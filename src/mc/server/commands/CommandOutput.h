@@ -1,6 +1,7 @@
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
+#include "mc/server/commands/CommandOutputParameter.h"
 
 // auto generated inclusion list
 #include "mc/server/commands/CommandOutputMessageType.h"
@@ -35,7 +36,7 @@ public:
 
     // symbol:
     // ?error@CommandOutput@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@VCommandOutputParameter@@V?$allocator@VCommandOutputParameter@@@std@@@3@@Z
-    MCAPI void error(std::string const&, std::vector<class CommandOutputParameter> const&);
+    MCAPI void error(std::string const&, std::vector<class CommandOutputParameter> const& params = {});
 
     // symbol:
     // ?forceOutput@CommandOutput@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@VCommandOutputParameter@@V?$allocator@VCommandOutputParameter@@@std@@@3@@Z
@@ -70,7 +71,7 @@ public:
 
     // symbol:
     // ?success@CommandOutput@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@VCommandOutputParameter@@V?$allocator@VCommandOutputParameter@@@std@@@3@@Z
-    MCAPI void success(std::string const&, std::vector<class CommandOutputParameter> const&);
+    MCAPI void success(std::string const&, std::vector<class CommandOutputParameter> const& params = {});
 
     // symbol: ?wantsData@CommandOutput@@QEBA_NXZ
     MCAPI bool wantsData() const;

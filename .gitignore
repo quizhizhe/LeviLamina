@@ -18,3 +18,4 @@
 /build
 /CMakeLists.txt
 /vsxmake2022
+/compile_commands.json

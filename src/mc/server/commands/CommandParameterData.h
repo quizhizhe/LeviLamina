@@ -25,6 +25,8 @@ public:
     bool                               mIsOptional;    // this+0x58
     CommandParameterOption             mOptions;       // this+0x59
 
+    CommandParameterData() : mTypeIndex(mTypeIndex){};
+
     CommandParameterData(
         Bedrock::typeid_t<CommandRegistry> typeIndex,
         ParseFn                            parser,
@@ -35,8 +37,17 @@ public:
         bool                               optional,
         int                                flag_offset
     )
-    : mTypeIndex(typeIndex), mParse(parser), mName(name), mEnumName(enumName), mEnumSymbol(-1), mPostfix(nullptr),
-      mPostfixSymbol(-1), mParamType(type), mOffset(offset), mSetOffset(flag_offset), mIsOptional(optional),
+    : mTypeIndex(typeIndex),
+      mParse(parser),
+      mName(name),
+      mEnumName(enumName),
+      mEnumSymbol(-1),
+      mPostfix(nullptr),
+      mPostfixSymbol(-1),
+      mParamType(type),
+      mOffset(offset),
+      mSetOffset(flag_offset),
+      mIsOptional(optional),
       mOptions(CommandParameterOption::None){};
 
 public:

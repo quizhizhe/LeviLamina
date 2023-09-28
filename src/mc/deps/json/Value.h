@@ -71,15 +71,13 @@ public:
         }
 
         [[nodiscard]] constexpr std::strong_ordering operator<=>(CZString const& other) const {
-            if (!cstr_)
-                return index_ <=> other.index_;
+            if (!cstr_) return index_ <=> other.index_;
             uint this_len  = this->storage_.length_;
             uint other_len = other.storage_.length_;
             uint min_len   = std::min<uint>(this_len, other_len);
             int  comp      = memcmp(this->cstr_, other.cstr_, min_len);
 
-            if (comp == 0)
-                return this_len <=> other_len;
+            if (comp == 0) return this_len <=> other_len;
             return comp <=> 0;
         }
 
@@ -112,12 +110,12 @@ public:
     ValueHolder value_;
     struct {
         ValueType value_type_ : 8;
-        bool      allocated_ : 1;
+        bool      allocated_  : 1;
     } bits_;
 
 public:
     // prevent constructor by default
-    Value();
+    Value() = default;
 
 public:
     // NOLINTBEGIN
