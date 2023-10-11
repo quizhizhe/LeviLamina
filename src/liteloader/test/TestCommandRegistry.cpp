@@ -65,7 +65,6 @@ public:
 
         registry.addSoftEnum("SoftEnumName", {"one_softenum", "two_softenum", "three_softenum", "four_softenum"});
 
-        // addons list
         registry.addEnum<Operation>(
             "Operation_List",
             {
@@ -95,7 +94,6 @@ public:
             )
         );
 
-        // addons install
         registry.addEnum<Operation>(
             "Operation_Install",
             {
@@ -103,31 +101,13 @@ public:
         }
         );
 
-        // try {
 
-        //     registry.registerOverload<TestCommand>(
-        //         "testcommand",
-        //         makeMandatory<CommandParameterDataType::Enum>(
-        //             &TestCommand::operation,
-        //             "operation",
-        //             "Operation_Addons_Install"
-        //         )
-        //             .addOptions(CommandParameterOption::EnumAutocompleteExpansion),
-        //         makeMandatory<CommandParameterDataType::Basic>(&TestCommand::target, "enumName")
-        //     );
-        // } catch (std::exception const& e) {
-        //     ll::logger.error(
-        //         "Exception occurred in registerOverload Operation_Addons_Install"
-        //     );
-        //     ll::logger.error("Error message: {} , type: {}", TextEncoding::toUTF8(e.what()), typeid(e).name());
-        // } catch (...) {
-        //     ll::logger.error(
-        //         "Unknown Exception occurred in registerOverload Operation_Addons_Install"
-        //     );
-        // }
-
-
-        // addons uninstall
+        registry.registerOverload<TestCommand>(
+            "testcommand",
+            makeMandatory<CommandParameterDataType::Enum>(&TestCommand::operation, "operation", "Operation_Install")
+                .addOptions(CommandParameterOption::EnumAutocompleteExpansion),
+            makeMandatory<CommandParameterDataType::Basic>(&TestCommand::target, "enumName")
+        );
 
         registry.addEnum<Operation>(
             "Operation_Others",
@@ -145,7 +125,7 @@ public:
             makeMandatory<CommandParameterDataType::SoftEnum>(
                 &TestCommand::target,
                 "enumName",
-                "EnumName",
+                "SoftEnumName",
                 &TestCommand::target_isSet
             )
         );
@@ -163,22 +143,17 @@ public:
     }
 };
 
-LL_AUTO_STATIC_HOOK(
-    ServerCommandsService,
-    HookPriority::Normal,
-    ServerCommands::setupStandardServer,
-    void,
-    Minecraft&             server,
-    std::string const&     networkCommands,
-    std::string const&     networkTestCommands,
-    class PermissionsFile* permissionsFile
-) {
-    origin(server, networkCommands, networkTestCommands, permissionsFile);
-    // Test CommandRegistry
-    try {
-        TestCommand::setup(server.getCommands().getRegistry());
-    } catch (std::exception const& e) {
-        ll::logger.error("Exception occurred in TestCommand::setup");
-        ll::logger.error("Error message: {} , type: {}", TextEncoding::toUTF8(e.what()), typeid(e).name());
-    } catch (...) { ll::logger.error("Unknown Exception occurred in TestCommand::setup!"); }
-}
+// LL_AUTO_STATIC_HOOK(
+//     ServerCommandsService,
+//     HookPriority::Normal,
+//     ServerCommands::setupStandardServer,
+//     void,
+//     Minecraft&             server,
+//     std::string const&     networkCommands,
+//     std::string const&     networkTestCommands,
+//     class PermissionsFile* permissionsFile
+// ) {
+//     origin(server, networkCommands, networkTestCommands, permissionsFile);
+//     // Test CommandRegistry
+//     TestCommand::setup(server.getCommands().getRegistry());
+// }
