@@ -41,7 +41,8 @@ void setupTestParamCommand() {
     Param EffectParam("testEffect", ParamType::Effect, true);
     Param CommandParam("testCommand", ParamType::Command, true);
     // Param posParam(ParamType::Position, "testPos", true);
-    //  Test Command: dynparam true 114 3.14 str @e @a 3 1 4 ~3 ~1 ~4 raw text msg {"a":4} stick concrete speed version
+    //  Test Command:
+    //    param true 123 3.14 string @e @a 1 2 3 ~1 ~2 ~3 msg {"a":123} stick bedrock ["persistent_bit"=true] npc poison help param rawtext
     DynamicCommand::setup(
         "param",
         "dynamic command",
@@ -76,13 +77,13 @@ void setupTestParamCommand() {
             "testPlayer",
             "testBlockPos",
             "testVec3",
-            //"testRawText",
-            //"testMessage",
-            //"testJsonValue",
-            //"testItem",
-            //"testBlock",
-            //"testEffect",
-            //"testCommand",
+            "testRawText",
+            "testMessage",
+            "testJsonValue",
+            "testItem",
+            "testBlock",
+            "testEffect",
+            "testCommand",
         }},
         [](DynamicCommand const&                                    command,
            CommandOrigin const&                                     origin,

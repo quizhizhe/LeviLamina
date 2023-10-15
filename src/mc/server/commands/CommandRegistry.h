@@ -584,6 +584,11 @@ public:
         const;
 
     template <>
+    MCAPI bool parse<CommandSelector<
+        Player>>(void*, CommandRegistry::ParseToken const&, CommandOrigin const&, int, std::string&, std::vector<std::string>&)
+        const;
+
+    template <>
     MCAPI bool parse<
         CommandWildcardInt>(void*, CommandRegistry::ParseToken const&, CommandOrigin const&, int, std::string&, std::vector<std::string>&)
         const;
