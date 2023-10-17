@@ -1,11 +1,6 @@
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
-#include "mc/entity/utilities/ActorDamageCause.h"
-#include "mc/enums/BlockSlot.h"
-#include "mc/enums/ObjectiveSortOrder.h"
-#include "mc/server/commands/CommandOperator.h"
-#include <atomic>
 
 namespace Json {
 class Value;
@@ -59,52 +54,29 @@ typeid_t<T0> type_id() {
     return id;
 }
 
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, bool>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, int>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, float>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, std::string>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, ActorDamageCause>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, DimensionType>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandBlockName>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandMessage>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandOperator>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandPosition>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandPositionFloat>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandSelector<Player>>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandSelector<Actor>>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, Json::Value>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, MobEffect const*>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, RelativeFloat>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, std::unique_ptr<Command>>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, WildcardCommandSelector<Actor>>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandItem>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, ActorDefinitionIdentifier const*>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandRawText>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandWildcardInt>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, ObjectiveSortOrder>();
-template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, BlockSlot>();
 }; // namespace Bedrock
+
+// clang-format off
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, int>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, bool>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, float>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, DimensionType>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, std::string>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, std::unique_ptr<class Command>>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, std::vector<class BlockStateCommandParam>>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, class CommandBlockName>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, class CommandFilePath>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, class CommandItem>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, class CommandMessage>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, class CommandPosition>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, class CommandPositionFloat>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, class CommandRawText>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, class CommandSelector<class Actor>>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, class CommandSelector<class Player>>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, class CommandWildcardInt>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, class Json::Value>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, class MobEffect const *>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, class RelativeFloat>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, class WildcardCommandSelector<class Actor>>();
+MCTAPI Bedrock::typeid_t<CommandRegistry> Bedrock::type_id<CommandRegistry, struct ActorDefinitionIdentifier const *>();
+// clang-format on

@@ -3,7 +3,7 @@
 #include "ll/api/LLAPI.h"
 #include "ll/api/LoggerAPI.h"
 #include "ll/api/ScheduleAPI.h"
-#include "ll/api/command/DynamicCommandAPI.h"
+#include "ll/api/command/DynamicCommand.h"
 #include "ll/api/memory/Hook.h"
 #include "ll/api/utils/Hash.h"
 #include "ll/core/Levilamina.h"
@@ -57,7 +57,6 @@ void setupTestParamCommand() {
             playerParam,
             BlockPosParam,
             Vec3Param,
-            RawTextParam,
             MessageParam,
             JsonValueParam,
             ItemParam,
@@ -66,9 +65,9 @@ void setupTestParamCommand() {
             ActorTypeParam,
             EffectParam,
             CommandParam,
+            RawTextParam,
         },
         {{
-            "testActorType",
             "testBool",
             "testInt",
             "testFloat",
@@ -77,13 +76,15 @@ void setupTestParamCommand() {
             "testPlayer",
             "testBlockPos",
             "testVec3",
-            "testRawText",
             "testMessage",
             "testJsonValue",
             "testItem",
             "testBlock",
+            "testBlockState",
+            "testActorType",
             "testEffect",
             "testCommand",
+            "testRawText"
         }},
         [](DynamicCommand const&                                    command,
            CommandOrigin const&                                     origin,
@@ -126,16 +127,16 @@ void setupTestEnumCommand() {
            std::unordered_map<std::string, DynamicCommand::Result>& results) {
             auto& action = results["testEnum"].getRaw<std::string>();
             switch (do_hash(action.c_str())) {
-            case do_hash("add"):
+            case "add"_h:
                 if (results["testInt"].isSet) output.success(fmt::format("add {}", results["testInt"].getRaw<int>()));
                 else output.success("add nothing");
                 break;
-            case do_hash("remove"):
+            case "remove"_h:
                 if (results["testInt"].isSet)
                     output.success(fmt::format("remove {}", results["testInt"].getRaw<int>()));
                 else output.success("remove nothing");
                 break;
-            case do_hash("list"):
+            case "list"_h:
                 output.success("list");
                 break;
             default:
@@ -166,13 +167,13 @@ void setupExampleCommand() {
                             CommandOutput&                                           output,
                             std::unordered_map<std::string, DynamicCommand::Result>& results) {
         switch (do_hash(results["testEnum"].getRaw<std::string>().c_str())) {
-        case do_hash("add"):
+        case "add"_h:
             output.success(fmt::format("Add - {}", results["testString"].getRaw<std::string>()));
             break;
-        case do_hash("remove"):
+        case "remove"_h:
             output.success(fmt::format("Remove - {}", results["testString"].getRaw<std::string>()));
             break;
-        case do_hash("list"):
+        case "list"_h:
             output.success("List");
             break;
         default:

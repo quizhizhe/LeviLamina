@@ -1,14 +1,16 @@
 ﻿// #define COMMAND_REGISTRY_EXTRA
-#include "ll/api/command/DynamicCommandAPI.h"
+#include "ll/api/command/DynamicCommand.h"
+
 #include "dyncall/dyncall_callback.h"
+
 #include "ll/api/LLAPI.h"
 #include "ll/api/LoggerAPI.h"
 #include "ll/api/ScheduleAPI.h"
 #include "ll/api/i18n/I18nAPI.h"
 #include "ll/api/memory/Hook.h"
-#include "ll/api/utils/SRWLock.h"
 #include "ll/core/Config.h"
 #include "ll/core/Levilamina.h"
+
 #include "mc/network/packet/AvailableCommandsPacket.h"
 #include "mc/server/LoopbackPacketSender.h"
 #include "mc/server/commands/BlockStateCommandParam.h"
@@ -60,7 +62,7 @@ namespace {
 bool                                                                     serverCommandsRegistered = false;
 std::unordered_map<std::string, std::unique_ptr<DynamicCommandInstance>> dynamicCommandInstances;
 std::vector<std::unique_ptr<DynamicCommandInstance>>                     delaySetupCommandInstances;
-SRWLock                                                                  delaySetupLock;
+std::shared_mutex                                                        delaySetupLock;
 
 
 using Result         = DynamicCommand::Result;
@@ -86,15 +88,10 @@ typedef CommandItem                         Item;
 typedef CommandBlockName                    Block;
 typedef std::vector<BlockStateCommandParam> BlockState;
 typedef MobEffect const*                    Effect;
-
-#ifdef USE_PARSE_ENUM_STRING
-typedef std::pair<std::string, int> Enum;
-#else
-typedef int Enum;
-#endif // USE_PARSE_ENUM_STRING
-typedef std::string                      SoftEnum;
-typedef ActorDefinitionIdentifier const* ActorType;
-typedef std::unique_ptr<Command>         Command;
+typedef std::pair<std::string, int>         Enum;
+typedef std::string                         SoftEnum;
+typedef ActorDefinitionIdentifier const*    ActorType;
+typedef std::unique_ptr<Command>            Command;
 #ifdef ENABLE_PARAMETER_TYPE_POSTFIX
 typedef int Postfix;
 #endif // ENABLE_PARAMETER_TYPE_POSTFIX
@@ -125,7 +122,13 @@ auto const ParameterSizeMap = std::unordered_map<ParameterType, size_t>{
 #endif  // ENABLE_PARAMETER_TYPE_POSTFIX
 };
 
-inline void OutputError(std::string errorMsg, int errorCode, std::string errorWhat, std::string func, HMODULE handle) {
+inline void OutputError(
+    const std::string& errorMsg,
+    int                errorCode,
+    const std::string& errorWhat,
+    const std::string& func,
+    HMODULE            handle
+) {
     logger.error(errorMsg);
     logger.error("Error: Code [{}] {}", errorCode, errorWhat);
     logger.error("In Function ({})", func);
@@ -539,9 +542,6 @@ std::unique_ptr<Command>* DynamicCommand::commandBuilder(std::unique_ptr<Command
 DynamicCommandInstance* DynamicCommand::_setup(std::unique_ptr<class DynamicCommandInstance> commandInstance) {
     std::string name = commandInstance->getCommandName();
     logger.info("Setting up command \"{}\"", name);
-#ifdef DEBUG
-    logger.info("Setting up command \"{}\"", name);
-#endif // DEBUG
 
     // Check if there is another command with the same name
     auto signature = ll::Global<CommandRegistry>->findCommand(name);
@@ -562,9 +562,7 @@ DynamicCommandInstance* DynamicCommand::_setup(std::unique_ptr<class DynamicComm
                         throw std::runtime_error(
                             "Enum " + std::string(param.description) + "not found in command and BDS"
                         );
-#ifndef USE_PARSE_ENUM_STRING_ // fix Enum
                     commandInstance->setEnum(*iter, ll::Global<CommandRegistry>->getEnumValues(*iter));
-#endif // USE_PARSE_ENUM_STRING
                 }
             } else if (param.type == ParameterType::SoftEnum) {
                 // add empty Soft Enum if not found in command and BDS
@@ -605,11 +603,7 @@ DynamicCommandInstance* DynamicCommand::_setup(std::unique_ptr<class DynamicComm
                 values.emplace_back(*iter, index);
                 ++index;
             }
-#ifdef USE_PARSE_ENUM_STRING
             ll::Global<CommandRegistry>->_addEnumValuesInternal(fixedView.data(), values, Bedrock::typeid_t<CommandRegistry>::_getCounter().fetch_add(1), &CommandRegistry::parseEnumStringAndInt).mValue;
-#else
-            ll::Global<CommandRegistry>->_addEnumValuesInternal(fixedView.data(), values, Bedrock::typeid_t<CommandRegistry>::count++, &CommandRegistry::parseEnum<int>).mValue;
-#endif // USE_PARSE_ENUM_STRING
         }
         commandInstance->enumRanges.swap(convertedEnumRanges);
 
@@ -645,7 +639,7 @@ DynamicCommandInstance* DynamicCommand::_setup(std::unique_ptr<class DynamicComm
 
 bool DynamicCommand::onServerCommandsRegister(CommandRegistry& /*registry*/) {
     serverCommandsRegistered = true;
-    SRWLockHolder locker(delaySetupLock);
+    std::unique_lock locker(delaySetupLock);
     for (auto& command : delaySetupCommandInstances) {
         std::string name   = command->getCommandName();
         auto        handle = command->handle_;
@@ -714,9 +708,8 @@ DynamicCommandInstance const* DynamicCommand::setup(std::unique_ptr<class Dynami
     auto ptr = commandInstance.get();
     if (!ptr) throw std::runtime_error("DynamicCommand::setup - commandInstance is null");
     if (!serverCommandsRegistered) {
-        delaySetupLock.lock();
-        auto& uptr = delaySetupCommandInstances.emplace_back(std::move(commandInstance));
-        delaySetupLock.unlock();
+        std::unique_lock locker(delaySetupLock);
+        auto&            uptr = delaySetupCommandInstances.emplace_back(std::move(commandInstance));
         return uptr.get();
     }
     Schedule::nextTick([instance{commandInstance.release()}]() {
@@ -753,12 +746,6 @@ std::unique_ptr<class DynamicCommandInstance> DynamicCommand::createCommand(
 }
 
 bool DynamicCommand::unregisterCommand(std::string const& name) {
-#ifdef DEBUG
-    Schedule::nextTick([tid = std::this_thread::get_id()]() {
-        // Call DynamicCommand::unregisterCommand in other thread is not allowed!
-        assert(tid == std::this_thread::get_id());
-    });
-#endif // DEBUG
     if (ll::Global<CommandRegistry>->unregisterCommand(name)) {
         dynamicCommandInstances.erase(name);
         updateAvailableCommands();
@@ -768,12 +755,6 @@ bool DynamicCommand::unregisterCommand(std::string const& name) {
 }
 
 inline bool DynamicCommand::updateAvailableCommands() {
-#ifdef DEBUG
-    Schedule::nextTick([tid = std::this_thread::get_id()]() {
-        // Call DynamicCommand::updateAvailableCommands in other thread is not allowed!
-        assert(tid == std::this_thread::get_id());
-    });
-#endif // DEBUG
 
     if (!ll::Global<CommandRegistry> || !ll::Global<Level>) return false;
     auto packet = ll::Global<CommandRegistry>->serializeAvailableCommands();
@@ -820,7 +801,7 @@ inline std::unique_ptr<DynamicCommandInstance> DynamicCommandInstance::create(
     CommandFlag            flag,
     HMODULE                handle
 ) {
-    if (ll::globalRuntimeConfig.serverStatus != ll::LLServerStatus::Running) {
+    if (ll::globalRuntimeConfig.serverStatus != ll::ServerStatus::Running) {
         for (auto& cmd : delaySetupCommandInstances) {
             if (cmd->name_ == name) {
                 logger.error("Command \"{}\" already exists", name);
@@ -1099,7 +1080,7 @@ LL_AUTO_TYPED_INSTANCE_HOOK(
     class Level&               level
 ) {
     if (ll::globalRuntimeConfig.tickThreadId != std::this_thread::get_id()) {
-        SRWLockSharedHolder locker(delaySetupLock);
+        std::shared_lock locker(delaySetupLock);
         return origin(commandOrigin, level);
     }
     return origin(commandOrigin, level);

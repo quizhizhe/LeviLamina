@@ -1,6 +1,7 @@
+#define DEBUG
 #ifdef DEBUG
 
-#include "ll/api/command/RegCommandAPI.h"
+#include "ll/api/command/RegisterCommandHelper.h"
 #include "ll/api/memory/Hook.h"
 #include "ll/core/LeviLamina.h"
 #include "mc/server/commands/CommandOrigin.h"
@@ -13,6 +14,27 @@
 #include "mc/server/commands/CommandRawText.h"
 #include "mc/world/Minecraft.h"
 #include "mc/world/level/Command.h"
+#include "mc/world/level/Level.h"
+#include "ll/api/LLAPI.h"
+#include "ll/api/service/GlobalService.h"
+#include "mc/world/level/storage/LevelStorage.h"
+
+#include <functional>
+
+namespace std {
+    template <>
+    struct hash<mce::UUID> {
+        size_t operator()(const mce::UUID& uuid) const {
+            // 使用std::hash计算哈希值
+            size_t hash_a = hash<uint64_t>()(uuid.a);
+            size_t hash_b = hash<uint64_t>()(uuid.b);
+
+            // 结合哈希值
+            return hash_a ^ (hash_b << 1);
+        }
+    };
+}
+
 
 
 class TestCommand : public Command {
@@ -51,13 +73,21 @@ public:
 
         default:
             ll::logger.info("Command default");
+            auto playerL = ll::Global<Level>->getLevelStorage().loadAllPlayerIDs(true);
+            if(!playerL.empty()) {
+                for(auto iter = playerL.begin(); iter != playerL.end(); ++iter) {
+                    std::cout<<"Player ID: "<< *iter << std::endl;
+                    auto nbt = ll::Global<Level>->getLevelStorage().loadPlayerDataFromTag(*iter);
+                    std::cout<<"NBT: "<< nbt->toString() << std::endl;
+                }
+            } else std::cout<<"NUll" << std::endl;
             break;
         }
     }
 
     static void setup(CommandRegistry& registry) {
 
-        using namespace ll::RegisterCommandHelper;
+        using namespace ll::command::RegisterCommandHelper;
 
         registry
             .registerCommand("testcommand", "LeviLamina CommandRegistry Test", CommandPermissionLevel::GameDirectors);
