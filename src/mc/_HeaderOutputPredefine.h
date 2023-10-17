@@ -1,8 +1,9 @@
 #pragma once
 
+#pragma clang diagnostic ignored "-Wignored-qualifiers"
+
 #pragma warning(disable : 4099)
 #pragma warning(disable : 4201)
-#pragma warning(error : 4834)
 
 #define MCAPI  __declspec(dllimport)
 #define MCVAPI __declspec(dllimport)
@@ -94,9 +95,9 @@
 
 #include "mc/math/vector/Vecs.h" // for vector types
 
-#include "liteloader/api/base/Macro.h" // for LLAPI
+#include "ll/api/base/Macro.h" // for LLAPI
 
-#include "liteloader/api/memory/MemoryUtils.h" // for dAccess
+#include "ll/api/memory/MemoryUtils.h" // for dAccess
 
 #include "mc/common/wrapper/optional_ref.h" // replace optional<reference_wrapper<>>
 

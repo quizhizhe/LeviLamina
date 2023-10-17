@@ -8,35 +8,21 @@
 
 class CompoundTagVariant;
 
-enum class SnbtFormat : uchar {
-    Minimize        = 0,
-    CompoundNewLine = 1 << 0,
-    ListNewLine     = 1 << 1,
-    Colored         = 1 << 2,
-    Console         = 1 << 3,
-    AlwaysNewLine   = CompoundNewLine | ListNewLine,
-};
-
 class CompoundTag : public ::Tag {
 public:
-    using TagMap = std::map<std::string, class CompoundTagVariant>;
+    using TagMap = std::map<std::string, class CompoundTagVariant, std::less<void>>;
 
     TagMap mTags;
 
-    template <typename T>
-    inline T const* get(std::string_view key) const {
-        return dynamic_cast<T const*>(get(key));
-    };
-
-    template <typename T>
-    inline T* get(std::string_view key) {
-        return dynamic_cast<T*>(get(key));
-    };
-
     CompoundTag(TagMap tags) : mTags(std::move(tags)) {} // NOLINT
+    CompoundTag(CompoundTag const&)            = default;
+    CompoundTag& operator=(CompoundTag const&) = default;
 
-    // LLNDAPI std::string toSNBT(uchar indent = 4, SnbtFormat snbtFormat = SnbtFormat::PartialNewLine) const;
-    // LLNDAPI static std::unique_ptr<CompoundTag> fromSNBT(std::string_view snbt);
+    [[nodiscard]] CompoundTagVariant&       operator[](std::string const& index) { return mTags[index]; }
+    [[nodiscard]] CompoundTagVariant const& operator[](std::string const& index) const { return mTags.at(index); }
+
+
+    LLNDAPI static std::unique_ptr<CompoundTag> fromSnbt(std::string_view snbt);
 
     LLNDAPI std::string                         toBinaryNBT(bool isLittleEndian = true) const;
     LLNDAPI static std::unique_ptr<CompoundTag> fromBinaryNBT(std::string_view dataView, bool isLittleEndian = true);
@@ -217,7 +203,7 @@ public:
 
     // symbol:
     // ?rawView@CompoundTag@@QEBAAEBV?$map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VCompoundTagVariant@@U?$less@X@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VCompoundTagVariant@@@std@@@2@@std@@XZ
-    MCAPI class std::map<std::string, class CompoundTagVariant, std::less<void>> const& rawView() const;
+    MCAPI TagMap const& rawView() const;
 
     // symbol: ?remove@CompoundTag@@QEAA_NV?$basic_string_view@DU?$char_traits@D@std@@@std@@@Z
     MCAPI bool remove(std::string_view);

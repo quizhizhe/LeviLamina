@@ -5,7 +5,7 @@ template <size_t N>
 class doubleN;
 
 template <typename T, typename... Components>
-    requires AllSame<Components...>
+    // requires ll::concepts::IsAllSame<Components...>
 class LL_EBO IntN : public Field<T, Components...>, IntNTag {
 public:
     using first_type = Field<T, Components...>::first_type;
@@ -14,12 +14,12 @@ public:
         requires(IntN::size() == 3)
     {
         return {
-            static_cast<T const*>(this)->template get<first_type>(1) * b.template get<first_type>(2) -
-                static_cast<T const*>(this)->template get<first_type>(2) * b.template get<first_type>(1),
-            static_cast<T const*>(this)->template get<first_type>(2) * b.template get<first_type>(0) -
-                static_cast<T const*>(this)->template get<first_type>(0) * b.template get<first_type>(2),
-            static_cast<T const*>(this)->template get<first_type>(0) * b.template get<first_type>(1) -
-                static_cast<T const*>(this)->template get<first_type>(1) * b.template get<first_type>(0)};
+            static_cast<T const*>(this)->template get<first_type>(1) * b.template get<first_type>(2)
+                - static_cast<T const*>(this)->template get<first_type>(2) * b.template get<first_type>(1),
+            static_cast<T const*>(this)->template get<first_type>(2) * b.template get<first_type>(0)
+                - static_cast<T const*>(this)->template get<first_type>(0) * b.template get<first_type>(2),
+            static_cast<T const*>(this)->template get<first_type>(0) * b.template get<first_type>(1)
+                - static_cast<T const*>(this)->template get<first_type>(1) * b.template get<first_type>(0)};
     }
 };
 

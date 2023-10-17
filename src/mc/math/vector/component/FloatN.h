@@ -2,7 +2,7 @@
 #include "mc/math/vector/component/base/Field.h"
 
 template <typename T, typename... Components>
-    requires AllSame<Components...>
+    // requires ll::concepts::IsAllSame<Components...>
 class LL_EBO FloatN : public Field<T, Components...>, FloatNTag {
 public:
     using first_type = Field<T, Components...>::first_type;
@@ -17,12 +17,12 @@ public:
         requires(FloatN::size() == 3)
     {
         return {
-            static_cast<T const*>(this)->template get<first_type>(1) * b.template get<first_type>(2) -
-                static_cast<T const*>(this)->template get<first_type>(2) * b.template get<first_type>(1),
-            static_cast<T const*>(this)->template get<first_type>(2) * b.template get<first_type>(0) -
-                static_cast<T const*>(this)->template get<first_type>(0) * b.template get<first_type>(2),
-            static_cast<T const*>(this)->template get<first_type>(0) * b.template get<first_type>(1) -
-                static_cast<T const*>(this)->template get<first_type>(1) * b.template get<first_type>(0)};
+            static_cast<T const*>(this)->template get<first_type>(1) * b.template get<first_type>(2)
+                - static_cast<T const*>(this)->template get<first_type>(2) * b.template get<first_type>(1),
+            static_cast<T const*>(this)->template get<first_type>(2) * b.template get<first_type>(0)
+                - static_cast<T const*>(this)->template get<first_type>(0) * b.template get<first_type>(2),
+            static_cast<T const*>(this)->template get<first_type>(0) * b.template get<first_type>(1)
+                - static_cast<T const*>(this)->template get<first_type>(1) * b.template get<first_type>(0)};
     }
 };
 
@@ -31,7 +31,9 @@ template <IsFloatN T>
     T tmp;
     T::forEachComponent([&]<typename axis_type>(size_t iter) constexpr {
         tmp.template get<axis_type>(iter) = std::lerp(
-            a.template get<axis_type>(iter), b.template get<axis_type>(iter), x.template get<axis_type>(iter)
+            a.template get<axis_type>(iter),
+            b.template get<axis_type>(iter),
+            x.template get<axis_type>(iter)
         );
     });
     return tmp;

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ll/api/base/Concepts.h"
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
@@ -13,9 +14,38 @@ public:
     Tag::Type mType;
 
 public:
-    // prevent constructor by default
-    ListTag& operator=(ListTag const&);
-    ListTag(ListTag const&);
+    constexpr ListTag& operator=(ListTag const& other) {
+        if (this != &other) {
+            mType = other.mType;
+            mList.clear();
+            mList.reserve(other.mList.size());
+            for (auto& tag : other.mList) { mList.emplace_back(tag->copy()); }
+        }
+        return *this;
+    }
+
+    constexpr ListTag(ListTag const& other) : mType(other.mType) {
+        mList.clear();
+        mList.reserve(other.mList.size());
+        for (auto& tag : other.mList) { mList.emplace_back(tag->copy()); }
+    }
+
+    template <std::derived_from<Tag> T>
+    constexpr ListTag(std::vector<T> const& tags) {
+        if (tags.empty()) {
+            mType = Tag::Type::End;
+        } else {
+            mType = tags[0].getId();
+            mList.reserve(tags.size());
+            for (auto& tag : tags) { mList.emplace_back(std::make_unique<T>(tag)); }
+        }
+    }
+
+    template <std::derived_from<Tag> T>
+    constexpr ListTag(std::initializer_list<T> tags) : ListTag(std::vector<T>{std::move(tags)}) {}
+
+    [[nodiscard]] Tag&       operator[](size_t index) { return *mList[index]; }
+    [[nodiscard]] Tag const& operator[](size_t index) const { return *mList[index]; }
 
 public:
     // NOLINTBEGIN

@@ -1,4 +1,4 @@
-#include "liteloader/core/LiteLoader.h"
+#include "ll/core/LeviLamina.h"
 
 #include <csignal>
 #include <iostream>
@@ -6,33 +6,33 @@
 #include <processenv.h>
 #include <string>
 
-#include "liteloader/api/utils/FileHelper.h"
-#include "liteloader/api/utils/SehTranslator.h"
-#include "liteloader/api/utils/StringUtils.h"
+#include "ll/api/utils/FileHelper.h"
+#include "ll/api/utils/SehTranslator.h"
+#include "ll/api/utils/StringUtils.h"
 
-#include "liteloader/api/memory/Hook.h"
+#include "ll/api/memory/Hook.h"
 
-#include "liteloader/api/LoggerAPI.h"
-#include "liteloader/api/ServerAPI.h"
-#include "liteloader/api/event/LegacyEvents.h"
-#include "liteloader/api/event/server/ServerStartedEvent.h"
-#include "liteloader/api/event/server/ServerStoppedEvent.h"
+#include "ll/api/LoggerAPI.h"
+#include "ll/api/ServerAPI.h"
+#include "ll/api/event/LegacyEvents.h"
+#include "ll/api/event/server/ServerStartedEvent.h"
+#include "ll/api/event/server/ServerStoppedEvent.h"
 
 #include "mc/Minecraft.hpp"
 
-#include "liteloader/core/AddonsHelper.h"
-#include "liteloader/core/Config.h"
-#include "liteloader/core/CrashLogger.h"
-#include "liteloader/core/Loader.h"
-#include "liteloader/core/PlayerDeathPositions.h"
-#include "liteloader/core/SimpleServerLogger.h"
-#include "liteloader/core/Version.h"
+#include "ll/core/AddonsHelper.h"
+#include "ll/core/Config.h"
+#include "ll/core/CrashLogger.h"
+#include "ll/core/Loader.h"
+#include "ll/core/PlayerDeathPositions.h"
+#include "ll/core/SimpleServerLogger.h"
+#include "ll/core/Version.h"
 
 #include <Psapi.h>
 #include <TlHelp32.h>
 #include <windows.h>
 
-Logger ll::logger("LiteLoader");
+Logger ll::logger("LeviLamina");
 time_t ll::startTime;
 time_t ll::endTime;
 
@@ -44,8 +44,7 @@ void fixPluginsLibDir() {
     constexpr const DWORD MAX_PATH_LEN = 32767;
 
     auto* buffer = new (nothrow) wchar_t[MAX_PATH_LEN];
-    if (!buffer)
-        return;
+    if (!buffer) return;
 
     GetEnvironmentVariableW(L"PATH", buffer, MAX_PATH_LEN);
     wstring path(buffer);
@@ -61,8 +60,7 @@ void fixUpCWD() {
     constexpr const DWORD MAX_PATH_LEN = 32767;
 
     auto* buffer = new (nothrow) wchar_t[MAX_PATH_LEN];
-    if (!buffer)
-        return;
+    if (!buffer) return;
 
     GetModuleFileNameW(nullptr, buffer, MAX_PATH_LEN);
     wstring path(buffer);
@@ -89,23 +87,23 @@ void unzipNodeModules() {
 
 void decompressResourcePacks() {
     if (std::filesystem::exists(
-            std::filesystem::path(TEXT(".\\plugins\\LiteLoader\\ResourcePacks\\LiteLoaderBDS-CUI.tar"))
+            std::filesystem::path(TEXT(".\\plugins\\LeviLamina\\ResourcePacks\\LeviLamina-CUI.tar"))
         )) {
         std::error_code ec;
         // if(std::filesystem::exists(".\\plugins\\lib\\node_modules\\"))
         //     filesystem::remove_all(".\\plugins\\lib\\node_modules\\", ec);
         auto res = NewProcessSync(
             fmt::format(
-                R"({} x "{}" -o".\plugins\LiteLoader\ResourcePacks\" -aoa)",
+                R"({} x "{}" -o".\plugins\LeviLamina\ResourcePacks\" -aoa)",
                 ZIP_PROGRAM_PATH,
-                R"(.\plugins\LiteLoader\ResourcePacks\LiteLoaderBDS-CUI.tar)"
+                R"(.\plugins\LeviLamina\ResourcePacks\LeviLamina-CUI.tar)"
             ),
             30000
         );
         if (res.first != 0) {
             logger.error(tr("ll.decompressResourcePacks.fail"));
         } else {
-            filesystem::remove(R"(.\plugins\LiteLoader\ResourcePacks\LiteLoaderBDS-CUI.tar)", ec);
+            filesystem::remove(R"(.\plugins\LeviLamina\ResourcePacks\LeviLamina-CUI.tar)", ec);
         }
     }
 }
@@ -115,8 +113,7 @@ void checkRunningBDS() {
     constexpr const DWORD MAX_PATH_LEN = 32767;
     auto*                 buffer       = new wchar_t[MAX_PATH_LEN];
 
-    if (!ll::globalConfig.enableCheckRunningBDS)
-        return;
+    if (!ll::globalConfig.enableCheckRunningBDS) return;
 
     // get all processes id with name "bedrock_server.exe" or "bedrock_server_mod.exe"
     // and pid is not current process
@@ -124,14 +121,12 @@ void checkRunningBDS() {
     PROCESSENTRY32     pe32;
     pe32.dwSize         = sizeof(PROCESSENTRY32);
     HANDLE hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-    if (hProcessSnap == INVALID_HANDLE_VALUE) {
-        return;
-    }
+    if (hProcessSnap == INVALID_HANDLE_VALUE) { return; }
     if (Process32First(hProcessSnap, &pe32)) {
         do {
-            if (pe32.th32ProcessID != GetCurrentProcessId() &&
-                (wcscmp(pe32.szExeFile, L"bedrock_server.exe") == 0 ||
-                 wcscmp(pe32.szExeFile, L"bedrock_server_mod.exe") == 0)) {
+            if (pe32.th32ProcessID != GetCurrentProcessId()
+                && (wcscmp(pe32.szExeFile, L"bedrock_server.exe") == 0
+                    || wcscmp(pe32.szExeFile, L"bedrock_server_mod.exe") == 0)) {
                 pids.push_back(pe32.th32ProcessID);
             }
         } while (Process32Next(hProcessSnap, &pe32));
@@ -163,9 +158,7 @@ void checkRunningBDS() {
                     rewind(stdin);
                     input = getchar();
                     rewind(stdin);
-                    if (input == 'n' || input == 'N') {
-                        break;
-                    }
+                    if (input == 'n' || input == 'N') { break; }
                     if (input == 'y' || input == 'Y') {
                         TerminateProcess(handle, 1);
                         break;
@@ -203,8 +196,7 @@ void fixAllowList() {
 }
 
 void printLogo() {
-    if (!ll::globalConfig.enableWelcomeText)
-        return;
+    if (!ll::globalConfig.enableWelcomeText) return;
 
     cout << R"(
                                                                        
@@ -220,12 +212,11 @@ void printLogo() {
 }
 
 void checkDevMode() {
-    if (ll::globalConfig.debugMode)
-        logger.warn(tr("ll.main.warning.inDevMode"));
+    if (ll::isDebugMode()) logger.warn(tr("ll.main.warning.inDevMode"));
 }
 
 void checkBetaVersion() {
-    if constexpr (LITELOADER_VERSION_STATUS != ll::Version::Release) {
+    if constexpr (LL_VERSION_STATUS != ll::Version::Release) {
         logger.warn(tr("ll.main.warning.betaVersion"));
         logger.warn(tr("ll.main.warning.productionEnv"));
     }
@@ -277,15 +268,13 @@ void unixSignalHandler(int signum) {
 
 // extern
 
-extern void RegisterCommands();
-
 extern void EndScheduleSystem();
 
 namespace bstats {
 void registerBStats();
 }
 
-void liteloaderMain() {
+void leviLaminaMain() {
     // Set global SEH-Exception handler
     auto oldSeTranslator = _set_se_translator(seh_exception::TranslateSEHtoCE);
 
@@ -300,7 +289,7 @@ void liteloaderMain() {
     std::filesystem::create_directories("plugins", ec);
 
     // I18n
-    auto i18n = Translation::load("plugins/LiteLoader/LangPack/");
+    auto i18n = Translation::load("plugins/LeviLamina/LangPack/");
 
     // Load Config
     ll::LoadLLConfig();
@@ -312,13 +301,10 @@ void liteloaderMain() {
     decompressResourcePacks();
 
     // If SEH Protection is not enabled (Debug mode), restore old SE translator
-    if (!ll::isDebugMode())
-        _set_se_translator(oldSeTranslator);
+    if (!ll::isDebugMode()) _set_se_translator(oldSeTranslator);
 
     // Update default language
-    if (i18n && ll::globalConfig.language != "system") {
-        i18n->defaultLocaleName = ll::globalConfig.language;
-    }
+    if (i18n && ll::globalConfig.language != "system") { i18n->defaultLocaleName = ll::globalConfig.language; }
 
     // Check Protocol Version
     checkProtocolVersion();
@@ -331,7 +317,7 @@ void liteloaderMain() {
     fixAllowList();
 
     // Init LL Logger
-    Logger::setDefaultFile("logs/LiteLoader-latest.log", false);
+    Logger::setDefaultFile("logs/LeviLamina-latest.log", false);
 
     // Check Running BDS(Requires Config)
     checkRunningBDS();
@@ -356,15 +342,10 @@ void liteloaderMain() {
     checkDevMode();
 
     // Addon Helper
-    if (ll::globalConfig.enableAddonsHelper) {
-        InitAddonsHelper();
-    }
+    if (ll::globalConfig.enableAddonsHelper) { InitAddonsHelper(); }
 
     // Load plugins
     ll::LoadMain();
-
-    // Register built-in commands
-    RegisterCommands();
 
     // Register simple server logger
     ll::SimpleServerLogger::registerSimpleServerLogger();
@@ -374,16 +355,17 @@ void liteloaderMain() {
 
     // Register Started
     using namespace ll::event::server;
-    ServerStartedEvent::subscribe([](const ServerStartedEvent&) {
+    ServerStartedEvent::subscribe([](ServerStartedEvent const&) {
         logger.info(tr("ll.notice.license", "LGPLv3"));
         logger.info(tr("ll.notice.newForum", "https://forum.litebds.com"));
-        logger.info(tr("ll.notice.translateText", "https://crowdin.com/project/liteloaderbds"));
+        // TODO: change to new name
+        logger.info(tr("ll.notice.translateText", "https://crowdin.com/project/LeviLaminabds"));
         logger.info("Thanks to RhyMC(rhymc.com) for the support");
         return true;
     });
 
     // Register Cleanup
-    ServerStoppedEvent::subscribe([](const ServerStoppedEvent&) {
+    ServerStoppedEvent::subscribe([](ServerStoppedEvent const&) {
         EndScheduleSystem();
         return true;
     });
@@ -394,7 +376,7 @@ void liteloaderMain() {
 
 using namespace ll::memory;
 
-LL_AUTO_STATIC_HOOK(LiteLoaderMain, HookPriority::Normal, "main", int, int argc, char** argv) {
+LL_AUTO_STATIC_HOOK(LeviLaminaMain, HookPriority::Normal, "main", int, int argc, char** argv) {
     startTime = clock();
     for (int i = 0; i < argc; ++i) {
         if (strcmp(argv[i], "--noColor") == 0) {
@@ -402,7 +384,7 @@ LL_AUTO_STATIC_HOOK(LiteLoaderMain, HookPriority::Normal, "main", int, int argc,
             break;
         }
     }
-    liteloaderMain();
+    leviLaminaMain();
     return origin(argc, argv);
 }
 

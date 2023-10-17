@@ -6,6 +6,30 @@ class IDataOutput;
 class IDataInput;
 class PrintStream;
 
+enum class SnbtFormat {
+    Minimize           = 0,
+    CompoundNewLine    = 1 << 0,
+    ListNewLine        = 1 << 1,
+    Colored            = 1 << 2,
+    Console            = 1 << 3,
+    ForceAscii         = 1 << 4,
+    PartialNewLine     = CompoundNewLine,
+    AlwaysNewLine      = CompoundNewLine | ListNewLine,
+    PrettyFilePrint    = CompoundNewLine,
+    PrettyChatPrint    = PrettyFilePrint | Colored,
+    PrettyConsolePrint = PrettyFilePrint | Colored | Console,
+};
+[[nodiscard]] constexpr SnbtFormat operator|(const SnbtFormat l, const SnbtFormat r) noexcept {
+    return static_cast<SnbtFormat>(
+        static_cast<std::underlying_type_t<SnbtFormat>>(l) | static_cast<std::underlying_type_t<SnbtFormat>>(r)
+    );
+}
+[[nodiscard]] constexpr SnbtFormat operator&(const SnbtFormat l, const SnbtFormat r) noexcept {
+    return static_cast<SnbtFormat>(
+        static_cast<std::underlying_type_t<SnbtFormat>>(l) & static_cast<std::underlying_type_t<SnbtFormat>>(r)
+    );
+}
+
 class Tag {
 public:
     // Tag inner types define
@@ -24,37 +48,26 @@ public:
         IntArray  = 0xB,
     };
 
-
-    template <typename T>
+    template <std::derived_from<Tag> T>
     T const* as_ptr() const {
-        return dynamic_cast<T const*>(this);
+        return static_cast<T const*>(this);
     }
-    template <typename T>
+    template <std::derived_from<Tag> T>
     T* as_ptr() {
-        return dynamic_cast<T*>(this);
+        return static_cast<T*>(this);
     }
-    template <typename T>
+    template <std::derived_from<Tag> T>
     T const& as() const {
-        auto* res = dynamic_cast<T const*>(this);
-        if (res) {
-            return *res;
-        }
-        throw std::runtime_error("Invalid Tag As");
+        return *static_cast<T const*>(this);
     }
-    template <typename T>
+    template <std::derived_from<Tag> T>
     T& as() {
-        auto* res = dynamic_cast<T*>(this);
-        if (res) {
-            return *res;
-        }
-        throw std::runtime_error("Invalid Tag As");
+        return *static_cast<T*>(this);
     }
 
-    LLNDAPI Tag&       operator[](size_t index);
-    LLNDAPI Tag const& operator[](size_t index) const;
+    LLNDAPI std::string toSnbt(SnbtFormat snbtFormat = SnbtFormat::PrettyFilePrint, uchar indent = 4) const;
 
-    LLNDAPI Tag&       operator[](std::string_view index);
-    LLNDAPI Tag const& operator[](std::string_view index) const;
+    LLNDAPI static std::unique_ptr<Tag> parseSnbt(std::string_view);
 
 public:
     // NOLINTBEGIN

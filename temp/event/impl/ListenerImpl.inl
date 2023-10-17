@@ -2,13 +2,13 @@
 
 /**
  * @brief This file is the implementation of the event listener.
- * @note Only LiteLoader itself should include this file in the source code of event.
+ * @note Only LeviLamina itself should include this file in the source code of event.
  */
 
-#include "liteloader/core/LiteLoader.h"
+#include "ll/core/LeviLamina.h"
 
-#include "liteloader/api/LoggerAPI.h"
-#include "liteloader/api/event/Listener.h"
+#include "ll/api/LoggerAPI.h"
+#include "ll/api/event/Listener.h"
 
 namespace ll::event {
 namespace detail {
@@ -29,9 +29,9 @@ inline int32_t getCurrentListenerId() noexcept { return globalListenerId++; }
  * @param plugin Plugin handle.
  */
 inline void logEventError(
-    const std::string& msg,
-    const std::string& detail,
-    const std::string& event,
+    std::string const& msg,
+    std::string const& detail,
+    std::string const& event,
     int32_t                listenerId,
     HMODULE            plugin
 ) {
@@ -88,7 +88,7 @@ void Listener<EventType>::call(EventType& event) {
         this->timing = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
     } catch (const seh_exception& e) {
         detail::logEventError("SEH Exception Occurred:", e.what(), typeid(EventType).name(), id, plugin);
-    } catch (const std::exception& e) {
+    } catch (std::exception const& e) {
         detail::logEventError("C++ Exception Occurred:", e.what(), typeid(EventType).name(), id, plugin);
     } catch (...) {
         detail::logEventError("Unknown Exception Occurred:", "", typeid(EventType).name(), id, plugin);
@@ -104,12 +104,12 @@ void Listener<EventType>::unsubscribe() {
 }
 
 template <typename EventType>
-bool Listener<EventType>::operator==(const Listener& other) const {
+bool Listener<EventType>::operator==(Listener const& other) const {
     return id == other.id;
 }
 
 template <typename EventType>
-bool Listener<EventType>::operator<(const Listener& other) const {
+bool Listener<EventType>::operator<(Listener const& other) const {
     if (this->priority == other.priority) {
         return this->id < other.id;
     }

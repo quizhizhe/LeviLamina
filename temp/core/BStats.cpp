@@ -1,12 +1,12 @@
-﻿#include "liteloader/core/LiteLoader.h"
+﻿#include "ll/core/LeviLamina.h"
 
-#include "liteloader/api/base/Global.h"
-#include "liteloader/api/ScheduleAPI.h"
-#include "liteloader/api/ServerAPI.h"
-#include "liteloader/api/event/server/ServerStartedEvent.h"
-#include "liteloader/api/utils/NetworkHelper.h"
-#include "liteloader/api/utils/StringUtils.h"
-#include "liteloader/api/utils/WinHelper.h"
+#include "ll/api/base/Global.h"
+#include "ll/api/ScheduleAPI.h"
+#include "ll/api/ServerAPI.h"
+#include "ll/api/event/server/ServerStartedEvent.h"
+#include "ll/api/utils/NetworkHelper.h"
+#include "ll/api/utils/StringUtils.h"
+#include "ll/api/utils/WinHelper.h"
 #include "mc/Level.hpp"
 #include "mc/PropertiesSettings.hpp"
 #include "mc/ServerNetworkHandler.hpp"
@@ -18,7 +18,7 @@ Logger bstatsLogger("bStats");
 
 #define BSTATS_JSON(key, val)                                                                                          \
     if (json.find(key) != json.end()) {                                                                                \
-        const nlohmann::json& out = json.at(key);                                                                      \
+        nlohmann::json const& out = json.at(key);                                                                      \
         out.get_to(val);                                                                                               \
     }
 
@@ -26,13 +26,14 @@ using namespace std;
 
 namespace regEdit {
 
-bool create(const string& UUID) {
+// TODO: remove old reg `LiteLoader`
+bool create(string const& UUID) {
     HKEY  hRoot = HKEY_CURRENT_USER;
     HKEY  hKey;
     DWORD dwDisposition = REG_OPENED_EXISTING_KEY;
     LONG  lRet          = ::RegCreateKeyEx(
         hRoot,
-        L"SOFTWARE\\LiteLoaderBDS",
+        L"SOFTWARE\\LeviLamina",
         0,
         nullptr,
         REG_OPTION_NON_VOLATILE,
@@ -58,7 +59,7 @@ unordered_set<string> getAllValue() {
     DWORD                 dwDisposition = REG_OPENED_EXISTING_KEY;
     LONG                  lRet          = ::RegCreateKeyEx(
         hRoot,
-        L"SOFTWARE\\LiteLoaderBDS",
+        L"SOFTWARE\\LeviLamina",
         0,
         nullptr,
         REG_OPTION_NON_VOLATILE,
@@ -144,7 +145,7 @@ void initJson(nlohmann::json json) {
     BSTATS_JSON("serverUuid", serverUuid)
 }
 
-void writeDefaultConfig(const std::string& fileName) {
+void writeDefaultConfig(std::string const& fileName) {
     std::ofstream file(fileName);
     if (!file.is_open()) {
         ll::logger.error("Can't open file {}", fileName);
@@ -159,7 +160,7 @@ void writeDefaultConfig(const std::string& fileName) {
     file.close();
 }
 
-void writeConfig(const std::string& fileName) {
+void writeConfig(std::string const& fileName) {
     std::ofstream file(fileName);
     if (!file.is_open()) {
         ll::logger.error("Can't open file {}", fileName);
@@ -173,7 +174,7 @@ void writeConfig(const std::string& fileName) {
     file.close();
 }
 
-void loadConfigFromJson(const std::string& fileName) {
+void loadConfigFromJson(std::string const& fileName) {
     std::ifstream file(fileName);
     if (!file.is_open()) {
         ll::logger.error("Can't open file {}", fileName);
@@ -186,7 +187,7 @@ void loadConfigFromJson(const std::string& fileName) {
     writeConfig(fileName);
 }
 
-void reloadJson(const std::string& fileName) {
+void reloadJson(std::string const& fileName) {
     std::ofstream file(fileName);
     if (file) {
         file << "//bStats collects some data for plugin authors like how many servers are using their plugins.\n";
@@ -222,7 +223,7 @@ string getOsArch() {
 string getOsName() { return IsWineEnvironment() ? "Linux" : "Windows"; }
 
 
-nlohmann::json addSimplePie(const string& key, const string& val) {
+nlohmann::json addSimplePie(string const& key, string const& val) {
     nlohmann::json json;
     json["chartId"] = key;
     nlohmann::json json2;
@@ -231,7 +232,7 @@ nlohmann::json addSimplePie(const string& key, const string& val) {
     return json;
 }
 
-nlohmann::json addAdvancedPie(const string& key, const unordered_map<string, int>& val) {
+nlohmann::json addAdvancedPie(string const& key, const unordered_map<string, int>& val) {
     nlohmann::json json;
     json["chartId"] = key;
     nlohmann::json json2;
@@ -246,6 +247,7 @@ nlohmann::json addAdvancedPie(const string& key, const unordered_map<string, int
 
 nlohmann::json getCustomCharts() {
     nlohmann::json pluginsJson;
+    // TODO: change to new name
     pluginsJson.emplace_back(addSimplePie("liteloaderbds_version", ll::getLoaderVersion().toString(false)));
     pluginsJson.emplace_back(addSimplePie("bds_version", ll::getBdsVersion().substr(1))); // bad
     pluginsJson.emplace_back(addSimplePie("xbox_auth", isOnlineAuth ? "Required" : "Not required"));
@@ -292,7 +294,7 @@ void submitTask() {
             {"User-Agent",      "Metrics-Service/1"        }
         };
         HttpPost(
-            "https://bstats.org/api/v2/data/bukkit", headers, json, "", [](int a1, const string& a2) {}, 10
+            "https://bstats.org/api/v2/data/bukkit", headers, json, "", [](int a1, string const& a2) {}, 10
         );
     });
 
@@ -359,7 +361,7 @@ void registerBStats() {
     if (bstatsSettings::enable) {
         bstatsLogger.info(tr("ll.main.bstats.enabled"));
         using ll::event::server::ServerStartedEvent;
-        ServerStartedEvent::subscribe([](const ServerStartedEvent& ev) {
+        ServerStartedEvent::subscribe([](ServerStartedEvent const& ev) {
             isOnlineAuth = Global<PropertiesSettings>->useOnlineAuthentication();
             scheduleThread();
         });

@@ -1,16 +1,51 @@
 #include "mc/server/commands/CommandRegistry.h"
-#include "liteloader/api/service/GlobalService.h"
-#include "liteloader/core/Config.h"
-#include "liteloader/core/LiteLoader.h"
-#include "mc/network/packet/AvailableCommandsPacket.h"
+#include "ll/api/service/GlobalService.h"
+#include "ll/core/Config.h"
+#include "ll/core/LeviLamina.h"
 #include "mc/server/commands/CommandParameterData.h"
 #include "mc/server/commands/CommandVersion.h"
-#include <algorithm>
 
+CommandRegistry::Overload::Overload(CommandVersion version, FactoryFn factory, std::vector<CommandParameterData> args)
+: version(version),
+  alloc(factory),
+  params(std::move(args)),
+  versionOffset(0xff) {}
+
+CommandRegistry::Signature::Signature(
+    std::string_view       name,
+    std::string_view       desc,
+    CommandPermissionLevel perm,
+    Symbol                 symbol,
+    CommandFlag            flag
+)
+: name(name),
+  desc(desc),
+  perm(perm),
+  main_symbol(symbol),
+  flag(flag) {}
+
+CommandRegistry::Overload::Overload(CommandVersion version, FactoryFn factory, std::vector<CommandParameterData> args)
+: version(version),
+  alloc(factory),
+  params(std::move(args)),
+  versionOffset(0xff) {}
+
+CommandRegistry::Signature::Signature(
+    std::string_view       name,
+    std::string_view       desc,
+    CommandPermissionLevel perm,
+    Symbol                 symbol,
+    CommandFlag            flag
+)
+: name(name),
+  desc(desc),
+  perm(perm),
+  main_symbol(symbol),
+  flag(flag) {}
 
 void CommandRegistry::registerOverload(
     std::string const&                  name,
-    Overload::FactoryFn                 factory,
+    FactoryFn                           factory,
     std::vector<CommandParameterData>&& args
 ) {
     auto& signature = *findCommand(name);
@@ -20,12 +55,14 @@ void CommandRegistry::registerOverload(
 
 std::vector<std::string> CommandRegistry::getEnumNames() {
     std::vector<std::string> results;
+    results.reserve(this->mEnums.size());
     for (auto& e : this->mEnums) results.push_back(e.name);
     return results;
 }
 
 std::vector<std::string> CommandRegistry::getSoftEnumNames() {
     std::vector<std::string> results;
+    results.reserve(this->mSoftEnums.size());
     for (auto& e : this->mSoftEnums) results.push_back(e.mName);
     return results;
 }
@@ -81,15 +118,21 @@ bool CommandRegistry::unregisterCommand(std::string const& name) {
             mEnumLookup.erase(aliasIter->name);
             aliasIter->name = fmt::format("removed_{}", removeIndex++);
         }
-        auto sig = mSignatures.find(command);
-        if (sig == mSignatures.end()) return false;
+        if (!mSignatures.contains(command)) return false;
 
-        std::erase_if(mCommandSymbols, [&sig](Symbol const& r) {
+        auto sig = mSignatures.find(command);
+        std::erase_if(mCommandSymbols, [&](Symbol const& r) {
             return r == sig->second.main_symbol || r == sig->second.alt_symbol;
         });
-        std::erase_if(mFactorizations, [&sig](Factorization const& r) {
+
+        // std::erase_if(mRules, [&](ParseRule const& r) {
+        //     return r.sym == sig->second.main_symbol || r.sym == sig->second.alt_symbol;
+        // });
+
+        std::erase_if(mFactorizations, [&](Factorization const& r) {
             return r.commandSymbol == sig->second.main_symbol || r.commandSymbol == sig->second.alt_symbol;
         });
+
 
         mSignatures.erase(sig);
         mAliases.erase(command);

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ll/api/i18n/I18nAPI.h"
 #include "mc/_HeaderOutputPredefine.h"
 #include "mc/server/commands/CommandOutputParameter.h"
 
@@ -19,6 +20,16 @@ public:
     CommandOutput& operator=(CommandOutput const&);
     CommandOutput();
 
+    template <typename... Args>
+    inline void trSuccess(std::string const& format, Args&&... args) {
+        success(tr(format, std::forward<Args>(args)...));
+    }
+
+    template <typename... Args>
+    inline void trError(std::string const& format, Args&&... args) {
+        error(tr(format, std::forward<Args>(args)...));
+    }
+
 public:
     // NOLINTBEGIN
     // symbol: ??0CommandOutput@@QEAA@W4CommandOutputType@@@Z
@@ -36,7 +47,7 @@ public:
 
     // symbol:
     // ?error@CommandOutput@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@VCommandOutputParameter@@V?$allocator@VCommandOutputParameter@@@std@@@3@@Z
-    MCAPI void error(std::string const&, std::vector<class CommandOutputParameter> const& params = {});
+    MCAPI void error(std::string const&, std::vector<class CommandOutputParameter> const& = {});
 
     // symbol:
     // ?forceOutput@CommandOutput@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@VCommandOutputParameter@@V?$allocator@VCommandOutputParameter@@@std@@@3@@Z
@@ -71,7 +82,7 @@ public:
 
     // symbol:
     // ?success@CommandOutput@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@VCommandOutputParameter@@V?$allocator@VCommandOutputParameter@@@std@@@3@@Z
-    MCAPI void success(std::string const&, std::vector<class CommandOutputParameter> const& params = {});
+    MCAPI void success(std::string const&, std::vector<class CommandOutputParameter> const& = {});
 
     // symbol: ?wantsData@CommandOutput@@QEBA_NXZ
     MCAPI bool wantsData() const;

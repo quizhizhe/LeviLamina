@@ -1,4 +1,4 @@
-#include "liteloader/api/event/LegacyEvents.h"
+#include "ll/api/event/LegacyEvents.h"
 
 #include <functional>
 #include <iostream>
@@ -56,19 +56,19 @@
 #include "mc/Util.hpp"
 #include "mc/VanillaBlocks.hpp"
 
-#include "liteloader/api/utils/DbgHelper.h"
-#include "liteloader/api/utils/StringUtils.h"
+#include "ll/api/utils/DbgHelper.h"
+#include "ll/api/utils/StringUtils.h"
 
-#include "liteloader/api/DynamicCommandAPI.h"
-#include "liteloader/api/i18n/I18nAPI.h"
-#include "liteloader/api/LoggerAPI.h"
-#include "liteloader/api/RegCommandAPI.h"
-#include "liteloader/api/ScheduleAPI.h"
+#include "ll/api/DynamicCommandAPI.h"
+#include "ll/api/i18n/I18nAPI.h"
+#include "ll/api/LoggerAPI.h"
+#include "ll/api/RegCommandAPI.h"
+#include "ll/api/ScheduleAPI.h"
 
-#include "liteloader/api/memory/Hook.h"
+#include "ll/api/memory/Hook.h"
 
-#include "liteloader/core/Config.h"
-#include "liteloader/core/LiteLoader.h"
+#include "ll/core/Config.h"
+#include "ll/core/LeviLamina.h"
 
 static_assert(offsetof(InventoryAction, source) == 0x0);
 static_assert(offsetof(InventoryAction, slot) == 0x0c);
@@ -138,7 +138,7 @@ bool EventManager<EVENT>::hasListener() {
 inline void OutputError(
     std::string        errorMsg,
     int                errorCode,
-    const std::string& errorWhat,
+    std::string const& errorWhat,
     std::string        eventName,
     std::string        pluginName
 ) {
@@ -171,7 +171,7 @@ bool EventManager<EVENT>::call(EVENT& ev) {
                 typeid(EVENT).name(),
                 i->pluginName
             );
-        } catch (const std::exception& e) {
+        } catch (std::exception const& e) {
             OutputError(
                 "Uncaught C++ Exception Detected!",
                 errno,
@@ -199,7 +199,7 @@ bool EventManager<EVENT>::call(EVENT& ev) {
             typeid(EVENT).name(),
             iNoConst->first
         );
-    } catch (const std::exception& e) {
+    } catch (std::exception const& e) {
         OutputError(
             "Uncaught Exception Detected! ", -1, TextEncoding::toUTF8(e.what()), typeid(EVENT).name(), iNoConst->first
         );
@@ -216,7 +216,7 @@ bool EventManager<EVENT>::call(EVENT& ev) {
         OutputError(
             "Uncaught SEH Exception Detected!", e.code(), TextEncoding::toUTF8(e.what()), typeid(EVENT).name(), i->first
         );
-    } catch (const std::exception& e) {
+    } catch (std::exception const& e) {
         OutputError(
             "Uncaught Exception Detected! ", -1, TextEncoding::toUTF8(e.what()), typeid(EVENT).name(), i->first
         );
@@ -246,7 +246,7 @@ bool EventManager<EVENT>::callToPlugin(std::string pluginName, EVENT& ev) {
                 typeid(EVENT).name(),
                 i->pluginName
             );
-        } catch (const std::exception& e) {
+        } catch (std::exception const& e) {
             OutputError(
                 "Uncaught C++ Exception Detected!",
                 errno,
@@ -267,7 +267,7 @@ bool EventManager<EVENT>::callToPlugin(std::string pluginName, EVENT& ev) {
 #define DECLARE_EVENT_DATA(EVENT)                                                                                      \
     template class ll::event::legacy::EventManager<EVENT>;                                                             \
     /*********************** For Compatibility ***********************/                                                \
-    std::list<std::pair<string, std::function<bool(const EVENT&)>>> EventTemplate<EVENT>::listeners;                   \
+    std::list<std::pair<string, std::function<bool(EVENT const&)>>> EventTemplate<EVENT>::listeners;                   \
     std::list<std::pair<string, std::function<bool(EVENT&)>>>       EventTemplate<EVENT>::listenersNoConst;
 
 DECLARE_EVENT_DATA(PlayerUseItemEvent);
@@ -1440,7 +1440,7 @@ LL_AUTO_INSTANCE_HOOK(
     }
 }
 
-#include "liteloader/api/impl/FormPacketHelper.h"
+#include "ll/api/impl/FormPacketHelper.h"
 #include "mc/Json.hpp"
 ////////////// FormResponsePacket //////////////
 

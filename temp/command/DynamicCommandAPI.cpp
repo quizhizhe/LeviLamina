@@ -1,13 +1,13 @@
 ﻿// #define COMMAND_REGISTRY_EXTRA
 #include <dyncall/dyncall_callback.h>
 
-#include "liteloader/api/DynamicCommandAPI.h"
-#include "liteloader/api/LLAPI.h"
-#include "liteloader/api/LoggerAPI.h"
-#include "liteloader/api/ScheduleAPI.h"
-#include "liteloader/api/i18n/I18nAPI.h"
-#include "liteloader/api/memory/Hook.h"
-#include "liteloader/api/utils/SRWLock.h"
+#include "ll/api/DynamicCommandAPI.h"
+#include "ll/api/LLAPI.h"
+#include "ll/api/LoggerAPI.h"
+#include "ll/api/ScheduleAPI.h"
+#include "ll/api/i18n/I18nAPI.h"
+#include "ll/api/memory/Hook.h"
+#include "ll/api/utils/SRWLock.h"
 #include "mc/ActorDefinitionIdentifier.hpp"
 #include "mc/AvailableCommandsPacket.hpp"
 #include "mc/CommandBlockName.hpp"
@@ -23,7 +23,7 @@
 #include "mc/Minecraft.hpp"
 #include "mc/MobEffect.hpp"
 
-#include "liteloader/core/LiteLoader.h"
+#include "ll/core/LeviLamina.h"
 
 using ll::logger;
 using ll::memory::dAccess;
@@ -53,7 +53,7 @@ using ll::memory::dAccess;
     catch (const seh_exception& e) {                                                                                   \
         OutputError("Uncaught SEH Exception Detected!", e.code(), TextEncoding::toUTF8(e.what()), func, handle);       \
     }                                                                                                                  \
-    catch (const std::exception& e) {                                                                                  \
+    catch (std::exception const& e) {                                                                                  \
         OutputError("Uncaught C++ Exception Detected!", errno, TextEncoding::toUTF8(e.what()), func, handle);          \
     }                                                                                                                  \
     catch (...) {                                                                                                      \
@@ -499,7 +499,7 @@ inline char DynamicCommand::builderCallbackHanler(DCCallback* cb, DCArgs* args, 
     return 'p';
 }
 
-std::unique_ptr<Command>* DynamicCommand::commandBuilder(std::unique_ptr<Command>* rtn, const std::string& name) {
+std::unique_ptr<Command>* DynamicCommand::commandBuilder(std::unique_ptr<Command>* rtn, std::string const& name) {
 #define CaseInitBreak(type)                                                                                            \
     case ParameterType::type:                                                                                          \
         initValue<ParameterDataType::type>(command, offset);                                                           \
@@ -699,9 +699,9 @@ std::unique_ptr<class DynamicCommandInstance> DynamicCommand::createCommand(
 ) {
     return DynamicCommandInstance::create(name, description, permission, flag1 |= flag2, handle);
 }
-#include "liteloader/api/LLAPI.h"
-#include "liteloader/api/event/LegacyEvents.h"
-#include "liteloader/core/Config.h"
+#include "ll/api/LLAPI.h"
+#include "ll/api/event/LegacyEvents.h"
+#include "ll/core/Config.h"
 
 DynamicCommandInstance const* DynamicCommand::setup(std::unique_ptr<class DynamicCommandInstance> commandInstance) {
     auto ptr = commandInstance.get();

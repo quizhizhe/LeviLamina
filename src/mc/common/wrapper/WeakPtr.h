@@ -11,58 +11,56 @@ class WeakPtr {
 public:
     WeakPtr() : counter(nullptr) {}
 
-    template <class Y, std::enable_if_t<std::is_convertible_v<Y*, T*>, int> = 0>
-    explicit WeakPtr(const SharedPtr<Y>& other) {
+    template <class Y>
+    explicit WeakPtr(SharedPtr<Y> const& other)
+        requires(std::convertible_to<Y*, T*>)
+    {
         counter = other.counter;
-        if (counter) {
-            counter->addWeakCount();
-        }
+        if (counter) { counter->addWeakCount(); }
     }
 
-    template <class Y, std::enable_if_t<std::is_convertible_v<Y*, T*>, int> = 0>
-    explicit WeakPtr(const WeakPtr<Y>& other) {
+    template <class Y>
+    explicit WeakPtr(WeakPtr<Y> const& other)
+        requires(std::convertible_to<Y*, T*>)
+    {
         counter = other.counter;
-        if (counter) {
-            counter->addWeakCount();
-        }
+        if (counter) { counter->addWeakCount(); }
     }
 
-    template <class Y, std::enable_if_t<std::is_convertible_v<Y*, T*>, int> = 0>
-    explicit WeakPtr(WeakPtr<Y>&& other) {
+    template <class Y>
+    explicit WeakPtr(WeakPtr<Y>&& other)
+        requires(std::convertible_to<Y*, T*>) {
         counter       = other.counter;
         other.counter = nullptr;
     }
 
     ~WeakPtr() {
-        if (counter) {
-            counter->releaseWeak();
-        }
+        if (counter) { counter->releaseWeak(); }
     }
 
-    template <class Y, std::enable_if_t<std::is_convertible_v<Y*, T*>, int> = 0>
-    WeakPtr<T>& operator=(const SharedPtr<Y>& other) {
+    template <class Y>
+    WeakPtr<T>& operator=(SharedPtr<Y> const& other)
+        requires(std::convertible_to<Y*, T*>) {
         if (counter != other.counter) {
             counter = other.counter;
-            if (counter) {
-                counter->addWeakCount();
-            }
+            if (counter) { counter->addWeakCount(); }
         }
         return *this;
     }
 
-    template <class Y, std::enable_if_t<std::is_convertible_v<Y*, T*>, int> = 0>
-    WeakPtr<T>& operator=(const WeakPtr<Y>& other) {
+    template <class Y>
+    WeakPtr<T>& operator=(WeakPtr<Y> const& other) 
+        requires(std::convertible_to<Y*, T*>){
         if (counter != other.counter) {
             counter = other.counter;
-            if (counter) {
-                counter->addWeakCount();
-            }
+            if (counter) { counter->addWeakCount(); }
         }
         return *this;
     }
 
-    template <class Y, std::enable_if_t<std::is_convertible_v<Y*, T*>, int> = 0>
-    WeakPtr<T>& operator=(WeakPtr<Y>&& other) {
+    template <class Y>
+    WeakPtr<T>& operator=(WeakPtr<Y>&& other)
+        requires(std::convertible_to<Y*, T*>) {
         if (counter != other.counter) {
             counter       = other.counter;
             other.counter = nullptr;

@@ -6,10 +6,10 @@
 #include "mc/server/commands/CommandSelectorResults.h"
 
 class Player;
-class Actor;
-template <class T0>
-class CommandSelector : public CommandSelectorBase {
+
+template <typename T>
+class CommandSelector : CommandSelectorBase {
 public:
-    CommandSelector() : CommandSelectorBase(std::is_same_v<T0, class Player>){};
-    MCAPI CommandSelectorResults<T0> results(CommandOrigin const& a0) const;
+    CommandSelector() : CommandSelectorBase(std::is_same_v<T, Player>) {}
+    MCAPI CommandSelectorResults<T> results(CommandOrigin const& a0) const;
 };

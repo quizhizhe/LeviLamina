@@ -15,6 +15,19 @@ template <typename>
 class CommandSelector;
 template <typename>
 class WildcardCommandSelector;
+class CommandBlockName;
+class CommandMessage;
+class CommandPosition;
+class CommandPositionFloat;
+class MobEffect;
+class RelativeFloat;
+class CommandItem;
+class ActorDefinitionIdentifier;
+class CommandRawText;
+class CommandWildcardInt;
+class Player;
+class Actor;
+class Command;
 
 namespace Bedrock {
 
@@ -59,35 +72,37 @@ MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, ActorDamageCause>();
 template <>
 MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, DimensionType>();
 template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, class CommandBlockName>();
+MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandBlockName>();
 template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, class CommandMessage>();
+MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandMessage>();
 template <>
 MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandOperator>();
 template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, class CommandPosition>();
+MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandPosition>();
 template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, class CommandPositionFloat>();
+MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandPositionFloat>();
 template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, class CommandSelector<class Player>>();
+MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandSelector<Player>>();
+template <>
+MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandSelector<Actor>>();
 template <>
 MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, Json::Value>();
 template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, class MobEffect const*>();
+MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, MobEffect const*>();
 template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, class RelativeFloat>();
+MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, RelativeFloat>();
 template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, std::unique_ptr<class Command>>();
+MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, std::unique_ptr<Command>>();
 template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, class WildcardCommandSelector<class Actor>>();
+MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, WildcardCommandSelector<Actor>>();
 template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, class CommandItem>();
+MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandItem>();
 template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, class ActorDefinitionIdentifier const*>();
+MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, ActorDefinitionIdentifier const*>();
 template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, class CommandRawText>();
+MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandRawText>();
 template <>
-MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, class CommandWildcardInt>();
+MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, CommandWildcardInt>();
 template <>
 MCAPI typeid_t<CommandRegistry> type_id<CommandRegistry, ObjectiveSortOrder>();
 template <>

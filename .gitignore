@@ -1,4 +1,4 @@
-﻿# Visual Studio related
+# Visual Studio related
 /.vs
 /CMakeSettings.json
 /out
@@ -19,3 +19,6 @@
 /CMakeLists.txt
 /vsxmake2022
 /compile_commands.json
+
+# MkDocs
+/site/

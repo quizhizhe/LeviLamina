@@ -2,8 +2,8 @@
 
 #include <functional>
 
-#include "liteloader/api/LLAPI.h"
-#include "liteloader/api/utils/AccessorMacro.h"
+#include "ll/api/LLAPI.h"
+#include "ll/api/utils/AccessorMacro.h"
 
 namespace ll::event {
 
@@ -47,9 +47,9 @@ public:
      */
     LLAPI void unsubscribe();
 
-    LLAPI bool operator==(const Listener& other) const;
+    LLAPI bool operator==(Listener const& other) const;
 
-    LLAPI bool operator<(const Listener& other) const;
+    LLAPI bool operator<(Listener const& other) const;
 };
 
 

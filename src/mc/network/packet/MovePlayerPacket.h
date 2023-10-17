@@ -2,6 +2,7 @@
 
 #include "mc/_HeaderOutputPredefine.h"
 #include "mc/entity/components/PlayerPositionModeComponent.h"
+#include "mc/entity/utilities/ActorType.h"
 #include "mc/events/MinecraftEventing.h"
 #include "mc/math/Vec2.h"
 #include "mc/math/Vec3.h"
@@ -24,7 +25,7 @@ public:
     bool                                      mOnGround;         // this+0x51
     ActorRuntimeID                            mRidingID;         // this+0x58
     MinecraftEventing::TeleportationCause     mCause;            // this+0x60
-    int                                       mSourceEntityType; // this+0x64 // maybe enum class ActorType ?
+    ActorType                                 mSourceEntityType; // this+0x64
     Tick                                      mTick;             // this+0x68
 
     // prevent constructor by default
