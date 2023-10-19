@@ -117,7 +117,7 @@ public:
      * @param defaultLocaleName  The default language code(if empty, default the system default language)
      * @param defaultLangData  The default translation data
      */
-    SingleFileI18N(
+    explicit SingleFileI18N(
         std::string const& filePath,
         std::string const& defaultLocaleName = "",
         LangData const&    defaultLangData   = {}
@@ -133,10 +133,10 @@ public:
         load(filePath);
     }
     /// Copy constructor
-    SingleFileI18N(SingleFileI18N const& other) { *this = other; }
-    ~SingleFileI18N() = default;
+    SingleFileI18N(SingleFileI18N const& other) = default;
+    ~SingleFileI18N() override = default;
 
-    LLAPI Type getType();
+    LLAPI Type getType() override;
 };
 
 class MultiFileI18N : public I18nBase {
@@ -155,7 +155,7 @@ public:
      * @param defaultLocaleName  The default language code
      * @param defaultLangData  The default translation data
      */
-    MultiFileI18N(
+    explicit MultiFileI18N(
         std::string const& dirPath,
         std::string const& defaultLocaleName = "",
         LangData const&    defaultLangData   = {}
@@ -171,10 +171,10 @@ public:
         load(dirPath);
     }
     /// Copy constructor
-    MultiFileI18N(MultiFileI18N const& other) { *this = other; }
-    ~MultiFileI18N() = default;
+    MultiFileI18N(MultiFileI18N const& other) = default;
+    ~MultiFileI18N() override = default;
 
-    LLAPI Type getType();
+    LLAPI Type getType() override;
 };
 
 #ifdef UNICODE
@@ -187,44 +187,12 @@ public:
 namespace Translation {
 
 ///////////////// tr Impl /////////////////
-template <ll::concepts::IsString S, typename... Args>
-inline std::string trlImpl(HMODULE hPlugin, std::string const& localeName, S const& formatStr, Args&&... args) {
-    std::string realFormatStr = formatStr;
+inline std::string trImpl(HMODULE hPlugin, std::string const& formatStr, std::string const& localeName = "") {
     if (PluginOwnData::hasImpl(hPlugin, I18nBase::POD_KEY)) {
-        auto& i18n    = PluginOwnData::getImpl<I18nBase>(hPlugin, I18nBase::POD_KEY);
-        realFormatStr = i18n.get(formatStr, localeName);
-        if (realFormatStr == formatStr) {
-            // If failed and the str dosn't match the args count, avoid fmt to avoid errors
-            auto   argSz         = sizeof...(args);
-            bool   lastIsBracket = false;
-            size_t cnt           = 0;
-            for (auto& c : formatStr) {
-                if (c == '{') {
-                    if (lastIsBracket) {
-                        cnt--;
-                        lastIsBracket = false;
-                    } else {
-                        cnt++;
-                        lastIsBracket = true;
-                        continue;
-                    }
-                }
-                if (lastIsBracket) { lastIsBracket = false; }
-            }
-            if (cnt != argSz) { return formatStr; }
-        }
+        auto& i18n = PluginOwnData::getImpl<I18nBase>(hPlugin, I18nBase::POD_KEY);
+        return i18n.get(formatStr, localeName);
     }
-    // realFormatStr = FixCurlyBracket(realFormatStr);
-    if constexpr (0 == sizeof...(args)) {
-        // Avoid fmt if only one argument
-        return realFormatStr;
-    } else {
-        return fmt::format(fmt::runtime(realFormatStr), std::forward<Args>(args)...);
-    }
-}
-template <ll::concepts::IsString S, typename... Args>
-inline std::string trImpl(HMODULE hPlugin, S const& formatStr, Args&&... args) {
-    return trlImpl(hPlugin, "", formatStr, std::forward<Args>(args)...);
+    return formatStr;
 }
 
 LLAPI I18nBase* loadI18nImpl(
@@ -337,7 +305,7 @@ inline I18nBase* getI18N(HMODULE hPlugin = nullptr) {
     return nullptr;
 }
 
-}; // namespace Translation
+} // namespace Translation
 
 /**
  * @brief Translate a str.
@@ -356,26 +324,9 @@ inline I18nBase* getI18N(HMODULE hPlugin = nullptr) {
  */
 template <ll::concepts::IsString S, typename... Args>
 inline std::string tr(S const& formatStr, Args&&... args) {
-    return Translation::trImpl(GetCurrentModule(), formatStr, std::forward<Args>(args)...);
-}
-
-/**
- * @brief Translate a str.
- *
- * @tparam Args         ...
- * @param  formatStr    The str to translate and format
- * @param  args         The format arguments
- * @return std::string  The translated str
- * @see    fmt::format
- * @see    https://fmt.dev/latest/index.html
- * @par Example
- * @code
- * tr("There are {0} days before {1} to come back", 3, "alex");
- * @endcode
- */
-template <typename... Args>
-inline std::string tr(const char* formatStr, Args&&... args) {
-    return tr(std::string(formatStr), std::forward<Args>(args)...);
+    auto res = Translation::trImpl(GetCurrentModule(), formatStr);
+    if constexpr (sizeof...(args) != 0) { return fmt::format(fmt::runtime(res), args...); }
+    return res;
 }
 
 /**
@@ -394,48 +345,26 @@ inline std::string tr(const char* formatStr, Args&&... args) {
  * trl("zh_CN", "There are {0} days before {1} to come back", 3, "alex");
  * @endcode
  */
-template <typename S, typename... Args>
+template <ll::concepts::IsString S, typename... Args>
 inline std::string trl(std::string const& localeName, S const& formatStr, Args&&... args) {
-    return Translation::trlImpl(GetCurrentModule(), localeName, formatStr, std::forward<Args>(args)...);
+    auto res = Translation::trImpl(GetCurrentModule(), formatStr, localeName);
+    if constexpr (sizeof...(args) != 0) { return fmt::format(fmt::runtime(res), args...); }
+    return res;
 }
 
-/**
- * @brief Translate a str to the specified language.
- *
- * @tparam Args         ...
- * @param  localeName   The language code like en_US
- * @param  formatStr    The str to translate and format(c-style)
- * @param  args         The format arguments
- * @return std::string  The translated str
- * @see    fmt::format
- * @see    https://fmt.dev/latest/index.html
- * @par Example
- * @code
- * trl("zh_CN", "There are {0} days before {1} to come back", 3, "alex");
- * @endcode
- */
-template <typename... Args>
-inline std::string trl(std::string const& localeName, const char* formatStr, Args&&... args) {
-    return trl(localeName, std::string(formatStr), std::forward<Args>(args)...);
+inline std::string operator""_tr(const char* x, size_t len) {
+    return Translation::trImpl(GetCurrentModule(), std::string{x, len});
 }
-
-namespace Translation {
-namespace literals {
-
-inline std::string operator""_tr(const char* str, size_t) { return tr(str); }
-
-} // namespace literals
-} // namespace Translation
 
 // For text encoding
 namespace TextEncoding {
-LLAPI Encoding getLocalEncoding();
-LLAPI Encoding detectEncoding(std::string const& text, bool* isReliable = nullptr);
+LLAPI ::Encoding getLocalEncoding();
+LLAPI ::Encoding detectEncoding(std::string const& text, bool* isReliable = nullptr);
 
-LLAPI std::string fromUnicode(std::wstring const& text, Encoding to = Encoding::UTF8);
-LLAPI std::wstring toUnicode(std::string const& text, Encoding from = Encoding::UTF8);
+LLAPI std::string fromUnicode(std::wstring const& text, ::Encoding to = ::Encoding::UTF8);
+LLAPI std::wstring toUnicode(std::string const& text, ::Encoding from = ::Encoding::UTF8);
 LLAPI std::string toUTF8(std::string const& text);
-LLAPI std::string toUTF8(std::string const& text, Encoding from);
+LLAPI std::string toUTF8(std::string const& text, ::Encoding from);
 
-LLAPI std::string convert(std::string const& text, Encoding from, Encoding to);
+LLAPI std::string convert(std::string const& text, ::Encoding from, ::Encoding to);
 } // namespace TextEncoding
