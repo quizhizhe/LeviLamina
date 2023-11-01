@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <memory>
 #include <string>
 #include <type_traits>
@@ -69,8 +70,24 @@ LLNDAPI FuncPtr resolveSignature(char const* signature);
  */
 LLNDAPI std::vector<std::string> lookupSymbol(FuncPtr func);
 
-template <uintptr_t off, typename RTN = void, typename... Args>
-auto constexpr virtualCall(void const* self, Args&&... args) -> RTN {
+/**
+ * @brief make a region of memory writable and executable, then call the
+ * callback, and finally restore the region.
+ * @param ptr Pointer to the region
+ * @param len Length of the region
+ * @param callback Callback
+ */
+LLAPI void modify(void* ptr, size_t len, const std::function<void()>& callback);
+
+template <class T>
+inline void modify(T& ref, std::remove_cvref_t<T>&& to) {
+    modify((void*)std::addressof(ref), sizeof(ref), [&ref, t = std::forward<T>(to)] {
+        (std::remove_cvref_t<T>&)(ref) = std::forward<T>(t);
+    });
+}
+
+template <typename RTN = void, typename... Args>
+constexpr auto virtualCall(void const* self, uintptr_t off, Args&&... args) -> RTN {
     return (*(RTN(**)(void const*, Args&&...))(*(uintptr_t*)self + off))(self, std::forward<Args>(args)...);
 }
 
@@ -138,14 +155,12 @@ inline FuncPtr signatureCache = resolveSignature(signature);
 
 } // namespace ll::memory
 
-#define LL_VA_EXPAND(...) __VA_ARGS__
+#define LL_RESOLVE_SYMBOL(symbol) (ll::memory::symbolCache<symbol>)
+
+#define LL_RESOLVE_SIGNATURE(signature) (ll::memory::signatureCache<signature>)
 
 #define LL_SYMBOL_CALL(symbol, Ret, ...) ((Ret(*)(__VA_ARGS__))(ll::memory::symbolCache<symbol>))
 
 #define LL_ADDRESS_CALL(address, Ret, ...) ((Ret(*)(__VA_ARGS__))(address))
 
-#define LL_SIGNATURE_CALL(...) LL_SYMBOL_CALL(__VA_ARGS__)
-
-#define LL_RESOLVE_SYMBOL(symbol) ll::memory::symbolCache<symbol>
-
-#define LL_RESOLVE_SIGNATURE(signature) ll::memory::signatureCache<signature>
+#define LL_SIGNATURE_CALL(...) ((Ret(*)(__VA_ARGS__))(ll::memory::signatureCache<symbol>))
