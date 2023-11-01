@@ -2,7 +2,6 @@
 
 #include <string>
 
-#include "ll/api/utils/DbgHelper.h"
 #include "ll/api/utils/StringUtils.h"
 
 #include "ll/api/i18n/I18nAPI.h"
@@ -13,16 +12,16 @@
 #include "Psapi.h"
 #include "Windows.h"
 
-using namespace ll::StringUtils;
+using namespace ll::string_utils;
 
-std::string GetLastErrorMessage(DWORD error_message_id) {
-    if (error_message_id == 0) return "";
+std::string GetLastErrorMessage(DWORD errorMessageId) {
+    if (errorMessageId == 0) return "";
 
     LPWSTR message_buffer = nullptr;
     FormatMessage(
         FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_FROM_SYSTEM,
         nullptr,
-        error_message_id,
+        errorMessageId,
         MAKELANGID(0x09, SUBLANG_DEFAULT),
         (LPWSTR)&message_buffer,
         0,
@@ -52,138 +51,6 @@ std::string GetLastErrorMessage() {
     return res;
 }
 
-// Tool
-wchar_t* str2cwstr(std::string const& str) {
-    auto  len    = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, nullptr, 0);
-    auto* buffer = new wchar_t[len + 1];
-    MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, buffer, len + 1);
-    buffer[len] = L'\0';
-    return buffer;
-}
-
-#define READ_BUFFER_SIZE 4096
-
-bool NewProcess(std::string const& process, std::function<void(int, std::string)> callback, int timeLimit) {
-    SECURITY_ATTRIBUTES sa;
-    HANDLE              hRead, hWrite;
-    sa.nLength              = sizeof(SECURITY_ATTRIBUTES);
-    sa.lpSecurityDescriptor = nullptr;
-    sa.bInheritHandle       = TRUE;
-
-    if (!CreatePipe(&hRead, &hWrite, &sa, 0)) return false;
-    STARTUPINFOW        si = {};
-    PROCESS_INFORMATION pi;
-
-    si.cb = sizeof(STARTUPINFO);
-    GetStartupInfoW(&si);
-    si.hStdOutput = si.hStdError = hWrite;
-    si.dwFlags                   = STARTF_USESTDHANDLES;
-
-    auto wCmd = str2cwstr(process);
-    if (!CreateProcessW(nullptr, wCmd, nullptr, nullptr, TRUE, 0, nullptr, nullptr, &si, &pi)) {
-        delete[] wCmd;
-        return false;
-    }
-    CloseHandle(hWrite);
-    CloseHandle(pi.hThread);
-
-    std::thread([hRead{hRead}, hProcess{pi.hProcess}, callback{std::move(callback)}, timeLimit{timeLimit}, wCmd{wCmd}](
-                ) {
-        if (!ll::isDebugMode()) _set_se_translator(seh_exception::TranslateSEHtoCE);
-        if (timeLimit == -1) WaitForSingleObject(hProcess, INFINITE);
-        else {
-            WaitForSingleObject(hProcess, timeLimit);
-            TerminateProcess(hProcess, -1);
-        }
-        char        buffer[READ_BUFFER_SIZE];
-        std::string strOutput;
-        DWORD       bytesRead, exitCode;
-
-        delete[] wCmd;
-        GetExitCodeProcess(hProcess, &exitCode);
-        while (true) {
-            ZeroMemory(buffer, READ_BUFFER_SIZE);
-            if (!ReadFile(hRead, buffer, READ_BUFFER_SIZE, &bytesRead, nullptr)) break;
-            strOutput.append(buffer, bytesRead);
-        }
-        CloseHandle(hRead);
-        CloseHandle(hProcess);
-
-        try {
-            if (callback) callback((int)exitCode, strOutput);
-        } catch (seh_exception const& e) {
-            ll::logger.error("SEH Uncaught Exception Detected!\n{}", TextEncoding::toUTF8(e.what()));
-            ll::logger.error("In NewProcess callback");
-            PrintCurrentStackTraceback();
-        } catch (...) {
-            ll::logger.error("NewProcess Callback Failed!");
-            ll::logger.error("Uncaught Exception Detected!");
-            PrintCurrentStackTraceback();
-        }
-    }).detach();
-
-    return true;
-}
-
-std::pair<int, std::string> NewProcessSync(std::string const& process, int timeLimit, bool noReadOutput) {
-    SECURITY_ATTRIBUTES sa;
-    HANDLE              hRead, hWrite;
-    sa.nLength              = sizeof(SECURITY_ATTRIBUTES);
-    sa.lpSecurityDescriptor = nullptr;
-    sa.bInheritHandle       = TRUE;
-
-    if (!CreatePipe(&hRead, &hWrite, &sa, 0)) return {-1, ""};
-    STARTUPINFOW        si = {};
-    PROCESS_INFORMATION pi;
-
-    si.cb = sizeof(STARTUPINFO);
-    GetStartupInfoW(&si);
-    si.hStdOutput = si.hStdError = hWrite;
-    si.dwFlags                   = STARTF_USESTDHANDLES;
-
-    auto wCmd = str2cwstr(process);
-    if (!CreateProcessW(nullptr, wCmd, nullptr, nullptr, TRUE, 0, nullptr, nullptr, &si, &pi)) {
-        delete[] wCmd;
-        return {-1, ""};
-    }
-    CloseHandle(hWrite);
-    CloseHandle(pi.hThread);
-
-    if (timeLimit == -1) WaitForSingleObject(pi.hProcess, INFINITE);
-    else {
-        WaitForSingleObject(pi.hProcess, timeLimit);
-        TerminateProcess(pi.hProcess, -1);
-    }
-    char        buffer[READ_BUFFER_SIZE];
-    std::string strOutput;
-    DWORD       bytesRead, exitCode;
-
-    delete[] wCmd;
-    GetExitCodeProcess(pi.hProcess, &exitCode);
-    if (!noReadOutput) {
-        while (true) {
-            ZeroMemory(buffer, READ_BUFFER_SIZE);
-            if (!ReadFile(hRead, buffer, READ_BUFFER_SIZE, &bytesRead, nullptr)) break;
-            strOutput.append(buffer, bytesRead);
-        }
-    }
-    CloseHandle(hRead);
-    CloseHandle(pi.hProcess);
-    return {exitCode, strOutput};
-}
-
-std::string GetModulePath(HMODULE handle) {
-    wchar_t buf[MAX_PATH] = {0};
-    GetModuleFileNameEx(GetCurrentProcess(), handle, buf, MAX_PATH);
-    return wstr2str(std::wstring(buf));
-}
-
-std::string GetModuleName(HMODULE handle) {
-    wchar_t buf[MAX_PATH] = {0};
-    GetModuleFileNameEx(GetCurrentProcess(), handle, buf, MAX_PATH);
-    return u8str2str(std::filesystem::path(buf).filename().u8string());
-}
-
 std::string GetSystemLocaleName() {
     wchar_t buf[256] = {0};
     auto    lcid     = GetSystemDefaultLCID();
@@ -196,8 +63,8 @@ std::string GetSystemLocaleName() {
 inline bool isWine() {
     HMODULE ntdll = GetModuleHandle(L"ntdll.dll");
     if (!ntdll) return false;
-    auto pwine_get_version = GetProcAddress(ntdll, "wine_get_version");
-    if (pwine_get_version) return true;
+    auto funcWineGetVersion = GetProcAddress(ntdll, "wine_get_version");
+    if (funcWineGetVersion) return true;
     else return false;
 }
 
@@ -252,8 +119,8 @@ inline std::vector<std::string> split(std::string str, std::string const& patter
     return result;
 }
 
-uintptr_t FindSig(const char* szSignature) {
-    const char*            pattern    = szSignature;
+uintptr_t FindSig(char const* szSignature) {
+    char const*            pattern    = szSignature;
     uintptr_t              firstMatch = 0;
     DWORD                  processId  = GetCurrentProcessId();
     static const uintptr_t rangeStart = GetProcessBaseAddress(processId);
@@ -267,7 +134,7 @@ uintptr_t FindSig(const char* szSignature) {
 
     static const uintptr_t rangeEnd = rangeStart + miModInfo.SizeOfImage;
     BYTE                   patByte  = GET_BYTE(pattern);
-    const char*            oldPat   = pattern;
+    char const*            oldPat   = pattern;
 
     for (uintptr_t pCur = rangeStart; pCur < rangeEnd; pCur++) {
         if (!*pattern) return firstMatch;

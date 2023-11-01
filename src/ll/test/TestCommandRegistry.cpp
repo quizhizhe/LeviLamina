@@ -1,50 +1,27 @@
-#define DEBUG
-#ifdef DEBUG
+#ifdef LL_DEBUG
 
-#include "ll/api/command/RegisterCommandHelper.h"
 #include "ll/api/memory/Hook.h"
 #include "ll/core/LeviLamina.h"
 #include "mc/server/commands/CommandOrigin.h"
 #include "mc/server/commands/CommandOutput.h"
 #include "mc/server/commands/CommandParameterData.h"
 #include "mc/server/commands/CommandParameterDataType.h"
+#include "mc/server/commands/CommandRawText.h"
 #include "mc/server/commands/CommandRegistry.h"
 #include "mc/server/commands/MinecraftCommands.h"
 #include "mc/server/commands/ServerCommands.h"
-#include "mc/server/commands/CommandRawText.h"
 #include "mc/world/Minecraft.h"
 #include "mc/world/level/Command.h"
-#include "mc/world/level/Level.h"
-#include "ll/api/LLAPI.h"
-#include "ll/api/service/GlobalService.h"
-#include "mc/world/level/storage/LevelStorage.h"
-
-#include <functional>
-
-namespace std {
-    template <>
-    struct hash<mce::UUID> {
-        size_t operator()(const mce::UUID& uuid) const {
-            // 使用std::hash计算哈希值
-            size_t hash_a = hash<uint64_t>()(uuid.a);
-            size_t hash_b = hash<uint64_t>()(uuid.b);
-
-            // 结合哈希值
-            return hash_a ^ (hash_b << 1);
-        }
-    };
-}
-
 
 
 class TestCommand : public Command {
     enum Operation : int { List, Install, Uninstall, Enable, Disable };
 
-    Operation   operation = static_cast<Operation>(-1);
-    std::string target;
-    int         index        = -1;
-    bool        target_isSet = false;
-    bool        index_isSet  = false;
+    Operation      operation = static_cast<Operation>(-1);
+    std::string    target;
+    int            index        = -1;
+    bool           target_isSet = false;
+    bool           index_isSet  = false;
     CommandRawText testTest;
 
 
@@ -53,41 +30,31 @@ public:
         switch (operation) {
         case Operation::List:
             if (target_isSet || index_isSet) {
-                ll::logger.info("Command Operation::List is set");
-            } else ll::logger.info("Command Operation::List isn't set");
+                ll::logger.debug("Command Operation::List is set");
+            } else ll::logger.debug("Command Operation::List isn't set");
             break;
         case Operation::Install:
-            ll::logger.info("Command Operation::Install");
+            ll::logger.debug("Command Operation::Install");
             break;
         case Operation::Uninstall:
-            ll::logger.info("Command Operation::Uninstall");
+            ll::logger.debug("Command Operation::Uninstall");
             break;
 
         case Operation::Enable:
-            ll::logger.info("Command Operation::Enable");
+            ll::logger.debug("Command Operation::Enable");
             break;
 
         case Operation::Disable:
-            ll::logger.info("Command Operation::Disable");
+            ll::logger.debug("Command Operation::Disable");
             break;
 
         default:
-            ll::logger.info("Command default");
-            auto playerL = ll::Global<Level>->getLevelStorage().loadAllPlayerIDs(true);
-            if(!playerL.empty()) {
-                for(auto iter = playerL.begin(); iter != playerL.end(); ++iter) {
-                    std::cout<<"Player ID: "<< *iter << std::endl;
-                    auto nbt = ll::Global<Level>->getLevelStorage().loadPlayerDataFromTag(*iter);
-                    std::cout<<"NBT: "<< nbt->toString() << std::endl;
-                }
-            } else std::cout<<"NUll" << std::endl;
+            ll::logger.debug("Command default");
             break;
         }
     }
 
     static void setup(CommandRegistry& registry) {
-
-        using namespace ll::command::RegisterCommandHelper;
 
         registry
             .registerCommand("testcommand", "LeviLamina CommandRegistry Test", CommandPermissionLevel::GameDirectors);
@@ -102,9 +69,13 @@ public:
         );
         registry.registerOverload<TestCommand>(
             "testcommand",
-            makeMandatory<CommandParameterDataType::Enum>(&TestCommand::operation, "operation", "Operation_List")
+            CommandParameterData::makeMandatory<CommandParameterDataType::Enum>(
+                &TestCommand::operation,
+                "operation",
+                "Operation_List"
+            )
                 .addOptions(CommandParameterOption::EnumAutocompleteExpansion),
-            makeOptional<CommandParameterDataType::SoftEnum>(
+            CommandParameterData::makeOptional<CommandParameterDataType::SoftEnum>(
                 &TestCommand::target,
                 "SoftEnumName",
                 "SoftEnumName",
@@ -113,9 +84,13 @@ public:
         );
         registry.registerOverload<TestCommand>(
             "testcommand",
-            makeMandatory<CommandParameterDataType::Enum>(&TestCommand::operation, "operation", "Operation_List")
+            CommandParameterData::makeMandatory<CommandParameterDataType::Enum>(
+                &TestCommand::operation,
+                "operation",
+                "Operation_List"
+            )
                 .addOptions(CommandParameterOption::EnumAutocompleteExpansion),
-            makeOptional<CommandParameterDataType::Basic>(
+            CommandParameterData::makeOptional<CommandParameterDataType::Basic>(
                 &TestCommand::index,
                 "enumIndex",
                 nullptr,
@@ -133,9 +108,13 @@ public:
 
         registry.registerOverload<TestCommand>(
             "testcommand",
-            makeMandatory<CommandParameterDataType::Enum>(&TestCommand::operation, "operation", "Operation_Install")
+            CommandParameterData::makeMandatory<CommandParameterDataType::Enum>(
+                &TestCommand::operation,
+                "operation",
+                "Operation_Install"
+            )
                 .addOptions(CommandParameterOption::EnumAutocompleteExpansion),
-            makeMandatory<CommandParameterDataType::Basic>(&TestCommand::target, "enumName")
+            CommandParameterData::makeMandatory<CommandParameterDataType::Basic>(&TestCommand::target, "enumName")
         );
 
         registry.addEnum<Operation>(
@@ -149,9 +128,13 @@ public:
         );
         registry.registerOverload<TestCommand>(
             "testcommand",
-            makeMandatory<CommandParameterDataType::Enum>(&TestCommand::operation, "operation", "Operation_Others")
+            CommandParameterData::makeMandatory<CommandParameterDataType::Enum>(
+                &TestCommand::operation,
+                "operation",
+                "Operation_Others"
+            )
                 .addOptions(CommandParameterOption::EnumAutocompleteExpansion),
-            makeMandatory<CommandParameterDataType::SoftEnum>(
+            CommandParameterData::makeMandatory<CommandParameterDataType::SoftEnum>(
                 &TestCommand::target,
                 "enumName",
                 "SoftEnumName",
@@ -160,9 +143,13 @@ public:
         );
         registry.registerOverload<TestCommand>(
             "testcommand",
-            makeMandatory<CommandParameterDataType::Enum>(&TestCommand::operation, "operation", "Operation_Others")
+            CommandParameterData::makeMandatory<CommandParameterDataType::Enum>(
+                &TestCommand::operation,
+                "operation",
+                "Operation_Others"
+            )
                 .addOptions(CommandParameterOption::EnumAutocompleteExpansion),
-            makeMandatory<CommandParameterDataType::Basic>(
+            CommandParameterData::makeMandatory<CommandParameterDataType::Basic>(
                 &TestCommand::index,
                 "enumIndex",
                 nullptr,
@@ -171,7 +158,7 @@ public:
         );
         registry.registerOverload<TestCommand>(
             "testcommand",
-            makeMandatory<CommandParameterDataType::Basic>(&TestCommand::testTest, "rawtext")
+            CommandParameterData::makeMandatory<CommandParameterDataType::Basic>(&TestCommand::testTest, "rawtext")
         );
     }
 };
@@ -191,4 +178,4 @@ LL_AUTO_STATIC_HOOK(
     TestCommand::setup(server.getCommands().getRegistry());
 }
 
-#endif // DEBUG
+#endif // LL_DEBUG

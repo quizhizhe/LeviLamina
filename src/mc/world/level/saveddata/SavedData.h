@@ -7,10 +7,8 @@ class SavedData {
     std::string mId;
 
 public:
-    // prevent constructor by default
-    SavedData& operator=(SavedData const&);
-    SavedData(SavedData const&);
-    SavedData();
+    bool        mDirty;
+    std::string mId;
 
 public:
     // NOLINTBEGIN

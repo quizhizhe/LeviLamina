@@ -22,21 +22,21 @@ public:
 
     template <typename... Args>
     inline void trSuccess(std::string const& format, Args&&... args) {
-        success(tr(format, std::forward<Args>(args)...));
+        success(ll::i18n::tr(format, std::forward<Args>(args)...));
     }
 
     template <typename... Args>
     inline void trError(std::string const& format, Args&&... args) {
-        error(tr(format, std::forward<Args>(args)...));
+        error(ll::i18n::tr(format, std::forward<Args>(args)...));
     }
 
 public:
     // NOLINTBEGIN
-    // symbol: ??0CommandOutput@@QEAA@W4CommandOutputType@@@Z
-    MCAPI explicit CommandOutput(::CommandOutputType);
-
     // symbol: ??0CommandOutput@@QEAA@AEBV0@@Z
     MCAPI CommandOutput(class CommandOutput const&);
+
+    // symbol: ??0CommandOutput@@QEAA@W4CommandOutputType@@@Z
+    MCAPI explicit CommandOutput(::CommandOutputType);
 
     // symbol:
     // ?addToResultList@CommandOutput@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVActor@@@Z

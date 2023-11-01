@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ll/api/utils/FifoJson.h"
+#include "nlohmann/json.hpp"
 
 namespace ll::form {
 
@@ -13,9 +13,9 @@ protected:
 
 class FormImpl {
 protected:
-    virtual ~FormImpl()                               = default;
-    [[nodiscard]] virtual FormType  getType() const   = 0;
-    [[nodiscard]] virtual fifo_json serialize() const = 0;
+    virtual ~FormImpl()                                            = default;
+    [[nodiscard]] virtual FormType               getType() const   = 0;
+    [[nodiscard]] virtual nlohmann::ordered_json serialize() const = 0;
 };
 
 } // namespace ll::form

@@ -5,13 +5,15 @@
 #include "mc/common/Common.h"
 #include "mc/common/SharedConstants.h"
 
-#include "ll/api/LoggerAPI.h"
-#include "ll/api/ServerAPI.h"
+#include "ll/api/Logger.h"
+#include "ll/api/ServerInfo.h"
 #include "ll/api/utils/StringUtils.h"
 #include "ll/api/utils/WinHelper.h"
 #include "ll/core/Config.h"
 
-Logger crashLogger("CrashLogger");
+using namespace ll::i18n_literals;
+
+ll::Logger crashLogger("CrashLogger");
 
 bool ll::CrashLogger::startCrashLoggerProcess() {
     if (IsDebuggerPresent()) {
@@ -33,16 +35,12 @@ bool ll::CrashLogger::startCrashLoggerProcess() {
     sa.lpSecurityDescriptor = nullptr;
     sa.nLength              = sizeof(SECURITY_ATTRIBUTES);
 
-    wchar_t     daemonCmd[MAX_PATH];
     std::string serverVersion = fmt::format("{}.{:0>2}", ll::getBdsVersion(), SharedConstants::RevisionVersion);
-    wsprintf(
-        daemonCmd,
-        L"%ls %u \"%ls\"",
-        ll::StringUtils::str2wstr(globalConfig.crashLoggerPath).c_str(),
-        GetCurrentProcessId(),
-        ll::StringUtils::str2wstr(serverVersion).c_str()
-    );
-    if (!CreateProcess(nullptr, daemonCmd, &sa, &sa, TRUE, 0, nullptr, nullptr, &si, &pi)) {
+
+    std::wstring cmd{ll::string_utils::str2wstr(
+        fmt::format("{} {} \"{}\"", globalConfig.modules.crashLogger.path, GetCurrentProcessId(), serverVersion)
+    )};
+    if (!CreateProcess(nullptr, cmd.data(), &sa, &sa, TRUE, 0, nullptr, nullptr, &si, &pi)) {
         crashLogger.error("ll.crashLogger.error.cannotCreateDaemonProcess"_tr);
         crashLogger.error(GetLastErrorMessage());
         return false;

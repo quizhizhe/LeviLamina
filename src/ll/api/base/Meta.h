@@ -1,39 +1,10 @@
+#pragma once
+
+#include "ll/api/base/StdInt.h"
 #include <string_view>
 #include <utility>
 
 namespace ll::meta {
-
-template <auto f>
-consteval std::string_view invocableName() noexcept {
-    constexpr std::string_view n{__FUNCSIG__};
-
-    constexpr std::string_view k{"invocableName<"};
-    constexpr std::string_view l{">(void) noexcept"};
-
-    constexpr auto s = l.size();
-    constexpr auto p = n.find(k) + k.size();
-
-    return n.substr(p, n.size() - p - s);
-}
-
-template <typename f>
-consteval std::string_view invocableName() noexcept {
-    constexpr std::string_view n{__FUNCSIG__};
-
-    constexpr std::string_view k{"invocableName<"};
-    constexpr std::string_view l{">(void) noexcept"};
-
-    constexpr auto s = l.size();
-    constexpr auto p = n.find(k) + k.size();
-
-    return n.substr(p, n.size() - p - s);
-}
-
-template <typename T>
-inline constexpr bool is_class_v = std::is_class_v<T> && invocableName<T>().starts_with("class ");
-
-template <typename T>
-inline constexpr bool is_struct_v = std::is_class_v<T> && invocableName<T>().starts_with("struct ");
 
 template <typename... Components, typename F>
 constexpr void unrollWithArgs(F&& func) {
@@ -92,13 +63,13 @@ public:
     using map = TypeList<typename M<TL>::type...>;
 
     template <typename T>
-    using append = TypeList<TL..., T>;
+    using push_back = TypeList<TL..., T>;
 
     template <typename T>
-    using prepend = TypeList<T, TL...>;
+    using push_front = TypeList<T, TL...>;
 
     template <size_t N>
-    using get = get_type_t<N, TL...>;
+    using get = get_type_t<N + 1, void, TL...>;
 
     template <template <typename...> class U>
     using to = U<TL...>;
@@ -113,5 +84,31 @@ public:
         unrollWithArgs<TL...>(func);
     }
 };
+
+template <auto Id>
+struct TypeCounter {
+    using tag = TypeCounter;
+
+    struct GenerateTag {
+        friend consteval auto isDefined(tag) { return true; }
+    };
+    friend consteval auto isDefined(tag);
+
+    template <typename Tag = tag, auto = isDefined(Tag{})>
+    static consteval auto exists(auto) {
+        return true;
+    }
+
+    static consteval auto exists(...) { return GenerateTag(), false; }
+};
+
+template <typename T, auto Id = int64{}>
+consteval auto uniqueId() {
+    if constexpr (TypeCounter<Id>::exists(Id)) {
+        return uniqueId<T, Id + 1>();
+    } else {
+        return Id;
+    }
+}
 
 } // namespace ll::meta

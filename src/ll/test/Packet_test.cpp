@@ -11,6 +11,7 @@
 #include "ll/api/memory/Hook.h"
 #include "ll/api/utils/FileHelper.h"
 #include "ll/core/LeviLamina.h"
+#include "ll/core/Version.h"
 
 #include "magic_enum.hpp"
 
@@ -81,9 +82,9 @@ void autoGenerate() {
 
     std::string path = __FILE__;
 
-    path = R"(D:\code\c++\LiteLoader\)" + path; // for OEOTYAN
+    path = LL_WORKSPACE_FOLDER + path;
 
-    auto file = ReadAllFile(path, false);
+    auto file = readAllFile(path, false);
     if (!file) {
         ll::logger.error("Couldn't open file {}", path);
         return;
@@ -118,7 +119,7 @@ void autoGenerate() {
 
 LL_AUTO_TYPED_INSTANCE_HOOK(
     PacketTestInit,
-    ll::memory::HookPriority::Normal,
+    HookPriority::Normal,
     ServerInstance,
     &ServerInstance::startServerThread,
     void

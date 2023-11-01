@@ -17,19 +17,19 @@ public:
     bool           mDirty = true;
 
     template <typename T>
-    inline optional_ref<T const> getData() const;
+    [[nodiscard]] inline optional_ref<T const> getData() const;
     template <typename T>
-    inline optional_ref<T> getData();
+    [[nodiscard]] inline optional_ref<T> getData();
     template <typename T>
     inline bool setData(T const& value);
 
     DataItem(DataItemType type, ushort id) : mType(type), mId(id) {}
 
     template <typename T>
-    inline static std::unique_ptr<DataItem> create(ushort key, T const& value);
+    [[nodiscard]] inline static std::unique_ptr<DataItem> create(ushort key, T const& value);
 
     template <typename T>
-    inline static std::unique_ptr<DataItem> create(::ActorDataIDs key, T const& value);
+    [[nodiscard]] inline static std::unique_ptr<DataItem> create(::ActorDataIDs key, T const& value);
 
 public:
     // NOLINTBEGIN
@@ -40,7 +40,7 @@ public:
     virtual bool isDataEqual(class DataItem const&) const;
 
     // vIndex: 2, symbol:
-    // ?clone@?$DataItem2@C@@UEBA?AV?$unique_ptr@VDataItem@@U?$default_delete@VDataItem@@@std@@@std@@XZ
+    // ?clone@?$DataItem2@M@@UEBA?AV?$unique_ptr@VDataItem@@U?$default_delete@VDataItem@@@std@@@std@@XZ
     virtual std::unique_ptr<class DataItem> clone() const = 0;
 
     // NOLINTEND

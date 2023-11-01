@@ -12,8 +12,8 @@
 
 #include "ll/api/memory/Hook.h"
 
-#include "ll/api/LoggerAPI.h"
-#include "ll/api/ServerAPI.h"
+#include "ll/api/Logger.h"
+#include "ll/api/ServerInfo.h"
 #include "ll/api/event/LegacyEvents.h"
 #include "ll/api/event/server/ServerStartedEvent.h"
 #include "ll/api/event/server/ServerStoppedEvent.h"
@@ -178,7 +178,7 @@ void checkRunningBDS() {
 void fixAllowList() {
     if (filesystem::exists("whitelist.json")) {
         if (filesystem::exists("allowlist.json")) {
-            auto res = ReadAllFile("allowlist.json");
+            auto res = readAllFile("allowlist.json");
             if (res && (res->empty() || nlohmann::json::parse(*res, nullptr, true, true).empty())) {
                 logger.warn(tr("ll.main.fixAllowList.removeEmptyAllowlist"));
                 filesystem::remove("allowlist.json");

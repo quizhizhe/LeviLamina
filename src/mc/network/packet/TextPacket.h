@@ -19,13 +19,18 @@ public:
     bool                     mLocalize;   // this+0x90
     std::string              mXuid;       // this+0x98
     std::string              mPlatformId; // this+0xB8
-    // prevent constructor by default
-    TextPacket(TextPacket const&);
+
+    [[nodiscard]] inline static TextPacket createRawMessage(std::string const& msg) {
+        auto res     = TextPacket{};
+        res.mType    = TextPacketType::Raw;
+        res.mMessage = msg;
+        return res;
+    }
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1TextPacket@@UEAA@XZ
+    virtual ~TextPacket();
 
     // vIndex: 1, symbol: ?getId@TextPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -38,9 +43,6 @@ public:
 
     // vIndex: 7, symbol: ?_read@TextPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
     virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1TextPacket@@UEAA@XZ
-    MCVAPI ~TextPacket();
 
     // symbol: ??0TextPacket@@QEAA@XZ
     MCAPI TextPacket();
@@ -95,14 +97,14 @@ public:
     );
 
     // symbol:
-    // ?createTextObjectWhisperMessage@TextPacket@@SA?AV1@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@00@Z
-    MCAPI static class TextPacket
-    createTextObjectWhisperMessage(std::string const& message, std::string const& xuid, std::string const& platformId);
-
-    // symbol:
     // ?createTextObjectWhisperMessage@TextPacket@@SA?AV1@AEBVResolvedTextObject@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@1@Z
     MCAPI static class TextPacket
     createTextObjectWhisperMessage(class ResolvedTextObject const&, std::string const&, std::string const&);
+
+    // symbol:
+    // ?createTextObjectWhisperMessage@TextPacket@@SA?AV1@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@00@Z
+    MCAPI static class TextPacket
+    createTextObjectWhisperMessage(std::string const& message, std::string const& xuid, std::string const& platformId);
 
     // symbol:
     // ?createTranslated@TextPacket@@SA?AV1@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@3@@Z

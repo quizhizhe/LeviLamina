@@ -26,6 +26,7 @@
 #include "mc/enums/MobSpawnMethod.h"
 #include "mc/enums/NewInteractionModel.h"
 #include "mc/enums/SubClientId.h"
+#include "mc/enums/TextPacketType.h"
 #include "mc/enums/TravelMethod.h"
 #include "mc/events/ActorEvent.h"
 #include "mc/events/LevelSoundEvent.h"
@@ -121,6 +122,14 @@ public:
 
     LLNDAPI std::string getDeviceId() const;
     LLNDAPI std::optional<NetworkPeer::NetworkStatus> getNetworkStatus() const;
+    /**
+     * @brief Disconnect player's client
+     */
+    LLAPI void disconnect(std::string const& reason) const;
+    /**
+     * @brief Send a message to player
+     */
+    LLAPI void sendMessage(std::string const& msg) const;
 
     // prevent constructor by default
     Player& operator=(Player const&);
@@ -816,11 +825,11 @@ public:
     // symbol: ?dropCursorSelectedItemOnDeath@Player@@QEAAXXZ
     MCAPI void dropCursorSelectedItemOnDeath();
 
-    // symbol: ?eat@Player@@QEAAXHM@Z
-    MCAPI void eat(int, float);
-
     // symbol: ?eat@Player@@QEAAXAEBVItemStack@@@Z
     MCAPI void eat(class ItemStack const&);
+
+    // symbol: ?eat@Player@@QEAAXHM@Z
+    MCAPI void eat(int, float);
 
     // symbol: ?equippedArmorItemCanBeMoved@Player@@QEBA_NAEBVItemStack@@@Z
     MCAPI bool equippedArmorItemCanBeMoved(class ItemStack const&) const;
@@ -831,11 +840,11 @@ public:
     // symbol: ?forceAllowEating@Player@@QEBA_NXZ
     MCAPI bool forceAllowEating() const;
 
-    // symbol: ?getAbilities@Player@@QEBAAEBVLayeredAbilities@@XZ
-    MCAPI class LayeredAbilities const& getAbilities() const;
-
     // symbol: ?getAbilities@Player@@QEAAAEAVLayeredAbilities@@XZ
     MCAPI class LayeredAbilities& getAbilities();
+
+    // symbol: ?getAbilities@Player@@QEBAAEBVLayeredAbilities@@XZ
+    MCAPI class LayeredAbilities const& getAbilities() const;
 
     // symbol: ?getAgent@Player@@QEBAPEAVAgent@@XZ
     MCAPI class Agent* getAgent() const;
@@ -901,11 +910,11 @@ public:
     // ?getItemInteractText@Player@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVItem@@@Z
     MCAPI std::string getItemInteractText(class Item const&) const;
 
-    // symbol: ?getItemStackNetManager@Player@@QEBAPEBVItemStackNetManagerBase@@XZ
-    MCAPI class ItemStackNetManagerBase const* getItemStackNetManager() const;
-
     // symbol: ?getItemStackNetManager@Player@@QEAAPEAVItemStackNetManagerBase@@XZ
     MCAPI class ItemStackNetManagerBase* getItemStackNetManager();
+
+    // symbol: ?getItemStackNetManager@Player@@QEBAPEBVItemStackNetManagerBase@@XZ
+    MCAPI class ItemStackNetManagerBase const* getItemStackNetManager() const;
 
     // symbol: ?getLuck@Player@@QEAAMXZ
     MCAPI float getLuck();
@@ -1272,11 +1281,11 @@ public:
     MCAPI static class Player*
     tryGetFromComponent(class FlagComponent<struct PlayerComponentFlag> const&, class ActorOwnerComponent&, bool);
 
-    // symbol: ?tryGetFromEntity@Player@@SAPEAV1@V?$StackRefResultT@UEntityRefTraits@@@@_N@Z
-    MCAPI static class Player* tryGetFromEntity(class StackRefResultT<struct EntityRefTraits>, bool);
-
     // symbol: ?tryGetFromEntity@Player@@SAPEAV1@AEAVEntityContext@@_N@Z
     MCAPI static class Player* tryGetFromEntity(class EntityContext&, bool);
+
+    // symbol: ?tryGetFromEntity@Player@@SAPEAV1@V?$StackRefResultT@UEntityRefTraits@@@@_N@Z
+    MCAPI static class Player* tryGetFromEntity(class StackRefResultT<struct EntityRefTraits>, bool);
 
     // symbol: ?tryGetFromEntity@Player@@SAPEBV1@AEBVEntityContext@@_N@Z
     MCAPI static class Player const* tryGetFromEntity(class EntityContext const&, bool);

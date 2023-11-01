@@ -42,13 +42,14 @@ public:
     // vIndex: 10, symbol: ?hash@IntTag@@UEBA_KXZ
     virtual uint64 hash() const;
 
-    // symbol: ??0IntTag@@QEAA@H@Z
-    MCAPI explicit IntTag(int);
-
     // symbol: ??0IntTag@@QEAA@XZ
     MCAPI IntTag();
 
+    // symbol: ??0IntTag@@QEAA@H@Z
+    MCAPI explicit IntTag(int);
+
     // NOLINTEND
 };
-
+namespace ll::nbt_literals {
 inline IntTag operator""_i(uint64 num) { return IntTag{(int)num}; }
+} // namespace ll::nbt_literals

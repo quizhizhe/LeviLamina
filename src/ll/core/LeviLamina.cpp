@@ -4,8 +4,8 @@
 #include <iostream>
 #include <string>
 
-#include "ll/api/LoggerAPI.h"
-#include "ll/api/ServerAPI.h"
+#include "ll/api/Logger.h"
+#include "ll/api/ServerInfo.h"
 #include "ll/api/memory/Hook.h"
 #include "ll/api/service/GlobalService.h"
 #include "ll/api/utils/FileHelper.h"
@@ -27,10 +27,13 @@
 #include "processenv.h"
 #include "windows.h"
 
+using namespace ll::hash;
+using namespace ll::hash_literals;
 
-Logger                                ll::logger("LeviLamina");
-std::chrono::steady_clock::time_point ll::SeverStartBeginTime;
-std::chrono::steady_clock::time_point ll::SeverStartEndTime;
+
+ll::Logger                            ll::logger("LeviLamina");
+std::chrono::steady_clock::time_point ll::severStartBeginTime;
+std::chrono::steady_clock::time_point ll::severStartEndTime;
 
 using namespace ll;
 
@@ -41,14 +44,15 @@ void fixPluginsLibDir() {
     auto* buffer = new (std::nothrow) wchar_t[MAX_PATH_LEN];
     if (!buffer) return;
 
-    GetEnvironmentVariableW(L"PATH", buffer, MAX_PATH_LEN);
+    GetEnvironmentVariable(L"PATH", buffer, MAX_PATH_LEN);
     std::wstring path(buffer);
 
-    GetCurrentDirectoryW(MAX_PATH_LEN, buffer);
+    GetCurrentDirectory(MAX_PATH_LEN, buffer);
     std::wstring currentDir(buffer);
 
+    delete[] buffer;
     // append plugins path to environment path
-    SetEnvironmentVariableW(L"PATH", (currentDir + L"\\plugins;" + path).c_str());
+    SetEnvironmentVariable(L"PATH", (currentDir + L"\\plugins;" + path).c_str());
 }
 
 void fixUpCWD() {
@@ -57,57 +61,21 @@ void fixUpCWD() {
     auto* buffer = new (std::nothrow) wchar_t[MAX_PATH_LEN];
     if (!buffer) return;
 
-    GetModuleFileNameW(nullptr, buffer, MAX_PATH_LEN);
+    GetModuleFileName(nullptr, buffer, MAX_PATH_LEN);
     std::wstring path(buffer);
 
-    SetCurrentDirectoryW(path.substr(0, path.find_last_of(L'\\')).c_str());
-}
+    delete[] buffer;
 
-void unzipNodeModules() {
-    if (std::filesystem::exists(std::filesystem::path(TEXT(".\\plugins\\lib\\node_modules.tar")))) {
-        std::error_code ec;
-        // if(std::filesystem::exists(".\\plugins\\lib\\node_modules\\"))
-        //     filesystem::remove_all(".\\plugins\\lib\\node_modules\\", ec);
-        auto res = NewProcessSync(
-            fmt::format(R"({} x "{}" -o".\plugins\lib\" -aoa)", ZIP_PROGRAM_PATH, R"(.\plugins\lib\node_modules.tar)"),
-            30000
-        );
-        if (res.first != 0) {
-            logger.error("ll.unzipNodeModules.fail"_tr);
-        } else {
-            std::filesystem::remove(R"(.\plugins\lib\node_modules.tar)", ec);
-        }
-    }
-}
-
-void decompressResourcePacks() {
-    if (std::filesystem::exists(std::filesystem::path(TEXT(".\\plugins\\LeviLamina\\ResourcePacks\\LeviLamina-CUI.tar"))
-        )) {
-        std::error_code ec;
-        // if(std::filesystem::exists(".\\plugins\\lib\\node_modules\\"))
-        //     filesystem::remove_all(".\\plugins\\lib\\node_modules\\", ec);
-        auto res = NewProcessSync(
-            fmt::format(
-                R"({} x "{}" -o".\plugins\LeviLamina\ResourcePacks\" -aoa)",
-                ZIP_PROGRAM_PATH,
-                R"(.\plugins\LeviLamina\ResourcePacks\LeviLamina-CUI.tar)"
-            ),
-            30000
-        );
-        if (res.first != 0) {
-            logger.error("ll.decompressResourcePacks.fail"_tr);
-        } else {
-            std::filesystem::remove(R"(.\plugins\LeviLamina\ResourcePacks\LeviLamina-CUI.tar)", ec);
-        }
-    }
+    SetCurrentDirectory(path.substr(0, path.find_last_of(L'\\')).c_str());
 }
 
 void checkRunningBDS() {
 
+    if (!ll::globalConfig.modules.checkRunningBDS) return;
+
     constexpr const DWORD MAX_PATH_LEN = 32767;
     auto*                 buffer       = new wchar_t[MAX_PATH_LEN];
 
-    if (!ll::globalConfig.enableCheckRunningBDS) return;
 
     // get all processes id with name "bedrock_server.exe" or "bedrock_server_mod.exe"
     // and pid is not current process
@@ -129,7 +97,7 @@ void checkRunningBDS() {
 
     // Get current process path
     std::wstring currentPath;
-    GetModuleFileNameW(nullptr, buffer, MAX_PATH_LEN);
+    GetModuleFileName(nullptr, buffer, MAX_PATH_LEN);
     currentPath = buffer;
 
     // Get the BDS process paths
@@ -139,7 +107,7 @@ void checkRunningBDS() {
         if (handle) {
             // Get the full path of the process
             std::wstring path;
-            GetModuleFileNameExW(handle, nullptr, buffer, MAX_PATH_LEN);
+            GetModuleFileNameEx(handle, nullptr, buffer, MAX_PATH_LEN);
             path = buffer;
 
             // Compare the path
@@ -147,7 +115,7 @@ void checkRunningBDS() {
                 logger.error("ll.main.checkRunningBDS.detected"_tr);
                 logger.error("ll.main.checkRunningBDS.tip"_tr);
                 while (true) {
-                    logger.error(tr("ll.main.checkRunningBDS.ask", pid));
+                    logger.error("ll.main.checkRunningBDS.ask"_tr, pid);
                     char input;
                     rewind(stdin);
                     input = static_cast<char>(getchar());
@@ -157,9 +125,7 @@ void checkRunningBDS() {
                         TerminateProcess(handle, 1);
                         break;
                     }
-                    if (input == 'e' || input == 'E') {
-                        std::terminate();
-                    }
+                    if (input == 'e' || input == 'E') { std::terminate(); }
                 }
             }
             CloseHandle(handle);
@@ -169,7 +135,6 @@ void checkRunningBDS() {
 }
 
 void printLogo() {
-    if (!ll::globalConfig.enableWelcomeText) return;
 
     logger.info(R"(                                                                      )");
     logger.info(R"(         _               _ _                    _                     )");
@@ -189,12 +154,8 @@ void printLogo() {
     logger.info("");
 }
 
-void checkDevMode() {
-    if (ll::globalConfig.debugMode) logger.warn("ll.main.warning.inDevMode"_tr);
-}
-
 void checkBetaVersion() {
-    if (ll::getLoaderVersion().mPreRelease != ll::Version::PreRelease::None) {
+    if (ll::getLoaderVersion().preRelease) {
         logger.warn("ll.main.warning.betaVersion"_tr);
         logger.warn("ll.main.warning.productionEnv"_tr);
     }
@@ -243,18 +204,31 @@ void unixSignalHandler(int signum) {
 }
 
 // extern
-
-extern void RegisterCommands();
-
-extern void EndScheduleSystem();
+namespace ll {
+extern void RegisterLeviCommands();
+}
 
 namespace bstats {
-void registerBStats();
+extern void registerBStats();
+}
+
+namespace ll::i18n {
+extern std::string globalDefaultLocaleName;
+}
+
+// bugfix
+namespace ll::bugfix {
+extern void enableArrayTagBugFix();
+} // namespace ll::bugfix
+void setupBugFixes() {
+    auto& bugfixSettings = ll::globalConfig.modules.tweak.bugfixes;
+    using namespace ll::bugfix;
+    if (bugfixSettings.fixArrayTagCompareBug) { enableArrayTagBugFix(); }
 }
 
 void leviLaminaMain() {
-    // If SEH Protection is not enabled (Debug mode), restore old SE translator
-    if (!ll::isDebugMode()) _set_se_translator(seh_exception::TranslateSEHtoCE);
+
+    _set_se_translator(seh_exception::TranslateSEHtoCE);
 
     // Prohibit pop-up windows to facilitate automatic restart
     SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX | SEM_NOALIGNMENTFAULTEXCEPT);
@@ -270,19 +244,16 @@ void leviLaminaMain() {
     std::filesystem::create_directories("plugins", ec);
 
     // I18n
-    auto i18n = Translation::load("plugins/LeviLamina/LangPack/");
+    ll::i18n::load("plugins/LeviLamina/LangPack");
 
     // Load Config
-    ll::LoadLLConfig();
-
-    // Unzip packed Node Modules
-    unzipNodeModules();
-
-    // Decompress resource packs
-    decompressResourcePacks();
+    ll::loadLeviConfig();
 
     // Update default language
-    if (i18n && ll::globalConfig.language != "system") { i18n->defaultLocaleName = ll::globalConfig.language; }
+    if (ll::globalConfig.language != "system") { i18n::globalDefaultLocaleName = ll::globalConfig.language; }
+
+    // Setup bug fixes
+    setupBugFixes();
 
     // Check Protocol Version
     checkProtocolVersion();
@@ -295,11 +266,11 @@ void leviLaminaMain() {
     checkRunningBDS();
 
     // Builtin CrashLogger
-    ll::CrashLogger::initCrashLogger(ll::globalConfig.enableCrashLogger);
+    ll::CrashLogger::initCrashLogger(ll::globalConfig.modules.crashLogger.enabled);
 
     // Rename Window
     HWND         hwnd = GetConsoleWindow();
-    std::wstring s    = ll::StringUtils::str2wstr("Bedrock Dedicated Server " + ll::getBdsVersion());
+    std::wstring s    = ll::string_utils::str2wstr("Bedrock Dedicated Server " + ll::getBdsVersion());
     SetWindowText(hwnd, s.c_str());
 
     // Register Exit Event Handler.
@@ -310,8 +281,10 @@ void leviLaminaMain() {
     // Welcome
     printLogo();
 
+#if defined(LL_DEBUG)
     // DebugMode
-    checkDevMode();
+    logger.warn("ll.main.warning.inDebugMode"_tr);
+#endif
 
     // Addon Helper
     // if (ll::globalConfig.enableAddonsHelper) {
@@ -322,7 +295,7 @@ void leviLaminaMain() {
     ll::LoadMain();
 
     // Register built-in commands
-    RegisterCommands();
+    RegisterLeviCommands();
 
     // Register simple server logger
     // ll::SimpleServerLogger::registerSimpleServerLogger();
@@ -331,16 +304,15 @@ void leviLaminaMain() {
     // bstats::registerBStats();
 }
 
-using namespace ll::memory;
 
-LL_AUTO_STATIC_HOOK(LeviLaminaMainHook, HookPriority::Normal, "main", int, int argc, char* argv[]) {
+LL_AUTO_STATIC_HOOK(LeviLaminaMainHook, HookPriority::Highest, "main", int, int argc, char* argv[]) {
 
-    SeverStartBeginTime = std::chrono::steady_clock::now();
+    severStartBeginTime = std::chrono::steady_clock::now();
 
     for (int i = 0; i < argc; ++i) {
         switch (do_hash(argv[i])) {
         case "--noColor"_h:
-            ll::commandLineOption.noColorOption = true;
+            ll::globalConfig.logger.colorLog = false;
             break;
         case "-v"_h:
         case "--version"_h:

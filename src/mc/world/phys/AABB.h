@@ -128,11 +128,11 @@ public:
     // symbol: ?set@AABB@@QEAAAEAV1@AEBV1@@Z
     MCAPI class AABB& set(class AABB const&);
 
-    // symbol: ?set@AABB@@QEAAAEAV1@MMMMMM@Z
-    MCAPI class AABB& set(float, float, float, float, float, float);
-
     // symbol: ?set@AABB@@QEAAAEAV1@AEBVVec3@@0@Z
     MCAPI class AABB& set(class Vec3 const&, class Vec3 const&);
+
+    // symbol: ?set@AABB@@QEAAAEAV1@MMMMMM@Z
+    MCAPI class AABB& set(float, float, float, float, float, float);
 
     // symbol: ?shrink@AABB@@QEAAAEAV1@AEBVVec3@@@Z
     MCAPI class AABB& shrink(class Vec3 const&);

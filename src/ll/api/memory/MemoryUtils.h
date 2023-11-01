@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <string>
 #include <type_traits>
 #include <vector>
@@ -52,14 +53,14 @@ inline void memcpy_t(void* dst, const void* src) {
  * @param symbol Symbol
  * @return function pointer
  */
-LLNDAPI FuncPtr resolveSymbol(const char* symbol);
+LLNDAPI FuncPtr resolveSymbol(char const* symbol);
 
 /**
  * @brief resolve signature to function pointer
  * @param t Signature
  * @return function pointer
  */
-LLNDAPI FuncPtr resolveSignature(const char* signature);
+LLNDAPI FuncPtr resolveSignature(char const* signature);
 
 /**
  * @brief lookup symbol name of a function address
@@ -69,18 +70,31 @@ LLNDAPI FuncPtr resolveSignature(const char* signature);
 LLNDAPI std::vector<std::string> lookupSymbol(FuncPtr func);
 
 template <uintptr_t off, typename RTN = void, typename... Args>
-auto constexpr virtualCall(void const* _this, Args&&... args) -> RTN {
-    return (*(RTN(**)(void const*, Args&&...))(*(uintptr_t*)_this + off))(_this, std::forward<Args>(args)...);
+auto constexpr virtualCall(void const* self, Args&&... args) -> RTN {
+    return (*(RTN(**)(void const*, Args&&...))(*(uintptr_t*)self + off))(self, std::forward<Args>(args)...);
 }
 
 template <typename T>
-[[nodiscard]] constexpr T& dAccess(void* ptr, uintptr_t off) {
-    return *(T*)(((uintptr_t)ptr) + off);
+[[nodiscard]] constexpr T& dAccess(void* ptr, intptr_t off) {
+    return *(T*)(((uintptr_t)ptr) + (uintptr_t)(off));
 }
 
 template <typename T>
-[[nodiscard]] constexpr T const& dAccess(void const* ptr, uintptr_t off) {
-    return *(T*)(((uintptr_t)ptr) + off);
+[[nodiscard]] constexpr T const& dAccess(void const* ptr, intptr_t off) {
+    return *(T*)(((uintptr_t)ptr) + (uintptr_t)off);
+}
+
+template <typename T>
+constexpr void destruct(void* ptr, intptr_t off) noexcept {
+    std::destroy_at(std::launder(reinterpret_cast<T*>(((uintptr_t)ptr) + (uintptr_t)off)));
+}
+
+template <typename T, class... Types>
+constexpr auto construct(void* ptr, intptr_t off, Types&&... args) {
+    return std::construct_at(
+        std::launder(reinterpret_cast<T*>(((uintptr_t)ptr) + (uintptr_t)off)),
+        std::forward<Types>(args)...
+    );
 }
 
 [[nodiscard]] inline size_t getMemSizeFromPtr(void* ptr) {

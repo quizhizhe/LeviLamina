@@ -42,13 +42,14 @@ public:
     // vIndex: 10, symbol: ?hash@StringTag@@UEBA_KXZ
     virtual uint64 hash() const;
 
-    // symbol: ??0StringTag@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI explicit StringTag(std::string);
-
     // symbol: ??0StringTag@@QEAA@XZ
     MCAPI StringTag();
 
+    // symbol: ??0StringTag@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+    MCAPI explicit StringTag(std::string);
+
     // NOLINTEND
 };
-
-inline StringTag operator""_tag(const char* x, size_t len) { return StringTag(std::string{x, len}); }
+namespace ll::nbt_literals {
+inline StringTag operator""_tag(char const* x, size_t len) { return StringTag(std::string{x, len}); }
+} // namespace ll::nbt_literals

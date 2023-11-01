@@ -132,13 +132,13 @@ public:
     };
 
     struct LexicalToken {
-        const char*            mText;           // this+0x0
+        char const*            mText;           // this+0x0
         uint                   mLength;         // this+0x8
         Symbol                 mType;           // this+0xC
         Symbol                 mIdentifierInfo; // this+0x10
         CommandRegistry const& mRegistry;       // this+0x18
 
-        LexicalToken(CommandRegistry& registry): mRegistry(registry) {}
+        LexicalToken(CommandRegistry& registry) : mRegistry(registry) {}
 
     public:
         // NOLINTBEGIN
@@ -213,7 +213,7 @@ public:
         std::unique_ptr<ParseToken> child;  // this+0x0
         std::unique_ptr<ParseToken> next;   // this+0x8
         ParseToken*                 parent; // this+0x10
-        const char*                 text;   // this+0x18
+        char const*                 text;   // this+0x18
         uint                        length; // this+0x20
         Symbol                      type;   // this+0x24
 
@@ -422,7 +422,7 @@ public:
     // following is the command parameter overloading
 
     template <typename T>
-    inline static std::unique_ptr<Command> allocateCommand() {
+    [[nodiscard]] inline static std::unique_ptr<Command> allocateCommand() {
         return std::make_unique<T>();
     };
 
@@ -434,33 +434,6 @@ public:
     };
 
     // following sections add sections for directive parameter enumeration
-
-    template <typename Type>
-    struct DefaultIdConverter {
-        template <typename Target, typename Source>
-        static Target convert(Source source) {
-            return static_cast<Target>(source);
-        }
-        uint64_t operator()(Type value) const { return convert<uint64_t, Type>(value); }
-        Type     operator()(uint64_t value) const { return convert<Type, uint64_t>(value); }
-    };
-
-    bool
-    parseEnumInt(void* target, CommandRegistry::ParseToken const& token, CommandOrigin const&, int, std::string&, std::vector<std::string>&)
-        const {
-        auto data     = getEnumData(token);
-        *(int*)target = (int)data;
-        return true;
-    };
-
-    bool
-    parseEnumString(void* target, CommandRegistry::ParseToken const& token, CommandOrigin const&, int, std::string&, std::vector<std::string>&)
-        const {
-        auto data             = token.toString();
-        *(std::string*)target = data;
-        return true;
-    };
-
     bool
     parseEnumStringAndInt(void* target, CommandRegistry::ParseToken const& token, CommandOrigin const&, int, std::string&, std::vector<std::string>&)
         const {
@@ -470,41 +443,21 @@ public:
         return true;
     };
 
-    template <typename Type, typename IDConverter = CommandRegistry::DefaultIdConverter<Type>>
+    template <typename Type>
     bool
     parseEnum(void* target, CommandRegistry::ParseToken const& token, CommandOrigin const&, int, std::string&, std::vector<std::string>&)
         const {
         auto data      = getEnumData(token);
-        *(Type*)target = IDConverter{}(data);
+        *(Type*)target = (Type)(data);
         return true;
     };
 
-    template <typename Type, typename IDConverter = CommandRegistry::DefaultIdConverter<Type>>
-    uint addEnumValues(
-        std::string const&                               name,
-        Bedrock::typeid_t<CommandRegistry>               tid,
-        std::vector<std::pair<std::string, Type>> const& values
-    ) {
-        std::vector<std::pair<std::string, uint64_t>> converted;
-        IDConverter                                   converter;
-        for (auto& value : values) converted.emplace_back(value.first, converter(value.second));
-        return _addEnumValuesInternal(name, converted, tid, &CommandRegistry::parseEnum<Type, IDConverter>).mValue;
-    };
-
-    uint addEnumValues(
-        std::string const&                        name,
-        const Bedrock::typeid_t<CommandRegistry>& tid,
-        std::initializer_list<std::string> const& values
-    ) {
-        std::vector<std::pair<std::string, uint64_t>> converted;
-        uint64_t                                      idx = 0;
-        for (auto& value : values) converted.emplace_back(value, ++idx);
-        return _addEnumValuesInternal(name, converted, tid, &CommandRegistry::parseEnumInt).mValue;
-    };
-
     template <typename T>
-    CommandRegistry* addEnum(char const* name, std::vector<std::pair<std::string, T>> const& values) {
-        this->addEnumValues<T>(name, Bedrock::type_id<CommandRegistry, T>(), values);
+    CommandRegistry* addEnum(std::string const& name, std::vector<std::pair<std::string, T>> const& values) {
+        std::vector<std::pair<std::string, uint64>> converted;
+        converted.reserve(values.size());
+        for (auto& value : values) converted.emplace_back(value.first, (uint64)(value.second));
+        _addEnumValuesInternal(name, converted, Bedrock::type_id<CommandRegistry, T>(), &CommandRegistry::parseEnum<T>);
         return this;
     }
 
@@ -682,29 +635,29 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol:
-    // ?_addChainedSubcommandValuesInternal@CommandRegistry@@AEAA?AVSymbol@1@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@U?$pair@_KI@std@@V?$allocator@U?$pair@_KI@std@@@2@@4@V?$typeid_t@VCommandRegistry@@@Bedrock@@P81@EBA_NPEAXAEBUParseToken@1@AEBVCommandOrigin@@HAEAV34@AEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@4@@ZPEAUSignature@1@@Z
-    MCAPI class CommandRegistry::Symbol
-    _addChainedSubcommandValuesInternal(std::string const&, std::vector<std::pair<uint64, uint>> const&, class Bedrock::typeid_t<class CommandRegistry>, ParseFn, struct CommandRegistry::Signature*);
-
-    // symbol:
     // ?_addChainedSubcommandValuesInternal@CommandRegistry@@AEAA?AVSymbol@1@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@U?$pair@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@I@std@@V?$allocator@U?$pair@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@I@std@@@2@@4@V?$typeid_t@VCommandRegistry@@@Bedrock@@P81@EBA_NPEAXAEBUParseToken@1@AEBVCommandOrigin@@HAEAV34@AEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@4@@ZPEAUSignature@1@@Z
     MCAPI class CommandRegistry::Symbol
     _addChainedSubcommandValuesInternal(std::string const&, std::vector<std::pair<std::string, uint>> const&, class Bedrock::typeid_t<class CommandRegistry>, ParseFn, struct CommandRegistry::Signature*);
 
     // symbol:
-    // ?_addEnumValuesInternal@CommandRegistry@@AEAA?AVSymbol@1@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@U?$pair@_K_K@std@@V?$allocator@U?$pair@_K_K@std@@@2@@4@V?$typeid_t@VCommandRegistry@@@Bedrock@@P81@EBA_NPEAXAEBUParseToken@1@AEBVCommandOrigin@@HAEAV34@AEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@4@@Z@Z
-    MCAPI class CommandRegistry::Symbol _addEnumValuesInternal(
-        std::string const&,
-        std::vector<std::pair<uint64, uint64>> const&,
-        class Bedrock::typeid_t<class CommandRegistry>,
-        ParseFn
-    );
+    // ?_addChainedSubcommandValuesInternal@CommandRegistry@@AEAA?AVSymbol@1@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@U?$pair@_KI@std@@V?$allocator@U?$pair@_KI@std@@@2@@4@V?$typeid_t@VCommandRegistry@@@Bedrock@@P81@EBA_NPEAXAEBUParseToken@1@AEBVCommandOrigin@@HAEAV34@AEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@4@@ZPEAUSignature@1@@Z
+    MCAPI class CommandRegistry::Symbol
+    _addChainedSubcommandValuesInternal(std::string const&, std::vector<std::pair<uint64, uint>> const&, class Bedrock::typeid_t<class CommandRegistry>, ParseFn, struct CommandRegistry::Signature*);
 
     // symbol:
     // ?_addEnumValuesInternal@CommandRegistry@@AEAA?AVSymbol@1@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@U?$pair@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_K@std@@V?$allocator@U?$pair@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_K@std@@@2@@4@V?$typeid_t@VCommandRegistry@@@Bedrock@@P81@EBA_NPEAXAEBUParseToken@1@AEBVCommandOrigin@@HAEAV34@AEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@4@@Z@Z
     MCAPI class CommandRegistry::Symbol _addEnumValuesInternal(
         std::string const&,
         std::vector<std::pair<std::string, uint64>> const&,
+        class Bedrock::typeid_t<class CommandRegistry>,
+        ParseFn
+    );
+
+    // symbol:
+    // ?_addEnumValuesInternal@CommandRegistry@@AEAA?AVSymbol@1@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@U?$pair@_K_K@std@@V?$allocator@U?$pair@_K_K@std@@@2@@4@V?$typeid_t@VCommandRegistry@@@Bedrock@@P81@EBA_NPEAXAEBUParseToken@1@AEBVCommandOrigin@@HAEAV34@AEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@4@@Z@Z
+    MCAPI class CommandRegistry::Symbol _addEnumValuesInternal(
+        std::string const&,
+        std::vector<std::pair<uint64, uint64>> const&,
         class Bedrock::typeid_t<class CommandRegistry>,
         ParseFn
     );
@@ -767,6 +720,11 @@ public:
         const;
 
     // symbol:
+    // ?buildOptionalRuleChain@CommandRegistry@@AEAA?AVSymbol@1@AEBUSignature@1@AEBV?$vector@VCommandParameterData@@V?$allocator@VCommandParameterData@@@std@@@std@@AEBV?$vector@VSymbol@CommandRegistry@@V?$allocator@VSymbol@CommandRegistry@@@std@@@5@@Z
+    MCAPI class CommandRegistry::Symbol
+    buildOptionalRuleChain(struct CommandRegistry::Signature const&, std::vector<class CommandParameterData> const&, std::vector<class CommandRegistry::Symbol> const&);
+
+    // symbol:
     // ?buildOptionalRuleChain@CommandRegistry@@AEAA?AVSymbol@1@AEBUSignature@1@AEBV?$vector@VCommandParameterData@@V?$allocator@VCommandParameterData@@@std@@@std@@PEBVCommandParameterData@@_K@Z
     MCAPI class CommandRegistry::Symbol buildOptionalRuleChain(
         struct CommandRegistry::Signature const&,
@@ -774,11 +732,6 @@ public:
         class CommandParameterData const*,
         uint64
     );
-
-    // symbol:
-    // ?buildOptionalRuleChain@CommandRegistry@@AEAA?AVSymbol@1@AEBUSignature@1@AEBV?$vector@VCommandParameterData@@V?$allocator@VCommandParameterData@@@std@@@std@@AEBV?$vector@VSymbol@CommandRegistry@@V?$allocator@VSymbol@CommandRegistry@@@std@@@5@@Z
-    MCAPI class CommandRegistry::Symbol
-    buildOptionalRuleChain(struct CommandRegistry::Signature const&, std::vector<class CommandParameterData> const&, std::vector<class CommandRegistry::Symbol> const&);
 
     // symbol: ?buildParseTable@CommandRegistry@@AEBAXI@Z
     MCAPI void buildParseTable(uint) const;
@@ -805,12 +758,12 @@ public:
         const;
 
     // symbol:
-    // ?describe@CommandRegistry@@AEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VSymbol@1@@Z
-    MCAPI std::string describe(class CommandRegistry::Symbol) const;
-
-    // symbol:
     // ?describe@CommandRegistry@@AEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVCommandParameterData@@@Z
     MCAPI std::string describe(class CommandParameterData const&) const;
+
+    // symbol:
+    // ?describe@CommandRegistry@@AEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VSymbol@1@@Z
+    MCAPI std::string describe(class CommandRegistry::Symbol) const;
 
     // symbol:
     // ?describe@CommandRegistry@@AEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBUSignature@1@AEBV23@AEBUOverload@1@IPEAI3@Z
@@ -819,12 +772,12 @@ public:
         const;
 
     // symbol:
-    // ?findCommand@CommandRegistry@@AEBAPEBUSignature@1@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI struct CommandRegistry::Signature const* findCommand(std::string const&) const;
-
-    // symbol:
     // ?findCommand@CommandRegistry@@AEAAPEAUSignature@1@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
     MCAPI struct CommandRegistry::Signature* findCommand(std::string const&);
+
+    // symbol:
+    // ?findCommand@CommandRegistry@@AEBAPEBUSignature@1@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+    MCAPI struct CommandRegistry::Signature const* findCommand(std::string const&) const;
 
     // symbol:
     // ?findEnumValue@CommandRegistry@@AEBA?AVSymbol@1@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
@@ -858,6 +811,12 @@ public:
     MCAPI bool originCanRun(class CommandOrigin const&, struct CommandRegistry::Signature const&) const;
 
     // symbol:
+    // ?parseSelector@CommandRegistry@@AEBA_NAEAUActorSelectorArgs@@AEBUParseToken@1@AEBVCommandOrigin@@HAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@6@@Z
+    MCAPI bool
+    parseSelector(struct ActorSelectorArgs&, struct CommandRegistry::ParseToken const&, class CommandOrigin const&, int, std::string&, std::vector<std::string>&)
+        const;
+
+    // symbol:
     // ?parseSelector@CommandRegistry@@AEBA_NPEAVCommandSelectorBase@@AEBUParseToken@1@AEBVCommandOrigin@@HAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@6@_N@Z
     MCAPI bool parseSelector(
         class CommandSelectorBase*,
@@ -868,12 +827,6 @@ public:
         std::vector<std::string>&,
         bool
     ) const;
-
-    // symbol:
-    // ?parseSelector@CommandRegistry@@AEBA_NAEAUActorSelectorArgs@@AEBUParseToken@1@AEBVCommandOrigin@@HAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@6@@Z
-    MCAPI bool
-    parseSelector(struct ActorSelectorArgs&, struct CommandRegistry::ParseToken const&, class CommandOrigin const&, int, std::string&, std::vector<std::string>&)
-        const;
 
     // symbol: ?registerOverloadInternal@CommandRegistry@@AEAAXAEAUSignature@1@AEAUOverload@1@@Z
     MCAPI void registerOverloadInternal(struct CommandRegistry::Signature&, struct CommandRegistry::Overload&);
@@ -951,7 +904,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    inline auto& $ParseRuleSymbols() { return ParseRuleSymbols; }
+    auto& $ParseRuleSymbols() { return ParseRuleSymbols; }
 
     // NOLINTEND
 };

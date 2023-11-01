@@ -2,17 +2,6 @@
 /*
  * @brief This file is a simple header-only SEH-Exception convert helper with minwindef
  */
-#ifndef _AMD64_
-#define _AMD64_
-#endif
-
-#ifdef SEH_TRANS_INFO_STRUCT
-#include "minwindef.h"
-#define SEH_EXP_INFO_POINTER struct _EXCEPTION_POINTERS*
-#else
-#define SEH_EXP_INFO_POINTER void*
-#endif
-
 #include <exception>
 
 #pragma comment(lib, "ntdll")
@@ -45,11 +34,11 @@ constexpr int ALLOCATE_BUFFER = 0x00000100;
 
 class seh_exception : std::exception {
 public:
-    const uint                 _expCode = 0;
-    const char*                _expMsg  = nullptr;
-    const SEH_EXP_INFO_POINTER _expInfo = nullptr;
+    const uint  _expCode = 0;
+    char const* _expMsg  = nullptr;
+    const void* _expInfo = nullptr;
 
-    seh_exception(uint ExpCode, SEH_EXP_INFO_POINTER ExpInfo) : _expCode(ExpCode), _expInfo(ExpInfo) {}
+    seh_exception(uint ExpCode, void* ExpInfo) : _expCode(ExpCode), _expInfo(ExpInfo) {}
 
     ~seh_exception() override {
         if (_expMsg) {
@@ -58,7 +47,7 @@ public:
         }
     };
 
-    [[nodiscard]] const char* what() const noexcept override {
+    [[nodiscard]] char const* what() const noexcept override {
 
         ulong messageLength = WinAPI::FormatMessageA(
             WinAPI::FormatMessageFlags::ALLOCATE_BUFFER | WinAPI::FormatMessageFlags::FROM_SYSTEM
@@ -76,7 +65,7 @@ public:
         return "SEH_UNKNOW_ERROR";
     }
 
-    [[nodiscard]] const SEH_EXP_INFO_POINTER info() const { return _expInfo; }
+    [[nodiscard]] const void* info() const { return _expInfo; }
 
     [[nodiscard]] uint code() const { return _expCode; }
 

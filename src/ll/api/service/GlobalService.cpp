@@ -1,21 +1,16 @@
 #include "ll/api/service/GlobalService.h"
 
-#include "mc/common/SharedConstants.h"
 #include "mc/deps/raknet/RakPeer.h"
 #include "mc/network/RakNetConnector.h"
-#include "mc/network/RakNetServerLocator.h"
 #include "mc/network/ServerNetworkHandler.h"
 #include "mc/resources/ResourcePackRepository.h"
 #include "mc/server/ServerLevel.h"
-#include "mc/server/commands/CommandSoftEnumRegistry.h"
 #include "mc/server/commands/MinecraftCommands.h"
 #include "mc/server/common/AllowListFile.h"
 #include "mc/server/common/PropertiesSettings.h"
 #include "mc/server/common/commands/AllowListCommand.h"
 #include "mc/world/Minecraft.h"
 #include "mc/world/events/ServerInstanceEventCoordinator.h"
-#include "mc/world/level/storage/DBStorage.h"
-#include "mc/world/scores/Scoreboard.h"
 #include "mc/world/systems/NetworkSystem.h"
 
 #include "ll/api/memory/Hook.h"
@@ -34,10 +29,9 @@ namespace {
 
 using namespace ll::memory;
 
-// Minecraft
 LL_AUTO_TYPED_INSTANCE_HOOK(
-    MinecraftService,
-    HookPriority::Normal,
+    MinecraftServiceHook,
+    HookPriority::High,
     Minecraft,
     &Minecraft::initAsDedicatedServer,
     void
@@ -47,29 +41,27 @@ LL_AUTO_TYPED_INSTANCE_HOOK(
     ll::Global<CommandRegistry>.init(&getCommands().getRegistry());
 }
 
-// ServerLevel
 LL_AUTO_TYPED_INSTANCE_HOOK(
-    ServerStartedEventHook,
-    ll::memory::HookPriority::Normal,
+    ServerLevelServiceHook,
+    HookPriority::High,
     ServerInstanceEventCoordinator,
     &ServerInstanceEventCoordinator::sendServerThreadStarted,
     void,
     ::ServerInstance& ins
 ) {
-    ll::Global<RakNet::RakPeer>.init(
-        (RakNet::RakPeer*)((RakNetConnector&)(*ll::Global<Minecraft>->getNetworkSystem().getRemoteConnector()))
-            .getPeer()
-    );
     ll::Global<StructureManager>.init(ll::Global<Minecraft>->getStructureManager().get());
     ll::Global<Level>.init(ll::Global<Minecraft>->getLevel());
     ll::Global<ServerLevel>.init((ServerLevel*)ll::Global<Level>);
     origin(ins);
+    ll::Global<RakNet::RakPeer>.init(
+        (RakNet::RakPeer*)((RakNetConnector&)(*ll::Global<Minecraft>->getNetworkSystem().getRemoteConnector()))
+            .getPeer()
+    );
 }
 
-// ServerNetworkHandler
 LL_AUTO_TYPED_INSTANCE_HOOK(
-    ServerNetworkHandlerService,
-    HookPriority::Normal,
+    ServerNetworkHandlerServiceHook,
+    HookPriority::High,
     ServerNetworkHandler,
     &ServerNetworkHandler::allowIncomingConnections,
     void,
@@ -81,10 +73,9 @@ LL_AUTO_TYPED_INSTANCE_HOOK(
     origin(a1, a2);
 }
 
-// AllowListFile
 LL_AUTO_TYPED_STATIC_HOOK(
-    AllowListFileService,
-    HookPriority::Normal,
+    AllowListFileServiceHook,
+    HookPriority::High,
     AllowListCommand,
     AllowListCommand::setup,
     void,
@@ -95,10 +86,9 @@ LL_AUTO_TYPED_STATIC_HOOK(
     origin(reg, file);
 }
 
-// PropertiesSettings
 LL_AUTO_TYPED_INSTANCE_HOOK(
-    PropertiesSettingsService,
-    HookPriority::Normal,
+    PropertiesSettingsServiceHook,
+    HookPriority::High,
     PropertiesSettings,
     &PropertiesSettings::isPropertiesFileLoaded,
     bool const
@@ -108,10 +98,9 @@ LL_AUTO_TYPED_INSTANCE_HOOK(
     return origin();
 }
 
-// ResourcePackRepository
 LL_AUTO_TYPED_INSTANCE_HOOK(
-    ResourcePackInitEventHook,
-    ll::memory::HookPriority::Normal,
+    ResourcePackRepositoryServiceHook,
+    HookPriority::High,
     ResourcePackRepository,
     &ResourcePackRepository::_initialize,
     void

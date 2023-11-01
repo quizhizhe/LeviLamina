@@ -3,14 +3,13 @@
 #include "httplib.h"
 #include <thread>
 
-#include "ll/api/utils/DbgHelper.h"
-
-#include "ll/api/LoggerAPI.h"
+#include "ll/api/Logger.h"
 #include "ll/api/i18n/I18nAPI.h"
 
 #include "ll/core/Config.h"
 #include "ll/core/LeviLamina.h"
 
+// TODO rewrite this file
 
 void SplitHttpUrl(std::string const& url, std::string& host, std::string& path) {
     host = url;
@@ -46,8 +45,7 @@ bool HttpGet(
     }
     if (timeout > 0) cli->set_connection_timeout(timeout, 0);
 
-    std::thread([cli, headers, callback, path{std::move(path)}]() {
-        if (!ll::isDebugMode()) _set_se_translator(seh_exception::TranslateSEHtoCE);
+    std::thread([cli, headers, callback, path{std::move(path)}] {
         try {
             auto response = cli->Get(path, headers);
             delete cli;
@@ -57,15 +55,12 @@ bool HttpGet(
         } catch (seh_exception const& e) {
             ll::logger.error("SEH Uncaught Exception Detected!\n{}", e.what());
             ll::logger.error("In HttpGet callback");
-            PrintCurrentStackTraceback();
         } catch (std::exception const& e) {
-            ll::logger.error("Uncaught C++ Exception Detected!\n{}", TextEncoding::toUTF8(e.what()));
+            ll::logger.error("Uncaught C++ Exception Detected!\n{}", e.what());
             ll::logger.error("In HttpGet callback");
-            PrintCurrentStackTraceback();
         } catch (...) {
             ll::logger.error("HttpGet Callback Failed!");
             ll::logger.error("Uncaught Exception Detected!");
-            PrintCurrentStackTraceback();
         }
     }).detach();
 
@@ -99,8 +94,7 @@ bool HttpPost(
     }
     if (timeout > 0) cli->set_connection_timeout(timeout, 0);
 
-    std::thread([cli, headers, data, type, callback, path{std::move(path)}]() {
-        if (!ll::isDebugMode()) _set_se_translator(seh_exception::TranslateSEHtoCE);
+    std::thread([cli, headers, data, type, callback, path{std::move(path)}] {
         try {
             auto response = cli->Post(path, headers, data, type);
             delete cli;
@@ -109,15 +103,12 @@ bool HttpPost(
         } catch (seh_exception const& e) {
             ll::logger.error("SEH Uncaught Exception Detected!\n{}", e.what());
             ll::logger.error("In HttpPost callback");
-            PrintCurrentStackTraceback();
         } catch (std::exception const& e) {
-            ll::logger.error("Uncaught C++ Exception Detected!\n{}", TextEncoding::toUTF8(e.what()));
+            ll::logger.error("Uncaught C++ Exception Detected!\n{}", e.what());
             ll::logger.error("In HttpGet callback");
-            PrintCurrentStackTraceback();
         } catch (...) {
             ll::logger.error("HttpPost Callback Failed!");
             ll::logger.error("Uncaught Exception Detected!");
-            PrintCurrentStackTraceback();
         }
     }).detach();
     return true;

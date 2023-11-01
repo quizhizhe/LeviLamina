@@ -1,8 +1,7 @@
-#ifdef DEBUG
+#ifdef LL_DEBUG
 
 #include "ll/api/LLAPI.h"
-#include "ll/api/LoggerAPI.h"
-#include "ll/api/ScheduleAPI.h"
+#include "ll/api/Logger.h"
 #include "ll/api/command/DynamicCommand.h"
 #include "ll/api/memory/Hook.h"
 #include "ll/api/utils/Hash.h"
@@ -11,14 +10,18 @@
 #include "mc/world/actor/Actor.h"
 #include "mc/world/level/storage/LevelData.h"
 
-#define TEST_DYNAMIC_COMMAND
-#define successf(...) success(fmt::format(__VA_ARGS__))
-#define errorf(...)   error(fmt::format(__VA_ARGS__))
+#include "ll/api/schedule/Scheduler.h"
+
+#include "ll/api/Literals.h"
+
 using Param      = DynamicCommand::ParameterData;
 using ParamType  = DynamicCommand::ParameterType;
 using ParamIndex = DynamicCommandInstance::ParameterIndex;
 
-#ifdef TEST_DYNAMIC_COMMAND
+using namespace ll::schedule;
+using namespace ll::hash;
+
+GameTimeScheduler scheduler;
 
 void setupTestParamCommand() {
     using Param     = DynamicCommand::ParameterData;
@@ -40,9 +43,9 @@ void setupTestParamCommand() {
     Param ActorTypeParam("testActorType", ParamType::ActorType, true);
     Param EffectParam("testEffect", ParamType::Effect, true);
     Param CommandParam("testCommand", ParamType::Command, true);
-    // Param posParam(ParamType::Position, "testPos", true);
     //  Test Command:
-    //    param true 123 3.14 string @e @a 1 2 3 ~1 ~2 ~3 msg {"a":123} stick bedrock ["persistent_bit"=true] npc poison help param rawtext
+    //    param true 123 3.14 string @e @a 1 2 3 ~1 ~2 ~3 msg {"a":123} stick bedrock ["persistent_bit"=true] npc poison
+    //    help param rawtext
     DynamicCommand::setup(
         "param",
         "dynamic command",
@@ -67,27 +70,25 @@ void setupTestParamCommand() {
             CommandParam,
             RawTextParam,
         },
-        {{
-            "testBool",
-            "testInt",
-            "testFloat",
-            "testStr",
-            "testActor",
-            "testPlayer",
-            "testBlockPos",
-            "testVec3",
-            "testMessage",
-            "testJsonValue",
-            "testItem",
-            "testBlock",
-            "testBlockState",
-            "testActorType",
-            "testEffect",
-            "testCommand",
-            "testRawText"
-        }},
-        [](DynamicCommand const&                                    command,
-           CommandOrigin const&                                     origin,
+        {{"testBool",
+          "testInt",
+          "testFloat",
+          "testStr",
+          "testActor",
+          "testPlayer",
+          "testBlockPos",
+          "testVec3",
+          "testMessage",
+          "testJsonValue",
+          "testItem",
+          "testBlock",
+          "testBlockState",
+          "testActorType",
+          "testEffect",
+          "testCommand",
+          "testRawText"}},
+        [](DynamicCommand const&,
+           CommandOrigin const&,
            CommandOutput&                                           output,
            std::unordered_map<std::string, DynamicCommand::Result>& results) {
             for (auto& [name, result] : results) { output.success(result.toDebugString()); }
@@ -121,8 +122,8 @@ void setupTestEnumCommand() {
             {"TestEnum2"},            // testenum <list>
         },
         // dynamic command callback
-        [](DynamicCommand const&                                    command,
-           CommandOrigin const&                                     origin,
+        [](DynamicCommand const&,
+           CommandOrigin const&,
            CommandOutput&                                           output,
            std::unordered_map<std::string, DynamicCommand::Result>& results) {
             auto& action = results["testEnum"].getRaw<std::string>();
@@ -162,8 +163,8 @@ void setupExampleCommand() {
     command->addOverload({optionsAdd, "testString"}); // dyncmd <add|remove> <testString:string>
     command->addOverload({"TestOperation2"});         // dyncmd <list>
 
-    command->setCallback([](DynamicCommand const&                                    command,
-                            CommandOrigin const&                                     origin,
+    command->setCallback([](DynamicCommand const&,
+                            CommandOrigin const&,
                             CommandOutput&                                           output,
                             std::unordered_map<std::string, DynamicCommand::Result>& results) {
         switch (do_hash(results["testEnum"].getRaw<std::string>().c_str())) {
@@ -190,26 +191,25 @@ void setupRemoveCommand() {
     command->setAlias("remove");
     auto name = command->mandatory("name", ParamType::SoftEnum, command->setSoftEnum("CommandNames", {}));
     command->addOverload(name);
-    command->setCallback([](DynamicCommand const&                                    cmd,
-                            CommandOrigin const&                                     origin,
+    command->setCallback([](DynamicCommand const& cmd,
+                            CommandOrigin const&,
                             CommandOutput&                                           output,
                             std::unordered_map<std::string, DynamicCommand::Result>& results) {
         auto& name     = results["name"].getRaw<std::string>();
         auto  fullName = ll::Global<CommandRegistry>->getCommandFullName(name);
         if (fullName == cmd.getCommandName()) {
             output.success("Request unregister itself");
-            Schedule::delay(
-                [fullName]() {
-                    auto res = ll::Global<CommandRegistry>->unregisterCommand(fullName);
-                    if (res) {
-                        DynamicCommand::unregisterCommand(fullName);
-                        ll::logger.info("unregister command " + fullName);
-                        ((DynamicCommandInstance*)0)
-                            ->setSoftEnum("CommandNames", ll::Global<CommandRegistry>->getEnumValues("CommandName"));
-                    } else ll::logger.error("error in unregister command " + fullName);
-                },
-                20
-            );
+
+            scheduler.add<DelayTask>(1s, [fullName] {
+                auto res = ll::Global<CommandRegistry>->unregisterCommand(fullName);
+                if (res) {
+                    DynamicCommand::unregisterCommand(fullName);
+                    ll::logger.debug("unregister command " + fullName);
+                    ((DynamicCommandInstance*)nullptr)
+                        ->setSoftEnum("CommandNames", ll::Global<CommandRegistry>->getEnumValues("CommandName"));
+                } else ll::logger.error("error in unregister command " + fullName);
+            });
+
             return;
         }
         auto res = ll::Global<CommandRegistry>->unregisterCommand(fullName);
@@ -223,23 +223,10 @@ void setupRemoveCommand() {
     DynamicCommand::setup(std::move(command));
 }
 
-// force enable cheat
-LL_AUTO_TYPED_INSTANCE_HOOK(
-    LevelDataService,
-    HookPriority::Normal,
-    LevelData,
-    "?hasCommandsEnabled@LevelData@@QEBA_NXZ",
-    bool
-) {
-    return true;
-};
-
-#endif // TEST_DYNAMIC_COMMAND
-
 // enum command
 void onEnumExecute(
-    DynamicCommand const&                                    cmd,
-    CommandOrigin const&                                     origin,
+    DynamicCommand const& cmd,
+    CommandOrigin const&,
     CommandOutput&                                           output,
     std::unordered_map<std::string, DynamicCommand::Result>& results
 ) {
@@ -252,7 +239,7 @@ void onEnumExecute(
         bool  found    = false;
         if (std::find(enumNames.begin(), enumNames.end(), enumName) != enumNames.end()) {
             found = true;
-            output.successf("§eEnum §l{}§r§e Values:", enumName);
+            output.trSuccess("§eEnum §l{}§r§e Values:", enumName);
             for (auto& val : ll::Global<CommandRegistry>->getEnumValues(enumName)) {
                 output.success(val);
                 // output.addToResultList("enums", val);
@@ -261,10 +248,10 @@ void onEnumExecute(
         }
         if (std::find(softEnumNames.begin(), softEnumNames.end(), enumName) != softEnumNames.end()) {
             found = true;
-            output.successf("§eSoft Enum §l{}§r§e Values:", enumName);
+            output.trSuccess("§eSoft Enum §l{}§r§e Values:", enumName);
             for (auto& val : ll::Global<CommandRegistry>->getSoftEnumValues(enumName)) { output.success(val); }
         }
-        if (!found) output.errorf("Enum or Soft Enum \"{}\" not found", enumName);
+        if (!found) output.trError("Enum or Soft Enum \"{}\" not found", enumName);
     } else {
         output.success("§eEnum Names:");
         for (auto& val : ll::Global<CommandRegistry>->getEnumNames()) { output.success(val); }
@@ -282,22 +269,19 @@ void setupEnumCommand() {
     command->addOverload();
     command->setCallback(onEnumExecute);
     auto cmd = DynamicCommand::setup(std::move(command));
-    Schedule::delay(
-        [cmd]() {
-            auto packet = ll::Global<CommandRegistry>->serializeAvailableCommands();
-            cmd->setSoftEnum("EnumNameList", packet.getEnumNames());
-            cmd->addSoftEnumValues("EnumNameList", packet.getSoftEnumNames());
-        },
-        10
-    );
+    scheduler.add<DelayTask>(1s, [cmd] {
+        auto packet = ll::Global<CommandRegistry>->serializeAvailableCommands();
+        cmd->setSoftEnum("EnumNameList", packet.getEnumNames());
+        cmd->addSoftEnumValues("EnumNameList", packet.getSoftEnumNames());
+    });
 }
 
 // echo command
 void setupEchoCommand() {
     auto command = DynamicCommand::createCommand("echo", "show message", CommandPermissionLevel::Any);
     command->addOverload(command->mandatory("text", ParamType::RawText));
-    command->setCallback([](DynamicCommand const&                                    cmd,
-                            CommandOrigin const&                                     origin,
+    command->setCallback([](DynamicCommand const&,
+                            CommandOrigin const&,
                             CommandOutput&                                           output,
                             std::unordered_map<std::string, DynamicCommand::Result>& results) {
         auto text = results["text"].getRaw<std::string>();
@@ -325,8 +309,6 @@ LL_AUTO_STATIC_HOOK(
     setupExampleCommand();
     setupEnumCommand();
     setupEchoCommand();
-    // onServerCommandsRegister must be at the end
-    DynamicCommand::onServerCommandsRegister(server.getCommands().getRegistry());
 }
 
-#endif // DEBUG
+#endif // LL_DEBUG

@@ -1,6 +1,10 @@
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
+#include "mc/deps/core/mce/UUID.h"
+#include "mc/deps/core/string/HashedString.h"
+#include "mc/world/item/crafting/RecipeIngredient.h"
+#include "mc/world/item/crafting/RecipeUnlockingRequirement.h"
 
 // auto generated inclusion list
 #include "mc/network/TypedServerNetId.h"
@@ -17,6 +21,16 @@ public:
     Recipe(Recipe const&);
     Recipe();
 
+    std::string                   mRecipeId;      // this+0x8
+    mce::UUID                     mMyId;          // this+0x28
+    int                           mWidth;         // this+0x38
+    int                           mHeight;        // this+0x3C
+    int                           mPriority;      // this+0x40
+    RecipeNetId                   mRecipeNetId;   // this+0x44
+    std::vector<RecipeIngredient> mMyIngredients; // this+0x48
+    RecipeUnlockingRequirement    mUnlockingRequirement;
+    HashedString                  mTag;
+
 public:
     // NOLINTBEGIN
     // vIndex: 0, symbol: __unk_vfn_0
@@ -26,7 +40,7 @@ public:
     // ?assemble@ShulkerBoxRecipe@@UEBAAEBV?$vector@VItemInstance@@V?$allocator@VItemInstance@@@std@@@std@@AEAVCraftingContainer@@AEAVCraftingContext@@@Z
     virtual std::vector<class ItemInstance> const& assemble(class CraftingContainer&, class CraftingContext&) const = 0;
 
-    // vIndex: 2, symbol: ?getCraftingSize@DecoratedPotRecipe@@UEBAHXZ
+    // vIndex: 2, symbol: ?getCraftingSize@BannerAddPatternRecipe@@UEBAHXZ
     virtual int getCraftingSize() const = 0;
 
     // vIndex: 3, symbol: ?getIngredient@ShapelessRecipe@@UEBAAEBVRecipeIngredient@@HH@Z
@@ -39,10 +53,10 @@ public:
     // vIndex: 5, symbol: __unk_vfn_5
     virtual void __unk_vfn_5() = 0;
 
-    // vIndex: 6, symbol: ?matches@ShapelessChemistryRecipe@@UEBA_NAEBVCraftingContainer@@AEBVCraftingContext@@@Z
+    // vIndex: 6, symbol: ?matches@ShapedChemistryRecipe@@UEBA_NAEBVCraftingContainer@@AEBVCraftingContext@@@Z
     virtual bool matches(class CraftingContainer const&, class CraftingContext const&) const = 0;
 
-    // vIndex: 7, symbol: ?size@DecoratedPotRecipe@@UEBAHXZ
+    // vIndex: 7, symbol: ?size@BannerAddPatternRecipe@@UEBAHXZ
     virtual int size() const = 0;
 
     // vIndex: 8, symbol: ?getId@Recipe@@UEBAAEBVUUID@mce@@XZ

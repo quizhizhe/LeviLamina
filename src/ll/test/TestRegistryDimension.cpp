@@ -1,5 +1,4 @@
-#define DEBUG
-#ifdef DEBUG
+#ifdef LL_DEBUG
 
 #include "ll/api/memory/Hook.h"
 #include "mc/common/wrapper/OwnerPtrFactory.h"
@@ -190,7 +189,7 @@ LL_AUTO_TYPED_INSTANCE_HOOK(
 LL_AUTO_TYPED_INSTANCE_HOOK(RegistryDimensionTest1, HookPriority::Normal, Dimension, &Dimension::getWeakRef, WeakRefT<SharePtrRefTraits<Dimension>>) {
     if (this->getDimensionId() == 1) return weak_from_this();
     return origin();
-}
+};
 
 
-#endif // DEBUG
+#endif // LL_DEBUG
