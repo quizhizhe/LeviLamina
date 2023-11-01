@@ -1,6 +1,8 @@
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
+#include "mc/world/level/dimension/NetherBrightnessRamp.h"
+#include "mc/world/level/dimension/VanillaDimensions.h"
 
 // auto generated inclusion list
 #include "mc/enums/LimboEntitiesVersion.h"
@@ -10,6 +12,12 @@
 
 class NetherDimension : public ::Dimension {
 public:
+    NetherDimension(ILevel& ilevel, Scheduler& scheduler)
+    : Dimension(ilevel, VanillaDimensions::Nether, DimensionHeightRange(0, 256), scheduler, "Nether"){
+        mSeaLevel = 32;
+        mDimensionBrightnessRamp = std::make_unique<NetherBrightnessRamp>();
+        mDimensionBrightnessRamp->buildBrightnessRamp();
+    };
     // prevent constructor by default
     NetherDimension& operator=(NetherDimension const&);
     NetherDimension(NetherDimension const&);
@@ -17,7 +25,7 @@ public:
 
 public:
     // NOLINTBEGIN
-    virtual ~NetherDimension();
+    virtual ~NetherDimension() = default;
 
     // vIndex: 8, symbol:
     // ?createGenerator@TheEndDimension@@UEAA?AV?$unique_ptr@VWorldGenerator@@U?$default_delete@VWorldGenerator@@@std@@@std@@XZ
@@ -25,14 +33,15 @@ public:
 
     // vIndex: 9, symbol: ?upgradeLevelChunk@TheEndDimension@@UEAAXAEAVChunkSource@@AEAVLevelChunk@@1@Z
     virtual void upgradeLevelChunk(class ChunkSource&, class LevelChunk&, class LevelChunk&);
-    
+
     // vIndex: 10, symbol: ?fixWallChunk@TheEndDimension@@UEAAXAEAVChunkSource@@AEAVLevelChunk@@@Z
     virtual void fixWallChunk(class ChunkSource&, class LevelChunk&);
 
     // vIndex: 11, symbol: ?levelChunkNeedsUpgrade@TheEndDimension@@UEBA_NAEBVLevelChunk@@@Z
     virtual bool levelChunkNeedsUpgrade(class LevelChunk const&) const;
 
-    // vIndex: 29, symbol: ?translatePosAcrossDimension@TheEndDimension@@UEBA?AVVec3@@AEBV2@V?$AutomaticID@VDimension@@H@@@Z
+    // vIndex: 29, symbol:
+    // ?translatePosAcrossDimension@TheEndDimension@@UEBA?AVVec3@@AEBV2@V?$AutomaticID@VDimension@@H@@@Z
     virtual class Vec3 translatePosAcrossDimension(class Vec3 const&, DimensionType) const;
 
     // vIndex: 37, symbol: ?_upgradeOldLimboEntity@TheEndDimension@@EEAAXAEAVCompoundTag@@W4LimboEntitiesVersion@@@Z
@@ -41,7 +50,7 @@ public:
     // vIndex: 38, symbol:
     // ?_wrapStorageForVersionCompatibility@TheEndDimension@@EEAA?AV?$unique_ptr@VChunkSource@@U?$default_delete@VChunkSource@@@std@@@std@@V23@W4StorageVersion@@@Z
     virtual std::unique_ptr<class ChunkSource>
-           _wrapStorageForVersionCompatibility(std::unique_ptr<class ChunkSource>, ::StorageVersion);
+        _wrapStorageForVersionCompatibility(std::unique_ptr<class ChunkSource>, ::StorageVersion);
 
     // Reload function
     // symbol: ?forceCheckAllNeighChunkSavedStat@NetherDimension@@UEBA_NXZ
@@ -72,7 +81,7 @@ public:
     virtual bool showSky() const;
 
     // symbol: ??0NetherDimension@@QEAA@AEAVILevel@@AEAVScheduler@@@Z
-    MCAPI NetherDimension(class ILevel&, class Scheduler&);
+    // MCAPI NetherDimension(class ILevel&, class Scheduler&);
 
     // NOLINTEND
 
