@@ -7,8 +7,6 @@
 #include "mc/world/AutomaticID.h"
 
 class ChunkKey {
-    ChunkPos pos;					// this+0x0
-	AutomaticID<Dimension, int> id; // this+0x8
 public:
     ChunkPos      pos; // this+0x0
     DimensionType id;  // this+0x8

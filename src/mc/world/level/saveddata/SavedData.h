@@ -3,9 +3,6 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 class SavedData {
-    bool        mDirty;
-    std::string mId;
-
 public:
     bool        mDirty;
     std::string mId;
