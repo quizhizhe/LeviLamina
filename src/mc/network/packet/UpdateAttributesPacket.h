@@ -4,6 +4,7 @@
 #include "mc/deps/core/string/HashedString.h"
 #include "mc/world/ActorRuntimeID.h"
 #include "mc/world/actor/monster/AttributeModifier.h"
+#include <mc/world/attribute/AttributeData.h>
 
 // auto generated inclusion list
 #include "mc/deps/core/common/bedrock/Result.h"
@@ -11,37 +12,6 @@
 #include "mc/network/packet/Packet.h"
 
 class UpdateAttributesPacket : public ::Packet {
-public:
-    // UpdateAttributesPacket inner types define
-    struct AttributeData {
-    public:
-        float                          mCurrentValue; // this+0x0
-        float                          mMinValue;     // this+0x4
-        float                          mMaxValue;     // this+0x8
-        float                          mDefaultValue; // this+0xC
-        HashedString                   mName;         // this+0x10
-        std::vector<AttributeModifier> mModifiers;    // this+0x40
-
-        // prevent constructor by default
-        AttributeData& operator=(AttributeData const&);
-        AttributeData(AttributeData const&);
-        AttributeData();
-
-    public:
-        // NOLINTBEGIN
-        // symbol: ??0AttributeData@UpdateAttributesPacket@@QEAA@$$QEAU01@@Z
-        MCAPI AttributeData(struct AttributeData&&);
-
-        // symbol:
-        // ?read@AttributeData@UpdateAttributesPacket@@QEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-        MCAPI class Bedrock::Result<void> read(class ReadOnlyBinaryStream& stream);
-
-        // symbol: ??1AttributeData@UpdateAttributesPacket@@QEAA@XZ
-        MCAPI ~AttributeData();
-
-        // NOLINTEND
-    };
-
 public:
     ActorRuntimeID             mRuntimeId;     // this+0x30
     std::vector<AttributeData> mAttributeData; // this+0x38
@@ -63,10 +33,10 @@ public:
     // ?getName@UpdateAttributesPacket@@UEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
     virtual std::string getName() const;
 
-    // vIndex: 3, symbol: ?write@UpdateAttributesPacket@@UEBAXAEAVBinaryStream@@@Z
+    // vIndex: 4, symbol: ?write@UpdateAttributesPacket@@UEBAXAEAVBinaryStream@@@Z
     virtual void write(class BinaryStream& stream) const;
 
-    // vIndex: 7, symbol:
+    // vIndex: 8, symbol:
     // ?_read@UpdateAttributesPacket@@MEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
     virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 

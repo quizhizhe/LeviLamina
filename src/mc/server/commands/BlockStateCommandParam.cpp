@@ -17,9 +17,10 @@ std::optional<Block::BlockStateValueType> BlockStateCommandParam::toStateValue()
 }
 Block::BlockStatesType BlockStateCommandParam::toStateMap(std::vector<BlockStateCommandParam> const& vec) {
     Block::BlockStatesType res;
+    res.reserve(vec.size());
     for (auto& p : vec) {
         if (auto val = p.toStateValue(); val) {
-            res.emplace(p.mBlockState, *std::move(val));
+            res.emplace_back(p.mBlockState, *std::move(val));
         }
     }
     return res;

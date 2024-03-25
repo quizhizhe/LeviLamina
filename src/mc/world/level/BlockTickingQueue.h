@@ -8,20 +8,19 @@ class BlockTickingQueue {
 public:
     // BlockTickingQueue inner types declare
     // clang-format off
-    class BlockTick;
     class TickDataSet;
     // clang-format on
 
-    // BlockTickingQueue inner types define
     class BlockTick {
     public:
         bool             mIsRemoved{};
         TickNextTickData mData;
 
     public:
-        bool operator>(const BlockTick& other) const { return mData > other.mData; }
+        bool operator>(BlockTick const& other) const { return mData > other.mData; }
     };
 
+    // BlockTickingQueue inner types define
     class TickDataSet : public MovePriorityQueue<BlockTick, std::greater<>> {
     public:
         // NOLINTBEGIN

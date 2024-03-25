@@ -578,6 +578,9 @@ public:
     // symbol: ?HASPERMISSIONSTATE_ENUM_ENABLED@CommandRegistry@@2PEBDEB
     MCAPI static char const* HASPERMISSIONSTATE_ENUM_ENABLED;
 
+    // symbol: ?HASPROPERTY_PARAM_PROPERTY_NAME@CommandRegistry@@2PEBDEB
+    MCAPI static char const* HASPROPERTY_PARAM_PROPERTY_NAME;
+
     // symbol: ?TAG_VALUES_SOFTENUM_NAME@CommandRegistry@@2PEBDEB
     MCAPI static char const* TAG_VALUES_SOFTENUM_NAME;
 
@@ -898,6 +901,11 @@ public:
         std::vector<std::string>&                 errorParams
     );
 
+    // symbol:
+    // ?readString@CommandRegistry@@CA_NAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBUParseToken@1@0AEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@3@@Z
+    MCAPI static bool
+    readString(std::string&, struct CommandRegistry::ParseToken const&, std::string&, std::vector<std::string>&);
+
     // NOLINTEND
 
 private:
@@ -995,3 +1003,12 @@ MCTAPI bool CommandRegistry::parse<std::unique_ptr<
 MCTAPI bool CommandRegistry::parse<std::vector<
     BlockStateCommandParam>>(void*, CommandRegistry::ParseToken const&, CommandOrigin const&, int, std::string&, std::vector<std::string>&)
     const;
+
+template <>
+inline bool CommandRegistry::parse<std::pair<
+    std::string,
+    uint64>>(void* target, CommandRegistry::ParseToken const& token, CommandOrigin const&, int, std::string&, std::vector<std::string>&)
+    const {
+    *(std::pair<std::string, uint64>*)target = {token.toString(), getEnumData(token)};
+    return true;
+}
