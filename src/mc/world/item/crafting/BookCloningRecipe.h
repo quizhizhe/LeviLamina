@@ -19,37 +19,32 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1BookCloningRecipe@@UEAA@XZ
+    virtual ~BookCloningRecipe() = default;
 
     // vIndex: 1, symbol:
     // ?assemble@BookCloningRecipe@@UEBAAEBV?$vector@VItemInstance@@V?$allocator@VItemInstance@@@std@@@std@@AEAVCraftingContainer@@AEAVCraftingContext@@@Z
-    virtual std::vector<class ItemInstance> const& assemble(class CraftingContainer&, class CraftingContext&) const;
+    virtual std::vector<class ItemInstance> const&
+    assemble(class CraftingContainer& craftSlots, class CraftingContext&) const;
 
     // vIndex: 2, symbol: ?getCraftingSize@BookCloningRecipe@@UEBAHXZ
     virtual int getCraftingSize() const;
 
     // vIndex: 3, symbol: ?getIngredient@BookCloningRecipe@@UEBAAEBVRecipeIngredient@@HH@Z
-    virtual class RecipeIngredient const& getIngredient(int, int) const;
+    virtual class RecipeIngredient const& getIngredient(int x, int y) const;
 
     // vIndex: 4, symbol:
     // ?getResultItem@BookCloningRecipe@@UEBAAEBV?$vector@VItemInstance@@V?$allocator@VItemInstance@@@std@@@std@@XZ
     virtual std::vector<class ItemInstance> const& getResultItem() const;
 
-    // vIndex: 5, symbol: __unk_vfn_5
-    virtual void __unk_vfn_5();
-
     // vIndex: 6, symbol: ?matches@BookCloningRecipe@@UEBA_NAEBVCraftingContainer@@AEBVCraftingContext@@@Z
-    virtual bool matches(class CraftingContainer const&, class CraftingContext const&) const;
+    virtual bool matches(class CraftingContainer const& craftSlots, class CraftingContext const&) const;
 
     // vIndex: 7, symbol: ?size@BookCloningRecipe@@UEBAHXZ
     virtual int size() const;
 
-    // symbol: ??0BookCloningRecipe@@QEAA@V?$basic_string_view@DU?$char_traits@D@std@@@std@@@Z
-    MCAPI explicit BookCloningRecipe(std::string_view);
-
     // symbol: ??0BookCloningRecipe@@QEAA@V?$basic_string_view@DU?$char_traits@D@std@@@std@@AEBVUUID@mce@@@Z
-    MCAPI BookCloningRecipe(std::string_view, class mce::UUID const&);
+    MCAPI BookCloningRecipe(std::string_view recipeId, class mce::UUID const& uuid);
 
     // symbol: ?ID@BookCloningRecipe@@2VUUID@mce@@B
     MCAPI static class mce::UUID const ID;

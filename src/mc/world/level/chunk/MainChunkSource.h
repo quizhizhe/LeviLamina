@@ -14,25 +14,26 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1MainChunkSource@@UEAA@XZ
+    virtual ~MainChunkSource() = default;
 
     // vIndex: 3, symbol: ?getExistingChunk@MainChunkSource@@UEAA?AV?$shared_ptr@VLevelChunk@@@std@@AEBVChunkPos@@@Z
-    virtual std::shared_ptr<class LevelChunk> getExistingChunk(class ChunkPos const&);
+    virtual std::shared_ptr<class LevelChunk> getExistingChunk(class ChunkPos const& cp);
 
     // vIndex: 4, symbol: ?getRandomChunk@MainChunkSource@@UEAA?AV?$shared_ptr@VLevelChunk@@@std@@AEAVRandom@@@Z
-    virtual std::shared_ptr<class LevelChunk> getRandomChunk(class Random&);
+    virtual std::shared_ptr<class LevelChunk> getRandomChunk(class Random& random);
 
     // vIndex: 5, symbol: ?isChunkKnown@MainChunkSource@@UEAA_NAEBVChunkPos@@@Z
-    virtual bool isChunkKnown(class ChunkPos const&);
+    virtual bool isChunkKnown(class ChunkPos const& chunkPos);
 
     // vIndex: 7, symbol:
     // ?createNewChunk@MainChunkSource@@UEAA?AV?$shared_ptr@VLevelChunk@@@std@@AEBVChunkPos@@W4LoadMode@ChunkSource@@_N@Z
-    virtual std::shared_ptr<class LevelChunk> createNewChunk(class ChunkPos const&, ::ChunkSource::LoadMode, bool);
+    virtual std::shared_ptr<class LevelChunk>
+    createNewChunk(class ChunkPos const& cp, ::ChunkSource::LoadMode lm, bool readOnly);
 
     // vIndex: 19, symbol:
     // ?acquireDiscarded@MainChunkSource@@UEAAXV?$unique_ptr@VLevelChunk@@ULevelChunkFinalDeleter@@@std@@@Z
-    virtual void acquireDiscarded(std::unique_ptr<class LevelChunk, struct LevelChunkFinalDeleter>);
+    virtual void acquireDiscarded(std::unique_ptr<class LevelChunk, struct LevelChunkFinalDeleter> ptr);
 
     // vIndex: 24, symbol:
     // ?getChunkMap@MainChunkSource@@UEAAPEBV?$unordered_map@VChunkPos@@V?$weak_ptr@VLevelChunk@@@std@@U?$hash@VChunkPos@@@3@U?$equal_to@VChunkPos@@@3@V?$allocator@U?$pair@$$CBVChunkPos@@V?$weak_ptr@VLevelChunk@@@std@@@std@@@3@@std@@XZ
@@ -49,10 +50,10 @@ public:
     virtual bool canCreateViews() const;
 
     // vIndex: 30, symbol: ?setLevelChunk@MainChunkSource@@UEAAXV?$shared_ptr@VLevelChunk@@@std@@@Z
-    virtual void setLevelChunk(std::shared_ptr<class LevelChunk>);
+    virtual void setLevelChunk(std::shared_ptr<class LevelChunk> lc);
 
     // symbol: ??0MainChunkSource@@QEAA@V?$unique_ptr@VChunkSource@@U?$default_delete@VChunkSource@@@std@@@std@@@Z
-    MCAPI explicit MainChunkSource(std::unique_ptr<class ChunkSource>);
+    MCAPI explicit MainChunkSource(std::unique_ptr<class ChunkSource> storage);
 
     // NOLINTEND
 };

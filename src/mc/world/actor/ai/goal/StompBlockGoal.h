@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1StompBlockGoal@@UEAA@XZ
+    virtual ~StompBlockGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@StompBlockGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -35,13 +35,13 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@StompBlockGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // vIndex: 11, symbol: ?isValidTarget@StompBlockGoal@@UEAA_NAEAVBlockSource@@AEBVBlockPos@@@Z
-    virtual bool isValidTarget(class BlockSource&, class BlockPos const&);
+    virtual bool isValidTarget(class BlockSource& region, class BlockPos const& pos);
 
     // vIndex: 13, symbol: ?_canReach@StompBlockGoal@@MEAA_NAEBVBlockPos@@@Z
-    virtual bool _canReach(class BlockPos const&);
+    virtual bool _canReach(class BlockPos const& pos);
 
     // vIndex: 14, symbol: ?_moveToBlock@StompBlockGoal@@MEAAXXZ
     virtual void _moveToBlock();
@@ -50,19 +50,16 @@ public:
     virtual bool findTargetBlock();
 
     // vIndex: 18, symbol: ?_createBreakProgressParticles@StompBlockGoal@@MEAAXAEAVLevel@@AEAVBlockSource@@VBlockPos@@@Z
-    virtual void _createBreakProgressParticles(class Level&, class BlockSource&, class BlockPos);
+    virtual void _createBreakProgressParticles(class Level& level, class BlockSource& region, class BlockPos pos);
 
     // vIndex: 19, symbol: ?_createDestroyParticles@StompBlockGoal@@MEAAXAEAVLevel@@AEAVBlockSource@@VBlockPos@@@Z
-    virtual void _createDestroyParticles(class Level&, class BlockSource&, class BlockPos);
+    virtual void _createDestroyParticles(class Level& level, class BlockSource& region, class BlockPos pos);
 
     // vIndex: 20, symbol: ?_playBreakProgressSound@StompBlockGoal@@MEAAXAEAVLevel@@AEAVBlockSource@@VBlockPos@@@Z
-    virtual void _playBreakProgressSound(class Level&, class BlockSource&, class BlockPos);
+    virtual void _playBreakProgressSound(class Level& level, class BlockSource& region, class BlockPos pos);
 
     // vIndex: 21, symbol: ?_playDestroySound@StompBlockGoal@@MEAAXAEAVLevel@@AEAVBlockSource@@VBlockPos@@@Z
-    virtual void _playDestroySound(class Level&, class BlockSource&, class BlockPos);
-
-    // symbol: ??0StompBlockGoal@@QEAA@PEBVBlock@@AEAVMob@@MHHMH@Z
-    MCAPI StompBlockGoal(class Block const*, class Mob&, float, int, int, float, int);
+    virtual void _playDestroySound(class Level& level, class BlockSource& region, class BlockPos pos);
 
     // NOLINTEND
 };

@@ -11,17 +11,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1InMemorySequentialFile@@UEAA@XZ
+    virtual ~InMemorySequentialFile() = default;
 
     // vIndex: 1, symbol: ?Read@InMemorySequentialFile@@UEAA?AVStatus@leveldb@@_KPEAVSlice@3@PEAD@Z
-    virtual leveldb::Status Read(uint64, leveldb::Slice*, char*);
+    virtual leveldb::Status Read(uint64 n, leveldb::Slice* result, char* scratch);
 
     // vIndex: 2, symbol: ?Skip@InMemorySequentialFile@@UEAA?AVStatus@leveldb@@_K@Z
-    virtual leveldb::Status Skip(uint64);
-
-    // symbol: ??0InMemorySequentialFile@@QEAA@V?$shared_ptr@VInMemoryFile@@@std@@@Z
-    MCAPI explicit InMemorySequentialFile(std::shared_ptr<class InMemoryFile>);
+    virtual leveldb::Status Skip(uint64 n);
 
     // NOLINTEND
 };

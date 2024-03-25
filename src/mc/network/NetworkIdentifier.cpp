@@ -1,10 +1,15 @@
 #include "mc/network/NetworkIdentifier.h"
+#include "mc/deps/raknet/RakNet.h"
 #include "mc/deps/raknet/RakPeer.h"
 
-#include "ll/api/service/GlobalService.h"
+#include "ll/api/service/Bedrock.h"
 
 std::string NetworkIdentifier::getIPAndPort() const {
-    if (!ll::Global<RakNet::RakPeer>) { return ""; }
-    std::string rv = ll::Global<RakNet::RakPeer>->GetSystemAddressFromGuid(mGuid).ToString(':');
-    return rv.substr(0, rv.find('|'));
+    if (ll::service::getRakPeer()) {
+        auto address = ll::service::getRakPeer()->GetSystemAddressFromGuid(mGuid);
+        if (address != RakNet::UNASSIGNED_SYSTEM_ADDRESS) {
+            return address;
+        }
+    }
+    return "127.0.0.1:65535";
 }

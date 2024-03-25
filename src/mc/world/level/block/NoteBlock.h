@@ -27,156 +27,43 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1NoteBlock@@UEAA@XZ
+    virtual ~NoteBlock() = default;
 
-    // vIndex: 22, symbol: __unk_vfn_22
-    virtual void __unk_vfn_22();
+    // vIndex: 65, symbol: ?onRedstoneUpdate@NoteBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@H_N@Z
+    virtual void
+    onRedstoneUpdate(class BlockSource& region, class BlockPos const& pos, int strength, bool isFirstTime) const;
 
-    // vIndex: 31, symbol: __unk_vfn_31
-    virtual void __unk_vfn_31();
+    // vIndex: 71, symbol: ?setupRedstoneComponent@NoteBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@@Z
+    virtual void setupRedstoneComponent(class BlockSource& region, class BlockPos const& pos) const;
 
-    // vIndex: 32, symbol: __unk_vfn_32
-    virtual void __unk_vfn_32();
+    // vIndex: 101, symbol: ?attack@NoteBlock@@UEBA_NPEAVPlayer@@AEBVBlockPos@@@Z
+    virtual bool attack(class Player* player, class BlockPos const& pos) const;
 
-    // vIndex: 34, symbol: __unk_vfn_34
-    virtual void __unk_vfn_34();
+    // vIndex: 105, symbol: ?triggerEvent@NoteBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@HH@Z
+    virtual void triggerEvent(class BlockSource& region, class BlockPos const& pos, int instrument, int note) const;
 
-    // vIndex: 35, symbol: __unk_vfn_35
-    virtual void __unk_vfn_35();
+    // vIndex: 147, symbol: ?onPlace@NoteBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@@Z
+    virtual void onPlace(class BlockSource& region, class BlockPos const& pos) const;
 
-    // vIndex: 36, symbol: __unk_vfn_36
-    virtual void __unk_vfn_36();
+    // vIndex: 152, symbol: ?isInteractiveBlock@NoteBlock@@UEBA_NXZ
+    virtual bool isInteractiveBlock() const;
 
-    // vIndex: 38, symbol: __unk_vfn_38
-    virtual void __unk_vfn_38();
-
-    // vIndex: 39, symbol: __unk_vfn_39
-    virtual void __unk_vfn_39();
-
-    // vIndex: 40, symbol: __unk_vfn_40
-    virtual void __unk_vfn_40();
-
-    // vIndex: 41, symbol: __unk_vfn_41
-    virtual void __unk_vfn_41();
-
-    // vIndex: 42, symbol: __unk_vfn_42
-    virtual void __unk_vfn_42();
-
-    // vIndex: 43, symbol: __unk_vfn_43
-    virtual void __unk_vfn_43();
-
-    // vIndex: 44, symbol: __unk_vfn_44
-    virtual void __unk_vfn_44();
-
-    // vIndex: 46, symbol: __unk_vfn_46
-    virtual void __unk_vfn_46();
-
-    // vIndex: 47, symbol: __unk_vfn_47
-    virtual void __unk_vfn_47();
-
-    // vIndex: 48, symbol: __unk_vfn_48
-    virtual void __unk_vfn_48();
-
-    // vIndex: 49, symbol: __unk_vfn_49
-    virtual void __unk_vfn_49();
-
-    // vIndex: 50, symbol: __unk_vfn_50
-    virtual void __unk_vfn_50();
-
-    // vIndex: 51, symbol: __unk_vfn_51
-    virtual void __unk_vfn_51();
-
-    // vIndex: 55, symbol: __unk_vfn_55
-    virtual void __unk_vfn_55();
-
-    // vIndex: 61, symbol: __unk_vfn_61
-    virtual void __unk_vfn_61();
-
-    // vIndex: 62, symbol: __unk_vfn_62
-    virtual void __unk_vfn_62();
-
-    // vIndex: 74, symbol: ?onRedstoneUpdate@NoteBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@H_N@Z
-    virtual void onRedstoneUpdate(class BlockSource&, class BlockPos const&, int, bool) const;
-
-    // vIndex: 76, symbol: __unk_vfn_76
-    virtual void __unk_vfn_76();
-
-    // vIndex: 80, symbol: ?setupRedstoneComponent@NoteBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@@Z
-    virtual void setupRedstoneComponent(class BlockSource&, class BlockPos const&) const;
-
-    // vIndex: 83, symbol: __unk_vfn_83
-    virtual void __unk_vfn_83();
-
-    // vIndex: 106, symbol: __unk_vfn_106
-    virtual void __unk_vfn_106();
-
-    // vIndex: 110, symbol: ?attack@NoteBlock@@UEBA_NPEAVPlayer@@AEBVBlockPos@@@Z
-    virtual bool attack(class Player*, class BlockPos const&) const;
-
-    // vIndex: 115, symbol: ?triggerEvent@NoteBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@HH@Z
-    virtual void triggerEvent(class BlockSource&, class BlockPos const&, int, int) const;
-
-    // vIndex: 122, symbol: __unk_vfn_122
-    virtual void __unk_vfn_122();
-
-    // vIndex: 123, symbol: __unk_vfn_123
-    virtual void __unk_vfn_123();
-
-    // vIndex: 124, symbol: __unk_vfn_124
-    virtual void __unk_vfn_124();
-
-    // vIndex: 127, symbol: __unk_vfn_127
-    virtual void __unk_vfn_127();
-
-    // vIndex: 130, symbol: __unk_vfn_130
-    virtual void __unk_vfn_130();
-
-    // vIndex: 153, symbol: __unk_vfn_153
-    virtual void __unk_vfn_153();
-
-    // vIndex: 162, symbol: __unk_vfn_162
-    virtual void __unk_vfn_162();
-
-    // vIndex: 163, symbol: __unk_vfn_163
-    virtual void __unk_vfn_163();
-
-    // vIndex: 164, symbol: __unk_vfn_164
-    virtual void __unk_vfn_164();
-
-    // vIndex: 165, symbol: ?onPlace@NoteBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@@Z
-    virtual void onPlace(class BlockSource&, class BlockPos const&) const;
-
-    // vIndex: 167, symbol: __unk_vfn_167
-    virtual void __unk_vfn_167();
-
-    // vIndex: 171, symbol: __unk_vfn_171
-    virtual void __unk_vfn_171();
-
-    // vIndex: 173, symbol: ?use@NoteBlock@@UEBA_NAEAVPlayer@@AEBVBlockPos@@E@Z
-    virtual bool use(class Player&, class BlockPos const&, uchar) const;
-
-    // vIndex: 174, symbol: __unk_vfn_174
-    virtual void __unk_vfn_174();
-
-    // vIndex: 183, symbol: __unk_vfn_183
-    virtual void __unk_vfn_183();
-
-    // symbol: ?isInteractiveBlock@NoteBlock@@UEBA_NXZ
-    MCVAPI bool isInteractiveBlock() const;
+    // vIndex: 154, symbol: ?use@NoteBlock@@UEBA_NAEAVPlayer@@AEBVBlockPos@@E@Z
+    virtual bool use(class Player& player, class BlockPos const& pos, uchar face) const;
 
     // symbol: ??0NoteBlock@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z
-    MCAPI NoteBlock(std::string const&, int);
+    MCAPI NoteBlock(std::string const& nameId, int id);
 
     // symbol: ?enableSkullPlacement@NoteBlock@@QEAAAEAV1@_N@Z
-    MCAPI class NoteBlock& enableSkullPlacement(bool);
+    MCAPI class NoteBlock& enableSkullPlacement(bool enabled);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_triggerNoteParticle@NoteBlock@@AEBAXAEAVLevel@@AEBVVec3@@H@Z
-    MCAPI void _triggerNoteParticle(class Level&, class Vec3 const&, int) const;
+    MCAPI void _triggerNoteParticle(class Level& level, class Vec3 const&, int note) const;
 
     // NOLINTEND
 };

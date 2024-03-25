@@ -22,8 +22,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1DirectoryPackAccessStrategy@@UEAA@XZ
+    virtual ~DirectoryPackAccessStrategy();
 
     // vIndex: 1, symbol: ?getPackSize@DirectoryPackAccessStrategy@@UEBA_KXZ
     virtual uint64 getPackSize() const;
@@ -45,36 +45,43 @@ public:
     virtual bool isTrusted() const;
 
     // vIndex: 7, symbol: ?hasAsset@DirectoryPackAccessStrategy@@UEBA_NAEBVPath@Core@@_N1@Z
-    virtual bool hasAsset(class Core::Path const&, bool, bool) const;
+    virtual bool hasAsset(class Core::Path const& packRelativePath, bool trustedContentOnly, bool) const;
 
     // vIndex: 8, symbol: ?hasFolder@DirectoryPackAccessStrategy@@UEBA_NAEBVPath@Core@@@Z
-    virtual bool hasFolder(class Core::Path const&) const;
+    virtual bool hasFolder(class Core::Path const& packRelativePath) const;
 
     // vIndex: 9, symbol:
     // ?getAsset@DirectoryPackAccessStrategy@@UEBA_NAEBVPath@Core@@AEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z
-    virtual bool getAsset(class Core::Path const&, std::string&, bool) const;
+    virtual bool getAsset(class Core::Path const& packRelativePath, std::string& result, bool trustedContentOnly) const;
 
     // vIndex: 10, symbol: ?deleteAsset@DirectoryPackAccessStrategy@@UEAA_NAEBVPath@Core@@@Z
     virtual bool deleteAsset(class Core::Path const&);
 
     // vIndex: 11, symbol:
     // ?writeAsset@DirectoryPackAccessStrategy@@UEAA_NAEBVPath@Core@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual bool writeAsset(class Core::Path const&, std::string const&);
+    virtual bool writeAsset(class Core::Path const& packRelativePath, std::string const& fileContent);
 
     // vIndex: 12, symbol:
     // ?forEachIn@DirectoryPackAccessStrategy@@UEBAXAEBVPath@Core@@V?$function@$$A6AXAEBVPath@Core@@@Z@std@@_N@Z
-    virtual void forEachIn(class Core::Path const&, std::function<void(class Core::Path const&)>, bool) const;
+    virtual void forEachIn(
+        class Core::Path const&                      packRelativePath,
+        std::function<void(class Core::Path const&)> callback,
+        bool                                         recurseAnyways
+    ) const;
 
     // vIndex: 13, symbol:
     // ?forEachInAssetSet@DirectoryPackAccessStrategy@@UEBAXAEBVPath@Core@@V?$function@$$A6AXAEBVPath@Core@@@Z@std@@@Z
-    virtual void forEachInAssetSet(class Core::Path const&, std::function<void(class Core::Path const&)>) const;
+    virtual void forEachInAssetSet(
+        class Core::Path const&                      packRelativePath,
+        std::function<void(class Core::Path const&)> callback
+    ) const;
 
     // vIndex: 14, symbol: ?getStrategyType@DirectoryPackAccessStrategy@@UEBA?AW4PackAccessStrategyType@@XZ
     virtual ::PackAccessStrategyType getStrategyType() const;
 
     // vIndex: 16, symbol:
     // ?createSubPack@DirectoryPackAccessStrategy@@UEBA?AV?$unique_ptr@VPackAccessStrategy@@U?$default_delete@VPackAccessStrategy@@@std@@@std@@AEBVPath@Core@@@Z
-    virtual std::unique_ptr<class PackAccessStrategy> createSubPack(class Core::Path const&) const;
+    virtual std::unique_ptr<class PackAccessStrategy> createSubPack(class Core::Path const& subPath) const;
 
     // vIndex: 18, symbol: ?canRecurse@DirectoryPackAccessStrategy@@UEBA_NXZ
     virtual bool canRecurse() const;
@@ -82,11 +89,8 @@ public:
     // vIndex: 19, symbol: ?unload@DirectoryPackAccessStrategy@@UEAAXXZ
     virtual void unload();
 
-    // symbol: ??1DirectoryPackAccessStrategy@@UEAA@XZ
-    MCVAPI ~DirectoryPackAccessStrategy();
-
     // symbol: ??0DirectoryPackAccessStrategy@@QEAA@AEBVResourceLocation@@_N@Z
-    MCAPI DirectoryPackAccessStrategy(class ResourceLocation const&, bool);
+    MCAPI DirectoryPackAccessStrategy(class ResourceLocation const& packLocation, bool recurse);
 
     // NOLINTEND
 };

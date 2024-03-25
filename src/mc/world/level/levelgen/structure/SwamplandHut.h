@@ -15,27 +15,37 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SwamplandHut@@UEAA@XZ
+    virtual ~SwamplandHut() = default;
 
     // vIndex: 2, symbol: ?getType@SwamplandHut@@UEBA?AW4StructurePieceType@@XZ
     virtual ::StructurePieceType getType() const;
 
     // vIndex: 4, symbol: ?postProcess@SwamplandHut@@UEAA_NAEAVBlockSource@@AEAVRandom@@AEBVBoundingBox@@@Z
-    virtual bool postProcess(class BlockSource&, class Random&, class BoundingBox const&);
+    virtual bool postProcess(class BlockSource& region, class Random& random, class BoundingBox const& chunkBB);
 
     // vIndex: 5, symbol: ?postProcessMobsAt@SwamplandHut@@UEAAXAEAVBlockSource@@AEAVRandom@@AEBVBoundingBox@@@Z
-    virtual void postProcessMobsAt(class BlockSource&, class Random&, class BoundingBox const&);
+    virtual void postProcessMobsAt(class BlockSource& region, class Random& random, class BoundingBox const& chunkBB);
 
     // vIndex: 12, symbol: ?addHardcodedSpawnAreas@SwamplandHut@@UEBAXAEAVLevelChunk@@@Z
-    virtual void addHardcodedSpawnAreas(class LevelChunk&) const;
+    virtual void addHardcodedSpawnAreas(class LevelChunk& chunk) const;
+
+    // symbol: ??0SwamplandHut@@QEAA@FHH@Z
+    MCAPI SwamplandHut(short seaLevel, int west, int north);
 
     // NOLINTEND
 
     // protected:
     // NOLINTBEGIN
     // symbol: ?placeCauldron@SwamplandHut@@IEAAXAEAVBlockSource@@AEAVRandom@@HHHAEBVBoundingBox@@@Z
-    MCAPI void placeCauldron(class BlockSource&, class Random&, int, int, int, class BoundingBox const&);
+    MCAPI void placeCauldron(
+        class BlockSource&       region,
+        class Random&            random,
+        int                      x,
+        int                      y,
+        int                      z,
+        class BoundingBox const& chunkBB
+    );
 
     // NOLINTEND
 };

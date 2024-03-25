@@ -18,17 +18,17 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SpawnAoECloudSubcomponent@@UEAA@XZ
+    virtual ~SpawnAoECloudSubcomponent() = default;
 
     // vIndex: 1, symbol: ?readfromJSON@SpawnAoECloudSubcomponent@@UEAAXAEAVValue@Json@@AEBVSemVersion@@@Z
-    virtual void readfromJSON(class Json::Value&, class SemVersion const&);
+    virtual void readfromJSON(class Json::Value& component, class SemVersion const& engineVersion);
 
     // vIndex: 2, symbol: ?writetoJSON@SpawnAoECloudSubcomponent@@UEBAXAEAVValue@Json@@@Z
-    virtual void writetoJSON(class Json::Value&) const;
+    virtual void writetoJSON(class Json::Value& component) const;
 
     // vIndex: 3, symbol: ?doOnHitEffect@SpawnAoECloudSubcomponent@@UEAAXAEAVActor@@AEAVProjectileComponent@@@Z
-    virtual void doOnHitEffect(class Actor&, class ProjectileComponent&);
+    virtual void doOnHitEffect(class Actor& owner, class ProjectileComponent&);
 
     // vIndex: 4, symbol: ?getName@SpawnAoECloudSubcomponent@@UEAAPEBDXZ
     virtual char const* getName();

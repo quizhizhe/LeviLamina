@@ -19,8 +19,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ActorPickRequestPacket@@UEAA@XZ
+    virtual ~ActorPickRequestPacket() = default;
 
     // vIndex: 1, symbol: ?getId@ActorPickRequestPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -30,11 +30,11 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@ActorPickRequestPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@ActorPickRequestPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0ActorPickRequestPacket@@QEAA@XZ
     MCAPI ActorPickRequestPacket();

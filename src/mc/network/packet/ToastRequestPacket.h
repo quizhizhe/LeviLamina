@@ -18,8 +18,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1ToastRequestPacket@@UEAA@XZ
+    virtual ~ToastRequestPacket();
 
     // vIndex: 1, symbol: ?getId@ToastRequestPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -29,20 +29,17 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@ToastRequestPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@ToastRequestPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1ToastRequestPacket@@UEAA@XZ
-    MCVAPI ~ToastRequestPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0ToastRequestPacket@@QEAA@XZ
     MCAPI ToastRequestPacket();
 
     // symbol: ??0ToastRequestPacket@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z
-    MCAPI ToastRequestPacket(std::string const&, std::string const&);
+    MCAPI ToastRequestPacket(std::string const& title, std::string const& content);
 
     // NOLINTEND
 };

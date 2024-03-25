@@ -66,64 +66,64 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ?convertDirectionToFacingDirection@Facing@@SAEW4Type@Direction@@@Z
-    MCAPI static uchar convertDirectionToFacingDirection(::Direction::Type);
+    MCAPI static uchar convertDirectionToFacingDirection(::Direction::Type direction);
 
     // symbol: ?convertWeirdoDirectionToFacingDirection@Facing@@SAEW4WeirdoDirection@@@Z
-    MCAPI static uchar convertWeirdoDirectionToFacingDirection(::WeirdoDirection);
+    MCAPI static uchar convertWeirdoDirectionToFacingDirection(::WeirdoDirection weirdoDirection);
 
     // symbol: ?convertYRotationToFacingDirection@Facing@@SAEM@Z
-    MCAPI static uchar convertYRotationToFacingDirection(float);
+    MCAPI static uchar convertYRotationToFacingDirection(float yRotation);
 
     // symbol: ?from2DDataValue@Facing@@SA?AW4Name@1@H@Z
-    MCAPI static ::Facing::Name from2DDataValue(int);
+    MCAPI static ::Facing::Name from2DDataValue(int data);
 
     // symbol: ?fromVec3@Facing@@SAEAEBVVec3@@@Z
-    MCAPI static uchar fromVec3(class Vec3 const&);
+    MCAPI static uchar fromVec3(class Vec3 const& dir);
 
     // symbol: ?getAxis@Facing@@SA?AW4Axis@1@E@Z
-    MCAPI static ::Facing::Axis getAxis(uchar);
+    MCAPI static ::Facing::Axis getAxis(uchar face);
 
     // symbol: ?getAxisFromStandingRotation@Facing@@SA?AV?$optional@W4Axis@Facing@@@std@@H@Z
-    MCAPI static std::optional<::Facing::Axis> getAxisFromStandingRotation(int);
+    MCAPI static std::optional<::Facing::Axis> getAxisFromStandingRotation(int standingRotation);
 
     // symbol: ?getClockWise@Facing@@SAEE@Z
-    MCAPI static uchar getClockWise(uchar);
+    MCAPI static uchar getClockWise(uchar face);
 
     // symbol: ?getClosestRotation@Facing@@SA?AW4Rotation@1@M@Z
     MCAPI static ::Facing::Rotation getClosestRotation(float);
 
     // symbol: ?getCounterClockWise@Facing@@SAEE@Z
-    MCAPI static uchar getCounterClockWise(uchar);
+    MCAPI static uchar getCounterClockWise(uchar face);
 
     // symbol: ?getFaceLocation@Facing@@SA?AVVec3@@EMM@Z
-    MCAPI static class Vec3 getFaceLocation(uchar, float, float);
+    MCAPI static class Vec3 getFaceLocation(uchar face, float u, float v);
 
     // symbol: ?getFacingDirection@Facing@@SAEAEBVVec3@@0@Z
-    MCAPI static uchar getFacingDirection(class Vec3 const&, class Vec3 const&);
+    MCAPI static uchar getFacingDirection(class Vec3 const& currentPos, class Vec3 const&);
 
     // symbol: ?getMostPrioritizedFacingDirection@Facing@@SA?AV?$vector@EV?$allocator@E@std@@@std@@AEBVVec2@@E_N@Z
-    MCAPI static std::vector<uchar> getMostPrioritizedFacingDirection(class Vec2 const&, uchar, bool);
+    MCAPI static std::vector<uchar> getMostPrioritizedFacingDirection(class Vec2 const& viewVector, uchar, bool);
 
     // symbol: ?getMostPrioritizedFacingDirectionFromViewVector@Facing@@SA?AV?$array@E$05@std@@AEBVVec2@@@Z
-    MCAPI static std::array<uchar, 6> getMostPrioritizedFacingDirectionFromViewVector(class Vec2 const&);
+    MCAPI static std::array<uchar, 6> getMostPrioritizedFacingDirectionFromViewVector(class Vec2 const& viewVector);
 
     // symbol: ?getOpposite@Facing@@SAEE@Z
-    MCAPI static uchar getOpposite(uchar);
+    MCAPI static uchar getOpposite(uchar face);
 
     // symbol: ?getRandomFace@Facing@@SAHAEAVRandom@@@Z
-    MCAPI static int getRandomFace(class Random&);
+    MCAPI static int getRandomFace(class Random& random);
 
     // symbol: ?getRandomFaceHorizontal@Facing@@SAHAEAVRandom@@@Z
-    MCAPI static int getRandomFaceHorizontal(class Random&);
+    MCAPI static int getRandomFaceHorizontal(class Random& random);
 
     // symbol: ?getRotationMatrix@Facing@@SA?AU?$mat@$02$02M$0A@@glm@@EW4Rotation@1@@Z
-    MCAPI static struct glm::mat<3, 3, float, 0> getRotationMatrix(uchar, ::Facing::Rotation);
+    MCAPI static struct glm::mat<3, 3, float, 0> getRotationMatrix(uchar facing, ::Facing::Rotation rotation);
 
     // symbol: ?getShuffledDirections@Facing@@SA?AV?$vector@EV?$allocator@E@std@@@std@@XZ
     MCAPI static std::vector<uchar> getShuffledDirections();
 
     // symbol: ?getShuffledDirections@Facing@@SA?AV?$vector@EV?$allocator@E@std@@@std@@AEAVRandom@@@Z
-    MCAPI static std::vector<uchar> getShuffledDirections(class Random&);
+    MCAPI static std::vector<uchar> getShuffledDirections(class Random& random);
 
     // symbol: ?getStepX@Facing@@SAHE@Z
     MCAPI static int getStepX(uchar);
@@ -135,19 +135,19 @@ public:
     MCAPI static int getStepZ(uchar);
 
     // symbol: ?isValidDirection@Facing@@SA_NH@Z
-    MCAPI static bool isValidDirection(int);
+    MCAPI static bool isValidDirection(int face);
 
     // symbol: ?makeDirectionArray@Facing@@SA?AV?$array@E$05@std@@EEE@Z
     MCAPI static std::array<uchar, 6> makeDirectionArray(uchar, uchar, uchar);
 
     // symbol: ?rotateFace@Facing@@SAEEW4Rotation@1@@Z
-    MCAPI static uchar rotateFace(uchar, ::Facing::Rotation);
+    MCAPI static uchar rotateFace(uchar face, ::Facing::Rotation rot);
 
     // symbol: ?rotateFaceAroundGivenFace@Facing@@SAEEEW4Rotation@1@@Z
-    MCAPI static uchar rotateFaceAroundGivenFace(uchar, uchar, ::Facing::Rotation);
+    MCAPI static uchar rotateFaceAroundGivenFace(uchar, uchar, ::Facing::Rotation rotation);
 
     // symbol: ?toString@Facing@@SA?AV?$basic_string_view@DU?$char_traits@D@std@@@std@@E@Z
-    MCAPI static std::string_view toString(uchar);
+    MCAPI static std::string_view toString(uchar face);
 
     // symbol: ?ALL_EXCEPT@Facing@@2V?$array@V?$vector@EV?$allocator@E@std@@@std@@$05@std@@B
     MCAPI static std::array<std::vector<uchar>, 6> const ALL_EXCEPT;

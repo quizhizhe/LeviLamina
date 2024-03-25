@@ -25,16 +25,14 @@ public:
     MCAPI void addNameAction(struct NameAction const&);
 
     // symbol: ?initialize@NameableDefinition@@QEBAXAEAVEntityContext@@AEAVNameableComponent@@@Z
-    MCAPI void initialize(class EntityContext&, class NameableComponent&) const;
-
-    // symbol: ??1NameableDefinition@@QEAA@XZ
-    MCAPI ~NameableDefinition();
+    MCAPI void initialize(class EntityContext& entity, class NameableComponent& component) const;
 
     // symbol:
     // ?buildSchema@NameableDefinition@@SAXAEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VNameableDefinition@@@JsonUtil@@@std@@@Z
-    MCAPI static void
-    buildSchema(std::shared_ptr<
-                class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class NameableDefinition>>&);
+    MCAPI static void buildSchema(
+        std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class NameableDefinition>>&
+            root
+    );
 
     // NOLINTEND
 };

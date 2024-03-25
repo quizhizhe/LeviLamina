@@ -3,6 +3,10 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
+#include "mc/entity/utilities/ActorInitializationMethod.h"
+#include "mc/entity/utilities/ActorType.h"
+#include "mc/enums/MovePredictionType.h"
+#include "mc/events/MinecraftEventing.h"
 #include "mc/world/events/ActorEventListener.h"
 #include "mc/world/events/EventResult.h"
 
@@ -15,11 +19,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1CombatRegenerationListener@@UEAA@XZ
+    virtual ~CombatRegenerationListener() = default;
 
     // vIndex: 1, symbol: ?onEvent@CombatRegenerationListener@@UEAA?AW4EventResult@@AEBUActorNotificationEvent@@@Z
-    virtual ::EventResult onEvent(struct ActorNotificationEvent const&);
+    virtual ::EventResult onEvent(struct ActorNotificationEvent const& event);
 
     // NOLINTEND
 };

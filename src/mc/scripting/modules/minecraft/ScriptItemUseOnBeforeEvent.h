@@ -4,19 +4,19 @@
 
 // auto generated inclusion list
 #include "mc/external/scripting/ClassBindingBuilder.h"
-#include "mc/scripting/modules/minecraft/ScriptItemUseOnAfterEvent.h"
+#include "mc/external/scripting/StrongTypedObjectHandle.h"
 
 // auto generated forward declare list
 // clang-format off
 class Player;
-namespace ScriptModuleMinecraft { struct ScriptItemUseOnAfterEvent; }
+namespace ScriptModuleMinecraft { class ScriptItemStack; }
 namespace Scripting { class WeakLifetimeScope; }
 struct ItemUseOnEvent;
 // clang-format on
 
 namespace ScriptModuleMinecraft {
 
-struct ScriptItemUseOnBeforeEvent : public ::ScriptModuleMinecraft::ScriptItemUseOnAfterEvent {
+struct ScriptItemUseOnBeforeEvent {
 public:
     // prevent constructor by default
     ScriptItemUseOnBeforeEvent& operator=(ScriptItemUseOnBeforeEvent const&);
@@ -24,9 +24,6 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ??1ScriptItemUseOnBeforeEvent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptItemUseOnBeforeEvent();
-
     // symbol: ??0ScriptItemUseOnBeforeEvent@ScriptModuleMinecraft@@QEAA@$$QEAU01@@Z
     MCAPI ScriptItemUseOnBeforeEvent(struct ScriptModuleMinecraft::ScriptItemUseOnBeforeEvent&&);
 
@@ -34,8 +31,9 @@ public:
     MCAPI ScriptItemUseOnBeforeEvent(struct ScriptModuleMinecraft::ScriptItemUseOnBeforeEvent const&);
 
     // symbol:
-    // ??0ScriptItemUseOnBeforeEvent@ScriptModuleMinecraft@@QEAA@AEAUItemUseOnEvent@@PEAVPlayer@@AEBVWeakLifetimeScope@Scripting@@@Z
-    MCAPI ScriptItemUseOnBeforeEvent(struct ItemUseOnEvent&, class Player*, class Scripting::WeakLifetimeScope const&);
+    // ??0ScriptItemUseOnBeforeEvent@ScriptModuleMinecraft@@QEAA@AEAUItemUseOnEvent@@V?$StrongTypedObjectHandle@VScriptItemStack@ScriptModuleMinecraft@@@Scripting@@PEAVPlayer@@AEBVWeakLifetimeScope@4@@Z
+    MCAPI
+    ScriptItemUseOnBeforeEvent(struct ItemUseOnEvent&, class Scripting::StrongTypedObjectHandle<class ScriptModuleMinecraft::ScriptItemStack>, class Player*, class Scripting::WeakLifetimeScope const&);
 
     // symbol: ??4ScriptItemUseOnBeforeEvent@ScriptModuleMinecraft@@QEAAAEAU01@$$QEAU01@@Z
     MCAPI struct ScriptModuleMinecraft::ScriptItemUseOnBeforeEvent&

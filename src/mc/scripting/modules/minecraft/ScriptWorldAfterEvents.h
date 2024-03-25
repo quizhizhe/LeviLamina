@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/external/scripting/ClassBindingBuilder.h"
+#include "mc/external/scripting/ClassBindingBuilderReadOnly.h"
 #include "mc/external/scripting/StrongTypedObjectHandle.h"
 
 // auto generated forward declare list
@@ -78,27 +78,34 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol:
+        // __gen_??1ScriptWorldAfterEventsDeferredEventListener@ScriptWorldAfterEvents@ScriptModuleMinecraft@@UEAA@XZ
+        virtual ~ScriptWorldAfterEventsDeferredEventListener() = default;
 
         // vIndex: 1, symbol: ?onLevelTickEnd@ScriptDeferredEventListener@@UEAAXXZ
         virtual void onLevelTickEnd();
 
-        // vIndex: 2, symbol: __unk_vfn_2
-        virtual void __unk_vfn_2();
+        // vIndex: 2, symbol: ?onRunAsyncJobs@ScriptDeferredEventListener@@UEAAXXZ
+        virtual void onRunAsyncJobs();
 
-        // vIndex: 3, symbol:
+        // vIndex: 3, symbol: ?onRunSystemTick@ScriptDeferredEventListener@@UEAA_NXZ
+        virtual bool onRunSystemTick();
+
+        // vIndex: 4, symbol:
         // ?onFlushWorldAfterEvents@ScriptWorldAfterEventsDeferredEventListener@ScriptWorldAfterEvents@ScriptModuleMinecraft@@UEAA_NXZ
         virtual bool onFlushWorldAfterEvents();
 
-        // vIndex: 4, symbol: __unk_vfn_4
-        virtual void __unk_vfn_4();
+        // vIndex: 5, symbol: ?onFlushSystemAfterEvents@ScriptDeferredEventListener@@UEAA_NXZ
+        virtual bool onFlushSystemAfterEvents();
 
-        // vIndex: 5, symbol:
+        // vIndex: 6, symbol: ?onFlushEditorExtensionContextAfterEvents@ScriptDeferredEventListener@@UEAA_NXZ
+        virtual bool onFlushEditorExtensionContextAfterEvents();
+
+        // vIndex: 7, symbol:
         // ?onPreFlushAfterEvents@?$IScriptScriptDeferredEventListener@VScriptWorldAfterEvents@ScriptModuleMinecraft@@@ScriptModuleMinecraft@@UEAAXXZ
         virtual void onPreFlushAfterEvents();
 
-        // vIndex: 6, symbol:
+        // vIndex: 8, symbol:
         // ?onPostFlushAfterEvents@?$IScriptScriptDeferredEventListener@VScriptWorldAfterEvents@ScriptModuleMinecraft@@@ScriptModuleMinecraft@@UEAAXXZ
         virtual void onPostFlushAfterEvents();
 
@@ -128,8 +135,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1ScriptWorldAfterEvents@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptWorldAfterEvents();
 
     // vIndex: 1, symbol: ?getLevel@ScriptWorldAfterEvents@ScriptModuleMinecraft@@UEBAAEAVLevel@@XZ
     virtual class Level& getLevel() const;
@@ -344,9 +351,6 @@ public:
     virtual void onProjectileHitBlock(class Scripting::StrongTypedObjectHandle<
                                       struct ScriptModuleMinecraft::ScriptProjectileHitBlockAfterEvent>&);
 
-    // symbol: ??1ScriptWorldAfterEvents@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptWorldAfterEvents();
-
     // symbol: ??0ScriptWorldAfterEvents@ScriptModuleMinecraft@@QEAA@$$QEAV01@@Z
     MCAPI ScriptWorldAfterEvents(class ScriptModuleMinecraft::ScriptWorldAfterEvents&&);
 
@@ -377,9 +381,9 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol:
-    // ?_bindSignals@ScriptWorldAfterEvents@ScriptModuleMinecraft@@CAXAEAV?$ClassBindingBuilder@VScriptWorldAfterEvents@ScriptModuleMinecraft@@@Scripting@@@Z
+    // ?_bindSignals@ScriptWorldAfterEvents@ScriptModuleMinecraft@@CAXAEAV?$ClassBindingBuilderReadOnly@VScriptWorldAfterEvents@ScriptModuleMinecraft@@@Scripting@@@Z
     MCAPI static void
-    _bindSignals(class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptWorldAfterEvents>&);
+    _bindSignals(class Scripting::ClassBindingBuilderReadOnly<class ScriptModuleMinecraft::ScriptWorldAfterEvents>&);
 
     // symbol:
     // ?_createSignals@ScriptWorldAfterEvents@ScriptModuleMinecraft@@CA?AV?$vector@USignalHandle@ScriptWorldAfterEvents@ScriptModuleMinecraft@@V?$allocator@USignalHandle@ScriptWorldAfterEvents@ScriptModuleMinecraft@@@std@@@std@@XZ

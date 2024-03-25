@@ -29,19 +29,22 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1Definition@CroakGoal@@UEAA@XZ
+        virtual ~Definition() = default;
 
         // symbol: ??0Definition@CroakGoal@@QEAA@XZ
         MCAPI Definition();
 
         // symbol: ?initialize@Definition@CroakGoal@@QEBAXAEAVEntityContext@@AEAV2@@Z
-        MCAPI void initialize(class EntityContext&, class CroakGoal&) const;
+        MCAPI void initialize(class EntityContext& entity, class CroakGoal& goal) const;
 
         // symbol:
         // ?buildSchema@Definition@CroakGoal@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VDefinition@CroakGoal@@@JsonUtil@@@4@@Z
-        MCAPI static void
-        buildSchema(std::string const&, std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class CroakGoal::Definition>>&);
+        MCAPI static void buildSchema(
+            std::string const& name,
+            std::shared_ptr<
+                class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class CroakGoal::Definition>>& root
+        );
 
         // NOLINTEND
     };
@@ -54,8 +57,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1CroakGoal@@UEAA@XZ
+    virtual ~CroakGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@CroakGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -71,10 +74,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@CroakGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0CroakGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit CroakGoal(class Mob&);
+    MCAPI explicit CroakGoal(class Mob& mob);
 
     // NOLINTEND
 };

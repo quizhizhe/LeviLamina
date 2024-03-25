@@ -11,7 +11,7 @@
 class AnimatePacket : public ::Packet {
 public:
     // AnimatePacket inner types define
-    enum class Action {
+    enum class Action : int {
         NoAction         = 0x0,
         Swing            = 0x1,
         WakeUp           = 0x3,
@@ -27,8 +27,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1AnimatePacket@@UEAA@XZ
+    virtual ~AnimatePacket();
 
     // vIndex: 1, symbol: ?getId@AnimatePacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -37,25 +37,22 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@AnimatePacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol: ?_read@AnimatePacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1AnimatePacket@@UEAA@XZ
-    MCVAPI ~AnimatePacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0AnimatePacket@@QEAA@XZ
     MCAPI AnimatePacket();
 
     // symbol: ??0AnimatePacket@@QEAA@W4Action@0@AEAVActor@@@Z
-    MCAPI AnimatePacket(::AnimatePacket::Action, class Actor&);
+    MCAPI AnimatePacket(::AnimatePacket::Action action, class Actor& e);
 
     // symbol: ??0AnimatePacket@@QEAA@W4Action@0@VActorRuntimeID@@@Z
-    MCAPI AnimatePacket(::AnimatePacket::Action, class ActorRuntimeID);
+    MCAPI AnimatePacket(::AnimatePacket::Action action, class ActorRuntimeID runtimeId);
 
     // symbol: ??0AnimatePacket@@QEAA@W4Action@0@VActorRuntimeID@@M@Z
-    MCAPI AnimatePacket(::AnimatePacket::Action, class ActorRuntimeID, float);
+    MCAPI AnimatePacket(::AnimatePacket::Action action, class ActorRuntimeID runtimeId, float data);
 
     // NOLINTEND
 };

@@ -19,18 +19,16 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ShulkerBoxRecipe@@UEAA@XZ
+    virtual ~ShulkerBoxRecipe() = default;
 
     // vIndex: 1, symbol:
     // ?assemble@ShulkerBoxRecipe@@UEBAAEBV?$vector@VItemInstance@@V?$allocator@VItemInstance@@@std@@@std@@AEAVCraftingContainer@@AEAVCraftingContext@@@Z
-    virtual std::vector<class ItemInstance> const& assemble(class CraftingContainer&, class CraftingContext&) const;
-
-    // vIndex: 5, symbol: __unk_vfn_5
-    virtual void __unk_vfn_5();
+    virtual std::vector<class ItemInstance> const&
+    assemble(class CraftingContainer& craftSlots, class CraftingContext&) const;
 
     // vIndex: 12, symbol: ?itemsMatch@ShulkerBoxRecipe@@UEBA_NAEBVItemDescriptor@@0@Z
-    virtual bool itemsMatch(class ItemDescriptor const&, class ItemDescriptor const&) const;
+    virtual bool itemsMatch(class ItemDescriptor const& lhs, class ItemDescriptor const& rhs) const;
 
     // symbol:
     // ??0ShulkerBoxRecipe@@QEAA@V?$basic_string_view@DU?$char_traits@D@std@@@std@@AEBV?$vector@VRecipeIngredient@@V?$allocator@VRecipeIngredient@@@std@@@2@AEBV?$vector@VItemInstance@@V?$allocator@VItemInstance@@@std@@@2@VHashedString@@HPEBVUUID@mce@@V?$optional@VRecipeUnlockingRequirement@@@2@AEBVSemVersion@@@Z

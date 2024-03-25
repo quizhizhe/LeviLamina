@@ -20,30 +20,34 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1OnPlayerDestroyedTriggerDescription@@UEAA@XZ
+    virtual ~OnPlayerDestroyedTriggerDescription() = default;
 
     // vIndex: 1, symbol:
     // ?getName@OnPlayerDestroyedTriggerDescription@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
     virtual std::string const& getName() const;
 
     // vIndex: 2, symbol: ?initializeComponent@BlockComponentDescription@@UEBAXAEAVEntityContext@@@Z
-    virtual void initializeComponent(class EntityContext&) const;
+    virtual void initializeComponent(class EntityContext& entity) const;
 
-    // vIndex: 3, symbol: ?initializeComponent@BlockComponentDescription@@UEBAXAEAVBlockComponentStorage@@@Z
+    // vIndex: 3, symbol:
+    // ?initializeComponent@?$BlockTriggerDescription@VOnPlayerDestroyedTrigger@@@@UEBAXAEAVBlockComponentStorage@@@Z
     virtual void initializeComponent(class BlockComponentStorage&) const;
 
-    // vIndex: 4, symbol: ?initializeComponentFromCode@BlockComponentDescription@@UEBAXAEAVBlockComponentStorage@@@Z
+    // vIndex: 4, symbol: ?initializeComponentFromCode@BlockComponentDescription@@UEBAXAEAVEntityContext@@@Z
+    virtual void initializeComponentFromCode(class EntityContext&) const;
+
+    // vIndex: 5, symbol: ?initializeComponentFromCode@BlockComponentDescription@@UEBAXAEAVBlockComponentStorage@@@Z
     virtual void initializeComponentFromCode(class BlockComponentStorage&) const;
 
-    // vIndex: 5, symbol: __unk_vfn_5
-    virtual void __unk_vfn_5();
-
     // vIndex: 6, symbol:
-    // ?buildSchema@BlockComponentDescription@@UEBAXAEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@UBlockComponentGroupDescription@@@JsonUtil@@@std@@AEBVBlockComponentFactory@@@Z
-    virtual void
-    buildSchema(std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, struct BlockComponentGroupDescription>>&, class BlockComponentFactory const&)
-        const;
+    // ?buildSchema@?$BlockTriggerDescription@VOnPlayerDestroyedTrigger@@@@UEBAXAEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@UBlockComponentGroupDescription@@@JsonUtil@@@std@@AEBVBlockComponentFactory@@@Z
+    virtual void buildSchema(
+        std::shared_ptr<
+            class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, struct BlockComponentGroupDescription>>&
+                                           componentSchema,
+        class BlockComponentFactory const& factory
+    ) const;
 
     // vIndex: 7, symbol: ?isNetworkComponent@BlockComponentDescription@@UEBA_NXZ
     virtual bool isNetworkComponent() const;

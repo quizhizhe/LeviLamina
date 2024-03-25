@@ -1,9 +1,12 @@
 #pragma once
 
+#include <cstddef>
+#include <type_traits>
+#include <utility>
+
 #include "ll/api/base/Concepts.h"
 #include "ll/api/base/Meta.h"
-#include "magic_enum.hpp"
-#include <type_traits>
+#include "ll/api/reflection/TypeName.h"
 
 #if defined(__clang__) && !defined(BOOST_PFR_CORE_NAME_PARSING)
 #define BOOST_PFR_CORE_NAME_PARSING                                                                                    \
@@ -13,85 +16,23 @@
 
 #include "boost/pfr.hpp"
 
-namespace ll::reflection {
-template <typename T>
-inline constexpr bool is_reflectable_v =
-    std::is_aggregate_v<std::remove_cvref_t<T>> && !requires { typename T::size_type; };
+#include "magic_enum.hpp"
 
-template <typename T>
+namespace ll::reflection {
+template <class T>
+inline constexpr bool is_reflectable_v =
+    std::is_aggregate_v<std::remove_cvref_t<T>> && !requires { typename std::remove_cvref_t<T>::size_type; };
+
+template <class T>
 concept Reflectable = is_reflectable_v<T>;
 
-template <Reflectable T, typename F>
+template <class T>
+inline constexpr auto const name_array_v = boost::pfr::names_as_array<std::remove_cvref_t<T>>();
+
+template <Reflectable T, class F>
 constexpr void forEachMember(T&& value, F&& func) {
-    using Type                            = std::remove_cvref_t<T>;
-    static constexpr auto const namearray = boost::pfr::names_as_array<Type>();
-    boost::pfr::for_each_field(std::forward<T>(value), [&](auto&& field, std::size_t idx) {
-        std::forward<F>(func)(namearray[idx], std::forward<decltype(field)>(field));
+    boost::pfr::for_each_field(std::forward<T>(value), [func = std::forward<F>(func)](auto&& field, std::size_t idx) {
+        func(name_array_v<T>[idx], std::forward<decltype(field)>(field));
     });
 }
-
-template <auto f>
-consteval std::string_view valueRawName() noexcept {
-    constexpr std::string_view n{__FUNCSIG__};
-#if defined(__clang__)
-    constexpr std::string_view k{"[f = "};
-    constexpr std::string_view l{"]"};
-#else
-    constexpr std::string_view k{"valueRawName<"};
-    constexpr std::string_view l{">(void) noexcept"};
-#endif
-    constexpr auto s = l.size();
-    constexpr auto p = n.find(k) + k.size();
-
-    return n.substr(p, n.size() - p - s);
-}
-
-template <typename f>
-consteval std::string_view typeRawName() noexcept {
-    constexpr std::string_view n{__FUNCSIG__};
-#if defined(__clang__)
-    constexpr std::string_view k{"[f = "};
-    constexpr std::string_view l{"]"};
-#else
-    constexpr std::string_view k{"typeRawName<"};
-    constexpr std::string_view l{">(void) noexcept"};
-#endif
-    constexpr auto s = l.size();
-    constexpr auto p = n.find(k) + k.size();
-
-    return n.substr(p, n.size() - p - s);
-}
-
-consteval std::string_view removeTypePrefix(std::string_view s) noexcept {
-    if (s.starts_with("enum ")) { s.remove_prefix(sizeof("enum ") - 1); }
-    if (s.starts_with("class ")) { s.remove_prefix(sizeof("class ") - 1); }
-    if (s.starts_with("union ")) { s.remove_prefix(sizeof("union ") - 1); }
-    if (s.starts_with("struct ")) { s.remove_prefix(sizeof("struct ") - 1); }
-    return s;
-}
-
-consteval std::string_view removeTypeSuffix(std::string_view s) noexcept {
-    auto k = s.find("<");
-    if (k != std::string_view::npos) { return s.substr(0, k); }
-    return s;
-}
-
-template <typename T>
-inline constexpr std::string_view type_raw_name_v = typeRawName<T>();
-
-template <typename T>
-inline constexpr std::string_view type_unprefix_name_v = removeTypePrefix(type_raw_name_v<T>);
-
-template <typename T>
-inline constexpr std::string_view type_name_v = removeTypeSuffix(type_unprefix_name_v<T>);
-
-template <typename T>
-inline constexpr bool is_template_v = type_raw_name_v<T>.find("<") != std::string_view::npos;
-
-template <typename T>
-inline constexpr bool is_class_v = std::is_class_v<T> && type_raw_name_v<T>.starts_with("class ");
-
-template <typename T>
-inline constexpr bool is_struct_v = std::is_class_v<T> && type_raw_name_v<T>.starts_with("struct ");
-
 } // namespace ll::reflection

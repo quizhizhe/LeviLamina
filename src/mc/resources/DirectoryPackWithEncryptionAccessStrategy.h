@@ -23,8 +23,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1DirectoryPackWithEncryptionAccessStrategy@@UEAA@XZ
+    virtual ~DirectoryPackWithEncryptionAccessStrategy() = default;
 
     // vIndex: 1, symbol: ?getPackSize@DirectoryPackWithEncryptionAccessStrategy@@UEBA_KXZ
     virtual uint64 getPackSize() const;
@@ -46,25 +46,29 @@ public:
     virtual bool isTrusted() const;
 
     // vIndex: 7, symbol: ?hasAsset@DirectoryPackWithEncryptionAccessStrategy@@UEBA_NAEBVPath@Core@@_N1@Z
-    virtual bool hasAsset(class Core::Path const&, bool, bool) const;
+    virtual bool hasAsset(class Core::Path const& packRelativePath, bool trustedContentOnly, bool) const;
 
     // vIndex: 8, symbol: ?hasFolder@DirectoryPackWithEncryptionAccessStrategy@@UEBA_NAEBVPath@Core@@@Z
-    virtual bool hasFolder(class Core::Path const&) const;
+    virtual bool hasFolder(class Core::Path const& packRelativePath) const;
 
     // vIndex: 9, symbol:
     // ?getAsset@DirectoryPackWithEncryptionAccessStrategy@@UEBA_NAEBVPath@Core@@AEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z
-    virtual bool getAsset(class Core::Path const&, std::string&, bool) const;
+    virtual bool getAsset(class Core::Path const& packRelativePath, std::string& result, bool trustedContentOnly) const;
 
     // vIndex: 10, symbol: ?deleteAsset@DirectoryPackWithEncryptionAccessStrategy@@UEAA_NAEBVPath@Core@@@Z
     virtual bool deleteAsset(class Core::Path const&);
 
     // vIndex: 11, symbol:
     // ?writeAsset@DirectoryPackWithEncryptionAccessStrategy@@UEAA_NAEBVPath@Core@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual bool writeAsset(class Core::Path const&, std::string const&);
+    virtual bool writeAsset(class Core::Path const& packRelativePath, std::string const& fileContent);
 
     // vIndex: 12, symbol:
     // ?forEachIn@DirectoryPackWithEncryptionAccessStrategy@@UEBAXAEBVPath@Core@@V?$function@$$A6AXAEBVPath@Core@@@Z@std@@_N@Z
-    virtual void forEachIn(class Core::Path const&, std::function<void(class Core::Path const&)>, bool) const;
+    virtual void forEachIn(
+        class Core::Path const&                      packRelativePath,
+        std::function<void(class Core::Path const&)> callback,
+        bool                                         recurseAnyways
+    ) const;
 
     // vIndex: 14, symbol:
     // ?getStrategyType@DirectoryPackWithEncryptionAccessStrategy@@UEBA?AW4PackAccessStrategyType@@XZ
@@ -72,7 +76,7 @@ public:
 
     // vIndex: 16, symbol:
     // ?createSubPack@DirectoryPackWithEncryptionAccessStrategy@@UEBA?AV?$unique_ptr@VPackAccessStrategy@@U?$default_delete@VPackAccessStrategy@@@std@@@std@@AEBVPath@Core@@@Z
-    virtual std::unique_ptr<class PackAccessStrategy> createSubPack(class Core::Path const&) const;
+    virtual std::unique_ptr<class PackAccessStrategy> createSubPack(class Core::Path const& subPath) const;
 
     // vIndex: 17, symbol:
     // ?generateAssetSet@DirectoryPackWithEncryptionAccessStrategy@@UEAA?AW4PackAccessAssetGenerationResult@@XZ
@@ -89,8 +93,11 @@ public:
 
     // symbol:
     // ??0DirectoryPackWithEncryptionAccessStrategy@@QEAA@AEBVResourceLocation@@0AEBV?$not_null@V?$NonOwnerPointer@$$CBVIContentKeyProvider@@@Bedrock@@@gsl@@@Z
-    MCAPI
-    DirectoryPackWithEncryptionAccessStrategy(class ResourceLocation const&, class ResourceLocation const&, Bedrock::NotNullNonOwnerPtr<class IContentKeyProvider const> const&);
+    MCAPI DirectoryPackWithEncryptionAccessStrategy(
+        class ResourceLocation const&                                       packLocation,
+        class ResourceLocation const&                                       encryptedContentLocation,
+        Bedrock::NotNullNonOwnerPtr<class IContentKeyProvider const> const& keyProvider
+    );
 
     // NOLINTEND
 
@@ -98,10 +105,10 @@ public:
     // NOLINTBEGIN
     // symbol:
     // ?_getUnencryptedAsset@DirectoryPackWithEncryptionAccessStrategy@@AEBA_NAEBVPath@Core@@AEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI bool _getUnencryptedAsset(class Core::Path const&, std::string&) const;
+    MCAPI bool _getUnencryptedAsset(class Core::Path const& packRelativePath, std::string& result) const;
 
     // symbol: ?_hasUnencryptedAsset@DirectoryPackWithEncryptionAccessStrategy@@AEBA_NAEBVPath@Core@@@Z
-    MCAPI bool _hasUnencryptedAsset(class Core::Path const&) const;
+    MCAPI bool _hasUnencryptedAsset(class Core::Path const& packRelativePath) const;
 
     // NOLINTEND
 };

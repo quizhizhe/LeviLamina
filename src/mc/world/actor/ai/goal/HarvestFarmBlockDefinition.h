@@ -19,19 +19,22 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1HarvestFarmBlockDefinition@@UEAA@XZ
+    virtual ~HarvestFarmBlockDefinition() = default;
 
     // symbol: ??0HarvestFarmBlockDefinition@@QEAA@XZ
     MCAPI HarvestFarmBlockDefinition();
 
     // symbol: ?initialize@HarvestFarmBlockDefinition@@QEBAXAEAVEntityContext@@AEAVHarvestFarmBlockGoal@@@Z
-    MCAPI void initialize(class EntityContext&, class HarvestFarmBlockGoal&) const;
+    MCAPI void initialize(class EntityContext& entity, class HarvestFarmBlockGoal& goal) const;
 
     // symbol:
     // ?buildSchema@HarvestFarmBlockDefinition@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VHarvestFarmBlockDefinition@@@JsonUtil@@@3@@Z
-    MCAPI static void
-    buildSchema(std::string const&, std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class HarvestFarmBlockDefinition>>&);
+    MCAPI static void buildSchema(
+        std::string const& name,
+        std::shared_ptr<
+            class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class HarvestFarmBlockDefinition>>& root
+    );
 
     // NOLINTEND
 };

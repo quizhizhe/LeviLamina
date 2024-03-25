@@ -3,13 +3,14 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
+#include "mc/deps/puv/EquipmentSlot.h"
 #include "mc/entity/utilities/ActorDamageCause.h"
 #include "mc/entity/utilities/ActorFlags.h"
+#include "mc/entity/utilities/ActorInitializationMethod.h"
 #include "mc/entity/utilities/ActorType.h"
 #include "mc/enums/ArmorMaterialType.h"
 #include "mc/enums/ArmorSlot.h"
 #include "mc/enums/ArmorTextureType.h"
-#include "mc/enums/EquipmentSlot.h"
 #include "mc/enums/HandSlot.h"
 #include "mc/enums/InputMode.h"
 #include "mc/enums/MaterialType.h"
@@ -21,6 +22,11 @@
 #include "mc/world/actor/Actor.h"
 #include "mc/world/item/components/ItemUseMethod.h"
 
+// auto generated forward declare list
+// clang-format off
+namespace mce { class Color; }
+// clang-format on
+
 class HangingActor : public ::Actor {
 public:
     // prevent constructor by default
@@ -30,108 +36,58 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 4, symbol: ?reloadHardcoded@HangingActor@@UEAAXW4InitializationMethod@Actor@@AEBVVariantParameterList@@@Z
-    virtual void reloadHardcoded(::Actor::InitializationMethod, class VariantParameterList const&);
+    // vIndex: 4, symbol: ?reloadHardcoded@HangingActor@@UEAAXW4ActorInitializationMethod@@AEBVVariantParameterList@@@Z
+    virtual void reloadHardcoded(::ActorInitializationMethod method, class VariantParameterList const& params);
 
     // vIndex: 5, symbol:
-    // ?reloadHardcodedClient@HangingActor@@UEAAXW4InitializationMethod@Actor@@AEBVVariantParameterList@@@Z
-    virtual void reloadHardcodedClient(::Actor::InitializationMethod, class VariantParameterList const&);
+    // ?reloadHardcodedClient@HangingActor@@UEAAXW4ActorInitializationMethod@@AEBVVariantParameterList@@@Z
+    virtual void reloadHardcodedClient(::ActorInitializationMethod method, class VariantParameterList const& params);
 
-    // vIndex: 10, symbol: __unk_vfn_10
-    virtual void __unk_vfn_10();
-
-    // vIndex: 23, symbol: __unk_vfn_23
-    virtual void __unk_vfn_23();
+    // vIndex: 10, symbol: ??1HangingActor@@UEAA@XZ
+    virtual ~HangingActor();
 
     // vIndex: 29, symbol: ?normalTick@HangingActor@@UEAAXXZ
     virtual void normalTick();
 
-    // vIndex: 39, symbol: __unk_vfn_39
-    virtual void __unk_vfn_39();
+    // vIndex: 44, symbol: ?getBrightness@HangingActor@@UEBAMMAEBVIConstBlockSource@@@Z
+    virtual float getBrightness(float, class IConstBlockSource const& region) const;
 
-    // vIndex: 41, symbol: __unk_vfn_41
-    virtual void __unk_vfn_41();
-
-    // vIndex: 44, symbol: __unk_vfn_44
-    virtual void __unk_vfn_44();
-
-    // vIndex: 46, symbol: ?getBrightness@HangingActor@@UEBAMMAEBVIConstBlockSource@@@Z
-    virtual float getBrightness(float, class IConstBlockSource const&) const;
-
-    // vIndex: 47, symbol: __unk_vfn_47
-    virtual void __unk_vfn_47();
-
-    // vIndex: 51, symbol: ?isPickable@HangingActor@@UEAA_NXZ
+    // vIndex: 48, symbol: ?isPickable@HangingActor@@UEAA_NXZ
     virtual bool isPickable();
 
-    // vIndex: 52, symbol: __unk_vfn_52
-    virtual void __unk_vfn_52();
+    // vIndex: 75, symbol: ?isInvulnerableTo@HangingActor@@UEBA_NAEBVActorDamageSource@@@Z
+    virtual bool isInvulnerableTo(class ActorDamageSource const& source) const;
 
-    // vIndex: 61, symbol: __unk_vfn_61
-    virtual void __unk_vfn_61();
+    // vIndex: 158, symbol: ?_hurt@HangingActor@@MEAA_NAEBVActorDamageSource@@M_N1@Z
+    virtual bool _hurt(class ActorDamageSource const& source, float damage, bool knock, bool ignite);
 
-    // vIndex: 62, symbol: __unk_vfn_62
-    virtual void __unk_vfn_62();
+    // vIndex: 159, symbol: ?readAdditionalSaveData@HangingActor@@MEAAXAEBVCompoundTag@@AEAVDataLoadHelper@@@Z
+    virtual void readAdditionalSaveData(class CompoundTag const& tag, class DataLoadHelper& dataLoadHelper);
 
-    // vIndex: 63, symbol: __unk_vfn_63
-    virtual void __unk_vfn_63();
+    // vIndex: 160, symbol: ?addAdditionalSaveData@HangingActor@@MEBAXAEAVCompoundTag@@@Z
+    virtual void addAdditionalSaveData(class CompoundTag& tag) const;
 
-    // vIndex: 79, symbol: ?isInvulnerableTo@HangingActor@@UEBA_NAEBVActorDamageSource@@@Z
-    virtual bool isInvulnerableTo(class ActorDamageSource const&) const;
-
-    // vIndex: 109, symbol: __unk_vfn_109
-    virtual void __unk_vfn_109();
-
-    // vIndex: 144, symbol: ?setSize@HangingActor@@UEAAXMM@Z
-    virtual void setSize(float, float);
-
-    // vIndex: 147, symbol: __unk_vfn_147
-    virtual void __unk_vfn_147();
-
-    // vIndex: 148, symbol: __unk_vfn_148
-    virtual void __unk_vfn_148();
-
-    // vIndex: 165, symbol: __unk_vfn_165
-    virtual void __unk_vfn_165();
-
-    // vIndex: 166, symbol: ?_hurt@HangingActor@@MEAA_NAEBVActorDamageSource@@M_N1@Z
-    virtual bool _hurt(class ActorDamageSource const&, float, bool, bool);
-
-    // vIndex: 167, symbol: ?readAdditionalSaveData@HangingActor@@MEAAXAEBVCompoundTag@@AEAVDataLoadHelper@@@Z
-    virtual void readAdditionalSaveData(class CompoundTag const&, class DataLoadHelper&);
-
-    // vIndex: 168, symbol: ?addAdditionalSaveData@HangingActor@@MEBAXAEAVCompoundTag@@@Z
-    virtual void addAdditionalSaveData(class CompoundTag&) const;
-
-    // vIndex: 170, symbol: __unk_vfn_170
-    virtual void __unk_vfn_170();
-
-    // vIndex: 172, symbol: __unk_vfn_172
-    virtual void __unk_vfn_172();
-
-    // vIndex: 173, symbol: ?setDir@HangingActor@@UEAAXH@Z
-    virtual void setDir(int);
-
-    // vIndex: 174, symbol: ?getWidth@LeashFenceKnotActor@@UEBAHXZ
+    // vIndex: 163, symbol: ?getWidth@Painting@@UEBAHXZ
     virtual int getWidth() const = 0;
 
-    // vIndex: 175, symbol: ?getHeight@LeashFenceKnotActor@@UEBAHXZ
+    // vIndex: 164, symbol: ?getHeight@Painting@@UEBAHXZ
     virtual int getHeight() const = 0;
 
-    // vIndex: 176, symbol: ?dropItem@LeashFenceKnotActor@@UEAAXXZ
+    // vIndex: 165, symbol: ?dropItem@Painting@@UEAAXXZ
     virtual void dropItem() = 0;
 
-    // vIndex: 177, symbol: ?placeHangingEntity@HangingActor@@UEAA_NAEAVBlockSource@@H@Z
-    virtual bool placeHangingEntity(class BlockSource&, int);
+    // vIndex: 166, symbol: ?placeHangingEntity@HangingActor@@UEAA_NAEAVBlockSource@@H@Z
+    virtual bool placeHangingEntity(class BlockSource& region, int direction);
 
-    // vIndex: 178, symbol: ?wouldSurvive@HangingActor@@UEAA_NAEAVBlockSource@@@Z
-    virtual bool wouldSurvive(class BlockSource&);
-
-    // symbol: ??1HangingActor@@UEAA@XZ
-    MCVAPI ~HangingActor();
+    // vIndex: 167, symbol: ?wouldSurvive@HangingActor@@UEAA_NAEAVBlockSource@@@Z
+    virtual bool wouldSurvive(class BlockSource& region);
 
     // symbol: ??0HangingActor@@QEAA@PEAVActorDefinitionGroup@@AEBUActorDefinitionIdentifier@@AEAVEntityContext@@@Z
-    MCAPI HangingActor(class ActorDefinitionGroup*, struct ActorDefinitionIdentifier const&, class EntityContext&);
+    MCAPI HangingActor(
+        class ActorDefinitionGroup*             definitions,
+        struct ActorDefinitionIdentifier const& definitionName,
+        class EntityContext&                    entityContext
+    );
 
     // symbol: ?getDirection@HangingActor@@QEBAHXZ
     MCAPI int getDirection() const;
@@ -144,23 +100,23 @@ public:
     MCAPI void _calculateAABB();
 
     // symbol: ?_calculateActorPositionFromPlacementPosition@HangingActor@@IEAAXAEBVBlockPos@@@Z
-    MCAPI void _calculateActorPositionFromPlacementPosition(class BlockPos const&);
+    MCAPI void _calculateActorPositionFromPlacementPosition(class BlockPos const& blockPos);
 
     // symbol: ?_wouldSurvive@HangingActor@@IEAA_NAEAVBlockSource@@AEBVBlockPos@@_N@Z
-    MCAPI bool _wouldSurvive(class BlockSource&, class BlockPos const&, bool);
+    MCAPI bool _wouldSurvive(class BlockSource& region, class BlockPos const& blockPos, bool);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_blockContainsObstruction@HangingActor@@AEBA_NAEBVBlockSource@@AEBVBlockPos@@@Z
-    MCAPI bool _blockContainsObstruction(class BlockSource const&, class BlockPos const&) const;
+    MCAPI bool _blockContainsObstruction(class BlockSource const& region, class BlockPos const& blockPos) const;
 
     // symbol: ?_blockIsObstruction@HangingActor@@AEBA_NAEBVBlockSource@@AEBVBlockPos@@@Z
-    MCAPI bool _blockIsObstruction(class BlockSource const&, class BlockPos const&) const;
+    MCAPI bool _blockIsObstruction(class BlockSource const& region, class BlockPos const& blockPos) const;
 
     // symbol: ?_canSurviveOnBlock@HangingActor@@AEBA_NAEBVBlockSource@@AEBVBlockPos@@_N@Z
-    MCAPI bool _canSurviveOnBlock(class BlockSource const&, class BlockPos const&, bool) const;
+    MCAPI bool _canSurviveOnBlock(class BlockSource const& region, class BlockPos const& blockPos, bool) const;
 
     // NOLINTEND
 
@@ -174,7 +130,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $HANGING_OFFSET() { return HANGING_OFFSET; }
+    static auto& $HANGING_OFFSET() { return HANGING_OFFSET; }
 
     // NOLINTEND
 };

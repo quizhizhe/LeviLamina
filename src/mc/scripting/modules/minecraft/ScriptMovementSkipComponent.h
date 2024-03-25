@@ -10,6 +10,7 @@
 // auto generated forward declare list
 // clang-format off
 namespace ScriptModuleMinecraft { class MovementScriptActorComponent; }
+namespace ScriptModuleMinecraft { class ScriptComponentTypeEnumBuilder; }
 // clang-format on
 
 namespace ScriptModuleMinecraft {
@@ -23,15 +24,13 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // symbol: ??1ScriptMovementSkipComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptMovementSkipComponent();
+    // vIndex: 0, symbol: __gen_??1ScriptMovementSkipComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptMovementSkipComponent() = default;
 
     // symbol:
-    // ?bind@ScriptMovementSkipComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptMovementSkipComponent@ScriptModuleMinecraft@@@Scripting@@XZ
-    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptMovementSkipComponent> bind();
+    // ?bind@ScriptMovementSkipComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptMovementSkipComponent@ScriptModuleMinecraft@@@Scripting@@AEAVScriptComponentTypeEnumBuilder@2@@Z
+    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptMovementSkipComponent>
+    bind(class ScriptModuleMinecraft::ScriptComponentTypeEnumBuilder&);
 
     // symbol: ?ComponentId@ScriptMovementSkipComponent@ScriptModuleMinecraft@@2PEBDEB
     MCAPI static char const* ComponentId;

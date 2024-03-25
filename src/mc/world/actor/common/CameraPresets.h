@@ -42,7 +42,9 @@ public:
     };
 
 public:
-    std::vector<CameraPreset> mList;
+    std::vector<CameraPreset>              mPresets;
+    std::vector<CameraPresets::CameraList> mLists;
+    cereal::ReflectionCtx&                 mReflectionCtx;
 
     // prevent constructor by default
     CameraPresets& operator=(CameraPresets const&);
@@ -52,6 +54,9 @@ public:
     // NOLINTBEGIN
     // symbol: ??0CameraPresets@@QEAA@XZ
     MCAPI CameraPresets();
+
+    // symbol: ??0CameraPresets@@QEAA@AEAUReflectionCtx@cereal@@@Z
+    MCAPI explicit CameraPresets(struct cereal::ReflectionCtx&);
 
     // symbol:
     // ?buildCameraPresetList@CameraPresets@@QEBA?AV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@XZ
@@ -68,7 +73,7 @@ public:
     MCAPI bool isEmpty() const;
 
     // symbol: ?loadPresets@CameraPresets@@QEAAXAEAVResourcePackManager@@@Z
-    MCAPI void loadPresets(class ResourcePackManager&);
+    MCAPI void loadPresets(class ResourcePackManager& resourcePackManager);
 
     // symbol: ?write@CameraPresets@@QEBAXAEAVBinaryStream@@@Z
     MCAPI void write(class BinaryStream&) const;
@@ -96,16 +101,27 @@ public:
 
     // symbol:
     // ?_parseAndLoadCameraList@CameraPresets@@AEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVSemVersion@@0@Z
-    MCAPI void _parseAndLoadCameraList(std::string const&, class SemVersion const&, std::string const&);
+    MCAPI void _parseAndLoadCameraList(
+        std::string const&      fileData,
+        class SemVersion const& engineVersion,
+        std::string const&      filename
+    );
 
     // symbol:
     // ?_parseAndLoadCameraPreset@CameraPresets@@AEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVSemVersion@@0@Z
-    MCAPI void _parseAndLoadCameraPreset(std::string const&, class SemVersion const&, std::string const&);
+    MCAPI void _parseAndLoadCameraPreset(
+        std::string const&      fileData,
+        class SemVersion const& engineVersion,
+        std::string const&      filename
+    );
 
     // symbol:
     // ?_loadJsonFiles@CameraPresets@@CAXAEAVResourcePackManager@@AEBV?$PathBuffer@V?$StackString@D$0EAA@@Core@@@Core@@V?$function@$$A6AXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVSemVersion@@0@Z@std@@@Z
-    MCAPI static void
-    _loadJsonFiles(class ResourcePackManager&, class Core::PathBuffer<class Core::StackString<char, 1024>> const&, std::function<void(std::string const&, class SemVersion const&, std::string const&)>);
+    MCAPI static void _loadJsonFiles(
+        class ResourcePackManager&                                                           resourcePackManager,
+        class Core::PathBuffer<class Core::StackString<char, 1024>> const&                   path,
+        std::function<void(std::string const&, class SemVersion const&, std::string const&)> callback
+    );
 
     // NOLINTEND
 };

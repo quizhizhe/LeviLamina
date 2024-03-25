@@ -29,17 +29,17 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@ModalFormRequestPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@ModalFormRequestPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0ModalFormRequestPacket@@QEAA@XZ
     MCAPI ModalFormRequestPacket();
 
     // symbol: ??0ModalFormRequestPacket@@QEAA@IAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI ModalFormRequestPacket(uint, std::string const&);
+    MCAPI ModalFormRequestPacket(uint formId, std::string const& formJSON);
 
     // NOLINTEND
 };

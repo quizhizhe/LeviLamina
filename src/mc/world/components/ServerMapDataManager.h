@@ -19,8 +19,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ServerMapDataManager@@UEAA@XZ
+    virtual ~ServerMapDataManager() = default;
 
     // vIndex: 1, symbol:
     // ?registerOnCreateMapSavedDataCallback@ServerMapDataManager@@UEAA?AVSubscription@PubSub@Bedrock@@V?$function@$$A6AXAEAVMapItemSavedData@@@Z@std@@@Z
@@ -34,10 +34,11 @@ public:
     // vIndex: 3, symbol: ?createMapSavedData@ServerMapDataManager@@UEAAAEAVMapItemSavedData@@AEBUActorUniqueID@@@Z
     virtual class MapItemSavedData& createMapSavedData(struct ActorUniqueID const&);
 
-    // symbol:
-    // ??0ServerMapDataManager@@QEAA@AEAVDimensionManager@@PEAVLevelStorage@@V?$unique_ptr@VIMapDataManagerOptions@@U?$default_delete@VIMapDataManagerOptions@@@std@@@std@@V?$function@$$A6A?AUActorUniqueID@@XZ@4@@Z
-    MCAPI
-    ServerMapDataManager(class DimensionManager&, class LevelStorage*, std::unique_ptr<class IMapDataManagerOptions>, std::function<struct ActorUniqueID(void)>);
+    // vIndex: 4, symbol: ?requestMapInfo@ServerMapDataManager@@UEAAXUActorUniqueID@@_N@Z
+    virtual void requestMapInfo(struct ActorUniqueID, bool);
+
+    // vIndex: 5, symbol: ?_copyAndLockMap@ServerMapDataManager@@EEAAXUActorUniqueID@@0@Z
+    virtual void _copyAndLockMap(struct ActorUniqueID, struct ActorUniqueID);
 
     // NOLINTEND
 

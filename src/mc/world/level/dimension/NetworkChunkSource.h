@@ -14,23 +14,25 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1NetworkChunkSource@@UEAA@XZ
+    virtual ~NetworkChunkSource() = default;
 
     // vIndex: 3, symbol: ?getExistingChunk@NetworkChunkSource@@UEAA?AV?$shared_ptr@VLevelChunk@@@std@@AEBVChunkPos@@@Z
-    virtual std::shared_ptr<class LevelChunk> getExistingChunk(class ChunkPos const&);
+    virtual std::shared_ptr<class LevelChunk> getExistingChunk(class ChunkPos const& cp);
 
     // vIndex: 7, symbol:
     // ?createNewChunk@NetworkChunkSource@@UEAA?AV?$shared_ptr@VLevelChunk@@@std@@AEBVChunkPos@@W4LoadMode@ChunkSource@@_N@Z
-    virtual std::shared_ptr<class LevelChunk> createNewChunk(class ChunkPos const&, ::ChunkSource::LoadMode, bool);
+    virtual std::shared_ptr<class LevelChunk>
+    createNewChunk(class ChunkPos const& cp, ::ChunkSource::LoadMode lm, bool readOnly);
 
     // vIndex: 8, symbol:
     // ?getOrLoadChunk@NetworkChunkSource@@UEAA?AV?$shared_ptr@VLevelChunk@@@std@@AEBVChunkPos@@W4LoadMode@ChunkSource@@_N@Z
-    virtual std::shared_ptr<class LevelChunk> getOrLoadChunk(class ChunkPos const&, ::ChunkSource::LoadMode, bool);
+    virtual std::shared_ptr<class LevelChunk>
+    getOrLoadChunk(class ChunkPos const& cp, ::ChunkSource::LoadMode lm, bool readOnly);
 
     // vIndex: 19, symbol:
     // ?acquireDiscarded@NetworkChunkSource@@UEAAXV?$unique_ptr@VLevelChunk@@ULevelChunkFinalDeleter@@@std@@@Z
-    virtual void acquireDiscarded(std::unique_ptr<class LevelChunk, struct LevelChunkFinalDeleter>);
+    virtual void acquireDiscarded(std::unique_ptr<class LevelChunk, struct LevelChunkFinalDeleter> ptr);
 
     // vIndex: 24, symbol:
     // ?getChunkMap@NetworkChunkSource@@UEAAPEBV?$unordered_map@VChunkPos@@V?$weak_ptr@VLevelChunk@@@std@@U?$hash@VChunkPos@@@3@U?$equal_to@VChunkPos@@@3@V?$allocator@U?$pair@$$CBVChunkPos@@V?$weak_ptr@VLevelChunk@@@std@@@std@@@3@@std@@XZ
@@ -47,7 +49,7 @@ public:
     virtual bool canLaunchTasks() const;
 
     // symbol: ??0NetworkChunkSource@@QEAA@AEAVDimension@@@Z
-    MCAPI explicit NetworkChunkSource(class Dimension&);
+    MCAPI explicit NetworkChunkSource(class Dimension& dimension);
 
     // NOLINTEND
 };

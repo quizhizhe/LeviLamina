@@ -14,14 +14,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SetItemDamageFunction@@UEAA@XZ
+    virtual ~SetItemDamageFunction() = default;
 
     // vIndex: 1, symbol: ?apply@SetItemDamageFunction@@UEAAXAEAVItemStack@@AEAVRandom@@AEAVLootTableContext@@@Z
-    virtual void apply(class ItemStack&, class Random&, class LootTableContext&);
+    virtual void apply(class ItemStack& item, class Random& random, class LootTableContext& context);
 
     // vIndex: 3, symbol: ?apply@SetItemDamageFunction@@UEAAXAEAVItemInstance@@AEAVRandom@@AEAVLootTableContext@@@Z
-    virtual void apply(class ItemInstance&, class Random&, class LootTableContext&);
+    virtual void apply(class ItemInstance& item, class Random& random, class LootTableContext& context);
 
     // NOLINTEND
 };

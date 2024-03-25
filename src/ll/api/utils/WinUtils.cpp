@@ -2,59 +2,23 @@
 
 #include <string>
 
-#include "ll/api/i18n/I18nAPI.h"
+#include "ll/api/i18n/I18n.h"
+#include "ll/api/memory/Memory.h"
 #include "ll/api/utils/StringUtils.h"
 
 #include "ll/core/Config.h"
 #include "ll/core/LeviLamina.h"
 
-#include <libloaderapi.h>
-#include <psapi.h>
-#include <windows.h>
+#include "windows.h"
 
-using namespace ll::utils::string_utils;
-namespace ll::utils::win_utils {
+#include "psapi.h"
 
-std::string getLastErrorMessage(ulong errorMessageId) {
-    if (errorMessageId == 0) return "";
-    LPWSTR message_buffer = nullptr;
-    FormatMessage(
-        FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_FROM_SYSTEM,
-        nullptr,
-        errorMessageId,
-        MAKELANGID(0x09, SUBLANG_DEFAULT),
-        (LPWSTR)&message_buffer,
-        0,
-        nullptr
-    );
-    std::string res = wstr2str(std::wstring(message_buffer));
-    LocalFree(message_buffer);
-    return res;
-}
-
-std::string getLastErrorMessage() {
-    DWORD error_message_id = ::GetLastError();
-    if (error_message_id == 0) return "";
-
-    LPWSTR message_buffer = nullptr;
-    FormatMessage(
-        FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_FROM_SYSTEM,
-        nullptr,
-        error_message_id,
-        MAKELANGID(0x09, SUBLANG_DEFAULT),
-        (LPWSTR)&message_buffer,
-        0,
-        nullptr
-    );
-    std::string res = wstr2str(std::wstring(message_buffer));
-    LocalFree(message_buffer);
-    return res;
-}
+using namespace ll::string_utils;
+namespace ll::inline utils::win_utils {
 
 std::string getSystemLocaleName() {
-    wchar_t buf[256] = {0};
-    auto    lcid     = GetSystemDefaultLCID();
-    GetSystemDefaultLocaleName(buf, (int)lcid);
+    wchar_t buf[LOCALE_NAME_MAX_LENGTH]{};
+    GetSystemDefaultLocaleName(buf, LOCALE_NAME_MAX_LENGTH);
     auto str = wstr2str(buf);
     std::replace(str.begin(), str.end(), '-', '_');
     return str;
@@ -71,79 +35,66 @@ bool isWine() {
     return result;
 }
 
-#define IN_RANGE(x, a, b) ((x) >= (a) && (x) <= (b))
-#define GET_BITS(x)                                                                                                    \
-    (IN_RANGE(((x) & (~0x20)), 'A', 'F') ? (((x) & (~0x20)) - 'A' + 0xa) : (IN_RANGE(x, '0', '9') ? (x) - '0' : 0))
-#define GET_BYTE(x) (GET_BITS((x)[0]) << 4 | GET_BITS((x)[1]))
-
-inline DWORD_PTR GetProcessBaseAddr(DWORD processId) {
-    DWORD_PTR baseAddress   = 0;
-    HANDLE    processHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processId);
-    HMODULE*  moduleArray;
-    LPBYTE    moduleArrayBytes;
-    DWORD     bytesRequired = 0;
-
-    if (!processHandle) return baseAddress;
-
-    if (!EnumProcessModules(processHandle, nullptr, 0, &bytesRequired) || !bytesRequired) goto Ret;
-
-    moduleArrayBytes = (LPBYTE)LocalAlloc(LPTR, bytesRequired);
-    if (!moduleArrayBytes) { goto Ret; }
-
-    moduleArray = (HMODULE*)moduleArrayBytes;
-    if (EnumProcessModules(processHandle, moduleArray, bytesRequired, &bytesRequired)) {
-        baseAddress = (DWORD_PTR)moduleArray[0];
+std::span<uchar> getImageRange(std::string_view name) {
+    static auto process = GetCurrentProcess();
+    HMODULE     rangeStart;
+    if (name.empty()) {
+        rangeStart = GetModuleHandle(nullptr);
+    } else {
+        rangeStart = GetModuleHandle(str2wstr(name).c_str());
     }
-    LocalFree(moduleArrayBytes);
-
-Ret:
-    CloseHandle(processHandle);
-    return baseAddress;
-}
-
-uintptr_t findSig(char const* szSignature) {
-    char const*            pattern    = szSignature;
-    uintptr_t              firstMatch = 0;
-    DWORD                  processId  = GetCurrentProcessId();
-    static const uintptr_t rangeStart = GetProcessBaseAddr(processId);
-    static MODULEINFO      miModInfo;
-    static bool            init = false;
-
-    if (!init) {
-        init = true;
-        GetModuleInformation(GetCurrentProcess(), (HMODULE)rangeStart, &miModInfo, sizeof(MODULEINFO));
-    }
-
-    static const uintptr_t rangeEnd = rangeStart + miModInfo.SizeOfImage;
-    BYTE                   patByte  = GET_BYTE(pattern);
-    char const*            oldPat   = pattern;
-
-    for (uintptr_t pCur = rangeStart; pCur < rangeEnd; pCur++) {
-        if (!*pattern) return firstMatch;
-
-        while (*(PBYTE)pattern == ' ') pattern++;
-
-        if (!*pattern) return firstMatch;
-
-        if (oldPat != pattern) {
-            oldPat = pattern;
-            if (*(PBYTE)pattern != '\?') patByte = GET_BYTE(pattern);
-        }
-        if (*(PBYTE)pattern == '\?' || *(BYTE*)pCur == patByte) {
-            if (!firstMatch) firstMatch = pCur;
-
-            if (!pattern[2] || !pattern[1]) return firstMatch;
-            pattern += 2;
-        } else {
-            pattern    = szSignature;
-            firstMatch = 0;
+    if (rangeStart) {
+        MODULEINFO moduleInfo;
+        if (GetModuleInformation(process, rangeStart, &moduleInfo, sizeof(MODULEINFO))) {
+            return {(uchar*)rangeStart, moduleInfo.SizeOfImage};
         }
     }
-    return 0;
+    return {};
 }
 
-#undef IN_RANGE
-#undef GET_BYTE
-#undef GET_BITS
+void* getModuleHandle(void* addr) {
+    HMODULE hModule = nullptr;
+    GetModuleHandleEx(
+        GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+        reinterpret_cast<LPCTSTR>(addr),
+        &hModule
+    );
+    return hModule;
+}
 
-} // namespace ll::utils::win_utils
+std::optional<std::filesystem::path> getModulePath(void* handle) {
+    std::wstring path(32767, '\0');
+    if (auto res = GetModuleFileName((HMODULE)handle, path.data(), 32767); res != 0 && res != 32767) {
+        path.resize(res);
+        return std::filesystem::path(path);
+    } else {
+        return std::nullopt;
+    }
+}
+
+std::string getModuleFileName(void* handle) {
+#if _HAS_CXX23
+    return getModulePath(handle).transform([](auto&& path) { return u8str2str(path.filename().u8string()); }
+    ).value_or("");
+#else
+    return {};
+#endif
+}
+
+LLNDAPI std::pair<std::tm, int> getLocalTime() {
+    SYSTEMTIME sysTime;
+    GetLocalTime(&sysTime);
+    std::tm time{
+        .tm_sec   = sysTime.wSecond,      // seconds after the minute - [0, 60] including leap second
+        .tm_min   = sysTime.wMinute,      // minutes after the hour - [0, 59]
+        .tm_hour  = sysTime.wHour,        // hours since midnight - [0, 23]
+        .tm_mday  = sysTime.wDay,         // day of the month - [1, 31]
+        .tm_mon   = sysTime.wMonth - 1,   // months since January - [0, 11]
+        .tm_year  = sysTime.wYear - 1900, // years since 1900
+        .tm_wday  = sysTime.wDayOfWeek,   // days since Sunday - [0, 6]
+        .tm_isdst = -1                    // daylight savings time flag
+    };
+    return {time, sysTime.wMilliseconds};
+}
+
+} // namespace ll::inline utils::win_utils

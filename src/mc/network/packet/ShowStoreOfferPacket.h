@@ -1,6 +1,7 @@
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
+#include "mc/deps/core/mce/UUID.h"
 
 // auto generated inclusion list
 #include "mc/deps/core/common/bedrock/Result.h"
@@ -9,9 +10,13 @@
 
 class ShowStoreOfferPacket : public ::Packet {
 public:
-    std::string mOfferId;     // this+0x30
-    std::string mContentType; // this+0x50
-    bool        mShowAll;     // this+0x70
+    enum class RedirectType : uchar {
+        Marketplace,
+        DressingRoom,
+        ThirdPartyServerPage,
+    };
+    mce::UUID    mOfferId;      // this+0x30
+    RedirectType mRedirectType; // this+0x40
 
     // prevent constructor by default
     ShowStoreOfferPacket& operator=(ShowStoreOfferPacket const&);
@@ -19,8 +24,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ShowStoreOfferPacket@@UEAA@XZ
+    virtual ~ShowStoreOfferPacket() = default;
 
     // vIndex: 1, symbol: ?getId@ShowStoreOfferPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -30,11 +35,11 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@ShowStoreOfferPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@ShowStoreOfferPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0ShowStoreOfferPacket@@QEAA@XZ
     MCAPI ShowStoreOfferPacket();

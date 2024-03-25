@@ -49,17 +49,17 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ??1FeatureToggles@@UEAA@XZ
-    MCVAPI ~FeatureToggles();
+    // vIndex: 0, symbol: ??1FeatureToggles@@UEAA@XZ
+    virtual ~FeatureToggles();
 
     // symbol: ??0FeatureToggles@@QEAA@AEAVAppPlatform@@@Z
-    MCAPI explicit FeatureToggles(class AppPlatform&);
+    MCAPI explicit FeatureToggles(class AppPlatform& appPlatform);
 
     // symbol: ?get@FeatureToggles@@QEAAPEAVOption@@W4FeatureOptionID@@@Z
-    MCAPI class Option* get(::FeatureOptionID);
+    MCAPI class Option* get(::FeatureOptionID featureID);
 
     // symbol: ?isEnabled@FeatureToggles@@QEBA_NW4FeatureOptionID@@@Z
-    MCAPI bool isEnabled(::FeatureOptionID) const;
+    MCAPI bool isEnabled(::FeatureOptionID featureID) const;
 
     // NOLINTEND
 
@@ -67,17 +67,13 @@ public:
     // NOLINTBEGIN
     // symbol:
     // ?_getDisableIfOtherOptionDisabledSetupCallback@FeatureToggles@@AEBA?AV?$function@$$A6AXAEAVOption@@@Z@std@@W4FeatureOptionID@@@Z
-    MCAPI std::function<void(class Option&)> _getDisableIfOtherOptionDisabledSetupCallback(::FeatureOptionID) const;
+    MCAPI std::function<void(class Option&)>
+          _getDisableIfOtherOptionDisabledSetupCallback(::FeatureOptionID optionIdToCheck) const;
 
     // symbol:
     // ?_getDisabledIfOptionExpectationsNotMetSetupCallback@FeatureToggles@@AEAA?AV?$function@$$A6AXAEAVOption@@@Z@std@@V?$vector@W4FeatureOptionID@@V?$allocator@W4FeatureOptionID@@@std@@@3@0@Z
     MCAPI std::function<void(class Option&)>
         _getDisabledIfOptionExpectationsNotMetSetupCallback(std::vector<::FeatureOptionID>, std::vector<::FeatureOptionID>);
-
-    // symbol:
-    // ?_getDisabledIfOtherOptionsEnabledSetupCallback@FeatureToggles@@AEAA?AV?$function@$$A6AXAEAVOption@@@Z@std@@V?$vector@W4FeatureOptionID@@V?$allocator@W4FeatureOptionID@@@std@@@3@@Z
-    MCAPI std::function<void(class Option&)>
-          _getDisabledIfOtherOptionsEnabledSetupCallback(std::vector<::FeatureOptionID>);
 
     // symbol: ?_getForceEnableCallback@FeatureToggles@@AEAA?AV?$function@$$A6AXAEAVOption@@@Z@std@@XZ
     MCAPI std::function<void(class Option&)> _getForceEnableCallback();
@@ -87,10 +83,21 @@ public:
     MCAPI std::function<void(bool&)>
         _getLockIfInGameOrOptionExpectationsNotMetLockCallback(std::vector<::FeatureOptionID>, std::vector<::FeatureOptionID>);
 
+    // symbol: ?_initialize@FeatureToggles@@AEAAXAEAVAppPlatform@@@Z
+    MCAPI void _initialize(class AppPlatform& appPlatform);
+
     // symbol:
     // ?_registerFeature@FeatureToggles@@AEAAXW4FeatureOptionTabID@@W4FeatureOptionID@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@2_N1V?$function@$$A6AXAEAVOption@@@Z@5@V?$function@$$A6AXAEA_N@Z@5@@Z
-    MCAPI void
-    _registerFeature(::FeatureOptionTabID, ::FeatureOptionID, std::string const&, std::string const&, bool, ::FeatureOptionID, std::function<void(class Option&)>, std::function<void(bool&)>);
+    MCAPI void _registerFeature(
+        ::FeatureOptionTabID,
+        ::FeatureOptionID                  featureID,
+        std::string const&                 locName,
+        std::string const&                 saveName,
+        bool                               defaultValue,
+        ::FeatureOptionID                  dependencyFeatureID,
+        std::function<void(class Option&)> setup,
+        std::function<void(bool&)>         lock
+    );
 
     // symbol: ?_registerFeatures@FeatureToggles@@AEAAXXZ
     MCAPI void _registerFeatures();
@@ -111,7 +118,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mFeatureToggles() { return mFeatureToggles; }
+    static auto& $mFeatureToggles() { return mFeatureToggles; }
 
     // NOLINTEND
 };

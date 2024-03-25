@@ -6,7 +6,7 @@
 #include "mc/deps/file/IFileAccess.h"
 #include "mc/deps/file/IFileReadAccess.h"
 #include "mc/deps/file/IFileWriteAccess.h"
-#include "mc/world/systems/FileSystemMode.h"
+#include "mc/entity/systems/common/FileSystemMode.h"
 
 // auto generated forward declare list
 // clang-format off
@@ -31,11 +31,11 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1FileSystemFileReadAccess@FileSystemFileAccess@@UEAA@XZ
+        virtual ~FileSystemFileReadAccess() = default;
 
         // vIndex: 1, symbol: ?fread@FileSystemFileReadAccess@FileSystemFileAccess@@UEBA_KPEAX_K10@Z
-        virtual uint64 fread(void*, uint64, uint64, void*) const;
+        virtual uint64 fread(void* buffer, uint64 size, uint64 count, void* file) const;
 
         // NOLINTEND
     };
@@ -49,11 +49,11 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1FileSystemFileWriteAccess@FileSystemFileAccess@@UEAA@XZ
+        virtual ~FileSystemFileWriteAccess() = default;
 
         // vIndex: 1, symbol: ?fwrite@FileSystemFileWriteAccess@FileSystemFileAccess@@UEAA_KPEBX_K1PEAX@Z
-        virtual uint64 fwrite(void const*, uint64, uint64, void*);
+        virtual uint64 fwrite(void const* buffer, uint64 size, uint64 count, void* file);
 
         // NOLINTEND
     };
@@ -66,21 +66,21 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1FileSystemFileAccess@@UEAA@XZ
+    virtual ~FileSystemFileAccess() = default;
 
     // vIndex: 1, symbol:
     // ?fopen@FileSystemFileAccess@@UEAAPEAXAEBVPath@Core@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void* fopen(class Core::Path const&, std::string const&);
+    virtual void* fopen(class Core::Path const& filePath, std::string const& mode);
 
     // vIndex: 2, symbol: ?fclose@FileSystemFileAccess@@UEAAHPEAX@Z
-    virtual int fclose(void*);
+    virtual int fclose(void* file);
 
     // vIndex: 3, symbol: ?fseek@FileSystemFileAccess@@UEAAHPEAX_JH@Z
-    virtual int fseek(void*, int64, int);
+    virtual int fseek(void* file, int64 offset, int origin);
 
     // vIndex: 4, symbol: ?ftell@FileSystemFileAccess@@UEAA_JPEAX@Z
-    virtual int64 ftell(void*);
+    virtual int64 ftell(void* file);
 
     // vIndex: 5, symbol: ?getReadInterface@FileSystemFileAccess@@UEBAPEBVIFileReadAccess@@XZ
     virtual class IFileReadAccess const* getReadInterface() const;
@@ -92,7 +92,7 @@ public:
     virtual void unload();
 
     // symbol: ??0FileSystemFileAccess@@QEAA@W4FileSystemMode@@@Z
-    MCAPI explicit FileSystemFileAccess(::FileSystemMode);
+    MCAPI explicit FileSystemFileAccess(::FileSystemMode mode);
 
     // NOLINTEND
 };

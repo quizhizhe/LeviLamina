@@ -21,14 +21,36 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1GameTestInstanceLedger@@UEAA@XZ
+    virtual ~GameTestInstanceLedger() = default;
 
     // vIndex: 1, symbol: ?onTestStructureLoaded@GameTestInstanceLedger@@UEAAXAEAVBaseGameTestInstance@gametest@@@Z
     virtual void onTestStructureLoaded(class gametest::BaseGameTestInstance&);
 
+    // vIndex: 2, symbol: ?onTestPassed@IGameTestListener@gametest@@UEAAXAEAVBaseGameTestInstance@2@@Z
+    virtual void onTestPassed(class gametest::BaseGameTestInstance&);
+
+    // vIndex: 3, symbol: ?onTestFailed@IGameTestListener@gametest@@UEAAXAEAVBaseGameTestInstance@2@@Z
+    virtual void onTestFailed(class gametest::BaseGameTestInstance&);
+
+    // vIndex: 4, symbol: ?onTestStarted@IGameTestListener@gametest@@UEAAXAEAVBaseGameTestInstance@2@@Z
+    virtual void onTestStarted(class gametest::BaseGameTestInstance&);
+
+    // vIndex: 5, symbol: ?onTestRetryStarted@IGameTestListener@gametest@@UEAAXAEAVBaseGameTestInstance@2@@Z
+    virtual void onTestRetryStarted(class gametest::BaseGameTestInstance&);
+
+    // vIndex: 6, symbol: ?onTestRetryFinished@IGameTestListener@gametest@@UEAAXAEAVBaseGameTestInstance@2@@Z
+    virtual void onTestRetryFinished(class gametest::BaseGameTestInstance&);
+
+    // symbol: ??0GameTestInstanceLedger@@QEAA@AEAVLevelStorage@@@Z
+    MCAPI explicit GameTestInstanceLedger(class LevelStorage& storage);
+
     // symbol: ?clear@GameTestInstanceLedger@@QEAAXV?$AutomaticID@VDimension@@H@@@Z
-    MCAPI void clear(DimensionType);
+    MCAPI void clear(DimensionType dimension);
+
+    // symbol:
+    // ?getBoundingBoxes@GameTestInstanceLedger@@QEBA?AV?$vector@VBoundingBox@@V?$allocator@VBoundingBox@@@std@@@std@@V?$AutomaticID@VDimension@@H@@@Z
+    MCAPI std::vector<class BoundingBox> getBoundingBoxes(DimensionType dimension) const;
 
     // NOLINTEND
 
@@ -43,7 +65,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $GAME_TEST_INSTANCE_PREFIX() { return GAME_TEST_INSTANCE_PREFIX; }
+    static auto& $GAME_TEST_INSTANCE_PREFIX() { return GAME_TEST_INSTANCE_PREFIX; }
 
     // NOLINTEND
 };

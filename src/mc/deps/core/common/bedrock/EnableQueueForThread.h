@@ -22,8 +22,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ??1EnableQueueForThread@Threading@Bedrock@@UEAA@XZ
-    MCVAPI ~EnableQueueForThread();
+    // vIndex: 0, symbol: ??1EnableQueueForThread@Threading@Bedrock@@UEAA@XZ
+    virtual ~EnableQueueForThread();
 
     // symbol:
     // ??0EnableQueueForThread@Threading@Bedrock@@QEAA@AEAVWorkerPool@@AEAVScheduler@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
@@ -38,7 +38,7 @@ public:
 
     // symbol:
     // ?queue@EnableQueueForThread@Threading@Bedrock@@IEAA?AV?$shared_ptr@V?$IAsyncResult@X@Threading@Bedrock@@@std@@$$QEAV?$function@$$A6AXXZ@5@@Z
-    MCAPI std::shared_ptr<class Bedrock::Threading::IAsyncResult<void>> queue(std::function<void(void)>&&);
+    MCAPI std::shared_ptr<class Bedrock::Threading::IAsyncResult<void>> queue(std::function<void()>&&);
 
     // NOLINTEND
 };

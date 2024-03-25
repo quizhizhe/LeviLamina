@@ -18,13 +18,13 @@ public:
     // NOLINTBEGIN
     // symbol: ??0ClimateParameters@@QEAA@UParameter@ClimateUtils@@00000M@Z
     MCAPI ClimateParameters(
-        struct ClimateUtils::Parameter,
-        struct ClimateUtils::Parameter,
-        struct ClimateUtils::Parameter,
-        struct ClimateUtils::Parameter,
-        struct ClimateUtils::Parameter,
-        struct ClimateUtils::Parameter,
-        float
+        struct ClimateUtils::Parameter temperature,
+        struct ClimateUtils::Parameter humidity,
+        struct ClimateUtils::Parameter continentalness,
+        struct ClimateUtils::Parameter erosion,
+        struct ClimateUtils::Parameter depth,
+        struct ClimateUtils::Parameter weirdness,
+        float                          offset
     );
 
     // NOLINTEND

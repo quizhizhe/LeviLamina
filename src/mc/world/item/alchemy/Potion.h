@@ -12,18 +12,20 @@ public:
 public:
     // prevent constructor by default
     Potion& operator=(Potion const&);
+    Potion(Potion const&);
     Potion();
 
 public:
     // NOLINTBEGIN
-    // symbol: ??0Potion@@QEAA@AEBV0@@Z
-    MCAPI Potion(class Potion const&);
-
     // symbol:
     // ?appendFormattedPotionText@Potion@@QEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@W4PotionType@1@W4PotionVariant@1@AEBVPlayer@@M@Z
-    MCAPI void
-    appendFormattedPotionText(std::string&, ::Potion::PotionType, ::Potion::PotionVariant, class Player const&, float)
-        const;
+    MCAPI void appendFormattedPotionText(
+        std::string&         hovertext,
+        ::Potion::PotionType potionType,
+        ::Potion::PotionVariant,
+        class Player const& player,
+        float               timeMod
+    ) const;
 
     // symbol:
     // ?effectDurationToString@Potion@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@W4PotionType@1@MAEBVMobEffectInstance@@@Z
@@ -76,10 +78,10 @@ public:
     MCAPI static std::string getBasePotion(::Potion::PotionType);
 
     // symbol: ?getPotion@Potion@@SA?AV?$shared_ptr@$$CBVPotion@@@std@@V?$basic_string_view@DU?$char_traits@D@std@@@3@@Z
-    MCAPI static std::shared_ptr<class Potion const> getPotion(std::string_view);
+    MCAPI static std::shared_ptr<class Potion const> getPotion(std::string_view potionNameId);
 
     // symbol: ?getPotion@Potion@@SA?AV?$shared_ptr@$$CBVPotion@@@std@@H@Z
-    MCAPI static std::shared_ptr<class Potion const> getPotion(int);
+    MCAPI static std::shared_ptr<class Potion const> getPotion(int potionId);
 
     // symbol: ?getPotionCount@Potion@@SAHXZ
     MCAPI static int getPotionCount();
@@ -225,15 +227,20 @@ public:
     // NOLINTBEGIN
     // symbol:
     // ??0Potion@@AEAA@V?$basic_string_view@DU?$char_traits@D@std@@@std@@0AEBVMobEffectInstance@@W4PotionVariant@0@@Z
-    MCAPI Potion(std::string_view, std::string_view, class MobEffectInstance const&, ::Potion::PotionVariant);
+    MCAPI Potion(
+        std::string_view               nameId,
+        std::string_view               descriptionID,
+        class MobEffectInstance const& mobEffect,
+        ::Potion::PotionVariant        var
+    );
 
     // symbol:
     // ??0Potion@@AEAA@V?$basic_string_view@DU?$char_traits@D@std@@@std@@V?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@V?$vector@VMobEffectInstance@@V?$allocator@VMobEffectInstance@@@std@@@2@W4PotionVariant@0@@Z
     MCAPI Potion(
-        std::string_view,
-        std::vector<std::string>,
-        std::vector<class MobEffectInstance>,
-        ::Potion::PotionVariant
+        std::string_view                     nameId,
+        std::vector<std::string>             descriptionIDs,
+        std::vector<class MobEffectInstance> mobEffects,
+        ::Potion::PotionVariant              var
     );
 
     // symbol:
@@ -245,7 +252,7 @@ public:
     MCAPI std::string _getDescriptionIdSingleString(::Potion::PotionType) const;
 
     // symbol: ?addPotion@Potion@@CAXV?$shared_ptr@$$CBVPotion@@@std@@@Z
-    MCAPI static void addPotion(std::shared_ptr<class Potion const>);
+    MCAPI static void addPotion(std::shared_ptr<class Potion const> potion);
 
     // NOLINTEND
 
@@ -266,11 +273,11 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mLastId() { return mLastId; }
+    static auto& $mLastId() { return mLastId; }
 
-    auto& $mPotionsById() { return mPotionsById; }
+    static auto& $mPotionsById() { return mPotionsById; }
 
-    auto& $mPotionsByName() { return mPotionsByName; }
+    static auto& $mPotionsByName() { return mPotionsByName; }
 
     // NOLINTEND
 };

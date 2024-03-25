@@ -16,11 +16,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SmokerContainerManagerModel@@UEAA@XZ
+    virtual ~SmokerContainerManagerModel() = default;
 
     // symbol: ??0SmokerContainerManagerModel@@QEAA@W4ContainerID@@AEAVPlayer@@AEBVBlockPos@@@Z
-    MCAPI SmokerContainerManagerModel(::ContainerID, class Player&, class BlockPos const&);
+    MCAPI SmokerContainerManagerModel(::ContainerID containerId, class Player& player, class BlockPos const& blockPos);
 
     // NOLINTEND
 };

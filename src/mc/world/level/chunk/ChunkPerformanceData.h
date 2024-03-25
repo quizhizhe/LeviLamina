@@ -42,11 +42,14 @@ public:
 
 public:
     // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1ChunkPerformanceData@@UEAA@XZ
+    virtual ~ChunkPerformanceData() = default;
+
     // symbol: ??0ChunkPerformanceData@@QEAA@XZ
     MCAPI ChunkPerformanceData();
 
     // symbol: ?recordLoadedChunk@ChunkPerformanceData@@QEAAXAEBVLevelChunk@@@Z
-    MCAPI void recordLoadedChunk(class LevelChunk const&);
+    MCAPI void recordLoadedChunk(class LevelChunk const& chunk);
 
     // symbol: ?resetAll@ChunkPerformanceData@@QEAAXXZ
     MCAPI void resetAll();

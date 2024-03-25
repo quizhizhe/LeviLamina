@@ -21,8 +21,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1CommandRequestPacket@@UEAA@XZ
+    virtual ~CommandRequestPacket();
 
     // vIndex: 1, symbol: ?getId@CommandRequestPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -32,25 +32,24 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@CommandRequestPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@CommandRequestPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1CommandRequestPacket@@UEAA@XZ
-    MCVAPI ~CommandRequestPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0CommandRequestPacket@@QEAA@XZ
     MCAPI CommandRequestPacket();
 
     // symbol: ??0CommandRequestPacket@@QEAA@AEAVCommandContext@@_N@Z
-    MCAPI CommandRequestPacket(class CommandContext&, bool);
+    MCAPI CommandRequestPacket(class CommandContext& context, bool internalSource);
 
     // symbol:
     // ?createCommandContext@CommandRequestPacket@@QEBA?AV?$unique_ptr@VCommandContext@@U?$default_delete@VCommandContext@@@std@@@std@@AEBVNetworkIdentifier@@AEBV?$NonOwnerPointer@VILevel@@@Bedrock@@@Z
-    MCAPI std::unique_ptr<class CommandContext>
-    createCommandContext(class NetworkIdentifier const&, class Bedrock::NonOwnerPointer<class ILevel> const&) const;
+    MCAPI std::unique_ptr<class CommandContext> createCommandContext(
+        class NetworkIdentifier const&                      source,
+        class Bedrock::NonOwnerPointer<class ILevel> const& level
+    ) const;
 
     // symbol: ?getInternalSource@CommandRequestPacket@@QEBA_NXZ
     MCAPI bool getInternalSource() const;

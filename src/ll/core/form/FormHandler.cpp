@@ -1,85 +1,133 @@
 #include "FormHandler.h"
+#include "ll/api/base/StdInt.h"
 #include "ll/api/form/CustomForm.h"
 #include "ll/api/form/SimpleForm.h"
 #include "ll/api/memory/Hook.h"
+#include "ll/api/service/Bedrock.h"
 #include "ll/core/LeviLamina.h"
 #include "mc/deps/json/Value.h"
 #include "mc/network/PacketHandlerDispatcherInstance.h"
 #include "mc/network/ServerNetworkHandler.h"
 #include "mc/network/packet/ModalFormResponsePacket.h"
+#include "mc/scripting/ServerScriptManager.h"
+#include "mc/server/ServerInstance.h"
+
+#include "ll/api/form/FormIdManager.h"
+#include "mc/deps/json/Value.h"
+#include "mc/deps/json/ValueConstIterator.h"
+#include "nlohmann/json_fwd.hpp"
+#include <exception>
+#include <iostream>
+#include <nlohmann/json.hpp>
+#include <optional>
+#include <utility>
 
 namespace ll::form::handler {
 
-void SimpleFormHandler::handle(Player& player, std::string const& data) const {
-    int selected = data != "null" ? stoi(data) : -1;
+
+nlohmann::ordered_json jsonCppValueToNlohmannOrderedJson(const Json::Value& value) {
+    if (value.isObject()) {
+        nlohmann::ordered_json result = nlohmann::ordered_json::object();
+        for (const auto& key : value.getMemberNames()) {
+            result[key] = jsonCppValueToNlohmannOrderedJson(value[key]);
+        }
+        return result;
+    } else if (value.isArray()) {
+        nlohmann::ordered_json result = nlohmann::ordered_json::array();
+        for (const auto& item : value) {
+            result.push_back(jsonCppValueToNlohmannOrderedJson(item));
+        }
+        return result;
+    } else if (value.isString()) {
+        return value.asString("");
+    } else if (value.isBool()) {
+        return value.asBool(false);
+    } else if (value.isIntegral()) {
+        if (value.isNumeric() && !value.isDouble()) {
+            auto intVal  = value.asLargestInt();
+            auto uintVal = value.asLargestUInt();
+            if (intVal >= 0 && static_cast<uint64>(intVal) == uintVal) {
+                return uintVal;
+            }
+            return intVal;
+        }
+    } else if (value.isDouble()) {
+        return value.asDouble(0);
+    } else if (value.isNull()) {
+        return nullptr;
+    }
+    return nullptr;
+}
+
+void SimpleFormHandler::handle(Player& player, std::optional<Json::Value> data) const {
+    int selected = data.has_value() ? data.value().asInt(0) : -1;
     if (selected >= 0 && selected < (int)mButtonCallbacks.size()) {
-        if (mButtonCallbacks[selected]) { mButtonCallbacks[selected](player); }
+        if (mButtonCallbacks[selected]) {
+            mButtonCallbacks[selected](player);
+        }
     }
-    if (mCallback) { mCallback(player, selected); }
-}
-
-void CustomFormHandler::handle(Player& player, std::string const& data) const {
-    if (data == "null") {
-        if (mCallback) { mCallback(player, {}); }
-        return;
-    }
-
-    try {
-        nlohmann::ordered_json dataJson = nlohmann::ordered_json::parse(data);
-
-        if (!dataJson.is_array()) {
-            ll::logger.error("Failed to parse CustomForm result: not an array");
-            return;
-        }
-        if (dataJson.size() != mFormElements.size()) {
-            ll::logger.error("Failed to parse CustomForm result: size mismatch");
-            return;
-        }
-
-        CustomFormResult result;
-
-        for (size_t i = 0; i < mFormElements.size(); ++i) {
-            auto& element = mFormElements[i];
-            auto& value   = dataJson[i];
-            if (element->getType() == CustomFormElement::Type::Label) { continue; }
-
-            result.emplace(element->mName, element->parseResult(value));
-        }
-
-        if (mCallback) { mCallback(player, result); }
-    } catch (...) {
-        ll::logger.error("Failed to parse CustomForm result");
-        return;
+    if (mCallback) {
+        mCallback(player, selected);
     }
 }
 
-void ModalFormHandler::handle(Player& player, std::string const& data) const {
-    bool selected = data == "true";
-    if (mCallback) { mCallback(player, selected); }
+void CustomFormHandler::handle(Player& player, std::optional<Json::Value> data) const {
+    if (!data.has_value()) {
+        if (mCallback) {
+            mCallback(player, {});
+        }
+        return;
+    }
+
+    nlohmann::ordered_json dataJson = jsonCppValueToNlohmannOrderedJson(data.value());
+
+    if (!dataJson.is_array()) {
+        ll::logger.error("Failed to parse CustomForm result: not an array");
+        return;
+    }
+    if (dataJson.size() != mFormElements.size()) {
+        ll::logger.error("Failed to parse CustomForm result: size mismatch");
+        return;
+    }
+
+    CustomFormResult result;
+
+    for (size_t i = 0; i < mFormElements.size(); ++i) {
+        auto& element = mFormElements[i];
+        auto& value   = dataJson[i];
+        if (element->getType() == CustomFormElement::Type::Label) {
+            continue;
+        }
+        result.emplace(element->mName, element->parseResult(value));
+    }
+
+    if (mCallback) {
+        mCallback(player, result);
+    }
+}
+
+void ModalFormHandler::handle(Player& player, std::optional<Json::Value> data) const {
+    bool selected = data == true;
+    if (mCallback) {
+        mCallback(player, (ll::form::ModalForm::SelectedButton)selected);
+    }
 }
 
 std::unordered_map<uint, std::unique_ptr<FormHandler>> formHandlers = {};
-uint                                                   currentId    = 0;
 
-uint addFormHandler(std::unique_ptr<FormHandler>&& data) {
-    formHandlers.emplace(++currentId, std::move(data));
-    return currentId;
-}
-
-void handleFormPacket(Player& player, uint formId, std::string const& data) {
+bool handleFormPacket(Player& player, uint formId, std::optional<Json::Value> data) {
     auto it = formHandlers.find(formId);
     if (it == formHandlers.end()) {
-        ll::logger.error("Failed to find form handler for form id {}", formId);
-        return;
+        return false;
     }
-    it->second->handle(player, data);
+    it->second->handle(player, std::move(data));
     formHandlers.erase(it);
+    return true;
 }
-} // namespace ll::form::handler
 
-LL_AUTO_TYPED_INSTANCE_HOOK(
+LL_TYPE_INSTANCE_HOOK(
     FormResponseHandler,
-    HookPriority::Lowest,
+    HookPriority::Highest,
     PacketHandlerDispatcherInstance<ModalFormResponsePacket>,
     &PacketHandlerDispatcherInstance<ModalFormResponsePacket>::handle,
     void,
@@ -87,20 +135,25 @@ LL_AUTO_TYPED_INSTANCE_HOOK(
     NetEventCallback&        callback,
     std::shared_ptr<Packet>& packet
 ) {
-    auto player = ((ServerNetworkHandler&)callback).getServerPlayer(source, SubClientId::PrimaryClient);
-    if (!player.has_value()) {
-        ll::logger.error("Failed to get player by NetworkIdentifier for FormResponseHandler");
-        return;
+    if (auto player = ((ServerNetworkHandler&)callback).getServerPlayer(source, SubClientId::PrimaryClient); player) {
+        auto& modalPacket = (ModalFormResponsePacket&)*packet;
+
+        if (ll::form::handler::handleFormPacket(player, modalPacket.mFormId, modalPacket.mJSONResponse)) {
+            return;
+        }
     }
-
-    auto& modalPacket = (ModalFormResponsePacket&)*packet;
-
-    auto data = std::string{"null"};
-
-    if (!modalPacket.mFormCancelReason && modalPacket.mJSONResponse) {
-        data = modalPacket.mJSONResponse.value().toStyledString();
-        if (data.back() == '\n') { data.pop_back(); }
-    }
-
-    ll::form::handler::handleFormPacket(player, modalPacket.mFormId, data);
+    origin(source, callback, packet);
 }
+
+
+uint addFormHandler(std::unique_ptr<FormHandler>&& data) {
+    static ll::memory::HookRegistrar<FormResponseHandler> hook;
+
+    uint formId = ll::form::FormIdManager::genFormId();
+    formHandlers.emplace(formId, std::move(data));
+
+    return formId;
+}
+
+
+} // namespace ll::form::handler

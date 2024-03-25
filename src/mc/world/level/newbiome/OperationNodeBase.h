@@ -13,11 +13,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1OperationNodeBase@OperationNodeDetails@@UEAA@XZ
+    virtual ~OperationNodeBase() = default;
 
     // vIndex: 1, symbol: ?init@OperationNodeBase@OperationNodeDetails@@UEAAX_J@Z
-    virtual void init(int64);
+    virtual void init(int64 seed);
 
     // NOLINTEND
 };

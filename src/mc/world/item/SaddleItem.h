@@ -5,7 +5,6 @@
 // auto generated inclusion list
 #include "mc/entity/utilities/ActorLocation.h"
 #include "mc/enums/InHandUpdateType.h"
-#include "mc/enums/UseAnimation.h"
 #include "mc/events/LevelSoundEvent.h"
 #include "mc/world/item/Item.h"
 #include "mc/world/item/components/ItemColor.h"
@@ -27,66 +26,22 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SaddleItem@@UEAA@XZ
+    virtual ~SaddleItem() = default;
 
-    // vIndex: 11, symbol: __unk_vfn_11
-    virtual void __unk_vfn_11();
-
-    // vIndex: 14, symbol: __unk_vfn_14
-    virtual void __unk_vfn_14();
-
-    // vIndex: 16, symbol: __unk_vfn_16
-    virtual void __unk_vfn_16();
-
-    // vIndex: 21, symbol: __unk_vfn_21
-    virtual void __unk_vfn_21();
-
-    // vIndex: 51, symbol: __unk_vfn_51
-    virtual void __unk_vfn_51();
-
-    // vIndex: 53, symbol: __unk_vfn_53
-    virtual void __unk_vfn_53();
-
-    // vIndex: 66, symbol: __unk_vfn_66
-    virtual void __unk_vfn_66();
-
-    // vIndex: 70, symbol: __unk_vfn_70
-    virtual void __unk_vfn_70();
-
-    // vIndex: 71, symbol: __unk_vfn_71
-    virtual void __unk_vfn_71();
-
-    // vIndex: 72, symbol: __unk_vfn_72
-    virtual void __unk_vfn_72();
-
-    // vIndex: 75, symbol: __unk_vfn_75
-    virtual void __unk_vfn_75();
-
-    // vIndex: 79, symbol: __unk_vfn_79
-    virtual void __unk_vfn_79();
-
-    // vIndex: 80, symbol: __unk_vfn_80
-    virtual void __unk_vfn_80();
-
-    // vIndex: 85, symbol: ?dispense@SaddleItem@@UEBA_NAEAVBlockSource@@AEAVContainer@@HAEBVVec3@@E@Z
-    virtual bool dispense(class BlockSource&, class Container&, int, class Vec3 const&, uchar) const;
-
-    // vIndex: 115, symbol: __unk_vfn_115
-    virtual void __unk_vfn_115();
-
-    // vIndex: 116, symbol: __unk_vfn_116
-    virtual void __unk_vfn_116();
+    // vIndex: 72, symbol: ?dispense@SaddleItem@@UEBA_NAEAVBlockSource@@AEAVContainer@@HAEBVVec3@@E@Z
+    virtual bool
+    dispense(class BlockSource& region, class Container& container, int slot, class Vec3 const& pos, uchar) const;
 
     // symbol: ??0SaddleItem@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@F@Z
-    MCAPI SaddleItem(std::string const&, short);
+    MCAPI SaddleItem(std::string const& nameId, short id);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_tryEquipSaddleViaComponents@SaddleItem@@CA_NAEAVActor@@AEBVItemStack@@@Z
-    MCAPI static bool _tryEquipSaddleViaComponents(class Actor&, class ItemStack const&);
+    MCAPI static bool _tryEquipSaddleViaComponents(class Actor& actor, class ItemStack const&);
 
     // NOLINTEND
 };

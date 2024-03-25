@@ -17,20 +17,20 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1Symmetric@0Crypto@@UEAA@XZ
+    virtual ~Symmetric();
 
     // vIndex: 1, symbol:
     // ?init@Symmetric@1Crypto@@UEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z
-    virtual void init(std::string const&, std::string const&);
+    virtual void init(std::string const& key, std::string const&);
 
     // vIndex: 2, symbol:
     // ?encrypt@Symmetric@1Crypto@@UEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV34@@Z
-    virtual void encrypt(std::string const&, std::string&);
+    virtual void encrypt(std::string const&, std::string& output);
 
     // vIndex: 3, symbol:
     // ?decrypt@Symmetric@1Crypto@@UEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV34@@Z
-    virtual void decrypt(std::string const&, std::string&);
+    virtual void decrypt(std::string const&, std::string& output);
 
     // vIndex: 4, symbol: ?getKeySize@Symmetric@1Crypto@@UEBA_KXZ
     virtual uint64 getKeySize() const;
@@ -42,13 +42,10 @@ public:
     virtual uint64 getEncryptionBufferSize(uint64) const;
 
     // vIndex: 7, symbol: ?encryptToBuffer@Symmetric@1Crypto@@UEAA_NV?$span@$$CBD$0?0@gsl@@V?$span@D$0?0@4@AEA_K@Z
-    virtual bool encryptToBuffer(gsl::span<char const>, gsl::span<char>, uint64&);
-
-    // symbol: ??1Symmetric@0Crypto@@UEAA@XZ
-    MCVAPI ~Symmetric();
+    virtual bool encryptToBuffer(gsl::span<char const> input, gsl::span<char> output, uint64& bytesWritten);
 
     // symbol: ??0Symmetric@0Crypto@@QEAA@W4System@01@W4OperationMode@01@@Z
-    MCAPI Symmetric(::Crypto::Symmetric::System, ::Crypto::Symmetric::OperationMode);
+    MCAPI Symmetric(::Crypto::Symmetric::System system, ::Crypto::Symmetric::OperationMode mode);
 
     // NOLINTEND
 };

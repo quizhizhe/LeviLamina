@@ -14,11 +14,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ??1BlockRandomTickingComponent@@UEAA@XZ
-    MCVAPI ~BlockRandomTickingComponent();
-
-    // symbol: ??0BlockRandomTickingComponent@@QEAA@$$QEAU0@@Z
-    MCAPI BlockRandomTickingComponent(struct BlockRandomTickingComponent&&);
+    // vIndex: 0, symbol: __gen_??1BlockRandomTickingComponent@@UEAA@XZ
+    virtual ~BlockRandomTickingComponent() = default;
 
     // NOLINTEND
 };

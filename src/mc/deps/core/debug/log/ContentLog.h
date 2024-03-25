@@ -41,8 +41,8 @@ public:
 
     public:
         // NOLINTBEGIN
-        // symbol: ??0ContentLogScope@ContentLog@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-        MCAPI explicit ContentLogScope(std::string);
+        // symbol: ??0ContentLogScope@ContentLog@@QEAA@VContentScopeString@@@Z
+        MCAPI explicit ContentLogScope(class ContentScopeString);
 
         // symbol: ??1ContentLogScope@ContentLog@@QEAA@XZ
         MCAPI ~ContentLogScope();
@@ -65,6 +65,9 @@ public:
 
 public:
     // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1ContentLog@@UEAA@XZ
+    virtual ~ContentLog() = default;
+
     // symbol: ??0ContentLog@@QEAA@XZ
     MCAPI ContentLog();
 
@@ -81,10 +84,10 @@ public:
     MCAPI void updateEnabledStatus();
 
     // symbol: ?getBedrockLogAreaFromContentLogArea@ContentLog@@SA?BW4LogAreaID@@W4LogArea@@@Z
-    MCAPI static ::LogAreaID const getBedrockLogAreaFromContentLogArea(::LogArea);
+    MCAPI static ::LogAreaID const getBedrockLogAreaFromContentLogArea(::LogArea contentLogArea);
 
     // symbol: ?getLogAreaName@ContentLog@@SAPEBDW4LogArea@@@Z
-    MCAPI static char const* getLogAreaName(::LogArea);
+    MCAPI static char const* getLogAreaName(::LogArea area);
 
     // NOLINTEND
 

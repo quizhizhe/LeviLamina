@@ -2,21 +2,40 @@
 
 #include "mc/_HeaderOutputPredefine.h"
 
+// auto generated forward declare list
+// clang-format off
+namespace mce { class UUID; }
+// clang-format on
+
 struct ActorUniqueID {
 public:
     int64 id;
-    ActorUniqueID() { id = -1; }
+    ActorUniqueID() : id(INVALID_ID) {}
 
-    explicit ActorUniqueID(int64 i) { id = i; }
+    explicit ActorUniqueID(int64 id) : id(id) {}
 
     [[nodiscard]] constexpr int64 get() const { return id; }
 
-    constexpr explicit operator int64() const { return id; }
+    [[nodiscard]] constexpr operator int64() const { return id; } // NOLINT
 
 public:
     // NOLINTBEGIN
+    // symbol: ?getHash@ActorUniqueID@@QEBA_KXZ
+    MCAPI uint64 getHash() const;
+
+    // symbol: ?fromUUID@ActorUniqueID@@SA?AU1@AEBVUUID@mce@@@Z
+    MCAPI static struct ActorUniqueID fromUUID(class mce::UUID const&);
+
     // symbol: ?INVALID_ID@ActorUniqueID@@2U1@B
     MCAPI static struct ActorUniqueID const INVALID_ID;
 
     // NOLINTEND
 };
+
+namespace std {
+template <>
+class hash<ActorUniqueID> {
+public:
+    size_t operator()(ActorUniqueID const& id) const { return std::hash<int64>()(id.id); }
+};
+} // namespace std

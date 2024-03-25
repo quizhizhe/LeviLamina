@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1NapGoal@@UEAA@XZ
+    virtual ~NapGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@NapGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -32,17 +32,25 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@NapGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0NapGoal@@QEAA@AEAVMob@@MMMMAEBVActorFilterGroup@@1@Z
-    MCAPI NapGoal(class Mob&, float, float, float, float, class ActorFilterGroup const&, class ActorFilterGroup const&);
+    MCAPI NapGoal(
+        class Mob&                    mob,
+        float                         cooldownTimeMin,
+        float                         cooldownTimeMax,
+        float                         detectMobDistXZ,
+        float                         detectMobDistY,
+        class ActorFilterGroup const& canNapFilters,
+        class ActorFilterGroup const& wakeMobExceptions
+    );
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_canSleep@NapGoal@@AEBA_NAEBUTick@@@Z
-    MCAPI bool _canSleep(struct Tick const&) const;
+    MCAPI bool _canSleep(struct Tick const& currentTick) const;
 
     // symbol: ?_detectsMobs@NapGoal@@AEBA_NXZ
     MCAPI bool _detectsMobs() const;
@@ -62,7 +70,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $MOB_DETECT_TIME() { return MOB_DETECT_TIME; }
+    static auto& $MOB_DETECT_TIME() { return MOB_DETECT_TIME; }
 
     // NOLINTEND
 };

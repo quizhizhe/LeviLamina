@@ -14,14 +14,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1AbsorptionMobEffect@@UEAA@XZ
+    virtual ~AbsorptionMobEffect() = default;
 
     // vIndex: 1, symbol: ?applyEffects@AbsorptionMobEffect@@UEBAXPEAVActor@@HH@Z
-    virtual void applyEffects(class Actor*, int, int) const;
+    virtual void applyEffects(class Actor* target, int durationTicks, int amplification) const;
 
     // vIndex: 2, symbol: ?removeEffects@AbsorptionMobEffect@@UEAAXPEAVActor@@@Z
-    virtual void removeEffects(class Actor*);
+    virtual void removeEffects(class Actor* target);
 
     // NOLINTEND
 };

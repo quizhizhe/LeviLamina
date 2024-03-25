@@ -23,12 +23,15 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ??0PermissionsFile@@QEAA@AEBVPath@Core@@@Z
-    MCAPI explicit PermissionsFile(class Core::Path const&);
+    MCAPI explicit PermissionsFile(class Core::Path const& filePath);
 
     // symbol:
     // ?applyPlayerPermissionsFromDisk@PermissionsFile@@QEAAXAEAVPlayer@@AEBVUserEntityIdentifierComponent@@W4CommandPermissionLevel@@@Z
-    MCAPI void
-    applyPlayerPermissionsFromDisk(class Player&, class UserEntityIdentifierComponent const&, ::CommandPermissionLevel);
+    MCAPI void applyPlayerPermissionsFromDisk(
+        class Player& player,
+        class UserEntityIdentifierComponent const&,
+        ::CommandPermissionLevel opCommandPermissionLevel
+    );
 
     // symbol:
     // ?getPermissions@PermissionsFile@@QEBAAEBV?$unordered_map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@W4PlayerPermissionLevel@@U?$hash@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@U?$equal_to@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@W4PlayerPermissionLevel@@@std@@@2@@std@@XZ
@@ -40,15 +43,16 @@ public:
 
     // symbol:
     // ?isPermissionsSet@PermissionsFile@@QEBA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@W4PlayerPermissionLevel@@@Z
-    MCAPI bool isPermissionsSet(std::string const&, ::PlayerPermissionLevel) const;
+    MCAPI bool isPermissionsSet(std::string const& xuid, ::PlayerPermissionLevel permission) const;
 
     // symbol:
     // ?persistPlayerPermissionsToDisk@PermissionsFile@@QEAAXAEBVUserEntityIdentifierComponent@@W4PlayerPermissionLevel@@@Z
-    MCAPI void persistPlayerPermissionsToDisk(class UserEntityIdentifierComponent const&, ::PlayerPermissionLevel);
+    MCAPI void
+    persistPlayerPermissionsToDisk(class UserEntityIdentifierComponent const&, ::PlayerPermissionLevel permission);
 
     // symbol:
     // ?persistPlayerPermissionsToDisk@PermissionsFile@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@W4PlayerPermissionLevel@@@Z
-    MCAPI void persistPlayerPermissionsToDisk(std::string const&, ::PlayerPermissionLevel);
+    MCAPI void persistPlayerPermissionsToDisk(std::string const& xuid, ::PlayerPermissionLevel permission);
 
     // symbol: ?reload@PermissionsFile@@QEAA?AW4FileReadResult@@XZ
     MCAPI ::FileReadResult reload();
@@ -64,7 +68,7 @@ public:
     MCAPI std::tuple<::FileReadResult, class Json::Value> readPermissionFile();
 
     // symbol: ?setDefaultPlayerPermission@PermissionsFile@@AEAAXAEAVPlayer@@W4CommandPermissionLevel@@@Z
-    MCAPI void setDefaultPlayerPermission(class Player&, ::CommandPermissionLevel);
+    MCAPI void setDefaultPlayerPermission(class Player& player, ::CommandPermissionLevel opCommandPermissionLevel);
 
     // NOLINTEND
 };

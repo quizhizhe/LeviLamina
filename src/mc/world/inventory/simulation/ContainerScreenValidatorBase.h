@@ -13,8 +13,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1ContainerScreenValidatorBase@@UEAA@XZ
+    virtual ~ContainerScreenValidatorBase();
 
     // vIndex: 1, symbol:
     // ?postCommitItemRemoved@ContainerScreenValidatorBase@@UEAA?AV?$shared_ptr@VContainerValidationCommitObject@@@std@@W4ContainerEnumName@@HAEBVItemStack@@@Z
@@ -29,14 +29,8 @@ public:
     virtual struct ContainerValidationCraftResult
     getCraftResult(class ContainerScreenContext const&, class ContainerScreenValidation&, std::unique_ptr<struct ContainerValidationCraftInputs>);
 
-    // symbol: ??1ContainerScreenValidatorBase@@UEAA@XZ
-    MCVAPI ~ContainerScreenValidatorBase();
-
     // symbol: ??0ContainerScreenValidatorBase@@QEAA@XZ
     MCAPI ContainerScreenValidatorBase();
-
-    // symbol: ?isValidContainerForScreen@ContainerScreenValidatorBase@@QEBA_NW4ContainerEnumName@@@Z
-    MCAPI bool isValidContainerForScreen(::ContainerEnumName) const;
 
     // NOLINTEND
 };

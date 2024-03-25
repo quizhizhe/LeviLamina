@@ -2,7 +2,10 @@
 
 #include "mc/_HeaderOutputPredefine.h"
 
-class ServerMetricsImpl {
+// auto generated inclusion list
+#include "mc/common/ServerMetrics.h"
+
+class ServerMetricsImpl : public ::ServerMetrics {
 public:
     // prevent constructor by default
     ServerMetricsImpl& operator=(ServerMetricsImpl const&);
@@ -11,28 +14,28 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ServerMetricsImpl@@UEAA@XZ
+    virtual ~ServerMetricsImpl() = default;
 
     // vIndex: 1, symbol: ?sendPeriodicMetrics@ServerMetricsImpl@@UEAAXAEAVServerInstance@@@Z
-    virtual void sendPeriodicMetrics(class ServerInstance&);
+    virtual void sendPeriodicMetrics(class ServerInstance& serverInstance);
 
     // vIndex: 2, symbol:
     // ?sendServerTickTime@ServerMetricsImpl@@UEAAXAEBV?$duration@_JU?$ratio@$00$0DLJKMKAA@@std@@@chrono@std@@@Z
-    virtual void sendServerTickTime(std::chrono::nanoseconds const&);
+    virtual void sendServerTickTime(std::chrono::nanoseconds const& timepoint);
 
     // vIndex: 3, symbol: ?sendChunkLoadTelemetryData@ServerMetricsImpl@@UEAAXXZ
     virtual void sendChunkLoadTelemetryData();
 
     // symbol: ??0ServerMetricsImpl@@QEAA@PEAVServerCommunicationInterface@@@Z
-    MCAPI explicit ServerMetricsImpl(class ServerCommunicationInterface*);
+    MCAPI explicit ServerMetricsImpl(class ServerCommunicationInterface* serverCommunicationInterface);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?sendPeriodicMetricsInternal@ServerMetricsImpl@@AEAAXAEAVServerInstance@@@Z
-    MCAPI void sendPeriodicMetricsInternal(class ServerInstance&);
+    MCAPI void sendPeriodicMetricsInternal(class ServerInstance& serverInstance);
 
     // NOLINTEND
 };

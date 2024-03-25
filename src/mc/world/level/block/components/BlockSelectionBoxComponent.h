@@ -2,10 +2,7 @@
 
 #include "mc/_HeaderOutputPredefine.h"
 
-// auto generated inclusion list
-#include "mc/world/level/block/components/BlockAABBComponentData.h"
-
-struct BlockSelectionBoxComponent : public ::BlockAABBComponentData {
+struct BlockSelectionBoxComponent {
 public:
     // prevent constructor by default
     BlockSelectionBoxComponent& operator=(BlockSelectionBoxComponent const&);
@@ -14,8 +11,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ?usesNewComponentStorage@BlockSelectionBoxComponent@@SA_NXZ
-    MCAPI static bool usesNewComponentStorage();
+    // vIndex: 0, symbol: __gen_??1BlockSelectionBoxComponent@@UEAA@XZ
+    virtual ~BlockSelectionBoxComponent() = default;
 
     // NOLINTEND
 };

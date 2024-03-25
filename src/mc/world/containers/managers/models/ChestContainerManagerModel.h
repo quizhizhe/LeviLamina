@@ -17,20 +17,25 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ChestContainerManagerModel@@UEAA@XZ
+    virtual ~ChestContainerManagerModel() = default;
 
     // vIndex: 16, symbol: ?isValid@ChestContainerManagerModel@@UEAA_NM@Z
-    virtual bool isValid(float);
+    virtual bool isValid(float pickRange);
 
     // vIndex: 17, symbol: ?_postInit@ChestContainerManagerModel@@MEAA?AVContainerScreenContext@@XZ
     virtual class ContainerScreenContext _postInit();
 
     // symbol: ??0ChestContainerManagerModel@@QEAA@W4ContainerID@@AEAVPlayer@@UActorUniqueID@@@Z
-    MCAPI ChestContainerManagerModel(::ContainerID, class Player&, struct ActorUniqueID);
+    MCAPI ChestContainerManagerModel(::ContainerID containerId, class Player& player, struct ActorUniqueID uniqueID);
 
     // symbol: ??0ChestContainerManagerModel@@QEAA@W4ContainerID@@AEAVPlayer@@AEBVBlockPos@@W4BlockActorType@@@Z
-    MCAPI ChestContainerManagerModel(::ContainerID, class Player&, class BlockPos const&, ::BlockActorType);
+    MCAPI ChestContainerManagerModel(
+        ::ContainerID         containerId,
+        class Player&         player,
+        class BlockPos const& blockPos,
+        ::BlockActorType      blockActorType
+    );
 
     // NOLINTEND
 };

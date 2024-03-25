@@ -27,37 +27,17 @@ public:
 
     // symbol:
     // ??0LevelSummary@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVLevelData@@AEBVPath@Core@@2_N@Z
-    MCAPI
-    LevelSummary(std::string const&, class LevelData const&, class Core::Path const&, class Core::Path const&, bool);
+    MCAPI LevelSummary(
+        std::string const&      levelId,
+        class LevelData const&  levelData,
+        class Core::Path const& levelDirectory,
+        class Core::Path const& levelInfoDirectory,
+        bool
+    );
 
     // symbol:
-    // ??0LevelSummary@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0_JW4GameType@@W4Difficulty@@VLevelSeed64@@H_K_N6W4GamePublishSetting@Social@@6W4EducationEditionOffer@@AEBVGameVersion@@9W4StorageVersion@@AEBVPath@Core@@AEBVContentIdentity@@0_NAEBUEduSharedUriResource@@AEBVExperiments@@AEBVBaseGameVersion@@W4WorldType@Editor@@@Z
-    MCAPI LevelSummary(
-        std::string const&,
-        std::string const&,
-        int64,
-        ::GameType,
-        ::Difficulty,
-        class LevelSeed64,
-        int,
-        uint64,
-        bool,
-        bool,
-        ::Social::GamePublishSetting,
-        bool,
-        ::EducationEditionOffer,
-        class GameVersion const&,
-        class GameVersion const&,
-        ::StorageVersion,
-        class Core::Path const&,
-        class ContentIdentity const&,
-        std::string const&,
-        bool,
-        struct EduSharedUriResource const&,
-        class Experiments const&,
-        class BaseGameVersion const&,
-        ::Editor::WorldType
-    );
+    // ??0LevelSummary@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0_JW4GameType@@W4Difficulty@@VLevelSeed64@@H_K_N6W4GamePublishSetting@Social@@6W4EducationEditionOffer@@AEBVGameVersion@@9W4StorageVersion@@AEBVPath@Core@@AEBVContentIdentity@@0_NAEBUEduSharedUriResource@@AEBVExperiments@@AEBVBaseGameVersion@@W4WorldType@Editor@@V?$optional@VCloudSaveLevelInfo@@@2@@Z
+    MCAPI LevelSummary(std::string const&, std::string const&, int64, ::GameType, ::Difficulty, class LevelSeed64, int, uint64, bool, bool, ::Social::GamePublishSetting, bool, ::EducationEditionOffer, class GameVersion const&, class GameVersion const&, ::StorageVersion, class Core::Path const&, class ContentIdentity const&, std::string const&, bool, struct EduSharedUriResource const&, class Experiments const&, class BaseGameVersion const&, ::Editor::WorldType, std::optional<class CloudSaveLevelInfo>);
 
     // symbol: ??4LevelSummary@@QEAAAEAU0@AEBU0@@Z
     MCAPI struct LevelSummary& operator=(struct LevelSummary const&);
@@ -96,7 +76,7 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol: ?_initializeWorldIconPath@LevelSummary@@AEAAXAEBVPath@Core@@@Z
-    MCAPI void _initializeWorldIconPath(class Core::Path const&);
+    MCAPI void _initializeWorldIconPath(class Core::Path const& directory);
 
     // NOLINTEND
 };

@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SlimeRandomDirectionGoal@@UEAA@XZ
+    virtual ~SlimeRandomDirectionGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@SlimeRandomDirectionGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -26,10 +26,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@SlimeRandomDirectionGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0SlimeRandomDirectionGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit SlimeRandomDirectionGoal(class Mob&);
+    MCAPI explicit SlimeRandomDirectionGoal(class Mob& mob);
 
     // NOLINTEND
 };

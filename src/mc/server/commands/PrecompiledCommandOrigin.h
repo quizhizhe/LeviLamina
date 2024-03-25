@@ -24,8 +24,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1PrecompiledCommandOrigin@@UEAA@XZ
+    virtual ~PrecompiledCommandOrigin() = default;
 
     // vIndex: 1, symbol:
     // ?getRequestId@PrecompiledCommandOrigin@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
@@ -67,7 +67,7 @@ public:
     virtual bool hasTellPerms() const;
 
     // vIndex: 15, symbol: ?canUseAbility@PrecompiledCommandOrigin@@UEBA_NW4AbilitiesIndex@@@Z
-    virtual bool canUseAbility(::AbilitiesIndex) const;
+    virtual bool canUseAbility(::AbilitiesIndex abilityIndex) const;
 
     // vIndex: 16, symbol: ?isWorldBuilder@PrecompiledCommandOrigin@@UEBA_NXZ
     virtual bool isWorldBuilder() const;

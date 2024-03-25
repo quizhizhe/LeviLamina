@@ -19,8 +19,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1PlayStatusPacket@@UEAA@XZ
+    virtual ~PlayStatusPacket();
 
     // vIndex: 1, symbol: ?getId@PlayStatusPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -30,20 +30,17 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@PlayStatusPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@PlayStatusPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1PlayStatusPacket@@UEAA@XZ
-    MCVAPI ~PlayStatusPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0PlayStatusPacket@@QEAA@XZ
     MCAPI PlayStatusPacket();
 
     // symbol: ??0PlayStatusPacket@@QEAA@W4PlayStatus@@@Z
-    MCAPI explicit PlayStatusPacket(::PlayStatus);
+    MCAPI explicit PlayStatusPacket(::PlayStatus status);
 
     // NOLINTEND
 };

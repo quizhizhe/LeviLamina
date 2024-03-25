@@ -33,20 +33,20 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1MaterialHelper@CappedSurfaceBuilder@VanillaSurfaceBuilders@@UEAA@XZ
+        virtual ~MaterialHelper() = default;
 
         // vIndex: 1, symbol:
         // ?isFoundationBlock@MaterialHelper@CappedSurfaceBuilder@VanillaSurfaceBuilders@@UEBA_NAEBVBlock@@@Z
-        virtual bool isFoundationBlock(class Block const&) const;
+        virtual bool isFoundationBlock(class Block const& block) const;
 
         // vIndex: 2, symbol:
         // ?isWaterBlock@MaterialHelper@CappedSurfaceBuilder@VanillaSurfaceBuilders@@UEBA_NAEBVBlock@@@Z
-        virtual bool isWaterBlock(class Block const&) const;
+        virtual bool isWaterBlock(class Block const& block) const;
 
         // vIndex: 3, symbol:
         // ?isSolidBlock@MaterialHelper@CappedSurfaceBuilder@VanillaSurfaceBuilders@@UEBA_NAEBVBlock@@@Z
-        virtual bool isSolidBlock(class Block const&) const;
+        virtual bool isSolidBlock(class Block const& block) const;
 
         // NOLINTEND
     };
@@ -58,15 +58,15 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1CappedSurfaceBuilder@VanillaSurfaceBuilders@@UEAA@XZ
+    virtual ~CappedSurfaceBuilder() = default;
 
     // vIndex: 1, symbol: ?init@CappedSurfaceBuilder@VanillaSurfaceBuilders@@UEAAXAEAVEntityContext@@I@Z
-    virtual void init(class EntityContext&, uint);
+    virtual void init(class EntityContext& entity, uint levelSeed);
 
     // vIndex: 2, symbol:
     // ?buildSurfaceAt@CappedSurfaceBuilder@VanillaSurfaceBuilders@@UEBAXAEBUBuildParameters@ISurfaceBuilder@@@Z
-    virtual void buildSurfaceAt(struct ISurfaceBuilder::BuildParameters const&) const;
+    virtual void buildSurfaceAt(struct ISurfaceBuilder::BuildParameters const& parameters) const;
 
     // symbol: ??0CappedSurfaceBuilder@VanillaSurfaceBuilders@@QEAA@XZ
     MCAPI CappedSurfaceBuilder();

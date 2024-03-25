@@ -1,12 +1,20 @@
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
+#include "mc/deps/core/string/HashedString.h"
+#include "mc/util/molang/MolangScriptArg.h"
+#include "mc/util/molang/MolangVariableSettings.h"
 
 // auto generated inclusion list
 #include "mc/util/molang/MolangVariableIndex.h"
 
 class MolangVariable {
 public:
+    HashedString           mName;
+    MolangScriptArg        mValue;
+    MolangScriptArg        mPublicValue;
+    MolangVariableSettings mSettings;
+
     // prevent constructor by default
     MolangVariable& operator=(MolangVariable const&);
     MolangVariable(MolangVariable const&);
@@ -15,25 +23,22 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ??0MolangVariable@@QEAA@W4MolangVariableIndex@@VHashedString@@UMolangScriptArg@@@Z
-    MCAPI MolangVariable(::MolangVariableIndex, class HashedString, struct MolangScriptArg);
+    MCAPI MolangVariable(::MolangVariableIndex index, class HashedString name, struct MolangScriptArg value);
 
     // symbol: ??1MolangVariable@@QEAA@XZ
     MCAPI ~MolangVariable();
 
     // symbol: ?getVariableIndex@MolangVariable@@SA?AW4MolangVariableIndex@@AEBVHashedString@@@Z
-    MCAPI static ::MolangVariableIndex getVariableIndex(class HashedString const&);
+    MCAPI static ::MolangVariableIndex getVariableIndex(class HashedString const& name);
 
     // symbol: ?getVariableIndex@MolangVariable@@SA?AW4MolangVariableIndex@@_K@Z
     MCAPI static ::MolangVariableIndex getVariableIndex(uint64);
 
     // symbol: ?getVariableIndex@MolangVariable@@SA?AW4MolangVariableIndex@@_KPEBD_N@Z
-    MCAPI static ::MolangVariableIndex getVariableIndex(uint64, char const*, bool);
+    MCAPI static ::MolangVariableIndex getVariableIndex(uint64, char const* name, bool);
 
     // symbol: ?getVariableName@MolangVariable@@SAAEBVHashedString@@W4MolangVariableIndex@@@Z
-    MCAPI static class HashedString const& getVariableName(::MolangVariableIndex);
-
-    // symbol: ?initVariableMaps@MolangVariable@@SAXXZ
-    MCAPI static void initVariableMaps();
+    MCAPI static class HashedString const& getVariableName(::MolangVariableIndex index);
 
     // symbol: ?processWaterMark@MolangVariable@@SAXXZ
     MCAPI static void processWaterMark();
@@ -73,15 +78,15 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mHasSetWatermark() { return mHasSetWatermark; }
+    static auto& $mHasSetWatermark() { return mHasSetWatermark; }
 
-    auto& $mIndexToVariableNameMap() { return mIndexToVariableNameMap; }
+    static auto& $mIndexToVariableNameMap() { return mIndexToVariableNameMap; }
 
-    auto& $mIndexToVariableNameMap_LowWaterMark() { return mIndexToVariableNameMap_LowWaterMark; }
+    static auto& $mIndexToVariableNameMap_LowWaterMark() { return mIndexToVariableNameMap_LowWaterMark; }
 
-    auto& $mVariableNameToIndexMap() { return mVariableNameToIndexMap; }
+    static auto& $mVariableNameToIndexMap() { return mVariableNameToIndexMap; }
 
-    auto& $mVariableNameToIndexMap_LowWaterMark() { return mVariableNameToIndexMap_LowWaterMark; }
+    static auto& $mVariableNameToIndexMap_LowWaterMark() { return mVariableNameToIndexMap_LowWaterMark; }
 
     // NOLINTEND
 };

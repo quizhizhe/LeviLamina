@@ -34,7 +34,7 @@ public:
     public:
         // NOLINTBEGIN
         // symbol: ??0BlockPositionData@StructureBlockPalette@@QEAA@AEBU01@@Z
-        MCAPI BlockPositionData(struct StructureBlockPalette::BlockPositionData const&);
+        MCAPI BlockPositionData(struct StructureBlockPalette::BlockPositionData const& rhs);
 
         // symbol: ??1BlockPositionData@StructureBlockPalette@@QEAA@XZ
         MCAPI ~BlockPositionData();
@@ -43,8 +43,8 @@ public:
     };
 
 public:
-    std::vector<std::unique_ptr<CompoundTag>>                           mStructurePaletteIdToSerializationId;
-    std::unordered_map<ulong, StructureBlockPalette::BlockPositionData> mBlockPositionData;
+    std::vector<std::unique_ptr<CompoundTag>>                            mStructurePaletteIdToSerializationId;
+    std::unordered_map<uint64, StructureBlockPalette::BlockPositionData> mBlockPositionData;
 
     // prevent constructor by default
     StructureBlockPalette& operator=(StructureBlockPalette const&);
@@ -60,12 +60,13 @@ public:
 
     // symbol:
     // ?addMapping@StructureBlockPalette@@QEAA_KV?$unique_ptr@VCompoundTag@@U?$default_delete@VCompoundTag@@@std@@@std@@@Z
-    MCAPI uint64 addMapping(std::unique_ptr<class CompoundTag>);
+    MCAPI uint64 addMapping(std::unique_ptr<class CompoundTag> serializationId);
 
     // symbol:
     // ?getBlock@StructureBlockPalette@@QEBAAEBVBlock@@AEBVBlockPalette@@_KV?$NonOwnerPointer@VIUnknownBlockTypeRegistry@@@Bedrock@@@Z
     MCAPI class Block const&
-    getBlock(class BlockPalette const&, uint64, class Bedrock::NonOwnerPointer<class IUnknownBlockTypeRegistry>) const;
+    getBlock(class BlockPalette const& blockPalette, uint64, class Bedrock::NonOwnerPointer<class IUnknownBlockTypeRegistry>)
+        const;
 
     // symbol: ?getBlockPositionData@StructureBlockPalette@@QEBAPEBUBlockPositionData@1@_K@Z
     MCAPI struct StructureBlockPalette::BlockPositionData const* getBlockPositionData(uint64) const;
@@ -83,14 +84,14 @@ public:
     // NOLINTBEGIN
     // symbol:
     // ?_parseBlockPositionData@StructureBlockPalette@@IEAA?AW4StructureBlockPaletteLoadResult@@AEBVCompoundTag@@H@Z
-    MCAPI ::StructureBlockPaletteLoadResult _parseBlockPositionData(class CompoundTag const&, int);
+    MCAPI ::StructureBlockPaletteLoadResult _parseBlockPositionData(class CompoundTag const& tag, int index);
 
     // symbol:
     // ?_parseBlockPositionDataList@StructureBlockPalette@@IEAA?AW4StructureBlockPaletteLoadResult@@AEBVCompoundTag@@@Z
-    MCAPI ::StructureBlockPaletteLoadResult _parseBlockPositionDataList(class CompoundTag const&);
+    MCAPI ::StructureBlockPaletteLoadResult _parseBlockPositionDataList(class CompoundTag const& tag);
 
     // symbol: ?_saveBlockPositionDataList@StructureBlockPalette@@IEBAXAEAVCompoundTag@@@Z
-    MCAPI void _saveBlockPositionDataList(class CompoundTag&) const;
+    MCAPI void _saveBlockPositionDataList(class CompoundTag& tag) const;
 
     // NOLINTEND
 
@@ -98,7 +99,7 @@ public:
     // NOLINTBEGIN
     // symbol:
     // ?_contentErrorMissingField@StructureBlockPalette@@AEBAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI void _contentErrorMissingField(std::string const&) const;
+    MCAPI void _contentErrorMissingField(std::string const& tagName) const;
 
     // NOLINTEND
 };

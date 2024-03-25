@@ -15,18 +15,18 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1OceanMonumentWingRoom@@UEAA@XZ
+    virtual ~OceanMonumentWingRoom() = default;
 
     // vIndex: 2, symbol: ?getType@OceanMonumentWingRoom@@UEBA?AW4StructurePieceType@@XZ
     virtual ::StructurePieceType getType() const;
 
     // vIndex: 4, symbol: ?postProcess@OceanMonumentWingRoom@@UEAA_NAEAVBlockSource@@AEAVRandom@@AEBVBoundingBox@@@Z
-    virtual bool postProcess(class BlockSource&, class Random&, class BoundingBox const&);
+    virtual bool postProcess(class BlockSource& region, class Random& random, class BoundingBox const& chunkBB);
 
     // vIndex: 5, symbol:
     // ?postProcessMobsAt@OceanMonumentWingRoom@@UEAAXAEAVBlockSource@@AEAVRandom@@AEBVBoundingBox@@@Z
-    virtual void postProcessMobsAt(class BlockSource&, class Random&, class BoundingBox const&);
+    virtual void postProcessMobsAt(class BlockSource& region, class Random& random, class BoundingBox const& chunkBB);
 
     // NOLINTEND
 };

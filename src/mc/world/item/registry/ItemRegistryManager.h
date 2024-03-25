@@ -26,7 +26,7 @@ public:
         MCAPI explicit ScopedItemRegistry(class ItemRegistryRef);
 
         // symbol: ??0ScopedItemRegistry@ItemRegistryManager@@QEAA@V?$weak_ptr@VItemRegistry@@@std@@@Z
-        MCAPI explicit ScopedItemRegistry(std::weak_ptr<class ItemRegistry>);
+        MCAPI explicit ScopedItemRegistry(std::weak_ptr<class ItemRegistry> registry);
 
         // symbol: ?construct@ScopedItemRegistry@ItemRegistryManager@@QEAAXVItemRegistryRef@@@Z
         MCAPI void construct(class ItemRegistryRef);
@@ -67,7 +67,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mThreadLocalRegistry() { return mThreadLocalRegistry; }
+    static auto& $mThreadLocalRegistry() { return mThreadLocalRegistry; }
 
     // NOLINTEND
 };

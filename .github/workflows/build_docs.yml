@@ -3,27 +3,78 @@ on:
     paths:
       - .github/workflows/build_docs.yml
       - docs/**
+      - src/**/*.h
+      - Doxyfile
+      - DoxygenLayout.xml
       - mkdocs.yml
-      - requirements.txt
   workflow_dispatch:
 
 jobs:
-  build:
+  build-doxygen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - run: |
+          mkdir -p site/api
+      
+      - uses: mattnotmitt/doxygen-action@1.9.5
+
+      - run: |
+          tar -cvf artifact.tar -C site/ .
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: doxygen-pages
+          path: |
+            artifact.tar
+
+  build-mkdocs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - run: |
           pip install -r requirements.txt
+
       - run: |
           mkdocs build
+
+      - run: |
+          tar -cvf artifact.tar -C site/ .
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: mkdocs-pages
+          path: |
+            artifact.tar
+
+  merge:
+    needs:
+      - build-doxygen
+      - build-mkdocs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          path: artifacts/
+
+      - name: Extract artifacts
+        run: |
+          mkdir site
+          tar -xvf artifacts/doxygen-pages/artifact.tar -C site/
+          tar -xvf artifacts/mkdocs-pages/artifact.tar -C site/
+
       - uses: actions/upload-pages-artifact@v2
         with:
           path: site/
 
   deploy:
-    # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    needs: build
+    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
+    needs:
+      - merge
     permissions:
       id-token: write
       pages: write

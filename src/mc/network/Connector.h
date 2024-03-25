@@ -50,71 +50,56 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1Connector@@UEAA@XZ
+    virtual ~Connector();
 
-    // vIndex: 1, symbol: __unk_vfn_1
-    virtual void __unk_vfn_1();
+    // vIndex: 1, symbol:
+    // ?getLocalIps@Connector@@UEBA?AV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@XZ
+    virtual std::vector<std::string> getLocalIps() const;
 
     // vIndex: 2, symbol: ?getLocalIp@Connector@@UEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
     virtual std::string getLocalIp();
 
-    // vIndex: 3, symbol: __unk_vfn_3
-    virtual void __unk_vfn_3();
+    // vIndex: 3, symbol: ?getPort@LocalConnector@@UEBAGXZ
+    virtual ushort getPort() const;
 
-    // vIndex: 4, symbol: __unk_vfn_4
-    virtual void __unk_vfn_4();
+    // vIndex: 4, symbol:
+    // ?getRefinedLocalIps@LocalConnector@@UEBA?AV?$vector@USystemAddress@RakNet@@V?$allocator@USystemAddress@RakNet@@@std@@@std@@XZ
+    virtual std::vector<struct RakNet::SystemAddress> getRefinedLocalIps() const;
 
     // vIndex: 5, symbol: ?getConnectedGameInfo@Connector@@UEBAAEBVGameConnectionInfo@Social@@XZ
     virtual class Social::GameConnectionInfo const& getConnectedGameInfo() const;
 
-    // vIndex: 6, symbol: __unk_vfn_6
-    virtual void __unk_vfn_6();
+    // vIndex: 6, symbol: ?setupNatPunch@LocalConnector@@UEAAX_N@Z
+    virtual void setupNatPunch(bool connectToClient);
 
     // vIndex: 7, symbol: ?getNatPunchInfo@Connector@@UEBA?AUNatPunchInfo@1@XZ
     virtual struct Connector::NatPunchInfo getNatPunchInfo() const;
 
-    // symbol: ?addConnectionStateListener@Connector@@UEAAXPEAVConnectionStateListener@1@@Z
-    MCVAPI void addConnectionStateListener(class Connector::ConnectionStateListener*);
-
-    // symbol: ?getIPv4Port@Connector@@UEBAGXZ
-    MCVAPI ushort getIPv4Port() const;
-
-    // symbol: ?getIPv6Port@Connector@@UEBAGXZ
-    MCVAPI ushort getIPv6Port() const;
-
-    // symbol:
-    // ?getLocalIps@Connector@@UEBA?AV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@XZ
-    MCVAPI std::vector<std::string> getLocalIps() const;
-
-    // symbol: ?getPort@Connector@@UEBAGXZ
-    MCVAPI ushort getPort() const;
-
-    // symbol:
-    // ?getRefinedLocalIps@Connector@@UEBA?AV?$vector@USystemAddress@RakNet@@V?$allocator@USystemAddress@RakNet@@@std@@@std@@XZ
-    MCVAPI std::vector<struct RakNet::SystemAddress> getRefinedLocalIps() const;
-
-    // symbol: ?isIPv4Supported@Connector@@UEBA_NXZ
-    MCVAPI bool isIPv4Supported() const;
-
-    // symbol: ?isIPv6Supported@Connector@@UEBA_NXZ
-    MCVAPI bool isIPv6Supported() const;
-
-    // symbol: ?removeConnectionStateListener@Connector@@UEAAXPEAVConnectionStateListener@1@@Z
-    MCVAPI void removeConnectionStateListener(class Connector::ConnectionStateListener*);
-
-    // symbol: ?setupNatPunch@Connector@@UEAAX_N@Z
-    MCVAPI void setupNatPunch(bool);
-
-    // symbol:
+    // vIndex: 8, symbol:
     // ?startNatPunchingClient@Connector@@UEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@G@Z
-    MCVAPI void startNatPunchingClient(std::string const&, ushort);
+    virtual void startNatPunchingClient(std::string const&, ushort);
 
-    // symbol: ??1Connector@@UEAA@XZ
-    MCVAPI ~Connector();
+    // vIndex: 9, symbol: ?addConnectionStateListener@Connector@@UEAAXPEAVConnectionStateListener@1@@Z
+    virtual void addConnectionStateListener(class Connector::ConnectionStateListener*);
+
+    // vIndex: 10, symbol: ?removeConnectionStateListener@LocalConnector@@UEAAXPEAVConnectionStateListener@Connector@@@Z
+    virtual void removeConnectionStateListener(class Connector::ConnectionStateListener* listener);
+
+    // vIndex: 11, symbol: ?isIPv4Supported@Connector@@UEBA_NXZ
+    virtual bool isIPv4Supported() const;
+
+    // vIndex: 12, symbol: ?isIPv6Supported@Connector@@UEBA_NXZ
+    virtual bool isIPv6Supported() const;
+
+    // vIndex: 13, symbol: ?getIPv4Port@Connector@@UEBAGXZ
+    virtual ushort getIPv4Port() const;
+
+    // vIndex: 14, symbol: ?getIPv6Port@Connector@@UEBAGXZ
+    virtual ushort getIPv6Port() const;
 
     // symbol: ??0Connector@@QEAA@AEAUConnectionCallbacks@0@@Z
-    MCAPI explicit Connector(struct Connector::ConnectionCallbacks&);
+    MCAPI explicit Connector(struct Connector::ConnectionCallbacks& callbacks);
 
     // NOLINTEND
 };

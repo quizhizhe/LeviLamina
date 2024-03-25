@@ -18,8 +18,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1ItemFrameDropItemPacket@@UEAA@XZ
+    virtual ~ItemFrameDropItemPacket();
 
     // vIndex: 1, symbol: ?getId@ItemFrameDropItemPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -29,14 +29,11 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@ItemFrameDropItemPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@ItemFrameDropItemPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1ItemFrameDropItemPacket@@UEAA@XZ
-    MCVAPI ~ItemFrameDropItemPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0ItemFrameDropItemPacket@@QEAA@XZ
     MCAPI ItemFrameDropItemPacket();

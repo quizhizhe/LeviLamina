@@ -12,15 +12,24 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ??0SculkChargeCursor@@QEAA@AEBVCompoundTag@@@Z
-    MCAPI explicit SculkChargeCursor(class CompoundTag const&);
+    MCAPI explicit SculkChargeCursor(class CompoundTag const& tag);
+
+    // symbol: ??0SculkChargeCursor@@QEAA@AEBVBlockPos@@H@Z
+    MCAPI SculkChargeCursor(class BlockPos const& pos, int charge);
+
+    // symbol: ?addFrom@SculkChargeCursor@@QEAAXAEBV1@@Z
+    MCAPI void addFrom(class SculkChargeCursor const&);
+
+    // symbol: ?save@SculkChargeCursor@@QEBAXAEAVCompoundTag@@@Z
+    MCAPI void save(class CompoundTag& tag) const;
 
     // symbol:
     // ?update@SculkChargeCursor@@QEAAXAEAVIBlockWorldGenAPI@@PEAVBlockSource@@AEBVBlockPos@@AEAVRandom@@AEAVSculkSpreader@@_N@Z
     MCAPI void update(
-        class IBlockWorldGenAPI&,
-        class BlockSource*,
-        class BlockPos const&,
-        class Random&,
+        class IBlockWorldGenAPI& target,
+        class BlockSource*       region,
+        class BlockPos const&    origin,
+        class Random&            random,
         class SculkSpreader&,
         bool
     );
@@ -30,18 +39,14 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol: ?_getNonCornerNeighborsOffsets@SculkChargeCursor@@CA?AV?$array@VBlockPos@@$0BC@@std@@AEAVRandom@@@Z
-    MCAPI static std::array<class BlockPos, 18> _getNonCornerNeighborsOffsets(class Random&);
+    MCAPI static std::array<class BlockPos, 18> _getNonCornerNeighborsOffsets(class Random& random);
 
     // symbol: ?_getSculkBehavior@SculkChargeCursor@@CAAEBVSculkBehavior@@AEBVBlock@@@Z
-    MCAPI static class SculkBehavior const& _getSculkBehavior(class Block const&);
-
-    // symbol:
-    // ?_getValidMovementPos@SculkChargeCursor@@CA?AV?$optional@VBlockPos@@@std@@AEAVIBlockWorldGenAPI@@AEBVBlockPos@@AEAVSculkSpreader@@AEAVRandom@@@Z
-    MCAPI static std::optional<class BlockPos>
-    _getValidMovementPos(class IBlockWorldGenAPI&, class BlockPos const&, class SculkSpreader&, class Random&);
+    MCAPI static class SculkBehavior const& _getSculkBehavior(class Block const& block);
 
     // symbol: ?_isMovementUnobstructed@SculkChargeCursor@@CA_NAEAVIBlockWorldGenAPI@@AEBVBlockPos@@1@Z
-    MCAPI static bool _isMovementUnobstructed(class IBlockWorldGenAPI&, class BlockPos const&, class BlockPos const&);
+    MCAPI static bool
+    _isMovementUnobstructed(class IBlockWorldGenAPI& target, class BlockPos const& fromPos, class BlockPos const&);
 
     // NOLINTEND
 
@@ -61,11 +66,11 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $sDefaultSculkBehavior() { return sDefaultSculkBehavior; }
+    static auto& $sDefaultSculkBehavior() { return sDefaultSculkBehavior; }
 
-    auto& $sSculkBlockBehavior() { return sSculkBlockBehavior; }
+    static auto& $sSculkBlockBehavior() { return sSculkBlockBehavior; }
 
-    auto& $sSculkVeinBlockBehavior() { return sSculkVeinBlockBehavior; }
+    static auto& $sSculkVeinBlockBehavior() { return sSculkVeinBlockBehavior; }
 
     // NOLINTEND
 };

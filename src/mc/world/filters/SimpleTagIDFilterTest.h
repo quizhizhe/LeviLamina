@@ -19,11 +19,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ?_serializeValue@SimpleTagIDFilterTest@@MEBA?AVValue@Json@@XZ
-    MCVAPI class Json::Value _serializeValue() const;
-
-    // symbol: ?setup@SimpleTagIDFilterTest@@UEAA_NAEBUDefinition@FilterTest@@AEBUFilterInputs@@@Z
-    MCVAPI bool setup(struct FilterTest::Definition const&, struct FilterInputs const&);
+    // vIndex: 0, symbol: __gen_??1SimpleTagIDFilterTest@@UEAA@XZ
+    virtual ~SimpleTagIDFilterTest() = default;
 
     // NOLINTEND
 };

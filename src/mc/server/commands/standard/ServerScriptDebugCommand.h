@@ -14,16 +14,19 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ServerScriptDebugCommand@@UEAA@XZ
+    virtual ~ServerScriptDebugCommand() = default;
 
     // vIndex: 2, symbol: ?execute@ServerScriptDebugCommand@@UEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    virtual void execute(class CommandOrigin const&, class CommandOutput&) const;
+    virtual void execute(class CommandOrigin const&, class CommandOutput& output) const;
 
     // symbol:
     // ?setup@ServerScriptDebugCommand@@SAXAEAVCommandRegistry@@PEAVIScriptDebugger@@AEBV?$optional@UScriptSettings@@@std@@@Z
-    MCAPI static void
-    setup(class CommandRegistry&, class IScriptDebugger*, std::optional<struct ScriptSettings> const&);
+    MCAPI static void setup(
+        class CommandRegistry& registry,
+        class IScriptDebugger*,
+        std::optional<struct ScriptSettings> const& settings
+    );
 
     // NOLINTEND
 
@@ -40,9 +43,9 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $sForcedPort() { return sForcedPort; }
+    static auto& $sForcedPort() { return sForcedPort; }
 
-    auto& $sServerScriptDebugger() { return sServerScriptDebugger; }
+    static auto& $sServerScriptDebugger() { return sServerScriptDebugger; }
 
     // NOLINTEND
 };

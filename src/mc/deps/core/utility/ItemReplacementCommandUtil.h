@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/enums/EquipmentSlot.h"
+#include "mc/deps/puv/EquipmentSlot.h"
 
 // auto generated forward declare list
 // clang-format off
@@ -38,13 +38,13 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol:
-    // ?_replaceArmorSlots@ItemReplacementCommandUtil@Util@@CAXAEAUReplacementResults@2@AEAVActor@@V?$span@$$CBVItemStack@@$0?0@gsl@@W4EquipmentSlot@@H@Z
+    // ?_replaceArmorSlots@ItemReplacementCommandUtil@Util@@CAXAEAUReplacementResults@2@AEAVActor@@V?$span@$$CBVItemStack@@$0?0@gsl@@W4EquipmentSlot@Legacy@Puv@@H@Z
     MCAPI static void _replaceArmorSlots(
         struct Util::ReplacementResults&,
-        class Actor&,
+        class Actor& entity,
         gsl::span<class ItemStack const>,
-        ::EquipmentSlot,
-        int
+        ::Puv::Legacy::EquipmentSlot,
+        int count
     );
 
     // symbol: ?_slotBoundsValid@ItemReplacementCommandUtil@Util@@CA_NAEAUReplacementResults@2@HHV?$optional@H@std@@1@Z

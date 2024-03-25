@@ -5,6 +5,14 @@
 // auto generated inclusion list
 #include "mc/enums/MaterialType.h"
 
+class Material;
+class AABB;
+class GetCollisionShapeInterface;
+class BlockPos;
+class BlockActor;
+class Block;
+struct Bounds;
+
 class IConstBlockSource {
 public:
     // prevent constructor by default
@@ -14,6 +22,9 @@ public:
 
 public:
     // NOLINTBEGIN
+    // vIndex: 0
+    virtual ~IConstBlockSource() = default;
+
     // vIndex: 1, symbol: ?getBlock@BlockSource@@UEBAAEBVBlock@@HHH@Z
     virtual class Block const& getBlock(int, int, int) const = 0;
 
@@ -70,19 +81,19 @@ public:
     // ?fetchCollisionShapes@BlockSource@@UEBAXAEAV?$vector@VAABB@@V?$allocator@VAABB@@@std@@@std@@AEBVAABB@@_NV?$optional_ref@$$CBVGetCollisionShapeInterface@@@@@Z
     virtual void
     fetchCollisionShapes(std::vector<class AABB>&, class AABB const&, bool, class optional_ref<class GetCollisionShapeInterface const>)
-        const;
+        const = 0;
 
     // vIndex: 19, symbol:
     // ?getTallestCollisionShape@BlockSource@@UEBA?AVAABB@@AEBV2@PEAM_NV?$optional_ref@$$CBVGetCollisionShapeInterface@@@@@Z
     virtual class AABB
     getTallestCollisionShape(class AABB const&, float*, bool, class optional_ref<class GetCollisionShapeInterface const>)
-        const;
+        const = 0;
 
     // vIndex: 20, symbol: ?getBrightness@BlockSource@@UEBAMAEBVBlockPos@@@Z
     virtual float getBrightness(class BlockPos const&) const = 0;
 
     // symbol: ?checkMaterial@IConstBlockSource@@QEBA_NAEBVAABB@@W4MaterialType@@@Z
-    MCAPI bool checkMaterial(class AABB const&, ::MaterialType) const;
+    MCAPI bool checkMaterial(class AABB const& box, ::MaterialType material) const;
 
     // NOLINTEND
 };

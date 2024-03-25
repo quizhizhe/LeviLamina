@@ -26,12 +26,12 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScriptServerNetworkEventListener@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptServerNetworkEventListener() = default;
 
     // vIndex: 1, symbol:
-    // ?onEvent@ServerNetworkEventListener@@UEAA?AW4EventResult@@AEBUServerNetworkGameplayNotificationEvent@@@Z
-    virtual ::EventResult onEvent(struct ServerNetworkGameplayNotificationEvent const&);
+    // ?onEvent@?$EventListenerDispatcher@VServerNetworkEventListener@@@@MEAA?AW4EventResult@@AEBUServerNetworkGameplayNotificationEvent@@@Z
+    virtual ::EventResult onEvent(struct ServerNetworkGameplayNotificationEvent const& event);
 
     // vIndex: 2, symbol:
     // ?onMessage@ScriptServerNetworkEventListener@ScriptModuleMinecraft@@UEAA?AW4EventResult@@AEBUMessageEvent@@@Z
@@ -43,8 +43,10 @@ public:
 
     // symbol:
     // ??0ScriptServerNetworkEventListener@ScriptModuleMinecraft@@QEAA@AEBVWeakLifetimeScope@Scripting@@U?$TypedObjectHandle@VIScriptWorldAfterEvents@ScriptModuleMinecraft@@@3@@Z
-    MCAPI
-    ScriptServerNetworkEventListener(class Scripting::WeakLifetimeScope const&, struct Scripting::TypedObjectHandle<class ScriptModuleMinecraft::IScriptWorldAfterEvents>);
+    MCAPI ScriptServerNetworkEventListener(
+        class Scripting::WeakLifetimeScope const&                                                 scope,
+        struct Scripting::TypedObjectHandle<class ScriptModuleMinecraft::IScriptWorldAfterEvents> handle
+    );
 
     // NOLINTEND
 };

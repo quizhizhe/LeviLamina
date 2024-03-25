@@ -16,8 +16,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1DefendTrustedTargetGoal@@UEAA@XZ
+    virtual ~DefendTrustedTargetGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@DefendTrustedTargetGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -27,19 +27,27 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@DefendTrustedTargetGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol:
-    // ??0DefendTrustedTargetGoal@@QEAA@AEAVMob@@AEBV?$vector@UMobDescriptor@@V?$allocator@UMobDescriptor@@@std@@@std@@MH_NHW4LevelSoundEvent@@AEBVActorDefinitionTrigger@@@Z
-    MCAPI
-    DefendTrustedTargetGoal(class Mob&, std::vector<struct MobDescriptor> const&, float, int, bool, int, ::LevelSoundEvent, class ActorDefinitionTrigger const&);
+    // ??0DefendTrustedTargetGoal@@QEAA@AEAVMob@@AEBV?$vector@UMobDescriptor@@V?$allocator@UMobDescriptor@@@std@@@std@@MH_NHW4LevelSoundEvent@Legacy@Puv@@AEBVActorDefinitionTrigger@@@Z
+    MCAPI DefendTrustedTargetGoal(
+        class Mob&                               mob,
+        std::vector<struct MobDescriptor> const& targetTypes,
+        float                                    within,
+        int,
+        bool                                mustSee,
+        int                                 mustSeeForgetTicks,
+        ::Puv::Legacy::LevelSoundEvent      sound,
+        class ActorDefinitionTrigger const& onStartEvent
+    );
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_findTrustedTarget@DefendTrustedTargetGoal@@AEAA?AUActorUniqueID@@AEBVTrustComponent@@@Z
-    MCAPI struct ActorUniqueID _findTrustedTarget(class TrustComponent const&);
+    MCAPI struct ActorUniqueID _findTrustedTarget(class TrustComponent const& trust);
 
     // NOLINTEND
 };

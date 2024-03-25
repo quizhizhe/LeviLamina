@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1InspectBookshelfGoal@@UEAA@XZ
+    virtual ~InspectBookshelfGoal() = default;
 
     // vIndex: 2, symbol: ?canContinueToUse@InspectBookshelfGoal@@UEAA_NXZ
     virtual bool canContinueToUse();
@@ -26,19 +26,26 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@InspectBookshelfGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // vIndex: 11, symbol: ?isValidTarget@InspectBookshelfGoal@@UEAA_NAEAVBlockSource@@AEBVBlockPos@@@Z
-    virtual bool isValidTarget(class BlockSource&, class BlockPos const&);
+    virtual bool isValidTarget(class BlockSource& region, class BlockPos const& pos);
 
     // vIndex: 13, symbol: ?_canReach@InspectBookshelfGoal@@MEAA_NAEBVBlockPos@@@Z
-    virtual bool _canReach(class BlockPos const&);
+    virtual bool _canReach(class BlockPos const& pos);
 
     // vIndex: 17, symbol: ?findTargetBlock@InspectBookshelfGoal@@UEAA_NXZ
     virtual bool findTargetBlock();
 
     // symbol: ??0InspectBookshelfGoal@@QEAA@AEAVMob@@MHHHM@Z
-    MCAPI InspectBookshelfGoal(class Mob&, float, int, int, int, float);
+    MCAPI InspectBookshelfGoal(
+        class Mob& mob,
+        float      speedModifier,
+        int        searchRange,
+        int        searchHeight,
+        int        searchCount,
+        float      goalRadius
+    );
 
     // NOLINTEND
 };

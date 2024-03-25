@@ -14,12 +14,12 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1KnockbackArmorUpdater@@UEAA@XZ
+    virtual ~KnockbackArmorUpdater() = default;
 
     // vIndex: 1, symbol:
     // ?onEvent@?$EventListenerDispatcher@VActorEventListener@@@@MEAA?AW4EventResult@@AEBUActorNotificationEvent@@@Z
-    virtual ::EventResult onEvent(struct ActorNotificationEvent const&);
+    virtual ::EventResult onEvent(struct ActorNotificationEvent const& event);
 
     // vIndex: 2, symbol: __unk_vfn_2
     virtual void __unk_vfn_2();
@@ -99,7 +99,10 @@ public:
     // vIndex: 27, symbol: __unk_vfn_27
     virtual void __unk_vfn_27();
 
-    // vIndex: 28, symbol: ?onEvent@KnockbackArmorUpdater@@UEAA?AW4EventResult@@AEBUActorEquippedArmorEvent@@@Z
+    // vIndex: 28, symbol: __unk_vfn_28
+    virtual void __unk_vfn_28();
+
+    // vIndex: 29, symbol: ?onEvent@KnockbackArmorUpdater@@UEAA?AW4EventResult@@AEBUActorEquippedArmorEvent@@@Z
     virtual ::EventResult onEvent(struct ActorEquippedArmorEvent const&);
 
     // NOLINTEND

@@ -21,10 +21,10 @@ public:
     // NOLINTBEGIN
     // symbol:
     // ?_getUpdatePacket@CauldronBlockActor@@MEAA?AV?$unique_ptr@VBlockActorDataPacket@@U?$default_delete@VBlockActorDataPacket@@@std@@@std@@AEAVBlockSource@@@Z
-    MCVAPI std::unique_ptr<class BlockActorDataPacket> _getUpdatePacket(class BlockSource&);
+    MCVAPI std::unique_ptr<class BlockActorDataPacket> _getUpdatePacket(class BlockSource& region);
 
     // symbol: ?_onUpdatePacket@CauldronBlockActor@@MEAAXAEBVCompoundTag@@AEAVBlockSource@@@Z
-    MCVAPI void _onUpdatePacket(class CompoundTag const&, class BlockSource&);
+    MCVAPI void _onUpdatePacket(class CompoundTag const& data, class BlockSource& region);
 
     // symbol: ?getContainer@CauldronBlockActor@@UEAAPEAVContainer@@XZ
     MCVAPI class Container* getContainer();
@@ -36,7 +36,7 @@ public:
     MCVAPI int getContainerSize() const;
 
     // symbol: ?getItem@CauldronBlockActor@@UEBAAEBVItemStack@@H@Z
-    MCVAPI class ItemStack const& getItem(int) const;
+    MCVAPI class ItemStack const& getItem(int slot) const;
 
     // symbol: ?getMaxStackSize@CauldronBlockActor@@UEBAHXZ
     MCVAPI int getMaxStackSize() const;
@@ -45,19 +45,23 @@ public:
     MCVAPI std::string getName() const;
 
     // symbol: ?load@CauldronBlockActor@@UEAAXAEAVLevel@@AEBVCompoundTag@@AEAVDataLoadHelper@@@Z
-    MCVAPI void load(class Level&, class CompoundTag const&, class DataLoadHelper&);
+    MCVAPI void load(class Level& level, class CompoundTag const& base, class DataLoadHelper& dataLoadHelper);
 
     // symbol: ?onChanged@CauldronBlockActor@@UEAAXAEAVBlockSource@@@Z
-    MCVAPI void onChanged(class BlockSource&);
+    MCVAPI void onChanged(class BlockSource& region);
 
     // symbol: ?save@CauldronBlockActor@@UEBA_NAEAVCompoundTag@@@Z
-    MCVAPI bool save(class CompoundTag&) const;
+    MCVAPI bool save(class CompoundTag& tag) const;
 
     // symbol: ?serverInitItemStackIds@CauldronBlockActor@@UEAAXHHV?$function@$$A6AXHAEBVItemStack@@@Z@std@@@Z
-    MCVAPI void serverInitItemStackIds(int, int, std::function<void(int, class ItemStack const&)>);
+    MCVAPI void serverInitItemStackIds(
+        int                                              containerSlot,
+        int                                              count,
+        std::function<void(int, class ItemStack const&)> onNetIdChanged
+    );
 
     // symbol: ?setItem@CauldronBlockActor@@UEAAXHAEBVItemStack@@@Z
-    MCVAPI void setItem(int, class ItemStack const&);
+    MCVAPI void setItem(int slot, class ItemStack const& item);
 
     // symbol: ?startOpen@CauldronBlockActor@@UEAAXAEAVPlayer@@@Z
     MCVAPI void startOpen(class Player&);
@@ -66,7 +70,7 @@ public:
     MCVAPI void stopOpen(class Player&);
 
     // symbol: ?tick@CauldronBlockActor@@UEAAXAEAVBlockSource@@@Z
-    MCVAPI void tick(class BlockSource&);
+    MCVAPI void tick(class BlockSource& region);
 
     // symbol: ?getColor@CauldronBlockActor@@QEBA?AVColor@mce@@XZ
     MCAPI class mce::Color getColor() const;
@@ -87,10 +91,10 @@ public:
     MCAPI void mixDyes();
 
     // symbol: ?setCustomColor@CauldronBlockActor@@QEAAXAEBVColor@mce@@@Z
-    MCAPI void setCustomColor(class mce::Color const&);
+    MCAPI void setCustomColor(class mce::Color const& color);
 
     // symbol: ?setPotionType@CauldronBlockActor@@QEAAXW4PotionType@Potion@@@Z
-    MCAPI void setPotionType(::Potion::PotionType);
+    MCAPI void setPotionType(::Potion::PotionType type);
 
     // symbol: ?WATER_COLOR@CauldronBlockActor@@2VColor@mce@@A
     MCAPI static class mce::Color WATER_COLOR;

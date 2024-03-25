@@ -20,10 +20,10 @@ public:
     std::string              mXuid;       // this+0x98
     std::string              mPlatformId; // this+0xB8
 
-    [[nodiscard]] inline static TextPacket createRawMessage(std::string const& msg) {
-        auto res     = TextPacket{};
-        res.mType    = TextPacketType::Raw;
-        res.mMessage = msg;
+    [[nodiscard]] inline static TextPacket createRawMessage(std::string_view msg) {
+        auto res  = TextPacket{};
+        res.mType = TextPacketType::Raw;
+        res.mMessage.assign(msg);
         return res;
     }
 
@@ -39,10 +39,10 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@TextPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol: ?_read@TextPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0TextPacket@@QEAA@XZ
     MCAPI TextPacket();
@@ -98,8 +98,11 @@ public:
 
     // symbol:
     // ?createTextObjectWhisperMessage@TextPacket@@SA?AV1@AEBVResolvedTextObject@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@1@Z
-    MCAPI static class TextPacket
-    createTextObjectWhisperMessage(class ResolvedTextObject const&, std::string const&, std::string const&);
+    MCAPI static class TextPacket createTextObjectWhisperMessage(
+        class ResolvedTextObject const&,
+        std::string const& xuid,
+        std::string const& platformId
+    );
 
     // symbol:
     // ?createTextObjectWhisperMessage@TextPacket@@SA?AV1@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@00@Z
@@ -126,5 +129,6 @@ public:
         std::string const& xuid,
         std::string const& platformId
     );
+
     // NOLINTEND
 };

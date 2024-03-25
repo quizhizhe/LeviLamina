@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1MoveTowardsTargetGoal@@UEAA@XZ
+    virtual ~MoveTowardsTargetGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@MoveTowardsTargetGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -32,10 +32,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@MoveTowardsTargetGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0MoveTowardsTargetGoal@@QEAA@AEAVMob@@MM@Z
-    MCAPI MoveTowardsTargetGoal(class Mob&, float, float);
+    MCAPI MoveTowardsTargetGoal(class Mob& pathMob, float speedModifier, float within);
 
     // NOLINTEND
 };

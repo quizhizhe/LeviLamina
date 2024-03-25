@@ -14,17 +14,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1EndPodiumFeature@@UEAA@XZ
+    virtual ~EndPodiumFeature();
 
     // vIndex: 3, symbol: ?place@EndPodiumFeature@@UEBA_NAEAVBlockSource@@AEBVBlockPos@@AEAVRandom@@@Z
-    virtual bool place(class BlockSource&, class BlockPos const&, class Random&) const;
-
-    // symbol: ??1EndPodiumFeature@@UEAA@XZ
-    MCVAPI ~EndPodiumFeature();
+    virtual bool place(class BlockSource& region, class BlockPos const& origin, class Random& random) const;
 
     // symbol: ??0EndPodiumFeature@@QEAA@_N@Z
-    MCAPI explicit EndPodiumFeature(bool);
+    MCAPI explicit EndPodiumFeature(bool active);
 
     // symbol: ?CORNER_ROUNDING@EndPodiumFeature@@2MB
     MCAPI static float const CORNER_ROUNDING;

@@ -25,17 +25,17 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScriptItemGameplayHandler@@UEAA@XZ
+    virtual ~ScriptItemGameplayHandler() = default;
 
     // vIndex: 1, symbol:
     // ?handleEvent@?$Impl@U?$type_list@$$CBU?$ItemGameplayEvent@X@@U?$MutableItemGameplayEvent@W4CoordinatorResult@@@@@entt@@@?$EventHandlerDispatcher@VItemGameplayHandler@@@Details@@MEAA?AW4HandlerResult@@AEBU?$ItemGameplayEvent@X@@@Z
-    virtual ::HandlerResult handleEvent(struct ItemGameplayEvent<void> const&);
+    virtual ::HandlerResult handleEvent(struct ItemGameplayEvent<void> const& event);
 
     // vIndex: 2, symbol:
     // ?handleEvent@?$Impl@U?$type_list@U?$MutableItemGameplayEvent@W4CoordinatorResult@@@@@entt@@@?$EventHandlerDispatcher@VItemGameplayHandler@@@Details@@MEAA?AU?$GameplayHandlerResult@W4CoordinatorResult@@@@AEAU?$MutableItemGameplayEvent@W4CoordinatorResult@@@@@Z
     virtual struct GameplayHandlerResult<::CoordinatorResult>
-    handleEvent(struct MutableItemGameplayEvent<::CoordinatorResult>&);
+    handleEvent(struct MutableItemGameplayEvent<::CoordinatorResult>& event);
 
     // vIndex: 3, symbol: __unk_vfn_3
     virtual void __unk_vfn_3();
@@ -77,17 +77,17 @@ public:
     // symbol:
     // ?_handleItemDefinitionEventTriggered@ScriptItemGameplayHandler@@AEAA_NAEAUItemDefinitionEventTriggeredEvent@@AEBVWeakLifetimeScope@Scripting@@U?$TypedObjectHandle@VIScriptWorldBeforeEvents@ScriptModuleMinecraft@@@4@@Z
     MCAPI bool
-    _handleItemDefinitionEventTriggered(struct ItemDefinitionEventTriggeredEvent&, class Scripting::WeakLifetimeScope const&, struct Scripting::TypedObjectHandle<class ScriptModuleMinecraft::IScriptWorldBeforeEvents>);
+    _handleItemDefinitionEventTriggered(struct ItemDefinitionEventTriggeredEvent&, class Scripting::WeakLifetimeScope const& scope, struct Scripting::TypedObjectHandle<class ScriptModuleMinecraft::IScriptWorldBeforeEvents>);
 
     // symbol:
     // ?_handleItemUseEvent@ScriptItemGameplayHandler@@AEAA_NAEAUItemUseEvent@@AEBVWeakLifetimeScope@Scripting@@U?$TypedObjectHandle@VIScriptWorldBeforeEvents@ScriptModuleMinecraft@@@4@@Z
     MCAPI bool
-    _handleItemUseEvent(struct ItemUseEvent&, class Scripting::WeakLifetimeScope const&, struct Scripting::TypedObjectHandle<class ScriptModuleMinecraft::IScriptWorldBeforeEvents>);
+    _handleItemUseEvent(struct ItemUseEvent&, class Scripting::WeakLifetimeScope const& scope, struct Scripting::TypedObjectHandle<class ScriptModuleMinecraft::IScriptWorldBeforeEvents>);
 
     // symbol:
     // ?_handleItemUseOnEvent@ScriptItemGameplayHandler@@AEAA_NAEAUItemUseOnEvent@@AEBVWeakLifetimeScope@Scripting@@U?$TypedObjectHandle@VIScriptWorldBeforeEvents@ScriptModuleMinecraft@@@4@@Z
     MCAPI bool
-    _handleItemUseOnEvent(struct ItemUseOnEvent&, class Scripting::WeakLifetimeScope const&, struct Scripting::TypedObjectHandle<class ScriptModuleMinecraft::IScriptWorldBeforeEvents>);
+    _handleItemUseOnEvent(struct ItemUseOnEvent&, class Scripting::WeakLifetimeScope const& scope, struct Scripting::TypedObjectHandle<class ScriptModuleMinecraft::IScriptWorldBeforeEvents>);
 
     // NOLINTEND
 };

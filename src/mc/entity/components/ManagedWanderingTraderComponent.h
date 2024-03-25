@@ -15,7 +15,7 @@ public:
     MCAPI void initFromDefinition(class Actor&);
 
     // symbol: ?reloadComponent@ManagedWanderingTraderComponent@@QEAAXAEAVActor@@@Z
-    MCAPI void reloadComponent(class Actor&);
+    MCAPI void reloadComponent(class Actor& actor);
 
     // NOLINTEND
 };

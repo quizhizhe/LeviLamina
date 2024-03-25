@@ -14,8 +14,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ShulkerBoxContainerScreenValidator@@UEAA@XZ
+    virtual ~ShulkerBoxContainerScreenValidator() = default;
 
     // symbol: ??0ShulkerBoxContainerScreenValidator@@QEAA@XZ
     MCAPI ShulkerBoxContainerScreenValidator();

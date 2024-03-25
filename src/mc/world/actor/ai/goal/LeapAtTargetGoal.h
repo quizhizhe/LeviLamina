@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1LeapAtTargetGoal@@UEAA@XZ
+    virtual ~LeapAtTargetGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@LeapAtTargetGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -29,10 +29,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@LeapAtTargetGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0LeapAtTargetGoal@@QEAA@AEAVMob@@M_N1@Z
-    MCAPI LeapAtTargetGoal(class Mob&, float, bool, bool);
+    MCAPI LeapAtTargetGoal(class Mob& mob, float yd, bool mustBeOnGround, bool);
 
     // NOLINTEND
 };

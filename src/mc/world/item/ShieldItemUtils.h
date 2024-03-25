@@ -15,7 +15,7 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ?isBlockedDamageCause@ShieldItemUtils@@SA_NAEBVActorDamageSource@@@Z
-    MCAPI static bool isBlockedDamageCause(class ActorDamageSource const&);
+    MCAPI static bool isBlockedDamageCause(class ActorDamageSource const& source);
 
     // NOLINTEND
 
@@ -30,7 +30,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mAlwaysBlockableDamageCauses() { return mAlwaysBlockableDamageCauses; }
+    static auto& $mAlwaysBlockableDamageCauses() { return mAlwaysBlockableDamageCauses; }
 
     // NOLINTEND
 };

@@ -9,34 +9,31 @@ namespace ll::form {
 class ModalForm : public Form {
 
     class ModalFormImpl;
-    std::unique_ptr<ModalFormImpl> impl{};
+    std::unique_ptr<ModalFormImpl> impl;
 
 public:
-    using Callback = std::function<void(Player&, bool)>;
+    enum class SelectedButton : bool {
+        Upper = true,
+        Lower = false,
+    };
 
-    LLAPI ModalForm(
-        std::string title,
-        std::string content,
-        std::string buttonLeft,
-        std::string buttonRight,
-        Callback    callback = Callback()
-    );
-    ~ModalForm() override = default;
+    using Callback = std::function<void(Player&, SelectedButton)>;
+
+    LLNDAPI ModalForm();
+
+    LLNDAPI ModalForm(std::string title, std::string content, std::string upperButton, std::string lowerButton);
+
+    LLAPI ~ModalForm() override;
 
     LLAPI ModalForm& setTitle(std::string const& title);
 
     LLAPI ModalForm& setContent(std::string const& content);
 
-    LLAPI ModalForm& setButtonLeft(std::string const& buttonLeft);
+    LLAPI ModalForm& setUpperButton(std::string const& upperButton);
 
-    LLAPI ModalForm& setButtonRight(std::string const& buttonRight);
+    LLAPI ModalForm& setLowerButton(std::string const& lowerButton);
 
-    LLAPI ModalForm& setCallback(Callback callback);
-
-    LLAPI bool sendTo(Player& player, Callback callback = Callback());
-
-    static constexpr bool BUTTON_LEFT  = false;
-    static constexpr bool BUTTON_RIGHT = true;
+    LLAPI bool sendTo(Player& player, Callback callback = {});
 };
 
 } // namespace ll::form

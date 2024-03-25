@@ -1,38 +1,38 @@
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
-#include "mc/nbt/TagMemoryChunk.h"
 
 // auto generated inclusion list
 #include "mc/nbt/Tag.h"
 
 class ByteArrayTag : public ::Tag {
 public:
-    TagMemoryChunk data{};
+    std::vector<uchar> data;
 
-    ByteArrayTag& operator=(TagMemoryChunk const& value) {
-        data = value;
-        return *this;
-    }
+    [[nodiscard]] constexpr operator std::vector<uchar> const&() const { return data; }
+    [[nodiscard]] constexpr operator std::vector<uchar>&() { return data; }
 
-    operator TagMemoryChunk() const { return data; }
+    [[nodiscard]] constexpr ByteArrayTag() = default;
 
-    ByteArrayTag() = default;
+    [[nodiscard]] constexpr ByteArrayTag(std::vector<uchar> arr) : data(std::move(arr)) {} // NOLINT
 
-    ByteArrayTag(std::vector<schar> const& arr) : data((uchar*)arr.data(), arr.size()) {}
+    [[nodiscard]] constexpr ByteArrayTag(std::initializer_list<uchar> val) : data(std::move(val)) {} // NOLINT
 
-    std::span<schar> view() const { return std::span<schar>((schar*)data.mBuffer.get(), data.mSize); }
+    [[nodiscard]] constexpr uchar const& operator[](size_t index) const { return data[index]; }
+    [[nodiscard]] constexpr uchar&       operator[](size_t index) { return data[index]; }
+
+    [[nodiscard]] constexpr size_t size() const { return data.size(); }
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual ~ByteArrayTag() {}
+    // vIndex: 0, symbol: __gen_??1ByteArrayTag@@UEAA@XZ
+    virtual ~ByteArrayTag() = default;
 
     // vIndex: 2, symbol: ?write@ByteArrayTag@@UEBAXAEAVIDataOutput@@@Z
-    virtual void write(class IDataOutput&) const;
+    virtual void write(class IDataOutput& dos) const;
 
     // vIndex: 3, symbol: ?load@ByteArrayTag@@UEAAXAEAVIDataInput@@@Z
-    virtual void load(class IDataInput&);
+    virtual void load(class IDataInput& dis);
 
     // vIndex: 4, symbol: ?toString@ByteArrayTag@@UEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
     virtual std::string toString() const;
@@ -41,7 +41,7 @@ public:
     virtual ::Tag::Type getId() const;
 
     // vIndex: 6, symbol: ?equals@ByteArrayTag@@UEBA_NAEBVTag@@@Z
-    virtual bool equals(class Tag const&) const;
+    virtual bool equals(class Tag const& rhs) const;
 
     // vIndex: 9, symbol: ?copy@ByteArrayTag@@UEBA?AV?$unique_ptr@VTag@@U?$default_delete@VTag@@@std@@@std@@XZ
     virtual std::unique_ptr<class Tag> copy() const;

@@ -36,8 +36,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1SetTitlePacket@@UEAA@XZ
+    virtual ~SetTitlePacket();
 
     // vIndex: 1, symbol: ?getId@SetTitlePacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -47,14 +47,11 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@SetTitlePacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@SetTitlePacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1SetTitlePacket@@UEAA@XZ
-    MCVAPI ~SetTitlePacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0SetTitlePacket@@QEAA@XZ
     MCAPI SetTitlePacket();
@@ -63,16 +60,16 @@ public:
     MCAPI SetTitlePacket(class SetTitlePacket const&);
 
     // symbol: ??0SetTitlePacket@@QEAA@W4TitleType@0@@Z
-    MCAPI explicit SetTitlePacket(::SetTitlePacket::TitleType);
+    MCAPI explicit SetTitlePacket(::SetTitlePacket::TitleType type);
 
     // symbol: ??0SetTitlePacket@@QEAA@W4TitleType@0@AEBVResolvedTextObject@@@Z
-    MCAPI SetTitlePacket(::SetTitlePacket::TitleType, class ResolvedTextObject const&);
+    MCAPI SetTitlePacket(::SetTitlePacket::TitleType type, class ResolvedTextObject const&);
 
     // symbol: ??0SetTitlePacket@@QEAA@W4TitleType@0@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI SetTitlePacket(::SetTitlePacket::TitleType, std::string const&);
+    MCAPI SetTitlePacket(::SetTitlePacket::TitleType type, std::string const& titleText);
 
     // symbol: ??0SetTitlePacket@@QEAA@HHH@Z
-    MCAPI SetTitlePacket(int, int, int);
+    MCAPI SetTitlePacket(int fadeInTime, int stayTime, int fadeOutTime);
 
     // symbol: ??4SetTitlePacket@@QEAAAEAV0@$$QEAV0@@Z
     MCAPI class SetTitlePacket& operator=(class SetTitlePacket&&);

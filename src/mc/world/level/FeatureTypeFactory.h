@@ -15,6 +15,9 @@ public:
 
 public:
     // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1FeatureTypeFactory@@UEAA@XZ
+    virtual ~FeatureTypeFactory() = default;
+
     // symbol: ??0FeatureTypeFactory@@QEAA@XZ
     MCAPI FeatureTypeFactory();
 

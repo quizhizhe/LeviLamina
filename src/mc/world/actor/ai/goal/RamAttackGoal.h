@@ -29,30 +29,30 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
-
-        // symbol: ??1Definition@RamAttackGoal@@UEAA@XZ
-        MCVAPI ~Definition();
+        // vIndex: 0, symbol: ??1Definition@RamAttackGoal@@UEAA@XZ
+        virtual ~Definition();
 
         // symbol: ??0Definition@RamAttackGoal@@QEAA@XZ
         MCAPI Definition();
 
         // symbol:
         // ?addPreRamSoundEventByName@Definition@RamAttackGoal@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-        MCAPI void addPreRamSoundEventByName(std::string const&);
+        MCAPI void addPreRamSoundEventByName(std::string const& name);
 
         // symbol:
         // ?addRamImpactSoundEventByName@Definition@RamAttackGoal@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-        MCAPI void addRamImpactSoundEventByName(std::string const&);
+        MCAPI void addRamImpactSoundEventByName(std::string const& name);
 
         // symbol: ?initialize@Definition@RamAttackGoal@@QEBAXAEAVEntityContext@@AEAV2@@Z
-        MCAPI void initialize(class EntityContext&, class RamAttackGoal&) const;
+        MCAPI void initialize(class EntityContext& entity, class RamAttackGoal& goal) const;
 
         // symbol:
         // ?buildSchema@Definition@RamAttackGoal@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VDefinition@RamAttackGoal@@@JsonUtil@@@4@@Z
-        MCAPI static void
-        buildSchema(std::string const&, std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class RamAttackGoal::Definition>>&);
+        MCAPI static void buildSchema(
+            std::string const& name,
+            std::shared_ptr<
+                class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class RamAttackGoal::Definition>>& root
+        );
 
         // NOLINTEND
     };
@@ -65,8 +65,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1RamAttackGoal@@UEAA@XZ
+    virtual ~RamAttackGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@RamAttackGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -85,10 +85,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@RamAttackGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0RamAttackGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit RamAttackGoal(class Mob&);
+    MCAPI explicit RamAttackGoal(class Mob& mob);
 
     // NOLINTEND
 
@@ -105,7 +105,7 @@ public:
     MCAPI bool _hasChargePath();
 
     // symbol: ?_pathablePos@RamAttackGoal@@AEAA_NAEBVBlockSource@@VBlockPos@@@Z
-    MCAPI bool _pathablePos(class BlockSource const&, class BlockPos);
+    MCAPI bool _pathablePos(class BlockSource const& region, class BlockPos blockPos);
 
     // symbol: ?_resetCooldown@RamAttackGoal@@AEAAXXZ
     MCAPI void _resetCooldown();

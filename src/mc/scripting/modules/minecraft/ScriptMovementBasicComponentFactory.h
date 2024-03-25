@@ -25,17 +25,17 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScriptMovementBasicComponentFactory@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptMovementBasicComponentFactory() = default;
 
     // vIndex: 1, symbol:
     // ?createComponent@ScriptMovementBasicComponentFactory@ScriptModuleMinecraft@@UEAA?AV?$StrongTypedObjectHandle@VScriptActorComponent@ScriptModuleMinecraft@@@Scripting@@VWeakEntityRef@@AEBVWeakLifetimeScope@4@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
     virtual class Scripting::StrongTypedObjectHandle<class ScriptModuleMinecraft::ScriptActorComponent>
-    createComponent(class WeakEntityRef, class Scripting::WeakLifetimeScope const&, std::string const&);
+    createComponent(class WeakEntityRef entity, class Scripting::WeakLifetimeScope const& scope, std::string const& id);
 
     // vIndex: 2, symbol:
     // ?hasComponent@ScriptMovementBasicComponentFactory@ScriptModuleMinecraft@@UEBA_NVWeakEntityRef@@@Z
-    virtual bool hasComponent(class WeakEntityRef) const;
+    virtual bool hasComponent(class WeakEntityRef entity) const;
 
     // NOLINTEND
 };

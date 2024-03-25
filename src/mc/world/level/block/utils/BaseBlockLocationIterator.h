@@ -9,8 +9,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1BaseBlockLocationIterator@@UEAA@XZ
+    virtual ~BaseBlockLocationIterator() = default;
 
     // vIndex: 1, symbol: ??EBaseBlockLocationIterator@@UEAAAEAV0@XZ
     virtual class BaseBlockLocationIterator& operator++();
@@ -41,10 +41,10 @@ public:
     MCAPI BaseBlockLocationIterator();
 
     // symbol: ??0BaseBlockLocationIterator@@IEAA@AEBVBlockPos@@0_N@Z
-    MCAPI BaseBlockLocationIterator(class BlockPos const&, class BlockPos const&, bool);
+    MCAPI BaseBlockLocationIterator(class BlockPos const& min, class BlockPos const& max, bool begin);
 
     // symbol: ??4BaseBlockLocationIterator@@IEAAAEAV0@AEBV0@@Z
-    MCAPI class BaseBlockLocationIterator& operator=(class BaseBlockLocationIterator const&);
+    MCAPI class BaseBlockLocationIterator& operator=(class BaseBlockLocationIterator const& other);
 
     // NOLINTEND
 };

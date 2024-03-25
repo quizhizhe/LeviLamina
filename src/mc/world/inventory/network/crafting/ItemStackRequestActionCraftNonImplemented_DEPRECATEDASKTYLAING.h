@@ -12,32 +12,20 @@ public:
     ItemStackRequestActionCraftNonImplemented_DEPRECATEDASKTYLAING&
     operator=(ItemStackRequestActionCraftNonImplemented_DEPRECATEDASKTYLAING const&);
     ItemStackRequestActionCraftNonImplemented_DEPRECATEDASKTYLAING(ItemStackRequestActionCraftNonImplemented_DEPRECATEDASKTYLAING const&);
+    ItemStackRequestActionCraftNonImplemented_DEPRECATEDASKTYLAING();
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // vIndex: 1, symbol: ?getCraftAction@ItemStackRequestActionCraftBase@@UEBAPEBV1@XZ
-    virtual class ItemStackRequestActionCraftBase const* getCraftAction() const;
-
-    // vIndex: 2, symbol: ?getFilteredStringIndex@ItemStackRequestAction@@UEBAHXZ
-    virtual int getFilteredStringIndex() const;
-
-    // vIndex: 3, symbol:
-    // ?postLoadItems_DEPRECATEDASKTYLAING@ItemStackRequestActionCraftBase@@UEAAXAEAVBlockPalette@@_N@Z
-    virtual void postLoadItems_DEPRECATEDASKTYLAING(class BlockPalette&, bool);
+    // vIndex: 0, symbol: __gen_??1ItemStackRequestActionCraftNonImplemented_DEPRECATEDASKTYLAING@@UEAA@XZ
+    virtual ~ItemStackRequestActionCraftNonImplemented_DEPRECATEDASKTYLAING() = default;
 
     // vIndex: 4, symbol:
     // ?_write@ItemStackRequestActionCraftNonImplemented_DEPRECATEDASKTYLAING@@MEBAXAEAVBinaryStream@@@Z
-    virtual void _write(class BinaryStream&) const;
+    virtual void _write(class BinaryStream& stream) const;
 
     // vIndex: 5, symbol:
     // ?_read@ItemStackRequestActionCraftNonImplemented_DEPRECATEDASKTYLAING@@MEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??0ItemStackRequestActionCraftNonImplemented_DEPRECATEDASKTYLAING@@QEAA@XZ
-    MCAPI ItemStackRequestActionCraftNonImplemented_DEPRECATEDASKTYLAING();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // NOLINTEND
 };

@@ -4,17 +4,15 @@
 #include "mc/util/BigEndianStringByteInput.h"
 #include "mc/util/BigEndianStringByteOutput.h"
 
-extern std::optional<CompoundTagVariant> parseSnbtValue(std::string_view&);
-
 std::unique_ptr<CompoundTag> CompoundTag::fromSnbt(std::string_view snbt) {
-    auto res = parseSnbtValue(snbt);
-    if (res && res.value().hold<CompoundTag>()) {
-        return std::make_unique<CompoundTag>(std::move(res.value().get<CompoundTag>()));
+    auto res = parseSnbt(snbt);
+    if (res && res->getId() == Tag::Type::Compound) {
+        return std::unique_ptr<CompoundTag>(static_cast<CompoundTag*>(res.release()));
     }
     return nullptr;
 }
 
-std::string CompoundTag::toBinaryNBT(bool isLittleEndian) const {
+std::string CompoundTag::toBinaryNbt(bool isLittleEndian) const {
     std::string result;
     if (isLittleEndian) {
         auto io = StringByteOutput{result};
@@ -25,7 +23,7 @@ std::string CompoundTag::toBinaryNBT(bool isLittleEndian) const {
     }
     return result;
 }
-std::unique_ptr<CompoundTag> CompoundTag::fromBinaryNBT(std::string_view dataView, bool isLittleEndian) {
+std::unique_ptr<CompoundTag> CompoundTag::fromBinaryNbt(std::string_view dataView, bool isLittleEndian) {
     if (isLittleEndian) {
         auto io = StringByteInput{dataView};
         return NbtIo::read(io);
@@ -34,14 +32,16 @@ std::unique_ptr<CompoundTag> CompoundTag::fromBinaryNBT(std::string_view dataVie
         return NbtIo::read(io);
     }
 }
-std::string CompoundTag::toNetworkNBT() const {
+std::string CompoundTag::toNetworkNbt() const {
     BinaryStream stream;
     stream.writeType(*this);
     return stream.getAndReleaseData();
 }
-std::unique_ptr<CompoundTag> CompoundTag::fromNetworkNBT(std::string const& data) {
+std::unique_ptr<CompoundTag> CompoundTag::fromNetworkNbt(std::string const& data) {
     auto stream = ReadOnlyBinaryStream{data, false};
     auto res    = std::make_unique<CompoundTag>();
-    stream.readType(*res);
-    return res;
+    if (stream.readType(*res)) {
+        return res;
+    }
+    return nullptr;
 }

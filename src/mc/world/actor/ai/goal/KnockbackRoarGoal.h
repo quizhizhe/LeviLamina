@@ -30,16 +30,20 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1KnockbackRoarDefinition@KnockbackRoarGoal@@UEAA@XZ
+        virtual ~KnockbackRoarDefinition() = default;
 
         // symbol: ?initialize@KnockbackRoarDefinition@KnockbackRoarGoal@@QEBAXAEAVEntityContext@@AEAV2@@Z
-        MCAPI void initialize(class EntityContext&, class KnockbackRoarGoal&) const;
+        MCAPI void initialize(class EntityContext& entity, class KnockbackRoarGoal& goal) const;
 
         // symbol:
         // ?buildSchema@KnockbackRoarDefinition@KnockbackRoarGoal@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VKnockbackRoarDefinition@KnockbackRoarGoal@@@JsonUtil@@@4@@Z
-        MCAPI static void
-        buildSchema(std::string const&, std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class KnockbackRoarGoal::KnockbackRoarDefinition>>&);
+        MCAPI static void buildSchema(
+            std::string const&                                      name,
+            std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<
+                class JsonUtil::EmptyClass,
+                class KnockbackRoarGoal::KnockbackRoarDefinition>>& root
+        );
 
         // symbol: ?getStrictParsingVersion@KnockbackRoarDefinition@KnockbackRoarGoal@@SA?AVSemVersion@@XZ
         MCAPI static class SemVersion getStrictParsingVersion();
@@ -55,8 +59,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1KnockbackRoarGoal@@UEAA@XZ
+    virtual ~KnockbackRoarGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@KnockbackRoarGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -75,10 +79,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@KnockbackRoarGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0KnockbackRoarGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit KnockbackRoarGoal(class Mob&);
+    MCAPI explicit KnockbackRoarGoal(class Mob& mob);
 
     // NOLINTEND
 };

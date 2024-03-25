@@ -13,16 +13,24 @@ public:
 
 public:
     // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1DelayActionList@@UEAA@XZ
+    virtual ~DelayActionList() = default;
+
     // symbol: ??0DelayActionList@@QEAA@XZ
     MCAPI DelayActionList();
 
     // symbol:
     // ?queueRequestOrExecuteAction@DelayActionList@@QEAA?AW4QueueRequestResult@@VDelayRequest@@AEAVServerLevel@@AEAVDimension@@_K_N@Z
-    MCAPI ::QueueRequestResult
-    queueRequestOrExecuteAction(class DelayRequest, class ServerLevel&, class Dimension&, uint64, bool);
+    MCAPI ::QueueRequestResult queueRequestOrExecuteAction(
+        class DelayRequest request,
+        class ServerLevel& level,
+        class Dimension&   dimension,
+        uint64             currentTick,
+        bool
+    );
 
     // symbol: ?tick@DelayActionList@@QEAAXAEAVServerLevel@@AEAVDimension@@_K@Z
-    MCAPI void tick(class ServerLevel&, class Dimension&, uint64);
+    MCAPI void tick(class ServerLevel& level, class Dimension& dimension, uint64 currentTick);
 
     // NOLINTEND
 };

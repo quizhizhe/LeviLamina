@@ -15,7 +15,7 @@ public:
     MCAPI void initFromDefinition(class Actor&);
 
     // symbol: ?getPreferredPath@PreferredPathComponent@@SAAEBUPreferredPathDescription@@AEBVActor@@@Z
-    MCAPI static struct PreferredPathDescription const& getPreferredPath(class Actor const&);
+    MCAPI static struct PreferredPathDescription const& getPreferredPath(class Actor const& actor);
 
     // NOLINTEND
 };

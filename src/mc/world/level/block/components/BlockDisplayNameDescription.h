@@ -21,8 +21,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1BlockDisplayNameDescription@@UEAA@XZ
+    virtual ~BlockDisplayNameDescription() = default;
 
     // vIndex: 1, symbol:
     // ?getName@BlockDisplayNameDescription@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
@@ -30,9 +30,6 @@ public:
 
     // vIndex: 3, symbol: ?initializeComponent@BlockDisplayNameDescription@@UEBAXAEAVBlockComponentStorage@@@Z
     virtual void initializeComponent(class BlockComponentStorage&) const;
-
-    // vIndex: 5, symbol: __unk_vfn_5
-    virtual void __unk_vfn_5();
 
     // vIndex: 7, symbol: ?isNetworkComponent@BlockDisplayNameDescription@@UEBA_NXZ
     virtual bool isNetworkComponent() const;
@@ -47,6 +44,9 @@ public:
 
     // symbol: ?bindType@BlockDisplayNameDescription@@SAXAEAUReflectionCtx@cereal@@@Z
     MCAPI static void bindType(struct cereal::ReflectionCtx&);
+
+    // symbol: ?registerVersionUpgrades@BlockDisplayNameDescription@@SAXAEAVCerealSchemaUpgradeSet@@@Z
+    MCAPI static void registerVersionUpgrades(class CerealSchemaUpgradeSet&);
 
     // symbol: ?NameID@BlockDisplayNameDescription@@2V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@B
     MCAPI static std::string const NameID;

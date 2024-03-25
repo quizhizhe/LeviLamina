@@ -5,15 +5,12 @@
 // auto generated inclusion list
 #include "mc/external/scripting/ClassBindingBuilder.h"
 #include "mc/external/scripting/Result.h"
-#include "mc/external/scripting/StrongTypedObjectHandle.h"
 #include "mc/scripting/modules/minecraft/BaseScriptBlockLiquidContainerComponent.h"
 
 // auto generated forward declare list
 // clang-format off
-class BlockPos;
-class BlockSource;
 namespace ScriptModuleMinecraft { class BaseScriptBlockLiquidContainerComponent; }
-namespace Scripting { class WeakLifetimeScope; }
+namespace ScriptModuleMinecraft { class ScriptComponentTypeEnumBuilder; }
 // clang-format on
 
 namespace ScriptModuleMinecraft {
@@ -27,26 +24,13 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // symbol: ??1ScriptBlockSnowContainerComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptBlockSnowContainerComponent();
-
-    // symbol: ??4ScriptBlockSnowContainerComponent@ScriptModuleMinecraft@@QEAAAEAV01@$$QEAV01@@Z
-    MCAPI class ScriptModuleMinecraft::ScriptBlockSnowContainerComponent&
-    operator=(class ScriptModuleMinecraft::ScriptBlockSnowContainerComponent&&);
+    // vIndex: 0, symbol: __gen_??1ScriptBlockSnowContainerComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptBlockSnowContainerComponent() = default;
 
     // symbol:
-    // ?bind@ScriptBlockSnowContainerComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptBlockSnowContainerComponent@ScriptModuleMinecraft@@@Scripting@@XZ
+    // ?bind@ScriptBlockSnowContainerComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptBlockSnowContainerComponent@ScriptModuleMinecraft@@@Scripting@@AEAVScriptComponentTypeEnumBuilder@2@@Z
     MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptBlockSnowContainerComponent>
-    bind();
-
-    // symbol:
-    // ?tryCreate@ScriptBlockSnowContainerComponent@ScriptModuleMinecraft@@SA?AV?$optional@V?$StrongTypedObjectHandle@VScriptBlockSnowContainerComponent@ScriptModuleMinecraft@@@Scripting@@@std@@AEAVBlockSource@@VBlockPos@@AEBVWeakLifetimeScope@Scripting@@@Z
-    MCAPI static std::optional<
-        class Scripting::StrongTypedObjectHandle<class ScriptModuleMinecraft::ScriptBlockSnowContainerComponent>>
-    tryCreate(class BlockSource&, class BlockPos, class Scripting::WeakLifetimeScope const&);
+    bind(class ScriptModuleMinecraft::ScriptComponentTypeEnumBuilder&);
 
     // symbol: ?ComponentId@ScriptBlockSnowContainerComponent@ScriptModuleMinecraft@@2PEBDEB
     MCAPI static char const* ComponentId;

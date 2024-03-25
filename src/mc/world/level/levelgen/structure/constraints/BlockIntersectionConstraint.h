@@ -14,15 +14,19 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1BlockIntersectionConstraint@@UEAA@XZ
+    virtual ~BlockIntersectionConstraint() = default;
 
     // vIndex: 1, symbol:
     // ?isSatisfied@BlockIntersectionConstraint@@UEBA_NAEBVIBlockWorldGenAPI@@AEBVBlockPos@@AEBW4Rotation@@@Z
-    virtual bool isSatisfied(class IBlockWorldGenAPI const&, class BlockPos const&, ::Rotation const&) const;
+    virtual bool isSatisfied(
+        class IBlockWorldGenAPI const& target,
+        class BlockPos const&          structurePos,
+        ::Rotation const&              structureRot
+    ) const;
 
     // symbol: ??0BlockIntersectionConstraint@@QEAA@AEAVStructureTemplate@@@Z
-    MCAPI explicit BlockIntersectionConstraint(class StructureTemplate&);
+    MCAPI explicit BlockIntersectionConstraint(class StructureTemplate& structure);
 
     // NOLINTEND
 };

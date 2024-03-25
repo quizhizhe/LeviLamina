@@ -1,31 +1,40 @@
 #pragma once
 
+#include <cerrno>
+#include <cstddef>
+#include <cstdlib>
+#include <stdexcept>
 #include <string>
 #include <string_view>
+#include <type_traits>
+#include <utility>
 #include <vector>
+
+#include "fmt/color.h"
 
 #include "ll/api/base/Macro.h"
 #include "ll/api/base/StdInt.h"
-#include "ll/api/memory/Memory.h"
 
-#include "fmt/color.h"
-#include "fmt/core.h"
-
-namespace ll::utils::string_utils {
+namespace ll::inline utils::string_utils {
 
 // "2021-03-24"  ->  ["2021", "03", "24"]  (use '-' as split pattern)
-[[nodiscard]] constexpr std::vector<std::string_view> splitByPattern(std::string_view s, std::string_view pattern) {
-    if (s.empty()) return {};
+template <class T>
+[[nodiscard]] constexpr auto splitByPattern(T&& str, std::string_view pattern, bool keepEmpty = false)
+    -> decltype(auto) {
+    using ReturnTypeElement = std::conditional_t<std::is_same_v<T&&, std::string&&>, std::string, std::string_view>;
+    using ReturnType        = std::vector<ReturnTypeElement>;
+    std::string_view s{str};
+    if (s.empty()) return ReturnType{};
     size_t pos  = s.find(pattern);
     size_t size = s.size();
 
-    std::vector<std::string_view> ret;
+    ReturnType ret;
     while (pos != std::string::npos) {
-        ret.push_back(s.substr(0, pos));
+        if (keepEmpty || pos != 0) ret.push_back(ReturnTypeElement{s.substr(0, pos)});
         s   = s.substr(pos + pattern.size(), size - pos - pattern.size());
         pos = s.find(pattern);
     }
-    ret.push_back(s);
+    if (keepEmpty || !s.empty()) ret.push_back(ReturnTypeElement{s});
     return ret;
 }
 
@@ -36,14 +45,36 @@ namespace ll::utils::string_utils {
  * @param newValue  The string to replace with
  * @return std::string  The modified input std::string
  */
-[[nodiscard]] constexpr std::string
-replaceAll(std::string str, std::string const& oldValue, std::string const& newValue) {
+constexpr std::string& replaceAll(std::string& str, std::string_view oldValue, std::string_view newValue) {
     for (std::string::size_type pos(0); pos != std::string::npos; pos += newValue.length()) {
         if ((pos = str.find(oldValue, pos)) != std::string::npos) str.replace(pos, oldValue.length(), newValue);
         else break;
     }
     return str;
 }
+
+[[nodiscard]] constexpr std::string
+replaceAll(std::string const& str, std::string_view oldValue, std::string_view newValue) {
+    std::string ret = str;
+    replaceAll(ret, oldValue, newValue);
+    return ret;
+}
+
+constexpr bool
+replaceContent(std::string& str, std::string_view before, std::string_view after, std::string_view relplaceWith) {
+    auto startOffset = str.find(before);
+    if (startOffset == std::string::npos) return false;
+    startOffset    += before.size();
+    auto endOffset  = after.empty() ? std::string::npos : str.find(after, startOffset);
+    str.replace(startOffset, endOffset - startOffset, relplaceWith);
+    return true;
+}
+
+// use snappy to compress
+LLNDAPI std::string compress(std::string_view);
+
+// use snappy to decompress
+LLNDAPI std::string decompress(std::string_view);
 
 /**
  * @brief Integer to hex string.
@@ -61,47 +92,58 @@ replaceAll(std::string str, std::string const& oldValue, std::string const& newV
  * IntToHexStr(16, true, true, false); // "0000000F"
  * @endcode
  */
-template <typename T>
+template <class T>
     requires std::is_integral_v<T>
-[[nodiscard]] inline std::string
+[[nodiscard]] constexpr std::string
 intToHexStr(T value, bool upperCase = true, bool no0x = true, bool noLeadingZero = true) {
     std::string result;
     if (value < 0) result += '-';
     if (!no0x) result += "0x";
-    auto hexStr      = upperCase ? "0123456789ABCDEF" : "0123456789abcdef";
-    bool leadingZero = true;
+    constexpr char hexStr[2][17] = {"0123456789abcdef", "0123456789ABCDEF"};
+    bool           leadingZero   = true;
     for (int i = sizeof(T) * 2; i > 0; --i) {
         auto hex = (value >> (i - 1) * 4) & 0xF;
         if (noLeadingZero && leadingZero && hex == 0) continue;
         leadingZero  = false;
-        result      += hexStr[hex];
+        result      += hexStr[upperCase][hex];
     }
     return result;
 }
 
-template <typename S, typename Char = fmt::char_t<S>>
-[[nodiscard]] constexpr std::string applyTextStyle(fmt::text_style const& ts, S const& format_str) {
-    fmt::basic_memory_buffer<Char> buf;
-    auto                           fmt       = fmt::detail::to_string_view(format_str);
-    bool                           has_style = false;
+[[nodiscard]] constexpr std::string strToHexStr(std::string_view value, bool upperCase = false, bool addSpace = false) {
+    constexpr char hexStr[2][17] = {"0123456789abcdef", "0123456789ABCDEF"};
+    std::string    hex;
+    hex.reserve(value.size() * (addSpace ? 3 : 2));
+    for (uchar x : value) {
+        hex += hexStr[upperCase][x / 16];
+        hex += hexStr[upperCase][x % 16];
+        if (addSpace) hex += ' ';
+    }
+    if (addSpace && hex.ends_with(' ')) hex.pop_back();
+    return hex;
+}
+
+[[nodiscard]] constexpr std::string applyTextStyle(fmt::text_style const& ts, std::string_view str) {
+    std::string res;
+    bool        has_style = false;
     if (ts.has_emphasis()) {
         has_style     = true;
-        auto emphasis = fmt::detail::make_emphasis<Char>(ts.get_emphasis());
-        buf.append(emphasis.begin(), emphasis.end());
+        auto emphasis = fmt::detail::make_emphasis<char>(ts.get_emphasis());
+        res.append(emphasis.begin(), emphasis.end());
     }
     if (ts.has_foreground()) {
         has_style       = true;
-        auto foreground = fmt::detail::make_foreground_color<Char>(ts.get_foreground());
-        buf.append(foreground.begin(), foreground.end());
+        auto foreground = fmt::detail::make_foreground_color<char>(ts.get_foreground());
+        res.append(foreground.begin(), foreground.end());
     }
     if (ts.has_background()) {
         has_style       = true;
-        auto background = fmt::detail::make_background_color<Char>(ts.get_background());
-        buf.append(background.begin(), background.end());
+        auto background = fmt::detail::make_background_color<char>(ts.get_background());
+        res.append(background.begin(), background.end());
     }
-    buf.append(fmt.begin(), fmt.end());
-    if (has_style) fmt::detail::reset_color<Char>(buf);
-    return fmt::to_string(buf);
+    res += str;
+    if (has_style) res += "\x1b[0m";
+    return res;
 }
 
 LLNDAPI std::string removeEscapeCode(std::string_view str);
@@ -110,19 +152,28 @@ LLNDAPI std::string replaceAnsiToMcCode(std::string_view str);
 
 LLNDAPI std::string replaceMcToAnsiCode(std::string_view str);
 
+LLNDAPI bool isu8str(std::string_view str) noexcept;
+
+LLNDAPI std::string tou8str(std::string_view str);
+
+LLNDAPI std::string toSnakeCase(std::string_view str);
+
 namespace CodePage {
 enum : uint {
-    UTF16 = 0,
-    ANSI  = 936,
-    UTF8  = 65001,
+    DefaultACP = 0,  // default to ANSI code page
+    ThreadACP  = 3,  // current thread's ANSI code page
+    Symbol     = 42, // SYMBOL translations
+    GB2312     = 936,
+    UTF8       = 65001,
 };
 } // namespace CodePage
 
 LLNDAPI std::wstring str2wstr(std::string_view str, uint codePage = CodePage::UTF8);
 
-LLNDAPI std::string wstr2str(std::wstring_view str, uint codePage = CodePage::UTF8);
+LLNDAPI std::string wstr2str(std::wstring_view wstr, uint codePage = CodePage::UTF8);
 
-LLNDAPI std::string str2str(std::string_view str, uint fromCodePage, uint toCodePage = CodePage::UTF8);
+LLNDAPI std::string
+        str2str(std::string_view str, uint fromCodePage = CodePage::DefaultACP, uint toCodePage = CodePage::UTF8);
 
 [[nodiscard]] inline std::string u8str2str(std::u8string str) {
     std::string& tmp = *reinterpret_cast<std::string*>(&str);
@@ -152,25 +203,37 @@ LLNDAPI std::string str2str(std::string_view str, uint fromCodePage, uint toCode
 template <class T, auto f>
 [[nodiscard]] inline T svtonum(std::string_view str, size_t* idx, int base) {
     int&        errnoRef = errno;
-    const char* ptr      = str.data();
-    char*       eptr;
+    char const* ptr      = str.data();
+    char*       eptr{};
     errnoRef       = 0;
     const auto ans = f(ptr, &eptr, base);
-    if (ptr == eptr) { throw std::invalid_argument("invalid svtonum argument"); }
-    if (errnoRef == ERANGE) { throw std::out_of_range("svtonum argument out of range"); }
-    if (idx) { *idx = static_cast<size_t>(eptr - ptr); }
+    if (ptr == eptr) {
+        throw std::invalid_argument("invalid svtonum argument");
+    }
+    if (errnoRef == ERANGE) {
+        throw std::out_of_range("svtonum argument out of range");
+    }
+    if (idx) {
+        *idx = static_cast<size_t>(eptr - ptr);
+    }
     return static_cast<T>(ans);
 }
 template <class T, auto f>
 [[nodiscard]] inline T svtonum(std::string_view str, size_t* idx) {
     int&        errnoRef = errno;
-    const char* ptr      = str.data();
-    char*       eptr;
+    char const* ptr      = str.data();
+    char*       eptr{};
     errnoRef       = 0;
     const auto ans = f(ptr, &eptr);
-    if (ptr == eptr) { throw std::invalid_argument("invalid svtonum argument"); }
-    if (errnoRef == ERANGE) { throw std::out_of_range("svtonum argument out of range"); }
-    if (idx) { *idx = static_cast<size_t>(eptr - ptr); }
+    if (ptr == eptr) {
+        throw std::invalid_argument("invalid svtonum argument");
+    }
+    if (errnoRef == ERANGE) {
+        throw std::out_of_range("svtonum argument out of range");
+    }
+    if (idx) {
+        *idx = static_cast<size_t>(eptr - ptr);
+    }
     return static_cast<T>(ans);
 }
 
@@ -213,4 +276,6 @@ template <class T, auto f>
 [[nodiscard]] inline ldouble svtold(std::string_view str, size_t* idx = nullptr) {
     return svtonum<ldouble, strtof>(str, idx);
 }
-} // namespace ll::utils::string_utils
+LLNDAPI bool strtobool(std::string const&);
+
+} // namespace ll::inline utils::string_utils

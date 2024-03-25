@@ -23,7 +23,10 @@ public:
     public:
         // NOLINTBEGIN
         // symbol: ??0PacketStats@PacketObserver@@QEAA@I@Z
-        MCAPI explicit PacketStats(uint);
+        MCAPI explicit PacketStats(uint id);
+
+        // symbol: ??YPacketStats@PacketObserver@@QEAAXAEBU01@@Z
+        MCAPI void operator+=(struct PacketObserver::PacketStats const& packetStats);
 
         // NOLINTEND
     };
@@ -36,14 +39,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1PacketObserver@@UEAA@XZ
+    virtual ~PacketObserver();
 
     // vIndex: 1, symbol: ?packetSentTo@PacketObserver@@UEAAXAEBVNetworkIdentifier@@AEBVPacket@@I@Z
-    virtual void packetSentTo(class NetworkIdentifier const&, class Packet const&, uint);
+    virtual void packetSentTo(class NetworkIdentifier const&, class Packet const&, uint size);
 
     // vIndex: 2, symbol: ?packetReceivedFrom@PacketObserver@@UEAAXAEBVNetworkIdentifier@@AEBVPacket@@I@Z
-    virtual void packetReceivedFrom(class NetworkIdentifier const&, class Packet const&, uint);
+    virtual void packetReceivedFrom(class NetworkIdentifier const&, class Packet const&, uint size);
 
     // vIndex: 3, symbol:
     // ?dataSentTo@PacketObserver@@UEAAXAEBVNetworkIdentifier@@V?$basic_string_view@DU?$char_traits@D@std@@@std@@@Z
@@ -55,9 +58,6 @@ public:
 
     // vIndex: 5, symbol: ?reset@PacketObserver@@UEAAXXZ
     virtual void reset();
-
-    // symbol: ??1PacketObserver@@UEAA@XZ
-    MCVAPI ~PacketObserver();
 
     // NOLINTEND
 };

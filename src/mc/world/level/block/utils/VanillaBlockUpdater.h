@@ -25,44 +25,44 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol: ?addBaseUpdater@VanillaBlockUpdater@@CAXAEAVCompoundTagUpdaterContext@@@Z
-    MCAPI static void addBaseUpdater(class CompoundTagUpdaterContext&);
+    MCAPI static void addBaseUpdater(class CompoundTagUpdaterContext& context);
 
     // symbol:
     // ?addRailUpdater_1_14_0@VanillaBlockUpdater@@CAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAVCompoundTagUpdaterContext@@@Z
-    MCAPI static void addRailUpdater_1_14_0(std::string const&, class CompoundTagUpdaterContext&);
+    MCAPI static void addRailUpdater_1_14_0(std::string const& railName, class CompoundTagUpdaterContext& context);
 
     // symbol: ?addUpdaters_1_10_0@VanillaBlockUpdater@@CAXAEAVCompoundTagUpdaterContext@@@Z
-    MCAPI static void addUpdaters_1_10_0(class CompoundTagUpdaterContext&);
+    MCAPI static void addUpdaters_1_10_0(class CompoundTagUpdaterContext& context);
 
     // symbol: ?addUpdaters_1_12_0@VanillaBlockUpdater@@CAXAEAVCompoundTagUpdaterContext@@@Z
-    MCAPI static void addUpdaters_1_12_0(class CompoundTagUpdaterContext&);
+    MCAPI static void addUpdaters_1_12_0(class CompoundTagUpdaterContext& context);
 
     // symbol: ?addUpdaters_1_13_0@VanillaBlockUpdater@@CAXAEAVCompoundTagUpdaterContext@@@Z
-    MCAPI static void addUpdaters_1_13_0(class CompoundTagUpdaterContext&);
+    MCAPI static void addUpdaters_1_13_0(class CompoundTagUpdaterContext& context);
 
     // symbol: ?addUpdaters_1_14_0@VanillaBlockUpdater@@CAXAEAVCompoundTagUpdaterContext@@@Z
-    MCAPI static void addUpdaters_1_14_0(class CompoundTagUpdaterContext&);
+    MCAPI static void addUpdaters_1_14_0(class CompoundTagUpdaterContext& context);
 
     // symbol: ?addUpdaters_1_15_0@VanillaBlockUpdater@@CAXAEAVCompoundTagUpdaterContext@@@Z
-    MCAPI static void addUpdaters_1_15_0(class CompoundTagUpdaterContext&);
+    MCAPI static void addUpdaters_1_15_0(class CompoundTagUpdaterContext& context);
 
     // symbol: ?addUpdaters_1_16_0@VanillaBlockUpdater@@CAXAEAVCompoundTagUpdaterContext@@@Z
-    MCAPI static void addUpdaters_1_16_0(class CompoundTagUpdaterContext&);
+    MCAPI static void addUpdaters_1_16_0(class CompoundTagUpdaterContext& context);
 
     // symbol: ?addUpdaters_1_16_210@VanillaBlockUpdater@@CAXAEAVCompoundTagUpdaterContext@@@Z
-    MCAPI static void addUpdaters_1_16_210(class CompoundTagUpdaterContext&);
+    MCAPI static void addUpdaters_1_16_210(class CompoundTagUpdaterContext& context);
 
     // symbol: ?addUpdaters_1_18_10@VanillaBlockUpdater@@CAXAEAVCompoundTagUpdaterContext@@@Z
-    MCAPI static void addUpdaters_1_18_10(class CompoundTagUpdaterContext&);
+    MCAPI static void addUpdaters_1_18_10(class CompoundTagUpdaterContext& context);
 
     // symbol: ?addUpdaters_1_19_70@VanillaBlockUpdater@@CAXAEAVCompoundTagUpdaterContext@@@Z
-    MCAPI static void addUpdaters_1_19_70(class CompoundTagUpdaterContext&);
+    MCAPI static void addUpdaters_1_19_70(class CompoundTagUpdaterContext& context);
 
     // symbol: ?addUpdaters_1_19_80@VanillaBlockUpdater@@CAXAEAVCompoundTagUpdaterContext@@@Z
-    MCAPI static void addUpdaters_1_19_80(class CompoundTagUpdaterContext&);
+    MCAPI static void addUpdaters_1_19_80(class CompoundTagUpdaterContext& context);
 
     // symbol: ?addUpdaters_1_20_0@VanillaBlockUpdater@@CAXAEAVCompoundTagUpdaterContext@@@Z
-    MCAPI static void addUpdaters_1_20_0(class CompoundTagUpdaterContext&);
+    MCAPI static void addUpdaters_1_20_0(class CompoundTagUpdaterContext& context);
 
     // symbol: ?addUpdaters_1_20_10@VanillaBlockUpdater@@CAXAEAVCompoundTagUpdaterContext@@@Z
     MCAPI static void addUpdaters_1_20_10(class CompoundTagUpdaterContext&);
@@ -75,6 +75,12 @@ public:
 
     // symbol: ?addUpdaters_1_20_40@VanillaBlockUpdater@@CAXAEAVCompoundTagUpdaterContext@@@Z
     MCAPI static void addUpdaters_1_20_40(class CompoundTagUpdaterContext&);
+
+    // symbol: ?addUpdaters_1_20_50@VanillaBlockUpdater@@CAXAEAVCompoundTagUpdaterContext@@@Z
+    MCAPI static void addUpdaters_1_20_50(class CompoundTagUpdaterContext&);
+
+    // symbol: ?addUpdaters_1_20_60@VanillaBlockUpdater@@CAXAEAVCompoundTagUpdaterContext@@@Z
+    MCAPI static void addUpdaters_1_20_60(class CompoundTagUpdaterContext&);
 
     // NOLINTEND
 
@@ -89,7 +95,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mContext() { return mContext; }
+    static auto& $mContext() { return mContext; }
 
     // NOLINTEND
 };

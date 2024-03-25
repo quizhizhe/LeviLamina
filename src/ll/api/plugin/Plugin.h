@@ -1,37 +1,80 @@
 #pragma once
 
-#include <any>
-#include <map>
-#include <optional>
-#include <string>
-#include <unordered_map>
+#include <filesystem>
+#include <functional>
+#include <memory>
 
-#include "ll/api/plugin/Version.h"
-
-#include "mc/common/wrapper/optional_ref.h"
+#include "ll/api/Logger.h"
+#include "ll/api/base/Macro.h"
+#include "ll/api/plugin/Manifest.h"
 
 namespace ll::plugin {
 
-struct Plugin {
-    std::string                               mName;
-    std::string                               mDescription;
-    Version                                   mVersion;
-    std::map<std::string, std::string>        mExtraInfo;
-    std::unordered_map<std::string, std::any> mSharedData;
+LLAPI std::filesystem::path const& getPluginsRoot();
 
-    LLNDAPI std::string getDefaultDataPath() const;
+class PluginManager;
+class Plugin {
 
-    template <typename T, typename... Args>
-    void addSharedData(std::string const& key, Args&&... args)
-        requires(std::is_constructible_v<std::any, std::in_place_type_t<T>, Args...>)
-    {
-        mSharedData[key] = std::make_any<T>(std::forward<Args>(args)...);
-    }
-    template <typename T>
-    optional_ref<T> getSharedData(std::string const& key) {
-        if (mSharedData.contains(key)) { return std::any_cast<T>(&mSharedData[key]); }
-        return std::nullopt;
-    }
+public:
+    enum class State {
+        Enabled,
+        Disabled,
+    };
+    using callback_t = bool(Plugin&);
+    using CallbackFn = std::function<callback_t>;
+
+    LLNDAPI explicit Plugin(Manifest manifest);
+
+    LLAPI ~Plugin();
+
+    LLNDAPI State getState() const;
+
+    LLNDAPI Manifest const& getManifest() const;
+
+    LLNDAPI std::filesystem::path const& getPluginDir() const;
+
+    LLNDAPI std::filesystem::path const& getDataDir() const;
+
+    LLNDAPI std::filesystem::path const& getConfigDir() const;
+
+    LLNDAPI std::filesystem::path const& getLangDir() const;
+
+    LLNDAPI Logger& getLogger() const;
+
+    // set on load callback and etc...
+    LLAPI void onLoad(CallbackFn func) noexcept;
+
+    LLAPI void onUnload(CallbackFn func) noexcept;
+
+    LLAPI void onEnable(CallbackFn func) noexcept;
+
+    LLAPI void onDisable(CallbackFn func) noexcept;
+
+protected:
+    LLAPI void setState(State state) const;
+
+    // is callback set
+    LLNDAPI bool hasOnLoad() const noexcept;
+
+    LLNDAPI bool hasOnUnload() const noexcept;
+
+    LLNDAPI bool hasOnEnable() const noexcept;
+
+    LLNDAPI bool hasOnDisable() const noexcept;
+
+    // call on load callback and etc...
+    LLAPI bool onLoad() noexcept;
+
+    LLAPI bool onUnload() noexcept;
+
+    LLAPI bool onEnable() noexcept;
+
+    LLAPI bool onDisable() noexcept;
+
+private:
+    friend PluginManager;
+
+    struct Impl;
+    std::unique_ptr<Impl> mImpl;
 };
-
 } // namespace ll::plugin

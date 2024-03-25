@@ -5,13 +5,11 @@
 std::string const& BlockLegacy::getTypeName() const {
     return reinterpret_cast<BlockLegacy::NameInfo const*>(&(this->getRawNameHash()))->mFullName.getString();
 }
-optional_ref<BlockLegacy> BlockLegacy::tryGetFromRegistry(std::string const& name) {
+optional_ref<BlockLegacy> BlockLegacy::tryGetFromRegistry(std::string_view name) {
     auto blockLegacyPtr = BlockTypeRegistry::lookupByName(HashedString{name});
-    if (!blockLegacyPtr) { return nullptr; }
     return blockLegacyPtr.get();
 }
 optional_ref<BlockLegacy> BlockLegacy::tryGetFromRegistry(uint legacyBlockID) {
     auto blockLegacyPtr = VanillaBlockConversion::getBlockTypeFromLegacyId(legacyBlockID);
-    if (!blockLegacyPtr) { return nullptr; }
     return blockLegacyPtr.get();
 }

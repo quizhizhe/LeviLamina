@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1RangedAttackGoal@@UEAA@XZ
+    virtual ~RangedAttackGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@RangedAttackGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -35,13 +35,13 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@RangedAttackGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0RangedAttackGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit RangedAttackGoal(class Mob&);
+    MCAPI explicit RangedAttackGoal(class Mob& mob);
 
     // symbol: ?handleAttackBehavior@RangedAttackGoal@@QEAAXPEAVActor@@AEBVVec3@@M_N@Z
-    MCAPI void handleAttackBehavior(class Actor*, class Vec3 const&, float, bool);
+    MCAPI void handleAttackBehavior(class Actor* lockedTarget, class Vec3 const& lockedTargetPos, float, bool canSee);
 
     // NOLINTEND
 };

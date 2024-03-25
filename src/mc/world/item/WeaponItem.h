@@ -5,7 +5,6 @@
 // auto generated inclusion list
 #include "mc/entity/utilities/ActorLocation.h"
 #include "mc/enums/InHandUpdateType.h"
-#include "mc/enums/UseAnimation.h"
 #include "mc/events/LevelSoundEvent.h"
 #include "mc/world/item/Item.h"
 #include "mc/world/item/components/ItemColor.h"
@@ -27,88 +26,54 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1WeaponItem@@UEAA@XZ
+    virtual ~WeaponItem() = default;
 
-    // vIndex: 11, symbol: __unk_vfn_11
-    virtual void __unk_vfn_11();
+    // vIndex: 31, symbol: ?canDestroySpecial@WeaponItem@@UEBA_NAEBVBlock@@@Z
+    virtual bool canDestroySpecial(class Block const& block) const;
 
-    // vIndex: 14, symbol: __unk_vfn_14
-    virtual void __unk_vfn_14();
-
-    // vIndex: 16, symbol: __unk_vfn_16
-    virtual void __unk_vfn_16();
-
-    // vIndex: 21, symbol: __unk_vfn_21
-    virtual void __unk_vfn_21();
-
-    // vIndex: 44, symbol: ?canDestroySpecial@WeaponItem@@UEBA_NAEBVBlock@@@Z
-    virtual bool canDestroySpecial(class Block const&) const;
-
-    // vIndex: 48, symbol: ?getAttackDamage@WeaponItem@@UEBAHXZ
+    // vIndex: 35, symbol: ?getAttackDamage@WeaponItem@@UEBAHXZ
     virtual int getAttackDamage() const;
 
-    // vIndex: 49, symbol: ?isHandEquipped@WeaponItem@@UEBA_NXZ
+    // vIndex: 36, symbol: ?isHandEquipped@WeaponItem@@UEBA_NXZ
     virtual bool isHandEquipped() const;
 
-    // vIndex: 51, symbol: __unk_vfn_51
-    virtual void __unk_vfn_51();
-
-    // vIndex: 53, symbol: __unk_vfn_53
-    virtual void __unk_vfn_53();
-
-    // vIndex: 55, symbol: ?canDestroyInCreative@WeaponItem@@UEBA_NXZ
+    // vIndex: 42, symbol: ?canDestroyInCreative@WeaponItem@@UEBA_NXZ
     virtual bool canDestroyInCreative() const;
 
-    // vIndex: 60, symbol:
+    // vIndex: 47, symbol:
     // ?appendFormattedHovertext@WeaponItem@@UEBAXAEBVItemStackBase@@AEAVLevel@@AEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z
-    virtual void appendFormattedHovertext(class ItemStackBase const&, class Level&, std::string&, bool) const;
+    virtual void appendFormattedHovertext(
+        class ItemStackBase const& stack,
+        class Level&               level,
+        std::string&               hovertext,
+        bool                       showCategory
+    ) const;
 
-    // vIndex: 61, symbol: ?isValidRepairItem@WeaponItem@@UEBA_NAEBVItemStackBase@@0AEBVBaseGameVersion@@@Z
-    virtual bool
-    isValidRepairItem(class ItemStackBase const&, class ItemStackBase const&, class BaseGameVersion const&) const;
+    // vIndex: 48, symbol: ?isValidRepairItem@WeaponItem@@UEBA_NAEBVItemStackBase@@0AEBVBaseGameVersion@@@Z
+    virtual bool isValidRepairItem(
+        class ItemStackBase const&,
+        class ItemStackBase const&   repairItem,
+        class BaseGameVersion const& baseGameVersion
+    ) const;
 
-    // vIndex: 62, symbol: ?getEnchantSlot@WeaponItem@@UEBAHXZ
+    // vIndex: 49, symbol: ?getEnchantSlot@WeaponItem@@UEBAHXZ
     virtual int getEnchantSlot() const;
 
-    // vIndex: 63, symbol: ?getEnchantValue@WeaponItem@@UEBAHXZ
+    // vIndex: 50, symbol: ?getEnchantValue@WeaponItem@@UEBAHXZ
     virtual int getEnchantValue() const;
 
-    // vIndex: 66, symbol: __unk_vfn_66
-    virtual void __unk_vfn_66();
+    // vIndex: 71, symbol: ?use@WeaponItem@@UEBAAEAVItemStack@@AEAV2@AEAVPlayer@@@Z
+    virtual class ItemStack& use(class ItemStack& instance, class Player& player) const;
 
-    // vIndex: 70, symbol: __unk_vfn_70
-    virtual void __unk_vfn_70();
+    // vIndex: 75, symbol: ?getDestroySpeed@WeaponItem@@UEBAMAEBVItemStackBase@@AEBVBlock@@@Z
+    virtual float getDestroySpeed(class ItemStackBase const& item, class Block const& block) const;
 
-    // vIndex: 71, symbol: __unk_vfn_71
-    virtual void __unk_vfn_71();
+    // vIndex: 76, symbol: ?hurtActor@WeaponItem@@UEBAXAEAVItemStack@@AEAVActor@@AEAVMob@@@Z
+    virtual void hurtActor(class ItemStack& item, class Actor& actor, class Mob& attacker) const;
 
-    // vIndex: 72, symbol: __unk_vfn_72
-    virtual void __unk_vfn_72();
-
-    // vIndex: 75, symbol: __unk_vfn_75
-    virtual void __unk_vfn_75();
-
-    // vIndex: 79, symbol: __unk_vfn_79
-    virtual void __unk_vfn_79();
-
-    // vIndex: 80, symbol: __unk_vfn_80
-    virtual void __unk_vfn_80();
-
-    // vIndex: 84, symbol: ?use@WeaponItem@@UEBAAEAVItemStack@@AEAV2@AEAVPlayer@@@Z
-    virtual class ItemStack& use(class ItemStack&, class Player&) const;
-
-    // vIndex: 88, symbol: ?getDestroySpeed@WeaponItem@@UEBAMAEBVItemStackBase@@AEBVBlock@@@Z
-    virtual float getDestroySpeed(class ItemStackBase const&, class Block const&) const;
-
-    // vIndex: 89, symbol: ?hurtActor@WeaponItem@@UEBAXAEAVItemStack@@AEAVActor@@AEAVMob@@@Z
-    virtual void hurtActor(class ItemStack&, class Actor&, class Mob&) const;
-
-    // vIndex: 115, symbol: __unk_vfn_115
-    virtual void __unk_vfn_115();
-
-    // vIndex: 116, symbol: __unk_vfn_116
-    virtual void __unk_vfn_116();
+    // symbol: ??0WeaponItem@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HAEBVTier@Item@@@Z
+    MCAPI WeaponItem(std::string const& name, int id, class Item::Tier const& tier);
 
     // NOLINTEND
 };

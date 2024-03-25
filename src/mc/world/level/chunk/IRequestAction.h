@@ -21,26 +21,23 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1IRequestAction@@UEAA@XZ
+    virtual ~IRequestAction();
 
     // vIndex: 1, symbol: ?execute@FunctionAction@@UEAAXAEAVServerLevel@@AEAVDimension@@@Z
-    virtual void execute(class ServerLevel&, class Dimension&) = 0;
+    virtual void execute(class ServerLevel& level, class Dimension& dimension) = 0;
 
     // vIndex: 2, symbol: ?serialize@IRequestAction@@UEAAXAEAVCompoundTag@@@Z
-    virtual void serialize(class CompoundTag&);
+    virtual void serialize(class CompoundTag& tag);
 
-    // vIndex: 3, symbol: ??8IRequestAction@@UEBA_NAEAV0@@Z
-    virtual bool operator==(class IRequestAction&) const;
-
-    // symbol: ??1IRequestAction@@UEAA@XZ
-    MCVAPI ~IRequestAction();
+    // vIndex: 3, symbol: ??8IRequestAction@@UEBA_NAEBV0@@Z
+    virtual bool operator==(class IRequestAction const& action) const;
 
     // symbol: ??0IRequestAction@@QEAA@AEBW4RequestActionType@0@@Z
     MCAPI explicit IRequestAction(::IRequestAction::RequestActionType const&);
 
     // symbol: ?isValidTag@IRequestAction@@SA_NAEBVCompoundTag@@@Z
-    MCAPI static bool isValidTag(class CompoundTag const&);
+    MCAPI static bool isValidTag(class CompoundTag const& tag);
 
     // NOLINTEND
 };

@@ -1,25 +1,37 @@
 #pragma once
 
+#include <filesystem>
+#include <optional>
+#include <span>
 #include <string>
+
+#include <intrin.h>
 
 #include "ll/api/base/Macro.h"
 #include "ll/api/base/StdInt.h"
 
-namespace ll::utils::win_utils {
+namespace ll::inline utils::win_utils {
 
-// GetLastError() -> string
-LLNDAPI std::string getLastErrorMessage();
-LLNDAPI std::string getLastErrorMessage(ulong errorMessageId);
+extern "C" struct _IMAGE_DOS_HEADER __ImageBase; // NOLINT(bugprone-reserved-identifier)
 
-/**
- * @brief Get the system locale name.
- *
- * @return  std::string  The system locale name.
- */
+[[nodiscard]] inline void* getCurrentModuleHandle() { return &__ImageBase; }
+
 LLNDAPI std::string getSystemLocaleName();
 
 LLNDAPI bool isWine();
 
-LLNDAPI uintptr_t findSig(char const* szSignature);
+LLNDAPI std::span<uchar> getImageRange(std::string_view name = "");
 
-} // namespace ll::utils::win_utils
+LLNDAPI void* getModuleHandle(void* addr);
+
+LLNDAPI std::optional<std::filesystem::path> getModulePath(void* handle);
+
+LLNDAPI std::string getModuleFileName(void* handle);
+
+LLNDAPI std::pair<std::tm, int> getLocalTime(); // tm & ms
+
+[[nodiscard]] inline std::string getCallerModuleFileName(void* addr = _ReturnAddress()) {
+    return getModuleFileName(getModuleHandle(addr));
+}
+
+} // namespace ll::inline utils::win_utils

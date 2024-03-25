@@ -53,14 +53,14 @@ public:
     MCAPI ~SoundEventRequest();
 
     // symbol:
-    // ?tryPlaySound@SoundEventRequest@@SA?AV?$optional@USoundEventRequest@@@std@@V?$AutomaticID@VDimension@@H@@AEBVSynchedActorData@@AEBUActorDefinitionIdentifier@@W4LevelSoundEvent@@AEBVVec3@@H@Z
+    // ?tryPlaySound@SoundEventRequest@@SA?AV?$optional@USoundEventRequest@@@std@@V?$AutomaticID@VDimension@@H@@AEBUActorDataFlagComponent@@AEBUActorDefinitionIdentifier@@W4LevelSoundEvent@Legacy@Puv@@AEBVVec3@@H@Z
     MCAPI static std::optional<struct SoundEventRequest> tryPlaySound(
-        DimensionType,
-        class SynchedActorData const&,
-        struct ActorDefinitionIdentifier const&,
-        ::LevelSoundEvent,
-        class Vec3 const&,
-        int
+        DimensionType dimension,
+        struct ActorDataFlagComponent const&,
+        struct ActorDefinitionIdentifier const& id,
+        ::Puv::Legacy::LevelSoundEvent          type,
+        class Vec3 const&                       pos,
+        int                                     data
     );
 
     // NOLINTEND

@@ -14,13 +14,13 @@ public:
     MCAPI DanceComponent();
 
     // symbol: ?inListenDistance@DanceComponent@@QEBA_NAEBVVec3@@@Z
-    MCAPI bool inListenDistance(class Vec3 const&) const;
+    MCAPI bool inListenDistance(class Vec3 const& pos) const;
 
     // symbol: ?initFromDefinition@DanceComponent@@QEAAXAEAVActor@@@Z
-    MCAPI void initFromDefinition(class Actor&);
+    MCAPI void initFromDefinition(class Actor& actor);
 
     // symbol: ?initFromDefinition@DanceComponent@@QEAAXAEAVActor@@M@Z
-    MCAPI void initFromDefinition(class Actor&, float);
+    MCAPI void initFromDefinition(class Actor& actor, float distance);
 
     // NOLINTEND
 };

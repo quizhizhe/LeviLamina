@@ -17,7 +17,7 @@ struct ISharedData {};
 
 struct SharedData : public ISharedData {
 public:
-    const Level* mLevel;
+    Level const* mLevel;
 
     // prevent constructor by default
     SharedData& operator=(SharedData const&);
@@ -26,11 +26,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SharedData@PlayerCapabilities@@UEAA@XZ
+    virtual ~SharedData() = default;
 
     // vIndex: 1, symbol: ?isGameRuleEnabled@SharedData@PlayerCapabilities@@UEBA?AV?$optional@_N@std@@UGameRuleId@@@Z
-    virtual std::optional<bool> isGameRuleEnabled(struct GameRuleId) const;
+    virtual std::optional<bool> isGameRuleEnabled(struct GameRuleId rule) const;
 
     // vIndex: 2, symbol: ?getChatRestrictionLevel@SharedData@PlayerCapabilities@@UEBA?AW4ChatRestrictionLevel@@XZ
     virtual ::ChatRestrictionLevel getChatRestrictionLevel() const;

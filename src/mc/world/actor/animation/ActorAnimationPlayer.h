@@ -15,15 +15,15 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1ActorAnimationPlayer@@UEAA@XZ
+    virtual ~ActorAnimationPlayer();
 
     // vIndex: 1, symbol:
     // ?applyToPose@ActorAnimationControllerPlayer@@UEAAXAEAVRenderParams@@AEAV?$unordered_map@W4SkeletalHierarchyIndex@@V?$vector@VBoneOrientation@@V?$allocator@VBoneOrientation@@@std@@@std@@U?$hash@W4SkeletalHierarchyIndex@@@3@U?$equal_to@W4SkeletalHierarchyIndex@@@3@V?$allocator@U?$pair@$$CBW4SkeletalHierarchyIndex@@V?$vector@VBoneOrientation@@V?$allocator@VBoneOrientation@@@std@@@std@@@std@@@3@@std@@M@Z
     virtual void applyToPose(
-        class RenderParams&,
-        std::unordered_map<::SkeletalHierarchyIndex, std::vector<class BoneOrientation>>&,
-        float
+        class RenderParams&                                                               renderParams,
+        std::unordered_map<::SkeletalHierarchyIndex, std::vector<class BoneOrientation>>& destBoneOrientationsMap,
+        float                                                                             blendWeight
     ) = 0;
 
     // vIndex: 2, symbol: ?resetAnimation@ActorAnimationControllerPlayer@@UEAAXXZ
@@ -45,7 +45,7 @@ public:
 
     // vIndex: 7, symbol:
     // ?findAnimation@ActorAnimationControllerPlayer@@UEAA?AV?$shared_ptr@VActorAnimationPlayer@@@std@@AEBVHashedString@@@Z
-    virtual std::shared_ptr<class ActorAnimationPlayer> findAnimation(class HashedString const&) = 0;
+    virtual std::shared_ptr<class ActorAnimationPlayer> findAnimation(class HashedString const& friendlyName) = 0;
 
     // vIndex: 8, symbol: ?getAnimationType@ActorAnimationControllerPlayer@@UEBA?AW4ActorAnimationType@@XZ
     virtual ::ActorAnimationType getAnimationType() const = 0;
@@ -53,8 +53,8 @@ public:
     // vIndex: 9, symbol: ?getRawName@ActorAnimationControllerPlayer@@UEBAAEBVHashedString@@XZ
     virtual class HashedString const& getRawName() const = 0;
 
-    // symbol: ??1ActorAnimationPlayer@@UEAA@XZ
-    MCVAPI ~ActorAnimationPlayer();
+    // symbol: ??0ActorAnimationPlayer@@QEAA@AEBVHashedString@@AEBVExpressionNode@@@Z
+    MCAPI ActorAnimationPlayer(class HashedString const& friendlyName, class ExpressionNode const& blendExpression);
 
     // NOLINTEND
 };

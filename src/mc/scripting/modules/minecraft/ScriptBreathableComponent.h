@@ -11,6 +11,7 @@
 // clang-format off
 class WeakEntityRef;
 namespace ScriptModuleMinecraft { class ScriptBlockPermutation; }
+namespace ScriptModuleMinecraft { class ScriptComponentTypeEnumBuilder; }
 namespace Scripting { class WeakLifetimeScope; }
 // clang-format on
 
@@ -25,19 +26,20 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScriptBreathableComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptBreathableComponent() = default;
 
-    // vIndex: 1, symbol: ?_isValid@ScriptItemComponent@ScriptModuleMinecraft@@MEBA_NXZ
+    // vIndex: 1, symbol:
+    // ?_isValid@?$ECSScriptActorComponent@VBreathableComponent@@VBreathableDefinition@@@ScriptModuleMinecraft@@MEBA_NXZ
     virtual bool _isValid() const;
-
-    // symbol: ??1ScriptBreathableComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptBreathableComponent();
 
     // symbol:
     // ??0ScriptBreathableComponent@ScriptModuleMinecraft@@QEAA@AEBVWeakEntityRef@@AEBVWeakLifetimeScope@Scripting@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI
-    ScriptBreathableComponent(class WeakEntityRef const&, class Scripting::WeakLifetimeScope const&, std::string const&);
+    MCAPI ScriptBreathableComponent(
+        class WeakEntityRef const&                entity,
+        class Scripting::WeakLifetimeScope const& scope,
+        std::string const&                        id
+    );
 
     // symbol:
     // ?getBreatheBlocks@ScriptBreathableComponent@ScriptModuleMinecraft@@QEBA?AV?$Result@V?$vector@V?$StrongTypedObjectHandle@VScriptBlockPermutation@ScriptModuleMinecraft@@@Scripting@@V?$allocator@V?$StrongTypedObjectHandle@VScriptBlockPermutation@ScriptModuleMinecraft@@@Scripting@@@std@@@std@@$$V@Scripting@@XZ
@@ -76,11 +78,12 @@ public:
     MCAPI class Scripting::Result<int> getTotalSupply() const;
 
     // symbol: ?setAirSupply@ScriptBreathableComponent@ScriptModuleMinecraft@@QEBA?AV?$Result@X$$V@Scripting@@F@Z
-    MCAPI class Scripting::Result<void> setAirSupply(short) const;
+    MCAPI class Scripting::Result<void> setAirSupply(short value) const;
 
     // symbol:
-    // ?bind@ScriptBreathableComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptBreathableComponent@ScriptModuleMinecraft@@@Scripting@@XZ
-    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptBreathableComponent> bind();
+    // ?bind@ScriptBreathableComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptBreathableComponent@ScriptModuleMinecraft@@@Scripting@@AEAVScriptComponentTypeEnumBuilder@2@@Z
+    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptBreathableComponent>
+    bind(class ScriptModuleMinecraft::ScriptComponentTypeEnumBuilder&);
 
     // symbol: ?ComponentId@ScriptBreathableComponent@ScriptModuleMinecraft@@2PEBDEB
     MCAPI static char const* ComponentId;

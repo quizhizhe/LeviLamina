@@ -14,20 +14,20 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1PlayerContainerSetter@@UEAA@XZ
+    virtual ~PlayerContainerSetter() = default;
 
     // vIndex: 1, symbol: ?setArmor@PlayerContainerSetter@@UEAAXHAEBVItemStack@@@Z
-    virtual void setArmor(int, class ItemStack const&);
+    virtual void setArmor(int slot, class ItemStack const& item);
 
     // vIndex: 2, symbol: ?setOffhandSlot@PlayerContainerSetter@@UEAAXAEBVItemStack@@@Z
-    virtual void setOffhandSlot(class ItemStack const&);
+    virtual void setOffhandSlot(class ItemStack const& item);
 
     // vIndex: 3, symbol: ?setPlayerUIItem@PlayerContainerSetter@@UEAAXHAEBVItemStack@@@Z
-    virtual void setPlayerUIItem(int, class ItemStack const&);
+    virtual void setPlayerUIItem(int slot, class ItemStack const& item);
 
     // symbol: ??0PlayerContainerSetter@@QEAA@AEAVPlayer@@@Z
-    MCAPI explicit PlayerContainerSetter(class Player&);
+    MCAPI explicit PlayerContainerSetter(class Player& player);
 
     // NOLINTEND
 };

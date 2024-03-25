@@ -14,14 +14,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ExhaustionAttributeDelegate@@UEAA@XZ
+    virtual ~ExhaustionAttributeDelegate() = default;
 
     // vIndex: 1, symbol: ?tick@ExhaustionAttributeDelegate@@UEAAXXZ
     virtual void tick();
 
     // symbol: ??0ExhaustionAttributeDelegate@@QEAA@AEBVAttributeInstance@@@Z
-    MCAPI explicit ExhaustionAttributeDelegate(class AttributeInstance const&);
+    MCAPI explicit ExhaustionAttributeDelegate(class AttributeInstance const& _attribute);
 
     // NOLINTEND
 };

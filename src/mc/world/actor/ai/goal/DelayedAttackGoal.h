@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1DelayedAttackGoal@@UEAA@XZ
+    virtual ~DelayedAttackGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@DelayedAttackGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -35,29 +35,37 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@DelayedAttackGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
-
-    // vIndex: 10, symbol: ?_attemptMoveToTarget@DelayedAttackGoal@@EEAAXAEAVActor@@@Z
-    virtual void _attemptMoveToTarget(class Actor&);
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0DelayedAttackGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit DelayedAttackGoal(class Mob&);
+    MCAPI explicit DelayedAttackGoal(class Mob& mob);
 
-    // symbol: ?isTargetInLineOfSightLegacy@DelayedAttackGoal@@SA_NAEBVMob@@AEBVActor@@@Z
-    MCAPI static bool isTargetInLineOfSightLegacy(class Mob const&, class Actor const&);
-
-    // symbol: ?mMinLineOfSightFixVersion@DelayedAttackGoal@@2VBaseGameVersion@@B
-    MCAPI static class BaseGameVersion const mMinLineOfSightFixVersion;
+    // symbol: ?_isTargetInLineOfSightLegacy@DelayedAttackGoal@@SA_NAEBVMob@@AEBVActor@@@Z
+    MCAPI static bool _isTargetInLineOfSightLegacy(class Mob const&, class Actor const&);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_attemptStartAttacking@DelayedAttackGoal@@AEBAXPEAVActor@@@Z
-    MCAPI void _attemptStartAttacking(class Actor*) const;
+    MCAPI void _attemptStartAttacking(class Actor* target) const;
 
     // symbol: ?_manageAttackTime@DelayedAttackGoal@@AEAAXXZ
     MCAPI void _manageAttackTime();
+
+    // NOLINTEND
+
+private:
+    // NOLINTBEGIN
+    // symbol: ?mMinLineOfSightFixVersion@DelayedAttackGoal@@0VBaseGameVersion@@B
+    MCAPI static class BaseGameVersion const mMinLineOfSightFixVersion;
+
+    // NOLINTEND
+
+    // member accessor
+public:
+    // NOLINTBEGIN
+    static auto& $mMinLineOfSightFixVersion() { return mMinLineOfSightFixVersion; }
 
     // NOLINTEND
 };

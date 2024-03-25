@@ -14,20 +14,17 @@ public:
 
 public:
     // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1ServerPlayerEventCoordinator@@UEAA@XZ
+    virtual ~ServerPlayerEventCoordinator() = default;
+
     // symbol: ?sendPlayerAuthInputApplied@ServerPlayerEventCoordinator@@QEAAXAEAVPlayer@@@Z
-    MCAPI void sendPlayerAuthInputApplied(class Player&);
+    MCAPI void sendPlayerAuthInputApplied(class Player& player);
 
     // symbol: ?sendPlayerAuthInputReceived@ServerPlayerEventCoordinator@@QEAAXAEAVPlayer@@@Z
-    MCAPI void sendPlayerAuthInputReceived(class Player&);
-
-    // symbol: ?sendPlayerMovementAnomaly@ServerPlayerEventCoordinator@@QEAAXAEAVPlayer@@AEBVVec3@@MM@Z
-    MCAPI void sendPlayerMovementAnomaly(class Player&, class Vec3 const&, float, float);
-
-    // symbol: ?sendPlayerMovementCorrected@ServerPlayerEventCoordinator@@QEAAXAEAVPlayer@@AEBVVec3@@MM@Z
-    MCAPI void sendPlayerMovementCorrected(class Player&, class Vec3 const&, float, float);
+    MCAPI void sendPlayerAuthInputReceived(class Player& player);
 
     // symbol: ?sendPlayerOnGround@ServerPlayerEventCoordinator@@QEAAXAEAVPlayer@@@Z
-    MCAPI void sendPlayerOnGround(class Player&);
+    MCAPI void sendPlayerOnGround(class Player& player);
 
     // NOLINTEND
 };

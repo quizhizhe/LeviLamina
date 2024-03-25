@@ -30,10 +30,17 @@ public:
 
 public:
     // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1Pack@@UEAA@XZ
+    virtual ~Pack() = default;
+
     // symbol:
     // ??0Pack@@QEAA@V?$unique_ptr@VPackManifest@@U?$default_delete@VPackManifest@@@std@@@std@@V?$unique_ptr@VPackAccessStrategy@@U?$default_delete@VPackAccessStrategy@@@std@@@2@V?$unique_ptr@VSubpackInfoCollection@@U?$default_delete@VSubpackInfoCollection@@@std@@@2@V?$unique_ptr@VPackMetadata@@U?$default_delete@VPackMetadata@@@std@@@2@@Z
-    MCAPI
-    Pack(std::unique_ptr<class PackManifest>, std::unique_ptr<class PackAccessStrategy>, std::unique_ptr<class SubpackInfoCollection>, std::unique_ptr<class PackMetadata>);
+    MCAPI Pack(
+        std::unique_ptr<class PackManifest>          manifest,
+        std::unique_ptr<class PackAccessStrategy>    accessStrategy,
+        std::unique_ptr<class SubpackInfoCollection> subpacks,
+        std::unique_ptr<class PackMetadata>          metadata
+    );
 
     // symbol: ?getAccessStrategy@Pack@@QEAAPEAVPackAccessStrategy@@XZ
     MCAPI class PackAccessStrategy* getAccessStrategy();
@@ -47,39 +54,34 @@ public:
     // symbol: ?getManifestPtr@Pack@@QEAAPEAVPackManifest@@XZ
     MCAPI class PackManifest* getManifestPtr();
 
-    // symbol: ?getSubpackInfoStack@Pack@@QEAAPEAVSubpackInfoCollection@@XZ
-    MCAPI class SubpackInfoCollection* getSubpackInfoStack();
-
     // symbol: ?move@Pack@@QEAAX$$QEAV1@@Z
-    MCAPI void move(class Pack&&);
+    MCAPI void move(class Pack&& pack);
 
     // symbol: ?notifyDeleted@Pack@@QEAAXXZ
     MCAPI void notifyDeleted();
 
-    // symbol: ?notifyUpdated@Pack@@QEAAXXZ
-    MCAPI void notifyUpdated();
-
     // symbol: ?registerPackDeletedCallback@Pack@@QEAAXPEAXV?$function@$$A6AXAEAVPack@@@Z@std@@@Z
-    MCAPI void registerPackDeletedCallback(void*, std::function<void(class Pack&)>);
-
-    // symbol: ?registerPackUpdatedCallback@Pack@@QEAAXPEAXV?$function@$$A6AXAEAVPack@@@Z@std@@@Z
-    MCAPI void registerPackUpdatedCallback(void*, std::function<void(class Pack&)>);
-
-    // symbol: ?unregisterPackDeletedCallback@Pack@@QEAAXPEAX@Z
-    MCAPI void unregisterPackDeletedCallback(void*);
-
-    // symbol: ?unregisterPackUpdatedCallback@Pack@@QEAAXPEAX@Z
-    MCAPI void unregisterPackUpdatedCallback(void*);
+    MCAPI void registerPackDeletedCallback(void* ptr, std::function<void(class Pack&)> callback);
 
     // symbol:
     // ?createPack@Pack@@SA?AV?$unique_ptr@VPack@@U?$default_delete@VPack@@@std@@@std@@AEBVResourceLocation@@W4PackType@@W4PackOrigin@@AEAVIPackManifestFactory@@AEBV?$not_null@V?$NonOwnerPointer@$$CBVIContentKeyProvider@@@Bedrock@@@gsl@@PEAVPackSourceReport@@@Z
-    MCAPI static std::unique_ptr<class Pack>
-    createPack(class ResourceLocation const&, ::PackType, ::PackOrigin, class IPackManifestFactory&, Bedrock::NotNullNonOwnerPtr<class IContentKeyProvider const> const&, class PackSourceReport*);
+    MCAPI static std::unique_ptr<class Pack> createPack(
+        class ResourceLocation const&                                       fileLocation,
+        ::PackType                                                          type,
+        ::PackOrigin                                                        origin,
+        class IPackManifestFactory&                                         manifestFactory,
+        Bedrock::NotNullNonOwnerPtr<class IContentKeyProvider const> const& keyProvider,
+        class PackSourceReport*                                             report
+    );
 
     // symbol:
     // ?createPackMetadata@Pack@@SA?AV?$unique_ptr@VPackMetadata@@U?$default_delete@VPackMetadata@@@std@@@std@@W4PackType@@AEAVPackManifest@@AEBVPackAccessStrategy@@AEAVPackReport@@@Z
-    MCAPI static std::unique_ptr<class PackMetadata>
-    createPackMetadata(::PackType, class PackManifest&, class PackAccessStrategy const&, class PackReport&);
+    MCAPI static std::unique_ptr<class PackMetadata> createPackMetadata(
+        ::PackType                      type,
+        class PackManifest&             manifest,
+        class PackAccessStrategy const& accessStrategy,
+        class PackReport&               report
+    );
 
     // NOLINTEND
 
@@ -94,7 +96,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $EDUCATION_METADATA_FILE() { return EDUCATION_METADATA_FILE; }
+    static auto& $EDUCATION_METADATA_FILE() { return EDUCATION_METADATA_FILE; }
 
     // NOLINTEND
 };

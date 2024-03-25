@@ -31,6 +31,9 @@ public:
         class Scripting::StrongTypedObjectHandle<class ScriptModuleMinecraft::ScriptBlockPermutation>>
     createDefaultBlockPermutationV010() const;
 
+    // symbol: ?getBlock@ScriptBlockType@ScriptModuleMinecraft@@QEBAAEBVBlockLegacy@@XZ
+    MCAPI class BlockLegacy const& getBlock() const;
+
     // symbol:
     // ?getId@ScriptBlockType@ScriptModuleMinecraft@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
     MCAPI std::string getId() const;
@@ -42,7 +45,7 @@ public:
     // symbol:
     // ?getOrCreateHandle@ScriptBlockType@ScriptModuleMinecraft@@SA?AV?$StrongTypedObjectHandle@VScriptBlockType@ScriptModuleMinecraft@@@Scripting@@AEBVWeakLifetimeScope@4@AEBVBlockLegacy@@@Z
     MCAPI static class Scripting::StrongTypedObjectHandle<class ScriptModuleMinecraft::ScriptBlockType>
-    getOrCreateHandle(class Scripting::WeakLifetimeScope const&, class BlockLegacy const&);
+    getOrCreateHandle(class Scripting::WeakLifetimeScope const& scope, class BlockLegacy const& block);
 
     // NOLINTEND
 };

@@ -24,26 +24,23 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0() = 0;
+    // vIndex: 0, symbol: ??1RNS2_Berkley@RakNet@@UEAA@XZ
+    virtual ~RNS2_Berkley();
 
     // vIndex: 1, symbol: __unk_vfn_1
-    virtual void __unk_vfn_1();
+    virtual void __unk_vfn_1() = 0;
 
     // vIndex: 2, symbol: ?SetMulticastInterface@RNS2_Berkley@RakNet@@UEAAXH@Z
-    virtual void SetMulticastInterface(int);
-
-    // symbol: ??1RNS2_Berkley@RakNet@@UEAA@XZ
-    MCVAPI ~RNS2_Berkley();
+    virtual void SetMulticastInterface(int interfaceIndex);
 
     // symbol: ?BlockOnStopRecvPollingThread@RNS2_Berkley@RakNet@@QEAAXXZ
     MCAPI void BlockOnStopRecvPollingThread();
 
     // symbol: ?CreateRecvPollingThread@RNS2_Berkley@RakNet@@QEAAHH@Z
-    MCAPI int CreateRecvPollingThread(int);
+    MCAPI int CreateRecvPollingThread(int threadPriority);
 
     // symbol: ?SetDoNotFragment@RNS2_Berkley@RakNet@@QEAAXH@Z
-    MCAPI void SetDoNotFragment(int);
+    MCAPI void SetDoNotFragment(int opt);
 
     // symbol: ?SignalStopRecvPollingThread@RNS2_Berkley@RakNet@@QEAAXXZ
     MCAPI void SignalStopRecvPollingThread();
@@ -53,26 +50,28 @@ public:
     // protected:
     // NOLINTBEGIN
     // symbol: ?BindShared@RNS2_Berkley@RakNet@@IEAA?AW4RNS2BindResult@2@PEAURNS2_BerkleyBindParameters@2@PEBDI@Z
-    MCAPI ::RakNet::RNS2BindResult BindShared(struct RakNet::RNS2_BerkleyBindParameters*, char const*, uint);
+    MCAPI ::RakNet::RNS2BindResult
+    BindShared(struct RakNet::RNS2_BerkleyBindParameters* bindParameters, char const* file, uint line);
 
     // symbol:
     // ?BindSharedIPV4And6@RNS2_Berkley@RakNet@@IEAA?AW4RNS2BindResult@2@PEAURNS2_BerkleyBindParameters@2@PEBDI@Z
-    MCAPI ::RakNet::RNS2BindResult BindSharedIPV4And6(struct RakNet::RNS2_BerkleyBindParameters*, char const*, uint);
+    MCAPI ::RakNet::RNS2BindResult
+    BindSharedIPV4And6(struct RakNet::RNS2_BerkleyBindParameters* bindParameters, char const* file, uint line);
 
     // symbol: ?RecvFromLoopInt@RNS2_Berkley@RakNet@@IEAAIXZ
     MCAPI uint RecvFromLoopInt();
 
     // symbol: ?SetBroadcastSocket@RNS2_Berkley@RakNet@@IEAAXH@Z
-    MCAPI void SetBroadcastSocket(int);
+    MCAPI void SetBroadcastSocket(int broadcast);
 
     // symbol: ?SetSocketOptions@RNS2_Berkley@RakNet@@IEAAXXZ
     MCAPI void SetSocketOptions();
 
     // symbol: ?GetSystemAddressIPV4And6@RNS2_Berkley@RakNet@@KAXHPEAUSystemAddress@2@@Z
-    MCAPI static void GetSystemAddressIPV4And6(int, struct RakNet::SystemAddress*);
+    MCAPI static void GetSystemAddressIPV4And6(int rns2Socket, struct RakNet::SystemAddress* systemAddressOut);
 
     // symbol: ?RecvFromLoop@RNS2_Berkley@RakNet@@KAIPEAX@Z
-    MCAPI static uint RecvFromLoop(void*);
+    MCAPI static uint RecvFromLoop(void* arguments);
 
     // NOLINTEND
 };

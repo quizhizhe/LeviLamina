@@ -16,14 +16,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1TitleRawCommand@@UEAA@XZ
+    virtual ~TitleRawCommand() = default;
 
     // vIndex: 2, symbol: ?execute@TitleRawCommand@@UEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    virtual void execute(class CommandOrigin const&, class CommandOutput&) const;
+    virtual void execute(class CommandOrigin const& origin, class CommandOutput& output) const;
 
     // symbol: ?setup@TitleRawCommand@@SAXAEAVCommandRegistry@@@Z
-    MCAPI static void setup(class CommandRegistry&);
+    MCAPI static void setup(class CommandRegistry& registry);
 
     // NOLINTEND
 
@@ -31,9 +31,12 @@ public:
     // NOLINTBEGIN
     // symbol:
     // ?_sendTitlePacketTextObject@TitleRawCommand@@AEBA_NW4TitleType@SetTitlePacket@@AEBVCommandOrigin@@AEAVCommandOutput@@AEBV?$CommandSelectorResults@VPlayer@@@@@Z
-    MCAPI bool
-    _sendTitlePacketTextObject(::SetTitlePacket::TitleType, class CommandOrigin const&, class CommandOutput&, class CommandSelectorResults<class Player> const&)
-        const;
+    MCAPI bool _sendTitlePacketTextObject(
+        ::SetTitlePacket::TitleType                       type,
+        class CommandOrigin const&                        origin,
+        class CommandOutput&                              output,
+        class CommandSelectorResults<class Player> const& targets
+    ) const;
 
     // NOLINTEND
 };

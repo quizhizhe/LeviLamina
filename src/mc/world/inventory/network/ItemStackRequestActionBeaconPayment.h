@@ -11,21 +11,19 @@ public:
     // prevent constructor by default
     ItemStackRequestActionBeaconPayment& operator=(ItemStackRequestActionBeaconPayment const&);
     ItemStackRequestActionBeaconPayment(ItemStackRequestActionBeaconPayment const&);
+    ItemStackRequestActionBeaconPayment();
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ItemStackRequestActionBeaconPayment@@UEAA@XZ
+    virtual ~ItemStackRequestActionBeaconPayment() = default;
 
     // vIndex: 4, symbol: ?_write@ItemStackRequestActionBeaconPayment@@MEBAXAEAVBinaryStream@@@Z
-    virtual void _write(class BinaryStream&) const;
+    virtual void _write(class BinaryStream& stream) const;
 
     // vIndex: 5, symbol:
     // ?_read@ItemStackRequestActionBeaconPayment@@MEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??0ItemStackRequestActionBeaconPayment@@QEAA@XZ
-    MCAPI ItemStackRequestActionBeaconPayment();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // NOLINTEND
 };

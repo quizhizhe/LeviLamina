@@ -21,8 +21,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1PlayerHotbarPacket@@UEAA@XZ
+    virtual ~PlayerHotbarPacket();
 
     // vIndex: 1, symbol: ?getId@PlayerHotbarPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -32,20 +32,17 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@PlayerHotbarPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@PlayerHotbarPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1PlayerHotbarPacket@@UEAA@XZ
-    MCVAPI ~PlayerHotbarPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0PlayerHotbarPacket@@QEAA@XZ
     MCAPI PlayerHotbarPacket();
 
     // symbol: ??0PlayerHotbarPacket@@QEAA@IW4ContainerID@@_N@Z
-    MCAPI PlayerHotbarPacket(uint, ::ContainerID, bool);
+    MCAPI PlayerHotbarPacket(uint selectedSlot, ::ContainerID containerID, bool shouldSelectSlot);
 
     // NOLINTEND
 };

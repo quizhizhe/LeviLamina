@@ -16,9 +16,6 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ?initialize@VolumeFogDefinition@@QEBAXAEAVEntityContext@@AEAVVolumeFogComponent@@@Z
-    MCAPI void initialize(class EntityContext&, class VolumeFogComponent&) const;
-
     // symbol: ??1VolumeFogDefinition@@QEAA@XZ
     MCAPI ~VolumeFogDefinition();
 

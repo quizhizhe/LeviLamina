@@ -14,8 +14,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1PillagerOutpostFeature@@UEAA@XZ
+    virtual ~PillagerOutpostFeature() = default;
 
     // vIndex: 1, symbol: ?shouldAddHardcodedSpawnAreas@PillagerOutpostFeature@@UEBA_NXZ
     virtual bool shouldAddHardcodedSpawnAreas() const;
@@ -29,20 +29,26 @@ public:
     getNearestGeneratedFeature(class Dimension&, class BiomeSource const&, class BlockPos const&, class BlockPos&, class IPreliminarySurfaceProvider const&, bool, std::optional<class HashedString> const&);
 
     // vIndex: 4, symbol: ?initMobSpawnTypes@PillagerOutpostFeature@@UEAAXAEAVHardcodedSpawnAreaRegistry@@@Z
-    virtual void initMobSpawnTypes(class HardcodedSpawnAreaRegistry&);
+    virtual void initMobSpawnTypes(class HardcodedSpawnAreaRegistry& spawnAreas);
 
     // vIndex: 5, symbol:
     // ?isFeatureChunk@PillagerOutpostFeature@@UEAA_NAEBVBiomeSource@@AEAVRandom@@AEBVChunkPos@@IAEBVIPreliminarySurfaceProvider@@AEBVDimension@@@Z
-    virtual bool
-    isFeatureChunk(class BiomeSource const&, class Random&, class ChunkPos const&, uint, class IPreliminarySurfaceProvider const&, class Dimension const&);
+    virtual bool isFeatureChunk(
+        class BiomeSource const& biomeSource,
+        class Random&            random,
+        class ChunkPos const&    lc,
+        uint                     levelSeed,
+        class IPreliminarySurfaceProvider const&,
+        class Dimension const& dimension
+    );
 
     // vIndex: 6, symbol:
     // ?createStructureStart@PillagerOutpostFeature@@MEAA?AV?$unique_ptr@VStructureStart@@U?$default_delete@VStructureStart@@@std@@@std@@AEAVDimension@@AEBVBiomeSource@@AEAVRandom@@AEBVChunkPos@@AEBVIPreliminarySurfaceProvider@@@Z
     virtual std::unique_ptr<class StructureStart>
-    createStructureStart(class Dimension&, class BiomeSource const&, class Random&, class ChunkPos const&, class IPreliminarySurfaceProvider const&);
+    createStructureStart(class Dimension& generator, class BiomeSource const& biomeSource, class Random& random, class ChunkPos const& lc, class IPreliminarySurfaceProvider const&);
 
     // symbol: ??0PillagerOutpostFeature@@QEAA@I@Z
-    MCAPI explicit PillagerOutpostFeature(uint);
+    MCAPI explicit PillagerOutpostFeature(uint seed);
 
     // NOLINTEND
 };

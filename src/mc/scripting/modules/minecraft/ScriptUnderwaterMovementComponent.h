@@ -10,6 +10,7 @@
 // auto generated forward declare list
 // clang-format off
 namespace ScriptModuleMinecraft { class AttributeScriptActorComponent; }
+namespace ScriptModuleMinecraft { class ScriptComponentTypeEnumBuilder; }
 // clang-format on
 
 namespace ScriptModuleMinecraft {
@@ -23,16 +24,13 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // symbol: ??1ScriptUnderwaterMovementComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptUnderwaterMovementComponent();
+    // vIndex: 0, symbol: __gen_??1ScriptUnderwaterMovementComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptUnderwaterMovementComponent() = default;
 
     // symbol:
-    // ?bind@ScriptUnderwaterMovementComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptUnderwaterMovementComponent@ScriptModuleMinecraft@@@Scripting@@XZ
+    // ?bind@ScriptUnderwaterMovementComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptUnderwaterMovementComponent@ScriptModuleMinecraft@@@Scripting@@AEAVScriptComponentTypeEnumBuilder@2@@Z
     MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptUnderwaterMovementComponent>
-    bind();
+    bind(class ScriptModuleMinecraft::ScriptComponentTypeEnumBuilder&);
 
     // symbol: ?ComponentId@ScriptUnderwaterMovementComponent@ScriptModuleMinecraft@@2PEBDEB
     MCAPI static char const* ComponentId;

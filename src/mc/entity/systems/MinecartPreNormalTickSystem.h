@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/entity/EntityModifierT.h"
+#include "mc/entity/EntityModifier.h"
 
 class MinecartPreNormalTickSystem {
 public:
@@ -22,9 +22,12 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol:
-    // ?_doMinecartPreNormalTickSystem@MinecartPreNormalTickSystem@@CAXAEAVStrictEntityContext@@AEAVActorOwnerComponent@@V?$EntityModifierT@VEntityRegistryBase@@VStrictEntityContext@@UMinecartPreNormalTickBlockPosComponent@@@@@Z
-    MCAPI static void
-    _doMinecartPreNormalTickSystem(class StrictEntityContext&, class ActorOwnerComponent&, class EntityModifierT<class EntityRegistryBase, class StrictEntityContext, struct MinecartPreNormalTickBlockPosComponent>);
+    // ?_doMinecartPreNormalTickSystem@MinecartPreNormalTickSystem@@CAXAEAVStrictEntityContext@@AEAVActorOwnerComponent@@V?$EntityModifier@UMinecartPreNormalTickBlockPosComponent@@@@@Z
+    MCAPI static void _doMinecartPreNormalTickSystem(
+        class StrictEntityContext& context,
+        class ActorOwnerComponent&,
+        class EntityModifier<struct MinecartPreNormalTickBlockPosComponent> mod
+    );
 
     // NOLINTEND
 };

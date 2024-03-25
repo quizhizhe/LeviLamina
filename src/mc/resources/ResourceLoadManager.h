@@ -20,8 +20,11 @@ public:
 
 public:
     // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1ResourceLoadManager@@UEAA@XZ
+    virtual ~ResourceLoadManager() = default;
+
     // symbol: ?cancel@ResourceLoadManager@@QEAAXW4ResourceLoadType@@@Z
-    MCAPI void cancel(::ResourceLoadType);
+    MCAPI void cancel(::ResourceLoadType resourceLoadType);
 
     // NOLINTEND
 };

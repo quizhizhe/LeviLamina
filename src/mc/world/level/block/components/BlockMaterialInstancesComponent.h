@@ -15,14 +15,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ??0BlockMaterialInstancesComponent@@QEAA@$$QEAU0@@Z
-    MCAPI BlockMaterialInstancesComponent(struct BlockMaterialInstancesComponent&&);
+    // vIndex: 0, symbol: __gen_??1BlockMaterialInstancesComponent@@UEAA@XZ
+    virtual ~BlockMaterialInstancesComponent() = default;
 
     // symbol: ?getRenderLayer@BlockMaterialInstancesComponent@@QEBA?AW4BlockRenderLayer@@XZ
     MCAPI ::BlockRenderLayer getRenderLayer() const;
-
-    // symbol: ??4BlockMaterialInstancesComponent@@QEAAAEAU0@$$QEAU0@@Z
-    MCAPI struct BlockMaterialInstancesComponent& operator=(struct BlockMaterialInstancesComponent&&);
 
     // NOLINTEND
 };

@@ -19,27 +19,27 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1RandomDyeFunction@@UEAA@XZ
+    virtual ~RandomDyeFunction() = default;
 
     // vIndex: 1, symbol: ?apply@RandomDyeFunction@@UEAAXAEAVItemStack@@AEAVRandom@@AEAVLootTableContext@@@Z
-    virtual void apply(class ItemStack&, class Random&, class LootTableContext&);
+    virtual void apply(class ItemStack& item, class Random& random, class LootTableContext& context);
 
     // vIndex: 3, symbol: ?apply@RandomDyeFunction@@UEAAXAEAVItemInstance@@AEAVRandom@@AEAVLootTableContext@@@Z
-    virtual void apply(class ItemInstance&, class Random&, class LootTableContext&);
+    virtual void apply(class ItemInstance& item, class Random& random, class LootTableContext& context);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_applyBase@RandomDyeFunction@@AEBAXAEAVItemStackBase@@AEAVRandom@@@Z
-    MCAPI void _applyBase(class ItemStackBase&, class Random&) const;
+    MCAPI void _applyBase(class ItemStackBase& item, class Random& random) const;
 
     // symbol: ?_getRandomArmorColor@RandomDyeFunction@@AEBA?AVColor@mce@@AEAVRandom@@@Z
-    MCAPI class mce::Color _getRandomArmorColor(class Random&) const;
+    MCAPI class mce::Color _getRandomArmorColor(class Random& random) const;
 
     // symbol: ?_getRandomDyeColor@RandomDyeFunction@@AEBA?AVColor@mce@@AEAVRandom@@@Z
-    MCAPI class mce::Color _getRandomDyeColor(class Random&) const;
+    MCAPI class mce::Color _getRandomDyeColor(class Random& random) const;
 
     // NOLINTEND
 };

@@ -21,10 +21,10 @@ public:
     public:
         // NOLINTBEGIN
         // symbol: ??0Ingredient@PotionBrewing@@QEAA@AEBVItemInstance@@@Z
-        MCAPI explicit Ingredient(class ItemInstance const&);
+        MCAPI explicit Ingredient(class ItemInstance const& item);
 
         // symbol: ?equals@Ingredient@PotionBrewing@@QEBA_NAEBVItemDescriptor@@@Z
-        MCAPI bool equals(class ItemDescriptor const&) const;
+        MCAPI bool equals(class ItemDescriptor const& input) const;
 
         // symbol: ?getData@Ingredient@PotionBrewing@@QEBAHXZ
         MCAPI int getData() const;
@@ -53,32 +53,36 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ?addContainerRecipe@PotionBrewing@@SAXAEBVItem@@AEBVIngredient@1@0@Z
-    MCAPI static void addContainerRecipe(class Item const&, class PotionBrewing::Ingredient const&, class Item const&);
+    MCAPI static void
+    addContainerRecipe(class Item const& from, class PotionBrewing::Ingredient const& ingredient, class Item const& to);
 
     // symbol: ?addPotionMix@PotionBrewing@@SAXAEBVItemDescriptor@@AEBVIngredient@1@0@Z
-    MCAPI static void
-    addPotionMix(class ItemDescriptor const&, class PotionBrewing::Ingredient const&, class ItemDescriptor const&);
+    MCAPI static void addPotionMix(
+        class ItemDescriptor const&            from,
+        class PotionBrewing::Ingredient const& ingredient,
+        class ItemDescriptor const&            to
+    );
 
     // symbol: ?getFuelValue@PotionBrewing@@SAHAEBVItemDescriptor@@@Z
-    MCAPI static int getFuelValue(class ItemDescriptor const&);
+    MCAPI static int getFuelValue(class ItemDescriptor const& item);
 
     // symbol: ?hasMix@PotionBrewing@@SA_NAEBVItemInstance@@AEBVItemDescriptor@@@Z
-    MCAPI static bool hasMix(class ItemInstance const&, class ItemDescriptor const&);
+    MCAPI static bool hasMix(class ItemInstance const& source, class ItemDescriptor const& ingredient);
 
     // symbol: ?initPotionBrewing@PotionBrewing@@SAXXZ
     MCAPI static void initPotionBrewing();
 
     // symbol: ?isFuel@PotionBrewing@@SA_NAEBVItemDescriptor@@@Z
-    MCAPI static bool isFuel(class ItemDescriptor const&);
+    MCAPI static bool isFuel(class ItemDescriptor const& item);
 
     // symbol: ?isIngredient@PotionBrewing@@SA_NAEBVItemDescriptor@@@Z
-    MCAPI static bool isIngredient(class ItemDescriptor const&);
+    MCAPI static bool isIngredient(class ItemDescriptor const& item);
 
     // symbol: ?isPotionRecipeInput@PotionBrewing@@SA_NAEBVItemDescriptor@@@Z
-    MCAPI static bool isPotionRecipeInput(class ItemDescriptor const&);
+    MCAPI static bool isPotionRecipeInput(class ItemDescriptor const& item);
 
     // symbol: ?mix@PotionBrewing@@SA?AVItemInstance@@AEBVItemDescriptor@@AEBV2@@Z
-    MCAPI static class ItemInstance mix(class ItemDescriptor const&, class ItemInstance const&);
+    MCAPI static class ItemInstance mix(class ItemDescriptor const& ingredient, class ItemInstance const& source);
 
     // symbol: ?shutdown@PotionBrewing@@SAXXZ
     MCAPI static void shutdown();
@@ -88,11 +92,15 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol: ?addChemistryMix@PotionBrewing@@CAXAEBVItemInstance@@AEBVIngredient@1@0@Z
-    MCAPI static void
-    addChemistryMix(class ItemInstance const&, class PotionBrewing::Ingredient const&, class ItemInstance const&);
+    MCAPI static void addChemistryMix(
+        class ItemInstance const&              from,
+        class PotionBrewing::Ingredient const& ingredient,
+        class ItemInstance const&              to
+    );
 
     // symbol: ?getChemistryMix@PotionBrewing@@CA?AVItemInstance@@AEBVItemDescriptor@@0@Z
-    MCAPI static class ItemInstance getChemistryMix(class ItemDescriptor const&, class ItemDescriptor const&);
+    MCAPI static class ItemInstance
+    getChemistryMix(class ItemDescriptor const& from, class ItemDescriptor const& ingredient);
 
     // NOLINTEND
 
@@ -130,19 +138,19 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mChemistryMixes() { return mChemistryMixes; }
+    static auto& $mChemistryMixes() { return mChemistryMixes; }
 
-    auto& $mContainerMixes() { return mContainerMixes; }
+    static auto& $mContainerMixes() { return mContainerMixes; }
 
-    auto& $mIsInitialized() { return mIsInitialized; }
+    static auto& $mIsInitialized() { return mIsInitialized; }
 
-    auto& $mPotionMixes() { return mPotionMixes; }
+    static auto& $mPotionMixes() { return mPotionMixes; }
 
-    auto& $mValidContainers() { return mValidContainers; }
+    static auto& $mValidContainers() { return mValidContainers; }
 
-    auto& $mValidIngredients() { return mValidIngredients; }
+    static auto& $mValidIngredients() { return mValidIngredients; }
 
-    auto& $mValidRecipeInputs() { return mValidRecipeInputs; }
+    static auto& $mValidRecipeInputs() { return mValidRecipeInputs; }
 
     // NOLINTEND
 };

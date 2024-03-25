@@ -26,12 +26,13 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScatteredFeatureStart@RandomScatteredLargeFeatureDetails@@UEAA@XZ
+    virtual ~ScatteredFeatureStart() = default;
 
     // symbol:
     // ??0ScatteredFeatureStart@RandomScatteredLargeFeatureDetails@@QEAA@AEBVBiomeSource@@FHHAEBVIPreliminarySurfaceProvider@@@Z
-    MCAPI ScatteredFeatureStart(class BiomeSource const&, short, int, int, class IPreliminarySurfaceProvider const&);
+    MCAPI
+    ScatteredFeatureStart(class BiomeSource const& source, short seaLevel, int chunkX, int chunkZ, class IPreliminarySurfaceProvider const&);
 
     // NOLINTEND
 };

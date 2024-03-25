@@ -16,7 +16,7 @@ namespace PlayerCapabilities {
 
 class PlayerData : public ::PlayerCapabilities::IPlayerData {
 public:
-    const Player* mPlayer;
+    Player const& mPlayer; // this+0x8
 
     // prevent constructor by default
     PlayerData& operator=(PlayerData const&);
@@ -25,11 +25,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1PlayerData@PlayerCapabilities@@UEAA@XZ
+    virtual ~PlayerData() = default;
 
     // vIndex: 1, symbol: ?isAbilityEnabled@PlayerData@PlayerCapabilities@@UEBA_NW4AbilitiesIndex@@@Z
-    virtual bool isAbilityEnabled(::AbilitiesIndex) const;
+    virtual bool isAbilityEnabled(::AbilitiesIndex ability) const;
 
     // vIndex: 2, symbol: ?isTeacher@PlayerData@PlayerCapabilities@@UEBA_NXZ
     virtual bool isTeacher() const;
@@ -38,7 +38,7 @@ public:
     virtual bool isOperator() const;
 
     // symbol: ??0PlayerData@PlayerCapabilities@@QEAA@AEBVPlayer@@@Z
-    MCAPI explicit PlayerData(class Player const&);
+    MCAPI explicit PlayerData(class Player const& player);
 
     // NOLINTEND
 };

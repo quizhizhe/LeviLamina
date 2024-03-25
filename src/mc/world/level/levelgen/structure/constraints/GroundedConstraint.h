@@ -14,14 +14,18 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1GroundedConstraint@@UEAA@XZ
+    virtual ~GroundedConstraint() = default;
 
     // vIndex: 1, symbol: ?isSatisfied@GroundedConstraint@@UEBA_NAEBVIBlockWorldGenAPI@@AEBVBlockPos@@AEBW4Rotation@@@Z
-    virtual bool isSatisfied(class IBlockWorldGenAPI const&, class BlockPos const&, ::Rotation const&) const;
+    virtual bool isSatisfied(
+        class IBlockWorldGenAPI const& target,
+        class BlockPos const&          structurePos,
+        ::Rotation const&              structureRot
+    ) const;
 
     // symbol: ??0GroundedConstraint@@QEAA@AEAVStructureTemplate@@@Z
-    MCAPI explicit GroundedConstraint(class StructureTemplate&);
+    MCAPI explicit GroundedConstraint(class StructureTemplate& structure);
 
     // NOLINTEND
 };

@@ -10,6 +10,7 @@
 // clang-format off
 class ActorFilterGroup;
 class WeakEntityRef;
+namespace ScriptModuleMinecraft { class ScriptComponentTypeEnumBuilder; }
 namespace Scripting { class WeakLifetimeScope; }
 struct FeedItem;
 // clang-format on
@@ -25,14 +26,12 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScriptHealableComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptHealableComponent() = default;
 
-    // vIndex: 1, symbol: ?_isValid@ScriptItemComponent@ScriptModuleMinecraft@@MEBA_NXZ
+    // vIndex: 1, symbol:
+    // ?_isValid@?$ECSScriptActorComponent@VHealableComponent@@VHealableDefinition@@@ScriptModuleMinecraft@@MEBA_NXZ
     virtual bool _isValid() const;
-
-    // symbol: ??1ScriptHealableComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptHealableComponent();
 
     // symbol:
     // ??0ScriptHealableComponent@ScriptModuleMinecraft@@QEAA@AEBVWeakEntityRef@@AEBVWeakLifetimeScope@Scripting@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
@@ -51,8 +50,9 @@ public:
     MCAPI class Scripting::Result<std::vector<struct FeedItem>> getItems() const;
 
     // symbol:
-    // ?bind@ScriptHealableComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptHealableComponent@ScriptModuleMinecraft@@@Scripting@@XZ
-    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptHealableComponent> bind();
+    // ?bind@ScriptHealableComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptHealableComponent@ScriptModuleMinecraft@@@Scripting@@AEAVScriptComponentTypeEnumBuilder@2@@Z
+    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptHealableComponent>
+    bind(class ScriptModuleMinecraft::ScriptComponentTypeEnumBuilder&);
 
     // symbol: ?ComponentId@ScriptHealableComponent@ScriptModuleMinecraft@@2PEBDEB
     MCAPI static char const* ComponentId;

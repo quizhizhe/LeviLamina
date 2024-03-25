@@ -19,8 +19,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1SetLastHurtByPacket@@UEAA@XZ
+    virtual ~SetLastHurtByPacket();
 
     // vIndex: 1, symbol: ?getId@SetLastHurtByPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -30,20 +30,17 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@SetLastHurtByPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@SetLastHurtByPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1SetLastHurtByPacket@@UEAA@XZ
-    MCVAPI ~SetLastHurtByPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0SetLastHurtByPacket@@QEAA@XZ
     MCAPI SetLastHurtByPacket();
 
     // symbol: ??0SetLastHurtByPacket@@QEAA@W4ActorType@@@Z
-    MCAPI explicit SetLastHurtByPacket(::ActorType);
+    MCAPI explicit SetLastHurtByPacket(::ActorType lastHurtBy);
 
     // NOLINTEND
 };

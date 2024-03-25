@@ -10,7 +10,7 @@
 namespace JsonUtil { class EmptyClass; }
 // clang-format on
 
-class EntitySensorDefinition {
+struct EntitySensorDefinition {
 public:
     // prevent constructor by default
     EntitySensorDefinition& operator=(EntitySensorDefinition const&);
@@ -22,13 +22,13 @@ public:
     MCAPI EntitySensorDefinition();
 
     // symbol: ?initialize@EntitySensorDefinition@@QEBAXAEAVEntityContext@@AEAVEntitySensorComponent@@@Z
-    MCAPI void initialize(class EntityContext&, class EntitySensorComponent&) const;
+    MCAPI void initialize(class EntityContext& entity, class EntitySensorComponent& component) const;
 
     // symbol:
-    // ?buildSchema@EntitySensorDefinition@@SAXAEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VEntitySensorDefinition@@@JsonUtil@@@std@@@Z
+    // ?buildSchema@EntitySensorDefinition@@SAXAEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@UEntitySensorDefinition@@@JsonUtil@@@std@@@Z
     MCAPI static void
     buildSchema(std::shared_ptr<
-                class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class EntitySensorDefinition>>&);
+                class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, struct EntitySensorDefinition>>& root);
 
     // NOLINTEND
 };

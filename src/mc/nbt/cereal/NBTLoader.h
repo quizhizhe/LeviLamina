@@ -20,11 +20,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ??1NBTLoader@@UEAA@XZ
-    MCVAPI ~NBTLoader();
+    // vIndex: 0, symbol: ??1NBTLoader@@UEAA@XZ
+    virtual ~NBTLoader();
 
-    // symbol: ??0NBTLoader@@QEAA@V?$not_null@PEBVCompoundTag@@@gsl@@AEBUReflectionCtx@cereal@@@Z
-    MCAPI NBTLoader(gsl::not_null<class CompoundTag const*>, struct cereal::ReflectionCtx const&);
+    // symbol: ??0NBTLoader@@QEAA@V?$not_null@PEBVTag@@@gsl@@AEBUReflectionCtx@cereal@@@Z
+    MCAPI NBTLoader(gsl::not_null<class Tag const*>, struct cereal::ReflectionCtx const&);
 
     // NOLINTEND
 };

@@ -15,11 +15,18 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1MoveToLavaGoal@@UEAA@XZ
+    virtual ~MoveToLavaGoal() = default;
 
     // symbol: ??0MoveToLavaGoal@@QEAA@AEAVMob@@MHHHM@Z
-    MCAPI MoveToLavaGoal(class Mob&, float, int, int, int, float);
+    MCAPI MoveToLavaGoal(
+        class Mob& mob,
+        float      speedModifier,
+        int        searchRange,
+        int        searchHeight,
+        int        searchCount,
+        float      goalRadius
+    );
 
     // NOLINTEND
 };

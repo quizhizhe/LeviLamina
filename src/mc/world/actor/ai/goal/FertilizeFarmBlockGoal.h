@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1FertilizeFarmBlockGoal@@UEAA@XZ
+    virtual ~FertilizeFarmBlockGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@FertilizeFarmBlockGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -35,20 +35,20 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@FertilizeFarmBlockGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // vIndex: 11, symbol: ?isValidTarget@FertilizeFarmBlockGoal@@MEAA_NAEAVBlockSource@@AEBVBlockPos@@@Z
-    virtual bool isValidTarget(class BlockSource&, class BlockPos const&);
+    virtual bool isValidTarget(class BlockSource& region, class BlockPos const& pos);
 
     // symbol: ??0FertilizeFarmBlockGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit FertilizeFarmBlockGoal(class Mob&);
+    MCAPI explicit FertilizeFarmBlockGoal(class Mob& mob);
 
     // NOLINTEND
 
     // protected:
     // NOLINTBEGIN
     // symbol: ?tryFertilizeCrop@FertilizeFarmBlockGoal@@IEAA_NAEAVBlockSource@@AEBVBlockPos@@@Z
-    MCAPI bool tryFertilizeCrop(class BlockSource&, class BlockPos const&);
+    MCAPI bool tryFertilizeCrop(class BlockSource& region, class BlockPos const&);
 
     // NOLINTEND
 

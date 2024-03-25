@@ -11,6 +11,9 @@ public:
 
 public:
     // NOLINTBEGIN
+    // symbol: ?onFlushEditorExtensionContextAfterEvents@ScriptDeferredEventListener@@UEAA_NXZ
+    MCVAPI bool onFlushEditorExtensionContextAfterEvents();
+
     // symbol: ?onFlushSystemAfterEvents@ScriptDeferredEventListener@@UEAA_NXZ
     MCVAPI bool onFlushSystemAfterEvents();
 
@@ -25,6 +28,9 @@ public:
 
     // symbol: ?onPreFlushAfterEvents@ScriptDeferredEventListener@@UEAAXXZ
     MCVAPI void onPreFlushAfterEvents();
+
+    // symbol: ?onRunAsyncJobs@ScriptDeferredEventListener@@UEAAXXZ
+    MCVAPI void onRunAsyncJobs();
 
     // symbol: ?onRunSystemTick@ScriptDeferredEventListener@@UEAA_NXZ
     MCVAPI bool onRunSystemTick();

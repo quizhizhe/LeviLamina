@@ -54,6 +54,9 @@ MCAPI extern bool const IsCreatorEditorBuild;
 // symbol: ?IsDevBuild@SharedConstants@@3_NB
 MCAPI extern bool const IsDevBuild;
 
+// symbol: ?IsPS4Platform@SharedConstants@@3_NB
+MCAPI extern bool const IsPS4Platform;
+
 // symbol: ?IsPlaytest@SharedConstants@@3_NB
 MCAPI extern bool const IsPlaytest;
 
@@ -62,6 +65,9 @@ MCAPI extern bool const IsPreviewApp;
 
 // symbol: ?IsWin32Platform@SharedConstants@@3_NB
 MCAPI extern bool const IsWin32Platform;
+
+// symbol: ?IsXboxPlatform@SharedConstants@@3_NB
+MCAPI extern bool const IsXboxPlatform;
 
 // symbol: ?LevelDBCompressorID@SharedConstants@@3HB
 MCAPI extern int const LevelDBCompressorID;

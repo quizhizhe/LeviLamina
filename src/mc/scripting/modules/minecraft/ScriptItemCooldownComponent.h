@@ -9,6 +9,7 @@
 
 // auto generated forward declare list
 // clang-format off
+namespace ScriptModuleMinecraft { class ScriptComponentTypeEnumBuilder; }
 namespace ScriptModuleMinecraft { class ScriptItemComponent; }
 namespace ScriptModuleMinecraft { class ScriptPlayer; }
 // clang-format on
@@ -18,15 +19,13 @@ namespace ScriptModuleMinecraft {
 class ScriptItemCooldownComponent : public ::ScriptModuleMinecraft::ScriptItemComponent {
 public:
     // prevent constructor by default
+    ScriptItemCooldownComponent& operator=(ScriptItemCooldownComponent const&);
     ScriptItemCooldownComponent();
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // symbol: ??1ScriptItemCooldownComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptItemCooldownComponent();
+    // vIndex: 0, symbol: __gen_??1ScriptItemCooldownComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptItemCooldownComponent() = default;
 
     // symbol: ??0ScriptItemCooldownComponent@ScriptModuleMinecraft@@QEAA@AEBV01@@Z
     MCAPI ScriptItemCooldownComponent(class ScriptModuleMinecraft::ScriptItemCooldownComponent const&);
@@ -38,17 +37,14 @@ public:
     // symbol: ?getCooldownTicks@ScriptItemCooldownComponent@ScriptModuleMinecraft@@QEAA?AV?$Result@H$$V@Scripting@@XZ
     MCAPI class Scripting::Result<int> getCooldownTicks();
 
-    // symbol: ??4ScriptItemCooldownComponent@ScriptModuleMinecraft@@QEAAAEAV01@AEBV01@@Z
-    MCAPI class ScriptModuleMinecraft::ScriptItemCooldownComponent&
-    operator=(class ScriptModuleMinecraft::ScriptItemCooldownComponent const&);
-
     // symbol:
     // ?startCooldown@ScriptItemCooldownComponent@ScriptModuleMinecraft@@QEAA?AV?$Result@X$$V@Scripting@@AEAVScriptPlayer@2@@Z
     MCAPI class Scripting::Result<void> startCooldown(class ScriptModuleMinecraft::ScriptPlayer&);
 
     // symbol:
-    // ?bind@ScriptItemCooldownComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptItemCooldownComponent@ScriptModuleMinecraft@@@Scripting@@XZ
-    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptItemCooldownComponent> bind();
+    // ?bind@ScriptItemCooldownComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptItemCooldownComponent@ScriptModuleMinecraft@@@Scripting@@AEAVScriptComponentTypeEnumBuilder@2@@Z
+    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptItemCooldownComponent>
+    bind(class ScriptModuleMinecraft::ScriptComponentTypeEnumBuilder&);
 
     // NOLINTEND
 };

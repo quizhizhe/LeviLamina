@@ -14,18 +14,18 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SpringFeature@@UEAA@XZ
+    virtual ~SpringFeature() = default;
 
     // vIndex: 3, symbol: ?place@SpringFeature@@UEBA_NAEAVBlockSource@@AEBVBlockPos@@AEAVRandom@@@Z
-    virtual bool place(class BlockSource&, class BlockPos const&, class Random&) const;
+    virtual bool place(class BlockSource& region, class BlockPos const& pos, class Random& random) const;
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?isValidSpringBorderBlock@SpringFeature@@AEBA_NAEBVBlockLegacy@@AEAVBlockSource@@@Z
-    MCAPI bool isValidSpringBorderBlock(class BlockLegacy const&, class BlockSource&) const;
+    MCAPI bool isValidSpringBorderBlock(class BlockLegacy const& block, class BlockSource& region) const;
 
     // NOLINTEND
 };

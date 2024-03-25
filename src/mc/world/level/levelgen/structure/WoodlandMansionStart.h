@@ -14,25 +14,31 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1WoodlandMansionStart@@UEAA@XZ
+    virtual ~WoodlandMansionStart() = default;
 
     // vIndex: 1, symbol: ?postProcess@WoodlandMansionStart@@UEAA_NAEAVBlockSource@@AEAVRandom@@AEBVBoundingBox@@@Z
-    virtual bool postProcess(class BlockSource&, class Random&, class BoundingBox const&);
+    virtual bool postProcess(class BlockSource& region, class Random& random, class BoundingBox const& chunkBB);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_create@WoodlandMansionStart@@AEAAXAEAVDimension@@AEAVRandom@@HH@Z
-    MCAPI void _create(class Dimension&, class Random&, int, int);
+    MCAPI void _create(class Dimension& dimension, class Random& random, int x, int z);
 
     // symbol: ?_makeStairs@WoodlandMansionStart@@AEAAXAEBVBlockPos@@AEBVBlock@@EEAEAVBlockSource@@AEBVBoundingBox@@@Z
-    MCAPI void
-    _makeStairs(class BlockPos const&, class Block const&, uchar, uchar, class BlockSource&, class BoundingBox const&);
+    MCAPI void _makeStairs(
+        class BlockPos const&    startPos,
+        class Block const&       stairBlock,
+        uchar                    xStepDir,
+        uchar                    yStepDir,
+        class BlockSource&       region,
+        class BoundingBox const& chunkBB
+    );
 
     // symbol: ?_fillCobblestone@WoodlandMansionStart@@CAXAEBVBlockPos@@AEAVBlockSource@@@Z
-    MCAPI static void _fillCobblestone(class BlockPos const&, class BlockSource&);
+    MCAPI static void _fillCobblestone(class BlockPos const& startPos, class BlockSource& region);
 
     // NOLINTEND
 };

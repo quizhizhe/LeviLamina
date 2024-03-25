@@ -5,7 +5,6 @@
 // auto generated inclusion list
 #include "mc/entity/utilities/ActorLocation.h"
 #include "mc/enums/InHandUpdateType.h"
-#include "mc/enums/UseAnimation.h"
 #include "mc/events/LevelSoundEvent.h"
 #include "mc/world/item/SignItem.h"
 #include "mc/world/item/components/ItemColor.h"
@@ -28,74 +27,31 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1HangingSignItem@@UEAA@XZ
+    virtual ~HangingSignItem() = default;
 
-    // vIndex: 11, symbol: __unk_vfn_11
-    virtual void __unk_vfn_11();
-
-    // vIndex: 14, symbol: __unk_vfn_14
-    virtual void __unk_vfn_14();
-
-    // vIndex: 16, symbol: __unk_vfn_16
-    virtual void __unk_vfn_16();
-
-    // vIndex: 21, symbol: __unk_vfn_21
-    virtual void __unk_vfn_21();
-
-    // vIndex: 51, symbol: __unk_vfn_51
-    virtual void __unk_vfn_51();
-
-    // vIndex: 53, symbol: __unk_vfn_53
-    virtual void __unk_vfn_53();
-
-    // vIndex: 66, symbol: __unk_vfn_66
-    virtual void __unk_vfn_66();
-
-    // vIndex: 70, symbol: __unk_vfn_70
-    virtual void __unk_vfn_70();
-
-    // vIndex: 71, symbol: __unk_vfn_71
-    virtual void __unk_vfn_71();
-
-    // vIndex: 72, symbol: __unk_vfn_72
-    virtual void __unk_vfn_72();
-
-    // vIndex: 75, symbol: __unk_vfn_75
-    virtual void __unk_vfn_75();
-
-    // vIndex: 79, symbol: __unk_vfn_79
-    virtual void __unk_vfn_79();
-
-    // vIndex: 80, symbol: __unk_vfn_80
-    virtual void __unk_vfn_80();
-
-    // vIndex: 115, symbol: __unk_vfn_115
-    virtual void __unk_vfn_115();
-
-    // vIndex: 116, symbol: __unk_vfn_116
-    virtual void __unk_vfn_116();
-
-    // vIndex: 133, symbol:
+    // vIndex: 116, symbol:
     // ?_calculatePlacePos@HangingSignItem@@EEBA_NAEAVItemStackBase@@AEAVActor@@AEAEAEAVBlockPos@@@Z
-    virtual bool _calculatePlacePos(class ItemStackBase&, class Actor&, uchar&, class BlockPos&) const;
+    virtual bool _calculatePlacePos(class ItemStackBase&, class Actor& entity, uchar& face, class BlockPos& pos) const;
 
-    // vIndex: 136, symbol: ?getBlockToPlace@HangingSignItem@@MEBAPEBVBlock@@EAEBVActor@@VBlockPos@@@Z
-    virtual class Block const* getBlockToPlace(uchar, class Actor const&, class BlockPos) const;
+    // vIndex: 119, symbol: ?getBlockToPlace@HangingSignItem@@MEBAPEBVBlock@@EAEBVActor@@VBlockPos@@@Z
+    virtual class Block const* getBlockToPlace(uchar face, class Actor const& entity, class BlockPos pos) const;
 
     // symbol:
     // ??0HangingSignItem@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HW4SignType@SignBlock@@@Z
-    MCAPI HangingSignItem(std::string const&, int, ::SignBlock::SignType);
+    MCAPI HangingSignItem(std::string const& name, int id, ::SignBlock::SignType type);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_getCeilingHangingSignBlock@HangingSignItem@@AEBAPEBVBlock@@AEBVActor@@AEBEAEBVBlockPos@@@Z
-    MCAPI class Block const* _getCeilingHangingSignBlock(class Actor const&, uchar const&, class BlockPos const&) const;
+    MCAPI class Block const*
+    _getCeilingHangingSignBlock(class Actor const& entity, uchar const& face, class BlockPos const& pos) const;
 
     // symbol: ?_getWallHangingSignBlock@HangingSignItem@@AEBAPEBVBlock@@AEBVActor@@AEBEAEBVBlockPos@@@Z
-    MCAPI class Block const* _getWallHangingSignBlock(class Actor const&, uchar const&, class BlockPos const&) const;
+    MCAPI class Block const*
+    _getWallHangingSignBlock(class Actor const& entity, uchar const& face, class BlockPos const& pos) const;
 
     // NOLINTEND
 };

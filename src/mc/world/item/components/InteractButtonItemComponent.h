@@ -19,8 +19,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1InteractButtonItemComponent@@UEAA@XZ
+    virtual ~InteractButtonItemComponent();
 
     // vIndex: 3, symbol: ?isNetworkComponent@InteractButtonItemComponent@@UEBA_NXZ
     virtual bool isNetworkComponent() const;
@@ -33,15 +33,8 @@ public:
     // ?initializeFromNetwork@InteractButtonItemComponent@@UEAA_NAEBVCompoundTag@@AEBUReflectionCtx@cereal@@@Z
     virtual bool initializeFromNetwork(class CompoundTag const&, struct cereal::ReflectionCtx const&);
 
-    // vIndex: 9, symbol: ?_initializeComponent@InteractButtonItemComponent@@UEBAXXZ
-    virtual void _initializeComponent() const;
-
-    // symbol: ??1InteractButtonItemComponent@@UEAA@XZ
-    MCVAPI ~InteractButtonItemComponent();
-
-    // symbol:
-    // ?getInteractText@InteractButtonItemComponent@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
-    MCAPI std::string getInteractText() const;
+    // vIndex: 9, symbol: ?_initializeComponent@InteractButtonItemComponent@@UEAAXXZ
+    virtual void _initializeComponent();
 
     // symbol: ??4InteractButtonItemComponent@@QEAAAEAV0@AEBV0@@Z
     MCAPI class InteractButtonItemComponent& operator=(class InteractButtonItemComponent const&);

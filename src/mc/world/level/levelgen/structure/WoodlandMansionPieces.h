@@ -34,15 +34,15 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1FloorRoomCollection@WoodlandMansionPieces@@UEAA@XZ
+        virtual ~FloorRoomCollection() = default;
 
         // vIndex: 1, symbol:
         // ?get1x1@FirstFloorRoomCollection@WoodlandMansionPieces@@UEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAVRandom@@@Z
         virtual std::string get1x1(class Random&) = 0;
 
         // vIndex: 2, symbol:
-        // ?get1x1Secret@SecondFloorRoomCollection@WoodlandMansionPieces@@UEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAVRandom@@@Z
+        // ?get1x1Secret@FirstFloorRoomCollection@WoodlandMansionPieces@@UEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAVRandom@@@Z
         virtual std::string get1x1Secret(class Random&) = 0;
 
         // vIndex: 3, symbol:
@@ -62,7 +62,7 @@ public:
         virtual std::string get2x2(class Random&) = 0;
 
         // vIndex: 7, symbol:
-        // ?get2x2Secret@SecondFloorRoomCollection@WoodlandMansionPieces@@UEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAVRandom@@@Z
+        // ?get2x2Secret@FirstFloorRoomCollection@WoodlandMansionPieces@@UEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAVRandom@@@Z
         virtual std::string get2x2Secret(class Random&) = 0;
 
         // NOLINTEND
@@ -77,8 +77,8 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1FirstFloorRoomCollection@WoodlandMansionPieces@@UEAA@XZ
+        virtual ~FirstFloorRoomCollection() = default;
 
         // vIndex: 1, symbol:
         // ?get1x1@FirstFloorRoomCollection@WoodlandMansionPieces@@UEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAVRandom@@@Z
@@ -121,23 +121,29 @@ public:
     public:
         // NOLINTBEGIN
         // symbol: ??0MansionGrid@WoodlandMansionPieces@@QEAA@AEAVRandom@@@Z
-        MCAPI explicit MansionGrid(class Random&);
+        MCAPI explicit MansionGrid(class Random& random);
 
         // symbol: ?get1x2RoomDirection@MansionGrid@WoodlandMansionPieces@@QEBAEAEBVSimpleGrid@2@HHHH@Z
-        MCAPI uchar get1x2RoomDirection(class WoodlandMansionPieces::SimpleGrid const&, int, int, int, int) const;
+        MCAPI uchar
+        get1x2RoomDirection(class WoodlandMansionPieces::SimpleGrid const& grid, int x, int y, int floorNum, int roomId)
+            const;
 
         // NOLINTEND
 
         // private:
         // NOLINTBEGIN
         // symbol: ?_cleanEdges@MansionGrid@WoodlandMansionPieces@@AEAA_NAEAVSimpleGrid@2@@Z
-        MCAPI bool _cleanEdges(class WoodlandMansionPieces::SimpleGrid&);
+        MCAPI bool _cleanEdges(class WoodlandMansionPieces::SimpleGrid& grid);
 
         // symbol: ?_identifyRooms@MansionGrid@WoodlandMansionPieces@@AEAAXAEAVSimpleGrid@2@0@Z
-        MCAPI void _identifyRooms(class WoodlandMansionPieces::SimpleGrid&, class WoodlandMansionPieces::SimpleGrid&);
+        MCAPI void _identifyRooms(
+            class WoodlandMansionPieces::SimpleGrid& fromGrid,
+            class WoodlandMansionPieces::SimpleGrid& roomGrid
+        );
 
         // symbol: ?_recursiveCorridor@MansionGrid@WoodlandMansionPieces@@AEAAXAEAVSimpleGrid@2@HHEH@Z
-        MCAPI void _recursiveCorridor(class WoodlandMansionPieces::SimpleGrid&, int, int, uchar, int);
+        MCAPI void
+        _recursiveCorridor(class WoodlandMansionPieces::SimpleGrid& grid, int x, int y, uchar heading, int depth);
 
         // symbol: ?_setupThirdFloor@MansionGrid@WoodlandMansionPieces@@AEAAXXZ
         MCAPI void _setupThirdFloor();
@@ -169,8 +175,8 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1SecondFloorRoomCollection@WoodlandMansionPieces@@UEAA@XZ
+        virtual ~SecondFloorRoomCollection() = default;
 
         // vIndex: 1, symbol:
         // ?get1x1@SecondFloorRoomCollection@WoodlandMansionPieces@@UEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAVRandom@@@Z
@@ -213,10 +219,10 @@ public:
     public:
         // NOLINTBEGIN
         // symbol: ?edgesTo@SimpleGrid@WoodlandMansionPieces@@QEAA_NHHH@Z
-        MCAPI bool edgesTo(int, int, int);
+        MCAPI bool edgesTo(int x, int y, int ifValue);
 
         // symbol: ?set@SimpleGrid@WoodlandMansionPieces@@QEAAXHHHHH@Z
-        MCAPI void set(int, int, int, int, int);
+        MCAPI void set(int x0, int y0, int x1, int y1, int value);
 
         // NOLINTEND
     };
@@ -232,8 +238,12 @@ public:
         // NOLINTBEGIN
         // symbol:
         // ?createMansion@MansionPiecePlacer@WoodlandMansionPieces@@QEAAXAEBVBlockPos@@W4Rotation@@AEAV?$vector@V?$unique_ptr@VStructurePiece@@U?$default_delete@VStructurePiece@@@std@@@std@@V?$allocator@V?$unique_ptr@VStructurePiece@@U?$default_delete@VStructurePiece@@@std@@@std@@@2@@std@@AEAVMansionGrid@2@@Z
-        MCAPI void
-        createMansion(class BlockPos const&, ::Rotation, std::vector<std::unique_ptr<class StructurePiece>>&, class WoodlandMansionPieces::MansionGrid&);
+        MCAPI void createMansion(
+            class BlockPos const&                               origin,
+            ::Rotation                                          rotation,
+            std::vector<std::unique_ptr<class StructurePiece>>& pieces,
+            class WoodlandMansionPieces::MansionGrid&           mansion
+        );
 
         // NOLINTEND
 
@@ -241,53 +251,75 @@ public:
         // NOLINTBEGIN
         // symbol:
         // ?_addRoom1x1@MansionPiecePlacer@WoodlandMansionPieces@@AEAAXAEAV?$vector@V?$unique_ptr@VStructurePiece@@U?$default_delete@VStructurePiece@@@std@@@std@@V?$allocator@V?$unique_ptr@VStructurePiece@@U?$default_delete@VStructurePiece@@@std@@@std@@@2@@std@@AEBVBlockPos@@W4Rotation@@EAEAVFloorRoomCollection@2@@Z
-        MCAPI void
-        _addRoom1x1(std::vector<std::unique_ptr<class StructurePiece>>&, class BlockPos const&, ::Rotation, uchar, class WoodlandMansionPieces::FloorRoomCollection&);
+        MCAPI void _addRoom1x1(
+            std::vector<std::unique_ptr<class StructurePiece>>& pieces,
+            class BlockPos const&                               roomPos,
+            ::Rotation                                          rotation,
+            uchar                                               doorDir,
+            class WoodlandMansionPieces::FloorRoomCollection&   rooms
+        );
 
         // symbol:
         // ?_addRoom1x2@MansionPiecePlacer@WoodlandMansionPieces@@AEAAXAEAV?$vector@V?$unique_ptr@VStructurePiece@@U?$default_delete@VStructurePiece@@@std@@@std@@V?$allocator@V?$unique_ptr@VStructurePiece@@U?$default_delete@VStructurePiece@@@std@@@std@@@2@@std@@AEBVBlockPos@@W4Rotation@@EEAEAVFloorRoomCollection@2@_N@Z
         MCAPI void _addRoom1x2(
-            std::vector<std::unique_ptr<class StructurePiece>>&,
-            class BlockPos const&,
-            ::Rotation,
-            uchar,
-            uchar,
-            class WoodlandMansionPieces::FloorRoomCollection&,
-            bool
+            std::vector<std::unique_ptr<class StructurePiece>>& pieces,
+            class BlockPos const&                               roomPos,
+            ::Rotation                                          rotation,
+            uchar                                               roomDir,
+            uchar                                               doorDir,
+            class WoodlandMansionPieces::FloorRoomCollection&   rooms,
+            bool                                                isStairsRoom
         );
 
         // symbol:
         // ?_addRoom2x2@MansionPiecePlacer@WoodlandMansionPieces@@AEAAXAEAV?$vector@V?$unique_ptr@VStructurePiece@@U?$default_delete@VStructurePiece@@@std@@@std@@V?$allocator@V?$unique_ptr@VStructurePiece@@U?$default_delete@VStructurePiece@@@std@@@std@@@2@@std@@AEBVBlockPos@@W4Rotation@@EEAEAVFloorRoomCollection@2@@Z
-        MCAPI void
-        _addRoom2x2(std::vector<std::unique_ptr<class StructurePiece>>&, class BlockPos const&, ::Rotation, uchar, uchar, class WoodlandMansionPieces::FloorRoomCollection&);
+        MCAPI void _addRoom2x2(
+            std::vector<std::unique_ptr<class StructurePiece>>& pieces,
+            class BlockPos const&                               roomPos,
+            ::Rotation                                          rotation,
+            uchar                                               roomDir,
+            uchar                                               doorDir,
+            class WoodlandMansionPieces::FloorRoomCollection&   rooms
+        );
 
         // symbol:
         // ?_addRoom2x2Secret@MansionPiecePlacer@WoodlandMansionPieces@@AEAAXAEAV?$vector@V?$unique_ptr@VStructurePiece@@U?$default_delete@VStructurePiece@@@std@@@std@@V?$allocator@V?$unique_ptr@VStructurePiece@@U?$default_delete@VStructurePiece@@@std@@@std@@@2@@std@@AEBVBlockPos@@W4Rotation@@AEAVFloorRoomCollection@2@@Z
-        MCAPI void
-        _addRoom2x2Secret(std::vector<std::unique_ptr<class StructurePiece>>&, class BlockPos const&, ::Rotation, class WoodlandMansionPieces::FloorRoomCollection&);
+        MCAPI void _addRoom2x2Secret(
+            std::vector<std::unique_ptr<class StructurePiece>>& pieces,
+            class BlockPos const&                               roomPos,
+            ::Rotation                                          rotation,
+            class WoodlandMansionPieces::FloorRoomCollection&   rooms
+        );
 
         // symbol:
         // ?_createRoof@MansionPiecePlacer@WoodlandMansionPieces@@AEAAXAEAV?$vector@V?$unique_ptr@VStructurePiece@@U?$default_delete@VStructurePiece@@@std@@@std@@V?$allocator@V?$unique_ptr@VStructurePiece@@U?$default_delete@VStructurePiece@@@std@@@std@@@2@@std@@AEBVBlockPos@@W4Rotation@@AEAVSimpleGrid@2@PEAV72@@Z
-        MCAPI void
-        _createRoof(std::vector<std::unique_ptr<class StructurePiece>>&, class BlockPos const&, ::Rotation, class WoodlandMansionPieces::SimpleGrid&, class WoodlandMansionPieces::SimpleGrid*);
+        MCAPI void _createRoof(
+            std::vector<std::unique_ptr<class StructurePiece>>& pieces,
+            class BlockPos const&                               roofOrigin,
+            ::Rotation                                          rotation,
+            class WoodlandMansionPieces::SimpleGrid&            grid,
+            class WoodlandMansionPieces::SimpleGrid*            aboveGrid
+        );
 
         // symbol:
         // ?_traverseOuterWalls@MansionPiecePlacer@WoodlandMansionPieces@@AEAAXAEAV?$vector@V?$unique_ptr@VStructurePiece@@U?$default_delete@VStructurePiece@@@std@@@std@@V?$allocator@V?$unique_ptr@VStructurePiece@@U?$default_delete@VStructurePiece@@@std@@@std@@@2@@std@@AEAUPlacementData@2@AEAVSimpleGrid@2@EHHHH@Z
         MCAPI void _traverseOuterWalls(
-            std::vector<std::unique_ptr<class StructurePiece>>&,
-            struct WoodlandMansionPieces::PlacementData&,
-            class WoodlandMansionPieces::SimpleGrid&,
-            uchar,
-            int,
-            int,
-            int,
-            int
+            std::vector<std::unique_ptr<class StructurePiece>>& pieces,
+            struct WoodlandMansionPieces::PlacementData&        data,
+            class WoodlandMansionPieces::SimpleGrid&            grid,
+            uchar                                               gridDirection,
+            int                                                 startX,
+            int                                                 startY,
+            int                                                 endX,
+            int                                                 endY
         );
 
         // symbol:
         // ?_traverseWallPiece@MansionPiecePlacer@WoodlandMansionPieces@@AEAAXAEAV?$vector@V?$unique_ptr@VStructurePiece@@U?$default_delete@VStructurePiece@@@std@@@std@@V?$allocator@V?$unique_ptr@VStructurePiece@@U?$default_delete@VStructurePiece@@@std@@@std@@@2@@std@@AEAUPlacementData@2@@Z
-        MCAPI void
-        _traverseWallPiece(std::vector<std::unique_ptr<class StructurePiece>>&, struct WoodlandMansionPieces::PlacementData&);
+        MCAPI void _traverseWallPiece(
+            std::vector<std::unique_ptr<class StructurePiece>>& pieces,
+            struct WoodlandMansionPieces::PlacementData&        data
+        );
 
         // NOLINTEND
     };
@@ -301,8 +333,8 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1ThirdFloorRoomCollection@WoodlandMansionPieces@@UEAA@XZ
+        virtual ~ThirdFloorRoomCollection() = default;
 
         // NOLINTEND
     };
@@ -316,41 +348,44 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: ??1WoodlandMansionPiece@WoodlandMansionPieces@@UEAA@XZ
+        virtual ~WoodlandMansionPiece();
 
         // vIndex: 2, symbol: ?getType@WoodlandMansionPiece@WoodlandMansionPieces@@UEBA?AW4StructurePieceType@@XZ
         virtual ::StructurePieceType getType() const;
 
         // vIndex: 5, symbol:
         // ?postProcessMobsAt@WoodlandMansionPiece@WoodlandMansionPieces@@UEAAXAEAVBlockSource@@AEAVRandom@@AEBVBoundingBox@@@Z
-        virtual void postProcessMobsAt(class BlockSource&, class Random&, class BoundingBox const&);
+        virtual void
+        postProcessMobsAt(class BlockSource& region, class Random& random, class BoundingBox const& chunkBB);
 
         // vIndex: 13, symbol:
         // ?_handleDataMarker@WoodlandMansionPiece@WoodlandMansionPieces@@MEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVBlockPos@@AEAVBlockSource@@AEAVRandom@@AEBVBoundingBox@@@Z
-        virtual void
-        _handleDataMarker(std::string const&, class BlockPos const&, class BlockSource&, class Random&, class BoundingBox const&);
-
-        // symbol: ??1WoodlandMansionPiece@WoodlandMansionPieces@@UEAA@XZ
-        MCVAPI ~WoodlandMansionPiece();
+        virtual void _handleDataMarker(
+            std::string const&       markerId,
+            class BlockPos const&    position,
+            class BlockSource&       region,
+            class Random&            random,
+            class BoundingBox const& chunkBB
+        );
 
         // symbol:
         // ??0WoodlandMansionPiece@WoodlandMansionPieces@@QEAA@V?$not_null@V?$NonOwnerPointer@VStructureManager@@@Bedrock@@@gsl@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVBlockPos@@W4Rotation@@@Z
         MCAPI WoodlandMansionPiece(
-            Bedrock::NotNullNonOwnerPtr<class StructureManager>,
-            std::string const&,
-            class BlockPos const&,
-            ::Rotation
+            Bedrock::NotNullNonOwnerPtr<class StructureManager> structureManager,
+            std::string const&                                  templateName,
+            class BlockPos const&                               origin,
+            ::Rotation                                          rotation
         );
 
         // symbol:
         // ??0WoodlandMansionPiece@WoodlandMansionPieces@@QEAA@V?$not_null@V?$NonOwnerPointer@VStructureManager@@@Bedrock@@@gsl@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVBlockPos@@W4Rotation@@W4Mirror@@@Z
         MCAPI WoodlandMansionPiece(
-            Bedrock::NotNullNonOwnerPtr<class StructureManager>,
-            std::string const&,
-            class BlockPos const&,
-            ::Rotation,
-            ::Mirror
+            Bedrock::NotNullNonOwnerPtr<class StructureManager> structureManager,
+            std::string const&                                  templateName,
+            class BlockPos const&                               origin,
+            ::Rotation                                          rotation,
+            ::Mirror                                            mirror
         );
 
         // NOLINTEND
@@ -359,8 +394,13 @@ public:
         // NOLINTBEGIN
         // symbol:
         // ?_addChest@WoodlandMansionPiece@WoodlandMansionPieces@@AEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVBlockPos@@AEAVBlockSource@@AEAVRandom@@AEBVBoundingBox@@@Z
-        MCAPI void
-        _addChest(std::string const&, class BlockPos const&, class BlockSource&, class Random&, class BoundingBox const&);
+        MCAPI void _addChest(
+            std::string const&       markerId,
+            class BlockPos const&    position,
+            class BlockSource&       region,
+            class Random&            random,
+            class BoundingBox const& chunkBB
+        );
 
         // symbol: ?_loadTemplate@WoodlandMansionPiece@WoodlandMansionPieces@@AEAAXXZ
         MCAPI void _loadTemplate();
@@ -378,8 +418,13 @@ public:
     // NOLINTBEGIN
     // symbol:
     // ?generateMansion@WoodlandMansionPieces@@SAXV?$not_null@V?$NonOwnerPointer@VStructureManager@@@Bedrock@@@gsl@@AEBVBlockPos@@W4Rotation@@AEAV?$vector@V?$unique_ptr@VStructurePiece@@U?$default_delete@VStructurePiece@@@std@@@std@@V?$allocator@V?$unique_ptr@VStructurePiece@@U?$default_delete@VStructurePiece@@@std@@@std@@@2@@std@@AEAVRandom@@@Z
-    MCAPI static void
-    generateMansion(Bedrock::NotNullNonOwnerPtr<class StructureManager>, class BlockPos const&, ::Rotation, std::vector<std::unique_ptr<class StructurePiece>>&, class Random&);
+    MCAPI static void generateMansion(
+        Bedrock::NotNullNonOwnerPtr<class StructureManager> structureManager,
+        class BlockPos const&                               origin,
+        ::Rotation                                          rotation,
+        std::vector<std::unique_ptr<class StructurePiece>>& pieces,
+        class Random&                                       random
+    );
 
     // NOLINTEND
 };

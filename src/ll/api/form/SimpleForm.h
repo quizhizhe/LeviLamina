@@ -9,14 +9,17 @@ namespace ll::form {
 class SimpleForm : public Form {
 
     class SimpleFormImpl;
-    std::unique_ptr<SimpleFormImpl> impl{};
+    std::unique_ptr<SimpleFormImpl> impl;
 
 public:
     using Callback       = std::function<void(Player&, int)>;
     using ButtonCallback = std::function<void(Player&)>;
 
-    LLAPI explicit SimpleForm(std::string const& title, std::string const& content = "");
-    ~SimpleForm() override = default;
+    LLNDAPI SimpleForm();
+
+    LLNDAPI explicit SimpleForm(std::string const& title, std::string const& content = "");
+
+    LLAPI ~SimpleForm() override;
 
     LLAPI SimpleForm& setTitle(std::string const& title);
 
@@ -25,13 +28,27 @@ public:
     /**
      * @brief  Append a button to the form
      * @param  text      The text of the button
-     * @param  image     The image of the button
+     * @param  imageData The image data of the button
+     * @param  imageType The type of the image (url or path)
      * @param  callback  The callback of the button
      * @return SimpleForm&  *this
      * @note   If the `callback` parameter of sendTo() is set, the callback of the button will be ignored
      */
-    LLAPI SimpleForm&
-    appendButton(std::string const& text, std::string const& image = "", ButtonCallback callback = {});
+    LLAPI SimpleForm& appendButton(
+        std::string const& text,
+        std::string const& imageData,
+        std::string const& imageType,
+        ButtonCallback     callback = {}
+    );
+
+    /**
+     * @brief  Append a button to the form
+     * @param  text      The text of the button
+     * @param  callback  The callback of the button
+     * @return SimpleForm&  *this
+     * @note   If the `callback` parameter of sendTo() is set, the callback of the button will be ignored
+     */
+    LLAPI SimpleForm& appendButton(std::string const& text, ButtonCallback callback = {});
 
     /**
      * @brief  Send the form to the player

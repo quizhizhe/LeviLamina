@@ -9,6 +9,7 @@
 // auto generated forward declare list
 // clang-format off
 namespace ScriptModuleMinecraft { class ScriptActorComponent; }
+namespace ScriptModuleMinecraft { class ScriptComponentTypeEnumBuilder; }
 // clang-format on
 
 namespace ScriptModuleMinecraft {
@@ -22,18 +23,16 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // symbol: ??1ScriptOnFireComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptOnFireComponent();
+    // vIndex: 0, symbol: __gen_??1ScriptOnFireComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptOnFireComponent() = default;
 
     // symbol: ?getOnFireTicksRemaining@ScriptOnFireComponent@ScriptModuleMinecraft@@QEBAHXZ
     MCAPI int getOnFireTicksRemaining() const;
 
     // symbol:
-    // ?bind@ScriptOnFireComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptOnFireComponent@ScriptModuleMinecraft@@@Scripting@@XZ
-    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptOnFireComponent> bind();
+    // ?bind@ScriptOnFireComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptOnFireComponent@ScriptModuleMinecraft@@@Scripting@@AEAVScriptComponentTypeEnumBuilder@2@@Z
+    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptOnFireComponent>
+    bind(class ScriptModuleMinecraft::ScriptComponentTypeEnumBuilder&);
 
     // symbol: ?ComponentId@ScriptOnFireComponent@ScriptModuleMinecraft@@2PEBDEB
     MCAPI static char const* ComponentId;

@@ -16,8 +16,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SleepGoal@@UEAA@XZ
+    virtual ~SleepGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@SleepGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -36,13 +36,22 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@SleepGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // vIndex: 16, symbol: ?_getRepathTime@SleepGoal@@EEBA_KXZ
     virtual uint64 _getRepathTime() const;
 
     // symbol: ??0SleepGoal@@QEAA@AEAVMob@@MMM_NMHM@Z
-    MCAPI SleepGoal(class Mob&, float, float, float, bool, float, int, float);
+    MCAPI SleepGoal(
+        class Mob& mob,
+        float      walkSpeed,
+        float      sleepColliderHeight,
+        float      sleepColliderWidth,
+        bool,
+        float sleepYOffset,
+        int   cooldown,
+        float cooldownTimeout
+    );
 
     // NOLINTEND
 

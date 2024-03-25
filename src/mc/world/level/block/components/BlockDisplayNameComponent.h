@@ -14,11 +14,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ??1BlockDisplayNameComponent@@UEAA@XZ
-    MCVAPI ~BlockDisplayNameComponent();
-
-    // symbol: ?usesNewComponentStorage@BlockDisplayNameComponent@@SA_NXZ
-    MCAPI static bool usesNewComponentStorage();
+    // vIndex: 0, symbol: __gen_??1BlockDisplayNameComponent@@UEAA@XZ
+    virtual ~BlockDisplayNameComponent() = default;
 
     // NOLINTEND
 };

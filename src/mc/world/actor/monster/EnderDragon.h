@@ -3,13 +3,14 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
+#include "mc/deps/puv/EquipmentSlot.h"
 #include "mc/entity/utilities/ActorDamageCause.h"
 #include "mc/entity/utilities/ActorFlags.h"
+#include "mc/entity/utilities/ActorInitializationMethod.h"
 #include "mc/entity/utilities/ActorType.h"
 #include "mc/enums/ArmorMaterialType.h"
 #include "mc/enums/ArmorSlot.h"
 #include "mc/enums/ArmorTextureType.h"
-#include "mc/enums/EquipmentSlot.h"
 #include "mc/enums/HandSlot.h"
 #include "mc/enums/InputMode.h"
 #include "mc/enums/MaterialType.h"
@@ -19,9 +20,13 @@
 #include "mc/events/LevelSoundEvent.h"
 #include "mc/server/commands/CommandPermissionLevel.h"
 #include "mc/world/AutomaticID.h"
-#include "mc/world/actor/Actor.h"
 #include "mc/world/actor/monster/Monster.h"
 #include "mc/world/item/components/ItemUseMethod.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace mce { class Color; }
+// clang-format on
 
 class EnderDragon : public ::Monster {
 public:
@@ -32,110 +37,60 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 4, symbol: ?reloadHardcoded@EnderDragon@@UEAAXW4InitializationMethod@Actor@@AEBVVariantParameterList@@@Z
-    virtual void reloadHardcoded(::Actor::InitializationMethod, class VariantParameterList const&);
+    // vIndex: 4, symbol: ?reloadHardcoded@EnderDragon@@UEAAXW4ActorInitializationMethod@@AEBVVariantParameterList@@@Z
+    virtual void reloadHardcoded(::ActorInitializationMethod method, class VariantParameterList const& params);
 
-    // vIndex: 10, symbol: __unk_vfn_10
-    virtual void __unk_vfn_10();
+    // vIndex: 10, symbol: __gen_??1EnderDragon@@UEAA@XZ
+    virtual ~EnderDragon() = default;
 
     // vIndex: 13, symbol: ?remove@EnderDragon@@UEAAXXZ
     virtual void remove();
 
-    // vIndex: 23, symbol: __unk_vfn_23
-    virtual void __unk_vfn_23();
-
-    // vIndex: 39, symbol: __unk_vfn_39
-    virtual void __unk_vfn_39();
-
-    // vIndex: 41, symbol: __unk_vfn_41
-    virtual void __unk_vfn_41();
-
-    // vIndex: 42, symbol: ?getShadowRadius@EnderDragon@@UEBAMXZ
+    // vIndex: 41, symbol: ?getShadowRadius@EnderDragon@@UEBAMXZ
     virtual float getShadowRadius() const;
 
-    // vIndex: 43, symbol: ?getHeadLookVector@EnderDragon@@UEBA?AVVec3@@M@Z
-    virtual class Vec3 getHeadLookVector(float) const;
+    // vIndex: 42, symbol: ?getHeadLookVector@EnderDragon@@UEBA?AVVec3@@M@Z
+    virtual class Vec3 getHeadLookVector(float a) const;
 
-    // vIndex: 44, symbol: __unk_vfn_44
-    virtual void __unk_vfn_44();
-
-    // vIndex: 47, symbol: __unk_vfn_47
-    virtual void __unk_vfn_47();
-
-    // vIndex: 49, symbol: ?isImmobile@EnderDragon@@UEBA_NXZ
+    // vIndex: 46, symbol: ?isImmobile@EnderDragon@@UEBA_NXZ
     virtual bool isImmobile() const;
 
-    // vIndex: 52, symbol: __unk_vfn_52
-    virtual void __unk_vfn_52();
+    // vIndex: 66, symbol: ?setSitting@EnderDragon@@UEAAX_N@Z
+    virtual void setSitting(bool value);
 
-    // vIndex: 61, symbol: __unk_vfn_61
-    virtual void __unk_vfn_61();
+    // vIndex: 75, symbol: ?isInvulnerableTo@EnderDragon@@UEBA_NAEBVActorDamageSource@@@Z
+    virtual bool isInvulnerableTo(class ActorDamageSource const& source) const;
 
-    // vIndex: 62, symbol: __unk_vfn_62
-    virtual void __unk_vfn_62();
+    // vIndex: 80, symbol: ?handleEntityEvent@EnderDragon@@UEAAXW4ActorEvent@@H@Z
+    virtual void handleEntityEvent(::ActorEvent id, int data);
 
-    // vIndex: 63, symbol: __unk_vfn_63
-    virtual void __unk_vfn_63();
-
-    // vIndex: 70, symbol: ?setSitting@EnderDragon@@UEAAX_N@Z
-    virtual void setSitting(bool);
-
-    // vIndex: 79, symbol: ?isInvulnerableTo@EnderDragon@@UEBA_NAEBVActorDamageSource@@@Z
-    virtual bool isInvulnerableTo(class ActorDamageSource const&) const;
-
-    // vIndex: 84, symbol: ?handleEntityEvent@EnderDragon@@UEAAXW4ActorEvent@@H@Z
-    virtual void handleEntityEvent(::ActorEvent, int);
-
-    // vIndex: 108, symbol: ?canChangeDimensionsUsingPortal@EnderDragon@@UEBA_NXZ
+    // vIndex: 103, symbol: ?canChangeDimensionsUsingPortal@EnderDragon@@UEBA_NXZ
     virtual bool canChangeDimensionsUsingPortal() const;
 
-    // vIndex: 109, symbol: __unk_vfn_109
-    virtual void __unk_vfn_109();
-
-    // vIndex: 117, symbol: ?canBePulledIntoVehicle@EnderDragon@@UEBA_NXZ
+    // vIndex: 112, symbol: ?canBePulledIntoVehicle@EnderDragon@@UEBA_NXZ
     virtual bool canBePulledIntoVehicle() const;
 
-    // vIndex: 126, symbol: ?canBeAffected@EnderDragon@@UEBA_NI@Z
+    // vIndex: 121, symbol: ?canBeAffected@EnderDragon@@UEBA_NI@Z
     virtual bool canBeAffected(uint) const;
 
-    // vIndex: 147, symbol: __unk_vfn_147
-    virtual void __unk_vfn_147();
+    // vIndex: 143, symbol: ?die@EnderDragon@@UEAAXAEBVActorDamageSource@@@Z
+    virtual void die(class ActorDamageSource const& source);
 
-    // vIndex: 148, symbol: __unk_vfn_148
-    virtual void __unk_vfn_148();
+    // vIndex: 156, symbol: ?updateEntitySpecificMolangVariables@EnderDragon@@UEAAXAEAVRenderParams@@@Z
+    virtual void updateEntitySpecificMolangVariables(class RenderParams& renderParams);
 
-    // vIndex: 150, symbol: ?die@EnderDragon@@UEAAXAEBVActorDamageSource@@@Z
-    virtual void die(class ActorDamageSource const&);
+    // vIndex: 158, symbol: ?_hurt@EnderDragon@@MEAA_NAEBVActorDamageSource@@M_N1@Z
+    virtual bool _hurt(class ActorDamageSource const& source, float damage, bool knock, bool ignite);
 
-    // vIndex: 163, symbol: ?updateEntitySpecificMolangVariables@EnderDragon@@UEAAXAEAVRenderParams@@@Z
-    virtual void updateEntitySpecificMolangVariables(class RenderParams&);
-
-    // vIndex: 165, symbol: __unk_vfn_165
-    virtual void __unk_vfn_165();
-
-    // vIndex: 166, symbol: ?_hurt@EnderDragon@@MEAA_NAEBVActorDamageSource@@M_N1@Z
-    virtual bool _hurt(class ActorDamageSource const&, float, bool, bool);
-
-    // vIndex: 170, symbol: __unk_vfn_170
-    virtual void __unk_vfn_170();
-
-    // vIndex: 171, symbol: ?_onSizeUpdated@EnderDragon@@EEAAXXZ
-    virtual void _onSizeUpdated();
-
-    // vIndex: 172, symbol: __unk_vfn_172
-    virtual void __unk_vfn_172();
-
-    // vIndex: 213, symbol: ?tickDeath@EnderDragon@@MEAAXXZ
+    // vIndex: 202, symbol: ?tickDeath@EnderDragon@@MEAAXXZ
     virtual void tickDeath();
 
-    // symbol: ?canExistInPeaceful@EnderDragon@@UEBA_NXZ
-    MCVAPI bool canExistInPeaceful() const;
-
-    // symbol: ?isFishable@EnderDragon@@UEBA_NXZ
-    MCVAPI bool isFishable() const;
-
     // symbol: ??0EnderDragon@@QEAA@PEAVActorDefinitionGroup@@AEBUActorDefinitionIdentifier@@AEAVEntityContext@@@Z
-    MCAPI EnderDragon(class ActorDefinitionGroup*, struct ActorDefinitionIdentifier const&, class EntityContext&);
+    MCAPI EnderDragon(
+        class ActorDefinitionGroup*             definitions,
+        struct ActorDefinitionIdentifier const& definitionName,
+        class EntityContext&                    entityContext
+    );
 
     // symbol: ?dieNaturally@EnderDragon@@QEAAXXZ
     MCAPI void dieNaturally();
@@ -144,11 +99,11 @@ public:
     MCAPI int findClosestNode();
 
     // symbol: ?findClosestNode@EnderDragon@@QEAAHAEBVVec3@@@Z
-    MCAPI int findClosestNode(class Vec3 const&);
+    MCAPI int findClosestNode(class Vec3 const& pos);
 
     // symbol:
     // ?findPath@EnderDragon@@QEAA?AV?$unique_ptr@VPath@@U?$default_delete@VPath@@@std@@@std@@HHPEAVPathfinderNode@@@Z
-    MCAPI std::unique_ptr<class Path> findPath(int, int, class PathfinderNode*);
+    MCAPI std::unique_ptr<class Path> findPath(int startIndex, int endIndex, class PathfinderNode* finalNode);
 
     // symbol: ?getFlameCount@EnderDragon@@QEBAHXZ
     MCAPI int getFlameCount() const;
@@ -160,7 +115,7 @@ public:
     MCAPI class BlockPos getHeadPos() const;
 
     // symbol: ?getLatencyPos@EnderDragon@@QEBA?BV?$vector@MV?$allocator@M@std@@@std@@HM@Z
-    MCAPI std::vector<float> const getLatencyPos(int, float) const;
+    MCAPI std::vector<float> const getLatencyPos(int step, float a) const;
 
     // symbol: ?getNumCrystalsAlive@EnderDragon@@QEAAHXZ
     MCAPI int getNumCrystalsAlive();
@@ -172,7 +127,8 @@ public:
     MCAPI void incrementFlameCount();
 
     // symbol: ?onCrystalDestroyed@EnderDragon@@QEAAXAEBVEnderCrystal@@VBlockPos@@AEBVActorDamageSource@@@Z
-    MCAPI void onCrystalDestroyed(class EnderCrystal const&, class BlockPos, class ActorDamageSource const&);
+    MCAPI void
+    onCrystalDestroyed(class EnderCrystal const& crystal, class BlockPos pos, class ActorDamageSource const& source);
 
     // symbol: ?postAiStep@EnderDragon@@QEAAXXZ
     MCAPI void postAiStep();
@@ -190,17 +146,17 @@ public:
     MCAPI void setNumCrystalsAlive(int);
 
     // symbol: ?setTargetPos@EnderDragon@@QEAAXVVec3@@@Z
-    MCAPI void setTargetPos(class Vec3);
+    MCAPI void setTargetPos(class Vec3 pos);
 
     // symbol: ?setTurnSpeed@EnderDragon@@QEAAXM@Z
-    MCAPI void setTurnSpeed(float);
+    MCAPI void setTurnSpeed(float speed);
 
     // NOLINTEND
 
     // protected:
     // NOLINTBEGIN
     // symbol: ?_hurt@EnderDragon@@IEAA_NPEAVAABB@@AEBVActorDamageSource@@M@Z
-    MCAPI bool _hurt(class AABB*, class ActorDamageSource const&, float);
+    MCAPI bool _hurt(class AABB* part, class ActorDamageSource const& source, float damage);
 
     // NOLINTEND
 
@@ -210,21 +166,21 @@ public:
     MCAPI void _checkCrystals();
 
     // symbol: ?_checkWalls@EnderDragon@@AEAA_NVAABB@@@Z
-    MCAPI bool _checkWalls(class AABB);
+    MCAPI bool _checkWalls(class AABB bb);
 
     // symbol: ?_hurtEntities@EnderDragon@@AEBAXV?$span@V?$not_null@PEAVActor@@@gsl@@$0?0@gsl@@@Z
-    MCAPI void _hurtEntities(gsl::span<gsl::not_null<class Actor*>>) const;
+    MCAPI void _hurtEntities(gsl::span<gsl::not_null<class Actor*>> actors) const;
 
     // symbol: ?_knockBack@EnderDragon@@AEBAXV?$span@V?$not_null@PEAVActor@@@gsl@@$0?0@gsl@@@Z
-    MCAPI void _knockBack(gsl::span<gsl::not_null<class Actor*>>) const;
+    MCAPI void _knockBack(gsl::span<gsl::not_null<class Actor*>> actors) const;
 
     // symbol:
     // ?_reconstructPath@EnderDragon@@AEAA?AV?$unique_ptr@VPath@@U?$default_delete@VPath@@@std@@@std@@AEAVPathfinderNode@@0W4PathCompletionType@@@Z
     MCAPI std::unique_ptr<class Path>
-          _reconstructPath(class PathfinderNode&, class PathfinderNode&, ::PathCompletionType);
+          _reconstructPath(class PathfinderNode& from, class PathfinderNode& to, ::PathCompletionType completionType);
 
     // symbol: ?_isDragonImmuneBlock@EnderDragon@@CA_NAEBVBlockLegacy@@@Z
-    MCAPI static bool _isDragonImmuneBlock(class BlockLegacy const&);
+    MCAPI static bool _isDragonImmuneBlock(class BlockLegacy const& block);
 
     // NOLINTEND
 
@@ -247,13 +203,13 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $GROWL_INTERVAL_MAX() { return GROWL_INTERVAL_MAX; }
+    static auto& $GROWL_INTERVAL_MAX() { return GROWL_INTERVAL_MAX; }
 
-    auto& $GROWL_INTERVAL_MIN() { return GROWL_INTERVAL_MIN; }
+    static auto& $GROWL_INTERVAL_MIN() { return GROWL_INTERVAL_MIN; }
 
-    auto& $MAX_PATH_RADIUS() { return MAX_PATH_RADIUS; }
+    static auto& $MAX_PATH_RADIUS() { return MAX_PATH_RADIUS; }
 
-    auto& $SITTING_ALLOWED_DAMAGE_PERCENTAGE() { return SITTING_ALLOWED_DAMAGE_PERCENTAGE; }
+    static auto& $SITTING_ALLOWED_DAMAGE_PERCENTAGE() { return SITTING_ALLOWED_DAMAGE_PERCENTAGE; }
 
     // NOLINTEND
 };

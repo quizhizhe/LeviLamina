@@ -21,8 +21,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1InventoryContentPacket@@UEAA@XZ
+    virtual ~InventoryContentPacket();
 
     // vIndex: 1, symbol: ?getId@InventoryContentPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -32,24 +32,21 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@InventoryContentPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@InventoryContentPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1InventoryContentPacket@@UEAA@XZ
-    MCVAPI ~InventoryContentPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0InventoryContentPacket@@QEAA@XZ
     MCAPI InventoryContentPacket();
 
     // symbol:
     // ??0InventoryContentPacket@@QEAA@W4ContainerID@@AEBV?$vector@VItemStack@@V?$allocator@VItemStack@@@std@@@std@@@Z
-    MCAPI InventoryContentPacket(::ContainerID, std::vector<class ItemStack> const&);
+    MCAPI InventoryContentPacket(::ContainerID id, std::vector<class ItemStack> const& items);
 
     // symbol: ?fromPlayerInventoryId@InventoryContentPacket@@SA?AV1@W4ContainerID@@AEAVPlayer@@@Z
-    MCAPI static class InventoryContentPacket fromPlayerInventoryId(::ContainerID, class Player&);
+    MCAPI static class InventoryContentPacket fromPlayerInventoryId(::ContainerID id, class Player& player);
 
     // NOLINTEND
 };

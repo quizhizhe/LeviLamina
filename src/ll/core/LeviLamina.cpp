@@ -1,89 +1,82 @@
 #include "ll/core/LeviLamina.h"
 
+#include <chrono>
 #include <csignal>
-#include <iostream>
+#include <cstdio>
+#include <cwchar>
+#include <exception>
+#include <filesystem>
 #include <string>
+#include <system_error>
+#include <vector>
+
+#include "fmt/core.h"
 
 #include "ll/api/Logger.h"
-#include "ll/api/ServerInfo.h"
+#include "ll/api/i18n/I18n.h"
 #include "ll/api/memory/Hook.h"
-#include "ll/api/service/GlobalService.h"
-#include "ll/api/utils/FileUtils.h"
-#include "ll/api/utils/SehTranslator.h"
-#include "ll/api/utils/StringUtils.h"
+#include "ll/api/plugin/Plugin.h"
+#include "ll/api/service/Bedrock.h"
+#include "ll/api/service/PlayerInfo.h"
+#include "ll/api/service/ServerInfo.h"
+#include "ll/api/utils/ErrorUtils.h"
+#include "ll/api/utils/HashUtils.h"
+
+#include "mc/server/common/DedicatedServer.h"
+#include "mc/server/common/commands/StopCommand.h"
 
 #include "ll/core/Config.h"
 #include "ll/core/CrashLogger.h"
-#include "ll/core/Loader.h"
 #include "ll/core/Version.h"
-// #include "ll/core/AddonsHelper.h"
-// #include "ll/core/SimpleServerLogger.h"
+#include "ll/core/command/BuiltinCommands.h"
+#include "ll/core/plugin/PluginRegistrar.h"
 
-#include "mc/world/Minecraft.h"
+#include <windows.h>
 
-#include "Psapi.h"
-#include "TlHelp32.h"
-#include "minwindef.h"
-#include "processenv.h"
-#include "windows.h"
+#include <consoleapi.h>
+#include <errhandlingapi.h>
+#include <handleapi.h>
+#include <libloaderapi.h>
+#include <minwindef.h>
+#include <processenv.h>
+#include <processthreadsapi.h>
+#include <psapi.h>
+#include <tlhelp32.h>
+#include <winbase.h>
+#include <winnt.h>
 
-using namespace ll::hash;
-using namespace ll::hash_literals;
-using namespace ll::utils;
+#if defined(LL_DEBUG) && _HAS_CXX23
+#include "ll/api/utils/StacktraceUtils.h"
+#endif
 
-ll::Logger                            ll::logger("LeviLamina");
-std::chrono::steady_clock::time_point ll::severStartBeginTime;
-std::chrono::steady_clock::time_point ll::severStartEndTime;
+namespace ll {
 
-using namespace ll;
+using namespace hash_utils;
+using namespace hash_literals;
+using namespace i18n_literals;
 
-// Add plugins folder to path
-void fixPluginsLibDir() {
-    constexpr const DWORD MAX_PATH_LEN = 32767;
+namespace fs = std::filesystem;
 
-    auto* buffer = new (std::nothrow) wchar_t[MAX_PATH_LEN];
-    if (!buffer) return;
+Logger                                logger("LeviLamina");
+std::chrono::steady_clock::time_point severStartBeginTime;
+std::chrono::steady_clock::time_point severStartEndTime;
 
-    GetEnvironmentVariable(L"PATH", buffer, MAX_PATH_LEN);
-    std::wstring path(buffer);
-
-    GetCurrentDirectory(MAX_PATH_LEN, buffer);
-    std::wstring currentDir(buffer);
-
-    delete[] buffer;
-    // append plugins path to environment path
-    SetEnvironmentVariable(L"PATH", (currentDir + L"\\plugins;" + path).c_str());
-}
-
-void fixUpCWD() {
-    constexpr const DWORD MAX_PATH_LEN = 32767;
-
-    auto* buffer = new (std::nothrow) wchar_t[MAX_PATH_LEN];
-    if (!buffer) return;
-
-    GetModuleFileName(nullptr, buffer, MAX_PATH_LEN);
-    std::wstring path(buffer);
-
-    delete[] buffer;
-
+void fixCurrentDirectory() {
+    std::wstring path(32767, '\0');
+    GetModuleFileName(nullptr, path.data(), 32767);
     SetCurrentDirectory(path.substr(0, path.find_last_of(L'\\')).c_str());
 }
 
-void checkRunningBDS() {
-
-    if (!ll::globalConfig.modules.checkRunningBDS) return;
-
-    constexpr const DWORD MAX_PATH_LEN = 32767;
-    auto*                 buffer       = new wchar_t[MAX_PATH_LEN];
-
-
+void checkOtherBdsInstance() {
     // get all processes id with name "bedrock_server.exe" or "bedrock_server_mod.exe"
     // and pid is not current process
     std::vector<DWORD> pids;
     PROCESSENTRY32     pe32;
     pe32.dwSize         = sizeof(PROCESSENTRY32);
     HANDLE hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-    if (hProcessSnap == INVALID_HANDLE_VALUE) { return; }
+    if (hProcessSnap == INVALID_HANDLE_VALUE) {
+        return;
+    }
     if (Process32First(hProcessSnap, &pe32)) {
         do {
             if (pe32.th32ProcessID != GetCurrentProcessId()
@@ -96,9 +89,12 @@ void checkRunningBDS() {
     CloseHandle(hProcessSnap);
 
     // Get current process path
-    std::wstring currentPath;
-    GetModuleFileName(nullptr, buffer, MAX_PATH_LEN);
-    currentPath = buffer;
+    std::wstring currentPath(32767, '\0');
+    if (auto res = GetModuleFileName(nullptr, currentPath.data(), 32767); res != 0 && res != 32767) {
+        currentPath.resize(res);
+    } else {
+        return;
+    }
 
     // Get the BDS process paths
     for (auto& pid : pids) {
@@ -106,36 +102,41 @@ void checkRunningBDS() {
         auto handle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ | PROCESS_TERMINATE, false, pid);
         if (handle) {
             // Get the full path of the process
-            std::wstring path;
-            GetModuleFileNameEx(handle, nullptr, buffer, MAX_PATH_LEN);
-            path = buffer;
-
+            std::wstring path(32767, '\0');
+            if (auto res = GetModuleFileNameEx(handle, nullptr, path.data(), 32767); res != 0 && res != 32767) {
+                path.resize(res);
+            } else {
+                continue;
+            }
             // Compare the path
             if (path == currentPath) {
-                logger.error("ll.main.checkRunningBDS.detected"_tr);
-                logger.error("ll.main.checkRunningBDS.tip"_tr);
+                logger.error("Detected the existence of another BDS process with the same path!"_tr());
+                logger.error("This may cause the network port and the level to be occupied"_tr());
                 while (true) {
-                    logger.error("ll.main.checkRunningBDS.ask"_tr, pid);
+                    logger.error("Do you want to terminate the process with PID {}?  (y=Yes, n=No, e=Exit)"_tr(pid));
                     char input;
                     rewind(stdin);
                     input = static_cast<char>(getchar());
                     rewind(stdin);
-                    if (input == 'n' || input == 'N') { break; }
+                    if (input == 'n' || input == 'N') {
+                        break;
+                    }
                     if (input == 'y' || input == 'Y') {
                         TerminateProcess(handle, 1);
                         break;
                     }
-                    if (input == 'e' || input == 'E') { std::terminate(); }
+                    if (input == 'e' || input == 'E') {
+                        std::terminate();
+                    }
                 }
             }
             CloseHandle(handle);
         }
     }
-    delete[] buffer;
 }
 
-void printLogo() {
-
+void printWelcomeMsg() {
+    auto lock = Logger::lock();
     logger.info(R"(                                                                      )");
     logger.info(R"(         _               _ _                    _                     )");
     logger.info(R"(        | |    _____   _(_) |    __ _ _ __ ___ (_)_ __   __ _         )");
@@ -147,25 +148,20 @@ void printLogo() {
     logger.info(R"(                                                                      )");
     logger.info(R"(                                                                      )");
 
-    logger.info("ll.notice.license"_tr, "LGPLv3");
-    logger.info("ll.notice.newForum"_tr, "https://forum.litebds.com");
-    logger.info("ll.notice.translateText"_tr, "https://crowdin.com/project/liteloaderbds");
-    logger.info("ll.notice.sponsor.thanks"_tr);
-    logger.info("");
-}
-
-void checkBetaVersion() {
-    if (ll::getLoaderVersion().preRelease) {
-        logger.warn("ll.main.warning.betaVersion"_tr);
-        logger.warn("ll.main.warning.productionEnv"_tr);
-    }
+    logger.info("LeviLamina is a free software licensed under {}"_tr("LGPLv3"));
+    logger.info("Help us translate & improve text -> {}"_tr("https://translate.liteldev.com/"));
 }
 
 void checkProtocolVersion() {
-    auto currentProtocol = ll::getServerProtocolVersion();
+    auto currentProtocol = getServerProtocolVersion();
     if (TARGET_BDS_PROTOCOL_VERSION != currentProtocol) {
-        logger.warn("ll.main.warning.protocolVersionNotMatch.1"_tr, TARGET_BDS_PROTOCOL_VERSION, currentProtocol);
-        logger.warn("ll.main.warning.protocolVersionNotMatch.2"_tr);
+        logger.warn("Protocol version not match, target version: {}, current version: {}"_tr(
+            TARGET_BDS_PROTOCOL_VERSION,
+            currentProtocol
+        ));
+        logger.warn(
+            "This will most likely crash the server, please use the LeviLamina that matches the BDS version!"_tr()
+        );
     }
 }
 
@@ -174,28 +170,25 @@ BOOL WINAPI ConsoleExitHandler(DWORD CEvent) {
     case CTRL_C_EVENT:
     case CTRL_CLOSE_EVENT:
     case CTRL_SHUTDOWN_EVENT: {
-        if (Global<Minecraft>) {
-            Global<Minecraft>->requestServerShutdown("");
+        if (StopCommand::$mServer()) {
+            StopCommand::$mServer()->requestServerShutdown("");
         } else {
             std::terminate();
         }
-        return TRUE;
+        return true;
     }
     default:
         break;
     }
-    return FALSE;
+    return false;
 }
 
 void unixSignalHandler(int signum) {
     switch (signum) {
     case SIGINT:
     case SIGTERM: {
-        if (Global<Minecraft>) {
-            Global<Minecraft>->requestServerShutdown("");
-        } else {
-            std::terminate();
-        }
+        if (StopCommand::$mServer()) StopCommand::$mServer()->requestServerShutdown("");
+        else std::terminate();
         break;
     }
     default:
@@ -203,130 +196,101 @@ void unixSignalHandler(int signum) {
     }
 }
 
-// extern
-namespace ll {
-extern void RegisterLeviCommands();
-}
-
-namespace bstats {
-extern void registerBStats();
-}
-
-namespace ll::i18n {
+namespace i18n {
 extern std::string globalDefaultLocaleName;
 }
 
-// bugfix
-namespace ll::bugfix {
-extern void enableArrayTagBugFix();
-} // namespace ll::bugfix
-void setupBugFixes() {
-    auto& bugfixSettings = ll::globalConfig.modules.tweak.bugfixes;
-    using namespace ll::bugfix;
-    if (bugfixSettings.fixArrayTagCompareBug) { enableArrayTagBugFix(); }
-}
-
 void leviLaminaMain() {
-
-    _set_se_translator(seh_exception::TranslateSEHtoCE);
+    error_utils::setSehTranslator();
 
     // Prohibit pop-up windows to facilitate automatic restart
     SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX | SEM_NOALIGNMENTFAULTEXCEPT);
 
-    // Disable Output-Sync
-    std::ios::sync_with_stdio(false);
-
     // Init LL Logger
-    Logger::setDefaultFile("logs/LeviLamina-latest.log", false);
+    Logger::setDefaultFile(u8"logs/LeviLamina-latest.log", false);
 
     // Create Plugin Directory
     std::error_code ec;
-    std::filesystem::create_directories("plugins", ec);
+    fs::create_directories(plugin::getPluginsRoot(), ec);
 
-    // I18n
-    ll::i18n::load("plugins/LeviLamina/LangPack");
+    ::ll::i18n::load(plugin::getPluginsRoot() / u8"LeviLamina" / u8"lang");
 
-    // Load Config
-    ll::loadLeviConfig();
+    loadLeviConfig();
 
     // Update default language
-    if (ll::globalConfig.language != "system") { i18n::globalDefaultLocaleName = ll::globalConfig.language; }
+    if (globalConfig.language != "system") {
+        i18n::globalDefaultLocaleName = globalConfig.language;
+    }
 
-    // Setup bug fixes
-    setupBugFixes();
-
-    // Check Protocol Version
     checkProtocolVersion();
 
     // Fix problems
-    fixUpCWD();
-    fixPluginsLibDir();
+    fixCurrentDirectory();
 
-    // Check Running BDS(Requires Config)
-    checkRunningBDS();
-
-    // Builtin CrashLogger
-    ll::CrashLogger::initCrashLogger(ll::globalConfig.modules.crashLogger.enabled);
-
-    // Rename Window
-    HWND         hwnd = GetConsoleWindow();
-    std::wstring s    = string_utils::str2wstr("Bedrock Dedicated Server " + ll::getBdsVersion().to_string());
-    SetWindowText(hwnd, s.c_str());
+    if (globalConfig.modules.checkRunningBDS) {
+        checkOtherBdsInstance();
+    }
+    if (globalConfig.modules.playerInfo.alwaysLaunch) {
+        service::PlayerInfo::getInstance();
+    }
+    if (globalConfig.modules.crashLogger.enabled) {
+        if (globalConfig.modules.crashLogger.useBuiltin) {
+            static CrashLoggerNew crashLogger{};
+        } else {
+            CrashLogger::initCrashLogger();
+        }
+    }
 
     // Register Exit Event Handler.
-    SetConsoleCtrlHandler(ConsoleExitHandler, TRUE);
+    SetConsoleCtrlHandler(ConsoleExitHandler, true);
     signal(SIGTERM, unixSignalHandler);
     signal(SIGINT, unixSignalHandler);
 
-    // Welcome
-    printLogo();
+    printWelcomeMsg();
 
-#if defined(LL_DEBUG)
-    // DebugMode
-    logger.warn("ll.main.warning.inDebugMode"_tr);
+#ifdef LL_DEBUG
+    logger.warn("LeviLamina is running in DEBUG mode!"_tr());
 #endif
 
-    // Addon Helper
-    // if (ll::globalConfig.enableAddonsHelper) {
-    //     InitAddonsHelper();
-    // }
+    if (globalConfig.modules.commands.enabled) {
+        command::registerCommands();
+    }
 
-    // Load plugins
-    ll::LoadMain();
-
-    // Register built-in commands
-    RegisterLeviCommands();
-
-    // Register simple server logger
-    // ll::SimpleServerLogger::registerSimpleServerLogger();
-
-    // Register BStats
-    // bstats::registerBStats();
+    plugin::PluginRegistrar::getInstance().loadAllPlugins();
 }
 
 
-LL_AUTO_STATIC_HOOK(LeviLaminaMainHook, HookPriority::Highest, "main", int, int argc, char* argv[]) {
+LL_AUTO_STATIC_HOOK(LeviLaminaMainHook, HookPriority::High, "main", int, int argc, char* argv[]) {
 
+#if defined(LL_DEBUG) && _HAS_CXX23
+    static stacktrace_utils::SymbolLoader symbols{};
+#endif
+    setServerStatus(ServerStatus::Default);
     severStartBeginTime = std::chrono::steady_clock::now();
-
     for (int i = 0; i < argc; ++i) {
-        switch (do_hash(argv[i])) {
+        switch (doHash(argv[i])) {
         case "--noColor"_h:
-            ll::globalConfig.logger.colorLog = false;
+            globalConfig.logger.colorLog = false;
             break;
         case "-v"_h:
         case "--version"_h:
-            fmt::print("{}", ll::getBdsVersion().to_string());
+            fmt::print("{}", getBdsVersion().to_string());
             return 0;
         case "--protocolversion"_h:
-            fmt::print("{}", ll::getServerProtocolVersion());
+            fmt::print("{}", getServerProtocolVersion());
             return 0;
         default:
             break;
         }
     }
-    leviLaminaMain();
-    return origin(argc, argv);
+    setServerStatus(ServerStatus::Starting);
+    try {
+        leviLaminaMain();
+    } catch (...) {
+        error_utils::printCurrentException(logger);
+    }
+    auto res = origin(argc, argv);
+    setServerStatus(ServerStatus::Default);
+    return res;
 }
-
-[[maybe_unused]] BOOL WINAPI DllMain(HMODULE, DWORD, LPVOID) { return TRUE; }
+} // namespace ll

@@ -13,11 +13,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1LegacyBodyControl@@UEAA@XZ
+    virtual ~LegacyBodyControl() = default;
 
     // vIndex: 1, symbol: ?clientTick@LegacyBodyControl@@UEAAXAEAVMob@@@Z
-    virtual void clientTick(class Mob&);
+    virtual void clientTick(class Mob& mob);
 
     // symbol: ??0LegacyBodyControl@@QEAA@XZ
     MCAPI LegacyBodyControl();

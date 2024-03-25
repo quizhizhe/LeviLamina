@@ -15,11 +15,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1UseActorNode@@UEAA@XZ
+    virtual ~UseActorNode() = default;
 
     // vIndex: 1, symbol: ?tick@UseActorNode@@UEAA?AW4BehaviorStatus@@AEAVActor@@@Z
-    virtual ::BehaviorStatus tick(class Actor&);
+    virtual ::BehaviorStatus tick(class Actor& owner);
 
     // NOLINTEND
 };

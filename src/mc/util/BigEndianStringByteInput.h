@@ -10,7 +10,7 @@ public:
     using StringByteInput::StringByteInput;
 
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_destructor_-1
+    // vIndex: 0, symbol: ??1BigEndianStringByteInput@@UEAA@XZ
     virtual ~BigEndianStringByteInput();
 
     // vIndex: 3, symbol: ?readFloat@BigEndianStringByteInput@@UEAAMXZ
@@ -29,10 +29,10 @@ public:
     virtual int64 readLongLong();
 
     // vIndex: 9, symbol: ?readBytes@BigEndianStringByteInput@@UEAA_NPEAX_K@Z
-    virtual bool readBytes(void*, uint64);
+    virtual bool readBytes(void* data, uint64 bytes);
 
     // vIndex: 11, symbol: ?readBigEndianBytes@BigEndianStringByteInput@@UEAA_NPEAX_K@Z
-    virtual bool readBigEndianBytes(void*, uint64);
+    virtual bool readBigEndianBytes(void* data, uint64 bytes);
 
     // NOLINTEND
 };

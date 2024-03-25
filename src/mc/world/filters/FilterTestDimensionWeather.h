@@ -19,14 +19,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1FilterTestDimensionWeather@@UEAA@XZ
+    virtual ~FilterTestDimensionWeather() = default;
 
     // vIndex: 1, symbol: ?setup@FilterTestDimensionWeather@@UEAA_NAEBUDefinition@FilterTest@@AEBUFilterInputs@@@Z
-    virtual bool setup(struct FilterTest::Definition const&, struct FilterInputs const&);
+    virtual bool setup(struct FilterTest::Definition const& definition, struct FilterInputs const& inputs);
 
     // vIndex: 2, symbol: ?evaluate@FilterTestDimensionWeather@@UEBA_NAEBUFilterContext@@@Z
-    virtual bool evaluate(struct FilterContext const&) const;
+    virtual bool evaluate(struct FilterContext const& context) const;
 
     // vIndex: 4, symbol:
     // ?getName@FilterTestDimensionWeather@@UEBA?AV?$basic_string_view@DU?$char_traits@D@std@@@std@@XZ

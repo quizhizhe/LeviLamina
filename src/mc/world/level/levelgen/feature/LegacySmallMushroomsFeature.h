@@ -14,14 +14,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1LegacySmallMushroomsFeature@@UEAA@XZ
+    virtual ~LegacySmallMushroomsFeature() = default;
 
     // vIndex: 3, symbol: ?place@LegacySmallMushroomsFeature@@UEBA_NAEAVBlockSource@@AEBVBlockPos@@AEAVRandom@@@Z
-    virtual bool place(class BlockSource&, class BlockPos const&, class Random&) const;
+    virtual bool place(class BlockSource& region, class BlockPos const& origin, class Random& random) const;
 
     // symbol: ??0LegacySmallMushroomsFeature@@QEAA@AEBVFeatureRegistry@@@Z
-    MCAPI explicit LegacySmallMushroomsFeature(class FeatureRegistry const&);
+    MCAPI explicit LegacySmallMushroomsFeature(class FeatureRegistry const& registry);
 
     // NOLINTEND
 };

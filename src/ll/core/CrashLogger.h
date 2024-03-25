@@ -1,9 +1,19 @@
 #pragma once
 
+#include "vcruntime.h"
+
 namespace ll {
 class CrashLogger {
 public:
-    static bool startCrashLoggerProcess();
-    static void initCrashLogger(bool enableCrashLogger);
+    static void initCrashLogger();
 };
+#if _HAS_CXX23
+class CrashLoggerNew {
+    void* previous{};
+
+public:
+    CrashLoggerNew();
+    ~CrashLoggerNew();
+};
+#endif
 } // namespace ll

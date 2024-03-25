@@ -5,7 +5,7 @@
 // auto generated inclusion list
 #include "mc/world/actor/ActorComponentDescription.h"
 
-class ContainerDescription : public ::ActorComponentDescription {
+struct ContainerDescription : public ::ActorComponentDescription {
 public:
     // prevent constructor by default
     ContainerDescription& operator=(ContainerDescription const&);
@@ -17,14 +17,11 @@ public:
     // vIndex: 0, symbol: ?getJsonName@ContainerDescription@@UEBAPEBDXZ
     virtual char const* getJsonName() const;
 
-    // vIndex: 1, symbol: __unk_vfn_1
-    virtual void __unk_vfn_1();
+    // vIndex: 1, symbol: ??1ContainerDescription@@UEAA@XZ
+    virtual ~ContainerDescription();
 
     // vIndex: 2, symbol: ?deserializeData@ContainerDescription@@UEAAXUDeserializeDataParams@@@Z
-    virtual void deserializeData(struct DeserializeDataParams);
-
-    // symbol: ??1ContainerDescription@@UEAA@XZ
-    MCVAPI ~ContainerDescription();
+    virtual void deserializeData(struct DeserializeDataParams deserializeDataParams);
 
     // NOLINTEND
 };

@@ -16,17 +16,18 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1HopperContainerManagerModel@@UEAA@XZ
+    virtual ~HopperContainerManagerModel() = default;
 
     // vIndex: 17, symbol: ?_postInit@HopperContainerManagerModel@@MEAA?AVContainerScreenContext@@XZ
     virtual class ContainerScreenContext _postInit();
 
     // symbol: ??0HopperContainerManagerModel@@QEAA@W4ContainerID@@AEAVPlayer@@AEBVBlockPos@@@Z
-    MCAPI HopperContainerManagerModel(::ContainerID, class Player&, class BlockPos const&);
+    MCAPI HopperContainerManagerModel(::ContainerID containerId, class Player& player, class BlockPos const& blockPos);
 
     // symbol: ??0HopperContainerManagerModel@@QEAA@W4ContainerID@@AEAVPlayer@@AEBUActorUniqueID@@@Z
-    MCAPI HopperContainerManagerModel(::ContainerID, class Player&, struct ActorUniqueID const&);
+    MCAPI
+    HopperContainerManagerModel(::ContainerID containerId, class Player& player, struct ActorUniqueID const& uniqueID);
 
     // NOLINTEND
 };

@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1FollowOwnerGoal@@UEAA@XZ
+    virtual ~FollowOwnerGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@FollowOwnerGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -35,13 +35,21 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@FollowOwnerGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // vIndex: 9, symbol: ?onPlayerDimensionChanged@FollowOwnerGoal@@UEAAXPEAVPlayer@@V?$AutomaticID@VDimension@@H@@1@Z
-    virtual void onPlayerDimensionChanged(class Player*, DimensionType, DimensionType);
+    virtual void onPlayerDimensionChanged(class Player* player, DimensionType fromDimension, DimensionType toDimension);
 
     // symbol: ??0FollowOwnerGoal@@QEAA@AEAVMob@@MMM_N1M@Z
-    MCAPI FollowOwnerGoal(class Mob&, float, float, float, bool, bool, float);
+    MCAPI FollowOwnerGoal(
+        class Mob& mob,
+        float      speed,
+        float      startDistance,
+        float      stopDistance,
+        bool,
+        bool,
+        float maxDistance
+    );
 
     // NOLINTEND
 };

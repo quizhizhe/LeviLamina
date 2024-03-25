@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScaredGoal@@UEAA@XZ
+    virtual ~ScaredGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@ScaredGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -35,10 +35,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@ScaredGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0ScaredGoal@@QEAA@AEAVMob@@H@Z
-    MCAPI ScaredGoal(class Mob&, int);
+    MCAPI ScaredGoal(class Mob& mob, int interval);
 
     // NOLINTEND
 };

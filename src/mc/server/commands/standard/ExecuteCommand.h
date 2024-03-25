@@ -14,14 +14,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ExecuteCommand@@UEAA@XZ
+    virtual ~ExecuteCommand() = default;
 
     // vIndex: 2, symbol: ?execute@ExecuteCommand@@UEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    virtual void execute(class CommandOrigin const&, class CommandOutput&) const;
+    virtual void execute(class CommandOrigin const& origin, class CommandOutput& output) const;
 
     // symbol: ?setup@ExecuteCommand@@SAXAEAVCommandRegistry@@_NH@Z
-    MCAPI static void setup(class CommandRegistry&, bool, int);
+    MCAPI static void setup(class CommandRegistry& registry, bool, int);
 
     // NOLINTEND
 };

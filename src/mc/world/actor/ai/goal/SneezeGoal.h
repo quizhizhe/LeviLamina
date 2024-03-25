@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SneezeGoal@@UEAA@XZ
+    virtual ~SneezeGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@SneezeGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -35,21 +35,21 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@SneezeGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol:
     // ??0SneezeGoal@@QEAA@AEAVMob@@MMMAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@11MAEBV?$vector@UMobDescriptor@@V?$allocator@UMobDescriptor@@@std@@@3@M@Z
     MCAPI SneezeGoal(
-        class Mob&,
-        float,
-        float,
-        float,
-        std::string const&,
-        std::string const&,
-        std::string const&,
-        float,
-        std::vector<struct MobDescriptor> const&,
-        float
+        class Mob&                               mob,
+        float                                    cooldownTime,
+        float                                    probability,
+        float                                    dropItemChance,
+        std::string const&                       lootTable,
+        std::string const&                       sneezeSound,
+        std::string const&                       preSneezeSound,
+        float                                    prepareTime,
+        std::vector<struct MobDescriptor> const& reactMobFilters,
+        float                                    reactWithin
     );
 
     // NOLINTEND

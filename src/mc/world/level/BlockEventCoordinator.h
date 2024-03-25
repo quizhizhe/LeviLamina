@@ -18,12 +18,15 @@ public:
 
 public:
     // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1BlockEventCoordinator@@UEAA@XZ
+    virtual ~BlockEventCoordinator() = default;
+
     // symbol: ?getBlockGameplayHandler@BlockEventCoordinator@@QEAAAEAVBlockGameplayHandler@@XZ
     MCAPI class BlockGameplayHandler& getBlockGameplayHandler();
 
     // symbol:
     // ?registerBlockGameplayHandler@BlockEventCoordinator@@QEAAX$$QEAV?$unique_ptr@VBlockGameplayHandler@@U?$default_delete@VBlockGameplayHandler@@@std@@@std@@@Z
-    MCAPI void registerBlockGameplayHandler(std::unique_ptr<class BlockGameplayHandler>&&);
+    MCAPI void registerBlockGameplayHandler(std::unique_ptr<class BlockGameplayHandler>&& handler);
 
     // symbol:
     // ?sendBlockDestroyedByPlayer@BlockEventCoordinator@@QEAAXAEAVPlayer@@AEBVBlock@@AEBVBlockPos@@AEBVItemStackBase@@3@Z
@@ -34,36 +37,47 @@ public:
     MCAPI void sendBlockDestructionStarted(class Player&, class BlockPos const&, uchar);
 
     // symbol: ?sendBlockDestructionStopped@BlockEventCoordinator@@QEAAXAEAVPlayer@@AEBVBlockPos@@H@Z
-    MCAPI void sendBlockDestructionStopped(class Player&, class BlockPos const&, int);
+    MCAPI void sendBlockDestructionStopped(class Player& player, class BlockPos const& blockPos, int progress);
 
     // symbol: ?sendBlockExploded@BlockEventCoordinator@@QEAAXAEAVDimension@@AEBVBlockPos@@AEBVBlock@@PEAVActor@@@Z
-    MCAPI void sendBlockExploded(class Dimension&, class BlockPos const&, class Block const&, class Actor*);
+    MCAPI void sendBlockExploded(
+        class Dimension&      dimension,
+        class BlockPos const& blockPos,
+        class Block const&    destroyedBlock,
+        class Actor*          source
+    );
 
     // symbol: ?sendBlockInPosWillBeDestroyedByPlayer@BlockEventCoordinator@@QEAAXAEAVPlayer@@AEBVBlockPos@@@Z
-    MCAPI void sendBlockInPosWillBeDestroyedByPlayer(class Player&, class BlockPos const&);
+    MCAPI void sendBlockInPosWillBeDestroyedByPlayer(class Player& player, class BlockPos const& pos);
 
     // symbol: ?sendBlockInteractedWith@BlockEventCoordinator@@QEAAXAEAVPlayer@@AEBVBlockPos@@@Z
-    MCAPI void sendBlockInteractedWith(class Player&, class BlockPos const&);
+    MCAPI void sendBlockInteractedWith(class Player& player, class BlockPos const& blockPos);
 
     // symbol: ?sendBlockMovedByPiston@BlockEventCoordinator@@QEAAXAEBVBlockPos@@0W4PistonState@@@Z
-    MCAPI void sendBlockMovedByPiston(class BlockPos const&, class BlockPos const&, ::PistonState);
+    MCAPI void
+    sendBlockMovedByPiston(class BlockPos const& pistonPos, class BlockPos const& blockPos, ::PistonState action);
 
     // symbol: ?sendBlockPlacedByPlayer@BlockEventCoordinator@@QEAAXAEAVPlayer@@AEBVBlock@@AEBVBlockPos@@_N@Z
-    MCAPI void sendBlockPlacedByPlayer(class Player&, class Block const&, class BlockPos const&, bool);
+    MCAPI void sendBlockPlacedByPlayer(
+        class Player&         player,
+        class Block const&    placedBlock,
+        class BlockPos const& pos,
+        bool                  isUnderwater
+    );
 
     // symbol:
     // ?sendEvent@BlockEventCoordinator@@QEAA?AW4CoordinatorResult@@AEBV?$EventRef@U?$BlockGameplayEvent@W4CoordinatorResult@@@@@@@Z
-    MCAPI ::CoordinatorResult sendEvent(class EventRef<struct BlockGameplayEvent<::CoordinatorResult>> const&);
+    MCAPI ::CoordinatorResult sendEvent(class EventRef<struct BlockGameplayEvent<::CoordinatorResult>> const& event);
 
     // symbol:
     // ?sendEvent@BlockEventCoordinator@@QEAA?AW4CoordinatorResult@@V?$EventRef@U?$MutableBlockGameplayEvent@W4CoordinatorResult@@@@@@@Z
-    MCAPI ::CoordinatorResult sendEvent(class EventRef<struct MutableBlockGameplayEvent<::CoordinatorResult>>);
+    MCAPI ::CoordinatorResult sendEvent(class EventRef<struct MutableBlockGameplayEvent<::CoordinatorResult>> event);
 
     // symbol: ?sendEvent@BlockEventCoordinator@@QEAAXAEBV?$EventRef@U?$BlockGameplayEvent@X@@@@@Z
-    MCAPI void sendEvent(class EventRef<struct BlockGameplayEvent<void>> const&);
+    MCAPI void sendEvent(class EventRef<struct BlockGameplayEvent<void>> const& event);
 
     // symbol: ?sendUnknownBlockReceived@BlockEventCoordinator@@QEAAXAEAVLevel@@AEBUNewBlockID@@G@Z
-    MCAPI void sendUnknownBlockReceived(class Level&, struct NewBlockID const&, ushort);
+    MCAPI void sendUnknownBlockReceived(class Level& level, struct NewBlockID const& blockId, ushort data);
 
     // NOLINTEND
 };

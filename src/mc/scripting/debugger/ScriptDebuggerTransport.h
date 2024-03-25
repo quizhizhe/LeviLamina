@@ -2,7 +2,15 @@
 
 #include "mc/_HeaderOutputPredefine.h"
 
-class ScriptDebuggerTransport {
+// auto generated inclusion list
+#include "mc/external/scripting/IDebuggerTransport.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace Scripting { class IDebuggerTransport; }
+// clang-format on
+
+class ScriptDebuggerTransport : public ::Scripting::IDebuggerTransport {
 public:
     // prevent constructor by default
     ScriptDebuggerTransport& operator=(ScriptDebuggerTransport const&);
@@ -11,15 +19,15 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScriptDebuggerTransport@@UEAA@XZ
+    virtual ~ScriptDebuggerTransport() = default;
 
     // vIndex: 1, symbol: ?listen@ScriptDebuggerTransport@@UEAA_NG@Z
-    virtual bool listen(ushort);
+    virtual bool listen(ushort port);
 
     // vIndex: 2, symbol:
     // ?connect@ScriptDebuggerTransport@@UEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@G@Z
-    virtual bool connect(std::string const&, ushort);
+    virtual bool connect(std::string const& host, ushort port);
 
     // vIndex: 3, symbol: ?selectClient@ScriptDebuggerTransport@@UEAA_NXZ
     virtual bool selectClient();
@@ -40,10 +48,10 @@ public:
     virtual bool peek() const;
 
     // vIndex: 9, symbol: ?receive@ScriptDebuggerTransport@@UEAA_NPEAD_K@Z
-    virtual bool receive(char*, uint64);
+    virtual bool receive(char* buffer, uint64 length);
 
     // vIndex: 10, symbol: ?send@ScriptDebuggerTransport@@UEAAXPEBD_K@Z
-    virtual void send(char const*, uint64);
+    virtual void send(char const* buffer, uint64 length);
 
     // NOLINTEND
 };

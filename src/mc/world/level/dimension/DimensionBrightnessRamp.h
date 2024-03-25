@@ -5,14 +5,10 @@
 class DimensionBrightnessRamp {
 public:
     float mBrightnessRamp[16] = {0};
-    // prevent constructor by default
-    DimensionBrightnessRamp& operator=(DimensionBrightnessRamp const&);
-    DimensionBrightnessRamp(DimensionBrightnessRamp const&);
-    DimensionBrightnessRamp() = default;
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
+    // vIndex: 0, symbol: __gen_??1DimensionBrightnessRamp@@UEAA@XZ
     virtual ~DimensionBrightnessRamp() = default;
 
     // vIndex: 1, symbol: ?buildBrightnessRamp@DimensionBrightnessRamp@@UEAAXXZ
@@ -22,7 +18,7 @@ public:
     virtual float getBaseAmbientValue() const;
 
     // symbol: ?getBrightnessRampValue@DimensionBrightnessRamp@@QEBAMH@Z
-    MCAPI float getBrightnessRampValue(int) const;
+    MCAPI float getBrightnessRampValue(int index) const;
 
     // NOLINTEND
 };

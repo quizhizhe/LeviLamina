@@ -9,6 +9,7 @@
 // clang-format off
 namespace gametest { class BaseGameTestInstance; }
 namespace gametest { class IGameTestListener; }
+namespace gametest { class MultipleTestTracker; }
 // clang-format on
 
 class TestSummaryDisplayer : public ::gametest::IGameTestListener {
@@ -20,18 +21,37 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ?onTestFailed@TestSummaryDisplayer@@UEAAXAEAVBaseGameTestInstance@gametest@@@Z
-    MCVAPI void onTestFailed(class gametest::BaseGameTestInstance&);
+    // vIndex: 0, symbol: __gen_??1TestSummaryDisplayer@@UEAA@XZ
+    virtual ~TestSummaryDisplayer() = default;
 
-    // symbol: ?onTestPassed@TestSummaryDisplayer@@UEAAXAEAVBaseGameTestInstance@gametest@@@Z
-    MCVAPI void onTestPassed(class gametest::BaseGameTestInstance&);
+    // vIndex: 1, symbol:
+    // ?onTestStructureLoaded@GameTestBatchRunnerGameTestListener@gametest@@UEAAXAEAVBaseGameTestInstance@2@@Z
+    virtual void onTestStructureLoaded(class gametest::BaseGameTestInstance&);
+
+    // vIndex: 2, symbol: ?onTestPassed@TestSummaryDisplayer@@UEAAXAEAVBaseGameTestInstance@gametest@@@Z
+    virtual void onTestPassed(class gametest::BaseGameTestInstance&);
+
+    // vIndex: 3, symbol: ?onTestFailed@TestSummaryDisplayer@@UEAAXAEAVBaseGameTestInstance@gametest@@@Z
+    virtual void onTestFailed(class gametest::BaseGameTestInstance&);
+
+    // vIndex: 4, symbol: ?onTestStarted@IGameTestListener@gametest@@UEAAXAEAVBaseGameTestInstance@2@@Z
+    virtual void onTestStarted(class gametest::BaseGameTestInstance&);
+
+    // vIndex: 5, symbol: ?onTestRetryStarted@IGameTestListener@gametest@@UEAAXAEAVBaseGameTestInstance@2@@Z
+    virtual void onTestRetryStarted(class gametest::BaseGameTestInstance&);
+
+    // vIndex: 6, symbol: ?onTestRetryFinished@IGameTestListener@gametest@@UEAAXAEAVBaseGameTestInstance@2@@Z
+    virtual void onTestRetryFinished(class gametest::BaseGameTestInstance&);
+
+    // symbol: ??0TestSummaryDisplayer@@QEAA@AEAVLevel@@AEAVMultipleTestTracker@gametest@@@Z
+    MCAPI TestSummaryDisplayer(class Level& level, class gametest::MultipleTestTracker&);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_say@TestSummaryDisplayer@@AEBAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z
-    MCAPI void _say(std::string const&, std::string const&) const;
+    MCAPI void _say(std::string const& text, std::string const&) const;
 
     // symbol: ?_showTestSummaryIfAllDone@TestSummaryDisplayer@@AEBAXXZ
     MCAPI void _showTestSummaryIfAllDone() const;

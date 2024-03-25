@@ -2,11 +2,41 @@ site_name: LeviLamina
 repo_url: https://github.com/LiteLDev/LeviLamina
 
 nav:
-  - Basics:
-    - Overview: index.md
-    - install_windows.md
-    - usage.md
-    - faq.md
+  - Home: index.md
+
+  - quickstart.md
+
+  - Install:
+      - install.md
+      - Install on Docker: https://github.com/LiteLDev/levilamina-docker-server
+
+  - faq.md
+
+  - Tutorials:
+      - tutorials/create_your_first_plugin.md
+      - tutorials/publish_your_first_plugin.md
+      - tutorials/publish_your_first_pack.md
+
+  - Guides:
+      - guides/event_guide.md
+      - guides/export_interface_guide.md
+      - guides/find_function_guide.md
+      - guides/form_guide.md
+      - guides/hook_guide.md
+      - guides/i18n_guide.md
+      - guides/item_guide.md
+      - guides/permission_guide.md
+
+  - APIs: https://levilamina.liteldev.com/api
+
+  - Plugins: https://lippkg.com
+
+  - discuss.md
+
+  - links.md
+
+exclude_docs: |
+  api/assets/
 
 theme:
   name: material
@@ -16,7 +46,18 @@ theme:
   favicon: img/favicon.ico
   logo: img/logo.svg
   palette:
-    primary: white
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
 
 markdown_extensions:
   - abbr
@@ -53,11 +94,17 @@ plugins:
         - locale: en
           default: true
           name: English
-          
+
         - locale: zh
           name: 中文
           nav_translations:
-            Basics: 基础
-            Overview: 概述
+            Home: 主页
+            Install: 安装
+            Install on Docker: 在Docker上安装
+            Tutorials: 教程
+            Guides: 指南
+            APIs: 接口
+            Engines: 引擎
+            Plugins: 插件
 
-
+  - search

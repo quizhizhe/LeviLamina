@@ -43,17 +43,18 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1BatchedNetworkPeer@@UEAA@XZ
+    virtual ~BatchedNetworkPeer() = default;
 
     // vIndex: 1, symbol:
     // ?sendPacket@BatchedNetworkPeer@@UEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@W4Reliability@NetworkPeer@@W4Compressibility@@@Z
-    virtual void sendPacket(std::string const&, ::NetworkPeer::Reliability, ::Compressibility);
+    virtual void
+    sendPacket(std::string const& data, ::NetworkPeer::Reliability reliability, ::Compressibility compressible);
 
     // vIndex: 2, symbol:
     // ?receivePacket@BatchedNetworkPeer@@UEAA?AW4DataStatus@NetworkPeer@@AEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$shared_ptr@V?$time_point@Usteady_clock@chrono@std@@V?$duration@_JU?$ratio@$00$0DLJKMKAA@@std@@@23@@chrono@std@@@5@@Z
     virtual ::NetworkPeer::DataStatus
-    receivePacket(std::string&, std::shared_ptr<std::chrono::steady_clock::time_point> const&);
+    receivePacket(std::string& outData, std::shared_ptr<std::chrono::steady_clock::time_point> const&);
 
     // vIndex: 3, symbol: ?getNetworkStatus@BatchedNetworkPeer@@UEBA?AUNetworkStatus@NetworkPeer@@XZ
     virtual struct NetworkPeer::NetworkStatus getNetworkStatus() const;
@@ -62,13 +63,13 @@ public:
     virtual void update();
 
     // vIndex: 5, symbol: ?flush@BatchedNetworkPeer@@UEAAX$$QEAV?$function@$$A6AXXZ@std@@@Z
-    virtual void flush(std::function<void(void)>&&);
+    virtual void flush(std::function<void()>&& callback);
 
     // symbol: ??0BatchedNetworkPeer@@QEAA@V?$shared_ptr@VNetworkPeer@@@std@@AEAVScheduler@@@Z
-    MCAPI BatchedNetworkPeer(std::shared_ptr<class NetworkPeer>, class Scheduler&);
+    MCAPI BatchedNetworkPeer(std::shared_ptr<class NetworkPeer> peer, class Scheduler& scheduler);
 
     // symbol: ?setAsyncEnabled@BatchedNetworkPeer@@QEAAX_N@Z
-    MCAPI void setAsyncEnabled(bool);
+    MCAPI void setAsyncEnabled(bool val);
 
     // NOLINTEND
 

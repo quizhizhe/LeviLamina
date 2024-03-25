@@ -19,13 +19,13 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1RoofedTreeCanopy@@UEAA@XZ
+    virtual ~RoofedTreeCanopy() = default;
 
     // vIndex: 1, symbol:
     // ?placeCanopy@RoofedTreeCanopy@@UEBA?AV?$optional@VBlockPos@@@std@@AEAVIBlockWorldGenAPI@@AEBVBlockPos@@AEAVRandom@@AEAVRenderParams@@AEBUTreeParams@TreeHelper@@AEBV?$vector@VBlockPos@@V?$allocator@VBlockPos@@@std@@@3@@Z
     virtual std::optional<class BlockPos>
-    placeCanopy(class IBlockWorldGenAPI&, class BlockPos const&, class Random&, class RenderParams&, struct TreeHelper::TreeParams const&, std::vector<class BlockPos> const&)
+    placeCanopy(class IBlockWorldGenAPI& target, class BlockPos const& pos, class Random& random, class RenderParams&, struct TreeHelper::TreeParams const&, std::vector<class BlockPos> const&)
         const;
 
     // NOLINTEND
@@ -35,7 +35,7 @@ public:
     // symbol:
     // ?_placeLeafAt@RoofedTreeCanopy@@AEBA?AV?$optional@VBlockPos@@@std@@AEAVIBlockWorldGenAPI@@AEBVBlockPos@@V?$not_null@PEBVBlock@@@gsl@@@Z
     MCAPI std::optional<class BlockPos>
-          _placeLeafAt(class IBlockWorldGenAPI&, class BlockPos const&, gsl::not_null<class Block const*>) const;
+    _placeLeafAt(class IBlockWorldGenAPI& target, class BlockPos const& pos, gsl::not_null<class Block const*>) const;
 
     // NOLINTEND
 };

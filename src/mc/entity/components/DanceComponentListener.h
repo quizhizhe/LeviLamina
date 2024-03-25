@@ -15,7 +15,7 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ?setLevel@DanceComponentListener@@QEAAXAEAVLevel@@@Z
-    MCAPI void setLevel(class Level&);
+    MCAPI void setLevel(class Level& level);
 
     // symbol: ??1DanceComponentListener@@QEAA@XZ
     MCAPI ~DanceComponentListener();
@@ -25,9 +25,15 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol:
-    // ?_onLevelSoundEvent@DanceComponentListener@@AEAAXW4LevelSoundEvent@@AEBVVec3@@HAEBUActorDefinitionIdentifier@@_N3@Z
-    MCAPI void
-    _onLevelSoundEvent(::LevelSoundEvent, class Vec3 const&, int, struct ActorDefinitionIdentifier const&, bool, bool);
+    // ?_onLevelSoundEvent@DanceComponentListener@@AEAAXW4LevelSoundEvent@Legacy@Puv@@AEBVVec3@@HAEBUActorDefinitionIdentifier@@_N3@Z
+    MCAPI void _onLevelSoundEvent(
+        ::Puv::Legacy::LevelSoundEvent          type,
+        class Vec3 const&                       pos,
+        int                                     data,
+        struct ActorDefinitionIdentifier const& entityType,
+        bool                                    isBabyMob,
+        bool                                    isGlobal
+    );
 
     // NOLINTEND
 };

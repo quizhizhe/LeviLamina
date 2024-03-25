@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SwimIdleGoal@@UEAA@XZ
+    virtual ~SwimIdleGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@SwimIdleGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -32,7 +32,7 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@SwimIdleGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // NOLINTEND
 };

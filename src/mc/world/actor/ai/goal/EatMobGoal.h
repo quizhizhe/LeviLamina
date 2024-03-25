@@ -29,22 +29,22 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
-
-        // symbol: ??1Definition@EatMobGoal@@UEAA@XZ
-        MCVAPI ~Definition();
+        // vIndex: 0, symbol: ??1Definition@EatMobGoal@@UEAA@XZ
+        virtual ~Definition();
 
         // symbol: ??0Definition@EatMobGoal@@QEAA@XZ
         MCAPI Definition();
 
         // symbol: ?initialize@Definition@EatMobGoal@@QEBAXAEAVEntityContext@@AEAV2@@Z
-        MCAPI void initialize(class EntityContext&, class EatMobGoal&) const;
+        MCAPI void initialize(class EntityContext& entity, class EatMobGoal& goal) const;
 
         // symbol:
         // ?buildSchema@Definition@EatMobGoal@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VDefinition@EatMobGoal@@@JsonUtil@@@4@@Z
-        MCAPI static void
-        buildSchema(std::string const&, std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class EatMobGoal::Definition>>&);
+        MCAPI static void buildSchema(
+            std::string const& name,
+            std::shared_ptr<
+                class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class EatMobGoal::Definition>>& root
+        );
 
         // NOLINTEND
     };
@@ -57,8 +57,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1EatMobGoal@@UEAA@XZ
+    virtual ~EatMobGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@EatMobGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -77,10 +77,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@EatMobGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0EatMobGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit EatMobGoal(class Mob&);
+    MCAPI explicit EatMobGoal(class Mob& mob);
 
     // NOLINTEND
 };

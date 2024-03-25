@@ -9,9 +9,11 @@
 // auto generated forward declare list
 // clang-format off
 class AABB;
+class BlockPos;
 class BoundingBox;
 class Dimension;
 class Vec3;
+class WeakEntityRef;
 namespace gametest { class BaseGameTestFunction; }
 namespace gametest { class GameTestSequence; }
 namespace gametest { class IGameTestHelperProvider; }
@@ -30,8 +32,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1BaseGameTestInstance@gametest@@UEAA@XZ
+    virtual ~BaseGameTestInstance();
 
     // vIndex: 1, symbol: ?initialize@BaseGameTestInstance@gametest@@UEAAXXZ
     virtual void initialize();
@@ -72,22 +74,24 @@ public:
     // vIndex: 13, symbol: ?_removeSimulatedPlayers@BaseGameTestInstance@gametest@@MEAAXXZ
     virtual void _removeSimulatedPlayers();
 
-    // symbol: ??1BaseGameTestInstance@gametest@@UEAA@XZ
-    MCVAPI ~BaseGameTestInstance();
-
     // symbol:
     // ??0BaseGameTestInstance@gametest@@QEAA@AEBVBaseGameTestFunction@1@V?$unique_ptr@VIGameTestHelperProvider@gametest@@U?$default_delete@VIGameTestHelperProvider@gametest@@@std@@@std@@@Z
-    MCAPI
-    BaseGameTestInstance(class gametest::BaseGameTestFunction const&, std::unique_ptr<class gametest::IGameTestHelperProvider>);
+    MCAPI BaseGameTestInstance(
+        class gametest::BaseGameTestFunction const&,
+        std::unique_ptr<class gametest::IGameTestHelperProvider> helper
+    );
 
     // symbol: ?addListener@BaseGameTestInstance@gametest@@QEAAXV?$shared_ptr@VIGameTestListener@gametest@@@std@@@Z
-    MCAPI void addListener(std::shared_ptr<class gametest::IGameTestListener>);
+    MCAPI void addListener(std::shared_ptr<class gametest::IGameTestListener> listener);
+
+    // symbol: ?addSimulatedPlayer@BaseGameTestInstance@gametest@@QEAAXVWeakEntityRef@@@Z
+    MCAPI void addSimulatedPlayer(class WeakEntityRef);
 
     // symbol: ?createSequence@BaseGameTestInstance@gametest@@QEAAAEAVGameTestSequence@2@XZ
     MCAPI class gametest::GameTestSequence& createSequence();
 
     // symbol: ?fail@BaseGameTestInstance@gametest@@QEAAXUGameTestError@2@_N@Z
-    MCAPI void fail(struct gametest::GameTestError, bool);
+    MCAPI void fail(struct gametest::GameTestError error, bool);
 
     // symbol: ?finish@BaseGameTestInstance@gametest@@QEAAX_N@Z
     MCAPI void finish(bool);
@@ -98,15 +102,33 @@ public:
     // symbol: ?getRotation@BaseGameTestInstance@gametest@@QEBA?AW4Rotation@@XZ
     MCAPI ::Rotation getRotation() const;
 
+    // symbol: ?getStructureBlockPos@BaseGameTestInstance@gametest@@QEBA?AVBlockPos@@XZ
+    MCAPI class BlockPos getStructureBlockPos() const;
+
     // symbol:
     // ?getTestName@BaseGameTestInstance@gametest@@QEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
     MCAPI std::string const& getTestName() const;
+
+    // symbol: ?getTick@BaseGameTestInstance@gametest@@QEBAHXZ
+    MCAPI int getTick() const;
 
     // symbol: ?hasRetryAttempts@BaseGameTestInstance@gametest@@QEBA_NXZ
     MCAPI bool hasRetryAttempts() const;
 
     // symbol: ?removeListener@BaseGameTestInstance@gametest@@QEAAXV?$shared_ptr@VIGameTestListener@gametest@@@std@@@Z
-    MCAPI void removeListener(std::shared_ptr<class gametest::IGameTestListener>);
+    MCAPI void removeListener(std::shared_ptr<class gametest::IGameTestListener> listener);
+
+    // symbol: ?setMaxRunCount@BaseGameTestInstance@gametest@@QEAAXH@Z
+    MCAPI void setMaxRunCount(int);
+
+    // symbol: ?setRotation@BaseGameTestInstance@gametest@@QEAAXW4Rotation@@@Z
+    MCAPI void setRotation(::Rotation rotation);
+
+    // symbol: ?setStopOnFailure@BaseGameTestInstance@gametest@@QEAAX_N@Z
+    MCAPI void setStopOnFailure(bool);
+
+    // symbol: ?setStructureBlockPos@BaseGameTestInstance@gametest@@QEAAXAEBVBlockPos@@@Z
+    MCAPI void setStructureBlockPos(class BlockPos const&);
 
     // symbol: ?startExecution@BaseGameTestInstance@gametest@@QEAAXXZ
     MCAPI void startExecution();

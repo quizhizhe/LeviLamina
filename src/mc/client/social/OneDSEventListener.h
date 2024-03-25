@@ -26,26 +26,23 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1OneDSEventListener@Events@Social@@UEAA@XZ
+    virtual ~OneDSEventListener();
 
     // vIndex: 3, symbol: ?getEventTagsFilter@OneDSEventListener@Events@Social@@UEBAHXZ
     virtual int getEventTagsFilter() const;
 
     // vIndex: 5, symbol: ?sendEvent@OneDSEventListener@Events@Social@@UEAAXAEBVEvent@23@@Z
-    virtual void sendEvent(class Social::Events::Event const&);
+    virtual void sendEvent(class Social::Events::Event const& event);
 
     // vIndex: 6, symbol: ?_flushEventQueue@OneDSEventListener@Events@Social@@MEAAXXZ
     virtual void _flushEventQueue();
 
     // vIndex: 7, symbol: ?_checkAgainstEventAllowlist@OneDSEventListener@Events@Social@@MEBA_NAEBVEvent@23@@Z
-    virtual bool _checkAgainstEventAllowlist(class Social::Events::Event const&) const;
-
-    // symbol: ??1OneDSEventListener@Events@Social@@UEAA@XZ
-    MCVAPI ~OneDSEventListener();
+    virtual bool _checkAgainstEventAllowlist(class Social::Events::Event const& event) const;
 
     // symbol: ??0OneDSEventListener@Events@Social@@QEAA@VPath@Core@@@Z
-    MCAPI explicit OneDSEventListener(class Core::Path);
+    MCAPI explicit OneDSEventListener(class Core::Path logFileName);
 
     // NOLINTEND
 
@@ -62,10 +59,10 @@ public:
     // NOLINTBEGIN
     // symbol:
     // ?AddPartA@OneDSEventListener@Events@Social@@AEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAVValue@Json@@_N@Z
-    MCAPI void AddPartA(std::string const&, class Json::Value&, bool);
+    MCAPI void AddPartA(std::string const& eventName, class Json::Value&, bool);
 
     // symbol: ?AddPartC@OneDSEventListener@Events@Social@@AEAAXAEBVEvent@23@AEAVValue@Json@@@Z
-    MCAPI void AddPartC(class Social::Events::Event const&, class Json::Value&);
+    MCAPI void AddPartC(class Social::Events::Event const& event, class Json::Value&);
 
     // symbol: ?_sendBatch@OneDSEventListener@Events@Social@@AEAA_NXZ
     MCAPI bool _sendBatch();
@@ -103,15 +100,15 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $ENDPOINT_IDENTIFIER() { return ENDPOINT_IDENTIFIER; }
+    static auto& $ENDPOINT_IDENTIFIER() { return ENDPOINT_IDENTIFIER; }
 
-    auto& $ONEDS_URL() { return ONEDS_URL; }
+    static auto& $ONEDS_URL() { return ONEDS_URL; }
 
-    auto& $PARTA_IDENTIFIER() { return PARTA_IDENTIFIER; }
+    static auto& $PARTA_IDENTIFIER() { return PARTA_IDENTIFIER; }
 
-    auto& $SAFETY_ENDPOINT_IDENTIFIER() { return SAFETY_ENDPOINT_IDENTIFIER; }
+    static auto& $SAFETY_ENDPOINT_IDENTIFIER() { return SAFETY_ENDPOINT_IDENTIFIER; }
 
-    auto& $SAFETY_PARTA_IDENTIFIER() { return SAFETY_PARTA_IDENTIFIER; }
+    static auto& $SAFETY_PARTA_IDENTIFIER() { return SAFETY_PARTA_IDENTIFIER; }
 
     // NOLINTEND
 };

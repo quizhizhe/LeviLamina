@@ -14,20 +14,20 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ServerActorManagerProxy@@UEAA@XZ
+    virtual ~ServerActorManagerProxy() = default;
 
     // vIndex: 1, symbol: ?initializeActor@ServerActorManagerProxy@@UEAAXAEAVActor@@@Z
-    virtual void initializeActor(class Actor&);
+    virtual void initializeActor(class Actor& actor);
 
     // vIndex: 2, symbol: ?validate@ServerActorManagerProxy@@UEAA_NAEBVActor@@@Z
-    virtual bool validate(class Actor const&);
+    virtual bool validate(class Actor const& actor);
 
     // vIndex: 3, symbol: ?removeActorInLevelChunk@ServerActorManagerProxy@@UEAAXAEBVActor@@@Z
-    virtual void removeActorInLevelChunk(class Actor const&);
+    virtual void removeActorInLevelChunk(class Actor const& actor);
 
     // vIndex: 4, symbol: ?deleteActorFromWorldInLevelChunk@ServerActorManagerProxy@@UEAAXAEBVActor@@@Z
-    virtual void deleteActorFromWorldInLevelChunk(class Actor const&);
+    virtual void deleteActorFromWorldInLevelChunk(class Actor const& actor);
 
     // NOLINTEND
 };

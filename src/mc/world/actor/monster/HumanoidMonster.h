@@ -3,13 +3,14 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
+#include "mc/deps/puv/EquipmentSlot.h"
 #include "mc/entity/utilities/ActorDamageCause.h"
 #include "mc/entity/utilities/ActorFlags.h"
+#include "mc/entity/utilities/ActorInitializationMethod.h"
 #include "mc/entity/utilities/ActorType.h"
 #include "mc/enums/ArmorMaterialType.h"
 #include "mc/enums/ArmorSlot.h"
 #include "mc/enums/ArmorTextureType.h"
-#include "mc/enums/EquipmentSlot.h"
 #include "mc/enums/HandSlot.h"
 #include "mc/enums/InputMode.h"
 #include "mc/enums/MaterialType.h"
@@ -18,9 +19,13 @@
 #include "mc/events/LevelSoundEvent.h"
 #include "mc/server/commands/CommandPermissionLevel.h"
 #include "mc/world/AutomaticID.h"
-#include "mc/world/actor/Actor.h"
 #include "mc/world/actor/monster/Monster.h"
 #include "mc/world/item/components/ItemUseMethod.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace mce { class Color; }
+// clang-format on
 
 class HumanoidMonster : public ::Monster {
 public:
@@ -31,71 +36,30 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 10, symbol: __unk_vfn_10
-    virtual void __unk_vfn_10();
-
-    // vIndex: 23, symbol: __unk_vfn_23
-    virtual void __unk_vfn_23();
+    // vIndex: 10, symbol: ??1HumanoidMonster@@UEAA@XZ
+    virtual ~HumanoidMonster();
 
     // vIndex: 29, symbol: ?normalTick@HumanoidMonster@@UEAAXXZ
     virtual void normalTick();
 
-    // vIndex: 39, symbol: __unk_vfn_39
-    virtual void __unk_vfn_39();
+    // vIndex: 159, symbol: ?readAdditionalSaveData@HumanoidMonster@@MEAAXAEBVCompoundTag@@AEAVDataLoadHelper@@@Z
+    virtual void readAdditionalSaveData(class CompoundTag const& tag, class DataLoadHelper& dataLoadHelper);
 
-    // vIndex: 41, symbol: __unk_vfn_41
-    virtual void __unk_vfn_41();
+    // vIndex: 160, symbol: ?addAdditionalSaveData@HumanoidMonster@@MEBAXAEAVCompoundTag@@@Z
+    virtual void addAdditionalSaveData(class CompoundTag& tag) const;
 
-    // vIndex: 44, symbol: __unk_vfn_44
-    virtual void __unk_vfn_44();
-
-    // vIndex: 47, symbol: __unk_vfn_47
-    virtual void __unk_vfn_47();
-
-    // vIndex: 52, symbol: __unk_vfn_52
-    virtual void __unk_vfn_52();
-
-    // vIndex: 61, symbol: __unk_vfn_61
-    virtual void __unk_vfn_61();
-
-    // vIndex: 62, symbol: __unk_vfn_62
-    virtual void __unk_vfn_62();
-
-    // vIndex: 63, symbol: __unk_vfn_63
-    virtual void __unk_vfn_63();
-
-    // vIndex: 109, symbol: __unk_vfn_109
-    virtual void __unk_vfn_109();
-
-    // vIndex: 147, symbol: __unk_vfn_147
-    virtual void __unk_vfn_147();
-
-    // vIndex: 148, symbol: __unk_vfn_148
-    virtual void __unk_vfn_148();
-
-    // vIndex: 165, symbol: __unk_vfn_165
-    virtual void __unk_vfn_165();
-
-    // vIndex: 167, symbol: ?readAdditionalSaveData@HumanoidMonster@@MEAAXAEBVCompoundTag@@AEAVDataLoadHelper@@@Z
-    virtual void readAdditionalSaveData(class CompoundTag const&, class DataLoadHelper&);
-
-    // vIndex: 168, symbol: ?addAdditionalSaveData@HumanoidMonster@@MEBAXAEAVCompoundTag@@@Z
-    virtual void addAdditionalSaveData(class CompoundTag&) const;
-
-    // vIndex: 170, symbol: __unk_vfn_170
-    virtual void __unk_vfn_170();
-
-    // vIndex: 172, symbol: __unk_vfn_172
-    virtual void __unk_vfn_172();
-
-    // vIndex: 185, symbol: ?getItemUseDuration@HumanoidMonster@@UEBAHXZ
+    // vIndex: 175, symbol: ?getItemUseDuration@HumanoidMonster@@UEBAHXZ
     virtual int getItemUseDuration() const;
 
-    // vIndex: 190, symbol: ?doHurtTarget@HumanoidMonster@@UEAA_NPEAVActor@@AEBW4ActorDamageCause@@@Z
-    virtual bool doHurtTarget(class Actor*, ::ActorDamageCause const&);
+    // vIndex: 180, symbol: ?doHurtTarget@HumanoidMonster@@UEAA_NPEAVActor@@AEBW4ActorDamageCause@@@Z
+    virtual bool doHurtTarget(class Actor* target, ::ActorDamageCause const& cause);
 
-    // symbol: ??1HumanoidMonster@@UEAA@XZ
-    MCVAPI ~HumanoidMonster();
+    // symbol: ??0HumanoidMonster@@QEAA@PEAVActorDefinitionGroup@@AEBUActorDefinitionIdentifier@@AEAVEntityContext@@@Z
+    MCAPI HumanoidMonster(
+        class ActorDefinitionGroup*             definitions,
+        struct ActorDefinitionIdentifier const& definitionName,
+        class EntityContext&                    entityContext
+    );
 
     // NOLINTEND
 
@@ -118,13 +82,13 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $MAX_ENCHANTED_ARMOR_CHANCE() { return MAX_ENCHANTED_ARMOR_CHANCE; }
+    static auto& $MAX_ENCHANTED_ARMOR_CHANCE() { return MAX_ENCHANTED_ARMOR_CHANCE; }
 
-    auto& $MAX_ENCHANTED_WEAPON_CHANCE() { return MAX_ENCHANTED_WEAPON_CHANCE; }
+    static auto& $MAX_ENCHANTED_WEAPON_CHANCE() { return MAX_ENCHANTED_WEAPON_CHANCE; }
 
-    auto& $MAX_PICKUP_LOOT_CHANCE() { return MAX_PICKUP_LOOT_CHANCE; }
+    static auto& $MAX_PICKUP_LOOT_CHANCE() { return MAX_PICKUP_LOOT_CHANCE; }
 
-    auto& $MAX_WEARING_ARMOR_CHANCE() { return MAX_WEARING_ARMOR_CHANCE; }
+    static auto& $MAX_WEARING_ARMOR_CHANCE() { return MAX_WEARING_ARMOR_CHANCE; }
 
     // NOLINTEND
 };

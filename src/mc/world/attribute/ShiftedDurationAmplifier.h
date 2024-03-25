@@ -14,14 +14,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ShiftedDurationAmplifier@@UEAA@XZ
+    virtual ~ShiftedDurationAmplifier() = default;
 
     // vIndex: 2, symbol: ?shouldBuff@ShiftedDurationAmplifier@@UEBA_NHH@Z
-    virtual bool shouldBuff(int, int) const;
+    virtual bool shouldBuff(int remainingDuration, int amplification) const;
 
     // vIndex: 3, symbol: ?getTickInterval@ShiftedDurationAmplifier@@UEBAHH@Z
-    virtual int getTickInterval(int) const;
+    virtual int getTickInterval(int amplification) const;
 
     // NOLINTEND
 };

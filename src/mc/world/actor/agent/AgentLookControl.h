@@ -14,14 +14,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1AgentLookControl@@UEAA@XZ
+    virtual ~AgentLookControl() = default;
 
     // vIndex: 1, symbol: ?initializeInternal@AgentLookControl@@UEAAXAEAVMob@@@Z
-    virtual void initializeInternal(class Mob&);
+    virtual void initializeInternal(class Mob& mob);
 
     // vIndex: 2, symbol: ?tick@AgentLookControl@@UEAAXAEAVMob@@@Z
-    virtual void tick(class Mob&);
+    virtual void tick(class Mob& mob);
 
     // symbol: ?sBaseYMax@AgentLookControl@@2MA
     MCAPI static float sBaseYMax;

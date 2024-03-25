@@ -19,8 +19,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1TextObjectLocalizedTextWithParams@@UEAA@XZ
+    virtual ~TextObjectLocalizedTextWithParams() = default;
 
     // vIndex: 1, symbol:
     // ?asString@TextObjectLocalizedTextWithParams@@UEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
@@ -34,7 +34,7 @@ public:
 
     // symbol:
     // ??0TextObjectLocalizedTextWithParams@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@@Z
-    MCAPI TextObjectLocalizedTextWithParams(std::string, std::vector<std::string> const&);
+    MCAPI TextObjectLocalizedTextWithParams(std::string text, std::vector<std::string> const& params);
 
     // NOLINTEND
 };

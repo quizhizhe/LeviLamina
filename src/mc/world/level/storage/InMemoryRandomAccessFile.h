@@ -11,14 +11,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1InMemoryRandomAccessFile@@UEAA@XZ
+    virtual ~InMemoryRandomAccessFile() = default;
 
     // vIndex: 1, symbol: ?Read@InMemoryRandomAccessFile@@UEBA?AVStatus@leveldb@@_K0PEAVSlice@3@PEAD@Z
-    virtual leveldb::Status Read(uint64, uint64, leveldb::Slice*, char*) const;
+    virtual leveldb::Status Read(uint64 offset, uint64 n, leveldb::Slice* result, char* scratch) const;
 
     // symbol: ??0InMemoryRandomAccessFile@@QEAA@V?$shared_ptr@VInMemoryFile@@@std@@@Z
-    MCAPI explicit InMemoryRandomAccessFile(std::shared_ptr<class InMemoryFile>);
+    MCAPI explicit InMemoryRandomAccessFile(std::shared_ptr<class InMemoryFile> file);
 
     // NOLINTEND
 };

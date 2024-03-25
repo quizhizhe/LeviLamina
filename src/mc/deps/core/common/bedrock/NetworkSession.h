@@ -4,7 +4,6 @@
 
 // auto generated inclusion list
 #include "mc/deps/core/common/bedrock/EnableNonOwnerReferences.h"
-#include "mc/enums/TransportLayer.h"
 
 // auto generated forward declare list
 // clang-format off
@@ -20,8 +19,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ?getTransportLayer@NetworkSession@@QEBA?AW4TransportLayer@@XZ
-    MCAPI ::TransportLayer getTransportLayer() const;
+    // vIndex: 0, symbol: __gen_??1NetworkSession@@UEAA@XZ
+    virtual ~NetworkSession() = default;
 
     // NOLINTEND
 };

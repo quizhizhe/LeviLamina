@@ -29,11 +29,12 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1GameTestNetworkListener@GameTestNetworkAdapter@@UEAA@XZ
+        virtual ~GameTestNetworkListener() = default;
 
-        // vIndex: 1, symbol: __unk_vfn_1
-        virtual void __unk_vfn_1();
+        // vIndex: 1, symbol:
+        // ?onTestStructureLoaded@GameTestBatchRunnerGameTestListener@gametest@@UEAAXAEAVBaseGameTestInstance@2@@Z
+        virtual void onTestStructureLoaded(class gametest::BaseGameTestInstance&);
 
         // vIndex: 2, symbol:
         // ?onTestPassed@GameTestNetworkListener@GameTestNetworkAdapter@@UEAAXAEAVBaseGameTestInstance@gametest@@@Z
@@ -42,6 +43,15 @@ public:
         // vIndex: 3, symbol:
         // ?onTestFailed@GameTestNetworkListener@GameTestNetworkAdapter@@UEAAXAEAVBaseGameTestInstance@gametest@@@Z
         virtual void onTestFailed(class gametest::BaseGameTestInstance&);
+
+        // vIndex: 4, symbol: ?onTestStarted@IGameTestListener@gametest@@UEAAXAEAVBaseGameTestInstance@2@@Z
+        virtual void onTestStarted(class gametest::BaseGameTestInstance&);
+
+        // vIndex: 5, symbol: ?onTestRetryStarted@IGameTestListener@gametest@@UEAAXAEAVBaseGameTestInstance@2@@Z
+        virtual void onTestRetryStarted(class gametest::BaseGameTestInstance&);
+
+        // vIndex: 6, symbol: ?onTestRetryFinished@IGameTestListener@gametest@@UEAAXAEAVBaseGameTestInstance@2@@Z
+        virtual void onTestRetryFinished(class gametest::BaseGameTestInstance&);
 
         // NOLINTEND
     };
@@ -59,8 +69,12 @@ public:
 
     // symbol:
     // ?rungametest@GameTestNetworkAdapter@@QEAAXV?$not_null@PEAVPacketSender@@@gsl@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAVDimension@@AEBUTestParameters@gametest@@@Z
-    MCAPI void
-    rungametest(gsl::not_null<class PacketSender*>, std::string const&, class Dimension&, struct gametest::TestParameters const&);
+    MCAPI void rungametest(
+        gsl::not_null<class PacketSender*> packetSender,
+        std::string const&,
+        class Dimension&                       dimension,
+        struct gametest::TestParameters const& params
+    );
 
     // NOLINTEND
 };

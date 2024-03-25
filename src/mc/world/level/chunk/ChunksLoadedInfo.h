@@ -24,24 +24,24 @@ public:
     // symbol:
     // ?areAllChunksLoadedAndTicking@ChunksLoadedInfo@@SA?AW4ChunksLoadedStatus@@AEBVDimension@@AEAVChunkSource@@AEBUBounds@@_NUTick@@_N@Z
     MCAPI static ::ChunksLoadedStatus areAllChunksLoadedAndTicking(
-        class Dimension const&,
-        class ChunkSource&,
-        struct Bounds const&,
-        bool,
+        class Dimension const& dimension,
+        class ChunkSource&     source,
+        struct Bounds const&   bounds,
+        bool                   isCircle,
         struct Tick,
-        bool
+        bool allowNonPlayerTicking
     );
 
     // symbol:
     // ?calculateChunksLoadedInfo@ChunksLoadedInfo@@SA?AU1@AEBVDimension@@AEAVChunkSource@@AEBUBounds@@_NUTick@@_N55@Z
     MCAPI static struct ChunksLoadedInfo calculateChunksLoadedInfo(
-        class Dimension const&,
-        class ChunkSource&,
-        struct Bounds const&,
-        bool,
+        class Dimension const& dimension,
+        class ChunkSource&     source,
+        struct Bounds const&   bounds,
+        bool                   isCircle,
         struct Tick,
-        bool,
-        bool,
+        bool allowUnloadedChunks,
+        bool allowNonPlayerTicking,
         bool
     );
 

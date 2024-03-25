@@ -1,14 +1,21 @@
 #pragma once
 
+#include <set>
 #include <string>
-#include <thread>
+#include <unordered_map>
+#include <vector>
 
-/////////////////////// LL Configs ///////////////////////
+#include "ll/api/base/Macro.h"
+#include "ll/api/reflection/Dispatcher.h"
+#include "ll/core/tweak/ForceEnableCheatCommands.h"
+#include "ll/core/tweak/SimpleServerLogger.h"
+#include "ll/core/tweak/Statistics.h"
 
 namespace ll {
 
 struct LeviConfig {
-    int version = 3;
+
+    int version = 21;
 
     std::string language = "system";
     struct {
@@ -16,51 +23,43 @@ struct LeviConfig {
         int  logLevel = 4;
     } logger{};
 
-    struct ExtraMainPluginSettings {
-        bool enabled      = true;
-        bool alwaysLaunch = false;
-    };
-    ExtraMainPluginSettings scriptEngine{};
-    ExtraMainPluginSettings economyCore{};
-
     struct {
         struct {
-            bool        enabled = true;
-            std::string path    = R"(.\plugins\LeviLamina\CrashLogger.exe)";
+            bool        enabled      = true;
+            bool        useBuiltin   = false;
+            std::string externalPath = R"(.\plugins\LeviLamina\CrashLogger.exe)";
+            std::string logPath      = R"(.\logs\crash)";
+            std::string dumpPrefix   = "minidump_";
+            std::string logPrefix    = "trace_";
         } crashLogger{};
 
         struct {
-            bool                     enabled         = true;
-            std::vector<std::string> autoInstallPath = {R"(.\plugins\AddonsHelper\)"};
-            std::string              tempPath        = {R"(.\plugins\AddonsHelper\Temp\)"};
-            std::set<std::string>    extension       = {".mcpack", ".mcaddon", ".zip"};
-        } addonsHelper{};
-
-        struct {
-            std::string path = R"(.\plugins\LeviLamina\7z\7za.exe)";
-        } compressor{};
-
-        struct {
-            struct {
-                bool fixArrayTagCompareBug = true;
-            } bugfixes{};
-
-            bool tpdimCommand             = true;
-            bool settingsCommand          = true;
-            bool disableAutoCompactionLog = true;
+            bool                                                       disableAutoCompactionLog = true;
+            ll::reflection::Dispatcher<bool, ForceEnableCheatCommands> forceEnableCheatCommands = true;
+            ll::reflection::Dispatcher<bool, Statistics>               enableStatitics          = true;
         } tweak{};
 
-        bool checkRunningBDS    = true;
-        bool simpleServerLogger = true;
+        reflection::Dispatcher<SimpleServerLoggerConfig, SimpleServerLogger> simpleServerLogger{};
 
-        std::unordered_map<std::string, std::string> resourcePackEncryptionMap = {
-            {"<UUID>", "<KEY>"}
-        };
+        struct {
+            bool enabled             = true;
+            bool crashCommand        = false;
+            bool tpdimCommand        = true;
+            bool versionCommand      = true;
+            bool memstatusCommand    = true;
+            bool pluginManageCommand = true;
+        } commands{};
+
+        bool checkRunningBDS = true;
+
+        struct {
+            bool alwaysLaunch = false;
+        } playerInfo{};
 
     } modules{};
 };
 
-LLETAPI LeviConfig globalConfig;
+extern LeviConfig globalConfig;
 
 bool loadLeviConfig();
 

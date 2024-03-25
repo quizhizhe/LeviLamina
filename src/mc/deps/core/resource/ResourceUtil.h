@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/world/systems/ResourceFileSystem.h"
+#include "mc/entity/systems/common/ResourceFileSystem.h"
 
 class ResourceUtil {
 public:
@@ -16,11 +16,11 @@ public:
     // NOLINTBEGIN
     // symbol:
     // ?pathFromString@ResourceUtil@@SA?AW4ResourceFileSystem@@V?$basic_string_view@DU?$char_traits@D@std@@@std@@@Z
-    MCAPI static ::ResourceFileSystem pathFromString(std::string_view);
+    MCAPI static ::ResourceFileSystem pathFromString(std::string_view name);
 
     // symbol:
     // ?stringFromPath@ResourceUtil@@SA?AV?$basic_string_view@DU?$char_traits@D@std@@@std@@W4ResourceFileSystem@@@Z
-    MCAPI static std::string_view stringFromPath(::ResourceFileSystem);
+    MCAPI static std::string_view stringFromPath(::ResourceFileSystem fileSystem);
 
     // NOLINTEND
 };

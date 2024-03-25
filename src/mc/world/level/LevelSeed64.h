@@ -6,10 +6,7 @@ class LevelSeed64 {
 public:
     uint64 mValue;
 
-    // prevent constructor by default
-    LevelSeed64& operator=(LevelSeed64 const&);
-    LevelSeed64(LevelSeed64 const&);
-    LevelSeed64();
+    explicit LevelSeed64(uint64 value) : mValue(value) {}
 
 public:
     // NOLINTBEGIN
@@ -17,7 +14,7 @@ public:
     MCAPI uint to32BitRandomSeed() const;
 
     // symbol: ?fromUnsigned32@LevelSeed64@@SA?AV1@I@Z
-    MCAPI static class LevelSeed64 fromUnsigned32(uint);
+    MCAPI static class LevelSeed64 fromUnsigned32(uint value);
 
     // NOLINTEND
 };

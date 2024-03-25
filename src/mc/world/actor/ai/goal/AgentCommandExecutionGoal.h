@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1AgentCommandExecutionGoal@@UEAA@XZ
+    virtual ~AgentCommandExecutionGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@AgentCommandExecutionGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -32,10 +32,7 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@AgentCommandExecutionGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
-
-    // symbol: ??0AgentCommandExecutionGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit AgentCommandExecutionGoal(class Mob&);
+    virtual void appendDebugInfo(std::string& str) const;
 
     // NOLINTEND
 };

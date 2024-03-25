@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1OwnerHurtByTargetGoal@@UEAA@XZ
+    virtual ~OwnerHurtByTargetGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@OwnerHurtByTargetGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -26,7 +26,7 @@ public:
 
     // symbol:
     // ??0OwnerHurtByTargetGoal@@QEAA@AEAVMob@@AEBV?$vector@UMobDescriptor@@V?$allocator@UMobDescriptor@@@std@@@std@@@Z
-    MCAPI OwnerHurtByTargetGoal(class Mob&, std::vector<struct MobDescriptor> const&);
+    MCAPI OwnerHurtByTargetGoal(class Mob& mob, std::vector<struct MobDescriptor> const& targetTypes);
 
     // NOLINTEND
 };

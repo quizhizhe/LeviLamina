@@ -18,6 +18,7 @@ public:
     std::optional<AgentCapabilities>      mAgentCapabilities;
     std::optional<ExternalLinkSettings>   mExternalLinkSettings;
 
+
     // NOLINTBEGIN
     // symbol: ??0EducationLevelSettings@@QEAA@XZ
     MCAPI EducationLevelSettings();

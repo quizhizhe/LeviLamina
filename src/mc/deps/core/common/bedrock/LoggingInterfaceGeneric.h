@@ -22,14 +22,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1LoggingInterfaceGeneric@Http@Bedrock@@UEAA@XZ
+    virtual ~LoggingInterfaceGeneric() = default;
 
     // vIndex: 1, symbol: ?threadId@LoggingInterfaceGeneric@Http@Bedrock@@UEAA_KXZ
     virtual uint64 threadId();
 
     // vIndex: 2, symbol: ?writeToDebugger@LoggingInterfaceGeneric@Http@Bedrock@@UEAAXPEBDW4HCTraceLevel@@0@Z
-    virtual void writeToDebugger(char const*, ::HCTraceLevel, char const*);
+    virtual void writeToDebugger(char const* area, ::HCTraceLevel level, char const* message);
 
     // NOLINTEND
 };

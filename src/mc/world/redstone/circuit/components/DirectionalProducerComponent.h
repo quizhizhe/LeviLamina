@@ -14,18 +14,13 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1DirectionalProducerComponent@@UEAA@XZ
+    virtual ~DirectionalProducerComponent() = default;
 
     // vIndex: 12, symbol:
     // ?allowConnection@DirectionalProducerComponent@@UEAA_NAEAVCircuitSceneGraph@@AEBVCircuitTrackingInfo@@AEA_N@Z
-    virtual bool allowConnection(class CircuitSceneGraph&, class CircuitTrackingInfo const&, bool&);
-
-    // vIndex: 17, symbol: __unk_vfn_17
-    virtual void __unk_vfn_17();
-
-    // vIndex: 20, symbol: __unk_vfn_20
-    virtual void __unk_vfn_20();
+    virtual bool
+    allowConnection(class CircuitSceneGraph& graph, class CircuitTrackingInfo const& info, bool& bDirectlyPowered);
 
     // symbol: ??0DirectionalProducerComponent@@QEAA@XZ
     MCAPI DirectionalProducerComponent();

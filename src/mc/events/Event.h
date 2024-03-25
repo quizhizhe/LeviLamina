@@ -27,38 +27,34 @@ public:
 
     // symbol:
     // ??0Event@Events@Social@@QEAA@IAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$$QEAV?$unordered_map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VProperty@Events@Social@@U?$hash@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@U?$equal_to@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VProperty@Events@Social@@@std@@@2@@4@H@Z
-    MCAPI Event(uint, std::string const&, std::unordered_map<std::string, class Social::Events::Property>&&, int);
+    MCAPI Event(
+        uint                                                              id,
+        std::string const&                                                eventName,
+        std::unordered_map<std::string, class Social::Events::Property>&& commonProperties,
+        int                                                               eventTags
+    );
 
     // symbol:
     // ??0Event@Events@Social@@QEAA@IAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$$QEAV?$unordered_map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VProperty@Events@Social@@U?$hash@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@U?$equal_to@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VProperty@Events@Social@@@std@@@2@@4@AEBV?$NonOwnerPointer@VAppPlatform@@@Bedrock@@H@Z
     MCAPI Event(
-        uint,
-        std::string const&,
-        std::unordered_map<std::string, class Social::Events::Property>&&,
-        class Bedrock::NonOwnerPointer<class AppPlatform> const&,
-        int
+        uint                                                              id,
+        std::string const&                                                eventName,
+        std::unordered_map<std::string, class Social::Events::Property>&& commonProperties,
+        class Bedrock::NonOwnerPointer<class AppPlatform> const&          appPlatform,
+        int                                                               eventTags
     );
 
     // symbol: ?addProperty@Event@Events@Social@@QEAAXAEBVProperty@23@@Z
-    MCAPI void addProperty(class Social::Events::Property const&);
-
-    // symbol: ?hasEventTags@Event@Events@Social@@QEBA_NH@Z
-    MCAPI bool hasEventTags(int) const;
-
-    // symbol: ?hasMeasurements@Event@Events@Social@@QEBA_NXZ
-    MCAPI bool hasMeasurements() const;
+    MCAPI void addProperty(class Social::Events::Property const& property);
 
     // symbol: ??8Event@Events@Social@@QEBA_NAEBV012@@Z
-    MCAPI bool operator==(class Social::Events::Event const&) const;
-
-    // symbol: ?passesFilter@Event@Events@Social@@QEBA_NH@Z
-    MCAPI bool passesFilter(int) const;
+    MCAPI bool operator==(class Social::Events::Event const& other) const;
 
     // symbol: ?propertiesAsJsonValue@Event@Events@Social@@QEBA?AVValue@Json@@XZ
     MCAPI class Json::Value propertiesAsJsonValue() const;
 
     // symbol: ?updateMeasurements@Event@Events@Social@@QEAAXAEBV123@@Z
-    MCAPI void updateMeasurements(class Social::Events::Event const&);
+    MCAPI void updateMeasurements(class Social::Events::Event const& event);
 
     // symbol: ??1Event@Events@Social@@QEAA@XZ
     MCAPI ~Event();

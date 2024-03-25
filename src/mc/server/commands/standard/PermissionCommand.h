@@ -14,30 +14,27 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // vIndex: 1, symbol: ?collectOptionalArguments@Command@@MEAA_NXZ
-    virtual bool collectOptionalArguments();
+    // vIndex: 0, symbol: __gen_??1PermissionCommand@@UEAA@XZ
+    virtual ~PermissionCommand() = default;
 
     // vIndex: 2, symbol: ?execute@PermissionCommand@@UEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    virtual void execute(class CommandOrigin const&, class CommandOutput&) const;
+    virtual void execute(class CommandOrigin const& origin, class CommandOutput& output) const;
 
     // symbol: ?setup@PermissionCommand@@SAXAEAVCommandRegistry@@PEAVPermissionsFile@@@Z
-    MCAPI static void setup(class CommandRegistry&, class PermissionsFile*);
+    MCAPI static void setup(class CommandRegistry& registry, class PermissionsFile* permissionsFile);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?list@PermissionCommand@@AEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    MCAPI void list(class CommandOrigin const&, class CommandOutput&) const;
+    MCAPI void list(class CommandOrigin const& origin, class CommandOutput& output) const;
 
     // symbol: ?reload@PermissionCommand@@AEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    MCAPI void reload(class CommandOrigin const&, class CommandOutput&) const;
+    MCAPI void reload(class CommandOrigin const& origin, class CommandOutput& output) const;
 
     // symbol: ?set@PermissionCommand@@AEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    MCAPI void set(class CommandOrigin const&, class CommandOutput&) const;
+    MCAPI void set(class CommandOrigin const& origin, class CommandOutput& output) const;
 
     // NOLINTEND
 
@@ -51,7 +48,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mPermissionsFile() { return mPermissionsFile; }
+    static auto& $mPermissionsFile() { return mPermissionsFile; }
 
     // NOLINTEND
 };

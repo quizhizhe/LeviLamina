@@ -10,6 +10,7 @@
 // auto generated forward declare list
 // clang-format off
 namespace ScriptModuleMinecraft { class MovementScriptActorComponent; }
+namespace ScriptModuleMinecraft { class ScriptComponentTypeEnumBuilder; }
 // clang-format on
 
 namespace ScriptModuleMinecraft {
@@ -23,11 +24,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // symbol: ??1ScriptMovementSwayComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptMovementSwayComponent();
+    // vIndex: 0, symbol: __gen_??1ScriptMovementSwayComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptMovementSwayComponent() = default;
 
     // symbol: ?getSwayAmplitude@ScriptMovementSwayComponent@ScriptModuleMinecraft@@QEBA?AV?$Result@M$$V@Scripting@@XZ
     MCAPI class Scripting::Result<float> getSwayAmplitude() const;
@@ -36,8 +34,9 @@ public:
     MCAPI class Scripting::Result<float> getSwayFrequency() const;
 
     // symbol:
-    // ?bind@ScriptMovementSwayComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptMovementSwayComponent@ScriptModuleMinecraft@@@Scripting@@XZ
-    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptMovementSwayComponent> bind();
+    // ?bind@ScriptMovementSwayComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptMovementSwayComponent@ScriptModuleMinecraft@@@Scripting@@AEAVScriptComponentTypeEnumBuilder@2@@Z
+    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptMovementSwayComponent>
+    bind(class ScriptModuleMinecraft::ScriptComponentTypeEnumBuilder&);
 
     // symbol: ?ComponentId@ScriptMovementSwayComponent@ScriptModuleMinecraft@@2PEBDEB
     MCAPI static char const* ComponentId;

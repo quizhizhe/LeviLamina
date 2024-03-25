@@ -1,47 +1,82 @@
-
-#include "ll/api/memory/Hook.h"
-#include "ll/core/LeviLamina.h"
-#include "mc/server/ServerInstance.h"
-
-#include "ll/api/Config.h"
-
 #include "nlohmann/json.hpp"
 
+#include "ll/api/Config.h"
+#include "ll/api/data/Version.h"
+#include "ll/api/memory/Hook.h"
+#include "ll/api/utils/ErrorUtils.h"
+#include "ll/core/LeviLamina.h"
+
+#include "mc/server/ServerInstance.h"
+
 // #include "ll/api/schedule/Scheduler.h"
-// #include "ll/api/service/GlobalService.h"
+// #include "ll/api/service/Bedrock.h"
 // #include "mc/world/level/BlockPos.h"
 // #include "mc/world/level/Level.h"
 // #include "mc/world/level/LevelChunkTag.h"
 // #include "mc/world/level/storage/LevelStorage.h"
-// using namespace ll::schedule;
-// GameTickScheduler s;
+
+#include "ll/api/utils/WinUtils.h"
+
+#include "mc/nbt/CompoundTag.h"
+#include "mc/server/ServerLevel.h"
+#include "mc/server/commands/standard/FillCommand.h"
+
+#include "mc/deps/core/mce/Color.h"
+#include "mc/deps/core/mce/UUID.h"
+
+#include "mc/math/Vec2.h"
+#include "mc/math/Vec3.h"
+#include "mc/world/level/BlockPos.h"
+#include "mc/world/level/levelgen/structure/BoundingBox.h"
+
+#include "mc/world/actor/DataItem.h"
+
+// [0, 8, 16, 96, 97, 98, 104, 136, 144, 160, 176, 184, 196, 208, 232, 248, 304, 328, 360, 392, 408]
+
+// ["structure", "version", "ver", "someFlag", "eeeeFlag", "ssbbFlag", "str", "plain", "amap", "bmap", "vec2", "vec3",
+// "pos", "box", "tuple", "pair", "array", "vector", "nullvector", "mulset", "hi"]
 
 template <class T>
-
 class TestClass {
 public:
-    int version = 2;
-
-    bool someFlag = false;
-    bool eeeeFlag = true;
     struct {
         int   hello = 233;
         float trs   = 0.2f;
     } structure;
-    bool        ssbbFlag = false;
-    std::string str      = R"(\1hellow)";
-    int         plain    = 1111;
+
     class MyPair {
     public:
         std::string typo          = "hellotype";
         long long   I_am_a_number = 12415276547;
     };
 
+    int version = 2;
+
+    ll::data::Version ver;
+
+    bool        someFlag = false;
+    bool        eeeeFlag = true;
+    bool        ssbbFlag = false;
+    std::string str      = R"(\1hellow)";
+    int         plain    = 1111;
+
     std::map<std::string, MyPair> amap = {
         {"key1", {}                 },
         {"key2", {"a new thing", 42}},
         {"key3", {}                 },
     };
+    std::map<mce::UUID, int> bmap = {
+        {{},                  4454556  },
+        {{2, 3},              4366     },
+        {{4, 5},              -63556654},
+        {mce::UUID::random(), -5674236 },
+    };
+
+    Vec2        vec2{};
+    Vec3        vec3{};
+    BlockPos    pos{};
+    BoundingBox box{};
+
     std::tuple<int, bool, float>                       tuple;
     std::pair<std::string_view, MyPair>                pair;
     std::array<int, 5>                                 array{};
@@ -53,65 +88,112 @@ public:
         Benum,
     } hi;
 };
+// LL_AUTO_TYPE_INSTANCE_HOOK(Virtual, HookPriority::Normal, FillCommand, &FillCommand::execute, void, CommandOrigin
+// const&, CommandOutput&) {
+// }
+#if !(defined(__INTELLISENSE__) || defined(__clangd__) || defined(__clang__))
+struct myTypeList1 : ll::meta::DynamicTypeList<myTypeList1> {};
+struct myTypeList2 : ll::meta::DynamicTypeList<myTypeList2> {};
+struct myTypeList3 : ll::meta::TypeList<bool, int> {};
+struct myTypeList4 : ll::meta::TypeList<> {};
+#endif
 
-LL_AUTO_TYPED_INSTANCE_HOOK(
-    ConfigTest,
-    HookPriority::Normal,
-    ServerInstance,
-    &ServerInstance::startServerThread,
-    void
-) {
+LL_AUTO_TYPE_INSTANCE_HOOK(ConfigTest, HookPriority::Normal, ServerInstance, &ServerInstance::startServerThread, void) {
     origin();
+
+    auto lock = ll::Logger::lock();
+
+    int         s        = 1;
+    float       f        = 1.0f;
+    std::string str      = "hello world";
+    auto        sbbbbbb  = DataItem::create(1, s);
+    auto        sbbbbbb1 = DataItem::create(1, f);
+    auto        sbbbbbb2 = DataItem::create(1, str);
+
+    ll::logger.debug("DataItem {} {}", typeid(*sbbbbbb).name(), sbbbbbb->getData<int>().value());
+    ll::logger.debug("DataItem {} {}", typeid(*sbbbbbb1).name(), sbbbbbb1->getData<float>().value());
+    ll::logger.debug("DataItem {} {}", typeid(*sbbbbbb2).name(), sbbbbbb2->getData<std::string>().value());
+
 
     auto helloReflection = TestClass<int>{};
 
-    ll::config::saveConfig(helloReflection, "plugins/Test/testconfig.json");
+    // ll::config::saveConfig(helloReflection, "plugins/Test/config/testconfig.json");
 
-    ll::logger.debug("{} for load config", ll::config::loadConfig(helloReflection, "plugins/Test/testconfig.json"));
-    ll::logger.debug("\n{}", ll::reflection::serialize<nlohmann::ordered_json>(helloReflection).dump(4));
+    auto list = ll::string_utils::splitByPattern("structure.trs", ".");
+
+    // ll::reflection::visit(std::span{list}, helloReflection, [](auto&& a) {
+    //     if constexpr (std::floating_point<std::remove_cvref_t<decltype(a)>>) {
+    //         ll::logger.debug("ll::reflection::visit {} {}", typeid(decltype(a)).name(), a);
+    //     }
+    // });
+
+    ll::logger.debug(
+        "reflection NBT: {}",
+        ll::reflection::serialize<CompoundTagVariant>(helloReflection).toSnbt(SnbtFormat::PrettyConsolePrint)
+    );
+
+    ll::reflection::deserialize(helloReflection, ll::reflection::serialize<CompoundTagVariant>(helloReflection));
+
+    ll::logger.debug("0x{:X}", (uintptr_t)ll::memory::resolveIdentifier(&FillCommand::execute));
+    ll::logger.debug("0x{:X}", (uintptr_t)ll::win_utils::getImageRange().data());
+
+    ll::logger.debug("0x{:X}", (uintptr_t)ll::win_utils::getImageRange().size());
+    ll::logger.debug(
+        "0x{:X}",
+        (uintptr_t)ll::memory::resolveIdentifier(&FillCommand::execute)
+            - (uintptr_t)ll::win_utils::getImageRange("LeviLamina.dll").data()
+    );
+
+    ll::logger.debug("{}", ll::reflection::getRawName<&FillCommand::execute>());
+    ll::logger.debug("{}", ll::reflection::getRawName<&ServerLevel::_subTick>());
+    ll::logger.debug("{}", ll::reflection::getRawName<&ServerLevel::_checkBlockPermutationCap>());
+
+    try {
+        ll::reflection::deserialize(
+            helloReflection,
+            nlohmann::ordered_json::parse(R"({"structure":{"hello":""}})", nullptr, false, true)
+        );
+    } catch (...) {
+        ll::error_utils::printCurrentException(ll::logger);
+    }
 
     ll::logger.debug("789\xDB\xFE");
     ll::logger.debug("789\xDB\xFE");
 
-    std::cout << "hi I'm SB Plugin 1" << std::endl;
+    // ll::logger.debug("{}", ll::reflection::offset_array_v<TestClass<int>>);
 
-    std::clog << "hi I'm SB Plugin 2" << std::endl;
+#if !(defined(__INTELLISENSE__) || defined(__clangd__) || defined(__clang__))
+    myTypeList1::push_back<int>();
+    myTypeList1::push_back<float>();
+    ll::logger.debug("{}", ll::reflection::type_raw_name_v<decltype(myTypeList1::value())>);
 
-    std::cerr << "hi I'm SB Plugin 3" << std::endl;
+    myTypeList2::push_back<bool>();
+    myTypeList2::push_back<long>();
+    ll::logger.debug("{}", ll::reflection::type_raw_name_v<decltype(myTypeList2::value())>);
 
-    printf("hi I'm SB Plugin %d\n", 4);
+    ll::logger.debug("{}", ll::reflection::type_raw_name_v<decltype(myTypeList2::value())>);
+    ll::logger.debug("{}", ll::reflection::type_raw_name_v<decltype(myTypeList1::value())>);
 
-    fprintf(stdout, "hi I'm SB Plugin 5\n");
+    myTypeList1::assign<ll::meta::TypeList<int, bool, long, myTypeList2>>();
+    ll::logger.debug("{}", ll::reflection::type_raw_name_v<decltype(myTypeList1::value())>);
 
-    fprintf(stderr, "hi I'm SB Plugin 6\n");
+    myTypeList1::wrap<std::optional>();
+    ll::logger.debug("{}", ll::reflection::type_raw_name_v<decltype(myTypeList1::value())>);
 
-    puts("hi I'm SB Plugin 7\n");
+    myTypeList1::assign<ll::meta::TypeList<int, bool, long>>();
+    myTypeList1::wrap<std::add_const_t>();
+    ll::logger.debug("{}", ll::reflection::type_raw_name_v<decltype(myTypeList1::value())>);
+    myTypeList1::map<std::add_lvalue_reference>();
+    ll::logger.debug("{}", ll::reflection::type_raw_name_v<decltype(myTypeList1::value())>);
 
-    putchar('h');
-    putchar('a');
-    putchar('h');
-    putchar('a');
-    putchar(' ');
-    putchar('8');
-    putchar('\n');
+    ll::logger.debug("myTypeList3::index {} {}", myTypeList3::index<bool>, myTypeList3::index<int>);
 
-    std::clog << std::flush;
+    myTypeList3::forEach([]<typename T>() { ll::logger.debug(typeid(T).name()); });
 
-    fputc('h', stdout);
-    fputc('a', stdout);
-    fputc('h', stdout);
-    fputc('a', stdout);
-    fputc(' ', stdout);
-    fputc('9', stdout);
-    fputc('\n', stdout);
+    myTypeList3::forEachIndexed([]<typename T>(size_t index) { ll::logger.debug("{} : {}", typeid(T).name(), index); });
 
-    std::clog << std::flush;
+    myTypeList4::forEach([]<typename T>() { ll::logger.debug(typeid(T).name()); });
 
-    fputs("hi I'm SB Plugin 10\n", stdout);
-
-    fwrite("hi I'm SB Plugin 11\n", sizeof(char), 20, stdout);
-
-    printf_s("hi I'm SB Plugin %d\n", 12);
-
-    _printf_p("hi I'm SB Plugin %d\n", 13);
+    myTypeList4::forEachIndexed([]<typename T>(size_t index) { ll::logger.debug("{} : {}", typeid(T).name(), index); });
+#endif
 }

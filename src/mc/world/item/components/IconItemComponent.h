@@ -12,15 +12,9 @@ namespace cereal { struct ReflectionCtx; }
 
 class IconItemComponent {
 public:
-    // prevent constructor by default
-    IconItemComponent& operator=(IconItemComponent const&);
-    IconItemComponent(IconItemComponent const&);
-    IconItemComponent();
-
-public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1IconItemComponent@@UEAA@XZ
+    virtual ~IconItemComponent();
 
     // vIndex: 1, symbol: ?checkComponentDataForContentErrors@ItemComponent@@UEBA_NXZ
     virtual bool checkComponentDataForContentErrors() const;
@@ -32,11 +26,11 @@ public:
     virtual bool isNetworkComponent() const;
 
     // vIndex: 4, symbol:
-    // ?buildNetworkTag@ChargeableItemComponent@@UEBA?AV?$unique_ptr@VCompoundTag@@U?$default_delete@VCompoundTag@@@std@@@std@@AEBUReflectionCtx@cereal@@@Z
+    // ?buildNetworkTag@?$NetworkedItemComponent@VIconItemComponent@@@@UEBA?AV?$unique_ptr@VCompoundTag@@U?$default_delete@VCompoundTag@@@std@@@std@@AEBUReflectionCtx@cereal@@@Z
     virtual std::unique_ptr<class CompoundTag> buildNetworkTag(struct cereal::ReflectionCtx const&) const;
 
     // vIndex: 5, symbol:
-    // ?initializeFromNetwork@ChargeableItemComponent@@UEAA_NAEBVCompoundTag@@AEBUReflectionCtx@cereal@@@Z
+    // ?initializeFromNetwork@?$NetworkedItemComponent@VIconItemComponent@@@@UEAA_NAEBVCompoundTag@@AEBUReflectionCtx@cereal@@@Z
     virtual bool initializeFromNetwork(class CompoundTag const&, struct cereal::ReflectionCtx const&);
 
     // vIndex: 6, symbol: ?handleVersionBasedInitialization@ItemComponent@@UEAAXAEBVSemVersion@@@Z
@@ -48,12 +42,32 @@ public:
     // vIndex: 8, symbol: ?_useOn@ItemComponent@@MEBA_NAEAVItemStack@@AEAVActor@@AEBVBlockPos@@EAEBVVec3@@@Z
     virtual bool _useOn(class ItemStack&, class Actor&, class BlockPos const&, uchar, class Vec3 const&) const;
 
-    // vIndex: 9, symbol: ?_initializeComponent@ItemComponent@@MEBAXXZ
-    virtual void _initializeComponent() const;
+    // vIndex: 9, symbol: ?_initializeComponent@IconItemComponent@@UEAAXXZ
+    virtual void _initializeComponent();
+
+    // symbol: ??0IconItemComponent@@QEAA@XZ
+    MCAPI IconItemComponent();
+
+    // symbol: ??0IconItemComponent@@QEAA@AEBV0@@Z
+    MCAPI IconItemComponent(class IconItemComponent const&);
+
+    // symbol:
+    // ?getDefaultTexture@IconItemComponent@@QEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+    MCAPI std::string const& getDefaultTexture() const;
+
+    // symbol: ??4IconItemComponent@@QEAAAEAV0@$$QEAV0@@Z
+    MCAPI class IconItemComponent& operator=(class IconItemComponent&&);
+
+    // symbol: ??4IconItemComponent@@QEAAAEAV0@AEBV0@@Z
+    MCAPI class IconItemComponent& operator=(class IconItemComponent const&);
 
     // symbol:
     // ?setTexturePath@IconItemComponent@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
     MCAPI void setTexturePath(std::string const&);
+
+    // symbol:
+    // ?_fromString@IconItemComponent@@SAXAEAV1@AEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+    MCAPI static void _fromString(class IconItemComponent&, std::string&);
 
     // symbol:
     // ?bindType@IconItemComponent@@SAXAEAUReflectionCtx@cereal@@AEBV?$vector@W4AllExperiments@@V?$allocator@W4AllExperiments@@@std@@@std@@V?$optional@VSemVersion@@@5@@Z

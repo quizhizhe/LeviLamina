@@ -11,47 +11,29 @@ namespace mce {
 
 struct Image {
 public:
-    ImageFormat imageFormat{};       // 0x0
-    uint        mWidth{}, mHeight{}; // 0x4, 0x8
-    ImageUsage  mUsage{};            // 0xC
-    Blob        mImageBytes;         // 0x10
+    ImageFormat imageFormat{}; // this+0x0
+    uint        mWidth{};      // this+0x4
+    uint        mHeight{};     // this+0x8
+    uint        mDepth{};      // this+0xC
+    ImageUsage  mUsage{};      // this+0x10
+    Blob        mImageBytes;   // this+0x18
 
-    explicit inline Image(Blob&& data) : mImageBytes(std::move(data)) {}
-
-    Image() = default;
-
-    inline void copyRawImage(Blob const& blob) { mImageBytes = blob.clone(); }
-
-    constexpr void setImageDescription(uint width, uint height, ImageFormat format, ImageUsage usage) {
-        this->mWidth      = width;
-        this->mHeight     = height;
-        this->imageFormat = format;
-        this->mUsage      = usage;
-    }
-
-    inline void setRawImage(Blob&& buffer) { mImageBytes = std::move(buffer); }
-
-    Image(Image const& a1) {
-        imageFormat = a1.imageFormat;
-        mWidth      = a1.mWidth;
-        mHeight     = a1.mHeight;
-        mUsage      = a1.mUsage;
-        mImageBytes = a1.mImageBytes.clone();
-    }
+    [[nodiscard]] constexpr Image()                        = default;
+    LL_CLANG_CEXPR Image& operator=(Image&&) noexcept      = default;
+    [[nodiscard]] constexpr Image(Image&&) noexcept        = default;
+    LL_CLANG_CEXPR Image& operator=(Image const&) noexcept = default;
+    [[nodiscard]] constexpr Image(Image const&) noexcept   = default;
 
 public:
     // NOLINTBEGIN
     // symbol: ??0Image@mce@@QEAA@IIW4ImageFormat@1@W4ImageUsage@1@@Z
-    MCAPI Image(uint, uint, ::mce::ImageFormat, ::mce::ImageUsage);
+    MCAPI Image(uint w, uint h, ::mce::ImageFormat format, ::mce::ImageUsage usage);
 
     // symbol: ?clone@Image@mce@@QEBA?AU12@XZ
     MCAPI struct mce::Image clone() const;
 
     // symbol: ?isEmpty@Image@mce@@QEBA_NXZ
     MCAPI bool isEmpty() const;
-
-    // symbol: ??4Image@mce@@QEAAAEAU01@$$QEAU01@@Z
-    MCAPI struct mce::Image& operator=(struct mce::Image&&);
 
     // symbol: ?resizeImageBytesToFitImageDescription@Image@mce@@QEAAXXZ
     MCAPI void resizeImageBytesToFitImageDescription();

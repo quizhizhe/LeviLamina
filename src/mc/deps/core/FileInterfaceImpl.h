@@ -22,17 +22,17 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1FileInterfaceImpl@Core@@UEAA@XZ
+    virtual ~FileInterfaceImpl() = default;
 
     // vIndex: 1, symbol: ?readExactly@FileInterfaceImpl@Core@@UEAA?AVResult@2@PEAX_K@Z
-    virtual class Core::Result readExactly(void*, uint64);
+    virtual class Core::Result readExactly(void* buffer, uint64 numBytes);
 
     // vIndex: 2, symbol: ?readAtPosition@FileInterfaceImpl@Core@@UEAA?AVResult@2@_KPEAX0PEA_K@Z
-    virtual class Core::Result readAtPosition(uint64, void*, uint64, uint64*);
+    virtual class Core::Result readAtPosition(uint64 position, void* buffer, uint64 numBytes, uint64* pNumBytesRead);
 
     // vIndex: 3, symbol: ?getSize@FileInterfaceImpl@Core@@UEAA?AVResult@2@PEA_K@Z
-    virtual class Core::Result getSize(uint64*);
+    virtual class Core::Result getSize(uint64* pSize);
 
     // NOLINTEND
 };

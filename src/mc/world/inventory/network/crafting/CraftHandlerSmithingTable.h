@@ -17,12 +17,12 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1CraftHandlerSmithingTable@@UEAA@XZ
+    virtual ~CraftHandlerSmithingTable() = default;
 
     // vIndex: 4, symbol:
     // ?_handleCraftAction@CraftHandlerSmithingTable@@EEAA?AW4ItemStackNetResult@@AEBVItemStackRequestActionCraftBase@@@Z
-    virtual ::ItemStackNetResult _handleCraftAction(class ItemStackRequestActionCraftBase const&);
+    virtual ::ItemStackNetResult _handleCraftAction(class ItemStackRequestActionCraftBase const& requestAction);
 
     // vIndex: 6, symbol: ?_getLevelRecipes@CraftHandlerSmithingTable@@EEBAPEBVRecipes@@XZ
     virtual class Recipes const* _getLevelRecipes() const;

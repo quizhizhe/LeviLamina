@@ -14,14 +14,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1WSServerCommand@@UEAA@XZ
+    virtual ~WSServerCommand() = default;
 
     // vIndex: 2, symbol: ?execute@WSServerCommand@@UEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    virtual void execute(class CommandOrigin const&, class CommandOutput&) const;
+    virtual void execute(class CommandOrigin const& origin, class CommandOutput& output) const;
 
     // symbol: ?setup@WSServerCommand@@SAXAEAVCommandRegistry@@@Z
-    MCAPI static void setup(class CommandRegistry&);
+    MCAPI static void setup(class CommandRegistry& registry);
 
     // NOLINTEND
 };

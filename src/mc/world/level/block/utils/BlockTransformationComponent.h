@@ -28,7 +28,7 @@ public:
     public:
         // NOLINTBEGIN
         // symbol: ?rotationTypeFromVec3@RotationType@BlockTransformationComponent@@QEAAXAEBVVec3@@@Z
-        MCAPI void rotationTypeFromVec3(class Vec3 const&);
+        MCAPI void rotationTypeFromVec3(class Vec3 const& arr);
 
         // symbol: ?bindType@RotationType@BlockTransformationComponent@@SAXAEAUReflectionCtx@cereal@@@Z
         MCAPI static void bindType(struct cereal::ReflectionCtx&);
@@ -44,21 +44,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ??0BlockTransformationComponent@@QEAA@$$QEAV0@@Z
-    MCAPI BlockTransformationComponent(class BlockTransformationComponent&&);
-
-    // symbol: ??0BlockTransformationComponent@@QEAA@AEBVVec3@@AEBURotationType@0@0@Z
-    MCAPI
-    BlockTransformationComponent(class Vec3 const&, struct BlockTransformationComponent::RotationType const&, class Vec3 const&);
-
-    // symbol: ?getTransformationMatrix@BlockTransformationComponent@@QEBAAEBVMatrix@@XZ
-    MCAPI class Matrix const& getTransformationMatrix() const;
-
-    // symbol: ?setRotation@BlockTransformationComponent@@QEAAXAEBURotationType@1@@Z
-    MCAPI void setRotation(struct BlockTransformationComponent::RotationType const&);
-
-    // symbol: ?usesNewComponentStorage@BlockTransformationComponent@@SA_NXZ
-    MCAPI static bool usesNewComponentStorage();
+    // vIndex: 0, symbol: __gen_??1BlockTransformationComponent@@UEAA@XZ
+    virtual ~BlockTransformationComponent() = default;
 
     // NOLINTEND
 };

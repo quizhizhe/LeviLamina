@@ -29,24 +29,24 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ??0PositionTrackingDBServer@PositionTrackingDB@@QEAA@AEAVLevel@@AEAVScheduler@@@Z
-    MCAPI PositionTrackingDBServer(class Level&, class Scheduler&);
+    MCAPI PositionTrackingDBServer(class Level& level, class Scheduler& callbackContext);
 
     // symbol:
     // ?createTracker@PositionTrackingDBServer@PositionTrackingDB@@QEAA?AVPositionTrackingId@@AEBVBlockPos@@AEBV?$AutomaticID@VDimension@@H@@@Z
-    MCAPI class PositionTrackingId createTracker(class BlockPos const&, DimensionType const&);
+    MCAPI class PositionTrackingId createTracker(class BlockPos const&, DimensionType const& dimension);
 
     // symbol:
     // ?destroyTracker@PositionTrackingDBServer@PositionTrackingDB@@QEAA?AW4ResultCode@2@AEBVPositionTrackingId@@_N@Z
-    MCAPI ::PositionTrackingDB::ResultCode destroyTracker(class PositionTrackingId const&, bool);
+    MCAPI ::PositionTrackingDB::ResultCode destroyTracker(class PositionTrackingId const& id, bool);
 
     // symbol:
     // ?findTracker@PositionTrackingDBServer@PositionTrackingDB@@QEAA?AW4ResultCode@2@AEBVPositionTrackingId@@PEAPEAVTrackingRecord@2@@Z
     MCAPI ::PositionTrackingDB::ResultCode
-    findTracker(class PositionTrackingId const&, class PositionTrackingDB::TrackingRecord**);
+    findTracker(class PositionTrackingId const& id, class PositionTrackingDB::TrackingRecord**);
 
     // symbol:
     // ?onReceivePacket@PositionTrackingDBServer@PositionTrackingDB@@QEAAXAEBVPositionTrackingDBClientRequestPacket@@@Z
-    MCAPI void onReceivePacket(class PositionTrackingDBClientRequestPacket const&);
+    MCAPI void onReceivePacket(class PositionTrackingDBClientRequestPacket const& packet);
 
     // symbol: ?tick@PositionTrackingDBServer@PositionTrackingDB@@QEAA_NXZ
     MCAPI bool tick();
@@ -59,17 +59,17 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol: ?_addRecordToPendingUpdateQueue@PositionTrackingDBServer@PositionTrackingDB@@AEAAXPEAVTrackingRecord@2@@Z
-    MCAPI void _addRecordToPendingUpdateQueue(class PositionTrackingDB::TrackingRecord*);
+    MCAPI void _addRecordToPendingUpdateQueue(class PositionTrackingDB::TrackingRecord* record);
 
     // symbol: ?_broadcastUpdateToClients@PositionTrackingDBServer@PositionTrackingDB@@AEAAXPEBVTrackingRecord@2@@Z
-    MCAPI void _broadcastUpdateToClients(class PositionTrackingDB::TrackingRecord const*);
+    MCAPI void _broadcastUpdateToClients(class PositionTrackingDB::TrackingRecord const* record);
 
     // symbol:
     // ?_initializeNewPositionTrackerId@PositionTrackingDBServer@PositionTrackingDB@@AEAAXAEAVPositionTrackingId@@_N@Z
     MCAPI void _initializeNewPositionTrackerId(class PositionTrackingId&, bool);
 
     // symbol: ?_updateRecordDirtyStatus@PositionTrackingDBServer@PositionTrackingDB@@AEAAXPEAVTrackingRecord@2@@Z
-    MCAPI void _updateRecordDirtyStatus(class PositionTrackingDB::TrackingRecord*);
+    MCAPI void _updateRecordDirtyStatus(class PositionTrackingDB::TrackingRecord* record);
 
     // NOLINTEND
 };

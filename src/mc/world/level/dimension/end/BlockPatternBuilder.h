@@ -18,24 +18,24 @@ public:
     MCAPI class BlockPatternBuilder& build();
 
     // symbol: ?define@BlockPatternBuilder@@QEAAAEAV1@DAEBVBlock@@@Z
-    MCAPI class BlockPatternBuilder& define(char, class Block const&);
+    MCAPI class BlockPatternBuilder& define(char pattern, class Block const& block);
 
     // symbol:
     // ?define@BlockPatternBuilder@@QEAAAEAV1@DV?$function@$$A6A_NAEAVBlockSource@@AEBVBlockPos@@AEBVBlock@@@Z@std@@@Z
     MCAPI class BlockPatternBuilder&
-    define(char, std::function<bool(class BlockSource&, class BlockPos const&, class Block const&)>);
+    define(char pattern, std::function<bool(class BlockSource&, class BlockPos const&, class Block const&)> tester);
 
     // symbol: ?isReadyForMatch@BlockPatternBuilder@@QEAA_NXZ
     MCAPI bool isReadyForMatch();
 
     // symbol: ?match@BlockPatternBuilder@@QEAA?AUBuildMatch@@AEBVBlockPos@@@Z
-    MCAPI struct BuildMatch match(class BlockPos const&);
+    MCAPI struct BuildMatch match(class BlockPos const& pos);
 
     // symbol: ?match@BlockPatternBuilder@@QEAA?AUBuildMatch@@AEBVBlockPos@@HH@Z
-    MCAPI struct BuildMatch match(class BlockPos const&, int, int);
+    MCAPI struct BuildMatch match(class BlockPos const& pos, int subPattern, int rowIndex);
 
     // symbol: ?match@BlockPatternBuilder@@QEAA?AUBuildMatch@@AEBVBlockPos@@HHEE@Z
-    MCAPI struct BuildMatch match(class BlockPos const&, int, int, uchar, uchar);
+    MCAPI struct BuildMatch match(class BlockPos const& pos, int subPattern, int rowIndex, uchar forward, uchar up);
 
     // symbol:
     // ?replaceBlocks@BlockPatternBuilder@@QEAAXDUBuildMatch@@AEBVBlock@@V?$function@$$A6AXAEBVBlock@@AEBVBlockPos@@@Z@std@@@Z
@@ -44,14 +44,15 @@ public:
 
     // symbol:
     // ?start@BlockPatternBuilder@@SA?AV?$unique_ptr@VBlockPatternBuilder@@U?$default_delete@VBlockPatternBuilder@@@std@@@std@@AEAVBlockSource@@@Z
-    MCAPI static std::unique_ptr<class BlockPatternBuilder> start(class BlockSource&);
+    MCAPI static std::unique_ptr<class BlockPatternBuilder> start(class BlockSource& region);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_fitsBlockPatternEntry@BlockPatternBuilder@@AEAA_NHHAEBVBlockPos@@AEBVBlock@@@Z
-    MCAPI bool _fitsBlockPatternEntry(int, int, class BlockPos const&, class Block const&);
+    MCAPI bool
+    _fitsBlockPatternEntry(int subPattern, int rowIndex, class BlockPos const& pos, class Block const& block);
 
     // NOLINTEND
 };

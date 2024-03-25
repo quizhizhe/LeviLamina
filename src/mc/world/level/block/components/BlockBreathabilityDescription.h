@@ -21,15 +21,12 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1BlockBreathabilityDescription@@UEAA@XZ
+    virtual ~BlockBreathabilityDescription() = default;
 
     // vIndex: 1, symbol:
     // ?getName@BlockBreathabilityDescription@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
     virtual std::string const& getName() const;
-
-    // vIndex: 5, symbol: __unk_vfn_5
-    virtual void __unk_vfn_5();
 
     // vIndex: 7, symbol: ?isNetworkComponent@BlockBreathabilityDescription@@UEBA_NXZ
     virtual bool isNetworkComponent() const;

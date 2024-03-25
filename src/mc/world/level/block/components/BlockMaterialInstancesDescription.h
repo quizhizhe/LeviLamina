@@ -17,13 +17,11 @@ struct BlockMaterialInstancesDescription : public ::BlockComponentDescription {
 public:
     // prevent constructor by default
     BlockMaterialInstancesDescription& operator=(BlockMaterialInstancesDescription const&);
-    BlockMaterialInstancesDescription(BlockMaterialInstancesDescription const&);
-    BlockMaterialInstancesDescription();
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1BlockMaterialInstancesDescription@@UEAA@XZ
+    virtual ~BlockMaterialInstancesDescription();
 
     // vIndex: 1, symbol:
     // ?getName@BlockMaterialInstancesDescription@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
@@ -32,12 +30,9 @@ public:
     // vIndex: 3, symbol: ?initializeComponent@BlockMaterialInstancesDescription@@UEBAXAEAVBlockComponentStorage@@@Z
     virtual void initializeComponent(class BlockComponentStorage&) const;
 
-    // vIndex: 4, symbol:
+    // vIndex: 5, symbol:
     // ?initializeComponentFromCode@BlockMaterialInstancesDescription@@UEBAXAEAVBlockComponentStorage@@@Z
     virtual void initializeComponentFromCode(class BlockComponentStorage&) const;
-
-    // vIndex: 5, symbol: __unk_vfn_5
-    virtual void __unk_vfn_5();
 
     // vIndex: 7, symbol: ?isNetworkComponent@BlockMaterialInstancesDescription@@UEBA_NXZ
     virtual bool isNetworkComponent() const;
@@ -50,12 +45,18 @@ public:
     // ?initializeFromNetwork@BlockMaterialInstancesDescription@@UEAAXAEBVCompoundTag@@AEBUReflectionCtx@cereal@@@Z
     virtual void initializeFromNetwork(class CompoundTag const&, struct cereal::ReflectionCtx const&);
 
-    // symbol: ??1BlockMaterialInstancesDescription@@UEAA@XZ
-    MCVAPI ~BlockMaterialInstancesDescription();
+    // symbol: ??0BlockMaterialInstancesDescription@@QEAA@XZ
+    MCAPI BlockMaterialInstancesDescription();
+
+    // symbol: ??0BlockMaterialInstancesDescription@@QEAA@AEBU0@@Z
+    MCAPI BlockMaterialInstancesDescription(struct BlockMaterialInstancesDescription const&);
 
     // symbol:
     // ??0BlockMaterialInstancesDescription@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@W4BlockRenderLayer@@_N2@Z
-    MCAPI BlockMaterialInstancesDescription(std::string const&, ::BlockRenderLayer, bool, bool);
+    MCAPI BlockMaterialInstancesDescription(std::string const& textureName, ::BlockRenderLayer, bool, bool);
+
+    // symbol: ??4BlockMaterialInstancesDescription@@QEAAAEAU0@$$QEAU0@@Z
+    MCAPI struct BlockMaterialInstancesDescription& operator=(struct BlockMaterialInstancesDescription&&);
 
     // symbol: ?bindType@BlockMaterialInstancesDescription@@SAXAEAUReflectionCtx@cereal@@@Z
     MCAPI static void bindType(struct cereal::ReflectionCtx&);

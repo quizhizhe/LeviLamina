@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SnackGoal@@UEAA@XZ
+    virtual ~SnackGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@SnackGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -35,13 +35,19 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@SnackGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // vIndex: 10, symbol: ?getRandomEatingEnd@SnackGoal@@MEBAHXZ
     virtual int getRandomEatingEnd() const;
 
     // symbol: ??0SnackGoal@@QEAA@AEAVMob@@AEBV?$vector@VItemDescriptor@@V?$allocator@VItemDescriptor@@@std@@@std@@MMM@Z
-    MCAPI SnackGoal(class Mob&, std::vector<class ItemDescriptor> const&, float, float, float);
+    MCAPI SnackGoal(
+        class Mob&                               mob,
+        std::vector<class ItemDescriptor> const& itemList,
+        float                                    cooldown,
+        float                                    min,
+        float                                    stopChance
+    );
 
     // NOLINTEND
 
@@ -51,10 +57,10 @@ public:
     MCAPI bool _hasSnackableItems();
 
     // symbol: ?_isSnackableItem@SnackGoal@@AEBA_NAEBVItemStack@@@Z
-    MCAPI bool _isSnackableItem(class ItemStack const&) const;
+    MCAPI bool _isSnackableItem(class ItemStack const& item) const;
 
     // symbol: ?_updateHand@SnackGoal@@AEAAXAEBVItemStack@@@Z
-    MCAPI void _updateHand(class ItemStack const&);
+    MCAPI void _updateHand(class ItemStack const& item);
 
     // NOLINTEND
 
@@ -86,19 +92,19 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $CHEW_CHANCE() { return CHEW_CHANCE; }
+    static auto& $CHEW_CHANCE() { return CHEW_CHANCE; }
 
-    auto& $EATING_TIME() { return EATING_TIME; }
+    static auto& $EATING_TIME() { return EATING_TIME; }
 
-    auto& $PATH_RANGE() { return PATH_RANGE; }
+    static auto& $PATH_RANGE() { return PATH_RANGE; }
 
-    auto& $RANDOM_EATING_END() { return RANDOM_EATING_END; }
+    static auto& $RANDOM_EATING_END() { return RANDOM_EATING_END; }
 
-    auto& $RANDOM_EATING_START() { return RANDOM_EATING_START; }
+    static auto& $RANDOM_EATING_START() { return RANDOM_EATING_START; }
 
-    auto& $SEARCH_SIZE() { return SEARCH_SIZE; }
+    static auto& $SEARCH_SIZE() { return SEARCH_SIZE; }
 
-    auto& $STOP_DIST_SQRD() { return STOP_DIST_SQRD; }
+    static auto& $STOP_DIST_SQRD() { return STOP_DIST_SQRD; }
 
     // NOLINTEND
 };

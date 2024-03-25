@@ -15,8 +15,11 @@ class Player;
 class Scoreboard;
 class Vec3;
 namespace ScriptModuleMinecraft { class ScriptActor; }
+namespace ScriptModuleMinecraft { class ScriptItemStack; }
+namespace ScriptModuleMinecraft { class ScriptMolangVariableMap; }
 namespace ScriptModuleMinecraft { struct ScriptCamera; }
 namespace ScriptModuleMinecraft { struct ScriptDimensionLocation; }
+namespace ScriptModuleMinecraft { struct ScriptLocationInUnloadedChunkError; }
 namespace ScriptModuleMinecraft { struct ScriptLocationOutOfWorldBoundsError; }
 namespace ScriptModuleMinecraft { struct ScriptMusicOptions; }
 namespace ScriptModuleMinecraft { struct ScriptPlayerSoundOptions; }
@@ -40,8 +43,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScriptPlayer@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptPlayer() = default;
 
     // vIndex: 1, symbol: ?setUnloaded@ScriptPlayer@ScriptModuleMinecraft@@UEAAXAEAVActor@@@Z
     virtual void setUnloaded(class Actor&);
@@ -68,16 +71,19 @@ public:
     MCAPI ScriptPlayer(class ScriptModuleMinecraft::ScriptPlayer&&);
 
     // symbol: ??0ScriptPlayer@ScriptModuleMinecraft@@QEAA@AEBVPlayer@@AEBVWeakLifetimeScope@Scripting@@@Z
-    MCAPI ScriptPlayer(class Player const&, class Scripting::WeakLifetimeScope const&);
+    MCAPI ScriptPlayer(class Player const& player, class Scripting::WeakLifetimeScope const& scope);
 
     // symbol: ?addExperience@ScriptPlayer@ScriptModuleMinecraft@@QEBA?AV?$Result@I$$V@Scripting@@H@Z
-    MCAPI class Scripting::Result<uint> addExperience(int) const;
+    MCAPI class Scripting::Result<uint> addExperience(int amount) const;
 
     // symbol: ?addLevels@ScriptPlayer@ScriptModuleMinecraft@@QEBA?AV?$Result@H$$V@Scripting@@H@Z
-    MCAPI class Scripting::Result<int> addLevels(int) const;
+    MCAPI class Scripting::Result<int> addLevels(int amount) const;
 
     // symbol: ?calculateTotalXp@ScriptPlayer@ScriptModuleMinecraft@@QEBA?AV?$Result@I$$V@Scripting@@XZ
     MCAPI class Scripting::Result<uint> calculateTotalXp() const;
+
+    // symbol: ?eatItem@ScriptPlayer@ScriptModuleMinecraft@@QEAA?AV?$Result@X$$V@Scripting@@AEBVScriptItemStack@2@@Z
+    MCAPI class Scripting::Result<void> eatItem(class ScriptModuleMinecraft::ScriptItemStack const&);
 
     // symbol:
     // ?getCamera@ScriptPlayer@ScriptModuleMinecraft@@QEAA?AV?$Result@V?$StrongTypedObjectHandle@UScriptCamera@ScriptModuleMinecraft@@@Scripting@@$$V@Scripting@@XZ
@@ -86,7 +92,7 @@ public:
 
     // symbol:
     // ?getItemCooldownLeft@ScriptPlayer@ScriptModuleMinecraft@@QEBA?AV?$Result@H$$V@Scripting@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI class Scripting::Result<int> getItemCooldownLeft(std::string const&) const;
+    MCAPI class Scripting::Result<int> getItemCooldownLeft(std::string const& type) const;
 
     // symbol:
     // ?getName@ScriptPlayer@ScriptModuleMinecraft@@QEBA?AV?$Result@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$$V@Scripting@@XZ
@@ -150,7 +156,7 @@ public:
 
     // symbol:
     // ?postClientMessage@ScriptPlayer@ScriptModuleMinecraft@@QEAA?AV?$Result@X$$V@Scripting@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z
-    MCAPI class Scripting::Result<void> postClientMessage(std::string const&, std::string const&);
+    MCAPI class Scripting::Result<void> postClientMessage(std::string const& id, std::string const& value);
 
     // symbol:
     // ?queueMusic@ScriptPlayer@ScriptModuleMinecraft@@QEAA?AV?$Result@X$$V@Scripting@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$optional@UScriptMusicOptions@ScriptModuleMinecraft@@@6@@Z
@@ -162,15 +168,19 @@ public:
 
     // symbol:
     // ?sendMessage@ScriptPlayer@ScriptModuleMinecraft@@QEBA?AV?$Result@X$$V@Scripting@@AEBUContextConfig@4@AEBV?$variant@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@UScriptRawMessageInterface@ScriptModuleMinecraft@@V?$vector@V?$variant@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@UScriptRawMessageInterface@ScriptModuleMinecraft@@@std@@V?$allocator@V?$variant@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@UScriptRawMessageInterface@ScriptModuleMinecraft@@@std@@@2@@2@@std@@@Z
-    MCAPI class Scripting::Result<void>
-    sendMessage(struct Scripting::ContextConfig const&, std::variant<std::string, struct ScriptModuleMinecraft::ScriptRawMessageInterface, std::vector<std::variant<std::string, struct ScriptModuleMinecraft::ScriptRawMessageInterface>>> const&)
-        const;
+    MCAPI class Scripting::Result<void> sendMessage(
+        struct Scripting::ContextConfig const&,
+        std::variant<
+            std::string,
+            struct ScriptModuleMinecraft::ScriptRawMessageInterface,
+            std::vector<std::variant<std::string, struct ScriptModuleMinecraft::ScriptRawMessageInterface>>> const& var
+    ) const;
 
     // symbol: ?setOp@ScriptPlayer@ScriptModuleMinecraft@@QEBA?AV?$Result@X$$V@Scripting@@_N@Z
     MCAPI class Scripting::Result<void> setOp(bool) const;
 
     // symbol: ?setSelectedSlot@ScriptPlayer@ScriptModuleMinecraft@@QEBA?AV?$Result@X$$V@Scripting@@H@Z
-    MCAPI class Scripting::Result<void> setSelectedSlot(int) const;
+    MCAPI class Scripting::Result<void> setSelectedSlot(int slot) const;
 
     // symbol:
     // ?setSpawnPoint@ScriptPlayer@ScriptModuleMinecraft@@QEBA?AV?$Result@XUScriptLocationOutOfWorldBoundsError@ScriptModuleMinecraft@@UError@Scripting@@@Scripting@@AEBV?$optional@UScriptDimensionLocation@ScriptModuleMinecraft@@@std@@@Z
@@ -179,8 +189,17 @@ public:
         setSpawnPoint(std::optional<struct ScriptModuleMinecraft::ScriptDimensionLocation> const&) const;
 
     // symbol:
+    // ?spawnParticle@ScriptPlayer@ScriptModuleMinecraft@@QEAA?AV?$Result@XUError@Scripting@@UScriptLocationInUnloadedChunkError@ScriptModuleMinecraft@@UScriptLocationOutOfWorldBoundsError@4@@Scripting@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVVec3@@V?$optional@V?$StrongTypedObjectHandle@VScriptMolangVariableMap@ScriptModuleMinecraft@@@Scripting@@@6@@Z
+    MCAPI class Scripting::Result<
+        void,
+        struct Scripting::Error,
+        struct ScriptModuleMinecraft::ScriptLocationInUnloadedChunkError,
+        struct ScriptModuleMinecraft::ScriptLocationOutOfWorldBoundsError>
+    spawnParticle(std::string const&, class Vec3 const&, std::optional<class Scripting::StrongTypedObjectHandle<class ScriptModuleMinecraft::ScriptMolangVariableMap>>);
+
+    // symbol:
     // ?startItemCooldown@ScriptPlayer@ScriptModuleMinecraft@@QEAA?AV?$Result@X$$V@Scripting@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z
-    MCAPI class Scripting::Result<void> startItemCooldown(std::string const&, int);
+    MCAPI class Scripting::Result<void> startItemCooldown(std::string const& itemType, int duration);
 
     // symbol: ?stopMusic@ScriptPlayer@ScriptModuleMinecraft@@QEAA?AV?$Result@X$$V@Scripting@@XZ
     MCAPI class Scripting::Result<void> stopMusic();
@@ -195,7 +214,7 @@ public:
     // symbol:
     // ?getHandle@ScriptPlayer@ScriptModuleMinecraft@@SA?AV?$StrongTypedObjectHandle@VScriptPlayer@ScriptModuleMinecraft@@@Scripting@@AEBVPlayer@@AEBVWeakLifetimeScope@4@@Z
     MCAPI static class Scripting::StrongTypedObjectHandle<class ScriptModuleMinecraft::ScriptPlayer>
-    getHandle(class Player const&, class Scripting::WeakLifetimeScope const&);
+    getHandle(class Player const& player, class Scripting::WeakLifetimeScope const& scope);
 
     // NOLINTEND
 

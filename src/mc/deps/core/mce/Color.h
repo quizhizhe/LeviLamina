@@ -8,12 +8,14 @@ namespace mce {
 
 class Color;
 
-class Color : public floatN4<Color> {
+class Color : public ll::math::floatN4<Color> {
 public:
-    constexpr Color(uint hex) noexcept : Color((hex >> 16) & 0xFF, (hex >> 8) & 0xFF, hex & 0xFF) {}
+    [[nodiscard]] constexpr Color() noexcept = default;
+
+    [[nodiscard]] constexpr Color(uint hex) noexcept : Color((hex >> 16) & 0xFF, (hex >> 8) & 0xFF, hex & 0xFF) {}
 
     template <std::integral T0, std::integral T1, std::integral T2, std::integral T3 = uint>
-    constexpr Color(T0 const& ir, T1 const& ig, T2 const& ib, T3 const& ia = 255) noexcept
+    [[nodiscard]] constexpr Color(T0 const& ir, T1 const& ig, T2 const& ib, T3 const& ia = 255) noexcept
     : floatN4(
         static_cast<float>(ir) / 255.0f,
         static_cast<float>(ig) / 255.0f,
@@ -21,15 +23,18 @@ public:
         static_cast<float>(ia) / 255.0f
     ) {}
     template <std::floating_point T0, std::floating_point T1, std::floating_point T2, std::floating_point T3 = double>
-    constexpr Color(T0 const& r, T1 const& g, T2 const& b, T3 const& a = 1) noexcept : floatN4(r, g, b, a) {}
+    [[nodiscard]] constexpr Color(T0 const& r, T1 const& g, T2 const& b, T3 const& a = 1) noexcept
+    : floatN4(r, g, b, a) {}
 
-    template <IsFloatN V, std::floating_point A = double>
-    constexpr Color(V const& v, A const& a = 1) noexcept // NOLINT
+    template <ll::math::IsFloatN V, std::floating_point A = double>
+    [[nodiscard]] constexpr Color(V const& v, A const& a = 1) noexcept // NOLINT
         requires(V::size() == 3)
     : floatN4(v.r, v.g, v.b, a) {}
 
-    constexpr Color(std::string_view hex) noexcept : floatN4(0, 0, 0, 1) { // NOLINT
-        if (hex[0] == '#') { hex = hex.substr(1); }
+    [[nodiscard]] constexpr Color(std::string_view hex) noexcept : floatN4(0, 0, 0, 1) { // NOLINT
+        if (hex[0] == '#') {
+            hex = hex.substr(1);
+        }
 
         switch (hex.length()) {
         case 4:
@@ -55,21 +60,22 @@ public:
 
     [[nodiscard]] constexpr class mce::Color sRGBToLinear() const noexcept {
         auto color{toVec3()};
-        return {select(color.gt(0.04045f), ::pow(color / 1.055f + 0.055f, {2.4f}), color / 12.92f), a};
+        return {select(color.gt(0.04045f), pow(color / 1.055f + 0.055f, {2.4f}), color / 12.92f), a};
     }
 
-    [[nodiscard]] constexpr class mce::Color LinearTosRGB() const noexcept {
+    [[nodiscard]] constexpr class mce::Color linearTosRGB() const noexcept {
         auto color{toVec3()};
-        return {select(color.gt(0.0031308f), ::pow(color, {1.0f / 2.4f}) * 1.055f - 0.055f, color * 12.92f), a};
+        return {select(color.gt(0.0031308f), pow(color, {1.0f / 2.4f}) * 1.055f - 0.055f, color * 12.92f), a};
     }
 
-    [[nodiscard]] constexpr class mce::Color LinearToXYZ() const noexcept {
+    [[nodiscard]] constexpr class mce::Color linearToXYZ() const noexcept {
         auto color{toVec3()};
         return {
             color.dot({0.4124f, 0.3576f, 0.1805f}),
             color.dot({0.2126f, 0.7152f, 0.0722f}),
             color.dot({0.0193f, 0.1192f, 0.9505f}),
-            a};
+            a
+        };
     }
 
     [[nodiscard]] constexpr class mce::Color XYZToLinear() const noexcept {
@@ -78,7 +84,49 @@ public:
             color.dot({3.2410f, -1.5374f, -0.4986f}),
             color.dot({-0.9692f, 1.8760f, 0.0416f}),
             color.dot({0.0556f, -0.2040f, 1.0570f}),
-            a};
+            a
+        };
+    }
+
+    [[nodiscard]] constexpr class mce::Color linearToLMS() const noexcept {
+        auto color{toVec3()};
+        return {
+            color.dot({0.4122214708f, 0.5363325363f, 0.0514459929f}),
+            color.dot({0.2119034982f, 0.6806995451f, 0.1073969566f}),
+            color.dot({0.0883024619f, 0.2817188376f, 0.6299787005f}),
+            a
+        };
+    }
+
+    [[nodiscard]] constexpr class mce::Color LMSToLinear() const noexcept {
+        auto color{toVec3()};
+        return {
+            color.dot({+4.0767416621f, -3.3077115913f, +0.2309699292f}),
+            color.dot({-1.2684380046f, +2.6097574011f, -0.3413193965f}),
+            color.dot({-0.0041960863f, -0.7034186147f, +1.7076147010f}),
+            a
+        };
+    }
+
+    [[nodiscard]] constexpr class mce::Color LMSToOklab() const noexcept {
+        auto color{pow(toVec3(), {1.0f / 3.0f})};
+        return {
+            color.dot({0.2104542553f, +0.7936177850f, -0.0040720468f}),
+            color.dot({1.9779984951f, -2.4285922050f, +0.4505937099f}),
+            color.dot({0.0259040371f, +0.7827717662f, -0.8086757660f}),
+            a
+        };
+    }
+
+    [[nodiscard]] constexpr class mce::Color OklabToLMS() const noexcept {
+        auto color{toVec3()};
+        return {
+            pow({color.dot({1.0f, +0.3963377774f, +0.2158037573f}),
+                 color.dot({1.0f, -0.1055613458f, -0.0638541728f}),
+                 color.dot({1.0f, -0.0894841775f, -1.2914855480f})},
+                Vec3{3}),
+            a
+        };
     }
 
     [[nodiscard]] constexpr class mce::Color XYZToLab() const noexcept {
@@ -88,7 +136,7 @@ public:
         constexpr float delta2 = delta * delta;
         constexpr float delta3 = delta2 * delta;
 
-        color = select(color.gt(delta3), ::pow(color, {1.0f / 3.0f}), color / (3.0f * delta2) + 4.0f / 29.0f);
+        color = select(color.gt(delta3), pow(color, {1.0f / 3.0f}), color / (3.0f * delta2) + 4.0f / 29.0f);
         return {116.0f * color.y - 16.0f, 500.0f * (color.x - color.y), 200.0f * (color.y - color.z), a};
     }
 
@@ -99,7 +147,7 @@ public:
         constexpr float delta  = 6.0f / 29.0f;
         constexpr float delta2 = delta * delta;
 
-        color = select(color.gt(delta), ::pow(color, {3.0f}), (color - 4.0f / 29.0f) * (3.0f * delta2));
+        color = select(color.gt(delta), pow(color, {3.0f}), (color - 4.0f / 29.0f) * (3.0f * delta2));
         return {
             color * Vec3{0.950489f, 1.0f, 1.08884f},
             a
@@ -107,15 +155,15 @@ public:
     }
 
     [[nodiscard]] constexpr double deltaE76(Color const& dst) const noexcept { // 2.3 for JND
-        return this->sRGBToLinear().LinearToXYZ().XYZToLab().toVec3().distanceTo(
-            dst.sRGBToLinear().LinearToXYZ().XYZToLab().toVec3()
+        return this->sRGBToLinear().linearToXYZ().XYZToLab().toVec3().distanceTo(
+            dst.sRGBToLinear().linearToXYZ().XYZToLab().toVec3()
         );
     }
 
     [[nodiscard]] inline double deltaE94(Color const& dst) const noexcept { // 1.0 for JND
-        auto m1 = this->sRGBToLinear().LinearToXYZ().XYZToLab().toVec3();
+        auto m1 = this->sRGBToLinear().linearToXYZ().XYZToLab().toVec3();
         Vec2 ab1{m1.y, m1.z};
-        auto m2 = dst.sRGBToLinear().LinearToXYZ().XYZToLab().toVec3();
+        auto m2 = dst.sRGBToLinear().linearToXYZ().XYZToLab().toVec3();
         Vec2 ab2{m2.y, m2.z};
         auto C1 = ab1.length();
         auto C2 = ab2.length();
@@ -125,8 +173,8 @@ public:
     }
 
     [[nodiscard]] inline double deltaE00(Color const& dst) const noexcept { // 1.0 for JND
-        auto ma = this->sRGBToLinear().LinearToXYZ().XYZToLab().toVec3();
-        auto mb = dst.sRGBToLinear().LinearToXYZ().XYZToLab().toVec3();
+        auto ma = this->sRGBToLinear().linearToXYZ().XYZToLab().toVec3();
+        auto mb = dst.sRGBToLinear().linearToXYZ().XYZToLab().toVec3();
 
         // https://doi.org/10.1002/col.20070
         // The CIEDE2000 color-difference formula: Implementation notes,
@@ -206,17 +254,23 @@ public:
     [[nodiscard]] inline double distanceTo(Color const& dst) const noexcept { return deltaE00(dst); }
 
 private:
-    constexpr uchar static hexToNum(char hex) noexcept {
-        if ('A' <= hex && hex <= 'F') { return 10 + (hex - 'A'); }
-        if ('a' <= hex && hex <= 'f') { return 10 + (hex - 'a'); }
-        if ('0' <= hex && hex <= '9') { return (hex - '0'); }
+    [[nodiscard]] constexpr uchar static hexToNum(char hex) noexcept {
+        if ('A' <= hex && hex <= 'F') {
+            return 10 + (hex - 'A');
+        }
+        if ('a' <= hex && hex <= 'f') {
+            return 10 + (hex - 'a');
+        }
+        if ('0' <= hex && hex <= '9') {
+            return (hex - '0');
+        }
         return 0;
     }
 
 public:
     // NOLINTBEGIN
     // symbol: ??8Color@mce@@QEBA_NAEBV01@@Z
-    MCAPI bool operator==(class mce::Color const&) const;
+    MCAPI bool operator==(class mce::Color const& c) const;
 
     // symbol: ?toABGR@Color@mce@@QEBAHXZ
     MCAPI int toABGR() const;
@@ -226,6 +280,9 @@ public:
 
     // symbol: ?toHexString@Color@mce@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
     MCAPI std::string toHexString() const;
+
+    // symbol: ?fromARGB@Color@mce@@SA?AV12@H@Z
+    MCAPI static class mce::Color fromARGB(int);
 
     // symbol: ?fromHexString@Color@mce@@SA?AV12@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
     MCAPI static class mce::Color fromHexString(std::string const&);

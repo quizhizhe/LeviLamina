@@ -20,8 +20,11 @@ public:
 
 public:
     // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1CreativeItemEntry@@UEAA@XZ
+    virtual ~CreativeItemEntry() = default;
+
     // symbol: ??0CreativeItemEntry@@QEAA@$$QEAV0@@Z
-    MCAPI CreativeItemEntry(class CreativeItemEntry&&);
+    MCAPI CreativeItemEntry(class CreativeItemEntry&& rhs);
 
     // symbol: ?getCreativeNetId@CreativeItemEntry@@QEBAAEBV?$TypedServerNetId@UCreativeItemNetIdTag@@I$0A@@@XZ
     MCAPI CreativeItemNetId const& getCreativeNetId() const;

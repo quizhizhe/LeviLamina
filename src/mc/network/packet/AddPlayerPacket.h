@@ -39,7 +39,7 @@ public:
     BuildPlatform                          mBuildPlatform;
     GameType                               mPlayerGameType;
     NetworkItemStackDescriptor             mCarriedItem;
-    const SynchedActorDataEntityWrapper*   mEntityData;
+    SynchedActorDataEntityWrapper const*   mEntityData;
     PropertySyncData                       mSynchedProperties;
 
     // prevent constructor by default
@@ -48,8 +48,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1AddPlayerPacket@@UEAA@XZ
+    virtual ~AddPlayerPacket();
 
     // vIndex: 1, symbol: ?getId@AddPlayerPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -59,30 +59,17 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@AddPlayerPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
-
-    // vIndex: 4, symbol:
-    // ?read@AvailableActorIdentifiersPacket@@UEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> read(class ReadOnlyBinaryStream&);
-
-    // vIndex: 5, symbol: ?disallowBatching@Packet@@UEBA_NXZ
-    virtual bool disallowBatching() const;
-
-    // vIndex: 6, symbol: ?isValid@Packet@@UEBA_NXZ
-    virtual bool isValid() const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
-    // ?_read@AddPlayerPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1AddPlayerPacket@@UEAA@XZ
-    MCVAPI ~AddPlayerPacket();
+    // ?_read@AddPlayerPacket@@MEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0AddPlayerPacket@@QEAA@XZ
     MCAPI AddPlayerPacket();
 
     // symbol: ??0AddPlayerPacket@@QEAA@AEAVPlayer@@@Z
-    MCAPI explicit AddPlayerPacket(class Player&);
+    MCAPI explicit AddPlayerPacket(class Player& p);
 
     // NOLINTEND
 };

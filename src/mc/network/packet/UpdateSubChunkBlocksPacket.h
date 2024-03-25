@@ -54,7 +54,12 @@ public:
 
         // symbol:
         // ?add@BlocksChangedInfo@UpdateSubChunkBlocksPacket@@QEAAXAEBVBlockPos@@IAEBVBlock@@HPEBUActorBlockSyncMessage@@@Z
-        MCAPI void add(class BlockPos const&, uint, class Block const&, int, struct ActorBlockSyncMessage const*);
+        MCAPI void
+        add(class BlockPos const&               pos,
+            uint                                layer,
+            class Block const&                  block,
+            int                                 updateFlags,
+            struct ActorBlockSyncMessage const* syncMsg);
 
         // symbol: ??1BlocksChangedInfo@UpdateSubChunkBlocksPacket@@QEAA@XZ
         MCAPI ~BlocksChangedInfo();
@@ -72,8 +77,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1UpdateSubChunkBlocksPacket@@UEAA@XZ
+    virtual ~UpdateSubChunkBlocksPacket();
 
     // vIndex: 1, symbol: ?getId@UpdateSubChunkBlocksPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -83,14 +88,11 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@UpdateSubChunkBlocksPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@UpdateSubChunkBlocksPacket@@MEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1UpdateSubChunkBlocksPacket@@UEAA@XZ
-    MCVAPI ~UpdateSubChunkBlocksPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0UpdateSubChunkBlocksPacket@@QEAA@XZ
     MCAPI UpdateSubChunkBlocksPacket();
@@ -101,7 +103,7 @@ public:
     UpdateSubChunkBlocksPacket(std::vector<struct UpdateSubChunkBlocksPacket::NetworkBlockInfo> const&, std::vector<struct UpdateSubChunkBlocksPacket::NetworkBlockInfo> const&);
 
     // symbol: ?setSubChunkPosition@UpdateSubChunkBlocksPacket@@QEAAXAEBVSubChunkPos@@@Z
-    MCAPI void setSubChunkPosition(class SubChunkPos const&);
+    MCAPI void setSubChunkPosition(class SubChunkPos const& subChunkPos);
 
     // NOLINTEND
 };

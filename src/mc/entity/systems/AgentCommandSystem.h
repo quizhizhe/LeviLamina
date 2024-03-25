@@ -19,26 +19,32 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1AgentCommandSystem@@UEAA@XZ
+    virtual ~AgentCommandSystem() = default;
 
-    // vIndex: 1, symbol: __unk_vfn_1
-    virtual void __unk_vfn_1();
+    // vIndex: 1, symbol: ?registerEvents@ISystem@@UEAAXAEAV?$basic_dispatcher@V?$allocator@X@std@@@entt@@@Z
+    virtual void registerEvents(entt::dispatcher&);
 
     // vIndex: 2, symbol: ?tick@AgentCommandSystem@@UEAAXAEAVEntityRegistry@@@Z
-    virtual void tick(class EntityRegistry&);
+    virtual void tick(class EntityRegistry& registry);
+
+    // vIndex: 3, symbol: ?singleTick@ITickingSystem@@UEAAXAEAVEntityRegistry@@AEAVEntityContext@@@Z
+    virtual void singleTick(class EntityRegistry& registry, class EntityContext& entity);
+
+    // vIndex: 4, symbol: ?singleTick@ITickingSystem@@UEAAXAEAVEntityRegistry@@AEAVStrictEntityContext@@@Z
+    virtual void singleTick(class EntityRegistry& registry, class StrictEntityContext& entity);
 
     // symbol: ?cleanUp@AgentCommandSystem@@SAXAEAVEntityContext@@M@Z
-    MCAPI static void cleanUp(class EntityContext&, float);
+    MCAPI static void cleanUp(class EntityContext& agent, float);
 
     // symbol: ?initialize@AgentCommandSystem@@SAXAEAVEntityContext@@@Z
-    MCAPI static void initialize(class EntityContext&);
+    MCAPI static void initialize(class EntityContext& entity);
 
     // symbol: ?tickAgentCooldown@AgentCommandSystem@@SAXAEAVEntityContext@@AEAVCommandCooldown@AgentComponents@@@Z
-    MCAPI static void tickAgentCooldown(class EntityContext&, class AgentComponents::CommandCooldown&);
+    MCAPI static void tickAgentCooldown(class EntityContext& entity, class AgentComponents::CommandCooldown&);
 
     // symbol: ?tickLegacy@AgentCommandSystem@@SAXAEAVEntityContext@@AEAVAgentCommandComponent@@@Z
-    MCAPI static void tickLegacy(class EntityContext&, class AgentCommandComponent&);
+    MCAPI static void tickLegacy(class EntityContext& entity, class AgentCommandComponent&);
 
     // NOLINTEND
 };

@@ -13,11 +13,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1CommandDispatcher@@UEAA@XZ
+    virtual ~CommandDispatcher() = default;
 
     // vIndex: 1, symbol: ?performCommand@CommandDispatcher@@UEAAHAEBVCommandOrigin@@AEAVCommand@@@Z
-    virtual int performCommand(class CommandOrigin const&, class Command&);
+    virtual int performCommand(class CommandOrigin const& origin, class Command& command);
 
     // symbol: ??0CommandDispatcher@@QEAA@XZ
     MCAPI CommandDispatcher();

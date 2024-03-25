@@ -3,6 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
+#include "mc/common/wrapper/WeakRef.h"
 #include "mc/enums/TickingAreaLoadMode.h"
 
 // auto generated forward declare list
@@ -19,8 +20,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1ITickingArea@@UEAA@XZ
+    virtual ~ITickingArea();
 
     // vIndex: 1, symbol: ?getId@TickingArea@@UEBAAEBVUUID@mce@@XZ
     virtual class mce::UUID const& getId() const = 0;
@@ -34,11 +35,11 @@ public:
     // vIndex: 4, symbol: ?isEntityOwned@TickingArea@@UEBA_NXZ
     virtual bool isEntityOwned() const = 0;
 
-    // vIndex: 5, symbol: __unk_vfn_5
-    virtual void __unk_vfn_5() = 0;
+    // vIndex: 5, symbol: ?getBlockSource@TickingArea@@UEBA?BV?$WeakRef@VBlockSource@@@@XZ
+    virtual class WeakRef<class BlockSource> const getBlockSource() const = 0;
 
-    // vIndex: 6, symbol: __unk_vfn_6
-    virtual void __unk_vfn_6() = 0;
+    // vIndex: 6, symbol: ?getBlockSource@TickingArea@@UEAA?AV?$WeakRef@VBlockSource@@@@XZ
+    virtual class WeakRef<class BlockSource> getBlockSource() = 0;
 
     // vIndex: 7, symbol: ?getBounds@TickingArea@@UEBAAEBUBounds@@XZ
     virtual struct Bounds const& getBounds() const = 0;
@@ -49,11 +50,11 @@ public:
     // vIndex: 9, symbol: ?getMaxDistToPlayers@TickingArea@@UEBAMXZ
     virtual float getMaxDistToPlayers() const = 0;
 
-    // vIndex: 10, symbol: __unk_vfn_10
-    virtual void __unk_vfn_10() = 0;
+    // vIndex: 10, symbol: ?getView@TickingArea@@UEBAAEBVITickingAreaView@@XZ
+    virtual class ITickingAreaView const& getView() const = 0;
 
-    // vIndex: 11, symbol: __unk_vfn_11
-    virtual void __unk_vfn_11() = 0;
+    // vIndex: 11, symbol: ?getView@TickingArea@@UEAAAEAVITickingAreaView@@XZ
+    virtual class ITickingAreaView& getView() = 0;
 
     // vIndex: 12, symbol: ?getDescription@TickingArea@@UEBA?AUTickingAreaDescription@@XZ
     virtual struct TickingAreaDescription getDescription() const = 0;
@@ -62,25 +63,25 @@ public:
     virtual ::TickingAreaLoadMode getLoadMode() const = 0;
 
     // vIndex: 14, symbol: ?setLoadMode@TickingArea@@UEAAXW4TickingAreaLoadMode@@AEAVLevelStorage@@@Z
-    virtual void setLoadMode(::TickingAreaLoadMode, class LevelStorage&) = 0;
+    virtual void setLoadMode(::TickingAreaLoadMode loadMode, class LevelStorage& levelStorage) = 0;
 
     // vIndex: 15, symbol: ?isPreloadDone@TickingArea@@UEBA_NXZ
     virtual bool isPreloadDone() const = 0;
 
     // vIndex: 16, symbol: ?tick@TickingArea@@UEAAXAEBUTick@@_N@Z
-    virtual void tick(struct Tick const&, bool) = 0;
+    virtual void tick(struct Tick const& currentTick, bool randomize) = 0;
 
     // vIndex: 17, symbol: ?tickSeasons@TickingArea@@UEAAXAEAVRandom@@@Z
-    virtual void tickSeasons(class Random&) = 0;
+    virtual void tickSeasons(class Random& random) = 0;
 
     // vIndex: 18, symbol: ?updatePosition@TickingArea@@UEAAXAEBVVec3@@@Z
-    virtual void updatePosition(class Vec3 const&) = 0;
+    virtual void updatePosition(class Vec3 const& pos) = 0;
 
     // vIndex: 19, symbol: ?updateAndCenter@TickingArea@@UEAAXAEAVLevelStorage@@UTick@@@Z
-    virtual void updateAndCenter(class LevelStorage&, struct Tick) = 0;
+    virtual void updateAndCenter(class LevelStorage& levelStorage, struct Tick) = 0;
 
     // vIndex: 20, symbol: ?findOwner@TickingArea@@UEAAPEAVActor@@AEAE@Z
-    virtual class Actor* findOwner(uchar&) = 0;
+    virtual class Actor* findOwner(uchar& pendingChunks) = 0;
 
     // vIndex: 21, symbol: ?entityHasBeenFound@TickingArea@@UEBA_NXZ
     virtual bool entityHasBeenFound() const = 0;
@@ -92,16 +93,14 @@ public:
     virtual bool isRemoved() = 0;
 
     // vIndex: 24, symbol: ?remove@TickingArea@@UEAAXAEAVLevelStorage@@@Z
-    virtual void remove(class LevelStorage&) = 0;
+    virtual void remove(class LevelStorage& levelStorage) = 0;
 
     // vIndex: 25, symbol: ?onComponentChanged@TickingArea@@UEAAXIM_NAEAVLevelStorage@@@Z
-    virtual void onComponentChanged(uint, float, bool, class LevelStorage&) = 0;
+    virtual void
+    onComponentChanged(uint radius, float maxDistToPlayers, bool alwaysActive, class LevelStorage& levelStorage) = 0;
 
     // vIndex: 26, symbol: ?updateBlockSourceCurrentTick@TickingArea@@UEAAXAEBUTick@@@Z
-    virtual void updateBlockSourceCurrentTick(struct Tick const&) = 0;
-
-    // symbol: ??1ITickingArea@@UEAA@XZ
-    MCVAPI ~ITickingArea();
+    virtual void updateBlockSourceCurrentTick(struct Tick const& currentTick) = 0;
 
     // symbol: ?serialize@ITickingArea@@QEBA?AVCompoundTag@@XZ
     MCAPI class CompoundTag serialize() const;

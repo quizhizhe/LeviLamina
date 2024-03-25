@@ -44,7 +44,7 @@ public:
     // symbol:
     // ?makeCalculatorId@LodestoneCompassComponent@@SA?AV?$variant@UActorUniqueID@@U?$pair@VBlockPos@@V?$AutomaticID@VDimension@@H@@@std@@@std@@AEBUActorUniqueID@@@Z
     MCAPI static std::variant<struct ActorUniqueID, std::pair<class BlockPos, DimensionType>>
-    makeCalculatorId(struct ActorUniqueID const&);
+    makeCalculatorId(struct ActorUniqueID const& id);
 
     // NOLINTEND
 
@@ -67,7 +67,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mSpinningLodestone() { return mSpinningLodestone; }
+    static auto& $mSpinningLodestone() { return mSpinningLodestone; }
 
     // NOLINTEND
 };

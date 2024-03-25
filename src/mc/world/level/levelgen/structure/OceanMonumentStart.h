@@ -14,14 +14,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1OceanMonumentStart@@UEAA@XZ
+    virtual ~OceanMonumentStart() = default;
 
     // vIndex: 1, symbol: ?postProcess@OceanMonumentStart@@UEAA_NAEAVBlockSource@@AEAVRandom@@AEBVBoundingBox@@@Z
-    virtual bool postProcess(class BlockSource&, class Random&, class BoundingBox const&);
+    virtual bool postProcess(class BlockSource& region, class Random& random, class BoundingBox const& chunkBB);
 
     // symbol: ?createMonument@OceanMonumentStart@@QEAAXAEAVDimension@@AEAVRandom@@HH@Z
-    MCAPI void createMonument(class Dimension&, class Random&, int, int);
+    MCAPI void createMonument(class Dimension& dim, class Random& random, int x, int z);
 
     // NOLINTEND
 };

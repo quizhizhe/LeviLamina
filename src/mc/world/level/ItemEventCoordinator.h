@@ -15,6 +15,9 @@ public:
 
 public:
     // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1ItemEventCoordinator@@UEAA@XZ
+    virtual ~ItemEventCoordinator() = default;
+
     // symbol: ??0ItemEventCoordinator@@QEAA@XZ
     MCAPI ItemEventCoordinator();
 
@@ -22,18 +25,18 @@ public:
     MCAPI class ItemGameplayHandler& getItemGameplayHandler();
 
     // symbol: ?onItemModifiedActor@ItemEventCoordinator@@QEAAXAEBVItemStackBase@@AEBVActor@@@Z
-    MCAPI void onItemModifiedActor(class ItemStackBase const&, class Actor const&);
+    MCAPI void onItemModifiedActor(class ItemStackBase const& item, class Actor const& modifiedActor);
 
     // symbol: ?onItemSpawnedActor@ItemEventCoordinator@@QEAAXAEBVItemStackBase@@AEBVActor@@@Z
-    MCAPI void onItemSpawnedActor(class ItemStackBase const&, class Actor const&);
+    MCAPI void onItemSpawnedActor(class ItemStackBase const& item, class Actor const& spawnedActor);
 
     // symbol:
     // ?registerItemGameplayHandler@ItemEventCoordinator@@QEAAXV?$unique_ptr@VItemGameplayHandler@@U?$default_delete@VItemGameplayHandler@@@std@@@std@@@Z
-    MCAPI void registerItemGameplayHandler(std::unique_ptr<class ItemGameplayHandler>);
+    MCAPI void registerItemGameplayHandler(std::unique_ptr<class ItemGameplayHandler> handler);
 
     // symbol:
     // ?sendEvent@ItemEventCoordinator@@QEAA?AW4CoordinatorResult@@V?$EventRef@U?$MutableItemGameplayEvent@W4CoordinatorResult@@@@@@@Z
-    MCAPI ::CoordinatorResult sendEvent(class EventRef<struct MutableItemGameplayEvent<::CoordinatorResult>>);
+    MCAPI ::CoordinatorResult sendEvent(class EventRef<struct MutableItemGameplayEvent<::CoordinatorResult>> event);
 
     // NOLINTEND
 };

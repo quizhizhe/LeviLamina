@@ -13,14 +13,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScriptCanClimbComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptCanClimbComponent() = default;
 
-    // vIndex: 1, symbol: ?_isValid@ScriptItemComponent@ScriptModuleMinecraft@@MEBA_NXZ
+    // vIndex: 1, symbol: ?_isValid@ScriptActorComponent@ScriptModuleMinecraft@@MEBA_NXZ
     virtual bool _isValid() const;
-
-    // symbol: ??1ScriptCanClimbComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptCanClimbComponent();
 
     // symbol:
     // ?sClassName@ScriptCanClimbComponent@ScriptModuleMinecraft@@2V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@B

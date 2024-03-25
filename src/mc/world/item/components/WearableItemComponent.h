@@ -3,8 +3,9 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
+#include "mc/deps/puv/EquipmentSlot.h"
+#include "mc/entity/utilities/ActorLocation.h"
 #include "mc/enums/AllExperiments.h"
-#include "mc/enums/EquipmentSlot.h"
 
 // auto generated forward declare list
 // clang-format off
@@ -20,8 +21,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1WearableItemComponent@@UEAA@XZ
+    virtual ~WearableItemComponent() = default;
 
     // vIndex: 1, symbol: ?checkComponentDataForContentErrors@ItemComponent@@UEBA_NXZ
     virtual bool checkComponentDataForContentErrors() const;
@@ -33,11 +34,11 @@ public:
     virtual bool isNetworkComponent() const;
 
     // vIndex: 4, symbol:
-    // ?buildNetworkTag@ChargeableItemComponent@@UEBA?AV?$unique_ptr@VCompoundTag@@U?$default_delete@VCompoundTag@@@std@@@std@@AEBUReflectionCtx@cereal@@@Z
+    // ?buildNetworkTag@?$NetworkedItemComponent@VWearableItemComponent@@@@UEBA?AV?$unique_ptr@VCompoundTag@@U?$default_delete@VCompoundTag@@@std@@@std@@AEBUReflectionCtx@cereal@@@Z
     virtual std::unique_ptr<class CompoundTag> buildNetworkTag(struct cereal::ReflectionCtx const&) const;
 
     // vIndex: 5, symbol:
-    // ?initializeFromNetwork@ChargeableItemComponent@@UEAA_NAEBVCompoundTag@@AEBUReflectionCtx@cereal@@@Z
+    // ?initializeFromNetwork@?$NetworkedItemComponent@VWearableItemComponent@@@@UEAA_NAEBVCompoundTag@@AEBUReflectionCtx@cereal@@@Z
     virtual bool initializeFromNetwork(class CompoundTag const&, struct cereal::ReflectionCtx const&);
 
     // vIndex: 6, symbol: ?handleVersionBasedInitialization@ItemComponent@@UEAAXAEBVSemVersion@@@Z
@@ -49,17 +50,32 @@ public:
     // vIndex: 8, symbol: ?_useOn@ItemComponent@@MEBA_NAEAVItemStack@@AEAVActor@@AEBVBlockPos@@EAEBVVec3@@@Z
     virtual bool _useOn(class ItemStack&, class Actor&, class BlockPos const&, uchar, class Vec3 const&) const;
 
-    // vIndex: 9, symbol: ?_initializeComponent@WearableItemComponent@@UEBAXXZ
-    virtual void _initializeComponent() const;
+    // vIndex: 9, symbol: ?_initializeComponent@WearableItemComponent@@UEAAXXZ
+    virtual void _initializeComponent();
 
-    // symbol: ??0WearableItemComponent@@QEAA@W4EquipmentSlot@@H@Z
-    MCAPI WearableItemComponent(::EquipmentSlot, int);
+    // symbol: ??0WearableItemComponent@@QEAA@W4EquipmentSlot@Legacy@Puv@@H@Z
+    MCAPI WearableItemComponent(::Puv::Legacy::EquipmentSlot, int);
 
     // symbol: ?dispense@WearableItemComponent@@QEBA_NAEAVBlockSource@@AEAVContainer@@HAEBVVec3@@E@Z
     MCAPI bool dispense(class BlockSource&, class Container&, int, class Vec3 const&, uchar) const;
 
-    // symbol: ?getSlot@WearableItemComponent@@QEBA?AW4EquipmentSlot@@XZ
-    MCAPI ::EquipmentSlot getSlot() const;
+    // symbol: ?getArmorValue@WearableItemComponent@@QEBAHXZ
+    MCAPI int getArmorValue() const;
+
+    // symbol: ?getEquipLocation@WearableItemComponent@@QEBA?AW4ActorLocation@@XZ
+    MCAPI ::ActorLocation getEquipLocation() const;
+
+    // symbol: ?getSlot@WearableItemComponent@@QEBA?AW4EquipmentSlot@Legacy@Puv@@XZ
+    MCAPI ::Puv::Legacy::EquipmentSlot getSlot() const;
+
+    // symbol: ?isArmor@WearableItemComponent@@QEBA_NXZ
+    MCAPI bool isArmor() const;
+
+    // symbol: ?shouldAllowStacking@WearableItemComponent@@QEBA_NXZ
+    MCAPI bool shouldAllowStacking() const;
+
+    // symbol: ?use@WearableItemComponent@@QEBA_NAEAVItemStack@@AEAVPlayer@@@Z
+    MCAPI bool use(class ItemStack& instance, class Player& player) const;
 
     // symbol:
     // ?bindType@WearableItemComponent@@SAXAEAUReflectionCtx@cereal@@AEBV?$vector@W4AllExperiments@@V?$allocator@W4AllExperiments@@@std@@@std@@V?$optional@VSemVersion@@@5@@Z
@@ -68,6 +84,9 @@ public:
 
     // symbol: ?getIdentifier@WearableItemComponent@@SAAEBVHashedString@@XZ
     MCAPI static class HashedString const& getIdentifier();
+
+    // symbol: ?registerVersionUpgrades@WearableItemComponent@@SAXAEAVCerealSchemaUpgradeSet@@@Z
+    MCAPI static void registerVersionUpgrades(class CerealSchemaUpgradeSet&);
 
     // NOLINTEND
 };

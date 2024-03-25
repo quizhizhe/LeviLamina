@@ -41,10 +41,10 @@ public:
     MCAPI class BlockPos const& currentPos() const;
 
     // symbol: ?currentPos@Path@@QEBA?AVVec3@@PEBVActor@@@Z
-    MCAPI class Vec3 currentPos(class Actor const*) const;
+    MCAPI class Vec3 currentPos(class Actor const* actor) const;
 
     // symbol: ?endsInXZ@Path@@QEAA_NAEBVVec3@@@Z
-    MCAPI bool endsInXZ(class Vec3 const&);
+    MCAPI bool endsInXZ(class Vec3 const& pos);
 
     // symbol: ?getCompletionType@Path@@QEBA?AW4PathCompletionType@@XZ
     MCAPI ::PathCompletionType getCompletionType() const;
@@ -59,13 +59,13 @@ public:
     MCAPI class BlockPos const& getLastPos() const;
 
     // symbol: ?getNodePos@Path@@QEBAAEBVBlockPos@@_K@Z
-    MCAPI class BlockPos const& getNodePos(uint64) const;
+    MCAPI class BlockPos const& getNodePos(uint64 index) const;
 
     // symbol: ?getNodeType@Path@@QEBA?AW4NodeType@@_K@Z
-    MCAPI ::NodeType getNodeType(uint64) const;
+    MCAPI ::NodeType getNodeType(uint64 index) const;
 
     // symbol: ?getPos@Path@@QEBA?AVVec3@@PEBVActor@@_K@Z
-    MCAPI class Vec3 getPos(class Actor const*, uint64) const;
+    MCAPI class Vec3 getPos(class Actor const* actor, uint64 index) const;
 
     // symbol: ?getSize@Path@@QEBA_KXZ
     MCAPI uint64 getSize() const;
@@ -83,13 +83,13 @@ public:
     MCAPI void next();
 
     // symbol: ?sameAs@Path@@QEBA_NPEAV1@@Z
-    MCAPI bool sameAs(class Path*) const;
+    MCAPI bool sameAs(class Path* path) const;
 
     // symbol: ?setIndex@Path@@QEAAX_K@Z
-    MCAPI void setIndex(uint64);
+    MCAPI void setIndex(uint64 index);
 
     // symbol: ?setSize@Path@@QEAAX_K@Z
-    MCAPI void setSize(uint64);
+    MCAPI void setSize(uint64 length);
 
     // symbol: ??1Path@@QEAA@XZ
     MCAPI ~Path();
@@ -100,6 +100,6 @@ public:
     // NOLINTBEGIN
     // symbol:
     // ?buildFromNodes@Path@@AEAAX$$QEAV?$vector@VNode@Path@@V?$allocator@VNode@Path@@@std@@@std@@W4PathCompletionType@@@Z
-    MCAPI void buildFromNodes(NodeArray&&, ::PathCompletionType);
+    MCAPI void buildFromNodes(NodeArray&& nodeArray, ::PathCompletionType completionType);
     // NOLINTEND
 };

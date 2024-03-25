@@ -11,4 +11,11 @@ public:
     BlockFrictionComponent& operator=(BlockFrictionComponent const&);
     BlockFrictionComponent(BlockFrictionComponent const&);
     BlockFrictionComponent();
+
+public:
+    // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1BlockFrictionComponent@@UEAA@XZ
+    virtual ~BlockFrictionComponent() = default;
+
+    // NOLINTEND
 };

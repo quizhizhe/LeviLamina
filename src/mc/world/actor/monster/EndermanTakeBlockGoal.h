@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1EndermanTakeBlockGoal@@UEAA@XZ
+    virtual ~EndermanTakeBlockGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@EndermanTakeBlockGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -26,13 +26,13 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@EndermanTakeBlockGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // vIndex: 10, symbol: ?getRandomNearbyBlockPos@EndermanTakeBlockGoal@@MEBA?AVBlockPos@@AEBVVec3@@@Z
-    virtual class BlockPos getRandomNearbyBlockPos(class Vec3 const&) const;
+    virtual class BlockPos getRandomNearbyBlockPos(class Vec3 const& centerPos) const;
 
     // symbol: ??0EndermanTakeBlockGoal@@QEAA@AEAVEnderMan@@@Z
-    MCAPI explicit EndermanTakeBlockGoal(class EnderMan&);
+    MCAPI explicit EndermanTakeBlockGoal(class EnderMan& enderman);
 
     // NOLINTEND
 };

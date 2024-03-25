@@ -14,16 +14,16 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1FitSimpleTopRoom@@UEAA@XZ
+    virtual ~FitSimpleTopRoom() = default;
 
     // vIndex: 1, symbol: ?fits@FitSimpleTopRoom@@UEBA_NAEBVRoomDefinition@@@Z
-    virtual bool fits(class RoomDefinition const&) const;
+    virtual bool fits(class RoomDefinition const& definition) const;
 
     // vIndex: 2, symbol:
     // ?create@FitSimpleTopRoom@@UEAA?AV?$unique_ptr@VOceanMonumentPiece@@U?$default_delete@VOceanMonumentPiece@@@std@@@std@@AEAHV?$shared_ptr@VRoomDefinition@@@3@AEAVRandom@@@Z
     virtual std::unique_ptr<class OceanMonumentPiece>
-    create(int&, std::shared_ptr<class RoomDefinition>, class Random&);
+    create(int& orientation, std::shared_ptr<class RoomDefinition> definition, class Random& random);
 
     // NOLINTEND
 };

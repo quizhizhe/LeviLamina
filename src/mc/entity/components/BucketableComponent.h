@@ -14,13 +14,13 @@ public:
     MCAPI BucketableComponent();
 
     // symbol: ?getInteraction@BucketableComponent@@QEAA_NAEAVActor@@AEAVPlayer@@AEAVActorInteraction@@@Z
-    MCAPI bool getInteraction(class Actor&, class Player&, class ActorInteraction&);
+    MCAPI bool getInteraction(class Actor& owner, class Player& player, class ActorInteraction& interaction);
 
     // symbol: ?initFromDefinition@BucketableComponent@@QEAAXAEAVActor@@@Z
-    MCAPI void initFromDefinition(class Actor&);
+    MCAPI void initFromDefinition(class Actor& owner);
 
     // symbol: ?implInteraction@BucketableComponent@@SAXAEAVActor@@AEAVPlayer@@@Z
-    MCAPI static void implInteraction(class Actor&, class Player&);
+    MCAPI static void implInteraction(class Actor& owner, class Player& player);
 
     // NOLINTEND
 
@@ -34,7 +34,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $WATER_BUCKET_USEABLE_VERSION() { return WATER_BUCKET_USEABLE_VERSION; }
+    static auto& $WATER_BUCKET_USEABLE_VERSION() { return WATER_BUCKET_USEABLE_VERSION; }
 
     // NOLINTEND
 };

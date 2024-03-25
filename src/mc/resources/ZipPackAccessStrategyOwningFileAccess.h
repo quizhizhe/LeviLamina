@@ -22,13 +22,16 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ZipPackAccessStrategyOwningFileAccess@@UEAA@XZ
+    virtual ~ZipPackAccessStrategyOwningFileAccess() = default;
 
     // symbol:
     // ??0ZipPackAccessStrategyOwningFileAccess@@QEAA@V?$shared_ptr@VIFileAccess@@@std@@AEBVResourceLocation@@AEBVPath@Core@@@Z
-    MCAPI
-    ZipPackAccessStrategyOwningFileAccess(std::shared_ptr<class IFileAccess>, class ResourceLocation const&, class Core::Path const&);
+    MCAPI ZipPackAccessStrategyOwningFileAccess(
+        std::shared_ptr<class IFileAccess> fileAccess,
+        class ResourceLocation const&      path,
+        class Core::Path const&            subPath
+    );
 
     // NOLINTEND
 };

@@ -14,14 +14,20 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1HoldBlockSystem@@UEAA@XZ
+    virtual ~HoldBlockSystem() = default;
 
     // vIndex: 1, symbol: ?registerEvents@HoldBlockSystem@@UEAAXAEAV?$basic_dispatcher@V?$allocator@X@std@@@entt@@@Z
     virtual void registerEvents(entt::dispatcher&);
 
-    // symbol: ?tick@HoldBlockSystem@@UEAAXAEAVEntityRegistry@@@Z
-    MCVAPI void tick(class EntityRegistry&);
+    // vIndex: 2, symbol: ?tick@LootSystem@@UEAAXAEAVEntityRegistry@@@Z
+    virtual void tick(class EntityRegistry&);
+
+    // vIndex: 3, symbol: ?singleTick@ITickingSystem@@UEAAXAEAVEntityRegistry@@AEAVEntityContext@@@Z
+    virtual void singleTick(class EntityRegistry& registry, class EntityContext& entity);
+
+    // vIndex: 4, symbol: ?singleTick@ITickingSystem@@UEAAXAEAVEntityRegistry@@AEAVStrictEntityContext@@@Z
+    virtual void singleTick(class EntityRegistry& registry, class StrictEntityContext& entity);
 
     // NOLINTEND
 

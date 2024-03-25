@@ -8,7 +8,7 @@
 class BytesDataInput : public ::IDataInput {
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
+    // vIndex: 0, symbol: __gen_??1BytesDataInput@@UEAA@XZ
     virtual ~BytesDataInput() = default;
 
     // vIndex: 1, symbol:

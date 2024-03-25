@@ -26,17 +26,25 @@ public:
     {
         return mLeft.contains(a);
     }
-    void insert(T0 const& a1, T1 const& a2) {
-        mRight.insert(a1, a2);
-        mLeft.insert(a2, a1);
+    void emplace(T0 const& a1, T1 const& a2) {
+        mRight.emplace(a1, a2);
+        mLeft.emplace(a2, a1);
+    }
+    void insert_or_assign(T0 const& a1, T1 const& a2) {
+        mRight.insert_or_assign(a1, a2);
+        mLeft.insert_or_assign(a2, a1);
     }
     void eraser(T0 const& a) {
-        if (!mRight.contains(a)) { return; }
+        if (!mRight.contains(a)) {
+            return;
+        }
         mRight.erase(a);
         mLeft.erase(mRight[a]);
     }
     void erasel(T1 const& a) {
-        if (!mLeft.contains(a)) { return; }
+        if (!mLeft.contains(a)) {
+            return;
+        }
         mLeft.erase(a);
         mRight.erase(mLeft[a]);
     }

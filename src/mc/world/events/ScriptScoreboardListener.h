@@ -23,16 +23,16 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScriptScoreboardListener@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptScoreboardListener() = default;
 
     // vIndex: 2, symbol:
     // ?onObjectiveRemoved@ScriptScoreboardListener@ScriptModuleMinecraft@@UEAA?AW4EventResult@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual ::EventResult onObjectiveRemoved(std::string const&);
+    virtual ::EventResult onObjectiveRemoved(std::string const& objective);
 
     // vIndex: 3, symbol:
     // ?onScoreboardIdentityRemoved@ScriptScoreboardListener@ScriptModuleMinecraft@@UEAA?AW4EventResult@@AEBUScoreboardId@@@Z
-    virtual ::EventResult onScoreboardIdentityRemoved(struct ScoreboardId const&);
+    virtual ::EventResult onScoreboardIdentityRemoved(struct ScoreboardId const& id);
 
     // NOLINTEND
 };

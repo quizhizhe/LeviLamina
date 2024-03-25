@@ -24,11 +24,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ??1FilePathManager@Core@@UEAA@XZ
-    MCVAPI ~FilePathManager();
+    // vIndex: 0, symbol: ??1FilePathManager@Core@@UEAA@XZ
+    virtual ~FilePathManager();
 
     // symbol: ??0FilePathManager@Core@@QEAA@AEBVPath@1@_N@Z
-    MCAPI FilePathManager(class Core::Path const&, bool);
+    MCAPI FilePathManager(class Core::Path const& root, bool isDedicatedServer);
 
     // symbol:
     // ?getResourcePacksPath@FilePathManager@Core@@QEBA?AV?$PathBuffer@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@XZ

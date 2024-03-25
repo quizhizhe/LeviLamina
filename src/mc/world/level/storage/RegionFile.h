@@ -17,14 +17,17 @@ public:
 
 public:
     // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1RegionFile@@UEAA@XZ
+    virtual ~RegionFile() = default;
+
     // symbol: ??0RegionFile@@QEAA@AEBVPath@Core@@@Z
-    MCAPI explicit RegionFile(class Core::Path const&);
+    MCAPI explicit RegionFile(class Core::Path const& basePath);
 
     // symbol: ?open@RegionFile@@QEAA_NXZ
     MCAPI bool open();
 
     // symbol: ?readChunk@RegionFile@@QEAA_NHHPEAPEAVBitStream@RakNet@@@Z
-    MCAPI bool readChunk(int, int, class RakNet::BitStream**);
+    MCAPI bool readChunk(int x, int z, class RakNet::BitStream** destChunkData);
 
     // NOLINTEND
 };

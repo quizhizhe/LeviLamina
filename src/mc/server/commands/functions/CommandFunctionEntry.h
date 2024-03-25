@@ -15,12 +15,13 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1CommandFunctionEntry@@UEAA@XZ
+    virtual ~CommandFunctionEntry() = default;
 
     // vIndex: 1, symbol:
     // ?execute@CommandFunctionEntry@@UEAAXAEAVFunctionManager@@AEBVCommandOrigin@@W4FunctionQueueOrder@@@Z
-    virtual void execute(class FunctionManager&, class CommandOrigin const&, ::FunctionQueueOrder);
+    virtual void
+    execute(class FunctionManager& functionManager, class CommandOrigin const& origin, ::FunctionQueueOrder order);
 
     // NOLINTEND
 };

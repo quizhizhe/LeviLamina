@@ -20,26 +20,32 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1AgentMoveCommandSystem@@UEAA@XZ
+    virtual ~AgentMoveCommandSystem() = default;
 
-    // vIndex: 1, symbol: __unk_vfn_1
-    virtual void __unk_vfn_1();
+    // vIndex: 1, symbol: ?registerEvents@ISystem@@UEAAXAEAV?$basic_dispatcher@V?$allocator@X@std@@@entt@@@Z
+    virtual void registerEvents(entt::dispatcher&);
 
     // vIndex: 2, symbol: ?tick@AgentMoveCommandSystem@@UEAAXAEAVEntityRegistry@@@Z
-    virtual void tick(class EntityRegistry&);
+    virtual void tick(class EntityRegistry& registry);
+
+    // vIndex: 3, symbol: ?singleTick@ITickingSystem@@UEAAXAEAVEntityRegistry@@AEAVEntityContext@@@Z
+    virtual void singleTick(class EntityRegistry& registry, class EntityContext& entity);
+
+    // vIndex: 4, symbol: ?singleTick@ITickingSystem@@UEAAXAEAVEntityRegistry@@AEAVStrictEntityContext@@@Z
+    virtual void singleTick(class EntityRegistry& registry, class StrictEntityContext& entity);
 
     // symbol: ?cleanUp@AgentMoveCommandSystem@@SAXAEAVEntityContext@@M@Z
-    MCAPI static void cleanUp(class EntityContext&, float);
+    MCAPI static void cleanUp(class EntityContext& agent, float cooldownTime);
 
     // symbol:
     // ?initialize@AgentMoveCommandSystem@@SAXAEAVEntityContext@@AEAUActionDetails@AgentComponents@@AEAVMove@4@@Z
     MCAPI static void
-    initialize(class EntityContext&, struct AgentComponents::ActionDetails&, class AgentComponents::Move&);
+    initialize(class EntityContext& entity, struct AgentComponents::ActionDetails& details, class AgentComponents::Move&);
 
     // symbol: ?tickMove@AgentMoveCommandSystem@@SAXAEAVEntityContext@@AEAUActionDetails@AgentComponents@@AEAVMove@4@@Z
     MCAPI static void
-    tickMove(class EntityContext&, struct AgentComponents::ActionDetails&, class AgentComponents::Move&);
+    tickMove(class EntityContext& entity, struct AgentComponents::ActionDetails& details, class AgentComponents::Move&);
 
     // NOLINTEND
 };

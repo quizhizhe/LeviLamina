@@ -13,8 +13,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ValidationErrorCategory@ResourceUri@Util@@UEAA@XZ
+    virtual ~ValidationErrorCategory() = default;
 
     // vIndex: 1, symbol: ?name@ValidationErrorCategory@ResourceUri@Util@@UEBAPEBDXZ
     virtual char const* name() const;

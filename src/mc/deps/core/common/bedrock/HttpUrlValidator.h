@@ -24,13 +24,13 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1HttpUrlValidator@Http@Bedrock@@UEAA@XZ
+    virtual ~HttpUrlValidator() = default;
 
     // vIndex: 1, symbol:
     // ?send@HttpUrlValidator@Http@Bedrock@@UEAA?AV?$shared_ptr@V?$IAsyncResult@VResponse@Http@Bedrock@@@Threading@Bedrock@@@std@@$$QEAVRequest@23@@Z
     virtual std::shared_ptr<class Bedrock::Threading::IAsyncResult<class Bedrock::Http::Response>>
-    send(class Bedrock::Http::Request&&);
+    send(class Bedrock::Http::Request&& request);
 
     // NOLINTEND
 };

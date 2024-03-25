@@ -24,18 +24,18 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScriptScriptingEventHandler@@UEAA@XZ
+    virtual ~ScriptScriptingEventHandler() = default;
 
     // vIndex: 1, symbol:
     // ?handleEvent@?$Impl@U?$type_list@U?$MutableScriptingGameplayEvent@W4CoordinatorResult@@@@$$CBU?$ScriptingGameplayEvent@W4CoordinatorResult@@@@@entt@@@?$EventHandlerDispatcher@VScriptingEventHandler@@@Details@@MEAA?AU?$GameplayHandlerResult@W4CoordinatorResult@@@@AEAU?$MutableScriptingGameplayEvent@W4CoordinatorResult@@@@@Z
     virtual struct GameplayHandlerResult<::CoordinatorResult>
-    handleEvent(struct MutableScriptingGameplayEvent<::CoordinatorResult>&);
+    handleEvent(struct MutableScriptingGameplayEvent<::CoordinatorResult>& event);
 
     // vIndex: 2, symbol:
     // ?handleEvent@?$Impl@U?$type_list@$$CBU?$ScriptingGameplayEvent@W4CoordinatorResult@@@@@entt@@@?$EventHandlerDispatcher@VScriptingEventHandler@@@Details@@MEAA?AU?$GameplayHandlerResult@W4CoordinatorResult@@@@AEBU?$ScriptingGameplayEvent@W4CoordinatorResult@@@@@Z
     virtual struct GameplayHandlerResult<::CoordinatorResult>
-    handleEvent(struct ScriptingGameplayEvent<::CoordinatorResult> const&);
+    handleEvent(struct ScriptingGameplayEvent<::CoordinatorResult> const& event);
 
     // vIndex: 3, symbol: __unk_vfn_3
     virtual void __unk_vfn_3();
@@ -51,7 +51,7 @@ public:
     // symbol:
     // ?_handleWatchdogTerminateEvent@ScriptScriptingEventHandler@@AEBA_NAEAUBeforeWatchdogTerminateEvent@@AEBVWeakLifetimeScope@Scripting@@U?$TypedObjectHandle@VScriptSystemBeforeEvents@ScriptModuleMinecraft@@@4@@Z
     MCAPI bool
-    _handleWatchdogTerminateEvent(struct BeforeWatchdogTerminateEvent&, class Scripting::WeakLifetimeScope const&, struct Scripting::TypedObjectHandle<class ScriptModuleMinecraft::ScriptSystemBeforeEvents>)
+    _handleWatchdogTerminateEvent(struct BeforeWatchdogTerminateEvent&, class Scripting::WeakLifetimeScope const& scope, struct Scripting::TypedObjectHandle<class ScriptModuleMinecraft::ScriptSystemBeforeEvents>)
         const;
 
     // NOLINTEND

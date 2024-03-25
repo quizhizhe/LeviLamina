@@ -21,32 +21,29 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1AppIsland@Bedrock@@UEAA@XZ
+    virtual ~AppIsland();
 
     // vIndex: 1, symbol: ?getId@AppIsland@Bedrock@@UEAAGXZ
     virtual ushort getId();
 
-    // symbol: ?mainUpdate@AppIsland@Bedrock@@UEAAXXZ
-    MCVAPI void mainUpdate();
+    // vIndex: 2, symbol: ?start@AppIsland@Bedrock@@UEAA_NXZ
+    virtual bool start();
 
-    // symbol: ?processActivationArguments@AppIsland@Bedrock@@UEAAXAEBVActivationArguments@2@@Z
-    MCVAPI void processActivationArguments(class Bedrock::ActivationArguments const&);
+    // vIndex: 3, symbol: ?suspend@AppIsland@Bedrock@@UEAA_NXZ
+    virtual bool suspend();
 
-    // symbol: ?resume@AppIsland@Bedrock@@UEAA_NXZ
-    MCVAPI bool resume();
+    // vIndex: 4, symbol: ?resume@AppIsland@Bedrock@@UEAA_NXZ
+    virtual bool resume();
 
-    // symbol: ?start@AppIsland@Bedrock@@UEAA_NXZ
-    MCVAPI bool start();
+    // vIndex: 5, symbol: ?stop@AppIsland@Bedrock@@UEAA_NXZ
+    virtual bool stop();
 
-    // symbol: ?stop@AppIsland@Bedrock@@UEAA_NXZ
-    MCVAPI bool stop();
+    // vIndex: 6, symbol: ?mainUpdate@AppIsland@Bedrock@@UEAAXXZ
+    virtual void mainUpdate();
 
-    // symbol: ?suspend@AppIsland@Bedrock@@UEAA_NXZ
-    MCVAPI bool suspend();
-
-    // symbol: ??1AppIsland@Bedrock@@UEAA@XZ
-    MCVAPI ~AppIsland();
+    // vIndex: 7, symbol: ?processActivationArguments@AppIsland@Bedrock@@UEAAXAEBVActivationArguments@2@@Z
+    virtual void processActivationArguments(class Bedrock::ActivationArguments const& args);
 
     // symbol: ??0AppIsland@Bedrock@@QEAA@XZ
     MCAPI AppIsland();

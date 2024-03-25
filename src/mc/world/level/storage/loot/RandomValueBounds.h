@@ -17,19 +17,13 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ?deserialize@RandomValueBounds@@QEAAXAEBVValue@Json@@@Z
-    MCAPI void deserialize(class Json::Value const&);
+    MCAPI void deserialize(class Json::Value const& object);
 
     // symbol: ?getFloat@RandomValueBounds@@QEBAMAEAVRandom@@@Z
-    MCAPI float getFloat(class Random&) const;
+    MCAPI float getFloat(class Random& random) const;
 
     // symbol: ?getInt@RandomValueBounds@@QEBAHAEAVRandom@@@Z
-    MCAPI int getInt(class Random&) const;
-
-    // symbol: ?getMax@RandomValueBounds@@QEBAMXZ
-    MCAPI float getMax() const;
-
-    // symbol: ?getMin@RandomValueBounds@@QEBAMXZ
-    MCAPI float getMin() const;
+    MCAPI int getInt(class Random& random) const;
 
     // NOLINTEND
 };

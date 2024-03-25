@@ -1,61 +1,99 @@
 #pragma once
 
+#include <atomic>
+#include <chrono>
+#include <cstddef>
+#include <functional>
+#include <memory>
+#include <optional>
+#include <string_view>
+#include <utility>
+
 #include "ll/api/base/Macro.h"
 #include "ll/api/base/StdInt.h"
-#include <chrono>
-#include <functional>
-#include <string_view>
+#include "ll/api/plugin/NativePlugin.h"
+#include "ll/api/plugin/Plugin.h"
 
 namespace ll::schedule {
-LLETAPI std::atomic_ullong TaskId;
+inline namespace task {
+LLETAPI std::atomic_ullong taskId;
 
 template <class Clock>
 class Task {
+    uint64                id;
+    std::function<void()> fn;
+    bool                  mInterval;
+    bool                  mCancelled{false};
+
 public:
-    using TimePoint = typename Clock::time_point;
-    using Duration  = typename Clock::duration;
+    std::weak_ptr<plugin::Plugin> pluginPtr;
 
-    std::function<void()> const f;
-    bool const                  interval;
-    bool                        cancelled{false};
-    uint64                      id;
+    using time_point = typename Clock::time_point;
+    using duration   = typename Clock::duration;
 
-    Task(std::function<void()>&& f, bool interval = false) : f(f), interval(interval), id(TaskId++) {}
+    Task(
+        std::function<void()>         fn,
+        bool                          interval,
+        std::weak_ptr<plugin::Plugin> plugin = plugin::NativePlugin::current()
+    )
+    : id(taskId++),
+      fn(std::move(fn)),
+      mInterval(interval),
+      pluginPtr(std::move(plugin)) {}
 
-    inline void cancel() { cancelled = true; }
+    constexpr void call() { fn(); }
 
-    virtual TimePoint getNextTime() = 0;
+    [[nodiscard]] constexpr bool interval() { return mInterval; }
+
+    [[nodiscard]] constexpr bool isCancelled() { return mCancelled; }
+
+    constexpr void setCancelled(bool cancelled) { mCancelled = cancelled; }
+
+    constexpr void cancel() { setCancelled(true); }
+
+    [[nodiscard]] constexpr uint64 getId() const { return id; }
+
+    virtual std::optional<time_point> getFirstTime() { return getNextTime(); }
+
+    virtual std::optional<time_point> getNextTime() = 0;
+
+    virtual ~Task() = default;
 };
 
 template <class Clock>
 class RepeatTask : public Task<Clock> {
 private:
-    using TimePoint = typename Clock::time_point;
-    using Duration  = typename Clock::duration;
-    TimePoint      time;
-    Duration const duration;
+    using time_point = typename Clock::time_point;
+    using duration   = typename Clock::duration;
+    time_point     time;
+    duration const dur;
     size_t         count;
     bool const     forever;
 
 public:
     template <class R, class P>
-    RepeatTask(std::chrono::duration<R, P> duration, std::function<void()>&& f, size_t count = 0)
-    : Task<Clock>(std::move(f), false),
+    RepeatTask(
+        std::chrono::duration<R, P>   dur,
+        std::function<void()>         fn,
+        size_t                        count  = 0,
+        std::weak_ptr<plugin::Plugin> plugin = plugin::NativePlugin::current()
+    )
+    : Task<Clock>(std::move(fn), false, std::move(plugin)),
       time(Clock::now()),
-      duration(std::chrono::duration_cast<Duration>(duration)),
+      dur(std::chrono::duration_cast<duration>(dur)),
       count(count),
       forever(count == 0) {}
 
-    TimePoint getNextTime() override {
+    std::optional<time_point> getNextTime() override {
         if (!forever) {
             if (count > 0) {
                 count--;
             } else {
-                return TimePoint::max();
+                return std::nullopt;
             }
         }
         auto res  = time;
-        time     += duration;
+        time     += dur;
         return res;
     }
 };
@@ -63,66 +101,83 @@ public:
 template <class Clock>
 class IntervalTask : public Task<Clock> {
 private:
-    using TimePoint = typename Clock::time_point;
-    using Duration  = typename Clock::duration;
+    using time_point = typename Clock::time_point;
+    using duration   = typename Clock::duration;
     bool           first;
-    Duration const duration;
+    duration const dur;
     size_t         count;
     bool const     forever;
 
 public:
     template <class R, class P>
-    IntervalTask(std::chrono::duration<R, P> duration, std::function<void()>&& f, size_t count = 0)
-    : Task<Clock>(std::move(f), true),
+    IntervalTask(
+        std::chrono::duration<R, P>   dur,
+        std::function<void()>         fn,
+        size_t                        count  = 0,
+        std::weak_ptr<plugin::Plugin> plugin = plugin::NativePlugin::current()
+    )
+    : Task<Clock>(std::move(fn), true, std::move(plugin)),
       first(true),
-      duration(std::chrono::duration_cast<Duration>(duration)),
+      dur(std::chrono::duration_cast<duration>(dur)),
       count(count),
       forever(count == 0) {}
 
-    TimePoint getNextTime() override {
+    std::optional<time_point> getNextTime() override {
         if (!forever) {
             if (count > 0) {
                 count--;
             } else {
-                return TimePoint::max();
+                return std::nullopt;
             }
         }
         if (first) {
             first = false;
             return Clock::now();
         }
-        return Clock::now() + duration;
+        return Clock::now() + dur;
     }
 };
 
-LLNDAPI std::chrono::system_clock::time_point parseTime(std::string const&);
+LLNDAPI std::chrono::system_clock::time_point parseTime(std::string_view);
 
 template <class Clock>
 class DelayTask : public Task<Clock> {
 private:
-    using TimePoint = typename Clock::time_point;
-    using Duration  = typename Clock::duration;
-    TimePoint const time;
-    bool            finished;
+    using time_point = typename Clock::time_point;
+    using duration   = typename Clock::duration;
+    time_point const time;
 
 public:
-    DelayTask(TimePoint time, std::function<void()>&& f)
-    : Task<Clock>(std::move(f), false),
-      time(time),
-      finished(false) {}
+    DelayTask(
+        time_point                    time,
+        std::function<void()>         fn,
+        std::weak_ptr<plugin::Plugin> plugin = plugin::NativePlugin::current()
+    )
+    : Task<Clock>(std::move(fn), false, std::move(plugin)),
+      time(time) {}
 
     template <class R, class P>
-    DelayTask(std::chrono::duration<R, P> duration, std::function<void()>&& f)
-    : DelayTask<Clock>(Clock::now() + std::chrono::duration_cast<Duration>(duration), std::move(f)) {}
+    DelayTask(
+        std::chrono::duration<R, P>   dur,
+        std::function<void()>         fn,
+        std::weak_ptr<plugin::Plugin> plugin = plugin::NativePlugin::current()
+    )
+    : DelayTask<Clock>(Clock::now() + std::chrono::duration_cast<duration>(dur), std::move(fn), std::move(plugin)) {}
 
-    DelayTask(std::string const& timestr, std::function<void()>&& f)
+    DelayTask(
+        std::string_view              timestr,
+        std::function<void()>         fn,
+        std::weak_ptr<plugin::Plugin> plugin = plugin::NativePlugin::current()
+    )
         requires(std::is_same_v<Clock, std::chrono::system_clock>)
-    : DelayTask<Clock>(parseTime(timestr), std::move(f)) {}
+    : DelayTask<Clock>(parseTime(timestr), std::move(fn), std::move(plugin)) {}
 
-    TimePoint getNextTime() override {
-        if (finished) { return TimePoint::max(); }
-        finished = true;
-        return time;
-    }
+    std::optional<time_point> getFirstTime() override { return time; }
+
+    std::optional<time_point> getNextTime() override { return std::nullopt; }
 };
+} // namespace task
+namespace detail {
+LLAPI void printScheduleError() noexcept;
+}
 } // namespace ll::schedule

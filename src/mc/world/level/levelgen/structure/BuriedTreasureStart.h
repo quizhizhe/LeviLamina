@@ -14,11 +14,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1BuriedTreasureStart@@UEAA@XZ
+    virtual ~BuriedTreasureStart() = default;
 
     // symbol: ??0BuriedTreasureStart@@QEAA@AEAVDimension@@AEAVRandom@@HH@Z
-    MCAPI BuriedTreasureStart(class Dimension&, class Random&, int, int);
+    MCAPI BuriedTreasureStart(class Dimension& dim, class Random& random, int x, int z);
 
     // NOLINTEND
 };

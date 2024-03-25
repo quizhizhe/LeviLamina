@@ -11,20 +11,24 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ?_disableBrazeSDK@BrazeSDKManager@@MEAAXXZ
-    MCVAPI void _disableBrazeSDK();
+    // vIndex: 0, symbol: __gen_??1BrazeSDKManager@@UEAA@XZ
+    virtual ~BrazeSDKManager() = default;
 
-    // symbol: ?_enableBrazeSDK@BrazeSDKManager@@MEAAXXZ
-    MCVAPI void _enableBrazeSDK();
+    // vIndex: 1, symbol: ?enableBrazeSDK@BrazeSDKManager@@UEAAXXZ
+    virtual void enableBrazeSDK();
 
-    // symbol: ?disableBrazeSDK@BrazeSDKManager@@UEAAXXZ
-    MCVAPI void disableBrazeSDK();
+    // vIndex: 2, symbol: ?disableBrazeSDK@BrazeSDKManager@@UEAAXXZ
+    virtual void disableBrazeSDK();
 
-    // symbol: ?enableBrazeSDK@BrazeSDKManager@@UEAAXXZ
-    MCVAPI void enableBrazeSDK();
+    // vIndex: 3, symbol:
+    // ?setBrazeId@BrazeSDKManager@@UEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+    virtual void setBrazeId(std::string const&);
 
-    // symbol: ?setBrazeId@BrazeSDKManager@@UEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCVAPI void setBrazeId(std::string const&);
+    // vIndex: 4, symbol: ?_enableBrazeSDK@BrazeSDKManager@@MEAAXXZ
+    virtual void _enableBrazeSDK();
+
+    // vIndex: 5, symbol: ?_disableBrazeSDK@BrazeSDKManager@@MEAAXXZ
+    virtual void _disableBrazeSDK();
 
     // NOLINTEND
 
@@ -44,11 +48,11 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mInitialized() { return mInitialized; }
+    static auto& $mInitialized() { return mInitialized; }
 
-    auto& $mInstance() { return mInstance; }
+    static auto& $mInstance() { return mInstance; }
 
-    auto& $mIsReady() { return mIsReady; }
+    static auto& $mIsReady() { return mIsReady; }
 
     // NOLINTEND
 };

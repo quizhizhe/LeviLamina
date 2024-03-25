@@ -17,8 +17,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1ServerToClientHandshakePacket@@UEAA@XZ
+    virtual ~ServerToClientHandshakePacket();
 
     // vIndex: 1, symbol: ?getId@ServerToClientHandshakePacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -28,21 +28,18 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@ServerToClientHandshakePacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@ServerToClientHandshakePacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1ServerToClientHandshakePacket@@UEAA@XZ
-    MCVAPI ~ServerToClientHandshakePacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0ServerToClientHandshakePacket@@QEAA@XZ
     MCAPI ServerToClientHandshakePacket();
 
     // symbol:
     // ??0ServerToClientHandshakePacket@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI explicit ServerToClientHandshakePacket(std::string const&);
+    MCAPI explicit ServerToClientHandshakePacket(std::string const& webTokenData);
 
     // NOLINTEND
 };

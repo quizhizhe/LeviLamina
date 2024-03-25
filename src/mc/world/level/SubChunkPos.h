@@ -2,14 +2,14 @@
 
 #include "mc/_HeaderOutputPredefine.h"
 
-class SubChunkPos : public intN3<SubChunkPos> {
+class SubChunkPos : public ll::math::intN3<SubChunkPos> {
 public:
     using intN3::intN3;
 
 public:
     // NOLINTBEGIN
     // symbol: ??0SubChunkPos@@QEAA@AEBVBlockPos@@@Z
-    MCAPI explicit SubChunkPos(class BlockPos const&);
+    MCAPI explicit SubChunkPos(class BlockPos const& bp);
 
     // symbol: ??BSubChunkPos@@QEBA?AVBlockPos@@XZ
     MCAPI explicit operator class BlockPos() const;

@@ -14,13 +14,13 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SculkPatchFeature@@UEAA@XZ
+    virtual ~SculkPatchFeature() = default;
 
     // vIndex: 1, symbol:
     // ?place@SculkPatchFeature@@UEBA?AV?$optional@VBlockPos@@@std@@AEAVIBlockWorldGenAPI@@AEBVBlockPos@@AEAVRandom@@AEAVRenderParams@@@Z
     virtual std::optional<class BlockPos>
-    place(class IBlockWorldGenAPI&, class BlockPos const&, class Random&, class RenderParams&) const;
+    place(class IBlockWorldGenAPI& target, class BlockPos const& pos, class Random& random, class RenderParams&) const;
 
     // vIndex: 2, symbol:
     // ?isValidPlacement@IFeature@@UEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z

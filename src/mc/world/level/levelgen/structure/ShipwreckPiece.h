@@ -16,25 +16,26 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ShipwreckPiece@@UEAA@XZ
+    virtual ~ShipwreckPiece() = default;
 
     // vIndex: 2, symbol: ?getType@ShipwreckPiece@@UEBA?AW4StructurePieceType@@XZ
     virtual ::StructurePieceType getType() const;
 
     // vIndex: 4, symbol: ?postProcess@ShipwreckPiece@@UEAA_NAEAVBlockSource@@AEAVRandom@@AEBVBoundingBox@@@Z
-    virtual bool postProcess(class BlockSource&, class Random&, class BoundingBox const&);
+    virtual bool postProcess(class BlockSource& region, class Random& random, class BoundingBox const& chunkBB);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_calculateTargetPos@ShipwreckPiece@@CA?AVBlockPos@@AEAVBlockSource@@V2@W4Rotation@@1@Z
-    MCAPI static class BlockPos _calculateTargetPos(class BlockSource&, class BlockPos, ::Rotation, class BlockPos);
+    MCAPI static class BlockPos
+    _calculateTargetPos(class BlockSource& region, class BlockPos origin, ::Rotation rot, class BlockPos size);
 
     // symbol: ?_calculateTargetPosLegacy@ShipwreckPiece@@CA?AVBlockPos@@AEAVBlockSource@@V2@W4Rotation@@1@Z
     MCAPI static class BlockPos
-    _calculateTargetPosLegacy(class BlockSource&, class BlockPos, ::Rotation, class BlockPos);
+    _calculateTargetPosLegacy(class BlockSource& region, class BlockPos origin, ::Rotation rot, class BlockPos size);
 
     // NOLINTEND
 
@@ -49,7 +50,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $STRUCTURE_SHIPWRECK_TYPES() { return STRUCTURE_SHIPWRECK_TYPES; }
+    static auto& $STRUCTURE_SHIPWRECK_TYPES() { return STRUCTURE_SHIPWRECK_TYPES; }
 
     // NOLINTEND
 };

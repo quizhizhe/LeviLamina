@@ -20,7 +20,7 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
+    // vIndex: 0, symbol: __gen_??1BlockActorDataPacket@@UEAA@XZ
     virtual ~BlockActorDataPacket() = default;
 
     // vIndex: 1, symbol: ?getId@BlockActorDataPacket@@UEBA?AW4MinecraftPacketIds@@XZ
@@ -31,17 +31,17 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@BlockActorDataPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@BlockActorDataPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0BlockActorDataPacket@@QEAA@XZ
     MCAPI BlockActorDataPacket();
 
     // symbol: ??0BlockActorDataPacket@@QEAA@AEBVBlockPos@@VCompoundTag@@@Z
-    MCAPI BlockActorDataPacket(class BlockPos const&, class CompoundTag);
+    MCAPI BlockActorDataPacket(class BlockPos const& pos, class CompoundTag tag);
 
     // NOLINTEND
 };

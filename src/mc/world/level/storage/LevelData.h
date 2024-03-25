@@ -31,26 +31,29 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ??0LevelData@@QEAA@_N@Z
-    MCAPI explicit LevelData(bool);
+    MCAPI explicit LevelData(bool isEduMode);
 
     // symbol: ??0LevelData@@QEAA@$$QEAV0@@Z
-    MCAPI LevelData(class LevelData&&);
+    MCAPI LevelData(class LevelData&& rhs);
 
     // symbol:
     // ??0LevelData@@QEAA@AEBVLevelSettings@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@W4GeneratorType@@AEBVBlockPos@@_NW4EducationEditionOffer@@MM@Z
     MCAPI LevelData(
-        class LevelSettings const&,
-        std::string const&,
-        ::GeneratorType,
-        class BlockPos const&,
-        bool,
-        ::EducationEditionOffer,
-        float,
-        float
+        class LevelSettings const& settings,
+        std::string const&         levelName,
+        ::GeneratorType            generatorVersion,
+        class BlockPos const&      defaultSpawn,
+        bool                       achievementsDisabled,
+        ::EducationEditionOffer    eduOffer,
+        float                      rainLevel,
+        float                      lightningLevel
     );
 
     // symbol: ?achievementsWillBeDisabledOnLoad@LevelData@@QEBA_NXZ
     MCAPI bool achievementsWillBeDisabledOnLoad() const;
+
+    // symbol: ?cloudSaveForWorldIsEnabled@LevelData@@QEBA_NXZ
+    MCAPI bool cloudSaveForWorldIsEnabled() const;
 
     // symbol: ?createTag@LevelData@@QEBA?AV?$unique_ptr@VCompoundTag@@U?$default_delete@VCompoundTag@@@std@@@std@@XZ
     MCAPI std::unique_ptr<class CompoundTag> createTag() const;
@@ -81,6 +84,9 @@ public:
 
     // symbol: ?getChatRestrictionLevel@LevelData@@QEBA?AW4ChatRestrictionLevel@@XZ
     MCAPI ::ChatRestrictionLevel getChatRestrictionLevel() const;
+
+    // symbol: ?getCloudSaveInfo@LevelData@@QEBAAEBVCloudSaveLevelInfo@@XZ
+    MCAPI class CloudSaveLevelInfo const& getCloudSaveInfo() const;
 
     // symbol: ?getCurrentTick@LevelData@@QEBAAEBUTick@@XZ
     MCAPI struct Tick const& getCurrentTick() const;
@@ -166,6 +172,9 @@ public:
     // symbol: ?getLimitedWorldWidth@LevelData@@QEBAHXZ
     MCAPI int getLimitedWorldWidth() const;
 
+    // symbol: ?getLoadedPlayerTag@LevelData@@QEAAAEAVCompoundTag@@XZ
+    MCAPI class CompoundTag& getLoadedPlayerTag();
+
     // symbol: ?getMultiplayerGameIntent@LevelData@@QEBA_NXZ
     MCAPI bool getMultiplayerGameIntent() const;
 
@@ -215,7 +224,7 @@ public:
     MCAPI ::GeneratorType getStoredGenerator() const;
 
     // symbol: ?getTagData@LevelData@@QEAAXAEBVCompoundTag@@@Z
-    MCAPI void getTagData(class CompoundTag const&);
+    MCAPI void getTagData(class CompoundTag const& tag);
 
     // symbol: ?getTime@LevelData@@QEBAHXZ
     MCAPI int getTime() const;
@@ -311,7 +320,7 @@ public:
     MCAPI bool isWorldTemplateOptionLocked() const;
 
     // symbol: ??4LevelData@@QEAAAEAV0@$$QEAV0@@Z
-    MCAPI class LevelData& operator=(class LevelData&&);
+    MCAPI class LevelData& operator=(class LevelData&& rhs);
 
     // symbol: ?recordStartUp@LevelData@@QEAAXXZ
     MCAPI void recordStartUp();
@@ -320,145 +329,139 @@ public:
     MCAPI void setAdventureModeOverridesEnabled(bool);
 
     // symbol: ?setBaseGameVersion@LevelData@@QEAAXAEBVBaseGameVersion@@@Z
-    MCAPI void setBaseGameVersion(class BaseGameVersion const&);
+    MCAPI void setBaseGameVersion(class BaseGameVersion const& baseGameVersion);
 
     // symbol: ?setBonusChestSpawned@LevelData@@QEAAX_N@Z
-    MCAPI void setBonusChestSpawned(bool);
+    MCAPI void setBonusChestSpawned(bool bonusChestSpawned);
 
     // symbol: ?setChatRestrictionLevel@LevelData@@QEAAXW4ChatRestrictionLevel@@@Z
     MCAPI void setChatRestrictionLevel(::ChatRestrictionLevel);
 
     // symbol: ?setCommandsEnabled@LevelData@@QEAAX_N@Z
-    MCAPI void setCommandsEnabled(bool);
+    MCAPI void setCommandsEnabled(bool commandsEnabled);
 
     // symbol: ?setCustomSkinsDisabled@LevelData@@QEAAX_N@Z
-    MCAPI void setCustomSkinsDisabled(bool);
+    MCAPI void setCustomSkinsDisabled(bool val);
 
     // symbol: ?setDataDrivenGenerator@LevelData@@QEAAXW4GeneratorType@@@Z
-    MCAPI void setDataDrivenGenerator(::GeneratorType);
+    MCAPI void setDataDrivenGenerator(::GeneratorType type);
 
     // symbol: ?setEduSharedUriResource@LevelData@@QEAAXAEBUEduSharedUriResource@@@Z
     MCAPI void setEduSharedUriResource(struct EduSharedUriResource const&);
 
     // symbol: ?setEducationEditionOffer@LevelData@@QEAAXW4EducationEditionOffer@@@Z
-    MCAPI void setEducationEditionOffer(::EducationEditionOffer);
+    MCAPI void setEducationEditionOffer(::EducationEditionOffer offer);
 
     // symbol: ?setEducationFeaturesEnabled@LevelData@@QEAAX_N@Z
-    MCAPI void setEducationFeaturesEnabled(bool);
+    MCAPI void setEducationFeaturesEnabled(bool educationEnabled);
 
     // symbol: ?setEducationOid@LevelData@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI void setEducationOid(std::string const&);
+    MCAPI void setEducationOid(std::string const& educationOid);
 
     // symbol: ?setEmoteChatMuted@LevelData@@QEAAX_N@Z
-    MCAPI void setEmoteChatMuted(bool);
+    MCAPI void setEmoteChatMuted(bool val);
 
     // symbol: ?setForceGameType@LevelData@@QEAAX_N@Z
-    MCAPI void setForceGameType(bool);
+    MCAPI void setForceGameType(bool value);
 
     // symbol: ?setGameDifficulty@LevelData@@QEAAXW4Difficulty@@@Z
-    MCAPI void setGameDifficulty(::Difficulty);
+    MCAPI void setGameDifficulty(::Difficulty difficulty);
 
     // symbol: ?setGameType@LevelData@@QEAAXW4GameType@@@Z
-    MCAPI void setGameType(::GameType);
+    MCAPI void setGameType(::GameType type);
 
     // symbol: ?setGenerator@LevelData@@QEAAXW4GeneratorType@@@Z
-    MCAPI void setGenerator(::GeneratorType);
+    MCAPI void setGenerator(::GeneratorType version);
 
     // symbol: ?setHasLockedBehaviorPack@LevelData@@QEAAX_N@Z
-    MCAPI void setHasLockedBehaviorPack(bool);
+    MCAPI void setHasLockedBehaviorPack(bool hasLockedPack);
 
     // symbol: ?setHasLockedResourcePack@LevelData@@QEAAX_N@Z
-    MCAPI void setHasLockedResourcePack(bool);
+    MCAPI void setHasLockedResourcePack(bool hasLockedPack);
 
     // symbol: ?setLANBroadcast@LevelData@@QEAAX_N@Z
-    MCAPI void setLANBroadcast(bool);
+    MCAPI void setLANBroadcast(bool broadcast);
 
     // symbol: ?setLANBroadcastIntent@LevelData@@QEAAX_N@Z
-    MCAPI void setLANBroadcastIntent(bool);
+    MCAPI void setLANBroadcastIntent(bool broadcast);
 
     // symbol: ?setLevelName@LevelData@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI void setLevelName(std::string const&);
+    MCAPI void setLevelName(std::string const& levelName);
 
     // symbol: ?setLightningLevel@LevelData@@QEAAXM@Z
-    MCAPI void setLightningLevel(float);
+    MCAPI void setLightningLevel(float level);
 
     // symbol: ?setLightningTime@LevelData@@QEAAXH@Z
-    MCAPI void setLightningTime(int);
+    MCAPI void setLightningTime(int lightningTime);
 
     // symbol: ?setMultiplayerGame@LevelData@@QEAAX_N@Z
-    MCAPI void setMultiplayerGame(bool);
+    MCAPI void setMultiplayerGame(bool multiplayer);
 
     // symbol: ?setMultiplayerGameIntent@LevelData@@QEAAX_N@Z
-    MCAPI void setMultiplayerGameIntent(bool);
+    MCAPI void setMultiplayerGameIntent(bool multiplayer);
 
     // symbol: ?setOnlySpawnV1Villagers@LevelData@@QEAAX_N@Z
-    MCAPI void setOnlySpawnV1Villagers(bool);
+    MCAPI void setOnlySpawnV1Villagers(bool val);
 
     // symbol: ?setPersonaDisabled@LevelData@@QEAAX_N@Z
-    MCAPI void setPersonaDisabled(bool);
+    MCAPI void setPersonaDisabled(bool val);
 
     // symbol: ?setPlatformBroadcastIntent@LevelData@@QEAAXW4GamePublishSetting@Social@@@Z
-    MCAPI void setPlatformBroadcastIntent(::Social::GamePublishSetting);
+    MCAPI void setPlatformBroadcastIntent(::Social::GamePublishSetting broadcastMode);
 
     // symbol: ?setPlatformBroadcastMode@LevelData@@QEAAXW4GamePublishSetting@Social@@@Z
-    MCAPI void setPlatformBroadcastMode(::Social::GamePublishSetting);
-
-    // symbol: ?setPremiumTemplateContentIdentity@LevelData@@QEAAXAEBVContentIdentity@@@Z
-    MCAPI void setPremiumTemplateContentIdentity(class ContentIdentity const&);
+    MCAPI void setPlatformBroadcastMode(::Social::GamePublishSetting broadcastMode);
 
     // symbol: ?setRainLevel@LevelData@@QEAAXM@Z
-    MCAPI void setRainLevel(float);
+    MCAPI void setRainLevel(float level);
 
     // symbol: ?setRainTime@LevelData@@QEAAXH@Z
-    MCAPI void setRainTime(int);
+    MCAPI void setRainTime(int rainTime);
 
     // symbol: ?setSeed@LevelData@@QEAAXVLevelSeed64@@@Z
-    MCAPI void setSeed(class LevelSeed64);
+    MCAPI void setSeed(class LevelSeed64 seed);
 
     // symbol: ?setServerChunkTickRange@LevelData@@QEAAXI@Z
-    MCAPI void setServerChunkTickRange(uint);
+    MCAPI void setServerChunkTickRange(uint newRange);
 
     // symbol: ?setSpawnPos@LevelData@@QEAAXAEBVBlockPos@@@Z
-    MCAPI void setSpawnPos(class BlockPos const&);
+    MCAPI void setSpawnPos(class BlockPos const& spawn);
 
     // symbol: ?setStorageVersion@LevelData@@QEAAXW4StorageVersion@@@Z
-    MCAPI void setStorageVersion(::StorageVersion);
+    MCAPI void setStorageVersion(::StorageVersion version);
 
     // symbol: ?setTagData@LevelData@@QEBAXAEAVCompoundTag@@@Z
-    MCAPI void setTagData(class CompoundTag&) const;
+    MCAPI void setTagData(class CompoundTag& tag) const;
 
     // symbol: ?setTexturepacksRequired@LevelData@@QEAAX_N@Z
-    MCAPI void setTexturepacksRequired(bool);
+    MCAPI void setTexturepacksRequired(bool texturepacksRequired);
 
     // symbol: ?setTime@LevelData@@QEAAXH@Z
-    MCAPI void setTime(int);
+    MCAPI void setTime(int time);
 
     // symbol: ?setUseMsaGamertagsOnly@LevelData@@QEAAX_N@Z
-    MCAPI void setUseMsaGamertagsOnly(bool);
+    MCAPI void setUseMsaGamertagsOnly(bool useMsaGamertagsOnly);
 
     // symbol: ?setWorldTemplateIdentity@LevelData@@QEAAXAEBUPackIdVersion@@@Z
-    MCAPI void setWorldTemplateIdentity(struct PackIdVersion const&);
+    MCAPI void setWorldTemplateIdentity(struct PackIdVersion const& packIdVersion);
 
     // symbol: ?setWorldTemplateOptionLocked@LevelData@@QEAAX_N@Z
-    MCAPI void setWorldTemplateOptionLocked(bool);
+    MCAPI void setWorldTemplateOptionLocked(bool isLocked);
 
     // symbol: ?setWorldVersion@LevelData@@QEAAXW4WorldVersion@@@Z
-    MCAPI void setWorldVersion(::WorldVersion);
+    MCAPI void setWorldVersion(::WorldVersion version);
 
     // symbol: ?setXBLBroadcastIntent@LevelData@@QEAAXW4GamePublishSetting@Social@@@Z
-    MCAPI void setXBLBroadcastIntent(::Social::GamePublishSetting);
+    MCAPI void setXBLBroadcastIntent(::Social::GamePublishSetting broadcastMode);
 
     // symbol: ?setXBLBroadcastMode@LevelData@@QEAAXW4GamePublishSetting@Social@@@Z
-    MCAPI void setXBLBroadcastMode(::Social::GamePublishSetting);
+    MCAPI void setXBLBroadcastMode(::Social::GamePublishSetting broadcastMode);
 
     // symbol: ?touchLastLoadedWithVersion@LevelData@@QEAAXXZ
     MCAPI void touchLastLoadedWithVersion();
 
-    // symbol: ?updateLastTimePlayed@LevelData@@QEBAXXZ
-    MCAPI void updateLastTimePlayed() const;
-
     // symbol: ?v1_read@LevelData@@QEAAXAEAVBitStream@RakNet@@W4StorageVersion@@@Z
-    MCAPI void v1_read(class RakNet::BitStream&, ::StorageVersion);
+    MCAPI void v1_read(class RakNet::BitStream& bitStream, ::StorageVersion storageVersion);
 
     // symbol: ??1LevelData@@QEAA@XZ
     MCAPI ~LevelData();
@@ -467,11 +470,8 @@ public:
 
     // private:
     // NOLINTBEGIN
-    // symbol: ?_determineMaxBaseGameVersion@LevelData@@AEAAXXZ
-    MCAPI void _determineMaxBaseGameVersion();
-
     // symbol: ?_setValue@LevelData@@AEAAXAEBVHashedString@@$$QEAULevelDataValue@@@Z
-    MCAPI void _setValue(class HashedString const&, struct LevelDataValue&&);
+    MCAPI void _setValue(class HashedString const& key, struct LevelDataValue&& value);
 
     // NOLINTEND
 };

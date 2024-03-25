@@ -18,8 +18,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1SetActorLinkPacket@@UEAA@XZ
+    virtual ~SetActorLinkPacket();
 
     // vIndex: 1, symbol: ?getId@SetActorLinkPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -29,20 +29,17 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@SetActorLinkPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@SetActorLinkPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1SetActorLinkPacket@@UEAA@XZ
-    MCVAPI ~SetActorLinkPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0SetActorLinkPacket@@QEAA@XZ
     MCAPI SetActorLinkPacket();
 
     // symbol: ??0SetActorLinkPacket@@QEAA@AEBUActorLink@@@Z
-    MCAPI explicit SetActorLinkPacket(struct ActorLink const&);
+    MCAPI explicit SetActorLinkPacket(struct ActorLink const& link);
 
     // NOLINTEND
 };

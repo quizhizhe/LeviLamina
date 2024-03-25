@@ -19,8 +19,15 @@ public:
 
 public:
     // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1SaveTransactionManager@@UEAA@XZ
+    virtual ~SaveTransactionManager() = default;
+
     // symbol: ??0SaveTransactionManager@@QEAA@AEAVWorkerPool@@AEAVScheduler@@V?$function@$$A6AX_N@Z@std@@@Z
-    MCAPI SaveTransactionManager(class WorkerPool&, class Scheduler&, std::function<void(bool)>);
+    MCAPI SaveTransactionManager(
+        class WorkerPool&         workerPool,
+        class Scheduler&          scheduler,
+        std::function<void(bool)> showIconFunction
+    );
 
     // symbol: ?onBeginCompaction@SaveTransactionManager@@QEAAXXZ
     MCAPI void onBeginCompaction();

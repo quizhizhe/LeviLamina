@@ -15,8 +15,8 @@ public:
 
     template <typename T>
     inline Bedrock::Result<void> readType(T& x) {
-        auto res = serialize<T>::read(*this);
-        if (res.has_value()) {
+        auto res = ::serialize<T>::read(*this);
+        if (res) {
             x = res.value();
             return {};
         }
@@ -38,20 +38,17 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1ReadOnlyBinaryStream@@UEAA@XZ
+    virtual ~ReadOnlyBinaryStream();
 
     // vIndex: 1, symbol: ?read@ReadOnlyBinaryStream@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@PEAX_K@Z
-    virtual class Bedrock::Result<void> read(void*, uint64);
-
-    // symbol: ??1ReadOnlyBinaryStream@@UEAA@XZ
-    MCVAPI ~ReadOnlyBinaryStream();
+    virtual class Bedrock::Result<void> read(void* target, uint64 num);
 
     // symbol: ??0ReadOnlyBinaryStream@@QEAA@$$QEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI explicit ReadOnlyBinaryStream(std::string&&);
+    MCAPI explicit ReadOnlyBinaryStream(std::string&& buffer);
 
     // symbol: ??0ReadOnlyBinaryStream@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z
-    MCAPI ReadOnlyBinaryStream(std::string const&, bool);
+    MCAPI ReadOnlyBinaryStream(std::string const& buffer, bool copyBuffer);
 
     // symbol: ?canReadBool@ReadOnlyBinaryStream@@QEBA_NXZ
     MCAPI bool canReadBool() const;

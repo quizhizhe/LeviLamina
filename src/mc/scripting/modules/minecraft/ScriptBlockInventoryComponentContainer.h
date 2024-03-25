@@ -28,8 +28,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScriptBlockInventoryComponentContainer@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptBlockInventoryComponentContainer() = default;
 
     // vIndex: 2, symbol:
     // ?getEmptySlotsCount@ScriptBlockInventoryComponentContainer@ScriptModuleMinecraft@@UEBA?AV?$Result@H$$V@Scripting@@XZ
@@ -41,7 +41,7 @@ public:
 
     // vIndex: 14, symbol:
     // ?_getItemContext@ScriptBlockInventoryComponentContainer@ScriptModuleMinecraft@@MEBA?AVItemContext@@H@Z
-    virtual class ItemContext _getItemContext(int) const;
+    virtual class ItemContext _getItemContext(int slot) const;
 
     // NOLINTEND
 };

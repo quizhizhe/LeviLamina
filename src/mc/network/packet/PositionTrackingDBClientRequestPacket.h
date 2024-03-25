@@ -24,8 +24,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1PositionTrackingDBClientRequestPacket@@UEAA@XZ
+    virtual ~PositionTrackingDBClientRequestPacket();
 
     // vIndex: 1, symbol: ?getId@PositionTrackingDBClientRequestPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -35,14 +35,11 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@PositionTrackingDBClientRequestPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@PositionTrackingDBClientRequestPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1PositionTrackingDBClientRequestPacket@@UEAA@XZ
-    MCVAPI ~PositionTrackingDBClientRequestPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0PositionTrackingDBClientRequestPacket@@QEAA@XZ
     MCAPI PositionTrackingDBClientRequestPacket();

@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1LookAtActorGoal@@UEAA@XZ
+    virtual ~LookAtActorGoal();
 
     // vIndex: 1, symbol: ?canUse@LookAtActorGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -35,20 +35,25 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@LookAtActorGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
-
-    // symbol: ??1LookAtActorGoal@@UEAA@XZ
-    MCVAPI ~LookAtActorGoal();
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0LookAtActorGoal@@QEAA@AEAVMob@@MMHHHH@Z
-    MCAPI LookAtActorGoal(class Mob&, float, float, int, int, int, int);
+    MCAPI LookAtActorGoal(
+        class Mob& mob,
+        float      lookDistance,
+        float      probability,
+        int        minLookTime,
+        int        maxLookTime,
+        int        angleOfViewX,
+        int        angleOfViewY
+    );
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_withinFieldOfView@LookAtActorGoal@@AEAA_NAEAVActor@@@Z
-    MCAPI bool _withinFieldOfView(class Actor&);
+    MCAPI bool _withinFieldOfView(class Actor& entity);
 
     // NOLINTEND
 };

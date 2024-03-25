@@ -8,7 +8,7 @@ public:
     // CommandBlockNameResult inner types define
     enum class Result : uchar {
         Unknown       = 0x0,
-        Succeess      = 0x1,
+        Success       = 0x1,
         NoBlockName   = 0x2,
         SetDataError  = 0x3,
         SetStateError = 0x4,
@@ -28,7 +28,7 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ??0CommandBlockNameResult@@QEAA@AEBVHashedString@@PEBVBlock@@_N@Z
-    MCAPI CommandBlockNameResult(class HashedString const&, class Block const*, bool);
+    MCAPI CommandBlockNameResult(class HashedString const& originalName, class Block const* block, bool);
 
     // symbol: ?getBlock@CommandBlockNameResult@@QEBAPEBVBlock@@XZ
     MCAPI class Block const* getBlock() const;

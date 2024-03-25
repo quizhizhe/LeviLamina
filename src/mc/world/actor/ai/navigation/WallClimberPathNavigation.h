@@ -14,25 +14,27 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1WallClimberPathNavigation@@UEAA@XZ
+    virtual ~WallClimberPathNavigation() = default;
 
     // vIndex: 2, symbol: ?tick@WallClimberPathNavigation@@MEAAXAEAVNavigationComponent@@AEAVMob@@@Z
-    virtual void tick(class NavigationComponent&, class Mob&);
+    virtual void tick(class NavigationComponent& parent, class Mob& mob);
 
     // vIndex: 4, symbol:
     // ?createPath@WallClimberPathNavigation@@MEAA?AV?$unique_ptr@VPath@@U?$default_delete@VPath@@@std@@@std@@AEAVNavigationComponent@@AEAVMob@@AEBVVec3@@@Z
-    virtual std::unique_ptr<class Path> createPath(class NavigationComponent&, class Mob&, class Vec3 const&);
+    virtual std::unique_ptr<class Path>
+    createPath(class NavigationComponent& parent, class Mob& mob, class Vec3 const& pos);
 
     // vIndex: 5, symbol:
     // ?createPath@WallClimberPathNavigation@@MEAA?AV?$unique_ptr@VPath@@U?$default_delete@VPath@@@std@@@std@@AEAVNavigationComponent@@AEAVMob@@AEAVActor@@@Z
-    virtual std::unique_ptr<class Path> createPath(class NavigationComponent&, class Mob&, class Actor&);
+    virtual std::unique_ptr<class Path>
+    createPath(class NavigationComponent& parent, class Mob& mob, class Actor& target);
 
     // vIndex: 7, symbol: ?moveTo@WallClimberPathNavigation@@MEAA_NAEAVNavigationComponent@@AEAVMob@@AEAVActor@@M@Z
-    virtual bool moveTo(class NavigationComponent&, class Mob&, class Actor&, float);
+    virtual bool moveTo(class NavigationComponent& parent, class Mob& mob, class Actor& target, float speed);
 
     // vIndex: 11, symbol: ?canUpdatePath@WallClimberPathNavigation@@MEBA_NAEBVMob@@@Z
-    virtual bool canUpdatePath(class Mob const&) const;
+    virtual bool canUpdatePath(class Mob const& mob) const;
 
     // NOLINTEND
 

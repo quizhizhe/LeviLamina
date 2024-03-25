@@ -14,11 +14,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SimpleBlockVolumeIterator@@UEAA@XZ
+    virtual ~SimpleBlockVolumeIterator() = default;
 
     // symbol: ??0SimpleBlockVolumeIterator@@QEAA@AEBVSimpleBlockVolume@@_N@Z
-    MCAPI SimpleBlockVolumeIterator(class SimpleBlockVolume const&, bool);
+    MCAPI SimpleBlockVolumeIterator(class SimpleBlockVolume const&, bool begin);
 
     // NOLINTEND
 };

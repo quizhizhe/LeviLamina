@@ -1,11 +1,38 @@
 #include "ll/api/utils/StringUtils.h"
-#include "ctre/ctre-unicode.hpp"
-#include "ll/api/base/Global.h"
-#include "magic_enum.hpp"
-#include "mc/deps/core/mce/Color.h"
-#include "windows.h"
 
-namespace ll::utils::string_utils {
+#include <cctype>
+#include <cfloat>
+#include <cstdint>
+#include <string>
+#include <string_view>
+#include <unordered_map>
+
+#include "ctre/ctre-unicode.hpp"
+#include "fmt/color.h"
+#include "fmt/core.h"
+#include "fmt/format.h"
+#include "magic_enum.hpp"
+
+#include "ll/api/base/StdInt.h"
+
+#include "mc/deps/core/mce/Color.h"
+#include "mc/deps/core/utility/Util.h"
+#include "mc/deps/snappy/snappy.h"
+
+#include "stringapiset.h"
+
+namespace ll::inline utils::string_utils {
+
+std::string compress(std::string_view sv) {
+    std::string res;
+    snappy::Compress(sv.data(), sv.size(), &res);
+    return res;
+}
+std::string decompress(std::string_view sv) {
+    std::string res;
+    snappy::Uncompress(sv.data(), sv.size(), &res);
+    return res;
+}
 
 fmt::text_style getTextStyleFromCode(std::string_view code) {
     if (code.starts_with("§")) {
@@ -51,10 +78,14 @@ fmt::text_style getTextStyleFromCode(std::string_view code) {
         if (code.find(';') != std::string_view::npos) {
             bool background = code.starts_with('4');
             code.remove_prefix(1);
-            if (!code.starts_with("8;2;")) { return {}; }
+            if (!code.starts_with("8;2;")) {
+                return {};
+            }
             code.remove_prefix(4);
             auto svec = splitByPattern(code, ";");
-            if (svec.size() != 3) { return {}; }
+            if (svec.size() != 3) {
+                return {};
+            }
             auto colorFromCode = fmt::rgb(svtouc(svec[0]), svtouc(svec[1]), svtouc(svec[2]));
             if (background) {
                 return fmt::bg(colorFromCode);
@@ -69,7 +100,7 @@ fmt::text_style getTextStyleFromCode(std::string_view code) {
                 return fmt::bg((fmt::terminal_color)(num - 10));
             } else {
                 switch (num) {
-                // clang-format off
+                    // clang-format off
                     case 1: return fmt::emphasis::bold;
                     case 2: return fmt::emphasis::faint;
                     case 3: return fmt::emphasis::italic;
@@ -93,9 +124,15 @@ std::string getMcCodeFromTextStyle(fmt::text_style style) {
     bool        hasMcStyle = false;
     if (style.has_emphasis()) {
         hasMcStyle = true;
-        if ((uchar)(fmt::emphasis::blink) & (uchar)(style.get_emphasis())) { res += "§k"; }
-        if ((uchar)(fmt::emphasis::bold) & (uchar)(style.get_emphasis())) { res += "§l"; }
-        if ((uchar)(fmt::emphasis::italic) & (uchar)(style.get_emphasis())) { res += "§o"; }
+        if ((uchar)(fmt::emphasis::blink) & (uchar)(style.get_emphasis())) {
+            res += "§k";
+        }
+        if ((uchar)(fmt::emphasis::bold) & (uchar)(style.get_emphasis())) {
+            res += "§l";
+        }
+        if ((uchar)(fmt::emphasis::italic) & (uchar)(style.get_emphasis())) {
+            res += "§o";
+        }
     }
     if (style.has_foreground()) {
         hasMcStyle = true;
@@ -125,7 +162,7 @@ std::string getMcCodeFromTextStyle(fmt::text_style style) {
             res += minStr;
         } else {
             switch ((fmt::terminal_color)(fg.value.term_color)) {
-            // clang-format off
+                // clang-format off
             case fmt::terminal_color::black:          res += "§0"; break;
             case fmt::terminal_color::red:            res += "§4"; break;
             case fmt::terminal_color::green:          res += "§2"; break;
@@ -147,8 +184,12 @@ std::string getMcCodeFromTextStyle(fmt::text_style style) {
             }
         }
     }
-    if (style.has_background()) { hasMcStyle = true; }
-    if (hasMcStyle) { return res; }
+    if (style.has_background()) {
+        hasMcStyle = true;
+    }
+    if (hasMcStyle) {
+        return res;
+    }
     return "§r";
 }
 
@@ -170,19 +211,21 @@ std::string getAnsiCodeFromTextStyle(fmt::text_style style) {
 }
 
 std::wstring str2wstr(std::string_view str, uint codePage) {
-    int len = MultiByteToWideChar(codePage, 0, str.data(), (int)str.size(), nullptr, 0);
-    if (len == 0) { return {}; }
-    std::wstring wstr(len, L'\0');
+    int          len = MultiByteToWideChar(codePage, 0, str.data(), (int)str.size(), nullptr, 0);
+    std::wstring wstr;
+    if (len == 0) return wstr;
+    wstr.resize(len);
     MultiByteToWideChar(codePage, 0, str.data(), (int)str.size(), wstr.data(), len);
     return wstr;
 }
 
-std::string wstr2str(std::wstring_view str, uint codePage) {
-    int len = WideCharToMultiByte(codePage, 0, str.data(), (int)str.size(), nullptr, 0, nullptr, nullptr);
-    if (len == 0) { return {}; }
-    std::string ret(len, '\0');
-    WideCharToMultiByte(codePage, 0, str.data(), (int)str.size(), ret.data(), (int)ret.size(), nullptr, nullptr);
-    return ret;
+std::string wstr2str(std::wstring_view wstr, uint codePage) {
+    int         len = WideCharToMultiByte(codePage, 0, wstr.data(), (int)wstr.size(), nullptr, 0, nullptr, nullptr);
+    std::string str;
+    if (len == 0) return str;
+    str.resize(len);
+    WideCharToMultiByte(codePage, 0, wstr.data(), (int)wstr.size(), str.data(), (int)str.size(), nullptr, nullptr);
+    return str;
 }
 
 std::string str2str(std::string_view str, uint fromCodePage, uint toCodePage) {
@@ -190,43 +233,85 @@ std::string str2str(std::string_view str, uint fromCodePage, uint toCodePage) {
 }
 
 std::string removeEscapeCode(std::string_view str) {
-    std::stringstream res;
-    auto              sbu8 = sv2u8sv(str);
+    std::string res;
+    auto        sbu8 = sv2u8sv(str);
     for (auto& s : ctre::split<u8"(\x1B(?:[@-Z\\-_]|\\[[0-?]*[ -/]*[@-~]))|((?<!§)§(?:[0-9a-u]))">(sbu8)) {
-        res << u8sv2sv(s);
+        res += u8sv2sv(s);
     }
-    return res.str();
+    return res;
 }
 
 std::string replaceAnsiToMcCode(std::string_view str) {
-    std::stringstream res;
-
-    auto i     = ctre::iterator<"\x1B(?:[@-Z\\-_]|\\[[0-?]*[ -/]*[@-~])">(str);
-    auto begin = i.orig_begin;
+    std::string res;
+    auto        i     = ctre::iterator<"\x1B(?:[@-Z\\-_]|\\[[0-?]*[ -/]*[@-~])">(str);
+    auto        begin = i.orig_begin;
     for (; i.current_match; ++i) {
-        if (begin != i.current_match.begin()) res << std::string_view{begin, i.current_match.begin()};
+        if (begin != i.current_match.begin()) res += std::string_view{begin, i.current_match.begin()};
         begin = i.current;
 
-        res << getMcCodeFromTextStyle(getTextStyleFromCode(i.current_match.view()));
+        res += getMcCodeFromTextStyle(getTextStyleFromCode(i.current_match.view()));
     }
-    if (begin != str.end()) res << std::string_view{begin, str.end()};
-    return res.str();
+    if (begin != str.end()) res += std::string_view{begin, str.end()};
+    return res;
 }
 
 std::string replaceMcToAnsiCode(std::string_view str) {
-    auto              sbu8 = sv2u8sv(str);
-    std::stringstream res;
-    auto              i     = ctre::iterator<u8"(?<!§)§(?:[0-9a-u])">(sbu8);
-    auto              begin = sbu8.begin();
+    auto        sbu8 = sv2u8sv(str);
+    std::string res;
+    auto        i     = ctre::iterator<u8"(?<!§)§(?:[0-9a-u])">(sbu8);
+    auto        begin = sbu8.begin();
     for (; i.current_match; ++i) {
         auto view = i.current_match.view();
-        if (begin != view.begin()) res << u8sv2sv(std::u8string_view{begin, view.begin()});
-        begin = view.end();
-        res << getAnsiCodeFromTextStyle(getTextStyleFromCode(u8sv2sv(view)));
+        if (begin != view.begin()) res += u8sv2sv(std::u8string_view{begin, view.begin()});
+        begin  = view.end();
+        res   += getAnsiCodeFromTextStyle(getTextStyleFromCode(u8sv2sv(view)));
     }
-    if (begin != sbu8.end()) res << u8sv2sv(std::u8string_view{begin, sbu8.end()});
-    res << getAnsiCodeFromTextStyle({});
-    return res.str();
+    if (begin != sbu8.end()) res += u8sv2sv(std::u8string_view{begin, sbu8.end()});
+    res += getAnsiCodeFromTextStyle({});
+    return res;
 }
 
-} // namespace ll::utils::string_utils
+bool isu8str(std::string_view str) noexcept {
+    bool res = true;
+    fmt::detail::for_each_codepoint(str, [&](uint32_t cp, fmt::string_view) {
+        if (cp == fmt::detail::invalid_code_point) {
+            res = false;
+            return false;
+        }
+        return true;
+    });
+    return res;
+}
+
+std::string tou8str(std::string_view str) {
+    if (isu8str(str)) {
+        return std::string{str};
+    } else {
+        return str2str(str, CodePage::DefaultACP, CodePage::UTF8);
+    }
+}
+std::string toSnakeCase(std::string_view str) {
+    std::string res;
+    if (str.empty()) {
+        return res;
+    }
+    res.reserve(str.length());
+    res.push_back((char)tolower(str.front()));
+    str.remove_prefix(1);
+    for (auto c : str) {
+        if (isupper(c)) {
+            res.push_back('_');
+            res.push_back((char)tolower(c));
+        } else {
+            res.push_back(c);
+        }
+    }
+    return res;
+}
+bool strtobool(std::string const& str) {
+    bool res = false;
+    Util::toBool(str, res);
+    return res;
+}
+
+} // namespace ll::inline utils::string_utils

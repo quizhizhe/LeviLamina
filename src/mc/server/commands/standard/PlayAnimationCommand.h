@@ -15,17 +15,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1PlayAnimationCommand@@UEAA@XZ
+    virtual ~PlayAnimationCommand();
 
     // vIndex: 2, symbol: ?execute@PlayAnimationCommand@@UEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    virtual void execute(class CommandOrigin const&, class CommandOutput&) const;
-
-    // symbol: ??1PlayAnimationCommand@@UEAA@XZ
-    MCVAPI ~PlayAnimationCommand();
+    virtual void execute(class CommandOrigin const& origin, class CommandOutput& output) const;
 
     // symbol: ?setup@PlayAnimationCommand@@SAXAEAVCommandRegistry@@@Z
-    MCAPI static void setup(class CommandRegistry&);
+    MCAPI static void setup(class CommandRegistry& registry);
 
     // NOLINTEND
 
@@ -39,7 +36,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mStopExpressionVersion() { return mStopExpressionVersion; }
+    static auto& $mStopExpressionVersion() { return mStopExpressionVersion; }
 
     // NOLINTEND
 };

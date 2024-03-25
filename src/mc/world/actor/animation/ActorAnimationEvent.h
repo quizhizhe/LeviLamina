@@ -20,10 +20,15 @@ public:
 
     // symbol:
     // ??0ActorAnimationEvent@@QEAA@MAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@W4CurrentCmdVersion@@W4MolangVersion@@@Z
-    MCAPI ActorAnimationEvent(float, std::string const&, ::CurrentCmdVersion, ::MolangVersion);
+    MCAPI ActorAnimationEvent(
+        float               time,
+        std::string const&  event,
+        ::CurrentCmdVersion commandVersion,
+        ::MolangVersion     molangVersion
+    );
 
     // symbol: ?fire@ActorAnimationEvent@@QEBAXAEAVRenderParams@@PEAVActor@@@Z
-    MCAPI void fire(class RenderParams&, class Actor*) const;
+    MCAPI void fire(class RenderParams& renderParams, class Actor* actor) const;
 
     // symbol: ??1ActorAnimationEvent@@QEAA@XZ
     MCAPI ~ActorAnimationEvent();

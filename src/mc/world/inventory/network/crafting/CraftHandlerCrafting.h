@@ -19,12 +19,12 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1CraftHandlerCrafting@@UEAA@XZ
+    virtual ~CraftHandlerCrafting() = default;
 
     // vIndex: 1, symbol:
     // ?handleConsumedItem@CraftHandlerCrafting@@UEAA?AW4ItemStackNetResult@@W4ContainerEnumName@@EAEBVItemStack@@@Z
-    virtual ::ItemStackNetResult handleConsumedItem(::ContainerEnumName, uchar, class ItemStack const&);
+    virtual ::ItemStackNetResult handleConsumedItem(::ContainerEnumName, uchar slot, class ItemStack const&);
 
     // vIndex: 2, symbol:
     // ?preHandleAction@CraftHandlerCrafting@@UEAA?AW4ItemStackNetResult@@W4ItemStackRequestActionType@@@Z
@@ -32,7 +32,7 @@ public:
 
     // vIndex: 4, symbol:
     // ?_handleCraftAction@CraftHandlerCrafting@@MEAA?AW4ItemStackNetResult@@AEBVItemStackRequestActionCraftBase@@@Z
-    virtual ::ItemStackNetResult _handleCraftAction(class ItemStackRequestActionCraftBase const&);
+    virtual ::ItemStackNetResult _handleCraftAction(class ItemStackRequestActionCraftBase const& requestAction);
 
     // vIndex: 6, symbol: ?_getLevelRecipes@CraftHandlerCrafting@@EEBAPEBVRecipes@@XZ
     virtual class Recipes const* _getLevelRecipes() const;
@@ -43,14 +43,15 @@ public:
     // NOLINTBEGIN
     // symbol:
     // ?_handleAutoCraft@CraftHandlerCrafting@@AEAA?AW4ItemStackNetResult@@AEBVItemStackRequestActionCraftRecipeAuto@@@Z
-    MCAPI ::ItemStackNetResult _handleAutoCraft(class ItemStackRequestActionCraftRecipeAuto const&);
+    MCAPI ::ItemStackNetResult _handleAutoCraft(class ItemStackRequestActionCraftRecipeAuto const& requestAction);
 
     // symbol: ?_handleCarefulRestoration@CraftHandlerCrafting@@AEBAXAEBVItemInstance@@@Z
     MCAPI void _handleCarefulRestoration(class ItemInstance const&) const;
 
     // symbol:
     // ?_handleCraftOutput@CraftHandlerCrafting@@AEAA?AW4ItemStackNetResult@@AEBV?$ItemStackRequestActionCraft@V?$TypedServerNetId@URecipeNetIdTag@@I$0A@@@$0M@@@@Z
-    MCAPI ::ItemStackNetResult _handleCraftOutput(class ItemStackRequestActionCraft<RecipeNetId, 12> const&);
+    MCAPI ::ItemStackNetResult
+    _handleCraftOutput(class ItemStackRequestActionCraft<RecipeNetId, 12> const& requestAction);
 
     // NOLINTEND
 };

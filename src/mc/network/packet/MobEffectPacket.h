@@ -32,8 +32,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1MobEffectPacket@@UEAA@XZ
+    virtual ~MobEffectPacket();
 
     // vIndex: 1, symbol: ?getId@MobEffectPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -43,20 +43,24 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@MobEffectPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@MobEffectPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1MobEffectPacket@@UEAA@XZ
-    MCVAPI ~MobEffectPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0MobEffectPacket@@QEAA@XZ
     MCAPI MobEffectPacket();
 
     // symbol: ??0MobEffectPacket@@QEAA@VActorRuntimeID@@W4Event@0@HHH_N@Z
-    MCAPI MobEffectPacket(class ActorRuntimeID, ::MobEffectPacket::Event, int, int, int, bool);
+    MCAPI MobEffectPacket(
+        class ActorRuntimeID     runtimeId,
+        ::MobEffectPacket::Event event,
+        int                      effectId,
+        int                      duration,
+        int                      amplifier,
+        bool                     showParticles
+    );
 
     // NOLINTEND
 };

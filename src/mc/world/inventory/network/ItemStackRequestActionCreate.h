@@ -11,21 +11,19 @@ public:
     // prevent constructor by default
     ItemStackRequestActionCreate& operator=(ItemStackRequestActionCreate const&);
     ItemStackRequestActionCreate(ItemStackRequestActionCreate const&);
+    ItemStackRequestActionCreate();
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ItemStackRequestActionCreate@@UEAA@XZ
+    virtual ~ItemStackRequestActionCreate() = default;
 
     // vIndex: 4, symbol: ?_write@ItemStackRequestActionCreate@@MEBAXAEAVBinaryStream@@@Z
-    virtual void _write(class BinaryStream&) const;
+    virtual void _write(class BinaryStream& stream) const;
 
     // vIndex: 5, symbol:
     // ?_read@ItemStackRequestActionCreate@@MEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??0ItemStackRequestActionCreate@@QEAA@XZ
-    MCAPI ItemStackRequestActionCreate();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // NOLINTEND
 };

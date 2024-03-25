@@ -12,10 +12,10 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ?canPullOutItem@BrewingStandBlockActor@@UEBA_NHHAEBVItemStack@@@Z
-    MCVAPI bool canPullOutItem(int, int, class ItemStack const&) const;
+    MCVAPI bool canPullOutItem(int slot, int face, class ItemStack const&) const;
 
     // symbol: ?canPushInItem@BrewingStandBlockActor@@UEBA_NHHAEBVItemStack@@@Z
-    MCVAPI bool canPushInItem(int, int, class ItemStack const&) const;
+    MCVAPI bool canPushInItem(int slot, int face, class ItemStack const& item) const;
 
     // symbol: ?getContainer@BrewingStandBlockActor@@UEAAPEAVContainer@@XZ
     MCVAPI class Container* getContainer();
@@ -27,7 +27,7 @@ public:
     MCVAPI int getContainerSize() const;
 
     // symbol: ?getItem@BrewingStandBlockActor@@UEBAAEBVItemStack@@H@Z
-    MCVAPI class ItemStack const& getItem(int) const;
+    MCVAPI class ItemStack const& getItem(int slot) const;
 
     // symbol: ?getMaxStackSize@BrewingStandBlockActor@@UEBAHXZ
     MCVAPI int getMaxStackSize() const;
@@ -36,25 +36,29 @@ public:
     MCVAPI std::string getName() const;
 
     // symbol: ?load@BrewingStandBlockActor@@UEAAXAEAVLevel@@AEBVCompoundTag@@AEAVDataLoadHelper@@@Z
-    MCVAPI void load(class Level&, class CompoundTag const&, class DataLoadHelper&);
+    MCVAPI void load(class Level& level, class CompoundTag const& base, class DataLoadHelper& dataLoadHelper);
 
     // symbol: ?onChanged@BrewingStandBlockActor@@UEAAXAEAVBlockSource@@@Z
-    MCVAPI void onChanged(class BlockSource&);
+    MCVAPI void onChanged(class BlockSource& region);
 
     // symbol: ?onMove@BrewingStandBlockActor@@UEAAXXZ
     MCVAPI void onMove();
 
     // symbol: ?save@BrewingStandBlockActor@@UEBA_NAEAVCompoundTag@@@Z
-    MCVAPI bool save(class CompoundTag&) const;
+    MCVAPI bool save(class CompoundTag& tag) const;
 
     // symbol: ?serverInitItemStackIds@BrewingStandBlockActor@@UEAAXHHV?$function@$$A6AXHAEBVItemStack@@@Z@std@@@Z
-    MCVAPI void serverInitItemStackIds(int, int, std::function<void(int, class ItemStack const&)>);
+    MCVAPI void serverInitItemStackIds(
+        int                                              containerSlot,
+        int                                              count,
+        std::function<void(int, class ItemStack const&)> onNetIdChanged
+    );
 
     // symbol: ?setContainerChanged@BrewingStandBlockActor@@UEAAXH@Z
-    MCVAPI void setContainerChanged(int);
+    MCVAPI void setContainerChanged(int slot);
 
     // symbol: ?setItem@BrewingStandBlockActor@@UEAAXHAEBVItemStack@@@Z
-    MCVAPI void setItem(int, class ItemStack const&);
+    MCVAPI void setItem(int slot, class ItemStack const& item);
 
     // symbol: ?startOpen@BrewingStandBlockActor@@UEAAXAEAVPlayer@@@Z
     MCVAPI void startOpen(class Player&);
@@ -63,7 +67,7 @@ public:
     MCVAPI void stopOpen(class Player&);
 
     // symbol: ?tick@BrewingStandBlockActor@@UEAAXAEAVBlockSource@@@Z
-    MCVAPI void tick(class BlockSource&);
+    MCVAPI void tick(class BlockSource& region);
 
     // symbol: ?brew@BrewingStandBlockActor@@QEAAXXZ
     MCAPI void brew();
@@ -78,16 +82,16 @@ public:
     MCAPI int getFuelTotal() const;
 
     // symbol: ?setBrewTime@BrewingStandBlockActor@@QEAAXH@Z
-    MCAPI void setBrewTime(int);
+    MCAPI void setBrewTime(int value);
 
     // symbol: ?setFuelAmount@BrewingStandBlockActor@@QEAAXH@Z
-    MCAPI void setFuelAmount(int);
+    MCAPI void setFuelAmount(int value);
 
     // symbol: ?setFuelTotal@BrewingStandBlockActor@@QEAAXH@Z
-    MCAPI void setFuelTotal(int);
+    MCAPI void setFuelTotal(int value);
 
     // symbol: ?isFuel@BrewingStandBlockActor@@SA_NAEBVItemDescriptor@@@Z
-    MCAPI static bool isFuel(class ItemDescriptor const&);
+    MCAPI static bool isFuel(class ItemDescriptor const& itemDescriptor);
 
     // NOLINTEND
 

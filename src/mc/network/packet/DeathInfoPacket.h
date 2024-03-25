@@ -17,8 +17,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1DeathInfoPacket@@UEAA@XZ
+    virtual ~DeathInfoPacket();
 
     // vIndex: 1, symbol: ?getId@DeathInfoPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -28,14 +28,11 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@DeathInfoPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@DeathInfoPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1DeathInfoPacket@@UEAA@XZ
-    MCVAPI ~DeathInfoPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0DeathInfoPacket@@QEAA@XZ
     MCAPI DeathInfoPacket();

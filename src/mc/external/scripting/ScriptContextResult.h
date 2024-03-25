@@ -10,6 +10,13 @@ public:
     ScriptContextResult& operator=(ScriptContextResult const&);
     ScriptContextResult(ScriptContextResult const&);
     ScriptContextResult();
+
+public:
+    // NOLINTBEGIN
+    // symbol: ??1ScriptContextResult@Scripting@@QEAA@XZ
+    MCAPI ~ScriptContextResult();
+
+    // NOLINTEND
 };
 
 }; // namespace Scripting

@@ -34,8 +34,8 @@ public:
 
     public:
         // NOLINTBEGIN
-        // symbol: ??1IPSupportInterface@RakPeerHelper@@UEAA@XZ
-        MCVAPI ~IPSupportInterface();
+        // vIndex: 0, symbol: ??1IPSupportInterface@RakPeerHelper@@UEAA@XZ
+        virtual ~IPSupportInterface();
 
         // NOLINTEND
     };
@@ -48,47 +48,32 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ??0RakPeerHelper@@QEAA@AEAVIPSupportInterface@0@@Z
-    MCAPI explicit RakPeerHelper(class RakPeerHelper::IPSupportInterface&);
-
-    // symbol: ?getIPv4ConnectionIndex@RakPeerHelper@@QEBAHXZ
-    MCAPI int getIPv4ConnectionIndex() const;
-
-    // symbol: ?getIPv6ConnectionIndex@RakPeerHelper@@QEBAHXZ
-    MCAPI int getIPv6ConnectionIndex() const;
-
-    // symbol: ?isIPv4Supported@RakPeerHelper@@QEBA_NXZ
-    MCAPI bool isIPv4Supported() const;
-
-    // symbol: ?isIPv6Supported@RakPeerHelper@@QEBA_NXZ
-    MCAPI bool isIPv6Supported() const;
-
     // symbol:
     // ?peerStartup@RakPeerHelper@@QEAA?AW4StartupResult@RakNet@@PEAVRakPeerInterface@3@AEBUConnectionDefinition@@W4PeerPurpose@1@@Z
-    MCAPI ::RakNet::StartupResult
-    peerStartup(class RakNet::RakPeerInterface*, struct ConnectionDefinition const&, ::RakPeerHelper::PeerPurpose);
-
-    // symbol: ?reset@RakPeerHelper@@QEAAXXZ
-    MCAPI void reset();
+    MCAPI ::RakNet::StartupResult peerStartup(
+        class RakNet::RakPeerInterface*,
+        struct ConnectionDefinition const& definition,
+        ::RakPeerHelper::PeerPurpose       purpose
+    );
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?LogIPSupport@RakPeerHelper@@AEAAXW4PeerPurpose@1@@Z
-    MCAPI void LogIPSupport(::RakPeerHelper::PeerPurpose);
+    MCAPI void LogIPSupport(::RakPeerHelper::PeerPurpose purpose);
 
     // symbol: ?_resetToIPv6Only@RakPeerHelper@@AEAAXV?$span@USocketDescriptor@RakNet@@$01@gsl@@AEAH@Z
-    MCAPI void _resetToIPv6Only(gsl::span<struct RakNet::SocketDescriptor, 2>, int&);
+    MCAPI void _resetToIPv6Only(gsl::span<struct RakNet::SocketDescriptor, 2> sockets, int& socketCount);
 
     // symbol:
     // ?_startupInternal@RakPeerHelper@@AEAA?AW4StartupResult@RakNet@@V?$not_null@PEAVRakPeerInterface@RakNet@@@gsl@@AEBUConnectionDefinition@@PEAUSocketDescriptor@3@AEAHH@Z
     MCAPI ::RakNet::StartupResult _startupInternal(
-        gsl::not_null<class RakNet::RakPeerInterface*>,
-        struct ConnectionDefinition const&,
-        struct RakNet::SocketDescriptor*,
-        int&,
-        int
+        gsl::not_null<class RakNet::RakPeerInterface*> peer,
+        struct ConnectionDefinition const&             definition,
+        struct RakNet::SocketDescriptor*               sockets,
+        int&                                           socketCount,
+        int                                            ipv6Index
     );
 
     // NOLINTEND

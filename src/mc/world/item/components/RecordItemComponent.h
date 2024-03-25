@@ -16,12 +16,11 @@ public:
     // prevent constructor by default
     RecordItemComponent& operator=(RecordItemComponent const&);
     RecordItemComponent(RecordItemComponent const&);
-    RecordItemComponent();
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1RecordItemComponent@@UEAA@XZ
+    virtual ~RecordItemComponent() = default;
 
     // vIndex: 1, symbol: ?checkComponentDataForContentErrors@ItemComponent@@UEBA_NXZ
     virtual bool checkComponentDataForContentErrors() const;
@@ -33,11 +32,11 @@ public:
     virtual bool isNetworkComponent() const;
 
     // vIndex: 4, symbol:
-    // ?buildNetworkTag@ChargeableItemComponent@@UEBA?AV?$unique_ptr@VCompoundTag@@U?$default_delete@VCompoundTag@@@std@@@std@@AEBUReflectionCtx@cereal@@@Z
+    // ?buildNetworkTag@?$NetworkedItemComponent@VRecordItemComponent@@@@UEBA?AV?$unique_ptr@VCompoundTag@@U?$default_delete@VCompoundTag@@@std@@@std@@AEBUReflectionCtx@cereal@@@Z
     virtual std::unique_ptr<class CompoundTag> buildNetworkTag(struct cereal::ReflectionCtx const&) const;
 
     // vIndex: 5, symbol:
-    // ?initializeFromNetwork@ChargeableItemComponent@@UEAA_NAEBVCompoundTag@@AEBUReflectionCtx@cereal@@@Z
+    // ?initializeFromNetwork@?$NetworkedItemComponent@VRecordItemComponent@@@@UEAA_NAEBVCompoundTag@@AEBUReflectionCtx@cereal@@@Z
     virtual bool initializeFromNetwork(class CompoundTag const&, struct cereal::ReflectionCtx const&);
 
     // vIndex: 6, symbol: ?handleVersionBasedInitialization@ItemComponent@@UEAAXAEBVSemVersion@@@Z
@@ -49,15 +48,18 @@ public:
     // vIndex: 8, symbol: ?_useOn@ItemComponent@@MEBA_NAEAVItemStack@@AEAVActor@@AEBVBlockPos@@EAEBVVec3@@@Z
     virtual bool _useOn(class ItemStack&, class Actor&, class BlockPos const&, uchar, class Vec3 const&) const;
 
-    // vIndex: 9, symbol: ?_initializeComponent@ItemComponent@@MEBAXXZ
-    virtual void _initializeComponent() const;
+    // vIndex: 9, symbol: ?_initializeComponent@ItemComponent@@MEAAXXZ
+    virtual void _initializeComponent();
 
-    // symbol: ??0RecordItemComponent@@QEAA@W4LevelSoundEvent@@MH@Z
-    MCAPI RecordItemComponent(::LevelSoundEvent, float, int);
+    // symbol: ??0RecordItemComponent@@QEAA@XZ
+    MCAPI RecordItemComponent();
+
+    // symbol: ??0RecordItemComponent@@QEAA@W4LevelSoundEvent@Legacy@Puv@@MH@Z
+    MCAPI RecordItemComponent(::Puv::Legacy::LevelSoundEvent, float, int);
 
     // symbol:
     // ?appendFormattedHovertext@RecordItemComponent@@QEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI void appendFormattedHovertext(std::string&) const;
+    MCAPI void appendFormattedHovertext(std::string& hovertext) const;
 
     // symbol: ?getComparatorSignal@RecordItemComponent@@QEBAHXZ
     MCAPI int getComparatorSignal() const;
@@ -69,8 +71,8 @@ public:
     // ?getRecordDescription@RecordItemComponent@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
     MCAPI std::string getRecordDescription() const;
 
-    // symbol: ?getSound@RecordItemComponent@@QEBA?AW4LevelSoundEvent@@XZ
-    MCAPI ::LevelSoundEvent getSound() const;
+    // symbol: ?getSound@RecordItemComponent@@QEBA?AW4LevelSoundEvent@Legacy@Puv@@XZ
+    MCAPI ::Puv::Legacy::LevelSoundEvent getSound() const;
 
     // symbol:
     // ?bindType@RecordItemComponent@@SAXAEAUReflectionCtx@cereal@@AEBV?$vector@W4AllExperiments@@V?$allocator@W4AllExperiments@@@std@@@std@@V?$optional@VSemVersion@@@5@@Z
@@ -81,8 +83,8 @@ public:
     MCAPI static class HashedString const& getIdentifier();
 
     // symbol:
-    // ?getRecordNameNoPrefix@RecordItemComponent@@SA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@W4LevelSoundEvent@@@Z
-    MCAPI static std::string getRecordNameNoPrefix(::LevelSoundEvent);
+    // ?getRecordNameNoPrefix@RecordItemComponent@@SA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@W4LevelSoundEvent@Legacy@Puv@@@Z
+    MCAPI static std::string getRecordNameNoPrefix(::Puv::Legacy::LevelSoundEvent);
 
     // NOLINTEND
 };

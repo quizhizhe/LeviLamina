@@ -16,8 +16,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1MoveToBlockGoal@@UEAA@XZ
+    virtual ~MoveToBlockGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@MoveToBlockGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -36,12 +36,11 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@MoveToBlockGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol:
     // ??0MoveToBlockGoal@@QEAA@AEAVMob@@MHHHHMVVec3@@MW4TargetSelectionMethod@@V?$vector@VActorDefinitionTrigger@@V?$allocator@VActorDefinitionTrigger@@@std@@@std@@3V?$vector@VItemDescriptor@@V?$allocator@VItemDescriptor@@@std@@@5@AEBVActorFilterGroup@@@Z
-    MCAPI
-    MoveToBlockGoal(class Mob&, float, int, int, int, int, float, class Vec3, float, ::TargetSelectionMethod, std::vector<class ActorDefinitionTrigger>, std::vector<class ActorDefinitionTrigger>, std::vector<class ItemDescriptor>, class ActorFilterGroup const&);
+    MCAPI MoveToBlockGoal(class Mob& mob, float speedModifier, int searchRange, int searchHeight, int tickInterval, int stayDurationTicks, float goalRadius, class Vec3 targetPositionOffset, float chanceToStart, ::TargetSelectionMethod targetSelectionMethod, std::vector<class ActorDefinitionTrigger> onReachTriggers, std::vector<class ActorDefinitionTrigger> onStayCompletedTriggers, std::vector<class ItemDescriptor> targetBlocks, class ActorFilterGroup const&);
 
     // NOLINTEND
 
@@ -51,13 +50,13 @@ public:
     MCAPI void _checkIfStuck();
 
     // symbol: ?_isValidTarget@MoveToBlockGoal@@AEBA_NAEBVBlock@@@Z
-    MCAPI bool _isValidTarget(class Block const&) const;
+    MCAPI bool _isValidTarget(class Block const& candidateBlock) const;
 
     // symbol: ?_moveToBlock@MoveToBlockGoal@@AEAAXXZ
     MCAPI void _moveToBlock();
 
     // symbol: ?_pathIsValid@MoveToBlockGoal@@AEAA_NPEBVPath@@@Z
-    MCAPI bool _pathIsValid(class Path const*);
+    MCAPI bool _pathIsValid(class Path const* path);
 
     // NOLINTEND
 };

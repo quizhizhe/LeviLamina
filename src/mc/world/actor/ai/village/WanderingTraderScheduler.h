@@ -12,10 +12,10 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ??0WanderingTraderScheduler@@QEAA@AEAVLevel@@@Z
-    MCAPI explicit WanderingTraderScheduler(class Level&);
+    MCAPI explicit WanderingTraderScheduler(class Level& level);
 
     // symbol: ?isWanderingTraderCurrentlyManaged@WanderingTraderScheduler@@QEAA_NAEBVActor@@@Z
-    MCAPI bool isWanderingTraderCurrentlyManaged(class Actor const&);
+    MCAPI bool isWanderingTraderCurrentlyManaged(class Actor const& actor);
 
     // symbol: ?readSaveData@WanderingTraderScheduler@@QEAAXXZ
     MCAPI void readSaveData();
@@ -34,7 +34,7 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol: ?_canSpawnAtPosition@WanderingTraderScheduler@@AEBA_NAEBVBlockPos@@AEAVBlockSource@@@Z
-    MCAPI bool _canSpawnAtPosition(class BlockPos const&, class BlockSource&) const;
+    MCAPI bool _canSpawnAtPosition(class BlockPos const& pos, class BlockSource& region) const;
 
     // symbol: ?_canWanderingTraderBeMoved@WanderingTraderScheduler@@AEBA_NXZ
     MCAPI bool _canWanderingTraderBeMoved() const;
@@ -44,11 +44,17 @@ public:
 
     // symbol:
     // ?_findValidSpawnPosUnder@WanderingTraderScheduler@@AEBA?AV?$optional@VBlockPos@@@std@@AEBVBlockPos@@AEAVBlockSource@@@Z
-    MCAPI std::optional<class BlockPos> _findValidSpawnPosUnder(class BlockPos const&, class BlockSource&) const;
+    MCAPI std::optional<class BlockPos>
+          _findValidSpawnPosUnder(class BlockPos const& pos, class BlockSource& region) const;
 
     // symbol:
     // ?_getRandomHeightmapPosAroundOrigin@WanderingTraderScheduler@@AEAA?AVBlockPos@@AEBVBlockSource@@AEBV2@H_N@Z
-    MCAPI class BlockPos _getRandomHeightmapPosAroundOrigin(class BlockSource const&, class BlockPos const&, int, bool);
+    MCAPI class BlockPos _getRandomHeightmapPosAroundOrigin(
+        class BlockSource const& region,
+        class BlockPos const&    origin,
+        int                      distFromOrigin,
+        bool                     exactDist
+    );
 
     // symbol: ?_getRandomPlayerInOverworld@WanderingTraderScheduler@@AEBAPEAVActor@@XZ
     MCAPI class Actor* _getRandomPlayerInOverworld() const;
@@ -56,10 +62,10 @@ public:
     // symbol:
     // ?_getSpawnPosFromNearestVillageToPlayerPos@WanderingTraderScheduler@@AEAA?AV?$optional@VBlockPos@@@std@@AEBVBlockPos@@AEAVBlockSource@@@Z
     MCAPI std::optional<class BlockPos>
-          _getSpawnPosFromNearestVillageToPlayerPos(class BlockPos const&, class BlockSource&);
+          _getSpawnPosFromNearestVillageToPlayerPos(class BlockPos const& playerPos, class BlockSource& region);
 
     // symbol: ?_spawnWanderingTraderAtPos@WanderingTraderScheduler@@AEAAXAEBVBlockPos@@AEAVBlockSource@@@Z
-    MCAPI void _spawnWanderingTraderAtPos(class BlockPos const&, class BlockSource&);
+    MCAPI void _spawnWanderingTraderAtPos(class BlockPos const& pos, class BlockSource& region);
 
     // NOLINTEND
 
@@ -88,17 +94,17 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $CHANCE_TO_SPAWN_IN_WILDERNESS() { return CHANCE_TO_SPAWN_IN_WILDERNESS; }
+    static auto& $CHANCE_TO_SPAWN_IN_WILDERNESS() { return CHANCE_TO_SPAWN_IN_WILDERNESS; }
 
-    auto& $CHANCE_TO_SPAWN_PER_DAY() { return CHANCE_TO_SPAWN_PER_DAY; }
+    static auto& $CHANCE_TO_SPAWN_PER_DAY() { return CHANCE_TO_SPAWN_PER_DAY; }
 
-    auto& $DISTANCE_IN_BLOCKS_FROM_MEETING_AREA() { return DISTANCE_IN_BLOCKS_FROM_MEETING_AREA; }
+    static auto& $DISTANCE_IN_BLOCKS_FROM_MEETING_AREA() { return DISTANCE_IN_BLOCKS_FROM_MEETING_AREA; }
 
-    auto& $DISTANCE_IN_BLOCKS_FROM_PLAYER() { return DISTANCE_IN_BLOCKS_FROM_PLAYER; }
+    static auto& $DISTANCE_IN_BLOCKS_FROM_PLAYER() { return DISTANCE_IN_BLOCKS_FROM_PLAYER; }
 
-    auto& $DISTANCE_IN_BLOCKS_FROM_PLAYER_SQUARE() { return DISTANCE_IN_BLOCKS_FROM_PLAYER_SQUARE; }
+    static auto& $DISTANCE_IN_BLOCKS_FROM_PLAYER_SQUARE() { return DISTANCE_IN_BLOCKS_FROM_PLAYER_SQUARE; }
 
-    auto& $LENGTH_OF_DAY_IN_TICKS() { return LENGTH_OF_DAY_IN_TICKS; }
+    static auto& $LENGTH_OF_DAY_IN_TICKS() { return LENGTH_OF_DAY_IN_TICKS; }
 
     // NOLINTEND
 };

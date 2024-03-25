@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1RandomLookAroundAndSitGoal@@UEAA@XZ
+    virtual ~RandomLookAroundAndSitGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@RandomLookAroundAndSitGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -35,7 +35,7 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@RandomLookAroundAndSitGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0RandomLookAroundAndSitGoal@@QEAA@AEAVMob@@_N1HHMMHHMH@Z
     MCAPI RandomLookAroundAndSitGoal(class Mob&, bool, bool, int, int, float, float, int, int, float, int);

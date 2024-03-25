@@ -21,40 +21,40 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1RedstoneTorchCapacitor@@UEAA@XZ
+    virtual ~RedstoneTorchCapacitor() = default;
 
     // vIndex: 1, symbol: ?getStrength@RedstoneTorchCapacitor@@UEBAHXZ
     virtual int getStrength() const;
 
     // vIndex: 10, symbol: ?removeSource@RedstoneTorchCapacitor@@UEAAXAEBVBlockPos@@PEBVBaseCircuitComponent@@@Z
-    virtual void removeSource(class BlockPos const&, class BaseCircuitComponent const*);
+    virtual void removeSource(class BlockPos const& posSource, class BaseCircuitComponent const* pComponent);
 
     // vIndex: 11, symbol:
     // ?addSource@RedstoneTorchCapacitor@@UEAA_NAEAVCircuitSceneGraph@@AEBVCircuitTrackingInfo@@AEAHAEA_N@Z
-    virtual bool addSource(class CircuitSceneGraph&, class CircuitTrackingInfo const&, int&, bool&);
+    virtual bool addSource(
+        class CircuitSceneGraph&         graph,
+        class CircuitTrackingInfo const& info,
+        int&                             dampening,
+        bool&                            bDirectlyPowered
+    );
 
     // vIndex: 12, symbol:
     // ?allowConnection@RedstoneTorchCapacitor@@UEAA_NAEAVCircuitSceneGraph@@AEBVCircuitTrackingInfo@@AEA_N@Z
-    virtual bool allowConnection(class CircuitSceneGraph&, class CircuitTrackingInfo const&, bool&);
+    virtual bool
+    allowConnection(class CircuitSceneGraph& graph, class CircuitTrackingInfo const& info, bool& bDirectlyPowered);
 
     // vIndex: 14, symbol: ?evaluate@RedstoneTorchCapacitor@@UEAA_NAEAVCircuitSystem@@AEBVBlockPos@@@Z
-    virtual bool evaluate(class CircuitSystem&, class BlockPos const&);
+    virtual bool evaluate(class CircuitSystem& system, class BlockPos const& pos);
 
     // vIndex: 15, symbol: ?cacheValues@RedstoneTorchCapacitor@@UEAAXAEAVCircuitSystem@@AEBVBlockPos@@@Z
-    virtual void cacheValues(class CircuitSystem&, class BlockPos const&);
+    virtual void cacheValues(class CircuitSystem& system, class BlockPos const& pos);
 
     // vIndex: 16, symbol: ?updateDependencies@RedstoneTorchCapacitor@@EEAAXAEAVCircuitSceneGraph@@AEBVBlockPos@@@Z
-    virtual void updateDependencies(class CircuitSceneGraph&, class BlockPos const&);
-
-    // vIndex: 17, symbol: __unk_vfn_17
-    virtual void __unk_vfn_17();
+    virtual void updateDependencies(class CircuitSceneGraph& system, class BlockPos const& pos);
 
     // vIndex: 18, symbol: ?isHalfPulse@RedstoneTorchCapacitor@@UEBA_NXZ
     virtual bool isHalfPulse() const;
-
-    // vIndex: 20, symbol: __unk_vfn_20
-    virtual void __unk_vfn_20();
 
     // vIndex: 23, symbol: ?getCircuitComponentType@RedstoneTorchCapacitor@@UEBA?AW4CircuitComponentType@@XZ
     virtual ::CircuitComponentType getCircuitComponentType() const;
@@ -69,7 +69,7 @@ public:
     MCAPI void resetBurnOutCount();
 
     // symbol: ?setOn@RedstoneTorchCapacitor@@QEAAX_N@Z
-    MCAPI void setOn(bool);
+    MCAPI void setOn(bool bOn);
 
     // NOLINTEND
 

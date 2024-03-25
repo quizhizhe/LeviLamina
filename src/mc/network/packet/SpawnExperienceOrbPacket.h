@@ -19,8 +19,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1SpawnExperienceOrbPacket@@UEAA@XZ
+    virtual ~SpawnExperienceOrbPacket();
 
     // vIndex: 1, symbol: ?getId@SpawnExperienceOrbPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -30,20 +30,17 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@SpawnExperienceOrbPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@SpawnExperienceOrbPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1SpawnExperienceOrbPacket@@UEAA@XZ
-    MCVAPI ~SpawnExperienceOrbPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0SpawnExperienceOrbPacket@@QEAA@XZ
     MCAPI SpawnExperienceOrbPacket();
 
     // symbol: ??0SpawnExperienceOrbPacket@@QEAA@AEBVVec3@@H@Z
-    MCAPI SpawnExperienceOrbPacket(class Vec3 const&, int);
+    MCAPI SpawnExperienceOrbPacket(class Vec3 const& pos, int xpValue);
 
     // NOLINTEND
 };

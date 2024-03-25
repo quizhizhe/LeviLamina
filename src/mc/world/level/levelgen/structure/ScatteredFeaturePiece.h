@@ -15,21 +15,18 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // symbol: ??1ScatteredFeaturePiece@@UEAA@XZ
-    MCVAPI ~ScatteredFeaturePiece();
+    // vIndex: 0, symbol: ??1ScatteredFeaturePiece@@UEAA@XZ
+    virtual ~ScatteredFeaturePiece();
 
     // NOLINTEND
 
     // protected:
     // NOLINTBEGIN
     // symbol: ??0ScatteredFeaturePiece@@IEAA@HHHHHH@Z
-    MCAPI ScatteredFeaturePiece(int, int, int, int, int, int);
+    MCAPI ScatteredFeaturePiece(int west, int floor, int north, int width, int height, int depth);
 
     // symbol: ?updateAverageGroundHeight@ScatteredFeaturePiece@@IEAA_NAEAVBlockSource@@AEBVBoundingBox@@H@Z
-    MCAPI bool updateAverageGroundHeight(class BlockSource&, class BoundingBox const&, int);
+    MCAPI bool updateAverageGroundHeight(class BlockSource& region, class BoundingBox const& chunkBB, int offset);
 
     // NOLINTEND
 };

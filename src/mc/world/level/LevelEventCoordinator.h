@@ -3,7 +3,9 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
+#include "mc/common/wrapper/CoordinatorResult.h"
 #include "mc/events/LevelGameplayEvent.h"
+#include "mc/events/MutableLevelGameplayEvent.h"
 #include "mc/world/events/EventRef.h"
 
 class LevelEventCoordinator {
@@ -14,34 +16,41 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ??1LevelEventCoordinator@@UEAA@XZ
-    MCVAPI ~LevelEventCoordinator();
+    // vIndex: 0, symbol: ??1LevelEventCoordinator@@UEAA@XZ
+    virtual ~LevelEventCoordinator();
 
     // symbol: ??0LevelEventCoordinator@@QEAA@XZ
     MCAPI LevelEventCoordinator();
 
+    // symbol: ?getLevelGameplayHandler@LevelEventCoordinator@@QEAAAEAVLevelGameplayHandler@@XZ
+    MCAPI class LevelGameplayHandler& getLevelGameplayHandler();
+
     // symbol:
     // ?registerLevelGameplayHandler@LevelEventCoordinator@@QEAAX$$QEAV?$unique_ptr@VLevelGameplayHandler@@U?$default_delete@VLevelGameplayHandler@@@std@@@std@@@Z
-    MCAPI void registerLevelGameplayHandler(std::unique_ptr<class LevelGameplayHandler>&&);
+    MCAPI void registerLevelGameplayHandler(std::unique_ptr<class LevelGameplayHandler>&& handler);
+
+    // symbol:
+    // ?sendEvent@LevelEventCoordinator@@QEAA?AW4CoordinatorResult@@V?$EventRef@U?$MutableLevelGameplayEvent@W4CoordinatorResult@@@@@@@Z
+    MCAPI ::CoordinatorResult sendEvent(class EventRef<struct MutableLevelGameplayEvent<::CoordinatorResult>>);
 
     // symbol: ?sendEvent@LevelEventCoordinator@@QEAAXAEBV?$EventRef@U?$LevelGameplayEvent@X@@@@@Z
-    MCAPI void sendEvent(class EventRef<struct LevelGameplayEvent<void>> const&);
+    MCAPI void sendEvent(class EventRef<struct LevelGameplayEvent<void>> const& event);
 
     // symbol: ?sendLevelInitialized@LevelEventCoordinator@@QEAAXAEAVLevel@@@Z
-    MCAPI void sendLevelInitialized(class Level&);
+    MCAPI void sendLevelInitialized(class Level& level);
 
     // symbol: ?sendLevelRemovedActor@LevelEventCoordinator@@QEAAXAEAVLevel@@AEAVActor@@@Z
-    MCAPI void sendLevelRemovedActor(class Level&, class Actor&);
+    MCAPI void sendLevelRemovedActor(class Level& level, class Actor& actor);
 
     // symbol: ?sendLevelTick@LevelEventCoordinator@@QEAAXAEAVLevel@@@Z
-    MCAPI void sendLevelTick(class Level&);
+    MCAPI void sendLevelTick(class Level& level);
 
     // symbol: ?sendLevelTickStart@LevelEventCoordinator@@QEAAXAEAVLevel@@@Z
-    MCAPI void sendLevelTickStart(class Level&);
+    MCAPI void sendLevelTickStart(class Level& level);
 
     // symbol:
     // ?sendLevelWeatherChanged@LevelEventCoordinator@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N1@Z
-    MCAPI void sendLevelWeatherChanged(std::string const&, bool, bool);
+    MCAPI void sendLevelWeatherChanged(std::string const& dimension, bool raining, bool lightning);
 
     // NOLINTEND
 };

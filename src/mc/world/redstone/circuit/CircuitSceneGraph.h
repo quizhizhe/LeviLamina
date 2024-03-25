@@ -29,10 +29,10 @@ public:
     public:
         // NOLINTBEGIN
         // symbol: ??0PendingEntry@CircuitSceneGraph@@QEAA@$$QEAV01@@Z
-        MCAPI PendingEntry(class CircuitSceneGraph::PendingEntry&&);
+        MCAPI PendingEntry(class CircuitSceneGraph::PendingEntry&& entry);
 
         // symbol: ??4PendingEntry@CircuitSceneGraph@@QEAAAEAV01@$$QEAV01@@Z
-        MCAPI class CircuitSceneGraph::PendingEntry& operator=(class CircuitSceneGraph::PendingEntry&&);
+        MCAPI class CircuitSceneGraph::PendingEntry& operator=(class CircuitSceneGraph::PendingEntry&& rhs);
 
         // symbol: ??1PendingEntry@CircuitSceneGraph@@QEAA@XZ
         MCAPI ~PendingEntry();
@@ -57,23 +57,29 @@ public:
 
     // symbol:
     // ?add@CircuitSceneGraph@@QEAAXAEBVBlockPos@@V?$unique_ptr@VBaseCircuitComponent@@U?$default_delete@VBaseCircuitComponent@@@std@@@std@@@Z
-    MCAPI void add(class BlockPos const&, std::unique_ptr<class BaseCircuitComponent>);
+    MCAPI void add(class BlockPos const& pos, std::unique_ptr<class BaseCircuitComponent> component);
 
     // symbol: ?getBaseComponent@CircuitSceneGraph@@QEAAPEAVBaseCircuitComponent@@AEBVBlockPos@@@Z
-    MCAPI class BaseCircuitComponent* getBaseComponent(class BlockPos const&);
+    MCAPI class BaseCircuitComponent* getBaseComponent(class BlockPos const& pos);
 
     // symbol: ?getComponent@CircuitSceneGraph@@QEAAPEAVBaseCircuitComponent@@AEBVBlockPos@@W4CircuitComponentType@@@Z
-    MCAPI class BaseCircuitComponent* getComponent(class BlockPos const&, ::CircuitComponentType);
+    MCAPI class BaseCircuitComponent* getComponent(class BlockPos const& pos, ::CircuitComponentType typeID);
 
     // symbol:
     // ?getFromPendingAdd@CircuitSceneGraph@@QEAAPEAVBaseCircuitComponent@@AEBVBlockPos@@W4CircuitComponentType@@@Z
-    MCAPI class BaseCircuitComponent* getFromPendingAdd(class BlockPos const&, ::CircuitComponentType);
+    MCAPI class BaseCircuitComponent* getFromPendingAdd(class BlockPos const& pos, ::CircuitComponentType typeID);
 
     // symbol: ?invalidatePos@CircuitSceneGraph@@QEAAXAEBVBlockPos@@@Z
-    MCAPI void invalidatePos(class BlockPos const&);
+    MCAPI void invalidatePos(class BlockPos const& pos);
 
     // symbol: ?preSetupPoweredBlocks@CircuitSceneGraph@@QEAAXAEBVChunkPos@@@Z
-    MCAPI void preSetupPoweredBlocks(class ChunkPos const&);
+    MCAPI void preSetupPoweredBlocks(class ChunkPos const& chunkPos);
+
+    // symbol: ?remove@CircuitSceneGraph@@QEAAXAEBVBlockPos@@PEAVBaseCircuitComponent@@@Z
+    MCAPI void remove(class BlockPos const& pos, class BaseCircuitComponent* component);
+
+    // symbol: ?update@CircuitSceneGraph@@QEAAXPEAVBlockSource@@@Z
+    MCAPI void update(class BlockSource* region);
 
     // symbol: ??1CircuitSceneGraph@@QEAA@XZ
     MCAPI ~CircuitSceneGraph();
@@ -83,22 +89,23 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol: ?findRelationships@CircuitSceneGraph@@AEAAXAEBVBlockPos@@PEAVBaseCircuitComponent@@PEAVBlockSource@@@Z
-    MCAPI void findRelationships(class BlockPos const&, class BaseCircuitComponent*, class BlockSource*);
+    MCAPI void
+    findRelationships(class BlockPos const& pos, class BaseCircuitComponent* producerTarget, class BlockSource* region);
 
     // symbol: ?processPendingAdds@CircuitSceneGraph@@AEAAXXZ
     MCAPI void processPendingAdds();
 
     // symbol: ?processPendingUpdates@CircuitSceneGraph@@AEAAXPEAVBlockSource@@@Z
-    MCAPI void processPendingUpdates(class BlockSource*);
+    MCAPI void processPendingUpdates(class BlockSource* region);
 
     // symbol: ?removeComponent@CircuitSceneGraph@@AEAAXAEBVBlockPos@@@Z
-    MCAPI void removeComponent(class BlockPos const&);
+    MCAPI void removeComponent(class BlockPos const& pos);
 
     // symbol: ?removeStaleRelationships@CircuitSceneGraph@@AEAAXXZ
     MCAPI void removeStaleRelationships();
 
     // symbol: ?scheduleRelationshipUpdate@CircuitSceneGraph@@AEAAXAEBVBlockPos@@PEAVBaseCircuitComponent@@@Z
-    MCAPI void scheduleRelationshipUpdate(class BlockPos const&, class BaseCircuitComponent*);
+    MCAPI void scheduleRelationshipUpdate(class BlockPos const& pos, class BaseCircuitComponent* component);
 
     // NOLINTEND
 };

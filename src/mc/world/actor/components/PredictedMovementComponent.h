@@ -26,6 +26,9 @@ public:
         // ?toString@HistoryCache@PredictedMovementComponent@@QEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
         MCAPI std::string toString();
 
+        // symbol: ??1HistoryCache@PredictedMovementComponent@@QEAA@XZ
+        MCAPI ~HistoryCache();
+
         // NOLINTEND
 
         // private:
@@ -53,7 +56,7 @@ public:
         // member accessor
     public:
         // NOLINTBEGIN
-        auto& $mSequenceIdGenerator() { return mSequenceIdGenerator; }
+        static auto& $mSequenceIdGenerator() { return mSequenceIdGenerator; }
 
         // NOLINTEND
     };
@@ -102,7 +105,7 @@ public:
             // member accessor
         public:
             // NOLINTBEGIN
-            auto& $mMaxTicks() { return mMaxTicks; }
+            static auto& $mMaxTicks() { return mMaxTicks; }
 
             // NOLINTEND
         };
@@ -114,6 +117,9 @@ public:
 
     public:
         // NOLINTBEGIN
+        // vIndex: 0, symbol: __gen_??1RuntimePredictionData@PredictedMovementComponent@@UEAA@XZ
+        virtual ~RuntimePredictionData() = default;
+
         // symbol: ??0RuntimePredictionData@PredictedMovementComponent@@QEAA@XZ
         MCAPI RuntimePredictionData();
 
@@ -132,7 +138,7 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ??0PredictedMovementComponent@@QEAA@AEAVActor@@@Z
-    MCAPI explicit PredictedMovementComponent(class Actor&);
+    MCAPI explicit PredictedMovementComponent(class Actor& actor);
 
     // symbol: ?isEnabled@PredictedMovementComponent@@QEBA_NXZ
     MCAPI bool isEnabled() const;
@@ -142,10 +148,7 @@ public:
 
     // symbol:
     // ?tick@PredictedMovementComponent@@QEAAXAEBV?$time_point@Usteady_clock@chrono@std@@V?$duration@_JU?$ratio@$00$0DLJKMKAA@@std@@@23@@chrono@std@@@Z
-    MCAPI void tick(std::chrono::steady_clock::time_point const&);
-
-    // symbol: ??1PredictedMovementComponent@@QEAA@XZ
-    MCAPI ~PredictedMovementComponent();
+    MCAPI void tick(std::chrono::steady_clock::time_point const& timepoint);
 
     // NOLINTEND
 
@@ -159,7 +162,7 @@ public:
 
     // symbol:
     // ?_tickNextPosition@PredictedMovementComponent@@AEAAXAEBV?$time_point@Usteady_clock@chrono@std@@V?$duration@_JU?$ratio@$00$0DLJKMKAA@@std@@@23@@chrono@std@@@Z
-    MCAPI void _tickNextPosition(std::chrono::steady_clock::time_point const&);
+    MCAPI void _tickNextPosition(std::chrono::steady_clock::time_point const& timepoint);
 
     // symbol:
     // ?_tryInterpolate@PredictedMovementComponent@@AEAA_NAEBV?$time_point@Usteady_clock@chrono@std@@V?$duration@_JU?$ratio@$00$0DLJKMKAA@@std@@@23@@chrono@std@@@Z
@@ -181,9 +184,9 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $LERP_STEP_SIZE() { return LERP_STEP_SIZE; }
+    static auto& $LERP_STEP_SIZE() { return LERP_STEP_SIZE; }
 
-    auto& $mGlobalRuntimePredictionData() { return mGlobalRuntimePredictionData; }
+    static auto& $mGlobalRuntimePredictionData() { return mGlobalRuntimePredictionData; }
 
     // NOLINTEND
 };

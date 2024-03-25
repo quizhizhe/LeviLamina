@@ -10,20 +10,15 @@ public:
     // prevent constructor by default
     BlockLootComponent& operator=(BlockLootComponent const&);
     BlockLootComponent(BlockLootComponent const&);
+    BlockLootComponent();
 
 public:
     // NOLINTBEGIN
-    // symbol: ??1BlockLootComponent@@UEAA@XZ
-    MCVAPI ~BlockLootComponent();
-
-    // symbol: ??0BlockLootComponent@@QEAA@XZ
-    MCAPI BlockLootComponent();
+    // vIndex: 0, symbol: __gen_??1BlockLootComponent@@UEAA@XZ
+    virtual ~BlockLootComponent() = default;
 
     // symbol: ?getLootTable@BlockLootComponent@@QEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
     MCAPI std::string const& getLootTable() const;
-
-    // symbol: ?usesNewComponentStorage@BlockLootComponent@@SA_NXZ
-    MCAPI static bool usesNewComponentStorage();
 
     // NOLINTEND
 };

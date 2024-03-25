@@ -12,7 +12,7 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ?consumeCount@XoroshiroRandom@@UEAAXI@Z
-    MCVAPI void consumeCount(uint);
+    MCVAPI void consumeCount(uint rounds);
 
     // symbol: ?fork@XoroshiroRandom@@UEAA?AV?$unique_ptr@VIRandom@@U?$default_delete@VIRandom@@@std@@@std@@XZ
     MCVAPI std::unique_ptr<class IRandom> fork();
@@ -37,7 +37,7 @@ public:
     MCVAPI int nextInt();
 
     // symbol: ?nextInt@XoroshiroRandom@@UEAAHH@Z
-    MCVAPI int nextInt(int);
+    MCVAPI int nextInt(int bound);
 
     // symbol: ?nextLong@XoroshiroRandom@@UEAA_JXZ
     MCVAPI int64 nextLong();
@@ -48,11 +48,11 @@ public:
     // symbol: ?seed64@XoroshiroRandom@@UEBA_JXZ
     MCVAPI int64 seed64() const;
 
-    // symbol: ?setSeed@XoroshiroRandom@@UEAAX_J@Z
-    MCVAPI void setSeed(int64);
-
     // symbol: ?setSeed@XoroshiroRandom@@UEAAXUSeed128Bit@@@Z
     MCVAPI void setSeed(struct Seed128Bit);
+
+    // symbol: ?setSeed@XoroshiroRandom@@UEAAX_J@Z
+    MCVAPI void setSeed(int64);
 
     // symbol: ??1XoroshiroRandom@@UEAA@XZ
     MCVAPI ~XoroshiroRandom();

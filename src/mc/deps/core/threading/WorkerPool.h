@@ -22,32 +22,38 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ??1WorkerPool@@UEAA@XZ
-    MCVAPI ~WorkerPool();
+    // vIndex: 0, symbol: ??1WorkerPool@@UEAA@XZ
+    virtual ~WorkerPool();
 
     // symbol: ??0WorkerPool@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAVScheduler@@@Z
-    MCAPI WorkerPool(std::string, class Scheduler&);
+    MCAPI WorkerPool(std::string name, class Scheduler& owner);
 
     // symbol:
     // ??0WorkerPool@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_KAEBVOSThreadPriority@Threading@Bedrock@@V?$optional@_K@2@_NV?$optional@H@2@@Z
-    MCAPI
-    WorkerPool(std::string, uint64, class Bedrock::Threading::OSThreadPriority const&, std::optional<uint64>, bool, std::optional<int>);
+    MCAPI WorkerPool(
+        std::string                                       name,
+        uint64                                            threadCount,
+        class Bedrock::Threading::OSThreadPriority const& priority,
+        std::optional<uint64>                             coreAffinityMask,
+        bool                                              suppressWorkerProfiling,
+        std::optional<int>                                idealCore
+    );
 
     // symbol: ?queue@WorkerPool@@QEAAXV?$shared_ptr@VBackgroundTaskBase@@@std@@_N@Z
-    MCAPI void queue(std::shared_ptr<class BackgroundTaskBase>, bool);
+    MCAPI void queue(std::shared_ptr<class BackgroundTaskBase> task, bool queueImmediate);
 
     // symbol: ?size@WorkerPool@@QEBA_KXZ
     MCAPI uint64 size() const;
 
     // symbol: ?tryPop@WorkerPool@@QEAA?AV?$shared_ptr@VBackgroundTaskBase@@@std@@H@Z
-    MCAPI std::shared_ptr<class BackgroundTaskBase> tryPop(int);
+    MCAPI std::shared_ptr<class BackgroundTaskBase> tryPop(int minPriority);
 
     // NOLINTEND
 
     // protected:
     // NOLINTBEGIN
     // symbol: ?_registerPool@WorkerPool@@KAXAEAV1@@Z
-    MCAPI static void _registerPool(class WorkerPool&);
+    MCAPI static void _registerPool(class WorkerPool& pool);
 
     // NOLINTEND
 
@@ -71,9 +77,9 @@ protected:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $sAllPools() { return sAllPools; }
+    static auto& $sAllPools() { return sAllPools; }
 
-    auto& $sAllPoolsMutex() { return sAllPoolsMutex; }
+    static auto& $sAllPoolsMutex() { return sAllPoolsMutex; }
 
     // NOLINTEND
 };

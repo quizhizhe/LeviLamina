@@ -16,11 +16,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ??1ServerCommand@@UEAA@XZ
-    MCVAPI ~ServerCommand();
-
-    // symbol: ?setup@ServerCommand@@SAXAEAVMinecraft@@@Z
-    MCAPI static void setup(class Minecraft&);
+    // vIndex: 0, symbol: ??1ServerCommand@@UEAA@XZ
+    virtual ~ServerCommand();
 
     // NOLINTEND
 
@@ -49,7 +46,7 @@ protected:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mGame() { return mGame; }
+    static auto& $mGame() { return mGame; }
 
     // NOLINTEND
 };

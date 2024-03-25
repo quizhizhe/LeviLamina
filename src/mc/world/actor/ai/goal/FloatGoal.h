@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1FloatGoal@@UEAA@XZ
+    virtual ~FloatGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@FloatGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -26,10 +26,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@FloatGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0FloatGoal@@QEAA@AEAVMob@@_N@Z
-    MCAPI FloatGoal(class Mob&, bool);
+    MCAPI FloatGoal(class Mob& mob, bool);
 
     // NOLINTEND
 };

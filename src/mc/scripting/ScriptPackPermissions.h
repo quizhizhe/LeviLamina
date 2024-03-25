@@ -1,19 +1,20 @@
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
+#include "mc/deps/json/Value.h"
+#include "mc/server/commands/CommandPermissionLevel.h"
 
 class ScriptPackPermissions {
 public:
-    // prevent constructor by default
-    ScriptPackPermissions& operator=(ScriptPackPermissions const&);
-    ScriptPackPermissions();
+    std::unordered_map<std::string, std::unordered_map<std::string, Json::Value>> mModulePermissions;
+    std::vector<std::string>                                                      mAllowedModules;
+    std::optional<CommandPermissionLevel>                                         mCommandsPermissionLevel;
 
 public:
-    // NOLINTBEGIN
-    // symbol: ??0ScriptPackPermissions@@QEAA@AEBV0@@Z
-    MCAPI ScriptPackPermissions(class ScriptPackPermissions const&);
-
-    // NOLINTEND
+    // prevent constructor by default
+    ScriptPackPermissions& operator=(ScriptPackPermissions const&);
+    ScriptPackPermissions(ScriptPackPermissions const&);
+    ScriptPackPermissions();
 
 private:
     // NOLINTBEGIN
@@ -26,7 +27,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $sWildCardModuleName() { return sWildCardModuleName; }
+    static auto& $sWildCardModuleName() { return sWildCardModuleName; }
 
     // NOLINTEND
 };

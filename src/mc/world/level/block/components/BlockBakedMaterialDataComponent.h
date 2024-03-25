@@ -14,11 +14,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ??4BlockBakedMaterialDataComponent@@QEAAAEAU0@$$QEAU0@@Z
-    MCAPI struct BlockBakedMaterialDataComponent& operator=(struct BlockBakedMaterialDataComponent&&);
-
-    // symbol: ?usesNewComponentStorage@BlockBakedMaterialDataComponent@@SA_NXZ
-    MCAPI static bool usesNewComponentStorage();
+    // vIndex: 0, symbol: __gen_??1BlockBakedMaterialDataComponent@@UEAA@XZ
+    virtual ~BlockBakedMaterialDataComponent() = default;
 
     // NOLINTEND
 };

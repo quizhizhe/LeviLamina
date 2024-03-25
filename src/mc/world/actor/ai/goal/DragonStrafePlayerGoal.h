@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1DragonStrafePlayerGoal@@UEAA@XZ
+    virtual ~DragonStrafePlayerGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@DragonStrafePlayerGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -35,10 +35,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@DragonStrafePlayerGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0DragonStrafePlayerGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit DragonStrafePlayerGoal(class Mob&);
+    MCAPI explicit DragonStrafePlayerGoal(class Mob& mob);
 
     // NOLINTEND
 
@@ -51,7 +51,7 @@ public:
     MCAPI void navigateToNextPathNode();
 
     // symbol: ?setTarget@DragonStrafePlayerGoal@@AEAAXPEAVActor@@@Z
-    MCAPI void setTarget(class Actor*);
+    MCAPI void setTarget(class Actor* target);
 
     // NOLINTEND
 };

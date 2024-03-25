@@ -17,9 +17,15 @@ public:
     getSeatDescriptionOfPassenger(std::vector<struct SeatDescription> const&, int, int);
 
     // symbol:
-    // ?setValuesToSynchedActorData@SeatDescriptionUtility@@SAXVSynchedActorDataWriter@@AEBVVec3@@AEBUSeatDescription@@M@Z
-    MCAPI static void
-    setValuesToSynchedActorData(class SynchedActorDataWriter, class Vec3 const&, struct SeatDescription const&, float);
+    // ?setValuesToSynchedActorData@SeatDescriptionUtility@@SAXAEAUActorDataSeatOffsetComponent@@AEAUActorDataDirtyFlagsComponent@@VSynchedActorDataWriter@@AEBVVec3@@AEBUSeatDescription@@M@Z
+    MCAPI static void setValuesToSynchedActorData(
+        struct ActorDataSeatOffsetComponent&,
+        struct ActorDataDirtyFlagsComponent&,
+        class SynchedActorDataWriter,
+        class Vec3 const&,
+        struct SeatDescription const&,
+        float
+    );
 
     // NOLINTEND
 };

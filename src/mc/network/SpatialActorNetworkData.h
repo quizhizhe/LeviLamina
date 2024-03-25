@@ -47,13 +47,6 @@ public:
         DebugSpatialPacketModifiers& operator=(DebugSpatialPacketModifiers const&);
         DebugSpatialPacketModifiers(DebugSpatialPacketModifiers const&);
         DebugSpatialPacketModifiers();
-
-    public:
-        // NOLINTBEGIN
-        // symbol: ?getSavingsPercentage@DebugSpatialPacketModifiers@SpatialActorNetworkData@@QEBAMXZ
-        MCAPI float getSavingsPercentage() const;
-
-        // NOLINTEND
     };
 
 public:
@@ -65,10 +58,10 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ??0SpatialActorNetworkData@@QEAA@AEAVActor@@@Z
-    MCAPI explicit SpatialActorNetworkData(class Actor&);
+    MCAPI explicit SpatialActorNetworkData(class Actor& entity);
 
     // symbol: ?enableAutoSend@SpatialActorNetworkData@@QEAAX_N@Z
-    MCAPI void enableAutoSend(bool);
+    MCAPI void enableAutoSend(bool enable);
 
     // symbol: ?getLastSentPositionForAddingEntity@SpatialActorNetworkData@@QEAA?AVVec3@@XZ
     MCAPI class Vec3 getLastSentPositionForAddingEntity();
@@ -83,25 +76,22 @@ public:
     MCAPI float getLastSentYHeadRotationForAddingEntity();
 
     // symbol: ?handleClientData@SpatialActorNetworkData@@QEAAXAEBVMoveActorAbsoluteData@@@Z
-    MCAPI void handleClientData(class MoveActorAbsoluteData const&);
+    MCAPI void handleClientData(class MoveActorAbsoluteData const& moveData);
 
     // symbol: ?isAutoSendEnabled@SpatialActorNetworkData@@QEBA_NXZ
     MCAPI bool isAutoSendEnabled() const;
 
     // symbol: ?sendUpdate@SpatialActorNetworkData@@QEAAX_N00@Z
-    MCAPI void sendUpdate(bool, bool, bool);
+    MCAPI void sendUpdate(bool forceTeleport, bool forceMoveLocalEntity, bool forceAbsoluteMovement);
 
     // symbol: ?shouldSendMotionPredictionHintsPacket@SpatialActorNetworkData@@QEBA_NXZ
     MCAPI bool shouldSendMotionPredictionHintsPacket() const;
 
     // symbol: ?shouldSendUpdate@SpatialActorNetworkData@@QEBA_N_N0@Z
-    MCAPI bool shouldSendUpdate(bool, bool) const;
+    MCAPI bool shouldSendUpdate(bool forceTeleport, bool forceMoveLocalEntity) const;
 
     // symbol: ?teleportEntity@SpatialActorNetworkData@@QEAAXAEBVVec3@@AEBVVec2@@M@Z
-    MCAPI void teleportEntity(class Vec3 const&, class Vec2 const&, float);
-
-    // symbol: ?getDebugSpatialPacketModifiers@SpatialActorNetworkData@@SAAEAUDebugSpatialPacketModifiers@1@XZ
-    MCAPI static struct SpatialActorNetworkData::DebugSpatialPacketModifiers& getDebugSpatialPacketModifiers();
+    MCAPI void teleportEntity(class Vec3 const& pos, class Vec2 const& rot, float yHeadRot);
 
     // NOLINTEND
 
@@ -112,13 +102,13 @@ public:
     MCAPI std::vector<struct NetworkIdentifierWithSubId> _findRelevantPlayersToSendUpdate();
 
     // symbol: ?_getOptimizationScore@SpatialActorNetworkData@@AEBA_KAEAVPlayer@@@Z
-    MCAPI uint64 _getOptimizationScore(class Player&) const;
+    MCAPI uint64 _getOptimizationScore(class Player& player) const;
 
     // symbol: ?_initializeLastSentValues@SpatialActorNetworkData@@AEAAXXZ
     MCAPI void _initializeLastSentValues();
 
     // symbol: ?_shouldUpdateBasedOptimizationOnScore@SpatialActorNetworkData@@AEBA_NAEAVPlayer@@@Z
-    MCAPI bool _shouldUpdateBasedOptimizationOnScore(class Player&) const;
+    MCAPI bool _shouldUpdateBasedOptimizationOnScore(class Player& player) const;
 
     // NOLINTEND
 
@@ -135,9 +125,9 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mDebugSendRateModifiers() { return mDebugSendRateModifiers; }
+    static auto& $mDebugSendRateModifiers() { return mDebugSendRateModifiers; }
 
-    auto& $mDebugSpatialPacketModifiers() { return mDebugSpatialPacketModifiers; }
+    static auto& $mDebugSpatialPacketModifiers() { return mDebugSpatialPacketModifiers; }
 
     // NOLINTEND
 };

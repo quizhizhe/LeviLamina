@@ -15,17 +15,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1PrivateKeyManager@@UEAA@XZ
+    virtual ~PrivateKeyManager();
 
     // vIndex: 1, symbol: ?isValid@PrivateKeyManager@@UEBA_NXZ
     virtual bool isValid() const;
 
-    // symbol: ??1PrivateKeyManager@@UEAA@XZ
-    MCVAPI ~PrivateKeyManager();
-
     // symbol: ??0PrivateKeyManager@@QEAA@W4System@Asymmetric@Crypto@@@Z
-    MCAPI explicit PrivateKeyManager(::Crypto::Asymmetric::System);
+    MCAPI explicit PrivateKeyManager(::Crypto::Asymmetric::System system);
 
     // symbol:
     // ?computeSecret@PrivateKeyManager@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVKeyManager@@@Z

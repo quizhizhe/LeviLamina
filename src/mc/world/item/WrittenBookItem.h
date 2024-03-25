@@ -5,7 +5,6 @@
 // auto generated inclusion list
 #include "mc/entity/utilities/ActorLocation.h"
 #include "mc/enums/InHandUpdateType.h"
-#include "mc/enums/UseAnimation.h"
 #include "mc/events/LevelSoundEvent.h"
 #include "mc/world/item/Item.h"
 #include "mc/world/item/components/ItemColor.h"
@@ -27,87 +26,50 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1WrittenBookItem@@UEAA@XZ
+    virtual ~WrittenBookItem() = default;
 
-    // vIndex: 11, symbol: __unk_vfn_11
-    virtual void __unk_vfn_11();
+    // vIndex: 37, symbol: ?isGlint@WrittenBookItem@@MEBA_NAEBVItemStackBase@@@Z
+    virtual bool isGlint(class ItemStackBase const& stack) const;
 
-    // vIndex: 14, symbol: __unk_vfn_14
-    virtual void __unk_vfn_14();
-
-    // vIndex: 16, symbol: __unk_vfn_16
-    virtual void __unk_vfn_16();
-
-    // vIndex: 21, symbol: __unk_vfn_21
-    virtual void __unk_vfn_21();
-
-    // vIndex: 50, symbol: ?isGlint@WrittenBookItem@@MEBA_NAEBVItemStackBase@@@Z
-    virtual bool isGlint(class ItemStackBase const&) const;
-
-    // vIndex: 51, symbol: __unk_vfn_51
-    virtual void __unk_vfn_51();
-
-    // vIndex: 53, symbol: __unk_vfn_53
-    virtual void __unk_vfn_53();
-
-    // vIndex: 59, symbol: ?requiresInteract@WrittenBookItem@@UEBA_NXZ
+    // vIndex: 46, symbol: ?requiresInteract@WrittenBookItem@@UEBA_NXZ
     virtual bool requiresInteract() const;
 
-    // vIndex: 60, symbol:
+    // vIndex: 47, symbol:
     // ?appendFormattedHovertext@WrittenBookItem@@UEBAXAEBVItemStackBase@@AEAVLevel@@AEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z
-    virtual void appendFormattedHovertext(class ItemStackBase const&, class Level&, std::string&, bool) const;
+    virtual void appendFormattedHovertext(
+        class ItemStackBase const& stack,
+        class Level&               level,
+        std::string&               hovertext,
+        bool                       showCategory
+    ) const;
 
-    // vIndex: 66, symbol: __unk_vfn_66
-    virtual void __unk_vfn_66();
+    // vIndex: 71, symbol: ?use@WrittenBookItem@@UEBAAEAVItemStack@@AEAV2@AEAVPlayer@@@Z
+    virtual class ItemStack& use(class ItemStack& instance, class Player& player) const;
 
-    // vIndex: 70, symbol: __unk_vfn_70
-    virtual void __unk_vfn_70();
-
-    // vIndex: 71, symbol: __unk_vfn_71
-    virtual void __unk_vfn_71();
-
-    // vIndex: 72, symbol: __unk_vfn_72
-    virtual void __unk_vfn_72();
-
-    // vIndex: 75, symbol: __unk_vfn_75
-    virtual void __unk_vfn_75();
-
-    // vIndex: 79, symbol: __unk_vfn_79
-    virtual void __unk_vfn_79();
-
-    // vIndex: 80, symbol: __unk_vfn_80
-    virtual void __unk_vfn_80();
-
-    // vIndex: 84, symbol: ?use@WrittenBookItem@@UEBAAEAVItemStack@@AEAV2@AEAVPlayer@@@Z
-    virtual class ItemStack& use(class ItemStack&, class Player&) const;
-
-    // vIndex: 95, symbol:
+    // vIndex: 82, symbol:
     // ?buildDescriptionId@WrittenBookItem@@UEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVItemDescriptor@@PEBVCompoundTag@@@Z
     virtual std::string buildDescriptionId(class ItemDescriptor const&, class CompoundTag const*) const;
 
-    // vIndex: 115, symbol: __unk_vfn_115
-    virtual void __unk_vfn_115();
-
-    // vIndex: 116, symbol: __unk_vfn_116
-    virtual void __unk_vfn_116();
-
-    // vIndex: 121, symbol:
+    // vIndex: 105, symbol:
     // ?getInteractText@WrittenBookItem@@UEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVPlayer@@@Z
     virtual std::string getInteractText(class Player const&) const;
 
+    // symbol: ??0WrittenBookItem@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z
+    MCAPI WrittenBookItem(std::string const& name, int id);
+
     // symbol: ?canBeCopied@WrittenBookItem@@SA_NPEBVCompoundTag@@@Z
-    MCAPI static bool canBeCopied(class CompoundTag const*);
+    MCAPI static bool canBeCopied(class CompoundTag const* tag);
 
     // symbol: ?getGeneration@WrittenBookItem@@SAHPEBVCompoundTag@@@Z
-    MCAPI static int getGeneration(class CompoundTag const*);
+    MCAPI static int getGeneration(class CompoundTag const* tag);
 
     // symbol: ?getPageCount@WrittenBookItem@@SAHAEBVItemStack@@@Z
-    MCAPI static int getPageCount(class ItemStack const&);
+    MCAPI static int getPageCount(class ItemStack const& book);
 
     // symbol:
     // ?getPages@WrittenBookItem@@SA?AV?$vector@UPageContent@@V?$allocator@UPageContent@@@std@@@std@@AEBVItemStack@@@Z
-    MCAPI static std::vector<struct PageContent> getPages(class ItemStack const&);
+    MCAPI static std::vector<struct PageContent> getPages(class ItemStack const& book);
 
     // symbol: ?MAX_GENERATION@WrittenBookItem@@2HB
     MCAPI static int const MAX_GENERATION;

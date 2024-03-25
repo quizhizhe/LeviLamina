@@ -21,8 +21,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1NetworkChunkPublisherUpdatePacket@@UEAA@XZ
+    virtual ~NetworkChunkPublisherUpdatePacket();
 
     // vIndex: 1, symbol: ?getId@NetworkChunkPublisherUpdatePacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -32,20 +32,17 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@NetworkChunkPublisherUpdatePacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@NetworkChunkPublisherUpdatePacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1NetworkChunkPublisherUpdatePacket@@UEAA@XZ
-    MCVAPI ~NetworkChunkPublisherUpdatePacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0NetworkChunkPublisherUpdatePacket@@QEAA@XZ
     MCAPI NetworkChunkPublisherUpdatePacket();
 
     // symbol: ??0NetworkChunkPublisherUpdatePacket@@QEAA@AEBVBlockPos@@I@Z
-    MCAPI NetworkChunkPublisherUpdatePacket(class BlockPos const&, uint);
+    MCAPI NetworkChunkPublisherUpdatePacket(class BlockPos const& position, uint radius);
 
     // NOLINTEND
 };

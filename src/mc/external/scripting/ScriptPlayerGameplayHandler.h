@@ -24,12 +24,12 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScriptPlayerGameplayHandler@@UEAA@XZ
+    virtual ~ScriptPlayerGameplayHandler() = default;
 
     // vIndex: 1, symbol:
     // ?handleEvent@?$Impl@U?$type_list@$$CBU?$PlayerGameplayEvent@X@@$$CBU?$PlayerGameplayEvent@W4CoordinatorResult@@@@@entt@@@?$EventHandlerDispatcher@VPlayerGameplayHandler@@@Details@@MEAA?AW4HandlerResult@@AEBU?$PlayerGameplayEvent@X@@@Z
-    virtual ::HandlerResult handleEvent(struct PlayerGameplayEvent<void> const&);
+    virtual ::HandlerResult handleEvent(struct PlayerGameplayEvent<void> const& event);
 
     // vIndex: 2, symbol:
     // ?handleEvent@ScriptPlayerGameplayHandler@@UEAA?AU?$GameplayHandlerResult@W4CoordinatorResult@@@@AEBU?$PlayerGameplayEvent@W4CoordinatorResult@@@@@Z

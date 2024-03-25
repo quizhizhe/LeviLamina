@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/common/IItemComponentLegacyFactoryData.h"
+#include "mc/world/item/components/IItemComponentLegacyFactoryData.h"
 
 // auto generated forward declare list
 // clang-format off
@@ -18,8 +18,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1ItemComponent@@UEAA@XZ
+    virtual ~ItemComponent();
 
     // vIndex: 1, symbol: ?checkComponentDataForContentErrors@ItemComponent@@UEBA_NXZ
     virtual bool checkComponentDataForContentErrors() const;
@@ -46,17 +46,11 @@ public:
     // vIndex: 8, symbol: ?_useOn@ItemComponent@@MEBA_NAEAVItemStack@@AEAVActor@@AEBVBlockPos@@EAEBVVec3@@@Z
     virtual bool _useOn(class ItemStack&, class Actor&, class BlockPos const&, uchar, class Vec3 const&) const;
 
-    // vIndex: 9, symbol: ?_initializeComponent@ItemComponent@@MEBAXXZ
-    virtual void _initializeComponent() const;
-
-    // symbol: ??1ItemComponent@@UEAA@XZ
-    MCVAPI ~ItemComponent();
+    // vIndex: 9, symbol: ?_initializeComponent@ItemComponent@@MEAAXXZ
+    virtual void _initializeComponent();
 
     // symbol: ??0ItemComponent@@QEAA@XZ
     MCAPI ItemComponent();
-
-    // symbol: ?bindItemComponentType@ItemComponent@@SAXAEAUReflectionCtx@cereal@@@Z
-    MCAPI static void bindItemComponentType(struct cereal::ReflectionCtx&);
 
     // NOLINTEND
 };

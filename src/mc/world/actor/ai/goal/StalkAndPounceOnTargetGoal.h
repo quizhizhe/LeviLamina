@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1StalkAndPounceOnTargetGoal@@UEAA@XZ
+    virtual ~StalkAndPounceOnTargetGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@StalkAndPounceOnTargetGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -38,20 +38,20 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@StalkAndPounceOnTargetGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0StalkAndPounceOnTargetGoal@@QEAA@AEAVMob@@AEBVActorFilterGroup@@MMMMMMMM_N@Z
     MCAPI StalkAndPounceOnTargetGoal(
-        class Mob&,
-        class ActorFilterGroup const&,
-        float,
-        float,
-        float,
-        float,
-        float,
-        float,
-        float,
-        float,
+        class Mob&                    mob,
+        class ActorFilterGroup const& stuckBlocks,
+        float                         stalkSpeed,
+        float                         stalkGiveUpDist,
+        float                         leapHeight,
+        float                         leapDist,
+        float                         maxPounceDist,
+        float                         strikeDistance,
+        float                         interestedTime,
+        float                         stuckTime,
         bool
     );
 
@@ -60,10 +60,10 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol: ?_isStuckBlock@StalkAndPounceOnTargetGoal@@AEBA_NVBlockPos@@@Z
-    MCAPI bool _isStuckBlock(class BlockPos) const;
+    MCAPI bool _isStuckBlock(class BlockPos blockPos) const;
 
     // symbol: ?_preparePounce@StalkAndPounceOnTargetGoal@@AEAAXAEBVVec3@@0@Z
-    MCAPI void _preparePounce(class Vec3 const&, class Vec3 const&);
+    MCAPI void _preparePounce(class Vec3 const& mobPos, class Vec3 const& targetPos);
 
     // NOLINTEND
 };

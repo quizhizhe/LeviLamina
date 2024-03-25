@@ -1,10 +1,12 @@
 #pragma once
 
+#include <chrono>
+#include <ratio>
+
 #include "ll/api/base/Macro.h"
 #include "ll/api/base/StdInt.h"
-#include <chrono>
 
-namespace ll::gamechrono {
+namespace ll::chrono {
 
 using ticks   = std::chrono::duration<int64, std::ratio<1, 20>>;
 using days    = std::chrono::duration<int64, std::ratio_multiply<std::ratio<24000>, ticks::period>>;
@@ -23,22 +25,23 @@ struct ServerClock {
 
     LLNDAPI static time_point now() noexcept;
 };
-struct GameTimeClock {
+
+struct GameTickClock {
     using duration                  = ticks;
     using rep                       = duration::rep;
     using period                    = duration::period;
-    using time_point                = std::chrono::time_point<GameTimeClock>;
+    using time_point                = std::chrono::time_point<GameTickClock>;
     static constexpr bool is_steady = false;
 
     LLNDAPI static time_point now() noexcept;
 };
 
-} // namespace ll::gamechrono
+} // namespace ll::chrono
 
 namespace ll::chrono_literals {
 
 using namespace std::literals::chrono_literals;
 
-constexpr ll::gamechrono::ticks operator""_tick(uint64 val) noexcept { return ll::gamechrono::ticks{val}; }
+constexpr ll::chrono::ticks operator""_tick(uint64 val) noexcept { return ll::chrono::ticks{val}; }
 
 } // namespace ll::chrono_literals

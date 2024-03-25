@@ -28,17 +28,17 @@ public:
     // symbol:
     // ?get@ScriptBlockTypes@ScriptModuleMinecraft@@QEAA?AV?$optional@V?$StrongTypedObjectHandle@VScriptBlockType@ScriptModuleMinecraft@@@Scripting@@@std@@AEAVWeakLifetimeScope@Scripting@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@4@@Z
     MCAPI std::optional<class Scripting::StrongTypedObjectHandle<class ScriptModuleMinecraft::ScriptBlockType>>
-          get(class Scripting::WeakLifetimeScope&, std::string const&);
+          get(class Scripting::WeakLifetimeScope& scope, std::string const& blockName);
 
     // symbol:
     // ?getAllBlockTypes@ScriptBlockTypes@ScriptModuleMinecraft@@QEAA?AV?$vector@V?$StrongTypedObjectHandle@VScriptBlockType@ScriptModuleMinecraft@@@Scripting@@V?$allocator@V?$StrongTypedObjectHandle@VScriptBlockType@ScriptModuleMinecraft@@@Scripting@@@std@@@std@@AEAVWeakLifetimeScope@Scripting@@@Z
     MCAPI std::vector<class Scripting::StrongTypedObjectHandle<class ScriptModuleMinecraft::ScriptBlockType>>
-          getAllBlockTypes(class Scripting::WeakLifetimeScope&);
+          getAllBlockTypes(class Scripting::WeakLifetimeScope& scope);
 
     // symbol:
-    // ?get_V010@ScriptBlockTypes@ScriptModuleMinecraft@@QEAA?AV?$StrongTypedObjectHandle@VScriptBlockType@ScriptModuleMinecraft@@@Scripting@@AEAVWeakLifetimeScope@4@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI class Scripting::StrongTypedObjectHandle<class ScriptModuleMinecraft::ScriptBlockType>
-    get_V010(class Scripting::WeakLifetimeScope&, std::string const&);
+    // ?get_V010@ScriptBlockTypes@ScriptModuleMinecraft@@QEAA?AV?$optional@V?$StrongTypedObjectHandle@VScriptBlockType@ScriptModuleMinecraft@@@Scripting@@@std@@AEAVWeakLifetimeScope@Scripting@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@4@@Z
+    MCAPI std::optional<class Scripting::StrongTypedObjectHandle<class ScriptModuleMinecraft::ScriptBlockType>>
+          get_V010(class Scripting::WeakLifetimeScope&, std::string const&);
 
     // symbol:
     // ?bind@ScriptBlockTypes@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptBlockTypes@ScriptModuleMinecraft@@@Scripting@@XZ

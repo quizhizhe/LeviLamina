@@ -6,18 +6,20 @@ struct AttributesComponent {
 public:
     // prevent constructor by default
     AttributesComponent& operator=(AttributesComponent const&);
-    AttributesComponent();
 
 public:
     // NOLINTBEGIN
+    // symbol: ??0AttributesComponent@@QEAA@XZ
+    MCAPI AttributesComponent();
+
     // symbol: ??0AttributesComponent@@QEAA@$$QEAU0@@Z
-    MCAPI AttributesComponent(struct AttributesComponent&&);
+    MCAPI AttributesComponent(struct AttributesComponent&& other);
 
     // symbol: ??0AttributesComponent@@QEAA@AEBU0@@Z
-    MCAPI AttributesComponent(struct AttributesComponent const&);
+    MCAPI AttributesComponent(struct AttributesComponent const& other);
 
     // symbol: ??4AttributesComponent@@QEAAAEAU0@$$QEAU0@@Z
-    MCAPI struct AttributesComponent& operator=(struct AttributesComponent&&);
+    MCAPI struct AttributesComponent& operator=(struct AttributesComponent&& other);
 
     // symbol: ??1AttributesComponent@@QEAA@XZ
     MCAPI ~AttributesComponent();

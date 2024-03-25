@@ -26,11 +26,9 @@ public:
 
 public:
     // clang-format off
-    [[nodiscard]] constexpr HashedString const& getHash()     const { return ll::memory::dAccess<HashedString>(this, 0x8); }
+    [[nodiscard]] constexpr HashedString const& getName()     const { return ll::memory::dAccess<HashedString>(this, 0x8); }
     [[nodiscard]] constexpr int   getDebugMapColor()          const { return ll::memory::dAccess<int>(this, 0x38); }
     [[nodiscard]] constexpr int   getDebugMapOddColor()       const { return ll::memory::dAccess<int>(this, 0x3C); }
-    [[nodiscard]] constexpr float getTemperature()            const { return ll::memory::dAccess<float>(this, 0x40); }
-    //[[nodiscard]]constexpr float getDownfall()              const { return ll::memory::dAccess<float>(this, 0x44); }
     [[nodiscard]] constexpr float getRedSporeDensity()        const { return ll::memory::dAccess<float>(this, 0x48); }
     [[nodiscard]] constexpr float getBlueSporeDensity()       const { return ll::memory::dAccess<float>(this, 0x4C); }
     [[nodiscard]] constexpr float getAshDensity()             const { return ll::memory::dAccess<float>(this, 0x50); }
@@ -47,18 +45,6 @@ public:
     [[nodiscard]] constexpr int   getId()                     const { return ll::memory::dAccess<int>(this, 0x88); }
     // clang-format on
 
-    // WeakRefT<SharePtrRefTraits<FogDefinition const>> mFogDefinition;   // this+0x90
-    // OceanRuinConfiguration                           mOceanRuinConfig; // this+0xA0
-    // std::vector<MobSpawnerData>                      mMobs; // this+0xB0
-
-    // PerlinSimplexNoise         mTemperatureNoise;       // this+0xC8
-    // PerlinSimplexNoise         mFrozenTemperatureNoise; // this+0xF0
-    // OwnerPtrT<EntityRefTraits> mEntity;                 // this+0x118
-    // PerlinSimplexNoise         mBiomeInfoNoise;         // this+0x130
-    // Biome::CachedClientComponentData mCachedClientComponentData;
-
-    [[nodiscard]] constexpr std::string const& getName() const { return getHash().getString(); }
-
     // prevent constructor by default
     Biome& operator=(Biome const&);
     Biome(Biome const&);
@@ -66,43 +52,44 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol:
-    // ?addTag@Biome@@QEAAAEAV1@VHashedString@@AEAV?$TagRegistry@U?$IDType@UBiomeTagIDType@@@@U?$IDType@UBiomeTagSetIDType@@@@@@@Z
-    MCAPI class Biome&
-    addTag(class HashedString, class TagRegistry<struct IDType<struct BiomeTagIDType>, struct IDType<struct BiomeTagSetIDType>>&);
+    // vIndex: 0, symbol: __gen_??1Biome@@UEAA@XZ
+    virtual ~Biome() = default;
 
     // symbol: ?cacheClientComponentData@Biome@@QEAAXXZ
     MCAPI void cacheClientComponentData();
 
     // symbol: ?canHaveSnowfall@Biome@@QEBA_NAEBVBlockSource@@AEBVBlockPos@@@Z
-    MCAPI bool canHaveSnowfall(class BlockSource const&, class BlockPos const&) const;
+    MCAPI bool canHaveSnowfall(class BlockSource const& region, class BlockPos const& pos) const;
 
     // symbol: ?getBiomeType@Biome@@QEBA?AW4VanillaBiomeTypes@@XZ
     MCAPI ::VanillaBiomeTypes getBiomeType() const;
 
     // symbol: ?getBirchFoliageColor@Biome@@QEBAHAEBVBlockPos@@@Z
-    MCAPI int getBirchFoliageColor(class BlockPos const&) const;
+    MCAPI int getBirchFoliageColor(class BlockPos const& pos) const;
+
+    // symbol: ?getDefaultBiomeTemperature@Biome@@QEBAMXZ
+    MCAPI float getDefaultBiomeTemperature() const;
 
     // symbol: ?getDownfall@Biome@@QEBAMXZ
     MCAPI float getDownfall() const;
 
     // symbol: ?getEvergreenFoliageColor@Biome@@QEBAHAEBVBlockPos@@@Z
-    MCAPI int getEvergreenFoliageColor(class BlockPos const&) const;
+    MCAPI int getEvergreenFoliageColor(class BlockPos const& pos) const;
 
     // symbol: ?getFoliageColor@Biome@@QEBAHAEBVBlockPos@@@Z
-    MCAPI int getFoliageColor(class BlockPos const&) const;
+    MCAPI int getFoliageColor(class BlockPos const& pos) const;
 
     // symbol: ?getMapBirchFoliageColor@Biome@@QEBAHAEBVBlockPos@@@Z
-    MCAPI int getMapBirchFoliageColor(class BlockPos const&) const;
+    MCAPI int getMapBirchFoliageColor(class BlockPos const& pos) const;
 
     // symbol: ?getMapEvergreenFoliageColor@Biome@@QEBAHAEBVBlockPos@@@Z
-    MCAPI int getMapEvergreenFoliageColor(class BlockPos const&) const;
+    MCAPI int getMapEvergreenFoliageColor(class BlockPos const& pos) const;
 
     // symbol: ?getMapFoliageColor@Biome@@QEBAHAEBVBlockPos@@@Z
-    MCAPI int getMapFoliageColor(class BlockPos const&) const;
+    MCAPI int getMapFoliageColor(class BlockPos const& pos) const;
 
     // symbol: ?getMapGrassColor@Biome@@QEBAHAEBVBlockPos@@@Z
-    MCAPI int getMapGrassColor(class BlockPos const&) const;
+    MCAPI int getMapGrassColor(class BlockPos const& pos) const;
 
     // symbol: ?getMobs@Biome@@QEBAAEBV?$vector@VMobSpawnerData@@V?$allocator@VMobSpawnerData@@@std@@@std@@XZ
     MCAPI std::vector<class MobSpawnerData> const& getMobs() const;
@@ -114,28 +101,32 @@ public:
     MCAPI int getSnowAccumulationLayers() const;
 
     // symbol: ?getTemperature@Biome@@QEBAMAEBVBlockSource@@AEBVBlockPos@@@Z
-    MCAPI float getTemperature(class BlockSource const&, class BlockPos const&) const;
+    MCAPI float getTemperature(class BlockSource const& region, class BlockPos const& pos) const;
 
     // symbol: ?getTemperatureCategory@Biome@@QEBA?AW4BiomeTempCategory@1@XZ
     MCAPI ::Biome::BiomeTempCategory getTemperatureCategory() const;
 
     // symbol: ?getTemperatureWorldGen@Biome@@QEBAMAEBVBlockPos@@F@Z
-    MCAPI float getTemperatureWorldGen(class BlockPos const&, short) const;
+    MCAPI float getTemperatureWorldGen(class BlockPos const& pos, short seaLevel) const;
 
     // symbol: ?hasTag@Biome@@QEBA_NAEBVWellKnownTagID@@@Z
-    MCAPI bool hasTag(class WellKnownTagID const&) const;
+    MCAPI bool hasTag(class WellKnownTagID const& tagID) const;
 
     // symbol:
     // ?hasTag@Biome@@QEBA_NAEBU?$IDType@UBiomeTagIDType@@@@AEBV?$TagRegistry@U?$IDType@UBiomeTagIDType@@@@U?$IDType@UBiomeTagSetIDType@@@@@@@Z
-    MCAPI bool
-    hasTag(struct IDType<struct BiomeTagIDType> const&, class TagRegistry<struct IDType<struct BiomeTagIDType>, struct IDType<struct BiomeTagSetIDType>> const&)
-        const;
+    MCAPI bool hasTag(
+        struct IDType<struct BiomeTagIDType> const& tagID,
+        class TagRegistry<struct IDType<struct BiomeTagIDType>, struct IDType<struct BiomeTagSetIDType>> const&
+            tagRegistry
+    ) const;
 
     // symbol:
     // ?hasTag@Biome@@QEBA_N_KAEBV?$TagRegistry@U?$IDType@UBiomeTagIDType@@@@U?$IDType@UBiomeTagSetIDType@@@@@@@Z
-    MCAPI bool
-    hasTag(uint64, class TagRegistry<struct IDType<struct BiomeTagIDType>, struct IDType<struct BiomeTagSetIDType>> const&)
-        const;
+    MCAPI bool hasTag(
+        uint64,
+        class TagRegistry<struct IDType<struct BiomeTagIDType>, struct IDType<struct BiomeTagSetIDType>> const&
+            tagRegistry
+    ) const;
 
     // symbol: ?isHumid@Biome@@QEBA_NXZ
     MCAPI bool isHumid() const;
@@ -144,30 +135,32 @@ public:
     MCAPI bool isSnowCovered() const;
 
     // symbol: ?setColor@Biome@@QEAAAEAV1@H@Z
-    MCAPI class Biome& setColor(int);
+    MCAPI class Biome& setColor(int color);
 
     // symbol: ?setColor@Biome@@QEAAAEAV1@H_N@Z
-    MCAPI class Biome& setColor(int, bool);
+    MCAPI class Biome& setColor(int color, bool oddColor);
 
     // symbol: ?setMapWaterColor@Biome@@QEAAAEAV1@H@Z
-    MCAPI class Biome& setMapWaterColor(int);
+    MCAPI class Biome& setMapWaterColor(int color);
 
     // symbol: ?setNoRain@Biome@@QEAAAEAV1@XZ
     MCAPI class Biome& setNoRain();
 
     // symbol: ?setOceanRuinConfig@Biome@@QEAAAEAV1@AEBUOceanRuinConfiguration@@@Z
-    MCAPI class Biome& setOceanRuinConfig(struct OceanRuinConfiguration const&);
+    MCAPI class Biome& setOceanRuinConfig(struct OceanRuinConfiguration const& config);
 
     // symbol: ?setOddColor@Biome@@QEAAAEAV1@H@Z
-    MCAPI class Biome& setOddColor(int);
+    MCAPI class Biome& setOddColor(int color);
 
     // symbol:
     // ?writePacketData@Biome@@QEAAXAEAVCompoundTag@@AEAV?$TagRegistry@U?$IDType@UBiomeTagIDType@@@@U?$IDType@UBiomeTagSetIDType@@@@@@@Z
-    MCAPI void
-    writePacketData(class CompoundTag&, class TagRegistry<struct IDType<struct BiomeTagIDType>, struct IDType<struct BiomeTagSetIDType>>&);
+    MCAPI void writePacketData(
+        class CompoundTag&                                                                                tag,
+        class TagRegistry<struct IDType<struct BiomeTagIDType>, struct IDType<struct BiomeTagSetIDType>>& tagRegistry
+    );
 
     // symbol: ?buildCachedTemperatureNoise@Biome@@SAXAEAVLevelChunk@@@Z
-    MCAPI static void buildCachedTemperatureNoise(class LevelChunk&);
+    MCAPI static void buildCachedTemperatureNoise(class LevelChunk& chunk);
 
     // symbol: ?BACKCOMPAT_FOG_NAME@Biome@@2V?$basic_string_view@DU?$char_traits@D@std@@@std@@B
     MCAPI static std::string_view const BACKCOMPAT_FOG_NAME;

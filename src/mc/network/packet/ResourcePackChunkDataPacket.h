@@ -20,8 +20,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1ResourcePackChunkDataPacket@@UEAA@XZ
+    virtual ~ResourcePackChunkDataPacket();
 
     // vIndex: 1, symbol: ?getId@ResourcePackChunkDataPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -31,21 +31,23 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@ResourcePackChunkDataPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@ResourcePackChunkDataPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1ResourcePackChunkDataPacket@@UEAA@XZ
-    MCVAPI ~ResourcePackChunkDataPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0ResourcePackChunkDataPacket@@QEAA@XZ
     MCAPI ResourcePackChunkDataPacket();
 
     // symbol:
     // ??0ResourcePackChunkDataPacket@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H_KAEBV?$vector@EV?$allocator@E@std@@@2@@Z
-    MCAPI ResourcePackChunkDataPacket(std::string const&, int, uint64, std::vector<uchar> const&);
+    MCAPI ResourcePackChunkDataPacket(
+        std::string const&        name,
+        int                       chunkID,
+        uint64                    byteOffset,
+        std::vector<uchar> const& data
+    );
 
     // NOLINTEND
 };

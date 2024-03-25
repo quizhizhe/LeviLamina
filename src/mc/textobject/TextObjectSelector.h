@@ -19,8 +19,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1TextObjectSelector@@UEAA@XZ
+    virtual ~TextObjectSelector() = default;
 
     // vIndex: 1, symbol:
     // ?asString@TextObjectSelector@@UEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
@@ -31,6 +31,9 @@ public:
 
     // vIndex: 3, symbol: ?resolve@TextObjectSelector@@UEBA?AVValue@Json@@AEBUResolveData@@@Z
     virtual class Json::Value resolve(struct ResolveData const&) const;
+
+    // symbol: ??0TextObjectSelector@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+    MCAPI explicit TextObjectSelector(std::string);
 
     // symbol:
     // ?RAW_TEXT_SELECTOR_KEY@TextObjectSelector@@2V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@B

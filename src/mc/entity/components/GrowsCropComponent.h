@@ -14,10 +14,10 @@ public:
     MCAPI GrowsCropComponent();
 
     // symbol: ?addAdditionalSaveData@GrowsCropComponent@@QEBAXAEAVCompoundTag@@@Z
-    MCAPI void addAdditionalSaveData(class CompoundTag&) const;
+    MCAPI void addAdditionalSaveData(class CompoundTag& tag) const;
 
     // symbol: ?readAdditionalSaveData@GrowsCropComponent@@QEAAXAEAVActor@@AEBVCompoundTag@@AEAVDataLoadHelper@@@Z
-    MCAPI void readAdditionalSaveData(class Actor&, class CompoundTag const&, class DataLoadHelper&);
+    MCAPI void readAdditionalSaveData(class Actor&, class CompoundTag const& tag, class DataLoadHelper&);
 
     // NOLINTEND
 };

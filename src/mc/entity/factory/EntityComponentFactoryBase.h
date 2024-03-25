@@ -19,17 +19,24 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ??1EntityComponentFactoryBase@@MEAA@XZ
-    MCVAPI ~EntityComponentFactoryBase();
+    // vIndex: 0, symbol: ??1EntityComponentFactoryBase@@MEAA@XZ
+    virtual ~EntityComponentFactoryBase();
 
     // symbol:
     // ?addComponents@EntityComponentFactoryBase@@QEBAXAEAVEntityRegistry@@AEAVEntityContext@@AEBVDefinitionInstanceGroup@@@Z
-    MCAPI void addComponents(class EntityRegistry&, class EntityContext&, class DefinitionInstanceGroup const&) const;
+    MCAPI void addComponents(
+        class EntityRegistry&                registry,
+        class EntityContext&                 entity,
+        class DefinitionInstanceGroup const& definitionGroup
+    ) const;
 
     // symbol:
     // ?removeComponents@EntityComponentFactoryBase@@QEBAXAEAVEntityRegistry@@AEAVEntityContext@@AEBVDefinitionInstanceGroup@@@Z
-    MCAPI void
-    removeComponents(class EntityRegistry&, class EntityContext&, class DefinitionInstanceGroup const&) const;
+    MCAPI void removeComponents(
+        class EntityRegistry&                registry,
+        class EntityContext&                 entity,
+        class DefinitionInstanceGroup const& definitionGroup
+    ) const;
 
     // NOLINTEND
 };

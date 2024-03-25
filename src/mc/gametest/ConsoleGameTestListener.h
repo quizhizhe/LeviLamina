@@ -20,17 +20,26 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ConsoleGameTestListener@@UEAA@XZ
+    virtual ~ConsoleGameTestListener() = default;
 
     // vIndex: 1, symbol: ?onTestStructureLoaded@ConsoleGameTestListener@@UEAAXAEAVBaseGameTestInstance@gametest@@@Z
-    virtual void onTestStructureLoaded(class gametest::BaseGameTestInstance&);
+    virtual void onTestStructureLoaded(class gametest::BaseGameTestInstance& test);
 
     // vIndex: 2, symbol: ?onTestPassed@ConsoleGameTestListener@@UEAAXAEAVBaseGameTestInstance@gametest@@@Z
-    virtual void onTestPassed(class gametest::BaseGameTestInstance&);
+    virtual void onTestPassed(class gametest::BaseGameTestInstance& test);
 
     // vIndex: 3, symbol: ?onTestFailed@ConsoleGameTestListener@@UEAAXAEAVBaseGameTestInstance@gametest@@@Z
-    virtual void onTestFailed(class gametest::BaseGameTestInstance&);
+    virtual void onTestFailed(class gametest::BaseGameTestInstance& test);
+
+    // vIndex: 4, symbol: ?onTestStarted@IGameTestListener@gametest@@UEAAXAEAVBaseGameTestInstance@2@@Z
+    virtual void onTestStarted(class gametest::BaseGameTestInstance&);
+
+    // vIndex: 5, symbol: ?onTestRetryStarted@IGameTestListener@gametest@@UEAAXAEAVBaseGameTestInstance@2@@Z
+    virtual void onTestRetryStarted(class gametest::BaseGameTestInstance&);
+
+    // vIndex: 6, symbol: ?onTestRetryFinished@IGameTestListener@gametest@@UEAAXAEAVBaseGameTestInstance@2@@Z
+    virtual void onTestRetryFinished(class gametest::BaseGameTestInstance&);
 
     // NOLINTEND
 };

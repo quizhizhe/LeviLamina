@@ -19,23 +19,26 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SmithingTransformRecipe@@UEAA@XZ
+    virtual ~SmithingTransformRecipe() = default;
 
     // vIndex: 1, symbol:
     // ?assemble@SmithingTransformRecipe@@UEBAAEBV?$vector@VItemInstance@@V?$allocator@VItemInstance@@@std@@@std@@AEAVCraftingContainer@@AEAVCraftingContext@@@Z
     virtual std::vector<class ItemInstance> const& assemble(class CraftingContainer&, class CraftingContext&) const;
-
-    // vIndex: 5, symbol: __unk_vfn_5
-    virtual void __unk_vfn_5();
 
     // vIndex: 6, symbol: ?matches@SmithingTransformRecipe@@UEBA_NAEBVCraftingContainer@@AEBVCraftingContext@@@Z
     virtual bool matches(class CraftingContainer const&, class CraftingContext const&) const;
 
     // symbol:
     // ??0SmithingTransformRecipe@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVRecipeIngredient@@11AEBVItemInstance@@AEBVHashedString@@@Z
-    MCAPI
-    SmithingTransformRecipe(std::string const&, class RecipeIngredient const&, class RecipeIngredient const&, class RecipeIngredient const&, class ItemInstance const&, class HashedString const&);
+    MCAPI SmithingTransformRecipe(
+        std::string const& recipeId,
+        class RecipeIngredient const&,
+        class RecipeIngredient const&,
+        class RecipeIngredient const&,
+        class ItemInstance const& resultItem,
+        class HashedString const& tag
+    );
 
     // symbol: ?getAdditionIngredient@SmithingTransformRecipe@@QEBAAEBVRecipeIngredient@@XZ
     MCAPI class RecipeIngredient const& getAdditionIngredient() const;

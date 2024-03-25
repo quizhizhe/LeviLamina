@@ -11,14 +11,12 @@ public:
     // prevent constructor by default
     ItemStackRequestActionConsume& operator=(ItemStackRequestActionConsume const&);
     ItemStackRequestActionConsume(ItemStackRequestActionConsume const&);
+    ItemStackRequestActionConsume();
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // symbol: ??0ItemStackRequestActionConsume@@QEAA@XZ
-    MCAPI ItemStackRequestActionConsume();
+    // vIndex: 0, symbol: __gen_??1ItemStackRequestActionConsume@@UEAA@XZ
+    virtual ~ItemStackRequestActionConsume() = default;
 
     // NOLINTEND
 };

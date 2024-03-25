@@ -15,9 +15,9 @@ public:
     MCAPI static struct TickingSystemWithInfo createGlideInputSystem();
 
     // symbol:
-    // ?doGlideInputSystem@GlideInputSystem@@SAXAEBUAbilitiesComponent@@AEBUFallFlyTicksComponent@@AEBUMoveInputComponent@@AEBUSynchedActorDataComponent@@AEAUStateVectorComponent@@@Z
+    // ?doGlideInputSystem@GlideInputSystem@@SAXAEBUMovementAbilitiesComponent@@AEBUMoveInputComponent@@AEBUActorDataFlagComponent@@AEAUFallFlyTicksComponent@@AEAUStateVectorComponent@@@Z
     MCAPI static void
-    doGlideInputSystem(struct AbilitiesComponent const&, struct FallFlyTicksComponent const&, struct MoveInputComponent const&, struct SynchedActorDataComponent const&, struct StateVectorComponent&);
+    doGlideInputSystem(struct MovementAbilitiesComponent const&, struct MoveInputComponent const&, struct ActorDataFlagComponent const&, struct FallFlyTicksComponent&, struct StateVectorComponent&);
 
     // NOLINTEND
 };

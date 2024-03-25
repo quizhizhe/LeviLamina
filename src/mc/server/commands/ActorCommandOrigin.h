@@ -1,6 +1,7 @@
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
+#include "mc/world/ActorUniqueID.h"
 
 // auto generated inclusion list
 #include "mc/enums/AbilitiesIndex.h"
@@ -15,17 +16,17 @@ namespace Json { class Value; }
 namespace mce { class UUID; }
 // clang-format on
 
+class Level;
+
 class ActorCommandOrigin : public ::CommandOrigin {
 public:
-    // prevent constructor by default
-    ActorCommandOrigin& operator=(ActorCommandOrigin const&);
-    ActorCommandOrigin(ActorCommandOrigin const&);
-    ActorCommandOrigin();
+    ActorUniqueID mEntityId;
+    Level*        mLevel;
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ActorCommandOrigin@@UEAA@XZ
+    virtual ~ActorCommandOrigin() = default;
 
     // vIndex: 1, symbol:
     // ?getRequestId@ActorCommandOrigin@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
@@ -73,7 +74,11 @@ public:
     virtual bool isValid() const;
 
     // symbol: ??0ActorCommandOrigin@@QEAA@AEAVActor@@@Z
-    MCAPI explicit ActorCommandOrigin(class Actor&);
+    MCAPI explicit ActorCommandOrigin(class Actor& origin);
+
+    // symbol:
+    // ?load@ActorCommandOrigin@@SA?AV?$unique_ptr@VActorCommandOrigin@@U?$default_delete@VActorCommandOrigin@@@std@@@std@@AEBVCompoundTag@@AEAVLevel@@@Z
+    MCAPI static std::unique_ptr<class ActorCommandOrigin> load(class CompoundTag const& tag, class Level& level);
 
     // NOLINTEND
 };

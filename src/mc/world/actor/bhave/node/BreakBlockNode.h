@@ -15,14 +15,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1BreakBlockNode@@UEAA@XZ
+    virtual ~BreakBlockNode() = default;
 
     // vIndex: 1, symbol: ?tick@BreakBlockNode@@UEAA?AW4BehaviorStatus@@AEAVActor@@@Z
-    virtual ::BehaviorStatus tick(class Actor&);
+    virtual ::BehaviorStatus tick(class Actor& owner);
 
     // vIndex: 2, symbol: ?initializeFromDefinition@BreakBlockNode@@EEAAXAEAVActor@@@Z
-    virtual void initializeFromDefinition(class Actor&);
+    virtual void initializeFromDefinition(class Actor& owner);
 
     // NOLINTEND
 };

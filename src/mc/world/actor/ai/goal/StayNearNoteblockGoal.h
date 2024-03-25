@@ -26,25 +26,21 @@ public:
         // prevent constructor by default
         Definition& operator=(Definition const&);
         Definition(Definition const&);
+        Definition();
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
-
-        // symbol: ??1Definition@StayNearNoteblockGoal@@UEAA@XZ
-        MCVAPI ~Definition();
-
-        // symbol: ??0Definition@StayNearNoteblockGoal@@QEAA@XZ
-        MCAPI Definition();
-
-        // symbol: ?initialize@Definition@StayNearNoteblockGoal@@QEBAXAEAVEntityContext@@AEAV2@@Z
-        MCAPI void initialize(class EntityContext&, class StayNearNoteblockGoal&) const;
+        // vIndex: 0, symbol: ??1Definition@StayNearNoteblockGoal@@UEAA@XZ
+        virtual ~Definition();
 
         // symbol:
         // ?buildSchema@Definition@StayNearNoteblockGoal@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VDefinition@StayNearNoteblockGoal@@@JsonUtil@@@4@@Z
-        MCAPI static void
-        buildSchema(std::string const&, std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class StayNearNoteblockGoal::Definition>>&);
+        MCAPI static void buildSchema(
+            std::string const&                             name,
+            std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<
+                class JsonUtil::EmptyClass,
+                class StayNearNoteblockGoal::Definition>>& root
+        );
 
         // NOLINTEND
     };
@@ -57,8 +53,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1StayNearNoteblockGoal@@UEAA@XZ
+    virtual ~StayNearNoteblockGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@StayNearNoteblockGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -77,10 +73,7 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@StayNearNoteblockGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
-
-    // symbol: ??0StayNearNoteblockGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit StayNearNoteblockGoal(class Mob&);
+    virtual void appendDebugInfo(std::string& str) const;
 
     // NOLINTEND
 

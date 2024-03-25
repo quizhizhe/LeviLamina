@@ -24,8 +24,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1ResourcePackStackPacket@@UEAA@XZ
+    virtual ~ResourcePackStackPacket();
 
     // vIndex: 1, symbol: ?getId@ResourcePackStackPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -35,14 +35,11 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@ResourcePackStackPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
-    // ?_read@ResourcePackStackPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1ResourcePackStackPacket@@UEAA@XZ
-    MCVAPI ~ResourcePackStackPacket();
+    // ?_read@ResourcePackStackPacket@@MEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0ResourcePackStackPacket@@QEAA@XZ
     MCAPI ResourcePackStackPacket();
@@ -50,7 +47,7 @@ public:
     // symbol:
     // ??0ResourcePackStackPacket@@QEAA@V?$vector@UPackInstanceId@@V?$allocator@UPackInstanceId@@@std@@@std@@0AEBVBaseGameVersion@@_NAEBVExperiments@@@Z
     MCAPI
-    ResourcePackStackPacket(std::vector<struct PackInstanceId>, std::vector<struct PackInstanceId>, class BaseGameVersion const&, bool, class Experiments const&);
+    ResourcePackStackPacket(std::vector<struct PackInstanceId> addOnIdsAndVersions, std::vector<struct PackInstanceId> texturePackIdsAndVersions, class BaseGameVersion const& baseGameVersion, bool texturePackRequired, class Experiments const&);
 
     // NOLINTEND
 };

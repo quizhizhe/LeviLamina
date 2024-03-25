@@ -19,8 +19,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ThrowableItemComponent@@UEAA@XZ
+    virtual ~ThrowableItemComponent() = default;
 
     // vIndex: 1, symbol: ?checkComponentDataForContentErrors@ItemComponent@@UEBA_NXZ
     virtual bool checkComponentDataForContentErrors() const;
@@ -32,11 +32,11 @@ public:
     virtual bool isNetworkComponent() const;
 
     // vIndex: 4, symbol:
-    // ?buildNetworkTag@ChargeableItemComponent@@UEBA?AV?$unique_ptr@VCompoundTag@@U?$default_delete@VCompoundTag@@@std@@@std@@AEBUReflectionCtx@cereal@@@Z
+    // ?buildNetworkTag@?$NetworkedItemComponent@VThrowableItemComponent@@@@UEBA?AV?$unique_ptr@VCompoundTag@@U?$default_delete@VCompoundTag@@@std@@@std@@AEBUReflectionCtx@cereal@@@Z
     virtual std::unique_ptr<class CompoundTag> buildNetworkTag(struct cereal::ReflectionCtx const&) const;
 
     // vIndex: 5, symbol:
-    // ?initializeFromNetwork@ChargeableItemComponent@@UEAA_NAEBVCompoundTag@@AEBUReflectionCtx@cereal@@@Z
+    // ?initializeFromNetwork@?$NetworkedItemComponent@VThrowableItemComponent@@@@UEAA_NAEBVCompoundTag@@AEBUReflectionCtx@cereal@@@Z
     virtual bool initializeFromNetwork(class CompoundTag const&, struct cereal::ReflectionCtx const&);
 
     // vIndex: 6, symbol: ?handleVersionBasedInitialization@ThrowableItemComponent@@UEAAXAEBVSemVersion@@@Z
@@ -48,11 +48,17 @@ public:
     // vIndex: 8, symbol: ?_useOn@ItemComponent@@MEBA_NAEAVItemStack@@AEAVActor@@AEBVBlockPos@@EAEBVVec3@@@Z
     virtual bool _useOn(class ItemStack&, class Actor&, class BlockPos const&, uchar, class Vec3 const&) const;
 
-    // vIndex: 9, symbol: ?_initializeComponent@ItemComponent@@MEBAXXZ
-    virtual void _initializeComponent() const;
+    // vIndex: 9, symbol: ?_initializeComponent@ItemComponent@@MEAAXXZ
+    virtual void _initializeComponent();
 
     // symbol: ??0ThrowableItemComponent@@QEAA@_N@Z
     MCAPI explicit ThrowableItemComponent(bool);
+
+    // symbol: ?releaseUsing@ThrowableItemComponent@@QEBA_NAEAVItemStack@@PEAVPlayer@@H@Z
+    MCAPI bool releaseUsing(class ItemStack& item, class Player* player, int durationLeft) const;
+
+    // symbol: ?use@ThrowableItemComponent@@QEBA_NAEAVItemStack@@AEAVPlayer@@@Z
+    MCAPI bool use(class ItemStack& item, class Player& player) const;
 
     // symbol:
     // ?bindType@ThrowableItemComponent@@SAXAEAUReflectionCtx@cereal@@AEBV?$vector@W4AllExperiments@@V?$allocator@W4AllExperiments@@@std@@@std@@V?$optional@VSemVersion@@@5@@Z
@@ -70,7 +76,7 @@ public:
     MCAPI void _doThrow(class ItemStack&, class Player&, class ProjectileItemComponent const&, float) const;
 
     // symbol: ?_getLaunchPower@ThrowableItemComponent@@AEBAMHHH@Z
-    MCAPI float _getLaunchPower(int, int, int) const;
+    MCAPI float _getLaunchPower(int durationLeft, int maxDrawDuration, int maxUseDuration) const;
 
     // NOLINTEND
 };

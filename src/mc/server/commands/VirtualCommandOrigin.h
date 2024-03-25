@@ -24,8 +24,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1VirtualCommandOrigin@@UEAA@XZ
+    virtual ~VirtualCommandOrigin() = default;
 
     // vIndex: 1, symbol:
     // ?getRequestId@VirtualCommandOrigin@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
@@ -67,7 +67,7 @@ public:
     virtual bool hasTellPerms() const;
 
     // vIndex: 15, symbol: ?canUseAbility@VirtualCommandOrigin@@UEBA_NW4AbilitiesIndex@@@Z
-    virtual bool canUseAbility(::AbilitiesIndex) const;
+    virtual bool canUseAbility(::AbilitiesIndex abilityIndex) const;
 
     // vIndex: 17, symbol: ?canUseCommandsWithoutCheatsEnabled@VirtualCommandOrigin@@UEBA_NXZ
     virtual bool canUseCommandsWithoutCheatsEnabled() const;
@@ -91,7 +91,7 @@ public:
     virtual void updateValues();
 
     // vIndex: 28, symbol: ?getExecutePosition@VirtualCommandOrigin@@UEBA?BVVec3@@HAEBVCommandPositionFloat@@@Z
-    virtual class Vec3 const getExecutePosition(int, class CommandPositionFloat const&) const;
+    virtual class Vec3 const getExecutePosition(int version, class CommandPositionFloat const&) const;
 
     // vIndex: 29, symbol: ?serialize@VirtualCommandOrigin@@UEBA?AVCompoundTag@@XZ
     virtual class CompoundTag serialize() const;
@@ -100,23 +100,28 @@ public:
     virtual bool isValid() const;
 
     // symbol: ??0VirtualCommandOrigin@@QEAA@AEBVCommandOrigin@@AEAVActor@@AEBVCommandPositionFloat@@H@Z
-    MCAPI VirtualCommandOrigin(class CommandOrigin const&, class Actor&, class CommandPositionFloat const&, int);
+    MCAPI VirtualCommandOrigin(
+        class CommandOrigin const& outputReceiver,
+        class Actor&               entity,
+        class CommandPositionFloat const&,
+        int version
+    );
 
     // symbol: ??0VirtualCommandOrigin@@QEAA@AEBVCommandOrigin@@0AEBVCommandPositionFloat@@H@Z
     MCAPI VirtualCommandOrigin(
-        class CommandOrigin const&,
-        class CommandOrigin const&,
+        class CommandOrigin const& outputReceiver,
+        class CommandOrigin const& source,
         class CommandPositionFloat const&,
-        int
+        int version
     );
 
     // symbol:
     // ??0VirtualCommandOrigin@@QEAA@V?$unique_ptr@VCommandOrigin@@U?$default_delete@VCommandOrigin@@@std@@@std@@0AEBVCommandPositionFloat@@H@Z
     MCAPI VirtualCommandOrigin(
-        std::unique_ptr<class CommandOrigin>,
-        std::unique_ptr<class CommandOrigin>,
+        std::unique_ptr<class CommandOrigin> outputReceiver,
+        std::unique_ptr<class CommandOrigin> source,
         class CommandPositionFloat const&,
-        int
+        int version
     );
 
     // symbol: ?getOrigin@VirtualCommandOrigin@@QEBAPEAVCommandOrigin@@XZ
@@ -124,7 +129,8 @@ public:
 
     // symbol:
     // ?load@VirtualCommandOrigin@@SA?AV?$unique_ptr@VVirtualCommandOrigin@@U?$default_delete@VVirtualCommandOrigin@@@std@@@std@@AEBVCompoundTag@@AEAVServerLevel@@@Z
-    MCAPI static std::unique_ptr<class VirtualCommandOrigin> load(class CompoundTag const&, class ServerLevel&);
+    MCAPI static std::unique_ptr<class VirtualCommandOrigin>
+    load(class CompoundTag const& tag, class ServerLevel& level);
 
     // NOLINTEND
 };

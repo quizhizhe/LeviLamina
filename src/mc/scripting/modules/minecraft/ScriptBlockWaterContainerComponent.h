@@ -13,6 +13,7 @@
 class BlockPos;
 class BlockSource;
 namespace ScriptModuleMinecraft { class BaseScriptBlockLiquidContainerComponent; }
+namespace ScriptModuleMinecraft { class ScriptComponentTypeEnumBuilder; }
 namespace ScriptModuleMinecraft { class ScriptItemType; }
 namespace ScriptModuleMinecraft { class ScriptRGBA; }
 namespace Scripting { class WeakLifetimeScope; }
@@ -29,11 +30,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // symbol: ??1ScriptBlockWaterContainerComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptBlockWaterContainerComponent();
+    // vIndex: 0, symbol: __gen_??1ScriptBlockWaterContainerComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptBlockWaterContainerComponent() = default;
 
     // symbol:
     // ?addDye@ScriptBlockWaterContainerComponent@ScriptModuleMinecraft@@QEAA?AV?$Result@X$$V@Scripting@@AEBVScriptItemType@2@@Z
@@ -43,24 +41,20 @@ public:
     // ?getCustomColor@ScriptBlockWaterContainerComponent@ScriptModuleMinecraft@@QEAA?AV?$Result@VScriptRGBA@ScriptModuleMinecraft@@$$V@Scripting@@XZ
     MCAPI class Scripting::Result<class ScriptModuleMinecraft::ScriptRGBA> getCustomColor();
 
-    // symbol: ??4ScriptBlockWaterContainerComponent@ScriptModuleMinecraft@@QEAAAEAV01@$$QEAV01@@Z
-    MCAPI class ScriptModuleMinecraft::ScriptBlockWaterContainerComponent&
-    operator=(class ScriptModuleMinecraft::ScriptBlockWaterContainerComponent&&);
-
     // symbol:
     // ?setCustomColor@ScriptBlockWaterContainerComponent@ScriptModuleMinecraft@@QEAA?AV?$Result@X$$V@Scripting@@AEBVScriptRGBA@2@@Z
-    MCAPI class Scripting::Result<void> setCustomColor(class ScriptModuleMinecraft::ScriptRGBA const&);
+    MCAPI class Scripting::Result<void> setCustomColor(class ScriptModuleMinecraft::ScriptRGBA const& color);
 
     // symbol:
-    // ?bind@ScriptBlockWaterContainerComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptBlockWaterContainerComponent@ScriptModuleMinecraft@@@Scripting@@XZ
+    // ?bind@ScriptBlockWaterContainerComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptBlockWaterContainerComponent@ScriptModuleMinecraft@@@Scripting@@AEAVScriptComponentTypeEnumBuilder@2@@Z
     MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptBlockWaterContainerComponent>
-    bind();
+    bind(class ScriptModuleMinecraft::ScriptComponentTypeEnumBuilder&);
 
     // symbol:
     // ?tryCreate@ScriptBlockWaterContainerComponent@ScriptModuleMinecraft@@SA?AV?$optional@V?$StrongTypedObjectHandle@VScriptBlockWaterContainerComponent@ScriptModuleMinecraft@@@Scripting@@@std@@AEAVBlockSource@@VBlockPos@@AEBVWeakLifetimeScope@Scripting@@@Z
     MCAPI static std::optional<
         class Scripting::StrongTypedObjectHandle<class ScriptModuleMinecraft::ScriptBlockWaterContainerComponent>>
-    tryCreate(class BlockSource&, class BlockPos, class Scripting::WeakLifetimeScope const&);
+    tryCreate(class BlockSource& region, class BlockPos position, class Scripting::WeakLifetimeScope const& scope);
 
     // symbol: ?ComponentId@ScriptBlockWaterContainerComponent@ScriptModuleMinecraft@@2PEBDEB
     MCAPI static char const* ComponentId;

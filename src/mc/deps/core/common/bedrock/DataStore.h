@@ -54,33 +54,29 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1EditorImpl@DataStore@Bedrock@@UEAA@XZ
+        virtual ~EditorImpl() = default;
 
-        // vIndex: 1, symbol: __unk_vfn_1
-        virtual void __unk_vfn_1();
+        // vIndex: 1, symbol:
+        // ?getOwningDataStore@ViewerImpl@DataStore@Bedrock@@UEBA?AV?$not_null@PEBVDataStore@Bedrock@@@gsl@@XZ
+        virtual gsl::not_null<class Bedrock::DataStore const*> getOwningDataStore() const;
 
-        // vIndex: 2, symbol: __unk_vfn_2
-        virtual void __unk_vfn_2();
+        // vIndex: 2, symbol:
+        // ?getOwningDataStore@ViewerImpl@DataStore@Bedrock@@UEAA?AV?$not_null@PEAVDataStore@Bedrock@@@gsl@@XZ
+        virtual gsl::not_null<class Bedrock::DataStore*> getOwningDataStore();
 
         // vIndex: 3, symbol:
         // ?getValueForKey@EditorImpl@DataStore@Bedrock@@UEAAPEAVNode@JSONObject@3@V?$basic_string_view@DU?$char_traits@D@std@@@std@@@Z
-        virtual class Bedrock::JSONObject::Node* getValueForKey(std::string_view);
+        virtual class Bedrock::JSONObject::Node* getValueForKey(std::string_view key);
 
         // vIndex: 4, symbol:
         // ?getValueForKey@EditorImpl@DataStore@Bedrock@@UEBAPEBVNode@JSONObject@3@V?$basic_string_view@DU?$char_traits@D@std@@@std@@@Z
-        virtual class Bedrock::JSONObject::Node const* getValueForKey(std::string_view) const;
+        virtual class Bedrock::JSONObject::Node const* getValueForKey(std::string_view key) const;
 
         // vIndex: 5, symbol:
         // ?setValueForKey@EditorImpl@DataStore@Bedrock@@UEAAPEAVNode@JSONObject@3@V?$basic_string_view@DU?$char_traits@D@std@@@std@@AEBVValueWrapper@53@@Z
         virtual class Bedrock::JSONObject::Node*
-        setValueForKey(std::string_view, class Bedrock::JSONObject::ValueWrapper const&);
-
-        // symbol: ?getOwningDataStore@EditorImpl@DataStore@Bedrock@@UEAA?AV?$not_null@PEAVDataStore@Bedrock@@@gsl@@XZ
-        MCVAPI gsl::not_null<class Bedrock::DataStore*> getOwningDataStore();
-
-        // symbol: ?getOwningDataStore@EditorImpl@DataStore@Bedrock@@UEBA?AV?$not_null@PEBVDataStore@Bedrock@@@gsl@@XZ
-        MCVAPI gsl::not_null<class Bedrock::DataStore const*> getOwningDataStore() const;
+        setValueForKey(std::string_view key, class Bedrock::JSONObject::ValueWrapper const& value);
 
         // NOLINTEND
     };
@@ -95,7 +91,7 @@ public:
     public:
         // NOLINTBEGIN
         // symbol: ??0Impl@DataStore@Bedrock@@QEAA@PEAV12@@Z
-        MCAPI explicit Impl(class Bedrock::DataStore*);
+        MCAPI explicit Impl(class Bedrock::DataStore* owner);
 
         // symbol: ?load@Impl@DataStore@Bedrock@@QEAAXXZ
         MCAPI void load();
@@ -112,18 +108,20 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0() = 0;
+        // vIndex: 0, symbol: __gen_??1Viewer@DataStore@Bedrock@@UEAA@XZ
+        virtual ~Viewer() = default;
 
-        // vIndex: 1, symbol: __unk_vfn_1
-        virtual void __unk_vfn_1() = 0;
+        // vIndex: 1, symbol:
+        // ?getOwningDataStore@ViewerImpl@DataStore@Bedrock@@UEBA?AV?$not_null@PEBVDataStore@Bedrock@@@gsl@@XZ
+        virtual gsl::not_null<class Bedrock::DataStore const*> getOwningDataStore() const = 0;
 
-        // vIndex: 2, symbol: __unk_vfn_2
-        virtual void __unk_vfn_2();
+        // vIndex: 2, symbol:
+        // ?getOwningDataStore@ViewerImpl@DataStore@Bedrock@@UEAA?AV?$not_null@PEAVDataStore@Bedrock@@@gsl@@XZ
+        virtual gsl::not_null<class Bedrock::DataStore*> getOwningDataStore() = 0;
 
         // vIndex: 3, symbol:
         // ?getValueForKey@EditorImpl@DataStore@Bedrock@@UEBAPEBVNode@JSONObject@3@V?$basic_string_view@DU?$char_traits@D@std@@@std@@@Z
-        virtual class Bedrock::JSONObject::Node const* getValueForKey(std::string_view) const = 0;
+        virtual class Bedrock::JSONObject::Node const* getValueForKey(std::string_view key) const = 0;
 
         // NOLINTEND
     };
@@ -137,24 +135,20 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1ViewerImpl@DataStore@Bedrock@@UEAA@XZ
+        virtual ~ViewerImpl() = default;
 
-        // vIndex: 1, symbol: __unk_vfn_1
-        virtual void __unk_vfn_1();
+        // vIndex: 1, symbol:
+        // ?getOwningDataStore@ViewerImpl@DataStore@Bedrock@@UEBA?AV?$not_null@PEBVDataStore@Bedrock@@@gsl@@XZ
+        virtual gsl::not_null<class Bedrock::DataStore const*> getOwningDataStore() const;
 
-        // vIndex: 2, symbol: __unk_vfn_2
-        virtual void __unk_vfn_2();
+        // vIndex: 2, symbol:
+        // ?getOwningDataStore@ViewerImpl@DataStore@Bedrock@@UEAA?AV?$not_null@PEAVDataStore@Bedrock@@@gsl@@XZ
+        virtual gsl::not_null<class Bedrock::DataStore*> getOwningDataStore();
 
         // vIndex: 3, symbol:
         // ?getValueForKey@ViewerImpl@DataStore@Bedrock@@UEBAPEBVNode@JSONObject@3@V?$basic_string_view@DU?$char_traits@D@std@@@std@@@Z
-        virtual class Bedrock::JSONObject::Node const* getValueForKey(std::string_view) const;
-
-        // symbol: ?getOwningDataStore@ViewerImpl@DataStore@Bedrock@@UEAA?AV?$not_null@PEAVDataStore@Bedrock@@@gsl@@XZ
-        MCVAPI gsl::not_null<class Bedrock::DataStore*> getOwningDataStore();
-
-        // symbol: ?getOwningDataStore@ViewerImpl@DataStore@Bedrock@@UEBA?AV?$not_null@PEBVDataStore@Bedrock@@@gsl@@XZ
-        MCVAPI gsl::not_null<class Bedrock::DataStore const*> getOwningDataStore() const;
+        virtual class Bedrock::JSONObject::Node const* getValueForKey(std::string_view key) const;
 
         // NOLINTEND
     };
@@ -166,8 +160,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ??1DataStore@Bedrock@@UEAA@XZ
-    MCVAPI ~DataStore();
+    // vIndex: 0, symbol: ??1DataStore@Bedrock@@UEAA@XZ
+    virtual ~DataStore();
 
     // symbol: ??0DataStore@Bedrock@@QEAA@XZ
     MCAPI DataStore();
@@ -179,7 +173,7 @@ public:
     MCAPI void setCustomFileHandlers(struct Bedrock::DataStore::CustomFileHandlers);
 
     // symbol: ?setFilePath@DataStore@Bedrock@@QEAAXAEBVPath@Core@@@Z
-    MCAPI void setFilePath(class Core::Path const&);
+    MCAPI void setFilePath(class Core::Path const& filePath);
 
     // NOLINTEND
 };

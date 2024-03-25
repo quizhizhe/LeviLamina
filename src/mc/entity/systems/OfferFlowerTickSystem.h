@@ -27,12 +27,11 @@ public:
     MCAPI static void _doOfferFlowerTickSystem(class StrictEntityContext const&, struct OfferFlowerTickComponent&);
 
     // symbol:
-    // ?_tickOfferFlowerTickSystem@OfferFlowerTickSystem@@CAXV?$ViewT@VStrictEntityContext@@VEntityRegistryBase@@U?$Include@VActorTickNeededComponent@@@@UOfferFlowerTickComponent@@@@@Z
+    // ?_tickOfferFlowerTickSystem@OfferFlowerTickSystem@@CAXV?$ViewT@VStrictEntityContext@@U?$Include@VActorTickNeededComponent@@@@UOfferFlowerTickComponent@@@@@Z
     MCAPI static void _tickOfferFlowerTickSystem(class ViewT<
                                                  class StrictEntityContext,
-                                                 class EntityRegistryBase,
                                                  struct Include<class ActorTickNeededComponent>,
-                                                 struct OfferFlowerTickComponent>);
+                                                 struct OfferFlowerTickComponent> view);
 
     // NOLINTEND
 };

@@ -10,23 +10,18 @@ public:
     // prevent constructor by default
     EnchantmentInstance& operator=(EnchantmentInstance const&);
     EnchantmentInstance(EnchantmentInstance const&);
+    EnchantmentInstance();
 
 public:
     // NOLINTBEGIN
-    // symbol: ??0EnchantmentInstance@@QEAA@XZ
-    MCAPI EnchantmentInstance();
-
     // symbol: ??0EnchantmentInstance@@QEAA@W4Type@Enchant@@H@Z
-    MCAPI EnchantmentInstance(::Enchant::Type, int);
+    MCAPI EnchantmentInstance(::Enchant::Type enchantType, int level);
 
     // symbol: ?getEnchantLevel@EnchantmentInstance@@QEBAHXZ
     MCAPI int getEnchantLevel() const;
 
     // symbol: ?getEnchantType@EnchantmentInstance@@QEBA?AW4Type@Enchant@@XZ
     MCAPI ::Enchant::Type getEnchantType() const;
-
-    // symbol: ?setEnchantLevel@EnchantmentInstance@@QEAAXH@Z
-    MCAPI void setEnchantLevel(int);
 
     // NOLINTEND
 };

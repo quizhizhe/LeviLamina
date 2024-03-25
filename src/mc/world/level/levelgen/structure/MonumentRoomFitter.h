@@ -11,16 +11,16 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1MonumentRoomFitter@@UEAA@XZ
+    virtual ~MonumentRoomFitter() = default;
 
     // vIndex: 1, symbol: ?fits@FitDoubleXRoom@@UEBA_NAEBVRoomDefinition@@@Z
-    virtual bool fits(class RoomDefinition const&) const = 0;
+    virtual bool fits(class RoomDefinition const& definition) const = 0;
 
     // vIndex: 2, symbol:
     // ?create@FitDoubleXRoom@@UEAA?AV?$unique_ptr@VOceanMonumentPiece@@U?$default_delete@VOceanMonumentPiece@@@std@@@std@@AEAHV?$shared_ptr@VRoomDefinition@@@3@AEAVRandom@@@Z
     virtual std::unique_ptr<class OceanMonumentPiece>
-    create(int&, std::shared_ptr<class RoomDefinition>, class Random&) = 0;
+    create(int& orientation, std::shared_ptr<class RoomDefinition> definition, class Random& random) = 0;
 
     // NOLINTEND
 };

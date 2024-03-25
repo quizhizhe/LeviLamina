@@ -15,16 +15,16 @@ public:
     };
 
 public:
-    ChunkPos    mPos;                           // this+0x30
-    bool        mCacheEnabled;                  // this+0x38
-    bool        mIsChunkInTickRange;            // this+0x39
-    std::string mSerializedChunk;               // this+0x40
-    uint64      mSubChunksCount;                // this+0x60
-    bool        isClientPacket;                 // this+0x68
-    bool        mClientNeedsToRequestSubchunks; // this+0x69
-    int         mClientRequestSubChunkLimit;    // this+0x6c
-
-    std::vector<SubChunkMetadata> mCacheMetadata; // this+0x70
+    ChunkPos                      mPos;                           // this+0x30
+    DimensionType                 mDimensionType;                 // this+0x38
+    bool                          mCacheEnabled;                  // this+0x3C
+    bool                          mIsChunkInTickRange;            // this+0x3D
+    std::string                   mSerializedChunk;               // this+0x40
+    uint64                        mSubChunksCount;                // this+0x60
+    bool                          mIsClientPacket;                // this+0x68
+    bool                          mClientNeedsToRequestSubchunks; // this+0x69
+    int                           mClientRequestSubChunkLimit;    // this+0x6c
+    std::vector<SubChunkMetadata> mCacheMetadata;                 // this+0x70
 
     // prevent constructor by default
     LevelChunkPacket& operator=(LevelChunkPacket const&);
@@ -32,8 +32,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1LevelChunkPacket@@UEAA@XZ
+    virtual ~LevelChunkPacket() = default;
 
     // vIndex: 1, symbol: ?getId@LevelChunkPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -43,21 +43,21 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@LevelChunkPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@LevelChunkPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0LevelChunkPacket@@QEAA@XZ
     MCAPI LevelChunkPacket();
 
     // symbol: ?pushSubChunkMetadata@LevelChunkPacket@@QEAAX_K@Z
-    MCAPI void pushSubChunkMetadata(uint64);
+    MCAPI void pushSubChunkMetadata(uint64 id);
 
     // symbol:
     // ?readCacheMetadata@LevelChunkPacket@@QEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    MCAPI class Bedrock::Result<void> readCacheMetadata(class ReadOnlyBinaryStream&);
+    MCAPI class Bedrock::Result<void> readCacheMetadata(class ReadOnlyBinaryStream& stream);
 
     // NOLINTEND
 };

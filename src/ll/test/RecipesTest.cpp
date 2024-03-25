@@ -1,6 +1,6 @@
 #include "mc/world/item/crafting/Recipes.h"
 #include "ll/api/memory/Hook.h"
-#include "ll/api/service/GlobalService.h"
+#include "ll/api/service/Bedrock.h"
 #include "ll/api/utils/StringUtils.h"
 #include "magic_enum.hpp"
 #include "mc/deps/json/Value.h"
@@ -16,7 +16,7 @@
 
 #ifdef TestRecipes
 
-LL_AUTO_TYPED_INSTANCE_HOOK(
+LL_AUTO_TYPE_INSTANCE_HOOK(
     TestRecipesHook,
     HookPriority::Normal,
     ServerInstanceEventCoordinator,
@@ -26,11 +26,11 @@ LL_AUTO_TYPED_INSTANCE_HOOK(
 ) {
     origin(ins);
 
-    using namespace ll::utils::string_utils;
+    using namespace ll::string_utils;
 
     nlohmann::json json;
 
-    for (auto& [type, rmap] : ll::Global<Level>->getRecipes().getRecipesAllTags()) {
+    for (auto& [type, rmap] : ll::service::getLevel()->getRecipes().getRecipesAllTags()) {
         auto& mapjson = json[type.getString()];
         for (auto& [k, v] : rmap) {
             auto& rjson           = mapjson[k];
@@ -58,7 +58,9 @@ LL_AUTO_TYPED_INSTANCE_HOOK(
                     // ukj["Item"] = item.getFullItemName();
                     // ukj["Data"] = data;
                     std::string iname = item.getFullItemName();
-                    if (data != 32767) { iname += ":" + std::to_string(data); }
+                    if (data != 32767) {
+                        iname += ":" + std::to_string(data);
+                    }
                     rijson["BaseMap"].push_back(iname);
                     return false;
                 });
@@ -117,14 +119,18 @@ LL_AUTO_TYPED_INSTANCE_HOOK(
 
     for (auto& recipe : json["crafting_table"].items()) {
         for (auto& i : recipe.value()["RecipeIngredient"]) {
-            if (i["StackSize"] < 1) { continue; }
+            if (i["StackSize"] < 1) {
+                continue;
+            }
             std::string key;
             if (i.contains("BaseMap")) {
                 for (auto& name : i["BaseMap"]) {
                     auto& table = multitable[name];
                     for (auto item : recipe.value()["ResultItem"]) {
                         item.erase("Count");
-                        if (!table.contains(item)) { table.push_back(item); }
+                        if (!table.contains(item)) {
+                            table.push_back(item);
+                        }
                     }
                 }
             }
@@ -132,7 +138,9 @@ LL_AUTO_TYPED_INSTANCE_HOOK(
             auto& table = multitable[key];
             for (auto item : recipe.value()["ResultItem"]) {
                 item.erase("Count");
-                if (!table.contains(item)) { table.push_back(item); }
+                if (!table.contains(item)) {
+                    table.push_back(item);
+                }
             }
         }
     }

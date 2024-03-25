@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1EatCarriedItemGoal@@UEAA@XZ
+    virtual ~EatCarriedItemGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@EatCarriedItemGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -35,10 +35,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@EatCarriedItemGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0EatCarriedItemGoal@@QEAA@AEAVMob@@H@Z
-    MCAPI EatCarriedItemGoal(class Mob&, int);
+    MCAPI EatCarriedItemGoal(class Mob& mob, int startDelay);
 
     // NOLINTEND
 
@@ -55,9 +55,9 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $CHEW_CHANCE() { return CHEW_CHANCE; }
+    static auto& $CHEW_CHANCE() { return CHEW_CHANCE; }
 
-    auto& $EATING_TIME() { return EATING_TIME; }
+    static auto& $EATING_TIME() { return EATING_TIME; }
 
     // NOLINTEND
 };

@@ -15,26 +15,21 @@ namespace ScriptModuleMinecraft {
 class ScriptComponent {
 public:
     // prevent constructor by default
+    ScriptComponent& operator=(ScriptComponent const&);
     ScriptComponent(ScriptComponent const&);
     ScriptComponent();
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1ScriptComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptComponent();
 
-    // vIndex: 1, symbol: ?_isValid@ScriptItemComponent@ScriptModuleMinecraft@@MEBA_NXZ
+    // vIndex: 1, symbol: ?_isValid@AttributeScriptActorComponent@ScriptModuleMinecraft@@MEBA_NXZ
     virtual bool _isValid() const = 0;
-
-    // symbol: ??1ScriptComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptComponent();
 
     // symbol:
     // ??0ScriptComponent@ScriptModuleMinecraft@@QEAA@AEBVWeakLifetimeScope@Scripting@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI ScriptComponent(class Scripting::WeakLifetimeScope const&, std::string const&);
-
-    // symbol: ??4ScriptComponent@ScriptModuleMinecraft@@QEAAAEAV01@AEBV01@@Z
-    MCAPI class ScriptModuleMinecraft::ScriptComponent& operator=(class ScriptModuleMinecraft::ScriptComponent const&);
+    MCAPI ScriptComponent(class Scripting::WeakLifetimeScope const& scope, std::string const& id);
 
     // symbol:
     // ?bind@ScriptComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptComponent@ScriptModuleMinecraft@@@Scripting@@XZ

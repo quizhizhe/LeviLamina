@@ -15,14 +15,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1NBStartPiece@@UEAA@XZ
+    virtual ~NBStartPiece() = default;
 
     // vIndex: 2, symbol: ?getType@NBStartPiece@@UEBA?AW4StructurePieceType@@XZ
     virtual ::StructurePieceType getType() const;
 
     // symbol: ??0NBStartPiece@@QEAA@AEAVRandom@@HH@Z
-    MCAPI NBStartPiece(class Random&, int, int);
+    MCAPI NBStartPiece(class Random& random, int west, int north);
 
     // NOLINTEND
 };

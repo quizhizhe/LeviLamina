@@ -30,16 +30,20 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1GoHomeDefinition@GoHomeGoal@@UEAA@XZ
+        virtual ~GoHomeDefinition() = default;
 
         // symbol: ?initialize@GoHomeDefinition@GoHomeGoal@@QEBAXAEAVEntityContext@@AEAV2@@Z
-        MCAPI void initialize(class EntityContext&, class GoHomeGoal&) const;
+        MCAPI void initialize(class EntityContext& entity, class GoHomeGoal& goal) const;
 
         // symbol:
         // ?buildSchema@GoHomeDefinition@GoHomeGoal@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VGoHomeDefinition@GoHomeGoal@@@JsonUtil@@@4@@Z
-        MCAPI static void
-        buildSchema(std::string const&, std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class GoHomeGoal::GoHomeDefinition>>&);
+        MCAPI static void buildSchema(
+            std::string const& name,
+            std::shared_ptr<
+                class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class GoHomeGoal::GoHomeDefinition>>&
+                root
+        );
 
         // NOLINTEND
     };
@@ -52,8 +56,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1GoHomeGoal@@UEAA@XZ
+    virtual ~GoHomeGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@GoHomeGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -72,10 +76,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@GoHomeGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0GoHomeGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit GoHomeGoal(class Mob&);
+    MCAPI explicit GoHomeGoal(class Mob& mob);
 
     // NOLINTEND
 

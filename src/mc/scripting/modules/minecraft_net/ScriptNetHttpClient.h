@@ -38,16 +38,12 @@ public:
     public:
         // NOLINTBEGIN
         // symbol:
-        // ??0RequestProcessor@ScriptNetHttpClient@ScriptModuleMinecraftNet@@QEAA@$$QEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$NonOwnerPointer@VScheduler@@@Bedrock@@@Z
-        MCAPI RequestProcessor(std::string&&, class Bedrock::NonOwnerPointer<class Scheduler>);
-
-        // symbol:
         // ?process@RequestProcessor@ScriptNetHttpClient@ScriptModuleMinecraftNet@@QEAA?AV?$Promise@V?$StrongTypedObjectHandle@UScriptNetResponse@ScriptModuleMinecraftNet@@@Scripting@@UError@2@X@Scripting@@AEBVWeakLifetimeScope@5@AEAVScriptObjectFactory@5@AEBV?$StrongTypedObjectHandle@UScriptNetRequest@ScriptModuleMinecraftNet@@@5@@Z
         MCAPI class Scripting::Promise<
             class Scripting::StrongTypedObjectHandle<struct ScriptModuleMinecraftNet::ScriptNetResponse>,
             struct Scripting::Error,
             void>
-        process(class Scripting::WeakLifetimeScope const&, class Scripting::ScriptObjectFactory&, class Scripting::StrongTypedObjectHandle<struct ScriptModuleMinecraftNet::ScriptNetRequest> const&);
+        process(class Scripting::WeakLifetimeScope const&, class Scripting::ScriptObjectFactory& factory, class Scripting::StrongTypedObjectHandle<struct ScriptModuleMinecraftNet::ScriptNetRequest> const&);
 
         // NOLINTEND
     };
@@ -65,7 +61,7 @@ public:
 
     // symbol:
     // ?cancelAll@ScriptNetHttpClient@ScriptModuleMinecraftNet@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI void cancelAll(std::string const&);
+    MCAPI void cancelAll(std::string const& reason);
 
     // symbol:
     // ?get@ScriptNetHttpClient@ScriptModuleMinecraftNet@@QEAA?AV?$Promise@V?$StrongTypedObjectHandle@UScriptNetResponse@ScriptModuleMinecraftNet@@@Scripting@@UError@2@X@Scripting@@AEBVWeakLifetimeScope@4@AEAVScriptObjectFactory@4@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
@@ -73,7 +69,9 @@ public:
         class Scripting::StrongTypedObjectHandle<struct ScriptModuleMinecraftNet::ScriptNetResponse>,
         struct Scripting::Error,
         void>
-    get(class Scripting::WeakLifetimeScope const&, class Scripting::ScriptObjectFactory&, std::string const&);
+    get(class Scripting::WeakLifetimeScope const& scope,
+        class Scripting::ScriptObjectFactory&     factory,
+        std::string const&                        uri);
 
     // symbol: ??4ScriptNetHttpClient@ScriptModuleMinecraftNet@@QEAAAEAU01@AEBU01@@Z
     MCAPI struct ScriptModuleMinecraftNet::ScriptNetHttpClient&
@@ -85,7 +83,7 @@ public:
         class Scripting::StrongTypedObjectHandle<struct ScriptModuleMinecraftNet::ScriptNetResponse>,
         struct Scripting::Error,
         void>
-    request(class Scripting::WeakLifetimeScope const&, class Scripting::ScriptObjectFactory&, class Scripting::StrongTypedObjectHandle<struct ScriptModuleMinecraftNet::ScriptNetRequest> const&);
+    request(class Scripting::WeakLifetimeScope const& scope, class Scripting::ScriptObjectFactory& factory, class Scripting::StrongTypedObjectHandle<struct ScriptModuleMinecraftNet::ScriptNetRequest> const&);
 
     // symbol: ??1ScriptNetHttpClient@ScriptModuleMinecraftNet@@QEAA@XZ
     MCAPI ~ScriptNetHttpClient();

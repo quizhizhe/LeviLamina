@@ -22,6 +22,10 @@ public:
     Vec3          mLiquidPos;    // this+0x60
     bool          mIndirectHit;  // this+0x6C
 
+    [[nodiscard]] constexpr explicit operator bool() const {
+        return mType == HitResultType::Tile || mType == HitResultType::Entity;
+    }
+
     // NOLINTBEGIN
     // symbol: ??0HitResult@@QEAA@XZ
     MCAPI HitResult();
@@ -43,10 +47,16 @@ public:
 
     // symbol: ??0HitResult@@QEAA@AEBVVec3@@0AEBVBlockPos@@E0@Z
     MCAPI
-    HitResult(class Vec3 const& startPos, class Vec3 const& rayDir, class BlockPos const&, uchar, class Vec3 const&);
+    HitResult(
+        class Vec3 const&     startPos,
+        class Vec3 const&     rayDir,
+        class BlockPos const& blockPos,
+        uchar                 facing,
+        class Vec3 const&     pos
+    );
 
     // symbol: ?distanceTo@HitResult@@QEBAMAEBVActor@@@Z
-    MCAPI float distanceTo(class Actor const&) const;
+    MCAPI float distanceTo(class Actor const& otherEntity) const;
 
     // symbol: ?getEntity@HitResult@@QEBAPEAVActor@@XZ
     MCAPI class Actor* getEntity() const;

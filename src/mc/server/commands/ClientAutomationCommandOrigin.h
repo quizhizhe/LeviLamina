@@ -24,8 +24,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ClientAutomationCommandOrigin@@UEAA@XZ
+    virtual ~ClientAutomationCommandOrigin() = default;
 
     // vIndex: 1, symbol:
     // ?getRequestId@ClientAutomationCommandOrigin@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
@@ -80,7 +80,7 @@ public:
 
     // symbol:
     // ??0ClientAutomationCommandOrigin@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI explicit ClientAutomationCommandOrigin(std::string const&);
+    MCAPI explicit ClientAutomationCommandOrigin(std::string const& requestId);
 
     // NOLINTEND
 };

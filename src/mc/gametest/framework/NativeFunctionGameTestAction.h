@@ -18,8 +18,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1NativeFunctionGameTestAction@gametest@@UEAA@XZ
+    virtual ~NativeFunctionGameTestAction() = default;
 
     // vIndex: 1, symbol:
     // ?run@NativeFunctionGameTestAction@gametest@@UEAA?AV?$optional@UGameTestError@gametest@@@std@@XZ
@@ -27,7 +27,7 @@ public:
 
     // symbol:
     // ??0NativeFunctionGameTestAction@gametest@@QEAA@V?$function@$$A6A?AV?$optional@UGameTestError@gametest@@@std@@XZ@std@@@Z
-    MCAPI explicit NativeFunctionGameTestAction(std::function<std::optional<struct gametest::GameTestError>(void)>);
+    MCAPI explicit NativeFunctionGameTestAction(std::function<std::optional<struct gametest::GameTestError>()>);
 
     // NOLINTEND
 };

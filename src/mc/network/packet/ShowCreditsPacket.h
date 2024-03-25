@@ -26,8 +26,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1ShowCreditsPacket@@UEAA@XZ
+    virtual ~ShowCreditsPacket();
 
     // vIndex: 1, symbol: ?getId@ShowCreditsPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -37,20 +37,17 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@ShowCreditsPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@ShowCreditsPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1ShowCreditsPacket@@UEAA@XZ
-    MCVAPI ~ShowCreditsPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0ShowCreditsPacket@@QEAA@XZ
     MCAPI ShowCreditsPacket();
 
     // symbol: ??0ShowCreditsPacket@@QEAA@VActorRuntimeID@@W4CreditsState@0@@Z
-    MCAPI ShowCreditsPacket(class ActorRuntimeID, ::ShowCreditsPacket::CreditsState);
+    MCAPI ShowCreditsPacket(class ActorRuntimeID playerID, ::ShowCreditsPacket::CreditsState creditsState);
 
     // NOLINTEND
 };

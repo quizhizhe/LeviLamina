@@ -11,11 +11,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ??1OnPlayerPlacingTrigger@@UEAA@XZ
-    MCVAPI ~OnPlayerPlacingTrigger();
-
-    // symbol: ??0OnPlayerPlacingTrigger@@QEAA@$$QEAV0@@Z
-    MCAPI OnPlayerPlacingTrigger(class OnPlayerPlacingTrigger&&);
+    // vIndex: 0, symbol: __gen_??1OnPlayerPlacingTrigger@@UEAA@XZ
+    virtual ~OnPlayerPlacingTrigger() = default;
 
     // NOLINTEND
 };

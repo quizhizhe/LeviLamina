@@ -41,35 +41,37 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1EnchantBookForTradingFunction@@UEAA@XZ
+    virtual ~EnchantBookForTradingFunction() = default;
 
     // vIndex: 1, symbol: ?apply@EnchantBookForTradingFunction@@UEAAXAEAVItemStack@@AEAVRandom@@AEAVLootTableContext@@@Z
-    virtual void apply(class ItemStack&, class Random&, class LootTableContext&);
+    virtual void apply(class ItemStack& item, class Random& random, class LootTableContext& context);
 
     // vIndex: 2, symbol:
     // ?apply@EnchantBookForTradingFunction@@UEAAHAEAVItemStack@@AEAVRandom@@AEBUTrade@@AEAVLootTableContext@@@Z
-    virtual int apply(class ItemStack&, class Random&, struct Trade const&, class LootTableContext&);
+    virtual int
+    apply(class ItemStack& item, class Random& random, struct Trade const& trade, class LootTableContext& context);
 
     // vIndex: 3, symbol:
     // ?apply@EnchantBookForTradingFunction@@UEAAXAEAVItemInstance@@AEAVRandom@@AEAVLootTableContext@@@Z
-    virtual void apply(class ItemInstance&, class Random&, class LootTableContext&);
+    virtual void apply(class ItemInstance& item, class Random& random, class LootTableContext& context);
 
     // vIndex: 4, symbol:
     // ?apply@EnchantBookForTradingFunction@@UEAAHAEAVItemInstance@@AEAVRandom@@AEBUTrade@@AEAVLootTableContext@@@Z
-    virtual int apply(class ItemInstance&, class Random&, struct Trade const&, class LootTableContext&);
+    virtual int
+    apply(class ItemInstance& item, class Random& random, struct Trade const& trade, class LootTableContext& context);
 
     // symbol:
     // ?deserialize@EnchantBookForTradingFunction@@SA?AV?$unique_ptr@VEnchantBookForTradingFunction@@U?$default_delete@VEnchantBookForTradingFunction@@@std@@@std@@VValue@Json@@AEAV?$vector@V?$unique_ptr@VLootItemCondition@@U?$default_delete@VLootItemCondition@@@std@@@std@@V?$allocator@V?$unique_ptr@VLootItemCondition@@U?$default_delete@VLootItemCondition@@@std@@@std@@@2@@3@@Z
     MCAPI static std::unique_ptr<class EnchantBookForTradingFunction>
-    deserialize(class Json::Value, std::vector<std::unique_ptr<class LootItemCondition>>&);
+    deserialize(class Json::Value object, std::vector<std::unique_ptr<class LootItemCondition>>& predicates);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_getRandomEnchantInstance@EnchantBookForTradingFunction@@AEBA?AVEnchantmentInstance@@AEAVRandom@@@Z
-    MCAPI class EnchantmentInstance _getRandomEnchantInstance(class Random&) const;
+    MCAPI class EnchantmentInstance _getRandomEnchantInstance(class Random& random) const;
 
     // symbol:
     // ?_trySelectEnchantmentFromOptions@EnchantBookForTradingFunction@@AEBA?AV?$optional@VEnchantmentInstance@@@std@@AEAVRandom@@@Z

@@ -9,17 +9,17 @@ public:
 
     using Type = A;
 
-    constexpr AutomaticID() : id(0) {}
+    [[nodiscard]] constexpr AutomaticID() : id(0) {}
 
-    constexpr AutomaticID(T x) : id(x) {} // NOLINT
+    [[nodiscard]] constexpr AutomaticID(T x) : id(x) {} // NOLINT
 
-    constexpr operator T() const { return id; } // NOLINT
+    [[nodiscard]] constexpr operator T() const { return id; } // NOLINT
 };
 
 namespace std {
-template <>
-class hash<AutomaticID<Dimension, int>> {
+template <typename A, typename T>
+class hash<AutomaticID<A, T>> {
 public:
-    size_t operator()(const AutomaticID<Dimension, int>& dimId) const { return std::hash<int>()(dimId.id); }
+    size_t operator()(const AutomaticID<A, T>& dimId) const { return std::hash<T>()(dimId.id); }
 };
 } // namespace std

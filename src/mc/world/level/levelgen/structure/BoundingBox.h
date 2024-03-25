@@ -8,7 +8,7 @@
 
 class AABB;
 
-class BoundingBox : public CommutativeGroup<BoundingBox, BlockPos, BlockPos> {
+class BoundingBox : public ll::math::CommutativeGroup<BoundingBox, BlockPos, BlockPos> {
 public:
     union {
         BlockPos min, x, r, s;
@@ -17,27 +17,31 @@ public:
         BlockPos max, y, g, t, z, b, p;
     };
 
-    constexpr BoundingBox() noexcept : min(BlockPos::MIN), max(BlockPos::MIN){};
-    constexpr BoundingBox(class BoundingBox const& k) noexcept            = default;
-    constexpr BoundingBox& operator=(class BoundingBox const& k) noexcept = default;
-    constexpr BoundingBox(BlockPos const& min, BlockPos const& max) noexcept : min(min), max(max){};
+    [[nodiscard]] constexpr BoundingBox() noexcept : min(0), max(0){};
+    [[nodiscard]] constexpr BoundingBox(class BoundingBox const& k) noexcept = default;
+    constexpr BoundingBox& operator=(class BoundingBox const& k) noexcept    = default;
+    [[nodiscard]] constexpr BoundingBox(BlockPos const& min, BlockPos const& max) noexcept : min(min), max(max){};
 
-    constexpr void forEachBlockInBox(std::function<void(BlockPos const&)>&& todo) const {
-        for (int dy = min.y; dy <= max.y; ++dy)
-            for (int dx = min.x; dx <= max.x; ++dx)
-                for (int dz = min.z; dz <= max.z; ++dz) { todo(BlockPos{dx, dy, dz}); }
-    }
-
-    constexpr bool forEachBlockInBox(std::function<bool(BlockPos const&)>&& todo) const {
+    constexpr void forEachPos(std::function<void(BlockPos const&)> const& todo) const {
         for (int dy = min.y; dy <= max.y; ++dy)
             for (int dx = min.x; dx <= max.x; ++dx)
                 for (int dz = min.z; dz <= max.z; ++dz) {
-                    if (!todo(BlockPos{dx, dy, dz})) { return false; }
+                    todo(BlockPos{dx, dy, dz});
+                }
+    }
+
+    constexpr bool forEachPos(std::function<bool(BlockPos const&)> const& todo) const {
+        for (int dy = min.y; dy <= max.y; ++dy)
+            for (int dx = min.x; dx <= max.x; ++dx)
+                for (int dz = min.z; dz <= max.z; ++dz) {
+                    if (!todo(BlockPos{dx, dy, dz})) {
+                        return false;
+                    }
                 }
         return true;
     }
 
-    constexpr void forEachBlockInBox(std::function<void(BlockPos const&, size_t)>&& todo) const {
+    constexpr void forEachPos(std::function<void(BlockPos const&, size_t)> const& todo) const {
         size_t i = 0;
         for (int dy = min.y; dy <= max.y; ++dy)
             for (int dx = min.x; dx <= max.x; ++dx)
@@ -47,37 +51,43 @@ public:
                 }
     }
 
-    constexpr bool forEachBlockInBox(std::function<bool(BlockPos const&, size_t)>&& todo) const {
+    constexpr bool forEachPos(std::function<bool(BlockPos const&, size_t)> const& todo) const {
         size_t i = 0;
         for (int dy = min.y; dy <= max.y; ++dy)
             for (int dx = min.x; dx <= max.x; ++dx)
                 for (int dz = min.z; dz <= max.z; ++dz) {
-                    if (!todo(BlockPos{dx, dy, dz}, i)) { return false; }
+                    if (!todo(BlockPos{dx, dy, dz}, i)) {
+                        return false;
+                    }
                     i++;
                 }
         return true;
     }
 
     constexpr BoundingBox& merge(BoundingBox const& a) noexcept {
-        *this = BoundingBox{::min(a.min, min), ::max(a.max, max)};
+        *this = BoundingBox{ll::math::min(a.min, min), ll::math::max(a.max, max)};
         return *this;
     }
 
     constexpr BoundingBox& merge(BlockPos const& a) noexcept {
-        *this = BoundingBox{::min(a, min), ::max(a, max)};
+        *this = BoundingBox{ll::math::min(a, min), ll::math::max(a, max)};
         return *this;
     }
 
     template <typename T>
     [[nodiscard]] constexpr T& get(size_t index) noexcept {
-        if (index == 1) { return (T&)z; }
+        if (index == 1) {
+            return (T&)z;
+        }
         return (T&)x;
     }
 
     template <typename T>
     [[nodiscard]] constexpr T const& get(size_t index) const noexcept {
-        if (index == 1) { return (T)z; }
-        return (T)x;
+        if (index == 1) {
+            return (T const&)z;
+        }
+        return (T const&)x;
     }
 
     [[nodiscard]] bool contains(BlockPos const& a) const noexcept { return a.ge(min).all() && a.le(max).all(); }
@@ -93,7 +103,7 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ??0BoundingBox@@QEAA@AEBVBlockPos@@0W4Rotation@@@Z
-    MCAPI BoundingBox(class BlockPos const&, class BlockPos const&, ::Rotation);
+    MCAPI BoundingBox(class BlockPos const& min, class BlockPos const& size, ::Rotation rotation);
 
     // symbol: ?isValid@BoundingBox@@QEBA_NXZ
     MCAPI bool isValid() const;

@@ -20,8 +20,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ResourcePackClientResponsePacket@@UEAA@XZ
+    virtual ~ResourcePackClientResponsePacket() = default;
 
     // vIndex: 1, symbol: ?getId@ResourcePackClientResponsePacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -31,11 +31,11 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@ResourcePackClientResponsePacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
-    // ?_read@ResourcePackClientResponsePacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
+    // ?_read@ResourcePackClientResponsePacket@@MEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0ResourcePackClientResponsePacket@@QEAA@XZ
     MCAPI ResourcePackClientResponsePacket();
@@ -45,7 +45,7 @@ public:
     MCAPI std::set<std::string> const& getDownloadingPacks() const;
 
     // symbol: ?isResponse@ResourcePackClientResponsePacket@@QEBA_NW4ResourcePackResponse@@@Z
-    MCAPI bool isResponse(::ResourcePackResponse) const;
+    MCAPI bool isResponse(::ResourcePackResponse haveThis) const;
 
     // NOLINTEND
 };

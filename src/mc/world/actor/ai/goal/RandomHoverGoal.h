@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1RandomHoverGoal@@UEAA@XZ
+    virtual ~RandomHoverGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@RandomHoverGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -32,10 +32,18 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@RandomHoverGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0RandomHoverGoal@@QEAA@AEAVMob@@MHMMMUIntRange@@@Z
-    MCAPI RandomHoverGoal(class Mob&, float, int, float, float, float, struct IntRange);
+    MCAPI RandomHoverGoal(
+        class Mob&      mob,
+        float           speedMultiplier,
+        int             interval,
+        float           xzDist,
+        float           yDist,
+        float           yOffset,
+        struct IntRange hoverHeight
+    );
 
     // NOLINTEND
 
@@ -43,6 +51,9 @@ public:
     // NOLINTBEGIN
     // symbol: ?_computeNewTarget@RandomHoverGoal@@IEAA_NXZ
     MCAPI bool _computeNewTarget();
+
+    // symbol: ?_findNewTarget@RandomHoverGoal@@IEBA?AV?$unique_ptr@VPath@@U?$default_delete@VPath@@@std@@@std@@XZ
+    MCAPI std::unique_ptr<class Path> _findNewTarget() const;
 
     // symbol: ?_moveToTarget@RandomHoverGoal@@IEAAXXZ
     MCAPI void _moveToTarget();

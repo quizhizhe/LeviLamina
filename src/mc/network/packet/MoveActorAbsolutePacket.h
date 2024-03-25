@@ -18,8 +18,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1MoveActorAbsolutePacket@@UEAA@XZ
+    virtual ~MoveActorAbsolutePacket();
 
     // vIndex: 1, symbol: ?getId@MoveActorAbsolutePacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -29,20 +29,17 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@MoveActorAbsolutePacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@MoveActorAbsolutePacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1MoveActorAbsolutePacket@@UEAA@XZ
-    MCVAPI ~MoveActorAbsolutePacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0MoveActorAbsolutePacket@@QEAA@XZ
     MCAPI MoveActorAbsolutePacket();
 
     // symbol: ??0MoveActorAbsolutePacket@@QEAA@AEBVMoveActorAbsoluteData@@@Z
-    MCAPI explicit MoveActorAbsolutePacket(class MoveActorAbsoluteData const&);
+    MCAPI explicit MoveActorAbsolutePacket(class MoveActorAbsoluteData const& data);
 
     // NOLINTEND
 };

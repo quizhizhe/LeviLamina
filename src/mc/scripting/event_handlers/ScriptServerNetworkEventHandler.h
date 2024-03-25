@@ -23,8 +23,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScriptServerNetworkEventHandler@@UEAA@XZ
+    virtual ~ScriptServerNetworkEventHandler() = default;
 
     // vIndex: 1, symbol:
     // ?handleEvent@ScriptServerNetworkEventHandler@@UEAA?AU?$GameplayHandlerResult@W4CoordinatorResult@@@@AEAUChatEvent@@@Z
@@ -33,7 +33,7 @@ public:
     // vIndex: 2, symbol:
     // ?handleEvent@?$Impl@U?$type_list@U?$MutableServerNetworkGameplayEvent@W4CoordinatorResult@@@@@entt@@@?$EventHandlerDispatcher@VServerNetworkEventHandler@@@Details@@MEAA?AU?$GameplayHandlerResult@W4CoordinatorResult@@@@AEAU?$MutableServerNetworkGameplayEvent@W4CoordinatorResult@@@@@Z
     virtual struct GameplayHandlerResult<::CoordinatorResult>
-    handleEvent(struct MutableServerNetworkGameplayEvent<::CoordinatorResult>&);
+    handleEvent(struct MutableServerNetworkGameplayEvent<::CoordinatorResult>& event);
 
     // NOLINTEND
 
@@ -42,7 +42,7 @@ public:
     // symbol:
     // ?_handleChat@ScriptServerNetworkEventHandler@@AEBA_NAEAUChatEvent@@AEBVWeakLifetimeScope@Scripting@@U?$TypedObjectHandle@VIScriptWorldBeforeEvents@ScriptModuleMinecraft@@@4@@Z
     MCAPI bool
-    _handleChat(struct ChatEvent&, class Scripting::WeakLifetimeScope const&, struct Scripting::TypedObjectHandle<class ScriptModuleMinecraft::IScriptWorldBeforeEvents>)
+    _handleChat(struct ChatEvent&, class Scripting::WeakLifetimeScope const& scope, struct Scripting::TypedObjectHandle<class ScriptModuleMinecraft::IScriptWorldBeforeEvents>)
         const;
 
     // NOLINTEND

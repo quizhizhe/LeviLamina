@@ -1,6 +1,7 @@
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
+#include "mc/scripting/ScriptPackPermissions.h"
 
 // auto generated forward declare list
 // clang-format off
@@ -9,12 +10,19 @@ namespace Json { class Value; }
 
 class ScriptPackConfiguration {
 public:
+    std::unordered_map<std::string, Json::Value> mPackVariables;
+    std::unordered_map<std::string, std::string> mPackSecrets;
+    ScriptPackPermissions                        mPackPermisions;
+
+public:
     // prevent constructor by default
     ScriptPackConfiguration& operator=(ScriptPackConfiguration const&);
-    ScriptPackConfiguration();
 
 public:
     // NOLINTBEGIN
+    // symbol: ??0ScriptPackConfiguration@@QEAA@XZ
+    MCAPI ScriptPackConfiguration();
+
     // symbol: ??0ScriptPackConfiguration@@QEAA@$$QEAV0@@Z
     MCAPI ScriptPackConfiguration(class ScriptPackConfiguration&&);
 

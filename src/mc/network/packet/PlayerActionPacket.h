@@ -13,12 +13,12 @@
 
 class PlayerActionPacket : public ::Packet {
 public:
-    NetworkBlockPosition mPos;       // this+0x30
-    NetworkBlockPosition mResultPos; // this+0x3C
-    int                  mFace;      // this+0x48
-    PlayerActionType     mAction;    // this+0x4C
-    ActorRuntimeID       mRuntimeId; // this+0x50
-    bool                 unk88;      // this+0x58
+    NetworkBlockPosition mPos;                               // this+0x30
+    NetworkBlockPosition mResultPos;                         // this+0x3C
+    int                  mFace;                              // this+0x48
+    PlayerActionType     mAction;                            // this+0x4C
+    ActorRuntimeID       mRuntimeId;                         // this+0x50
+    bool                 mtIsFromServerPlayerMovementSystem; // this+0x58
 
     // prevent constructor by default
     PlayerActionPacket& operator=(PlayerActionPacket const&);
@@ -26,8 +26,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1PlayerActionPacket@@UEAA@XZ
+    virtual ~PlayerActionPacket();
 
     // vIndex: 1, symbol: ?getId@PlayerActionPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -37,33 +37,41 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@PlayerActionPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@PlayerActionPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1PlayerActionPacket@@UEAA@XZ
-    MCVAPI ~PlayerActionPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0PlayerActionPacket@@QEAA@XZ
     MCAPI PlayerActionPacket();
 
     // symbol: ??0PlayerActionPacket@@QEAA@W4PlayerActionType@@VActorRuntimeID@@@Z
-    MCAPI PlayerActionPacket(::PlayerActionType, class ActorRuntimeID);
+    MCAPI PlayerActionPacket(::PlayerActionType action, class ActorRuntimeID runtimeId);
 
     // symbol: ??0PlayerActionPacket@@QEAA@W4PlayerActionType@@AEBVBlockPos@@VActorRuntimeID@@@Z
-    MCAPI PlayerActionPacket(::PlayerActionType, class BlockPos const&, class ActorRuntimeID);
+    MCAPI PlayerActionPacket(::PlayerActionType action, class BlockPos const& pos, class ActorRuntimeID runtimeId);
 
     // symbol: ??0PlayerActionPacket@@QEAA@W4PlayerActionType@@AEBVBlockPos@@HVActorRuntimeID@@@Z
-    MCAPI PlayerActionPacket(::PlayerActionType, class BlockPos const&, int, class ActorRuntimeID);
+    MCAPI
+    PlayerActionPacket(::PlayerActionType action, class BlockPos const& pos, int data, class ActorRuntimeID runtimeId);
 
     // symbol: ??0PlayerActionPacket@@QEAA@W4PlayerActionType@@AEBVBlockPos@@EVActorRuntimeID@@@Z
-    MCAPI PlayerActionPacket(::PlayerActionType, class BlockPos const&, uchar, class ActorRuntimeID);
+    MCAPI PlayerActionPacket(
+        ::PlayerActionType    action,
+        class BlockPos const& pos,
+        uchar                 face,
+        class ActorRuntimeID  runtimeId
+    );
 
     // symbol: ??0PlayerActionPacket@@QEAA@W4PlayerActionType@@AEBVBlockPos@@1HVActorRuntimeID@@@Z
-    MCAPI
-    PlayerActionPacket(::PlayerActionType, class BlockPos const&, class BlockPos const&, int, class ActorRuntimeID);
+    MCAPI PlayerActionPacket(
+        ::PlayerActionType    action,
+        class BlockPos const& pos,
+        class BlockPos const&,
+        int                  data,
+        class ActorRuntimeID runtimeId
+    );
 
     // symbol: ?getIsFromServerPlayerMovementSystem@PlayerActionPacket@@QEBA_NXZ
     MCAPI bool getIsFromServerPlayerMovementSystem() const;

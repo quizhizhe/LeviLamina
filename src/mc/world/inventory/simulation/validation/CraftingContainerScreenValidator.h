@@ -11,14 +11,12 @@ public:
     // prevent constructor by default
     CraftingContainerScreenValidator& operator=(CraftingContainerScreenValidator const&);
     CraftingContainerScreenValidator(CraftingContainerScreenValidator const&);
+    CraftingContainerScreenValidator();
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // symbol: ??0CraftingContainerScreenValidator@@QEAA@XZ
-    MCAPI CraftingContainerScreenValidator();
+    // vIndex: 0, symbol: __gen_??1CraftingContainerScreenValidator@@UEAA@XZ
+    virtual ~CraftingContainerScreenValidator() = default;
 
     // NOLINTEND
 };

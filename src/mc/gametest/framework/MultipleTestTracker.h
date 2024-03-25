@@ -4,6 +4,7 @@
 
 // auto generated forward declare list
 // clang-format off
+namespace gametest { class BaseGameTestInstance; }
 namespace gametest { class IGameTestListener; }
 // clang-format on
 
@@ -18,14 +19,18 @@ public:
 
 public:
     // NOLINTBEGIN
+    // symbol:
+    // ??0MultipleTestTracker@gametest@@QEAA@AEBV?$vector@V?$shared_ptr@VBaseGameTestInstance@gametest@@@std@@V?$allocator@V?$shared_ptr@VBaseGameTestInstance@gametest@@@std@@@2@@std@@@Z
+    MCAPI explicit MultipleTestTracker(std::vector<std::shared_ptr<class gametest::BaseGameTestInstance>> const&);
+
     // symbol: ?addListener@MultipleTestTracker@gametest@@QEAAXV?$shared_ptr@VIGameTestListener@gametest@@@std@@@Z
-    MCAPI void addListener(std::shared_ptr<class gametest::IGameTestListener>);
+    MCAPI void addListener(std::shared_ptr<class gametest::IGameTestListener> listener);
 
     // symbol: ?isDone@MultipleTestTracker@gametest@@QEBA_NXZ
     MCAPI bool isDone() const;
 
     // symbol: ?removeListener@MultipleTestTracker@gametest@@QEAAXV?$shared_ptr@VIGameTestListener@gametest@@@std@@@Z
-    MCAPI void removeListener(std::shared_ptr<class gametest::IGameTestListener>);
+    MCAPI void removeListener(std::shared_ptr<class gametest::IGameTestListener> listener);
 
     // NOLINTEND
 
@@ -56,15 +61,15 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $sFailedOptionalTest() { return sFailedOptionalTest; }
+    static auto& $sFailedOptionalTest() { return sFailedOptionalTest; }
 
-    auto& $sFailedRequiredTest() { return sFailedRequiredTest; }
+    static auto& $sFailedRequiredTest() { return sFailedRequiredTest; }
 
-    auto& $sNotStartedTest() { return sNotStartedTest; }
+    static auto& $sNotStartedTest() { return sNotStartedTest; }
 
-    auto& $sOnGoingTest() { return sOnGoingTest; }
+    static auto& $sOnGoingTest() { return sOnGoingTest; }
 
-    auto& $sSuccessfulTest() { return sSuccessfulTest; }
+    static auto& $sSuccessfulTest() { return sSuccessfulTest; }
 
     // NOLINTEND
 };

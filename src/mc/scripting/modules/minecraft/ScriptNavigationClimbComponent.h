@@ -10,6 +10,7 @@
 // auto generated forward declare list
 // clang-format off
 namespace ScriptModuleMinecraft { class NavigationScriptActorComponent; }
+namespace ScriptModuleMinecraft { class ScriptComponentTypeEnumBuilder; }
 // clang-format on
 
 namespace ScriptModuleMinecraft {
@@ -23,16 +24,13 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // symbol: ??1ScriptNavigationClimbComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptNavigationClimbComponent();
+    // vIndex: 0, symbol: __gen_??1ScriptNavigationClimbComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptNavigationClimbComponent() = default;
 
     // symbol:
-    // ?bind@ScriptNavigationClimbComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptNavigationClimbComponent@ScriptModuleMinecraft@@@Scripting@@XZ
+    // ?bind@ScriptNavigationClimbComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptNavigationClimbComponent@ScriptModuleMinecraft@@@Scripting@@AEAVScriptComponentTypeEnumBuilder@2@@Z
     MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptNavigationClimbComponent>
-    bind();
+    bind(class ScriptModuleMinecraft::ScriptComponentTypeEnumBuilder&);
 
     // symbol: ?ComponentId@ScriptNavigationClimbComponent@ScriptModuleMinecraft@@2PEBDEB
     MCAPI static char const* ComponentId;

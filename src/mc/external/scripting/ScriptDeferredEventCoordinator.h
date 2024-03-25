@@ -2,6 +2,12 @@
 
 #include "mc/_HeaderOutputPredefine.h"
 
+// auto generated forward declare list
+// clang-format off
+namespace Json { class Value; }
+namespace Scripting { struct ModuleDescriptor; }
+// clang-format on
+
 class ScriptDeferredEventCoordinator {
 public:
     // ScriptDeferredEventCoordinator inner types declare
@@ -33,8 +39,16 @@ public:
 
 public:
     // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1ScriptDeferredEventCoordinator@@UEAA@XZ
+    virtual ~ScriptDeferredEventCoordinator() = default;
+
     // symbol: ?sendAllDeferredEvents@ScriptDeferredEventCoordinator@@QEAAXXZ
     MCAPI void sendAllDeferredEvents();
+
+    // symbol:
+    // ?generateOrderDocumentationForVersion@ScriptDeferredEventCoordinator@@SAXAEBUModuleDescriptor@Scripting@@AEAVValue@Json@@@Z
+    MCAPI static void
+    generateOrderDocumentationForVersion(struct Scripting::ModuleDescriptor const&, class Json::Value&);
 
     // NOLINTEND
 
@@ -60,7 +74,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $sEventExecutionOrder() { return sEventExecutionOrder; }
+    static auto& $sEventExecutionOrder() { return sEventExecutionOrder; }
 
     // NOLINTEND
 };

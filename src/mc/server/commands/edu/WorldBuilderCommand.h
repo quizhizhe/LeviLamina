@@ -14,17 +14,17 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1WorldBuilderCommand@@UEAA@XZ
+    virtual ~WorldBuilderCommand() = default;
 
     // vIndex: 2, symbol: ?execute@WorldBuilderCommand@@UEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    virtual void execute(class CommandOrigin const&, class CommandOutput&) const;
+    virtual void execute(class CommandOrigin const& origin, class CommandOutput& output) const;
 
     // symbol: ?setWorldBuilder@WorldBuilderCommand@@SAXAEAVLayeredAbilities@@_N@Z
-    MCAPI static void setWorldBuilder(class LayeredAbilities&, bool);
+    MCAPI static void setWorldBuilder(class LayeredAbilities& abilities, bool newValue);
 
     // symbol: ?setup@WorldBuilderCommand@@SAXAEAVCommandRegistry@@@Z
-    MCAPI static void setup(class CommandRegistry&);
+    MCAPI static void setup(class CommandRegistry& registry);
 
     // NOLINTEND
 };

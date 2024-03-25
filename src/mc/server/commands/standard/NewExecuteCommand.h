@@ -1,6 +1,7 @@
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
+#include "mc/deps/core/common/bedrock/typeid_t.h"
 
 // auto generated inclusion list
 #include "mc/server/commands/CommandChainedSubcommand.h"
@@ -28,8 +29,8 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1ExecuteChainedSubcommand@NewExecuteCommand@@UEAA@XZ
+        virtual ~ExecuteChainedSubcommand() = default;
 
         // vIndex: 1, symbol:
         // ?getCommandName@ExecuteChainedSubcommand@NewExecuteCommand@@UEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
@@ -40,7 +41,7 @@ public:
         MCAPI static std::string getSubcommandName(::NewExecuteCommand::ExecuteChainedSubcommand::Subcommand);
 
         // symbol: ?setup@ExecuteChainedSubcommand@NewExecuteCommand@@SAXAEAVCommandRegistry@@@Z
-        MCAPI static void setup(class CommandRegistry&);
+        MCAPI static void setup(class CommandRegistry& registry);
 
         // symbol: ?CHAINED_OPTION_0@ExecuteChainedSubcommand@NewExecuteCommand@@2PEBDEB
         MCAPI static char const* CHAINED_OPTION_0;
@@ -145,52 +146,55 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1NewExecuteCommand@@UEAA@XZ
+    virtual ~NewExecuteCommand();
 
     // vIndex: 2, symbol: ?execute@NewExecuteCommand@@UEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    virtual void execute(class CommandOrigin const&, class CommandOutput&) const;
-
-    // symbol: ??1NewExecuteCommand@@UEAA@XZ
-    MCVAPI ~NewExecuteCommand();
+    virtual void execute(class CommandOrigin const& origin, class CommandOutput& output) const;
 
     // symbol: ??0NewExecuteCommand@@QEAA@XZ
     MCAPI NewExecuteCommand();
 
     // symbol: ?setup@NewExecuteCommand@@SAXAEAVCommandRegistry@@H@Z
-    MCAPI static void setup(class CommandRegistry&, int);
+    MCAPI static void setup(class CommandRegistry& registry, int);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_commandOutputFail@NewExecuteCommand@@AEBAXAEAVCommandOutput@@AEBV?$optional@H@std@@@Z
-    MCAPI void _commandOutputFail(class CommandOutput&, std::optional<int> const&) const;
+    MCAPI void _commandOutputFail(class CommandOutput& output, std::optional<int> const&) const;
 
     // symbol: ?_commandOutputSuccess@NewExecuteCommand@@AEBAXAEAVCommandOutput@@AEBV?$optional@H@std@@@Z
-    MCAPI void _commandOutputSuccess(class CommandOutput&, std::optional<int> const&) const;
+    MCAPI void _commandOutputSuccess(class CommandOutput& output, std::optional<int> const&) const;
 
     // symbol:
     // ?_detectConditionSubcommand@NewExecuteCommand@@AEBA_NAEBVCommandOrigin@@AEAVCommandOutput@@AEAV?$optional@H@std@@@Z
-    MCAPI bool _detectConditionSubcommand(class CommandOrigin const&, class CommandOutput&, std::optional<int>&) const;
+    MCAPI bool
+    _detectConditionSubcommand(class CommandOrigin const& origin, class CommandOutput& output, std::optional<int>&)
+        const;
 
     // symbol:
     // ?_getScoreFromSelectorOnObjective@NewExecuteCommand@@AEBA?AV?$optional@UScoreInfo@@@std@@AEBVScoreboard@@AEBV?$CommandSelector@VActor@@@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@3@AEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    MCAPI std::optional<struct ScoreInfo>
-    _getScoreFromSelectorOnObjective(class Scoreboard const&, class CommandSelector<class Actor> const&, std::string const&, class CommandOrigin const&, class CommandOutput&)
-        const;
+    MCAPI std::optional<struct ScoreInfo> _getScoreFromSelectorOnObjective(
+        class Scoreboard const&                   scoreboard,
+        class CommandSelector<class Actor> const& selector,
+        std::string const&                        objectiveName,
+        class CommandOrigin const&                origin,
+        class CommandOutput&                      output
+    ) const;
 
     // symbol:
     // ?_getScoreboardIdForSelector@NewExecuteCommand@@AEBA?AV?$optional@UScoreboardId@@@std@@AEBVScoreboard@@AEBV?$CommandSelector@VActor@@@@AEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    MCAPI std::optional<struct ScoreboardId>
-    _getScoreboardIdForSelector(class Scoreboard const&, class CommandSelector<class Actor> const&, class CommandOrigin const&, class CommandOutput&)
-        const;
-
-    // symbol:
-    // ?_handleScoreNotFound@NewExecuteCommand@@AEBAXAEBVCommandOrigin@@AEBV?$CommandSelector@VActor@@@@AEBVObjective@@AEAVCommandOutput@@@Z
-    MCAPI void
-    _handleScoreNotFound(class CommandOrigin const&, class CommandSelector<class Actor> const&, class Objective const&, class CommandOutput&)
-        const;
+    MCAPI std::optional<struct ScoreboardId> _getScoreboardIdForSelector(
+        class Scoreboard const&                   scoreboard,
+        class CommandSelector<class Actor> const& selector,
+        class CommandOrigin const&                origin,
+        class CommandOutput&                      output
+    ) const;
 
     // NOLINTEND
 };
+
+MCTAPI Bedrock::typeid_t<CommandRegistry>
+       Bedrock::type_id<CommandRegistry, NewExecuteCommand::ExecuteChainedSubcommand>();

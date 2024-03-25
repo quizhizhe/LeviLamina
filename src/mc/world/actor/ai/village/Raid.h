@@ -16,17 +16,19 @@ public:
     // NOLINTBEGIN
     // symbol:
     // ??0Raid@@QEAA@HHHHW4Difficulty@@E$$QEAV?$function@$$A6A_N_KAEAVVec3@@@Z@std@@$$QEAV?$function@$$A6A_N_KVVec3@@EAEAV?$unordered_set@UActorUniqueID@@U?$hash@UActorUniqueID@@@std@@U?$equal_to@UActorUniqueID@@@3@V?$allocator@UActorUniqueID@@@3@@std@@@Z@3@$$QEAV?$function@$$A6A_NAEBUActorUniqueID@@@Z@3@$$QEAV?$function@$$A6A_NXZ@3@@Z
-    MCAPI
-    Raid(int, int, int, int, ::Difficulty, uchar, std::function<bool(uint64, class Vec3&)>&&, std::function<bool(uint64, class Vec3, uchar, std::unordered_set<struct ActorUniqueID>&)>&&, std::function<bool(struct ActorUniqueID const&)>&&, std::function<bool(void)>&&);
+    MCAPI Raid(int raidPreparationTime, int groupCompleteDelayInTicks, int locationHelpDelayInTicks, int, ::Difficulty difficulty, uchar allowedSpawnFailures, std::function<bool(uint64, class Vec3&)>&& pickSpawnPointCallback, std::function<bool(uint64, class Vec3, uchar, std::unordered_set<struct ActorUniqueID>&)>&& spawnGroupCallback, std::function<bool(struct ActorUniqueID const&)>&& doesActorExistCallback, std::function<bool()>&&);
 
     // symbol: ?addAdditionalSaveData@Raid@@QEBAXAEAVCompoundTag@@@Z
-    MCAPI void addAdditionalSaveData(class CompoundTag&) const;
+    MCAPI void addAdditionalSaveData(class CompoundTag& tag) const;
 
     // symbol: ?addPlayerToHeroList@Raid@@QEAAXAEBVActor@@@Z
-    MCAPI void addPlayerToHeroList(class Actor const&);
+    MCAPI void addPlayerToHeroList(class Actor const& actor);
+
+    // symbol: ?addRaider@Raid@@QEAAXAEBUActorUniqueID@@M@Z
+    MCAPI void addRaider(struct ActorUniqueID const&, float);
 
     // symbol: ?appendDebugInfo@Raid@@QEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI void appendDebugInfo(std::string&) const;
+    MCAPI void appendDebugInfo(std::string& infoString) const;
 
     // symbol: ?getBossBarFilledFraction@Raid@@QEBAMXZ
     MCAPI float getBossBarFilledFraction() const;
@@ -34,11 +36,14 @@ public:
     // symbol: ?getRemainingRaiders@Raid@@QEBA_KXZ
     MCAPI uint64 getRemainingRaiders() const;
 
+    // symbol: ?isRaider@Raid@@QEBA_NUActorUniqueID@@@Z
+    MCAPI bool isRaider(struct ActorUniqueID actor) const;
+
     // symbol: ?readAdditionalSaveData@Raid@@QEAAXAEBVCompoundTag@@@Z
-    MCAPI void readAdditionalSaveData(class CompoundTag const&);
+    MCAPI void readAdditionalSaveData(class CompoundTag const& tag);
 
     // symbol: ?tick@Raid@@QEAAXUTick@@@Z
-    MCAPI void tick(struct Tick);
+    MCAPI void tick(struct Tick tick);
 
     // symbol: ??1Raid@@QEAA@XZ
     MCAPI ~Raid();
@@ -80,11 +85,11 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $NUM_GROUPS_ON_EASY() { return NUM_GROUPS_ON_EASY; }
+    static auto& $NUM_GROUPS_ON_EASY() { return NUM_GROUPS_ON_EASY; }
 
-    auto& $NUM_GROUPS_ON_HARD() { return NUM_GROUPS_ON_HARD; }
+    static auto& $NUM_GROUPS_ON_HARD() { return NUM_GROUPS_ON_HARD; }
 
-    auto& $NUM_GROUPS_ON_NORMAL() { return NUM_GROUPS_ON_NORMAL; }
+    static auto& $NUM_GROUPS_ON_NORMAL() { return NUM_GROUPS_ON_NORMAL; }
 
     // NOLINTEND
 };

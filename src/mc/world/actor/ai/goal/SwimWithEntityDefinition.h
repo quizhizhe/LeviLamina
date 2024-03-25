@@ -20,13 +20,16 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SwimWithEntityDefinition@@UEAA@XZ
+    virtual ~SwimWithEntityDefinition() = default;
 
     // symbol:
     // ?buildSchema@SwimWithEntityDefinition@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VSwimWithEntityDefinition@@@JsonUtil@@@3@@Z
-    MCAPI static void
-    buildSchema(std::string const&, std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class SwimWithEntityDefinition>>&);
+    MCAPI static void buildSchema(
+        std::string const& name,
+        std::shared_ptr<
+            class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class SwimWithEntityDefinition>>& root
+    );
 
     // NOLINTEND
 };

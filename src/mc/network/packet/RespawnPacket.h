@@ -23,8 +23,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1RespawnPacket@@UEAA@XZ
+    virtual ~RespawnPacket();
 
     // vIndex: 1, symbol: ?getId@RespawnPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -33,19 +33,16 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@RespawnPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol: ?_read@RespawnPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1RespawnPacket@@UEAA@XZ
-    MCVAPI ~RespawnPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0RespawnPacket@@QEAA@XZ
     MCAPI RespawnPacket();
 
     // symbol: ??0RespawnPacket@@QEAA@AEBVVec3@@AEBW4PlayerRespawnState@@@Z
-    MCAPI RespawnPacket(class Vec3 const&, ::PlayerRespawnState const&);
+    MCAPI RespawnPacket(class Vec3 const& pos, ::PlayerRespawnState const& state);
 
     // NOLINTEND
 };

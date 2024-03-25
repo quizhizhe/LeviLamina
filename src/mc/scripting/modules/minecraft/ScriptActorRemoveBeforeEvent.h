@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/external/scripting/ClassBindingBuilder.h"
+#include "mc/external/scripting/ClassBindingBuilderReadOnly.h"
 
 // auto generated forward declare list
 // clang-format off
@@ -23,12 +23,13 @@ public:
 public:
     // NOLINTBEGIN
     // symbol:
-    // ??0ScriptActorRemoveBeforeEvent@ScriptModuleMinecraft@@QEAA@PEBVActor@@AEBVWeakLifetimeScope@Scripting@@@Z
-    MCAPI ScriptActorRemoveBeforeEvent(class Actor const*, class Scripting::WeakLifetimeScope const&);
+    // ??0ScriptActorRemoveBeforeEvent@ScriptModuleMinecraft@@QEAA@AEBVActor@@AEBVWeakLifetimeScope@Scripting@@@Z
+    MCAPI ScriptActorRemoveBeforeEvent(class Actor const&, class Scripting::WeakLifetimeScope const&);
 
     // symbol:
-    // ?bind@ScriptActorRemoveBeforeEvent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@UScriptActorRemoveBeforeEvent@ScriptModuleMinecraft@@@Scripting@@XZ
-    MCAPI static class Scripting::ClassBindingBuilder<struct ScriptModuleMinecraft::ScriptActorRemoveBeforeEvent>
+    // ?bind@ScriptActorRemoveBeforeEvent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilderReadOnly@UScriptActorRemoveBeforeEvent@ScriptModuleMinecraft@@@Scripting@@XZ
+    MCAPI static class Scripting::ClassBindingBuilderReadOnly<
+        struct ScriptModuleMinecraft::ScriptActorRemoveBeforeEvent>
     bind();
 
     // NOLINTEND

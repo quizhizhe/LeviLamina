@@ -14,8 +14,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1NetworkEnableDisableListener@@UEAA@XZ
+    virtual ~NetworkEnableDisableListener();
 
     // vIndex: 1, symbol: ?_onDisable@RakNetServerLocator@@EEAAXXZ
     virtual void _onDisable() = 0;
@@ -23,11 +23,8 @@ public:
     // vIndex: 2, symbol: ?_onEnable@RakNetServerLocator@@EEAAXXZ
     virtual void _onEnable() = 0;
 
-    // symbol: ??1NetworkEnableDisableListener@@UEAA@XZ
-    MCVAPI ~NetworkEnableDisableListener();
-
     // symbol: ??0NetworkEnableDisableListener@@QEAA@AEBV?$NonOwnerPointer@VAppPlatform@@@Bedrock@@@Z
-    MCAPI explicit NetworkEnableDisableListener(class Bedrock::NonOwnerPointer<class AppPlatform> const&);
+    MCAPI explicit NetworkEnableDisableListener(class Bedrock::NonOwnerPointer<class AppPlatform> const& appPlatform);
 
     // symbol: ?disable@NetworkEnableDisableListener@@QEAAXXZ
     MCAPI void disable();
@@ -38,8 +35,17 @@ public:
     // symbol: ?isEnabled@NetworkEnableDisableListener@@QEBA_NXZ
     MCAPI bool isEnabled() const;
 
+    // symbol: ?isNetworkAllowed@NetworkEnableDisableListener@@QEBA_NXZ
+    MCAPI bool isNetworkAllowed() const;
+
+    // symbol: ?isUninitialized@NetworkEnableDisableListener@@QEBA_NXZ
+    MCAPI bool isUninitialized() const;
+
     // symbol: ?tryEnable@NetworkEnableDisableListener@@QEAAXXZ
     MCAPI void tryEnable();
+
+    // symbol: ?uninitialize@NetworkEnableDisableListener@@QEAAXXZ
+    MCAPI void uninitialize();
 
     // NOLINTEND
 };

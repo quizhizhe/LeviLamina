@@ -22,15 +22,15 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1OceanFrozenSurfaceBuilder@VanillaSurfaceBuilders@@UEAA@XZ
+    virtual ~OceanFrozenSurfaceBuilder() = default;
 
     // vIndex: 1, symbol: ?init@OceanFrozenSurfaceBuilder@VanillaSurfaceBuilders@@UEAAXAEAVEntityContext@@I@Z
-    virtual void init(class EntityContext&, uint);
+    virtual void init(class EntityContext& entity, uint levelSeed);
 
     // vIndex: 2, symbol:
     // ?buildSurfaceAt@OceanFrozenSurfaceBuilder@VanillaSurfaceBuilders@@UEBAXAEBUBuildParameters@ISurfaceBuilder@@@Z
-    virtual void buildSurfaceAt(struct ISurfaceBuilder::BuildParameters const&) const;
+    virtual void buildSurfaceAt(struct ISurfaceBuilder::BuildParameters const& parameters) const;
 
     // NOLINTEND
 };

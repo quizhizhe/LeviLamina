@@ -25,7 +25,7 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ??0DirectoryIterationItem@Core@@QEAA@W4DirectoryIterationFlags@1@@Z
-    MCAPI explicit DirectoryIterationItem(::Core::DirectoryIterationFlags);
+    MCAPI explicit DirectoryIterationItem(::Core::DirectoryIterationFlags flags);
 
     // symbol: ?getFileSize@DirectoryIterationItem@Core@@QEBA_KXZ
     MCAPI uint64 getFileSize() const;
@@ -50,22 +50,22 @@ public:
     MCAPI bool isFile() const;
 
     // symbol: ?setCreateTime@DirectoryIterationItem@Core@@QEAAX_J@Z
-    MCAPI void setCreateTime(int64);
+    MCAPI void setCreateTime(int64 time);
 
     // symbol: ?setFileSize@DirectoryIterationItem@Core@@QEAAX_K@Z
-    MCAPI void setFileSize(uint64);
+    MCAPI void setFileSize(uint64 size);
 
     // symbol: ?setFullPathName@DirectoryIterationItem@Core@@QEAAXAEBVPath@2@@Z
-    MCAPI void setFullPathName(class Core::Path const&);
+    MCAPI void setFullPathName(class Core::Path const& fullPathName);
 
     // symbol: ?setModifyTime@DirectoryIterationItem@Core@@QEAAX_J@Z
-    MCAPI void setModifyTime(int64);
+    MCAPI void setModifyTime(int64 modifyTime);
 
     // symbol: ?setName@DirectoryIterationItem@Core@@QEAAXAEBVPathPart@2@@Z
-    MCAPI void setName(class Core::PathPart const&);
+    MCAPI void setName(class Core::PathPart const& name);
 
     // symbol: ?setType@DirectoryIterationItem@Core@@QEAAXW4FileType@2@@Z
-    MCAPI void setType(::Core::FileType);
+    MCAPI void setType(::Core::FileType type);
 
     // symbol: ??1DirectoryIterationItem@Core@@QEAA@XZ
     MCAPI ~DirectoryIterationItem();

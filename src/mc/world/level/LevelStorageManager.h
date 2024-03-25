@@ -3,8 +3,8 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/common/wrapper/OwnerPtrT.h"
-#include "mc/common/wrapper/SharePtrRefTraits.h"
+#include "mc/common/wrapper/OwnerPtr.h"
+#include "mc/common/wrapper/StackRefResult.h"
 
 // auto generated forward declare list
 // clang-format off
@@ -21,12 +21,15 @@ public:
 public:
     // NOLINTBEGIN
     // symbol:
-    // ??0LevelStorageManager@@QEAA@V?$OwnerPtrT@U?$SharePtrRefTraits@VLevelStorage@@@@@@V?$unique_ptr@VGameDataSaveTimer@@U?$default_delete@VGameDataSaveTimer@@@std@@@std@@V?$unique_ptr@VUserStorageChecker@@U?$default_delete@VUserStorageChecker@@@std@@@3@@Z
+    // ??0LevelStorageManager@@QEAA@V?$OwnerPtr@VLevelStorage@@@@V?$unique_ptr@VGameDataSaveTimer@@U?$default_delete@VGameDataSaveTimer@@@std@@@std@@V?$unique_ptr@VUserStorageChecker@@U?$default_delete@VUserStorageChecker@@@std@@@3@@Z
     MCAPI
-    LevelStorageManager(class OwnerPtrT<struct SharePtrRefTraits<class LevelStorage>>, std::unique_ptr<class GameDataSaveTimer>, std::unique_ptr<class UserStorageChecker>);
+    LevelStorageManager(class OwnerPtr<class LevelStorage>, std::unique_ptr<class GameDataSaveTimer>, std::unique_ptr<class UserStorageChecker>);
 
     // symbol: ?getLevelStorage@LevelStorageManager@@QEAAAEAVLevelStorage@@XZ
     MCAPI class LevelStorage& getLevelStorage();
+
+    // symbol: ?getLevelStorageStackRef@LevelStorageManager@@QEAA?AV?$StackRefResult@VLevelStorage@@@@XZ
+    MCAPI class StackRefResult<class LevelStorage> getLevelStorageStackRef();
 
     // symbol: ?getSavedDataStorage@LevelStorageManager@@QEAAAEAVSavedDataStorage@@XZ
     MCAPI class SavedDataStorage& getSavedDataStorage();
@@ -48,11 +51,11 @@ public:
 
     // symbol:
     // ?registerOnAppSuspendCallback@LevelStorageManager@@QEAA?AVSubscription@PubSub@Bedrock@@V?$function@$$A6AXXZ@std@@@Z
-    MCAPI class Bedrock::PubSub::Subscription registerOnAppSuspendCallback(std::function<void(void)>);
+    MCAPI class Bedrock::PubSub::Subscription registerOnAppSuspendCallback(std::function<void()>);
 
     // symbol:
     // ?registerOnCanStartGameSaveTimerCheckCallback@LevelStorageManager@@QEAA?AVSubscription@PubSub@Bedrock@@V?$function@$$A6A_NXZ@std@@@Z
-    MCAPI class Bedrock::PubSub::Subscription registerOnCanStartGameSaveTimerCheckCallback(std::function<bool(void)>);
+    MCAPI class Bedrock::PubSub::Subscription registerOnCanStartGameSaveTimerCheckCallback(std::function<bool()>);
 
     // symbol:
     // ?registerOnPollSaveGameStatisticsCallback@LevelStorageManager@@QEAA?AVSubscription@PubSub@Bedrock@@V?$function@$$A6AXAEAVLevelStorage@@@Z@std@@@Z
@@ -65,11 +68,13 @@ public:
 
     // symbol:
     // ?registerOnSaveGameDataCallback@LevelStorageManager@@QEAA?AVSubscription@PubSub@Bedrock@@V?$function@$$A6AXAEAVLevelStorage@@@Z@std@@@Z
-    MCAPI class Bedrock::PubSub::Subscription registerOnSaveGameDataCallback(std::function<void(class LevelStorage&)>);
+    MCAPI class Bedrock::PubSub::Subscription
+    registerOnSaveGameDataCallback(std::function<void(class LevelStorage&)> callback);
 
     // symbol:
     // ?registerOnSaveLevelDataCallback@LevelStorageManager@@QEAA?AVSubscription@PubSub@Bedrock@@V?$function@$$A6AXAEAVLevelStorage@@@Z@std@@@Z
-    MCAPI class Bedrock::PubSub::Subscription registerOnSaveLevelDataCallback(std::function<void(class LevelStorage&)>);
+    MCAPI class Bedrock::PubSub::Subscription
+    registerOnSaveLevelDataCallback(std::function<void(class LevelStorage&)> callback);
 
     // symbol:
     // ?registerOnStartLeaveGameCallback@LevelStorageManager@@QEAA?AVSubscription@PubSub@Bedrock@@V?$function@$$A6AXAEAVLevelStorage@@@Z@std@@@Z
@@ -105,9 +110,6 @@ public:
 
     // private:
     // NOLINTBEGIN
-    // symbol: ?_getGameDataSaveTimer@LevelStorageManager@@AEAAAEAVGameDataSaveTimer@@XZ
-    MCAPI class GameDataSaveTimer& _getGameDataSaveTimer();
-
     // symbol: ?_onNewDimensionCreated@LevelStorageManager@@AEAAXAEAVDimension@@@Z
     MCAPI void _onNewDimensionCreated(class Dimension&);
 

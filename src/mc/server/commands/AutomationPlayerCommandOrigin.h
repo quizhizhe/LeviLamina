@@ -24,8 +24,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1AutomationPlayerCommandOrigin@@UEAA@XZ
+    virtual ~AutomationPlayerCommandOrigin() = default;
 
     // vIndex: 1, symbol:
     // ?getRequestId@AutomationPlayerCommandOrigin@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
@@ -56,7 +56,7 @@ public:
 
     // symbol:
     // ??0AutomationPlayerCommandOrigin@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAVPlayer@@@Z
-    MCAPI AutomationPlayerCommandOrigin(std::string const&, class Player&);
+    MCAPI AutomationPlayerCommandOrigin(std::string const& requestId, class Player& origin);
 
     // symbol:
     // ??0AutomationPlayerCommandOrigin@@QEAA@UActorUniqueID@@AEAVLevel@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVNetworkIdentifier@@@Z

@@ -9,7 +9,7 @@ class StringByteOutput : public ::BytesDataOutput {
 public:
     std::string* mBuffer;
 
-    constexpr StringByteOutput(std::string& str) noexcept : mBuffer(std::addressof(str)) {}
+    [[nodiscard]] constexpr explicit StringByteOutput(std::string& str) noexcept : mBuffer(std::addressof(str)) {}
 
 public:
     // NOLINTBEGIN
@@ -17,7 +17,7 @@ public:
     virtual ~StringByteOutput();
 
     // vIndex: 9, symbol: ?writeBytes@StringByteOutput@@UEAAXPEBX_K@Z
-    virtual void writeBytes(void const*, uint64);
+    virtual void writeBytes(void const* data, uint64 bytes);
 
     // NOLINTEND
 };

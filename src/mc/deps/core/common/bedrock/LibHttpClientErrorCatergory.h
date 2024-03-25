@@ -18,8 +18,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1LibHttpClientErrorCatergory@Http@Bedrock@@UEAA@XZ
+    virtual ~LibHttpClientErrorCatergory() = default;
 
     // vIndex: 1, symbol: ?name@LibHttpClientErrorCatergory@Http@Bedrock@@UEBAPEBDXZ
     virtual char const* name() const;

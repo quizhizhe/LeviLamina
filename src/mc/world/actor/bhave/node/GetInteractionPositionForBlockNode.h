@@ -16,14 +16,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1GetInteractionPositionForBlockNode@@UEAA@XZ
+    virtual ~GetInteractionPositionForBlockNode() = default;
 
     // vIndex: 1, symbol: ?tick@GetInteractionPositionForBlockNode@@UEAA?AW4BehaviorStatus@@AEAVActor@@@Z
-    virtual ::BehaviorStatus tick(class Actor&);
+    virtual ::BehaviorStatus tick(class Actor& owner);
 
     // vIndex: 2, symbol: ?initializeFromDefinition@GetInteractionPositionForBlockNode@@EEAAXAEAVActor@@@Z
-    virtual void initializeFromDefinition(class Actor&);
+    virtual void initializeFromDefinition(class Actor& owner);
 
     // NOLINTEND
 
@@ -31,7 +31,7 @@ public:
     // NOLINTBEGIN
     // symbol:
     // ?parseFacingNameFromString@GetInteractionPositionForBlockNode@@AEAA?AW4Name@Facing@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI ::Facing::Name parseFacingNameFromString(std::string);
+    MCAPI ::Facing::Name parseFacingNameFromString(std::string facingString);
 
     // NOLINTEND
 };

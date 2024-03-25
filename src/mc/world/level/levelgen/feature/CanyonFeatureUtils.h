@@ -1,6 +1,7 @@
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
+#include "mc/world/level/levelgen/feature/CanyonConfiguration.h"
 
 // auto generated inclusion list
 #include "mc/world/level/levelgen/feature/TerrainGenVersion.h"

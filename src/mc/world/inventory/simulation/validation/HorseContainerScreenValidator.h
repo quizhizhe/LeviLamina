@@ -11,14 +11,12 @@ public:
     // prevent constructor by default
     HorseContainerScreenValidator& operator=(HorseContainerScreenValidator const&);
     HorseContainerScreenValidator(HorseContainerScreenValidator const&);
+    HorseContainerScreenValidator();
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // symbol: ??0HorseContainerScreenValidator@@QEAA@XZ
-    MCAPI HorseContainerScreenValidator();
+    // vIndex: 0, symbol: __gen_??1HorseContainerScreenValidator@@UEAA@XZ
+    virtual ~HorseContainerScreenValidator() = default;
 
     // NOLINTEND
 };

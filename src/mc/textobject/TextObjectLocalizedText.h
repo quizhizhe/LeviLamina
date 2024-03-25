@@ -19,8 +19,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1TextObjectLocalizedText@@UEAA@XZ
+    virtual ~TextObjectLocalizedText() = default;
 
     // vIndex: 1, symbol:
     // ?asString@TextObjectLocalizedText@@UEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
@@ -33,7 +33,7 @@ public:
     virtual class Json::Value resolve(struct ResolveData const&) const;
 
     // symbol: ??0TextObjectLocalizedText@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI explicit TextObjectLocalizedText(std::string);
+    MCAPI explicit TextObjectLocalizedText(std::string text);
 
     // NOLINTEND
 };

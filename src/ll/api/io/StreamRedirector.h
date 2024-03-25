@@ -4,12 +4,12 @@
 #include <iostream>
 #include <utility>
 
-namespace ll {
+namespace ll::io {
 
 template <class Char = char, class Traits = std::char_traits<Char>>
 struct StreamRedirector {
-    StreamRedirector(const StreamRedirector&)            = delete;
-    StreamRedirector& operator=(const StreamRedirector&) = delete;
+    StreamRedirector(StreamRedirector const&)            = delete;
+    StreamRedirector& operator=(StreamRedirector const&) = delete;
 
     StreamRedirector(std::basic_ostream<Char, Traits>& stream, std::basic_streambuf<Char, Traits>* rdbuf)
     : stream(stream),
@@ -23,4 +23,4 @@ private:
     std::basic_ostream<Char, Traits>&   stream;
     std::basic_streambuf<Char, Traits>* rdbuf_old;
 };
-} // namespace ll
+} // namespace ll::io

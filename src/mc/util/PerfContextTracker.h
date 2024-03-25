@@ -23,14 +23,11 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: ??1Duration@PerfContextTracker@@UEAA@XZ
+        virtual ~Duration();
 
         // vIndex: 1, symbol: ?reset@Duration@PerfContextTracker@@UEAAXXZ
         virtual void reset();
-
-        // symbol: ??1Duration@PerfContextTracker@@UEAA@XZ
-        MCVAPI ~Duration();
 
         // symbol: ??0Duration@PerfContextTracker@@QEAA@XZ
         MCAPI Duration();
@@ -48,7 +45,7 @@ public:
     public:
         // NOLINTBEGIN
         // symbol: ??0EventScope@PerfContextTracker@@QEAA@W4PerfContextEvent@@@Z
-        MCAPI explicit EventScope(::PerfContextEvent);
+        MCAPI explicit EventScope(::PerfContextEvent eventType);
 
         // symbol: ??1EventScope@PerfContextTracker@@QEAA@XZ
         MCAPI ~EventScope();
@@ -65,8 +62,8 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1Timer@PerfContextTracker@@UEAA@XZ
+        virtual ~Timer() = default;
 
         // vIndex: 1, symbol: ?reset@Timer@PerfContextTracker@@UEAAXXZ
         virtual void reset();

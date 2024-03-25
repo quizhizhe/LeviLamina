@@ -19,11 +19,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1FindActorDefinition@@UEAA@XZ
+    virtual ~FindActorDefinition() = default;
 
     // vIndex: 1, symbol: ?load@FindActorDefinition@@UEAAXVValue@Json@@AEBVBehaviorFactory@@@Z
-    virtual void load(class Json::Value, class BehaviorFactory const&);
+    virtual void load(class Json::Value value, class BehaviorFactory const& factory);
 
     // NOLINTEND
 };

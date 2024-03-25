@@ -3,6 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
+#include "mc/deps/brstd/copyable_function.h"
 #include "mc/deps/core/PathBuffer.h"
 #include "mc/deps/core/common/bedrock/AsyncErrc.h"
 #include "mc/deps/core/common/bedrock/AsyncStatus.h"
@@ -20,7 +21,6 @@
 #include "mc/deps/core/common/bedrock/PlatformBootstrap.h"
 #include "mc/deps/core/common/bedrock/RequestPriority.h"
 #include "mc/deps/core/common/bedrock/ResponseBodyType.h"
-#include "mc/deps/core/common/bedrock/WorkerPoolManager.h"
 #include "mc/deps/core/common/bedrock/WorkerTaskStats.h"
 #include "mc/deps/core/common/bedrock/list.h"
 #include "mc/deps/core/common/bedrock/pubsub/ConnectPosition.h"
@@ -42,8 +42,10 @@ namespace Bedrock { class FilePickerManager; }
 namespace Bedrock { class IApplicationDataStores; }
 namespace Bedrock { class IIslandCore; }
 namespace Bedrock { class PlatformBootstrap; }
+namespace Bedrock { class WorkerPoolHandleInterface; }
 namespace Bedrock { class WorkerPoolManager; }
 namespace Bedrock { struct CallStack; }
+namespace Bedrock::Http { class BinaryRequestBody; }
 namespace Bedrock::Http { class DispatcherProcess; }
 namespace Bedrock::Http { class HeaderCollection; }
 namespace Bedrock::Http { class HttpInterface; }
@@ -94,10 +96,10 @@ namespace Core { class Path; }
 namespace Bedrock {
 // NOLINTBEGIN
 // symbol: ?strtoint32@Bedrock@@YAHPEBDPEAPEADH@Z
-MCAPI int strtoint32(char const*, char**, int);
+MCAPI int strtoint32(char const* str, char**, int base);
 
 // symbol: ?strtouint32@Bedrock@@YAIPEBDPEAPEADH@Z
-MCAPI uint strtouint32(char const*, char**, int);
+MCAPI uint strtouint32(char const* str, char**, int base);
 
 // symbol: ?throw_system_error@Bedrock@@YAXW4errc@std@@@Z
 MCAPI void throw_system_error(std::errc);

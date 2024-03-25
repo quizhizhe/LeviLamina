@@ -17,8 +17,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1TickingAreasLoadStatusPacket@@UEAA@XZ
+    virtual ~TickingAreasLoadStatusPacket();
 
     // vIndex: 1, symbol: ?getId@TickingAreasLoadStatusPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -28,14 +28,11 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@TickingAreasLoadStatusPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@TickingAreasLoadStatusPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1TickingAreasLoadStatusPacket@@UEAA@XZ
-    MCVAPI ~TickingAreasLoadStatusPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0TickingAreasLoadStatusPacket@@QEAA@XZ
     MCAPI TickingAreasLoadStatusPacket();

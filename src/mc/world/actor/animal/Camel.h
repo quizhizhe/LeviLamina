@@ -3,13 +3,14 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
+#include "mc/deps/puv/EquipmentSlot.h"
 #include "mc/entity/utilities/ActorDamageCause.h"
 #include "mc/entity/utilities/ActorFlags.h"
+#include "mc/entity/utilities/ActorInitializationMethod.h"
 #include "mc/entity/utilities/ActorType.h"
 #include "mc/enums/ArmorMaterialType.h"
 #include "mc/enums/ArmorSlot.h"
 #include "mc/enums/ArmorTextureType.h"
-#include "mc/enums/EquipmentSlot.h"
 #include "mc/enums/HandSlot.h"
 #include "mc/enums/InputMode.h"
 #include "mc/enums/MaterialType.h"
@@ -18,9 +19,13 @@
 #include "mc/events/LevelSoundEvent.h"
 #include "mc/server/commands/CommandPermissionLevel.h"
 #include "mc/world/AutomaticID.h"
-#include "mc/world/actor/Actor.h"
 #include "mc/world/actor/animal/Animal.h"
 #include "mc/world/item/components/ItemUseMethod.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace mce { class Color; }
+// clang-format on
 
 class Camel : public ::Animal {
 public:
@@ -31,68 +36,27 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 10, symbol: __unk_vfn_10
-    virtual void __unk_vfn_10();
+    // vIndex: 10, symbol: __gen_??1Camel@@UEAA@XZ
+    virtual ~Camel() = default;
 
     // vIndex: 20, symbol: ?getInterpolatedRidingOffset@Camel@@UEBA?AVVec3@@MH@Z
     virtual class Vec3 getInterpolatedRidingOffset(float, int) const;
 
-    // vIndex: 23, symbol: __unk_vfn_23
-    virtual void __unk_vfn_23();
-
     // vIndex: 29, symbol: ?normalTick@Camel@@UEAAXXZ
     virtual void normalTick();
 
-    // vIndex: 39, symbol: __unk_vfn_39
-    virtual void __unk_vfn_39();
+    // vIndex: 161, symbol: ?_playStepSound@Camel@@MEAAXAEBVBlockPos@@AEBVBlock@@@Z
+    virtual void _playStepSound(class BlockPos const&, class Block const& onBlock);
 
-    // vIndex: 41, symbol: __unk_vfn_41
-    virtual void __unk_vfn_41();
-
-    // vIndex: 44, symbol: __unk_vfn_44
-    virtual void __unk_vfn_44();
-
-    // vIndex: 47, symbol: __unk_vfn_47
-    virtual void __unk_vfn_47();
-
-    // vIndex: 52, symbol: __unk_vfn_52
-    virtual void __unk_vfn_52();
-
-    // vIndex: 61, symbol: __unk_vfn_61
-    virtual void __unk_vfn_61();
-
-    // vIndex: 62, symbol: __unk_vfn_62
-    virtual void __unk_vfn_62();
-
-    // vIndex: 63, symbol: __unk_vfn_63
-    virtual void __unk_vfn_63();
-
-    // vIndex: 109, symbol: __unk_vfn_109
-    virtual void __unk_vfn_109();
-
-    // vIndex: 147, symbol: __unk_vfn_147
-    virtual void __unk_vfn_147();
-
-    // vIndex: 148, symbol: __unk_vfn_148
-    virtual void __unk_vfn_148();
-
-    // vIndex: 165, symbol: __unk_vfn_165
-    virtual void __unk_vfn_165();
-
-    // vIndex: 169, symbol: ?_playStepSound@Camel@@MEAAXAEBVBlockPos@@AEBVBlock@@@Z
-    virtual void _playStepSound(class BlockPos const&, class Block const&);
-
-    // vIndex: 170, symbol: __unk_vfn_170
-    virtual void __unk_vfn_170();
-
-    // vIndex: 172, symbol: __unk_vfn_172
-    virtual void __unk_vfn_172();
-
-    // vIndex: 181, symbol: ?aiStep@Camel@@UEAAXXZ
+    // vIndex: 171, symbol: ?aiStep@Camel@@UEAAXXZ
     virtual void aiStep();
 
     // symbol: ??0Camel@@QEAA@PEAVActorDefinitionGroup@@AEBUActorDefinitionIdentifier@@AEAVEntityContext@@@Z
-    MCAPI Camel(class ActorDefinitionGroup*, struct ActorDefinitionIdentifier const&, class EntityContext&);
+    MCAPI Camel(
+        class ActorDefinitionGroup*             definitions,
+        struct ActorDefinitionIdentifier const& definitionName,
+        class EntityContext&                    entityContext
+    );
 
     // symbol: ?getDashCooldown@Camel@@QEBA?AV?$optional@VExpiringTick@@@std@@XZ
     MCAPI std::optional<class ExpiringTick> getDashCooldown() const;

@@ -23,8 +23,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1AttributeScriptActorComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~AttributeScriptActorComponent() = default;
 
     // vIndex: 1, symbol: ?_isValid@AttributeScriptActorComponent@ScriptModuleMinecraft@@MEBA_NXZ
     virtual bool _isValid() const;
@@ -35,7 +35,7 @@ public:
 
     // vIndex: 3, symbol:
     // ?setCurrent@AttributeScriptActorComponent@ScriptModuleMinecraft@@UEBA?AV?$Result@_N$$V@Scripting@@AEBM@Z
-    virtual class Scripting::Result<bool> setCurrent(float const&) const;
+    virtual class Scripting::Result<bool> setCurrent(float const& value) const;
 
     // vIndex: 4, symbol:
     // ?getValue@AttributeScriptActorComponent@ScriptModuleMinecraft@@UEBA?AV?$Result@M$$V@Scripting@@XZ

@@ -2,7 +2,10 @@
 
 #include "mc/_HeaderOutputPredefine.h"
 
-class VanillaGameModuleDedicatedServer {
+// auto generated inclusion list
+#include "mc/world/module/IGameModuleShared.h"
+
+class VanillaGameModuleDedicatedServer : public ::IGameModuleShared {
 public:
     // prevent constructor by default
     VanillaGameModuleDedicatedServer& operator=(VanillaGameModuleDedicatedServer const&);
@@ -11,8 +14,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1VanillaGameModuleDedicatedServer@@UEAA@XZ
+    virtual ~VanillaGameModuleDedicatedServer() = default;
 
     // vIndex: 1, symbol:
     // ?createGameModuleServer@VanillaGameModuleDedicatedServer@@UEAA?AV?$unique_ptr@VGameModuleServer@@U?$default_delete@VGameModuleServer@@@std@@@std@@XZ

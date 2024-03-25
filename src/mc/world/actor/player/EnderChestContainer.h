@@ -13,20 +13,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1EnderChestContainer@@UEAA@XZ
+    virtual ~EnderChestContainer() = default;
 
-    // vIndex: 18, symbol: ?startOpen@EnderChestContainer@@UEAAXAEAVPlayer@@@Z
-    virtual void startOpen(class Player&);
+    // vIndex: 19, symbol: ?startOpen@EnderChestContainer@@UEAAXAEAVPlayer@@@Z
+    virtual void startOpen(class Player& player);
 
-    // vIndex: 19, symbol: ?stopOpen@EnderChestContainer@@UEAAXAEAVPlayer@@@Z
-    virtual void stopOpen(class Player&);
-
-    // vIndex: 25, symbol: __unk_vfn_25
-    virtual void __unk_vfn_25();
-
-    // vIndex: 26, symbol: __unk_vfn_26
-    virtual void __unk_vfn_26();
+    // vIndex: 20, symbol: ?stopOpen@EnderChestContainer@@UEAAXAEAVPlayer@@@Z
+    virtual void stopOpen(class Player& player);
 
     // symbol: ??0EnderChestContainer@@QEAA@XZ
     MCAPI EnderChestContainer();

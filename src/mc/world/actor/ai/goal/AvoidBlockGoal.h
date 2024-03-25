@@ -29,21 +29,18 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
-
-        // symbol: ??1Definition@AvoidBlockGoal@@UEAA@XZ
-        MCVAPI ~Definition();
+        // vIndex: 0, symbol: ??1Definition@AvoidBlockGoal@@UEAA@XZ
+        virtual ~Definition();
 
         // symbol: ??0Definition@AvoidBlockGoal@@QEAA@XZ
         MCAPI Definition();
 
         // symbol: ?initialize@Definition@AvoidBlockGoal@@QEBAXAEAVEntityContext@@AEAV2@@Z
-        MCAPI void initialize(class EntityContext&, class AvoidBlockGoal&) const;
+        MCAPI void initialize(class EntityContext& entity, class AvoidBlockGoal& goal) const;
 
         // symbol:
         // ?setSoundEvent@Definition@AvoidBlockGoal@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-        MCAPI void setSoundEvent(std::string const&);
+        MCAPI void setSoundEvent(std::string const& soundEvent);
 
         // symbol:
         // ?setTargetSelectionMethod@Definition@AvoidBlockGoal@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
@@ -51,8 +48,12 @@ public:
 
         // symbol:
         // ?buildSchema@Definition@AvoidBlockGoal@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VDefinition@AvoidBlockGoal@@@JsonUtil@@@4@@Z
-        MCAPI static void
-        buildSchema(std::string const&, std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class AvoidBlockGoal::Definition>>&);
+        MCAPI static void buildSchema(
+            std::string const& name,
+            std::shared_ptr<
+                class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class AvoidBlockGoal::Definition>>&
+                root
+        );
 
         // NOLINTEND
     };
@@ -65,8 +66,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1AvoidBlockGoal@@UEAA@XZ
+    virtual ~AvoidBlockGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@AvoidBlockGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -85,17 +86,17 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@AvoidBlockGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0AvoidBlockGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit AvoidBlockGoal(class Mob&);
+    MCAPI explicit AvoidBlockGoal(class Mob& mob);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_isValidTarget@AvoidBlockGoal@@AEBA_NAEBVBlock@@@Z
-    MCAPI bool _isValidTarget(class Block const&) const;
+    MCAPI bool _isValidTarget(class Block const& candidateBlock) const;
 
     // NOLINTEND
 };

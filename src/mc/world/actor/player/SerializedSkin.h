@@ -11,7 +11,6 @@
 
 
 // auto generated inclusion list
-#include "mc/client/services/persona/AnimatedTextureType.h"
 #include "mc/deps/core/common/bedrock/Result.h"
 
 class SerializedSkin {
@@ -51,19 +50,16 @@ public:
     MCAPI SerializedSkin();
 
     // symbol: ??0SerializedSkin@@QEAA@AEBVConnectionRequest@@@Z
-    MCAPI explicit SerializedSkin(class ConnectionRequest const&);
+    MCAPI explicit SerializedSkin(class ConnectionRequest const& request);
 
     // symbol: ??0SerializedSkin@@QEAA@$$QEAV0@@Z
-    MCAPI SerializedSkin(class SerializedSkin&&);
+    MCAPI SerializedSkin(class SerializedSkin&& rhs);
 
     // symbol: ??0SerializedSkin@@QEAA@AEBV0@@Z
-    MCAPI SerializedSkin(class SerializedSkin const&);
+    MCAPI SerializedSkin(class SerializedSkin const& rhs);
 
     // symbol: ??0SerializedSkin@@QEAA@AEBVSubClientConnectionRequest@@@Z
-    MCAPI explicit SerializedSkin(class SubClientConnectionRequest const&);
-
-    // symbol: ?getAnimationFrames@SerializedSkin@@QEBAMW4AnimatedTextureType@persona@@@Z
-    MCAPI float getAnimationFrames(::persona::AnimatedTextureType) const;
+    MCAPI explicit SerializedSkin(class SubClientConnectionRequest const& request);
 
     // symbol: ?getName@SerializedSkin@@QEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
     MCAPI std::string const& getName() const;
@@ -72,26 +68,23 @@ public:
     MCAPI bool isTrustedSkin() const;
 
     // symbol: ??4SerializedSkin@@QEAAAEAV0@AEBV0@@Z
-    MCAPI class SerializedSkin& operator=(class SerializedSkin const&);
+    MCAPI class SerializedSkin& operator=(class SerializedSkin const& rhs);
 
     // symbol: ?read@SerializedSkin@@QEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    MCAPI class Bedrock::Result<void> read(class ReadOnlyBinaryStream&);
+    MCAPI class Bedrock::Result<void> read(class ReadOnlyBinaryStream& stream);
 
     // symbol:
     // ?setArmSizeFromString@SerializedSkin@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
     MCAPI void setArmSizeFromString(std::string const&);
 
     // symbol: ?setIsTrustedSkin@SerializedSkin@@QEAAX_N@Z
-    MCAPI void setIsTrustedSkin(bool);
+    MCAPI void setIsTrustedSkin(bool isTrustedSkin);
 
     // symbol: ?updateGeometryName@SerializedSkin@@QEAAXXZ
     MCAPI void updateGeometryName();
 
-    // symbol: ?useBlinkingAnimation@SerializedSkin@@QEBA_NXZ
-    MCAPI bool useBlinkingAnimation() const;
-
     // symbol: ?write@SerializedSkin@@QEBAXAEAVBinaryStream@@@Z
-    MCAPI void write(class BinaryStream&) const;
+    MCAPI void write(class BinaryStream& stream) const;
 
     // symbol: ??1SerializedSkin@@QEAA@XZ
     MCAPI ~SerializedSkin();
@@ -100,7 +93,7 @@ public:
     MCAPI static class SerializedSkin createTrustedDefaultSerializedSkin();
 
     // symbol: ?isSkinDisabled@SerializedSkin@@SA_NAEBV1@AEBVLevelData@@@Z
-    MCAPI static bool isSkinDisabled(class SerializedSkin const&, class LevelData const&);
+    MCAPI static bool isSkinDisabled(class SerializedSkin const& skin, class LevelData const& levelData);
 
     // NOLINTEND
 };

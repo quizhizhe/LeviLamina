@@ -24,34 +24,34 @@ public:
     MCAPI InventoryTransaction(class InventoryTransaction const&);
 
     // symbol: ?_logTransaction@InventoryTransaction@@QEBAX_N@Z
-    MCAPI void _logTransaction(bool) const;
+    MCAPI void _logTransaction(bool isClientSide) const;
 
     // symbol: ?addAction@InventoryTransaction@@QEAAXAEBVInventoryAction@@@Z
-    MCAPI void addAction(class InventoryAction const&);
+    MCAPI void addAction(class InventoryAction const& action);
 
     // symbol: ?executeFull@InventoryTransaction@@QEBA?AW4InventoryTransactionError@@AEAVPlayer@@_N@Z
-    MCAPI ::InventoryTransactionError executeFull(class Player&, bool) const;
+    MCAPI ::InventoryTransactionError executeFull(class Player& p, bool isSenderAuthority) const;
 
     // symbol: ?forceBalanceTransaction@InventoryTransaction@@QEAAXXZ
     MCAPI void forceBalanceTransaction();
 
     // symbol:
     // ?getActions@InventoryTransaction@@QEBAAEBV?$vector@VInventoryAction@@V?$allocator@VInventoryAction@@@std@@@std@@AEBVInventorySource@@@Z
-    MCAPI std::vector<class InventoryAction> const& getActions(class InventorySource const&) const;
+    MCAPI std::vector<class InventoryAction> const& getActions(class InventorySource const& source) const;
 
     // symbol:
     // ?getVerifyFunction@InventoryTransaction@@QEBA?AV?$function@$$A6A?AW4InventoryTransactionError@@AEAVPlayer@@AEBVInventoryAction@@_N@Z@std@@AEBVInventorySource@@@Z
     MCAPI std::function<::InventoryTransactionError(class Player&, class InventoryAction const&, bool)>
-          getVerifyFunction(class InventorySource const&) const;
+          getVerifyFunction(class InventorySource const& source) const;
 
     // symbol: ?postLoadItems@InventoryTransaction@@QEAAXAEAVBlockPalette@@_N@Z
-    MCAPI void postLoadItems(class BlockPalette&, bool);
+    MCAPI void postLoadItems(class BlockPalette& blockPalette, bool isClientSide);
 
     // symbol: ?serialize@InventoryTransaction@@QEBAXAEAVBinaryStream@@_N@Z
-    MCAPI void serialize(class BinaryStream&, bool) const;
+    MCAPI void serialize(class BinaryStream& stream, bool isClientSide) const;
 
     // symbol: ?verifyFull@InventoryTransaction@@QEBA?AW4InventoryTransactionError@@AEAVPlayer@@_N@Z
-    MCAPI ::InventoryTransactionError verifyFull(class Player&, bool) const;
+    MCAPI ::InventoryTransactionError verifyFull(class Player& p, bool isSenderAuthority) const;
 
     // symbol: ??1InventoryTransaction@@QEAA@XZ
     MCAPI ~InventoryTransaction();
@@ -61,7 +61,7 @@ public:
 
     // symbol:
     // ?deserialize@InventoryTransaction@@SA?AV?$Result@VInventoryTransaction@@Verror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    MCAPI static class Bedrock::Result<class InventoryTransaction> deserialize(class ReadOnlyBinaryStream&);
+    MCAPI static class Bedrock::Result<class InventoryTransaction> deserialize(class ReadOnlyBinaryStream& stream);
 
     // symbol:
     // ?getInventoryTransactionErrorName@InventoryTransaction@@SA?BV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@W4InventoryTransactionError@@@Z
@@ -72,7 +72,7 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol: ?addItemToContent@InventoryTransaction@@AEAAXAEBVItemStack@@H@Z
-    MCAPI void addItemToContent(class ItemStack const&, int);
+    MCAPI void addItemToContent(class ItemStack const& item, int count);
 
     // NOLINTEND
 
@@ -88,7 +88,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $inventoryTransactionErrorMap() { return inventoryTransactionErrorMap; }
+    static auto& $inventoryTransactionErrorMap() { return inventoryTransactionErrorMap; }
 
     // NOLINTEND
 };

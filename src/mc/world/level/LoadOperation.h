@@ -23,13 +23,15 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1LoadOperation@PositionTrackingDB@@UEAA@XZ
+    virtual ~LoadOperation() = default;
 
     // vIndex: 1, symbol:
     // ?tick@AsyncOperationBase@PositionTrackingDB@@UEAA_NV?$weak_ptr@VPositionTrackingDBServer@PositionTrackingDB@@@std@@AEAVTrackingRecord@2@@Z
-    virtual bool
-    tick(std::weak_ptr<class PositionTrackingDB::PositionTrackingDBServer>, class PositionTrackingDB::TrackingRecord&);
+    virtual bool tick(
+        std::weak_ptr<class PositionTrackingDB::PositionTrackingDBServer>,
+        class PositionTrackingDB::TrackingRecord& record
+    );
 
     // vIndex: 2, symbol: ?getDescription@LoadOperation@PositionTrackingDB@@UEBAPEBDXZ
     virtual char const* getDescription() const;
@@ -42,8 +44,10 @@ public:
 
     // vIndex: 5, symbol:
     // ?_init@LoadOperation@PositionTrackingDB@@MEAA_NV?$weak_ptr@VPositionTrackingDBServer@PositionTrackingDB@@@std@@AEAVTrackingRecord@2@@Z
-    virtual bool
-    _init(std::weak_ptr<class PositionTrackingDB::PositionTrackingDBServer>, class PositionTrackingDB::TrackingRecord&);
+    virtual bool _init(
+        std::weak_ptr<class PositionTrackingDB::PositionTrackingDBServer>,
+        class PositionTrackingDB::TrackingRecord& record
+    );
 
     // vIndex: 6, symbol:
     // ?_tick@LoadOperation@PositionTrackingDB@@MEAA_NV?$weak_ptr@VPositionTrackingDBServer@PositionTrackingDB@@@std@@AEAVTrackingRecord@2@@Z

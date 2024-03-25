@@ -5,19 +5,14 @@
 // auto generated inclusion list
 #include "mc/world/actor/ActorSpawnRuleBase.h"
 
-// auto generated forward declare list
-// clang-format off
-namespace Json { class Value; }
-// clang-format on
-
 class ActorSpawnRuleGroup : public ::ActorSpawnRuleBase {
 public:
     std::unordered_map<std::string, int> mCategoryLookup; // this+0x48
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ActorSpawnRuleGroup@@UEAA@XZ
+    virtual ~ActorSpawnRuleGroup() = default;
 
     // vIndex: 1, symbol:
     // ?getRootKey@ActorSpawnRuleGroup@@MEAAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
@@ -28,29 +23,30 @@ public:
     virtual std::string const& getFileType();
 
     // vIndex: 3, symbol:
-    // ?processPopulationControl@ActorSpawnRuleGroup@@MEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAVValue@Json@@@Z
-    virtual bool processPopulationControl(std::string const&, class Json::Value&);
+    // ?processPopulationControl@ActorSpawnRuleGroup@@MEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z
+    virtual bool processPopulationControl(std::string const&, std::string const&);
 
     // vIndex: 4, symbol:
-    // ?readResourceFiles@ActorSpawnRuleGroup@@MEAAXAEAVResourcePackManager@@AEAV?$unordered_map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@UActorSpawnRuleDefinition@@U?$hash@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@U?$equal_to@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@UActorSpawnRuleDefinition@@@std@@@2@@std@@@Z
+    // ?readResourceFiles@ActorSpawnRuleGroup@@MEAAXAEAVResourcePackManager@@AEBVMobSpawnRules@@AEAV?$unordered_map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@UActorSpawnRuleData@@U?$hash@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@U?$equal_to@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@UActorSpawnRuleData@@@std@@@2@@std@@@Z
     virtual void
-    readResourceFiles(class ResourcePackManager&, std::unordered_map<std::string, struct ActorSpawnRuleDefinition>&);
+    readResourceFiles(class ResourcePackManager&, class MobSpawnRules const&, std::unordered_map<std::string, struct ActorSpawnRuleData>&);
 
     // symbol: ??0ActorSpawnRuleGroup@@QEAA@AEAVResourcePackManager@@AEAVIWorldRegistriesProvider@@@Z
-    MCAPI ActorSpawnRuleGroup(class ResourcePackManager&, class IWorldRegistriesProvider&);
+    MCAPI
+    ActorSpawnRuleGroup(class ResourcePackManager& resourcePackManager, class IWorldRegistriesProvider& registries);
 
     // symbol: ?getActorSpawnPool@ActorSpawnRuleGroup@@QEBAHAEBUActorDefinitionIdentifier@@@Z
-    MCAPI int getActorSpawnPool(struct ActorDefinitionIdentifier const&) const;
+    MCAPI int getActorSpawnPool(struct ActorDefinitionIdentifier const& id) const;
 
     // symbol:
     // ?getDelayEnd@ActorSpawnRuleGroup@@QEBAHAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI int getDelayEnd(std::string const&) const;
+    MCAPI int getDelayEnd(std::string const& id) const;
 
     // symbol: ?offSetDelayByCurrentTick@ActorSpawnRuleGroup@@QEAAXAEBUTick@@@Z
-    MCAPI void offSetDelayByCurrentTick(struct Tick const&);
+    MCAPI void offSetDelayByCurrentTick(struct Tick const& currentTick);
 
     // symbol: ?resetDelayEnd@ActorSpawnRuleGroup@@QEAAXVMobSpawnRules@@_KAEAVRandom@@@Z
-    MCAPI void resetDelayEnd(class MobSpawnRules, uint64, class Random&);
+    MCAPI void resetDelayEnd(class MobSpawnRules spawnRules, uint64 age, class Random& random);
 
     // NOLINTEND
 };

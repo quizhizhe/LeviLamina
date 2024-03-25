@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1NearestAttackableTargetGoal@@UEAA@XZ
+    virtual ~NearestAttackableTargetGoal();
 
     // vIndex: 1, symbol: ?canUse@NearestAttackableTargetGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -29,16 +29,16 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@NearestAttackableTargetGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // vIndex: 11, symbol: ?_findTarget@NearestAttackableTargetGoal@@MEAA?AUActorUniqueID@@PEAPEBUMobDescriptor@@@Z
-    virtual struct ActorUniqueID _findTarget(struct MobDescriptor const**);
-
-    // symbol: ??1NearestAttackableTargetGoal@@UEAA@XZ
-    MCVAPI ~NearestAttackableTargetGoal();
+    virtual struct ActorUniqueID _findTarget(struct MobDescriptor const** outMobDescriptor);
 
     // symbol: ??0NearestAttackableTargetGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit NearestAttackableTargetGoal(class Mob&);
+    MCAPI explicit NearestAttackableTargetGoal(class Mob& mob);
+
+    // symbol: ?isTargetVisible@NearestAttackableTargetGoal@@QEBA_NAEBVMob@@MM@Z
+    MCAPI bool isTargetVisible(class Mob const&, float, float) const;
 
     // NOLINTEND
 
@@ -49,9 +49,6 @@ public:
 
     // symbol: ?_isTargetInCooldown@NearestAttackableTargetGoal@@IEBA_NAEBUMobDescriptor@@@Z
     MCAPI bool _isTargetInCooldown(struct MobDescriptor const&) const;
-
-    // symbol: ?_isTargetVisible@NearestAttackableTargetGoal@@IEBA_NAEBVMob@@MM@Z
-    MCAPI bool _isTargetVisible(class Mob const&, float, float) const;
 
     // NOLINTEND
 

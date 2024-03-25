@@ -4,15 +4,12 @@
 
 struct MolangActorArrayPtr {
 public:
-    // prevent constructor by default
-    MolangActorArrayPtr& operator=(MolangActorArrayPtr const&);
-    MolangActorArrayPtr(MolangActorArrayPtr const&);
-    MolangActorArrayPtr();
+    std::vector<class Actor*> mActors;
 
 public:
     // NOLINTBEGIN
     // symbol: ??0MolangActorArrayPtr@@QEAA@V?$vector@PEAVActor@@V?$allocator@PEAVActor@@@std@@@std@@@Z
-    MCAPI explicit MolangActorArrayPtr(std::vector<class Actor*>);
+    MCAPI explicit MolangActorArrayPtr(std::vector<class Actor*> actors);
 
     // symbol: ??1MolangActorArrayPtr@@QEAA@XZ
     MCAPI ~MolangActorArrayPtr();

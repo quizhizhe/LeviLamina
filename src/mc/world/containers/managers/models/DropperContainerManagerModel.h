@@ -16,14 +16,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1DropperContainerManagerModel@@UEAA@XZ
+    virtual ~DropperContainerManagerModel() = default;
 
     // vIndex: 17, symbol: ?_postInit@DropperContainerManagerModel@@MEAA?AVContainerScreenContext@@XZ
     virtual class ContainerScreenContext _postInit();
 
     // symbol: ??0DropperContainerManagerModel@@QEAA@W4ContainerID@@AEAVPlayer@@AEBVBlockPos@@@Z
-    MCAPI DropperContainerManagerModel(::ContainerID, class Player&, class BlockPos const&);
+    MCAPI DropperContainerManagerModel(::ContainerID containerId, class Player& player, class BlockPos const& blockPos);
 
     // NOLINTEND
 };

@@ -16,21 +16,18 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScreenHandlerLabTable@@UEAA@XZ
+    virtual ~ScreenHandlerLabTable() = default;
 
     // vIndex: 1, symbol:
     // ?handleAction@ScreenHandlerLabTable@@MEAA?AW4ItemStackNetResult@@AEBVItemStackRequestAction@@@Z
-    virtual ::ItemStackNetResult handleAction(class ItemStackRequestAction const&);
+    virtual ::ItemStackNetResult handleAction(class ItemStackRequestAction const& requestAction);
 
     // vIndex: 2, symbol: ?endRequest@ScreenHandlerLabTable@@MEAA?AW4ItemStackNetResult@@XZ
     virtual ::ItemStackNetResult endRequest();
 
     // vIndex: 4, symbol: ?postRequest@ScreenHandlerLabTable@@MEAAX_N@Z
-    virtual void postRequest(bool);
-
-    // symbol: ??0ScreenHandlerLabTable@@QEAA@AEBVContainerScreenContext@@AEAVItemStackRequestActionHandler@@@Z
-    MCAPI ScreenHandlerLabTable(class ContainerScreenContext const&, class ItemStackRequestActionHandler&);
+    virtual void postRequest(bool wasSuccess);
 
     // NOLINTEND
 

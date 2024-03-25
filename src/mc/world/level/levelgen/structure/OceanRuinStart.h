@@ -14,11 +14,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1OceanRuinStart@@UEAA@XZ
+    virtual ~OceanRuinStart() = default;
 
     // symbol: ?createRuin@OceanRuinStart@@QEAAXAEAVDimension@@AEAVRandom@@HH@Z
-    MCAPI void createRuin(class Dimension&, class Random&, int, int);
+    MCAPI void createRuin(class Dimension& dim, class Random& random, int x, int z);
 
     // NOLINTEND
 };

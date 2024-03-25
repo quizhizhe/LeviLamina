@@ -14,13 +14,13 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1MineshaftStart@@UEAA@XZ
+    virtual ~MineshaftStart() = default;
 
     // symbol:
     // ??0MineshaftStart@@QEAA@AEBVDimension@@AEBVBiomeSource@@AEAVRandom@@AEBVChunkPos@@AEBVIPreliminarySurfaceProvider@@@Z
     MCAPI
-    MineshaftStart(class Dimension const&, class BiomeSource const&, class Random&, class ChunkPos const&, class IPreliminarySurfaceProvider const&);
+    MineshaftStart(class Dimension const& dimension, class BiomeSource const& biomeSource, class Random& random, class ChunkPos const& pos, class IPreliminarySurfaceProvider const&);
 
     // NOLINTEND
 };

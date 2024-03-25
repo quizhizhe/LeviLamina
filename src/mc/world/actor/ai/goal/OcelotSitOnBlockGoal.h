@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1OcelotSitOnBlockGoal@@UEAA@XZ
+    virtual ~OcelotSitOnBlockGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@OcelotSitOnBlockGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -32,16 +32,16 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@OcelotSitOnBlockGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // vIndex: 11, symbol: ?isValidTarget@OcelotSitOnBlockGoal@@UEAA_NAEAVBlockSource@@AEBVBlockPos@@@Z
-    virtual bool isValidTarget(class BlockSource&, class BlockPos const&);
+    virtual bool isValidTarget(class BlockSource& region, class BlockPos const& pos);
 
     // vIndex: 13, symbol: ?_canReach@OcelotSitOnBlockGoal@@UEAA_NAEBVBlockPos@@@Z
-    virtual bool _canReach(class BlockPos const&);
+    virtual bool _canReach(class BlockPos const& pos);
 
     // symbol: ??0OcelotSitOnBlockGoal@@QEAA@AEAVMob@@M@Z
-    MCAPI OcelotSitOnBlockGoal(class Mob&, float);
+    MCAPI OcelotSitOnBlockGoal(class Mob& mob, float speedMod);
 
     // NOLINTEND
 };

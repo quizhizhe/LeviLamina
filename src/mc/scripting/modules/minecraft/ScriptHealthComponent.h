@@ -10,6 +10,7 @@
 // auto generated forward declare list
 // clang-format off
 namespace ScriptModuleMinecraft { class AttributeScriptActorComponent; }
+namespace ScriptModuleMinecraft { class ScriptComponentTypeEnumBuilder; }
 // clang-format on
 
 namespace ScriptModuleMinecraft {
@@ -23,8 +24,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScriptHealthComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptHealthComponent() = default;
 
     // vIndex: 3, symbol:
     // ?setCurrent@ScriptHealthComponent@ScriptModuleMinecraft@@UEBA?AV?$Result@_N$$V@Scripting@@AEBM@Z
@@ -42,12 +43,10 @@ public:
     // ?resetToDefaultValue@ScriptHealthComponent@ScriptModuleMinecraft@@UEBA?AV?$Result@X$$V@Scripting@@XZ
     virtual class Scripting::Result<void> resetToDefaultValue() const;
 
-    // symbol: ??1ScriptHealthComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptHealthComponent();
-
     // symbol:
-    // ?bind@ScriptHealthComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptHealthComponent@ScriptModuleMinecraft@@@Scripting@@XZ
-    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptHealthComponent> bind();
+    // ?bind@ScriptHealthComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptHealthComponent@ScriptModuleMinecraft@@@Scripting@@AEAVScriptComponentTypeEnumBuilder@2@@Z
+    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptHealthComponent>
+    bind(class ScriptModuleMinecraft::ScriptComponentTypeEnumBuilder&);
 
     // symbol: ?ComponentId@ScriptHealthComponent@ScriptModuleMinecraft@@2PEBDEB
     MCAPI static char const* ComponentId;

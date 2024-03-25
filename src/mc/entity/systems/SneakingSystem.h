@@ -22,8 +22,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SneakingSystem@@UEAA@XZ
+    virtual ~SneakingSystem() = default;
 
     // vIndex: 1, symbol: __unk_vfn_1
     virtual void __unk_vfn_1();
@@ -46,12 +46,12 @@ public:
                       struct AddRemove<>,
                       struct GlobalRead<>,
                       struct GlobalWrite<>,
-                      struct EntityFactoryT<>>&);
+                      struct EntityFactoryT<>>& context);
 
     // symbol:
     // ?_tickSneakingSystem@SneakingSystem@@SAXAEAVStrictEntityContext@@AEBV?$FlagComponent@UPlayerComponentFlag@@@@AEAUSneakingComponent@@AEAVActorOwnerComponent@@@Z
     MCAPI static void
-    _tickSneakingSystem(class StrictEntityContext&, class FlagComponent<struct PlayerComponentFlag> const&, struct SneakingComponent&, class ActorOwnerComponent&);
+    _tickSneakingSystem(class StrictEntityContext&, class FlagComponent<struct PlayerComponentFlag> const&, struct SneakingComponent& sneaking, class ActorOwnerComponent&);
 
     // symbol: ?createSystem@SneakingSystem@@SA?AUTickingSystemWithInfo@@XZ
     MCAPI static struct TickingSystemWithInfo createSystem();

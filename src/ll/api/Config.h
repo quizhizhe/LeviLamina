@@ -1,68 +1,52 @@
 #pragma once
-#include "ll/api/Logger.h"
-#include "ll/api/reflection/Serialization.h"
-#include "ll/api/utils/FileUtils.h"
+
 #include "nlohmann/json.hpp"
+
+#include "ll/api/io/FileUtils.h"
+#include "ll/api/reflection/Deserialization.h"
+#include "ll/api/reflection/Serialization.h"
+#include "ll/api/reflection/Visit.h"
 
 namespace ll::config {
 
-static constexpr const std::string_view metaDataName{".meta"};
-
-template <typename T>
+template <class T>
 concept IsConfig =
     ll::reflection::Reflectable<T> && std::integral<std::remove_cvref_t<decltype(std::declval<T>().version)>>;
 
-template <IsConfig T, typename J = nlohmann::ordered_json>
-inline bool saveConfig(T const& config, std::string const& path) noexcept {
-    using namespace ll::i18n_literals;
-    try {
-        namespace fs = std::filesystem;
-        auto data{ll::reflection::serialize<J, T>(config)};
-        data.erase("version");
-        data[metaDataName]["name"]    = ll::reflection::type_name_v<T>;
-        data[metaDataName]["version"] = config.version;
-        fs::create_directories(fs::path(path).remove_filename());
-        std::ofstream{path} << data.dump(4);
-        return true;
-    } catch (...) {}
-    std::clog << "config.save.fail"_tr << std::endl;
-    return false;
+template <IsConfig T, class J = nlohmann::ordered_json>
+inline bool saveConfig(T const& config, std::filesystem::path const& path) {
+    namespace fs = std::filesystem;
+    std::error_code ec;
+    fs::create_directories(path.parent_path(), ec);
+    std::ofstream{path} << ll::reflection::serialize<J, T>(config).dump(4);
+    return true;
 }
-
-template <IsConfig T, typename J = nlohmann::ordered_json>
-inline bool loadConfig(T& config, std::string const& path, bool overwriteAfterFail = true) noexcept {
-    using namespace ll::i18n_literals;
-    bool res = true;
-    try {
-        auto content = ll::utils::file_utils::readAllFile(path);
-        if (content && !content.value().empty()) {
-
-            auto data{J::parse(content.value(), nullptr, false, true)};
-
-            if (!data.contains(metaDataName)) {
-                std::cout << "config.metadata.empty"_tr << std::endl;
-                res = false;
-            } else {
-                auto& metaData = data[metaDataName];
-                if (!((metaData.contains("name") && metaData["name"].is_string() && (std::string)metaData["name"] == ll::reflection::type_name_v<T>)&&(
-                        metaData.contains("version") && metaData["version"].is_number()
-                        && (int64)metaData["version"] == config.version
-                    ))) {
-                    std::cout << "config.metadata.unmatch"_tr << std::endl; // TODO i18n
-                    res = false;
-                }
-            }
-            ll::reflection::deserialize<J, T>(config, data);
-        } else {
-            std::cout << "config.file.empty"_tr << std::endl; // TODO i18n
-            res = false;
+template <class T, class J>
+bool defaultConfigUpdater(T& config, J& data) {
+    data.erase("version");
+    auto patch = ll::reflection::serialize<J, T>(config);
+    patch.merge_patch(data);
+    data = patch;
+    return true;
+}
+template <IsConfig T, class J = nlohmann::ordered_json, class F = bool(T&, J&)>
+inline bool loadConfig(T& config, std::filesystem::path const& path, F&& updater = defaultConfigUpdater<T, J>) {
+    bool noNeedRewrite = true;
+    auto content       = file_utils::readFile(path);
+    if (content && !content->empty()) {
+        auto data{J::parse(*content, nullptr, true, true)};
+        if (!data.contains("version")) {
+            noNeedRewrite = false;
+        } else if ((int64)(data["version"]) != config.version) {
+            noNeedRewrite = false;
         }
-    } catch (...) {}
-    if (!res && overwriteAfterFail) {
-        std::cout << "config.save.rewrite"_tr << std::endl; // TODO i18n
-        saveConfig<T, J>(config, path);
+        if (noNeedRewrite || std::forward<F>(updater)(config, data)) {
+            ll::reflection::deserialize<J, T>(config, data);
+        }
+    } else {
+        noNeedRewrite = false;
     }
-    return res;
+    return noNeedRewrite;
 }
 
 } // namespace ll::config

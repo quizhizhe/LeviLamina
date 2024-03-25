@@ -22,34 +22,33 @@ namespace ScriptModuleMinecraft {
 class BaseScriptBlockComponent : public ::ScriptModuleMinecraft::ScriptComponent {
 public:
     // prevent constructor by default
+    BaseScriptBlockComponent& operator=(BaseScriptBlockComponent const&);
     BaseScriptBlockComponent();
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1BaseScriptBlockComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~BaseScriptBlockComponent();
 
     // vIndex: 1, symbol: ?_isValid@BaseScriptBlockComponent@ScriptModuleMinecraft@@MEBA_NXZ
     virtual bool _isValid() const;
-
-    // symbol: ??1BaseScriptBlockComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~BaseScriptBlockComponent();
 
     // symbol: ??0BaseScriptBlockComponent@ScriptModuleMinecraft@@QEAA@AEBV01@@Z
     MCAPI BaseScriptBlockComponent(class ScriptModuleMinecraft::BaseScriptBlockComponent const&);
 
     // symbol:
     // ??0BaseScriptBlockComponent@ScriptModuleMinecraft@@QEAA@AEAVBlockActor@@AEAVBlockSource@@VBlockPos@@AEBVWeakLifetimeScope@Scripting@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI
-    BaseScriptBlockComponent(class BlockActor&, class BlockSource&, class BlockPos, class Scripting::WeakLifetimeScope const&, std::string const&);
+    MCAPI BaseScriptBlockComponent(
+        class BlockActor&                         blockActor,
+        class BlockSource&                        region,
+        class BlockPos                            position,
+        class Scripting::WeakLifetimeScope const& scope,
+        std::string const&                        id
+    );
 
     // symbol:
     // ?getBlock@BaseScriptBlockComponent@ScriptModuleMinecraft@@QEBA?AV?$StrongTypedObjectHandle@VScriptBlock@ScriptModuleMinecraft@@@Scripting@@XZ
     MCAPI class Scripting::StrongTypedObjectHandle<class ScriptModuleMinecraft::ScriptBlock> getBlock() const;
-
-    // symbol: ??4BaseScriptBlockComponent@ScriptModuleMinecraft@@QEAAAEAV01@AEBV01@@Z
-    MCAPI class ScriptModuleMinecraft::BaseScriptBlockComponent&
-    operator=(class ScriptModuleMinecraft::BaseScriptBlockComponent const&);
 
     // symbol:
     // ?bind@BaseScriptBlockComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VBaseScriptBlockComponent@ScriptModuleMinecraft@@@Scripting@@XZ

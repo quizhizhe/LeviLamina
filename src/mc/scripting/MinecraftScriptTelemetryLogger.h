@@ -11,8 +11,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1MinecraftScriptTelemetryLogger@@UEAA@XZ
+    virtual ~MinecraftScriptTelemetryLogger() = default;
 
     // vIndex: 1, symbol: ?onPluginDiscovery@MinecraftScriptTelemetryLogger@@UEAAXAEBVScriptPluginResult@@@Z
     virtual void onPluginDiscovery(class ScriptPluginResult const&);
@@ -26,6 +26,9 @@ public:
 
     // vIndex: 4, symbol: ?onDebuggerConnect@MinecraftScriptTelemetryLogger@@UEAAXXZ
     virtual void onDebuggerConnect();
+
+    // symbol: ??0MinecraftScriptTelemetryLogger@@QEAA@AEAVIMinecraftEventing@@_N@Z
+    MCAPI MinecraftScriptTelemetryLogger(class IMinecraftEventing& eventing, bool);
 
     // NOLINTEND
 };

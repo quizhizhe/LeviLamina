@@ -1,6 +1,7 @@
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
+#include "mc/world/actor/player/Player.h"
 
 // auto generated inclusion list
 #include "mc/network/TypedClientNetId.h"
@@ -10,6 +11,10 @@
 #include "mc/world/item/components/ItemStackNetResult.h"
 
 class ItemStackRequestActionHandler {
+public:
+    Player& mPlayer;          // this+0x0
+    char    filler[0xE0 - 8]; // BDS-WIN 1.20.51 ItemStackNetManagerServer::ItemStackNetManagerServer line=15
+
 public:
     // ItemStackRequestActionHandler inner types declare
     // clang-format off
@@ -32,7 +37,7 @@ public:
         // NOLINTBEGIN
         // symbol:
         // ??0PlayerLegacyRequestSlotIdAssignment@ItemStackRequestActionHandler@@QEAA@W4ContainerEnumName@@AEAVContainer@@@Z
-        MCAPI PlayerLegacyRequestSlotIdAssignment(::ContainerEnumName, class Container&);
+        MCAPI PlayerLegacyRequestSlotIdAssignment(::ContainerEnumName containerName, class Container& container);
 
         // symbol: ??1PlayerLegacyRequestSlotIdAssignment@ItemStackRequestActionHandler@@QEAA@XZ
         MCAPI ~PlayerLegacyRequestSlotIdAssignment();
@@ -46,6 +51,13 @@ public:
         RequestSlotIdAssignment& operator=(RequestSlotIdAssignment const&);
         RequestSlotIdAssignment(RequestSlotIdAssignment const&);
         RequestSlotIdAssignment();
+
+    public:
+        // NOLINTBEGIN
+        // symbol: ??1RequestSlotIdAssignment@ItemStackRequestActionHandler@@QEAA@XZ
+        MCAPI ~RequestSlotIdAssignment();
+
+        // NOLINTEND
     };
 
     struct ScreenData {
@@ -76,20 +88,20 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ??0ItemStackRequestActionHandler@@QEAA@AEAVItemStackNetManagerServer@@AEAVPlayer@@@Z
-    MCAPI ItemStackRequestActionHandler(class ItemStackNetManagerServer&, class Player&);
+    MCAPI ItemStackRequestActionHandler(class ItemStackNetManagerServer&, class Player& player);
 
     // symbol:
     // ?_addResponseSlotInfo@ItemStackRequestActionHandler@@QEAAXAEBUItemStackRequestHandlerSlotInfo@@AEBVItemStack@@@Z
-    MCAPI void _addResponseSlotInfo(struct ItemStackRequestHandlerSlotInfo const&, class ItemStack const&);
+    MCAPI void _addResponseSlotInfo(struct ItemStackRequestHandlerSlotInfo const&, class ItemStack const& item);
 
     // symbol:
     // ?_cacheLegacySlotIdAssignment@ItemStackRequestActionHandler@@QEAAXW4ContainerEnumName@@EAEBV?$TypedClientNetId@UItemStackLegacyRequestIdTag@@H$0A@@@AEBV?$TypedServerNetId@UItemStackNetIdTag@@H$0A@@@@Z
     MCAPI void
-    _cacheLegacySlotIdAssignment(::ContainerEnumName, uchar, ItemStackLegacyRequestId const&, ItemStackNetId const&);
+    _cacheLegacySlotIdAssignment(::ContainerEnumName containerName, uchar slot, ItemStackLegacyRequestId const&, ItemStackNetId const&);
 
     // symbol:
     // ?_cacheSlotIdAssigment@ItemStackRequestActionHandler@@QEAAXAEBV?$TypedRuntimeId@UContainerRuntimeIdTag@@I$0A@@@EEAEBV?$TypedServerNetId@UItemStackNetIdTag@@H$0A@@@@Z
-    MCAPI void _cacheSlotIdAssigment(ContainerRuntimeId const&, uchar, uchar, ItemStackNetId const&);
+    MCAPI void _cacheSlotIdAssigment(ContainerRuntimeId const&, uchar, uchar slot, ItemStackNetId const&);
 
     // symbol:
     // ?_getOrInitSparseContainer@ItemStackRequestActionHandler@@QEAA?AV?$shared_ptr@VSimpleSparseContainer@@@std@@W4ContainerEnumName@@@Z
@@ -98,7 +110,7 @@ public:
     // symbol:
     // ?_handleRemove@ItemStackRequestActionHandler@@QEAA?AW4ItemStackNetResult@@AEBVItemStackRequestActionTransferBase@@AEAVItemStack@@W4RemoveType@1@@Z
     MCAPI ::ItemStackNetResult _handleRemove(
-        class ItemStackRequestActionTransferBase const&,
+        class ItemStackRequestActionTransferBase const& requestAction,
         class ItemStack&,
         ::ItemStackRequestActionHandler::RemoveType
     );
@@ -113,53 +125,46 @@ public:
 
     // symbol:
     // ?addFilteredStrings@ItemStackRequestActionHandler@@QEAAXV?$TypedClientNetId@UItemStackRequestIdTag@@H$0A@@@V?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@Z
-    MCAPI void addFilteredStrings(ItemStackRequestId, std::vector<std::string>);
+    MCAPI void addFilteredStrings(ItemStackRequestId requestId, std::vector<std::string>);
 
     // symbol:
     // ?endRequest@ItemStackRequestActionHandler@@QEAA?AV?$tuple@W4ItemStackNetResult@@V?$vector@UItemStackResponseContainerInfo@@V?$allocator@UItemStackResponseContainerInfo@@@std@@@std@@@std@@W4ItemStackNetResult@@@Z
     MCAPI std::tuple<::ItemStackNetResult, std::vector<struct ItemStackResponseContainerInfo>>
-          endRequest(::ItemStackNetResult);
+          endRequest(::ItemStackNetResult currentResult);
 
     // symbol:
     // ?getFilteredStrings@ItemStackRequestActionHandler@@QEBAAEBV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@V?$TypedClientNetId@UItemStackRequestIdTag@@H$0A@@@@Z
     MCAPI std::vector<std::string> const& getFilteredStrings(ItemStackRequestId) const;
-
-    // symbol: ?getRequestId@ItemStackRequestActionHandler@@QEBAAEBV?$TypedClientNetId@UItemStackRequestIdTag@@H$0A@@@XZ
-    MCAPI ItemStackRequestId const& getRequestId() const;
 
     // symbol: ?getScreenContext@ItemStackRequestActionHandler@@QEBAAEBVContainerScreenContext@@XZ
     MCAPI class ContainerScreenContext const& getScreenContext() const;
 
     // symbol:
     // ?handleRequestAction@ItemStackRequestActionHandler@@QEAA?AW4ItemStackNetResult@@AEBVItemStackRequestAction@@@Z
-    MCAPI ::ItemStackNetResult handleRequestAction(class ItemStackRequestAction const&);
-
-    // symbol: ?isValidationCraftingImplemented@ItemStackRequestActionHandler@@QEAA_NXZ
-    MCAPI bool isValidationCraftingImplemented();
-
-    // symbol:
-    // ?tryCraft@ItemStackRequestActionHandler@@QEAA?AV?$vector@VItemInstance@@V?$allocator@VItemInstance@@@std@@@std@@V?$unique_ptr@UContainerValidationCraftInputs@@U?$default_delete@UContainerValidationCraftInputs@@@std@@@3@@Z
-    MCAPI std::vector<class ItemInstance> tryCraft(std::unique_ptr<struct ContainerValidationCraftInputs>);
+    MCAPI ::ItemStackNetResult handleRequestAction(class ItemStackRequestAction const& requestAction);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol:
-    // ?_handleDestroy@ItemStackRequestActionHandler@@AEAA?AW4ItemStackNetResult@@AEBVItemStackRequestActionDestroy@@@Z
-    MCAPI ::ItemStackNetResult _handleDestroy(class ItemStackRequestActionDestroy const&);
-
-    // symbol:
     // ?_handlePlaceInItemContainer@ItemStackRequestActionHandler@@AEAA?AW4ItemStackNetResult@@AEBVItemStackRequestActionPlaceInItemContainer@@@Z
-    MCAPI ::ItemStackNetResult _handlePlaceInItemContainer(class ItemStackRequestActionPlaceInItemContainer const&);
+    MCAPI ::ItemStackNetResult
+    _handlePlaceInItemContainer(class ItemStackRequestActionPlaceInItemContainer const& requestAction);
 
     // symbol:
     // ?_handleTakeFromItemContainer@ItemStackRequestActionHandler@@AEAA?AW4ItemStackNetResult@@AEBVItemStackRequestActionTakeFromItemContainer@@@Z
-    MCAPI ::ItemStackNetResult _handleTakeFromItemContainer(class ItemStackRequestActionTakeFromItemContainer const&);
+    MCAPI ::ItemStackNetResult
+    _handleTakeFromItemContainer(class ItemStackRequestActionTakeFromItemContainer const& requestAction);
 
     // symbol:
     // ?_handleTransfer@ItemStackRequestActionHandler@@AEAA?AW4ItemStackNetResult@@AEBVItemStackRequestActionTransferBase@@_N11@Z
-    MCAPI ::ItemStackNetResult _handleTransfer(class ItemStackRequestActionTransferBase const&, bool, bool, bool);
+    MCAPI ::ItemStackNetResult _handleTransfer(
+        class ItemStackRequestActionTransferBase const& requestAction,
+        bool                                            isMerge,
+        bool                                            isMove,
+        bool                                            isSwap
+    );
 
     // symbol:
     // ?_resolveSlotIdAssignment@ItemStackRequestActionHandler@@AEAA?AV?$optional@URequestSlotIdAssignment@ItemStackRequestActionHandler@@@std@@AEBUItemStackRequestSlotInfo@@AEBV?$TypedRuntimeId@UContainerRuntimeIdTag@@I$0A@@@@Z

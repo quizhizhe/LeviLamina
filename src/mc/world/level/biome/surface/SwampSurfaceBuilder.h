@@ -22,15 +22,15 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SwampSurfaceBuilder@VanillaSurfaceBuilders@@UEAA@XZ
+    virtual ~SwampSurfaceBuilder() = default;
 
     // vIndex: 1, symbol: ?init@SwampSurfaceBuilder@VanillaSurfaceBuilders@@UEAAXAEAVEntityContext@@I@Z
-    virtual void init(class EntityContext&, uint);
+    virtual void init(class EntityContext& entity, uint);
 
     // vIndex: 2, symbol:
     // ?buildSurfaceAt@SwampSurfaceBuilder@VanillaSurfaceBuilders@@UEBAXAEBUBuildParameters@ISurfaceBuilder@@@Z
-    virtual void buildSurfaceAt(struct ISurfaceBuilder::BuildParameters const&) const;
+    virtual void buildSurfaceAt(struct ISurfaceBuilder::BuildParameters const& parameters) const;
 
     // NOLINTEND
 };

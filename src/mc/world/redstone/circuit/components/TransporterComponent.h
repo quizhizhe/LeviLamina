@@ -13,31 +13,31 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1TransporterComponent@@UEAA@XZ
+    virtual ~TransporterComponent() = default;
 
     // vIndex: 7, symbol: ?canConsumerPower@TransporterComponent@@UEBA_NXZ
     virtual bool canConsumerPower() const;
 
     // vIndex: 11, symbol:
     // ?addSource@TransporterComponent@@UEAA_NAEAVCircuitSceneGraph@@AEBVCircuitTrackingInfo@@AEAHAEA_N@Z
-    virtual bool addSource(class CircuitSceneGraph&, class CircuitTrackingInfo const&, int&, bool&);
+    virtual bool addSource(
+        class CircuitSceneGraph&         graph,
+        class CircuitTrackingInfo const& info,
+        int&                             dampening,
+        bool&                            bDirectlyPowered
+    );
 
     // vIndex: 12, symbol:
     // ?allowConnection@TransporterComponent@@UEAA_NAEAVCircuitSceneGraph@@AEBVCircuitTrackingInfo@@AEA_N@Z
-    virtual bool allowConnection(class CircuitSceneGraph&, class CircuitTrackingInfo const&, bool&);
+    virtual bool
+    allowConnection(class CircuitSceneGraph& graph, class CircuitTrackingInfo const& info, bool& bDirectlyPowered);
 
     // vIndex: 14, symbol: ?evaluate@TransporterComponent@@UEAA_NAEAVCircuitSystem@@AEBVBlockPos@@@Z
-    virtual bool evaluate(class CircuitSystem&, class BlockPos const&);
+    virtual bool evaluate(class CircuitSystem& system, class BlockPos const& pos);
 
     // vIndex: 15, symbol: ?cacheValues@TransporterComponent@@UEAAXAEAVCircuitSystem@@AEBVBlockPos@@@Z
-    virtual void cacheValues(class CircuitSystem&, class BlockPos const&);
-
-    // vIndex: 17, symbol: __unk_vfn_17
-    virtual void __unk_vfn_17();
-
-    // vIndex: 20, symbol: __unk_vfn_20
-    virtual void __unk_vfn_20();
+    virtual void cacheValues(class CircuitSystem& system, class BlockPos const& pos);
 
     // vIndex: 23, symbol: ?getCircuitComponentType@TransporterComponent@@UEBA?AW4CircuitComponentType@@XZ
     virtual ::CircuitComponentType getCircuitComponentType() const;

@@ -11,6 +11,7 @@
 class NetworkSettingsPacket : public ::Packet {
 public:
     NetworkSettingOptions mNetworkSettings; // this+0x30
+    bool                  mUnknown;         // this+0x40
 
     // prevent constructor by default
     NetworkSettingsPacket& operator=(NetworkSettingsPacket const&);
@@ -18,8 +19,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1NetworkSettingsPacket@@UEAA@XZ
+    virtual ~NetworkSettingsPacket();
 
     // vIndex: 1, symbol: ?getId@NetworkSettingsPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -29,14 +30,11 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@NetworkSettingsPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@NetworkSettingsPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1NetworkSettingsPacket@@UEAA@XZ
-    MCVAPI ~NetworkSettingsPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0NetworkSettingsPacket@@QEAA@XZ
     MCAPI NetworkSettingsPacket();

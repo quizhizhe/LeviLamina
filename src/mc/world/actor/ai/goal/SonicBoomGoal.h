@@ -30,16 +30,19 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1Definition@SonicBoomGoal@@UEAA@XZ
+        virtual ~Definition() = default;
 
         // symbol: ?initialize@Definition@SonicBoomGoal@@QEBAXAEAVEntityContext@@AEAV2@@Z
-        MCAPI void initialize(class EntityContext&, class SonicBoomGoal&) const;
+        MCAPI void initialize(class EntityContext& entity, class SonicBoomGoal& goal) const;
 
         // symbol:
         // ?buildSchema@Definition@SonicBoomGoal@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VDefinition@SonicBoomGoal@@@JsonUtil@@@4@@Z
-        MCAPI static void
-        buildSchema(std::string const&, std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class SonicBoomGoal::Definition>>&);
+        MCAPI static void buildSchema(
+            std::string const& name,
+            std::shared_ptr<
+                class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class SonicBoomGoal::Definition>>& root
+        );
 
         // NOLINTEND
     };
@@ -52,8 +55,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SonicBoomGoal@@UEAA@XZ
+    virtual ~SonicBoomGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@SonicBoomGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -72,10 +75,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@SonicBoomGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0SonicBoomGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit SonicBoomGoal(class Mob&);
+    MCAPI explicit SonicBoomGoal(class Mob& mob);
 
     // NOLINTEND
 };

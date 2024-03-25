@@ -18,8 +18,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1AutomationClientConnectPacket@@UEAA@XZ
+    virtual ~AutomationClientConnectPacket();
 
     // vIndex: 1, symbol: ?getId@AutomationClientConnectPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -29,20 +29,17 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@AutomationClientConnectPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@AutomationClientConnectPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1AutomationClientConnectPacket@@UEAA@XZ
-    MCVAPI ~AutomationClientConnectPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0AutomationClientConnectPacket@@QEAA@XZ
     MCAPI AutomationClientConnectPacket();
 
     // symbol: ??0AutomationClientConnectPacket@@QEAA@UWebSocketPacketData@@@Z
-    MCAPI explicit AutomationClientConnectPacket(struct WebSocketPacketData);
+    MCAPI explicit AutomationClientConnectPacket(struct WebSocketPacketData wsPacketData);
 
     // NOLINTEND
 };

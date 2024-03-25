@@ -13,30 +13,28 @@ namespace Crypto::Hash { class md5; }
 
 class XoroshiroPositionalRandomFactory : public ::IPositionalRandomFactory {
 public:
-    // prevent constructor by default
-    XoroshiroPositionalRandomFactory& operator=(XoroshiroPositionalRandomFactory const&);
-    XoroshiroPositionalRandomFactory(XoroshiroPositionalRandomFactory const&);
-    XoroshiroPositionalRandomFactory();
+    uint64 mSeedLo; // this+0x8
+    uint64 mSeedHi; // this+0x10
+
+public:
+    XoroshiroPositionalRandomFactory(uint64 seedLo, uint64 seedHi) : mSeedLo(seedLo), mSeedHi(seedHi) {}
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1XoroshiroPositionalRandomFactory@@UEAA@XZ
+    virtual ~XoroshiroPositionalRandomFactory();
 
     // vIndex: 1, symbol:
     // ?forBlockPos@XoroshiroPositionalRandomFactory@@UEBA?AV?$unique_ptr@VIRandom@@U?$default_delete@VIRandom@@@std@@@std@@AEBVBlockPos@@@Z
-    virtual std::unique_ptr<class IRandom> forBlockPos(class BlockPos const&) const;
+    virtual std::unique_ptr<class IRandom> forBlockPos(class BlockPos const& blockPos) const;
 
     // vIndex: 2, symbol:
     // ?forString@XoroshiroPositionalRandomFactory@@UEBA?AV?$unique_ptr@VIRandom@@U?$default_delete@VIRandom@@@std@@@std@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@3@@Z
-    virtual std::unique_ptr<class IRandom> forString(std::string const&) const;
-
-    // symbol: ??1XoroshiroPositionalRandomFactory@@UEAA@XZ
-    MCVAPI ~XoroshiroPositionalRandomFactory();
+    virtual std::unique_ptr<class IRandom> forString(std::string const& s) const;
 
     // symbol:
     // ?forStringImpl@XoroshiroPositionalRandomFactory@@QEBA?AVXoroshiroRandom@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI class XoroshiroRandom forStringImpl(std::string const&) const;
+    MCAPI class XoroshiroRandom forStringImpl(std::string const& s) const;
 
     // NOLINTEND
 
@@ -51,7 +49,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mThreadLocalDigest() { return mThreadLocalDigest; }
+    static auto& $mThreadLocalDigest() { return mThreadLocalDigest; }
 
     // NOLINTEND
 };

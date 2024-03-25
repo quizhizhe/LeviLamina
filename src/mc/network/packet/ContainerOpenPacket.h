@@ -26,8 +26,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1ContainerOpenPacket@@UEAA@XZ
+    virtual ~ContainerOpenPacket();
 
     // vIndex: 1, symbol: ?getId@ContainerOpenPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -37,20 +37,22 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@ContainerOpenPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@ContainerOpenPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1ContainerOpenPacket@@UEAA@XZ
-    MCVAPI ~ContainerOpenPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0ContainerOpenPacket@@QEAA@XZ
     MCAPI ContainerOpenPacket();
 
     // symbol: ??0ContainerOpenPacket@@QEAA@W4ContainerID@@W4ContainerType@@AEBVBlockPos@@AEBUActorUniqueID@@@Z
-    MCAPI ContainerOpenPacket(::ContainerID, ::ContainerType, class BlockPos const&, struct ActorUniqueID const&);
+    MCAPI ContainerOpenPacket(
+        ::ContainerID               containerId,
+        ::ContainerType             type,
+        class BlockPos const&       pos,
+        struct ActorUniqueID const& id
+    );
 
     // NOLINTEND
 };

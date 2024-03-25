@@ -20,8 +20,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1EmoteListPacket@@UEAA@XZ
+    virtual ~EmoteListPacket();
 
     // vIndex: 1, symbol: ?getId@EmoteListPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -31,20 +31,17 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@EmoteListPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@EmoteListPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1EmoteListPacket@@UEAA@XZ
-    MCVAPI ~EmoteListPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0EmoteListPacket@@QEAA@XZ
     MCAPI EmoteListPacket();
 
     // symbol: ??0EmoteListPacket@@QEAA@VActorRuntimeID@@@Z
-    MCAPI explicit EmoteListPacket(class ActorRuntimeID);
+    MCAPI explicit EmoteListPacket(class ActorRuntimeID runtimeId);
 
     // symbol: ?MAX_EMOTE_PIECE_IDS@EmoteListPacket@@2HB
     MCAPI static int const MAX_EMOTE_PIECE_IDS;

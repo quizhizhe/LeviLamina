@@ -8,7 +8,6 @@
 #include "mc/enums/MinecraftPacketIds.h"
 #include "mc/enums/SoftEnumUpdateType.h"
 #include "mc/network/packet/Packet.h"
-#include <string>
 
 class UpdateSoftEnumPacket : public ::Packet {
 public:
@@ -22,8 +21,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1UpdateSoftEnumPacket@@UEAA@XZ
+    virtual ~UpdateSoftEnumPacket();
 
     // vIndex: 1, symbol: ?getId@UpdateSoftEnumPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -33,21 +32,22 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@UpdateSoftEnumPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
-    // ?_read@UpdateSoftEnumPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1UpdateSoftEnumPacket@@UEAA@XZ
-    MCVAPI ~UpdateSoftEnumPacket();
+    // ?_read@UpdateSoftEnumPacket@@MEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0UpdateSoftEnumPacket@@QEAA@XZ
     MCAPI UpdateSoftEnumPacket();
 
     // symbol:
     // ??0UpdateSoftEnumPacket@@QEAA@W4SoftEnumUpdateType@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@3@@Z
-    MCAPI UpdateSoftEnumPacket(::SoftEnumUpdateType, std::string const&, std::vector<std::string> const&);
+    MCAPI UpdateSoftEnumPacket(
+        ::SoftEnumUpdateType            type,
+        std::string const&              enumName,
+        std::vector<std::string> const& values
+    );
 
     // NOLINTEND
 };

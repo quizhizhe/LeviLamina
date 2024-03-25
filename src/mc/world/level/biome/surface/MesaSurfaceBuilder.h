@@ -28,15 +28,15 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1MesaSurfaceBuilder@VanillaSurfaceBuilders@@UEAA@XZ
+    virtual ~MesaSurfaceBuilder() = default;
 
     // vIndex: 1, symbol: ?init@MesaSurfaceBuilder@VanillaSurfaceBuilders@@UEAAXAEAVEntityContext@@I@Z
-    virtual void init(class EntityContext&, uint);
+    virtual void init(class EntityContext& entity, uint levelSeed);
 
     // vIndex: 2, symbol:
     // ?buildSurfaceAt@MesaSurfaceBuilder@VanillaSurfaceBuilders@@UEBAXAEBUBuildParameters@ISurfaceBuilder@@@Z
-    virtual void buildSurfaceAt(struct ISurfaceBuilder::BuildParameters const&) const;
+    virtual void buildSurfaceAt(struct ISurfaceBuilder::BuildParameters const& parameters) const;
 
     // NOLINTEND
 
@@ -45,28 +45,28 @@ public:
     // symbol:
     // ?_buildSurface@MesaSurfaceBuilder@VanillaSurfaceBuilders@@AEBAXAEBVBlockPos@@MAEAVRandom@@AEAVBlockVolume@@HFAEBUMesaSurfaceBlocks@@AEBUSurfaceMaterialBlocks@@M@Z
     MCAPI void _buildSurface(
-        class BlockPos const&,
-        float,
-        class Random&,
+        class BlockPos const& pos,
+        float                 depthValue,
+        class Random&         random,
         class BlockVolume&,
         int,
-        short,
+        short seaLevel,
         struct MesaSurfaceBlocks const&,
-        struct SurfaceMaterialBlocks const&,
+        struct SurfaceMaterialBlocks const& blockPalette,
         float
     ) const;
 
     // symbol: ?_init@MesaSurfaceBuilder@VanillaSurfaceBuilders@@AEAAXI@Z
-    MCAPI void _init(uint);
+    MCAPI void _init(uint levelSeed);
 
     // symbol: ?generateBands@MesaSurfaceBuilder@VanillaSurfaceBuilders@@AEAAXAEAVRandom@@@Z
-    MCAPI void generateBands(class Random&);
+    MCAPI void generateBands(class Random& random);
 
     // symbol: ?getBand@MesaSurfaceBuilder@VanillaSurfaceBuilders@@AEBA?AW4BlockColor@@HHH@Z
-    MCAPI ::BlockColor getBand(int, int, int) const;
+    MCAPI ::BlockColor getBand(int worldX, int y, int worldZ) const;
 
     // symbol: ?makeBands@MesaSurfaceBuilder@VanillaSurfaceBuilders@@AEAAXAEAVRandom@@HW4BlockColor@@@Z
-    MCAPI void makeBands(class Random&, int, ::BlockColor);
+    MCAPI void makeBands(class Random& random, int, ::BlockColor color);
 
     // NOLINTEND
 };

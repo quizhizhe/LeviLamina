@@ -12,7 +12,7 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ?getCorrespondingWaxedBlock@CopperBehavior@@QEBAAEBVBlock@@AEBV2@@Z
-    MCAPI class Block const& getCorrespondingWaxedBlock(class Block const&) const;
+    MCAPI class Block const& getCorrespondingWaxedBlock(class Block const& block) const;
 
     // symbol: ?isWaxable@CopperBehavior@@QEBA_NXZ
     MCAPI bool isWaxable() const;
@@ -21,23 +21,16 @@ public:
     MCAPI bool isWaxed() const;
 
     // symbol: ?tryDecrementAge@CopperBehavior@@QEBA_NAEAVBlockSource@@AEBVBlockPos@@@Z
-    MCAPI bool tryDecrementAge(class BlockSource&, class BlockPos const&) const;
+    MCAPI bool tryDecrementAge(class BlockSource& region, class BlockPos const& pos) const;
 
     // symbol: ?tryIncrementAge@CopperBehavior@@QEBA_NAEAVBlockSource@@AEBVBlockPos@@MM@Z
-    MCAPI bool tryIncrementAge(class BlockSource&, class BlockPos const&, float, float) const;
+    MCAPI bool tryIncrementAge(class BlockSource& region, class BlockPos const& pos, float, float) const;
 
     // symbol: ?use@CopperBehavior@@QEBA_NAEAVPlayer@@AEBVBlockPos@@E@Z
-    MCAPI bool use(class Player&, class BlockPos const&, uchar) const;
+    MCAPI bool use(class Player& player, class BlockPos const& pos, uchar) const;
 
     // symbol: ??1CopperBehavior@@QEAA@XZ
     MCAPI ~CopperBehavior();
-
-    // NOLINTEND
-
-    // private:
-    // NOLINTBEGIN
-    // symbol: ?_incrementAge@CopperBehavior@@AEBAXAEAVBlockSource@@AEBVBlock@@AEBVBlockPos@@M@Z
-    MCAPI void _incrementAge(class BlockSource&, class Block const&, class BlockPos const&, float) const;
 
     // NOLINTEND
 };

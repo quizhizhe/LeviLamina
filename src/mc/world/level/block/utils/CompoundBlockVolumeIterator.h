@@ -14,8 +14,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1CompoundBlockVolumeIterator@@UEAA@XZ
+    virtual ~CompoundBlockVolumeIterator() = default;
 
     // vIndex: 1, symbol: ??ECompoundBlockVolumeIterator@@UEAAAEAVBaseBlockLocationIterator@@XZ
     virtual class BaseBlockLocationIterator& operator++();
@@ -30,7 +30,7 @@ public:
     virtual void _end();
 
     // symbol: ??0CompoundBlockVolumeIterator@@QEAA@AEBVCompoundBlockVolume@@_N@Z
-    MCAPI CompoundBlockVolumeIterator(class CompoundBlockVolume const&, bool);
+    MCAPI CompoundBlockVolumeIterator(class CompoundBlockVolume const&, bool begin);
 
     // NOLINTEND
 };

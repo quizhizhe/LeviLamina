@@ -11,14 +11,12 @@ public:
     // prevent constructor by default
     LabTableContainerScreenValidator& operator=(LabTableContainerScreenValidator const&);
     LabTableContainerScreenValidator(LabTableContainerScreenValidator const&);
+    LabTableContainerScreenValidator();
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // symbol: ??0LabTableContainerScreenValidator@@QEAA@XZ
-    MCAPI LabTableContainerScreenValidator();
+    // vIndex: 0, symbol: __gen_??1LabTableContainerScreenValidator@@UEAA@XZ
+    virtual ~LabTableContainerScreenValidator() = default;
 
     // NOLINTEND
 };

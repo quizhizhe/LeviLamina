@@ -19,35 +19,38 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1ResourcePackStack@@UEAA@XZ
+    virtual ~ResourcePackStack();
 
     // vIndex: 1, symbol:
     // ?loadAllVersionsOf@ResourcePackStack@@UEBA?AV?$vector@VLoadedResourceData@@V?$allocator@VLoadedResourceData@@@std@@@std@@AEBVResourceLocation@@@Z
-    virtual std::vector<class LoadedResourceData> loadAllVersionsOf(class ResourceLocation const&) const;
+    virtual std::vector<class LoadedResourceData> loadAllVersionsOf(class ResourceLocation const& resourceLocation
+    ) const;
 
     // vIndex: 2, symbol:
     // ?loadAllVersionsOf@ResourcePackStack@@UEBA_NAEBVResourceLocation@@AEAVResourcePackMergeStrategy@@@Z
-    virtual bool loadAllVersionsOf(class ResourceLocation const&, class ResourcePackMergeStrategy&) const;
+    virtual bool loadAllVersionsOf(
+        class ResourceLocation const&    resourceLocation,
+        class ResourcePackMergeStrategy& mergeStrategy
+    ) const;
 
     // vIndex: 3, symbol:
     // ?loadAllVersionsOf@ResourcePackStack@@UEBA_NAEBVResourceLocation@@AEBV?$function@$$A6A_NAEBVPackInstance@@@Z@std@@AEAVResourcePackMergeStrategy@@@Z
-    virtual bool
-    loadAllVersionsOf(class ResourceLocation const&, std::function<bool(class PackInstance const&)> const&, class ResourcePackMergeStrategy&)
-        const;
-
-    // symbol: ??1ResourcePackStack@@UEAA@XZ
-    MCVAPI ~ResourcePackStack();
+    virtual bool loadAllVersionsOf(
+        class ResourceLocation const& resourceLocation,
+        std::function<bool(class PackInstance const&)> const&,
+        class ResourcePackMergeStrategy& mergeStrategy
+    ) const;
 
     // symbol:
     // ?add@ResourcePackStack@@QEAAXVPackInstance@@AEBV?$not_null@V?$NonOwnerPointer@$$CBVIResourcePackRepository@@@Bedrock@@@gsl@@_N@Z
     MCAPI void add(class PackInstance, Bedrock::NotNullNonOwnerPtr<class IResourcePackRepository const> const&, bool);
 
     // symbol: ?getSplitStacks@ResourcePackStack@@QEBAXAEAV1@0@Z
-    MCAPI void getSplitStacks(class ResourcePackStack&, class ResourcePackStack&) const;
+    MCAPI void getSplitStacks(class ResourcePackStack& clientStack, class ResourcePackStack& serverStack) const;
 
     // symbol: ?hasCapabilityInStack@ResourcePackStack@@QEBA_NV?$basic_string_view@DU?$char_traits@D@std@@@std@@@Z
-    MCAPI bool hasCapabilityInStack(std::string_view) const;
+    MCAPI bool hasCapabilityInStack(std::string_view capability) const;
 
     // symbol: ?hasPlatformLockedContent@ResourcePackStack@@QEBA_NXZ
     MCAPI bool hasPlatformLockedContent() const;
@@ -56,7 +59,7 @@ public:
     MCAPI void removeDuplicates();
 
     // symbol: ?removeIf@ResourcePackStack@@QEAAXAEBV?$function@$$A6A_NAEBVPackInstance@@@Z@std@@@Z
-    MCAPI void removeIf(std::function<bool(class PackInstance const&)> const&);
+    MCAPI void removeIf(std::function<bool(class PackInstance const&)> const& callback);
 
     // symbol: ?removeInvalidPacks@ResourcePackStack@@QEAAXXZ
     MCAPI void removeInvalidPacks();
@@ -92,7 +95,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mUpgradePathMap() { return mUpgradePathMap; }
+    static auto& $mUpgradePathMap() { return mUpgradePathMap; }
 
     // NOLINTEND
 };

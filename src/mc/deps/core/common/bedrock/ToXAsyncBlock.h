@@ -23,8 +23,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ToXAsyncBlock@AsyncResult@Threading@Bedrock@@UEAA@XZ
+    virtual ~ToXAsyncBlock() = default;
 
     // vIndex: 1, symbol: ?getStatus@?$AsyncResultBase@PEAUXAsyncBlock@@@Threading@Bedrock@@UEBA?AW4AsyncStatus@23@XZ
     virtual ::Bedrock::Threading::AsyncStatus getStatus() const;
@@ -44,11 +44,13 @@ public:
 
     // vIndex: 6, symbol:
     // ?addOnComplete@?$AsyncResultBase@PEAUXAsyncBlock@@@Threading@Bedrock@@UEAAXV?$function@$$A6AXAEBV?$IAsyncResult@PEAUXAsyncBlock@@@Threading@Bedrock@@@Z@std@@@Z
-    virtual void addOnComplete(std::function<void(class Bedrock::Threading::IAsyncResult<struct XAsyncBlock*> const&)>);
+    virtual void
+    addOnComplete(std::function<void(class Bedrock::Threading::IAsyncResult<struct XAsyncBlock*> const&)> callback);
 
     // symbol:
     // ?create@ToXAsyncBlock@AsyncResult@Threading@Bedrock@@SA?AV?$shared_ptr@VToXAsyncBlock@AsyncResult@Threading@Bedrock@@@std@@PEAUXTaskQueueObject@@@Z
-    MCAPI static std::shared_ptr<class Bedrock::Threading::AsyncResult::ToXAsyncBlock> create(struct XTaskQueueObject*);
+    MCAPI static std::shared_ptr<class Bedrock::Threading::AsyncResult::ToXAsyncBlock>
+    create(struct XTaskQueueObject* queue);
 
     // NOLINTEND
 

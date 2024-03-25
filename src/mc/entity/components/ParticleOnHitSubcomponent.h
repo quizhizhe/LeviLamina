@@ -18,17 +18,17 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ParticleOnHitSubcomponent@@UEAA@XZ
+    virtual ~ParticleOnHitSubcomponent() = default;
 
     // vIndex: 1, symbol: ?readfromJSON@ParticleOnHitSubcomponent@@UEAAXAEAVValue@Json@@AEBVSemVersion@@@Z
-    virtual void readfromJSON(class Json::Value&, class SemVersion const&);
+    virtual void readfromJSON(class Json::Value& value, class SemVersion const& engineVersion);
 
     // vIndex: 2, symbol: ?writetoJSON@ParticleOnHitSubcomponent@@UEBAXAEAVValue@Json@@@Z
-    virtual void writetoJSON(class Json::Value&) const;
+    virtual void writetoJSON(class Json::Value& component) const;
 
     // vIndex: 3, symbol: ?doOnHitEffect@ParticleOnHitSubcomponent@@UEAAXAEAVActor@@AEAVProjectileComponent@@@Z
-    virtual void doOnHitEffect(class Actor&, class ProjectileComponent&);
+    virtual void doOnHitEffect(class Actor& owner, class ProjectileComponent& component);
 
     // vIndex: 4, symbol: ?getName@ParticleOnHitSubcomponent@@UEAAPEBDXZ
     virtual char const* getName();

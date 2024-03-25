@@ -21,8 +21,8 @@ public:
     // ?_hasAdjacentFlowingBlock@LiquidPhysicsSystemImpl@@SA_NAEBV?$vector@ULiquidBlockEntry@@V?$allocator@ULiquidBlockEntry@@@std@@@std@@AEBVIConstBlockSource@@W4MaterialType@@@Z
     MCAPI static bool _hasAdjacentFlowingBlock(
         std::vector<struct LiquidBlockEntry> const&,
-        class IConstBlockSource const&,
-        ::MaterialType
+        class IConstBlockSource const& region,
+        ::MaterialType                 liquidType
     );
 
     // symbol:

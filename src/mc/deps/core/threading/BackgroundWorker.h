@@ -23,8 +23,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1BackgroundWorker@@UEAA@XZ
+    virtual ~BackgroundWorker();
 
     // vIndex: 1, symbol: ?isAsync@BackgroundWorker@@UEBA_NXZ
     virtual bool isAsync() const;
@@ -32,29 +32,50 @@ public:
     // vIndex: 2, symbol: ?canTaskRunAgain@BackgroundWorker@@UEBA_NXZ
     virtual bool canTaskRunAgain() const;
 
-    // symbol: ??1BackgroundWorker@@UEAA@XZ
-    MCVAPI ~BackgroundWorker();
-
     // symbol:
     // ??0BackgroundWorker@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_NAEBVOSThreadPriority@Threading@Bedrock@@V?$optional@_K@2@V?$optional@H@2@AEAVWorkerPool@@1@Z
     MCAPI BackgroundWorker(
-        std::string,
-        bool,
-        class Bedrock::Threading::OSThreadPriority const&,
-        std::optional<uint64>,
-        std::optional<int>,
-        class WorkerPool&,
-        bool
+        std::string                                       name,
+        bool                                              async,
+        class Bedrock::Threading::OSThreadPriority const& priority,
+        std::optional<uint64>                             coreAffinity,
+        std::optional<int>                                idealCore,
+        class WorkerPool&                                 workerPool,
+        bool                                              suppressProfiling
     );
 
+    // symbol: ?getApproximateTaskCount@BackgroundWorker@@QEBA_KXZ
+    MCAPI uint64 getApproximateTaskCount() const;
+
+    // symbol: ?getThreadId@BackgroundWorker@@QEBA?AVid@thread@std@@XZ
+    MCAPI std::thread::id getThreadId() const;
+
+    // symbol: ?isIdle@BackgroundWorker@@QEBA_NXZ
+    MCAPI bool isIdle() const;
+
+    // symbol: ?processTaskSync@BackgroundWorker@@QEAA_NXZ
+    MCAPI bool processTaskSync();
+
     // symbol: ?queue@BackgroundWorker@@QEAAXV?$shared_ptr@VBackgroundTaskBase@@@std@@@Z
-    MCAPI void queue(std::shared_ptr<class BackgroundTaskBase>);
+    MCAPI void queue(std::shared_ptr<class BackgroundTaskBase> task);
+
+    // symbol: ?requestStop@BackgroundWorker@@QEAAX_N@Z
+    MCAPI void requestStop(bool wait);
+
+    // symbol: ?resetWorkerThreadID@BackgroundWorker@@QEAAXXZ
+    MCAPI void resetWorkerThreadID();
+
+    // symbol: ?resortPriorityQueue@BackgroundWorker@@QEAAXXZ
+    MCAPI void resortPriorityQueue();
 
     // symbol: ?start@BackgroundWorker@@QEAAXXZ
     MCAPI void start();
 
     // symbol: ?wake@BackgroundWorker@@QEAAXXZ
     MCAPI void wake();
+
+    // symbol: ?getLocal@BackgroundWorker@@SAPEAV1@XZ
+    MCAPI static class BackgroundWorker* getLocal();
 
     // NOLINTEND
 
@@ -78,7 +99,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $gLocalWorkerMappingSingleton() { return gLocalWorkerMappingSingleton; }
+    static auto& $gLocalWorkerMappingSingleton() { return gLocalWorkerMappingSingleton; }
 
     // NOLINTEND
 };

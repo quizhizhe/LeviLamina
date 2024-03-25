@@ -28,8 +28,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1CreativeContentPacket@@UEAA@XZ
+    virtual ~CreativeContentPacket();
 
     // vIndex: 1, symbol: ?getId@CreativeContentPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -39,21 +39,18 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@CreativeContentPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@CreativeContentPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1CreativeContentPacket@@UEAA@XZ
-    MCVAPI ~CreativeContentPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0CreativeContentPacket@@QEAA@XZ
     MCAPI CreativeContentPacket();
 
     // symbol:
     // ??0CreativeContentPacket@@QEAA@AEBV?$vector@VCreativeItemEntry@@V?$allocator@VCreativeItemEntry@@@std@@@std@@@Z
-    MCAPI explicit CreativeContentPacket(std::vector<class CreativeItemEntry> const&);
+    MCAPI explicit CreativeContentPacket(std::vector<class CreativeItemEntry> const& content);
 
     // NOLINTEND
 };

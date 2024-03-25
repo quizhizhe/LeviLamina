@@ -8,7 +8,9 @@
 
 // auto generated forward declare list
 // clang-format off
+namespace gametest { class BaseGameTestFunction; }
 namespace gametest { class BaseGameTestInstance; }
+namespace gametest { class IGameTestHelperProvider; }
 // clang-format on
 
 class MinecraftGameTestInstance : public ::gametest::BaseGameTestInstance {
@@ -20,8 +22,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1MinecraftGameTestInstance@@UEAA@XZ
+    virtual ~MinecraftGameTestInstance() = default;
 
     // vIndex: 1, symbol: ?initialize@MinecraftGameTestInstance@@UEAAXXZ
     virtual void initialize();
@@ -58,6 +60,14 @@ public:
 
     // vIndex: 14, symbol: ?getBlockSource@MinecraftGameTestInstance@@UEBAAEAVBlockSource@@XZ
     virtual class BlockSource& getBlockSource() const;
+
+    // symbol:
+    // ??0MinecraftGameTestInstance@@QEAA@AEBVBaseGameTestFunction@gametest@@V?$unique_ptr@VIGameTestHelperProvider@gametest@@U?$default_delete@VIGameTestHelperProvider@gametest@@@std@@@std@@AEAVDimension@@@Z
+    MCAPI MinecraftGameTestInstance(
+        class gametest::BaseGameTestFunction const&,
+        std::unique_ptr<class gametest::IGameTestHelperProvider> helper,
+        class Dimension&                                         dimension
+    );
 
     // NOLINTEND
 };

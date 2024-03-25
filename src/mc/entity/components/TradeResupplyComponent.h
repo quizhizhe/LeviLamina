@@ -14,16 +14,16 @@ public:
     MCAPI TradeResupplyComponent();
 
     // symbol: ?addAdditionalSaveData@TradeResupplyComponent@@QEBAXAEAVCompoundTag@@@Z
-    MCAPI void addAdditionalSaveData(class CompoundTag&) const;
+    MCAPI void addAdditionalSaveData(class CompoundTag& tag) const;
 
     // symbol: ?initFromDefinition@TradeResupplyComponent@@QEAAXAEAVActor@@@Z
     MCAPI void initFromDefinition(class Actor&);
 
     // symbol: ?readAdditionalSaveData@TradeResupplyComponent@@QEAAXAEAVActor@@AEBVCompoundTag@@AEAVDataLoadHelper@@@Z
-    MCAPI void readAdditionalSaveData(class Actor&, class CompoundTag const&, class DataLoadHelper&);
+    MCAPI void readAdditionalSaveData(class Actor&, class CompoundTag const& tag, class DataLoadHelper&);
 
     // symbol: ?reloadComponent@TradeResupplyComponent@@QEAAXAEAVActor@@@Z
-    MCAPI void reloadComponent(class Actor&);
+    MCAPI void reloadComponent(class Actor& actor);
 
     // NOLINTEND
 };

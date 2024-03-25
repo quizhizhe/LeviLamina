@@ -29,22 +29,23 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
-
-        // symbol: ??1Definition@GoAndGiveItemsToOwnerGoal@@UEAA@XZ
-        MCVAPI ~Definition();
+        // vIndex: 0, symbol: ??1Definition@GoAndGiveItemsToOwnerGoal@@UEAA@XZ
+        virtual ~Definition();
 
         // symbol: ??0Definition@GoAndGiveItemsToOwnerGoal@@QEAA@XZ
         MCAPI Definition();
 
         // symbol: ?initialize@Definition@GoAndGiveItemsToOwnerGoal@@QEBAXAEAVEntityContext@@AEAV2@@Z
-        MCAPI void initialize(class EntityContext&, class GoAndGiveItemsToOwnerGoal&) const;
+        MCAPI void initialize(class EntityContext& entity, class GoAndGiveItemsToOwnerGoal& goal) const;
 
         // symbol:
         // ?buildSchema@Definition@GoAndGiveItemsToOwnerGoal@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VDefinition@GoAndGiveItemsToOwnerGoal@@@JsonUtil@@@4@@Z
-        MCAPI static void
-        buildSchema(std::string const&, std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class GoAndGiveItemsToOwnerGoal::Definition>>&);
+        MCAPI static void buildSchema(
+            std::string const&                                 name,
+            std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<
+                class JsonUtil::EmptyClass,
+                class GoAndGiveItemsToOwnerGoal::Definition>>& root
+        );
 
         // NOLINTEND
     };
@@ -57,8 +58,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1GoAndGiveItemsToOwnerGoal@@UEAA@XZ
+    virtual ~GoAndGiveItemsToOwnerGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@GoAndGiveItemsToOwnerGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -77,10 +78,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@GoAndGiveItemsToOwnerGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0GoAndGiveItemsToOwnerGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit GoAndGiveItemsToOwnerGoal(class Mob&);
+    MCAPI explicit GoAndGiveItemsToOwnerGoal(class Mob& mob);
 
     // NOLINTEND
 

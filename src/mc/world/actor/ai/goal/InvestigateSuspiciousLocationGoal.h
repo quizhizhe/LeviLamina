@@ -29,19 +29,23 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1Definition@InvestigateSuspiciousLocationGoal@@UEAA@XZ
+        virtual ~Definition() = default;
 
         // symbol: ??0Definition@InvestigateSuspiciousLocationGoal@@QEAA@XZ
         MCAPI Definition();
 
         // symbol: ?initialize@Definition@InvestigateSuspiciousLocationGoal@@QEBAXAEAVEntityContext@@AEAV2@@Z
-        MCAPI void initialize(class EntityContext&, class InvestigateSuspiciousLocationGoal&) const;
+        MCAPI void initialize(class EntityContext& entity, class InvestigateSuspiciousLocationGoal& goal) const;
 
         // symbol:
         // ?buildSchema@Definition@InvestigateSuspiciousLocationGoal@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VDefinition@InvestigateSuspiciousLocationGoal@@@JsonUtil@@@4@@Z
-        MCAPI static void
-        buildSchema(std::string const&, std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class InvestigateSuspiciousLocationGoal::Definition>>&);
+        MCAPI static void buildSchema(
+            std::string const&                                         name,
+            std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<
+                class JsonUtil::EmptyClass,
+                class InvestigateSuspiciousLocationGoal::Definition>>& root
+        );
 
         // NOLINTEND
     };
@@ -54,8 +58,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1InvestigateSuspiciousLocationGoal@@UEAA@XZ
+    virtual ~InvestigateSuspiciousLocationGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@InvestigateSuspiciousLocationGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -74,10 +78,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@InvestigateSuspiciousLocationGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0InvestigateSuspiciousLocationGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit InvestigateSuspiciousLocationGoal(class Mob&);
+    MCAPI explicit InvestigateSuspiciousLocationGoal(class Mob& mob);
 
     // NOLINTEND
 };

@@ -29,22 +29,23 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
-
-        // symbol: ??1MoveOutdoorsDefinition@MoveOutdoorsGoal@@UEAA@XZ
-        MCVAPI ~MoveOutdoorsDefinition();
+        // vIndex: 0, symbol: ??1MoveOutdoorsDefinition@MoveOutdoorsGoal@@UEAA@XZ
+        virtual ~MoveOutdoorsDefinition();
 
         // symbol: ??0MoveOutdoorsDefinition@MoveOutdoorsGoal@@QEAA@XZ
         MCAPI MoveOutdoorsDefinition();
 
         // symbol: ?initialize@MoveOutdoorsDefinition@MoveOutdoorsGoal@@QEBAXAEAVEntityContext@@AEAV2@@Z
-        MCAPI void initialize(class EntityContext&, class MoveOutdoorsGoal&) const;
+        MCAPI void initialize(class EntityContext& entity, class MoveOutdoorsGoal& goal) const;
 
         // symbol:
         // ?buildSchema@MoveOutdoorsDefinition@MoveOutdoorsGoal@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VMoveOutdoorsDefinition@MoveOutdoorsGoal@@@JsonUtil@@@4@@Z
-        MCAPI static void
-        buildSchema(std::string const&, std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class MoveOutdoorsGoal::MoveOutdoorsDefinition>>&);
+        MCAPI static void buildSchema(
+            std::string const&                                    name,
+            std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<
+                class JsonUtil::EmptyClass,
+                class MoveOutdoorsGoal::MoveOutdoorsDefinition>>& root
+        );
 
         // NOLINTEND
     };
@@ -57,8 +58,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1MoveOutdoorsGoal@@UEAA@XZ
+    virtual ~MoveOutdoorsGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@MoveOutdoorsGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -71,16 +72,16 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@MoveOutdoorsGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // vIndex: 11, symbol: ?isValidTarget@MoveOutdoorsGoal@@UEAA_NAEAVBlockSource@@AEBVBlockPos@@@Z
-    virtual bool isValidTarget(class BlockSource&, class BlockPos const&);
+    virtual bool isValidTarget(class BlockSource& region, class BlockPos const& pos);
 
     // symbol: ??0MoveOutdoorsGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit MoveOutdoorsGoal(class Mob&);
+    MCAPI explicit MoveOutdoorsGoal(class Mob& mob);
 
     // symbol: ?mobHasClearSpaceAbove@MoveOutdoorsGoal@@SA_NAEAVBlockSource@@AEBVBlockPos@@@Z
-    MCAPI static bool mobHasClearSpaceAbove(class BlockSource&, class BlockPos const&);
+    MCAPI static bool mobHasClearSpaceAbove(class BlockSource& region, class BlockPos const& pos);
 
     // NOLINTEND
 

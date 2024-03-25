@@ -1,6 +1,8 @@
 #pragma once
 
+#include "ll/api/base/StdInt.h"
 #include "mc/_HeaderOutputPredefine.h"
+#include "mc/deps/core/common/bedrock/EnableNonOwnerReferences.h"
 
 // auto generated inclusion list
 #include "mc/world/events/EventResult.h"
@@ -10,7 +12,7 @@
 namespace Json { class Value; }
 // clang-format on
 
-class ScriptFormPromiseTracker {
+class ScriptFormPromiseTracker : public Bedrock::EnableNonOwnerReferences {
 public:
     // ScriptFormPromiseTracker inner types declare
     // clang-format off
@@ -34,26 +36,31 @@ public:
     };
 
 public:
+    char padding[0x8]; // parent class EventListenerDispatcher<PlayerEventListener>
+    int  mLastRequestId;
+    std::unordered_map<uint, ScriptFormPromiseTracker::FromRequest> mFormRequests;
+
+public:
     // prevent constructor by default
     ScriptFormPromiseTracker& operator=(ScriptFormPromiseTracker const&);
     ScriptFormPromiseTracker(ScriptFormPromiseTracker const&);
 
 public:
     // NOLINTBEGIN
-    // symbol: ?onEvent@ScriptFormPromiseTracker@@UEAA?AW4EventResult@@AEBUPlayerFormResponseEvent@@@Z
-    MCVAPI ::EventResult onEvent(struct PlayerFormResponseEvent const&);
-
     // symbol: ?onEvent@ScriptFormPromiseTracker@@UEAA?AW4EventResult@@AEBUPlayerFormCloseEvent@@@Z
-    MCVAPI ::EventResult onEvent(struct PlayerFormCloseEvent const&);
+    MCVAPI ::EventResult onEvent(struct PlayerFormCloseEvent const& formCloseEvent);
+
+    // symbol: ?onEvent@ScriptFormPromiseTracker@@UEAA?AW4EventResult@@AEBUPlayerFormResponseEvent@@@Z
+    MCVAPI ::EventResult onEvent(struct PlayerFormResponseEvent const& formResponseEvent);
 
     // symbol: ??0ScriptFormPromiseTracker@@QEAA@XZ
     MCAPI ScriptFormPromiseTracker();
 
     // symbol: ?handleFormResponse@ScriptFormPromiseTracker@@QEAAXIAEBVValue@Json@@@Z
-    MCAPI void handleFormResponse(uint, class Json::Value const&);
+    MCAPI void handleFormResponse(uint formId, class Json::Value const&);
 
     // symbol: ?handlePlayerQuit@ScriptFormPromiseTracker@@QEAAXAEBVNetworkIdentifier@@@Z
-    MCAPI void handlePlayerQuit(class NetworkIdentifier const&);
+    MCAPI void handlePlayerQuit(class NetworkIdentifier const& playerId);
 
     // symbol: ?rejectAllForShutdown@ScriptFormPromiseTracker@@QEAAXXZ
     MCAPI void rejectAllForShutdown();

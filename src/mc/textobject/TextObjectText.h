@@ -19,8 +19,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1TextObjectText@@UEAA@XZ
+    virtual ~TextObjectText() = default;
 
     // vIndex: 1, symbol:
     // ?asString@TextObjectText@@UEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
@@ -33,7 +33,7 @@ public:
     virtual class Json::Value resolve(struct ResolveData const&) const;
 
     // symbol: ??0TextObjectText@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI explicit TextObjectText(std::string);
+    MCAPI explicit TextObjectText(std::string text);
 
     // symbol:
     // ?asJsonValue@TextObjectText@@SA?AVValue@Json@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z

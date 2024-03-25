@@ -17,7 +17,7 @@ public:
     // symbol:
     // ?createBlockEntity@BlockActorFactory@@SA?AV?$shared_ptr@VBlockActor@@@std@@W4BlockActorType@@AEBVBlockPos@@AEBVBlockLegacy@@@Z
     MCAPI static std::shared_ptr<class BlockActor>
-    createBlockEntity(::BlockActorType, class BlockPos const&, class BlockLegacy const&);
+    createBlockEntity(::BlockActorType type, class BlockPos const& pos, class BlockLegacy const& block);
 
     // symbol: ?flushCustomBlockEntityCreationCallbacks@BlockActorFactory@@SAXXZ
     MCAPI static void flushCustomBlockEntityCreationCallbacks();
@@ -37,7 +37,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mCustomBlockEntityCreation() { return mCustomBlockEntityCreation; }
+    static auto& $mCustomBlockEntityCreation() { return mCustomBlockEntityCreation; }
 
     // NOLINTEND
 };

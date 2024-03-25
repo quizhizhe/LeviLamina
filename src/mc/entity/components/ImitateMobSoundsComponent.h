@@ -15,26 +15,26 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ?getRandomImitatedSound@ImitateMobSoundsComponent@@SA?AW4LevelSoundEvent@@AEBVRandomize@@@Z
-    MCAPI static ::LevelSoundEvent getRandomImitatedSound(class Randomize const&);
+    // symbol: ?getRandomImitatedSound@ImitateMobSoundsComponent@@SA?AW4LevelSoundEvent@Legacy@Puv@@AEBVRandomize@@@Z
+    MCAPI static ::Puv::Legacy::LevelSoundEvent getRandomImitatedSound(class Randomize const& randomize);
 
     // symbol: ?imitateNearbyMobs@ImitateMobSoundsComponent@@SA_NAEAVActor@@AEBVRandomize@@@Z
-    MCAPI static bool imitateNearbyMobs(class Actor&, class Randomize const&);
+    MCAPI static bool imitateNearbyMobs(class Actor& actor, class Randomize const& randomize);
 
     // NOLINTEND
 
 private:
     // NOLINTBEGIN
     // symbol:
-    // ?imitateMobMap@ImitateMobSoundsComponent@@0V?$unordered_map@W4ActorType@@W4LevelSoundEvent@@U?$hash@W4ActorType@@@std@@U?$equal_to@W4ActorType@@@4@V?$allocator@U?$pair@$$CBW4ActorType@@W4LevelSoundEvent@@@std@@@4@@std@@B
-    MCAPI static std::unordered_map<::ActorType, ::LevelSoundEvent> const imitateMobMap;
+    // ?imitateMobMap@ImitateMobSoundsComponent@@0V?$unordered_map@W4ActorType@@W4LevelSoundEvent@Legacy@Puv@@U?$hash@W4ActorType@@@std@@U?$equal_to@W4ActorType@@@6@V?$allocator@U?$pair@$$CBW4ActorType@@W4LevelSoundEvent@Legacy@Puv@@@std@@@6@@std@@B
+    MCAPI static std::unordered_map<::ActorType, ::Puv::Legacy::LevelSoundEvent> const imitateMobMap;
 
     // NOLINTEND
 
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $imitateMobMap() { return imitateMobMap; }
+    static auto& $imitateMobMap() { return imitateMobMap; }
 
     // NOLINTEND
 };

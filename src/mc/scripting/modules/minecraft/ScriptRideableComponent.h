@@ -11,6 +11,7 @@
 // clang-format off
 class WeakEntityRef;
 namespace ScriptModuleMinecraft { class ScriptActor; }
+namespace ScriptModuleMinecraft { class ScriptComponentTypeEnumBuilder; }
 namespace Scripting { class WeakLifetimeScope; }
 struct SeatDescription;
 // clang-format on
@@ -26,19 +27,20 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScriptRideableComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptRideableComponent() = default;
 
-    // vIndex: 1, symbol: ?_isValid@ScriptItemComponent@ScriptModuleMinecraft@@MEBA_NXZ
+    // vIndex: 1, symbol:
+    // ?_isValid@?$ECSScriptActorComponent@VRideableComponent@@VRideableDefinition@@@ScriptModuleMinecraft@@MEBA_NXZ
     virtual bool _isValid() const;
-
-    // symbol: ??1ScriptRideableComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptRideableComponent();
 
     // symbol:
     // ??0ScriptRideableComponent@ScriptModuleMinecraft@@QEAA@AEBVWeakEntityRef@@AEBVWeakLifetimeScope@Scripting@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI
-    ScriptRideableComponent(class WeakEntityRef const&, class Scripting::WeakLifetimeScope const&, std::string const&);
+    MCAPI ScriptRideableComponent(
+        class WeakEntityRef const&                entity,
+        class Scripting::WeakLifetimeScope const& scope,
+        std::string const&                        id
+    );
 
     // symbol:
     // ?addPassenger@ScriptRideableComponent@ScriptModuleMinecraft@@QEBA?AV?$Result@_N$$V@Scripting@@AEAVScriptActor@2@@Z
@@ -87,8 +89,9 @@ public:
     MCAPI class Scripting::Result<std::vector<struct SeatDescription>> getSeats() const;
 
     // symbol:
-    // ?bind@ScriptRideableComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptRideableComponent@ScriptModuleMinecraft@@@Scripting@@XZ
-    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptRideableComponent> bind();
+    // ?bind@ScriptRideableComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptRideableComponent@ScriptModuleMinecraft@@@Scripting@@AEAVScriptComponentTypeEnumBuilder@2@@Z
+    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptRideableComponent>
+    bind(class ScriptModuleMinecraft::ScriptComponentTypeEnumBuilder&);
 
     // symbol: ?ComponentId@ScriptRideableComponent@ScriptModuleMinecraft@@2PEBDEB
     MCAPI static char const* ComponentId;

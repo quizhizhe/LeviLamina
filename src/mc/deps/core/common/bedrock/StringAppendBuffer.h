@@ -13,8 +13,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1StringAppendBuffer@Bedrock@@UEAA@XZ
+    virtual ~StringAppendBuffer();
 
     // vIndex: 1, symbol: ?_Lock@?$basic_streambuf@DU?$char_traits@D@std@@@std@@UEAAXXZ
     virtual void _Lock();
@@ -23,7 +23,7 @@ public:
     virtual void _Unlock();
 
     // vIndex: 3, symbol: ?overflow@StringAppendBuffer@Bedrock@@UEAAHH@Z
-    virtual int overflow(int);
+    virtual int overflow(int c);
 
     // vIndex: 4, symbol: ?pbackfail@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MEAAHH@Z
     virtual int pbackfail(int);
@@ -41,7 +41,7 @@ public:
     virtual int64 xsgetn(char*, int64);
 
     // vIndex: 9, symbol: ?xsputn@StringAppendBuffer@Bedrock@@UEAA_JPEBD_J@Z
-    virtual int64 xsputn(char const*, int64);
+    virtual int64 xsputn(char const* s, int64 n);
 
     // vIndex: 10, symbol: ?seekoff@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MEAA?AV?$fpos@U_Mbstatet@@@2@_JHH@Z
     virtual std::fpos<struct _Mbstatet> seekoff(int64, int, int);
@@ -57,9 +57,6 @@ public:
 
     // vIndex: 14, symbol: ?imbue@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MEAAXAEBVlocale@2@@Z
     virtual void imbue(std::locale const&);
-
-    // symbol: ??1StringAppendBuffer@Bedrock@@UEAA@XZ
-    MCVAPI ~StringAppendBuffer();
 
     // NOLINTEND
 };

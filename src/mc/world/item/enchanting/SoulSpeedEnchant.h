@@ -19,44 +19,32 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SoulSpeedEnchant@@UEAA@XZ
+    virtual ~SoulSpeedEnchant() = default;
 
     // vIndex: 2, symbol: ?getMinCost@SoulSpeedEnchant@@UEBAHH@Z
-    virtual int getMinCost(int) const;
+    virtual int getMinCost(int level) const;
 
     // vIndex: 3, symbol: ?getMaxCost@SoulSpeedEnchant@@UEBAHH@Z
-    virtual int getMaxCost(int) const;
+    virtual int getMaxCost(int level) const;
 
     // vIndex: 5, symbol: ?getMaxLevel@SoulSpeedEnchant@@UEBAHXZ
     virtual int getMaxLevel() const;
 
-    // vIndex: 10, symbol: __unk_vfn_10
-    virtual void __unk_vfn_10();
+    // vIndex: 12, symbol: ?isTreasureOnly@SoulSpeedEnchant@@UEBA_NXZ
+    virtual bool isTreasureOnly() const;
 
-    // vIndex: 11, symbol: __unk_vfn_11
-    virtual void __unk_vfn_11();
-
-    // vIndex: 12, symbol: __unk_vfn_12
-    virtual void __unk_vfn_12();
-
-    // vIndex: 13, symbol: __unk_vfn_13
-    virtual void __unk_vfn_13();
-
-    // symbol: ?isDiscoverable@SoulSpeedEnchant@@UEBA_NXZ
-    MCVAPI bool isDiscoverable() const;
-
-    // symbol: ?isTreasureOnly@SoulSpeedEnchant@@UEBA_NXZ
-    MCVAPI bool isTreasureOnly() const;
+    // vIndex: 13, symbol: ?isDiscoverable@SoulSpeedEnchant@@UEBA_NXZ
+    virtual bool isDiscoverable() const;
 
     // symbol: ?getLevel@SoulSpeedEnchant@@SAHAEBVActor@@@Z
-    MCAPI static int getLevel(class Actor const&);
+    MCAPI static int getLevel(class Actor const& entity);
 
     // symbol: ?getSpeedBoost@SoulSpeedEnchant@@SAMH@Z
-    MCAPI static float getSpeedBoost(int);
+    MCAPI static float getSpeedBoost(int level);
 
     // symbol: ?shouldSpawnParticles@SoulSpeedEnchant@@SA_NAEBVActor@@@Z
-    MCAPI static bool shouldSpawnParticles(class Actor const&);
+    MCAPI static bool shouldSpawnParticles(class Actor const& entity);
 
     // symbol: ?SOUL_SPEED_BOOST_UUID@SoulSpeedEnchant@@2VUUID@mce@@B
     MCAPI static class mce::UUID const SOUL_SPEED_BOOST_UUID;

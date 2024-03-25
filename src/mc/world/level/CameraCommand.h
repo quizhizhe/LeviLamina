@@ -14,20 +14,23 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1CameraCommand@@UEAA@XZ
+    virtual ~CameraCommand() = default;
 
     // vIndex: 2, symbol: ?execute@CameraCommand@@UEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    virtual void execute(class CommandOrigin const&, class CommandOutput&) const;
+    virtual void execute(class CommandOrigin const& origin, class CommandOutput& output) const;
 
     // symbol:
     // ?prepareInstruction@CameraCommand@@QEBA_NAEAUCameraInstruction@@AEBVCameraPresets@@AEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    MCAPI bool
-    prepareInstruction(struct CameraInstruction&, class CameraPresets const&, class CommandOrigin const&, class CommandOutput&)
-        const;
+    MCAPI bool prepareInstruction(
+        struct CameraInstruction&,
+        class CameraPresets const&,
+        class CommandOrigin const& origin,
+        class CommandOutput&       output
+    ) const;
 
     // symbol: ?setup@CameraCommand@@SAXAEAVCommandRegistry@@@Z
-    MCAPI static void setup(class CommandRegistry&);
+    MCAPI static void setup(class CommandRegistry& registry);
 
     // symbol: ?ENUM_OPTION_CLEAR@CameraCommand@@2PEBDEB
     MCAPI static char const* ENUM_OPTION_CLEAR;

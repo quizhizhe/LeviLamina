@@ -16,31 +16,25 @@ public:
     BinaryStream(BinaryStream const&);
 
     template <typename T>
-    inline void writeType(T const& x) {
+    inline void writeType(T const& x, char const* = nullptr, char const* = nullptr) {
         serialize<T>::write(x, *this);
     }
 
-    MCTAPI void writeType(struct CommandOriginData const&);
-    MCTAPI void writeType(std::vector<std::unique_ptr<class DataItem>> const&);
-    MCTAPI void writeType(class NetworkItemStackDescriptor const&);
-    MCTAPI void writeType(class MoveActorAbsoluteData const&);
-    MCTAPI void writeType(class NetworkItemInstanceDescriptor const&);
-    MCTAPI void writeType(struct ItemStackRequestSlotInfo const&);
-    MCTAPI void writeType(class RecipeIngredient const&);
+    MCTAPI void writeType(class NetworkItemStackDescriptor const&, char const*, char const*);
+    MCTAPI void writeType(class MoveActorAbsoluteData const&, char const*, char const*);
+    MCTAPI void writeType(class NetworkItemInstanceDescriptor const&, char const*, char const*);
+    MCTAPI void writeType(struct PropertySyncData const&, char const*, char const*);
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // symbol: ??1BinaryStream@@UEAA@XZ
-    MCVAPI ~BinaryStream();
+    // vIndex: 0, symbol: ??1BinaryStream@@UEAA@XZ
+    virtual ~BinaryStream();
 
     // symbol: ??0BinaryStream@@QEAA@XZ
     MCAPI BinaryStream();
 
     // symbol: ??0BinaryStream@@QEAA@AEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z
-    MCAPI BinaryStream(std::string&, bool);
+    MCAPI BinaryStream(std::string& buffer, bool copyBuffer);
 
     // symbol: ?getAndReleaseData@BinaryStream@@QEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
     MCAPI std::string getAndReleaseData();
@@ -48,63 +42,63 @@ public:
     // symbol: ?reset@BinaryStream@@QEAAXXZ
     MCAPI void reset();
 
-    // symbol: ?writeBool@BinaryStream@@QEAAX_N@Z
-    MCAPI void writeBool(bool);
+    // symbol: ?writeBool@BinaryStream@@QEAAX_NPEBD1@Z
+    MCAPI void writeBool(bool data, char const* docName = nullptr, char const* docDesc = nullptr);
 
-    // symbol: ?writeByte@BinaryStream@@QEAAXE@Z
-    MCAPI void writeByte(uchar);
+    // symbol: ?writeByte@BinaryStream@@QEAAXEPEBD0@Z
+    MCAPI void writeByte(uchar data, char const* docName = nullptr, char const* docDesc = nullptr);
 
-    // symbol: ?writeDouble@BinaryStream@@QEAAXN@Z
-    MCAPI void writeDouble(double);
+    // symbol: ?writeDouble@BinaryStream@@QEAAXNPEBD0@Z
+    MCAPI void writeDouble(double data, char const* docName = nullptr, char const* docDesc = nullptr);
 
-    // symbol: ?writeFloat@BinaryStream@@QEAAXM@Z
-    MCAPI void writeFloat(float);
+    // symbol: ?writeFloat@BinaryStream@@QEAAXMPEBD0@Z
+    MCAPI void writeFloat(float data, char const* docName = nullptr, char const* docDesc = nullptr);
 
-    // symbol: ?writeSignedBigEndianInt@BinaryStream@@QEAAXH@Z
-    MCAPI void writeSignedBigEndianInt(int);
+    // symbol: ?writeSignedBigEndianInt@BinaryStream@@QEAAXHPEBD0@Z
+    MCAPI void writeSignedBigEndianInt(int data, char const* docName = nullptr, char const* docDesc = nullptr);
 
-    // symbol: ?writeSignedInt@BinaryStream@@QEAAXH@Z
-    MCAPI void writeSignedInt(int);
+    // symbol: ?writeSignedInt@BinaryStream@@QEAAXHPEBD0@Z
+    MCAPI void writeSignedInt(int data, char const* docName = nullptr, char const* docDesc = nullptr);
 
-    // symbol: ?writeSignedInt64@BinaryStream@@QEAAX_J@Z
-    MCAPI void writeSignedInt64(int64);
+    // symbol: ?writeSignedInt64@BinaryStream@@QEAAX_JPEBD1@Z
+    MCAPI void writeSignedInt64(int64 data, char const* docName = nullptr, char const* docDesc = nullptr);
 
-    // symbol: ?writeSignedShort@BinaryStream@@QEAAXF@Z
-    MCAPI void writeSignedShort(short);
+    // symbol: ?writeSignedShort@BinaryStream@@QEAAXFPEBD0@Z
+    MCAPI void writeSignedShort(short data, char const* docName = nullptr, char const* docDesc = nullptr);
 
-    // symbol: ?writeString@BinaryStream@@QEAAXV?$basic_string_view@DU?$char_traits@D@std@@@std@@@Z
-    MCAPI void writeString(std::string_view);
+    // symbol: ?writeString@BinaryStream@@QEAAXV?$basic_string_view@DU?$char_traits@D@std@@@std@@PEBD1@Z
+    MCAPI void writeString(std::string_view data, char const* docName = nullptr, char const* docDesc = nullptr);
 
-    // symbol: ?writeUnsignedChar@BinaryStream@@QEAAXE@Z
-    MCAPI void writeUnsignedChar(uchar);
+    // symbol: ?writeUnsignedChar@BinaryStream@@QEAAXEPEBD0@Z
+    MCAPI void writeUnsignedChar(uchar data, char const* docName = nullptr, char const* docDesc = nullptr);
 
-    // symbol: ?writeUnsignedInt@BinaryStream@@QEAAXI@Z
-    MCAPI void writeUnsignedInt(uint);
+    // symbol: ?writeUnsignedInt@BinaryStream@@QEAAXIPEBD0@Z
+    MCAPI void writeUnsignedInt(uint data, char const* docName = nullptr, char const* docDesc = nullptr);
 
-    // symbol: ?writeUnsignedInt64@BinaryStream@@QEAAX_K@Z
-    MCAPI void writeUnsignedInt64(uint64);
+    // symbol: ?writeUnsignedInt64@BinaryStream@@QEAAX_KPEBD1@Z
+    MCAPI void writeUnsignedInt64(uint64 data, char const* docName = nullptr, char const* docDesc = nullptr);
 
-    // symbol: ?writeUnsignedShort@BinaryStream@@QEAAXG@Z
-    MCAPI void writeUnsignedShort(ushort);
+    // symbol: ?writeUnsignedShort@BinaryStream@@QEAAXGPEBD0@Z
+    MCAPI void writeUnsignedShort(ushort data, char const* docName = nullptr, char const* docDesc = nullptr);
 
-    // symbol: ?writeUnsignedVarInt@BinaryStream@@QEAAXI@Z
-    MCAPI void writeUnsignedVarInt(uint);
+    // symbol: ?writeUnsignedVarInt@BinaryStream@@QEAAXIPEBD0@Z
+    MCAPI void writeUnsignedVarInt(uint data, char const* docName = nullptr, char const* docDesc = nullptr);
 
-    // symbol: ?writeUnsignedVarInt64@BinaryStream@@QEAAX_K@Z
-    MCAPI void writeUnsignedVarInt64(uint64);
+    // symbol: ?writeUnsignedVarInt64@BinaryStream@@QEAAX_KPEBD1@Z
+    MCAPI void writeUnsignedVarInt64(uint64 data, char const* docName = nullptr, char const* docDesc = nullptr);
 
-    // symbol: ?writeVarInt@BinaryStream@@QEAAXH@Z
-    MCAPI void writeVarInt(int);
+    // symbol: ?writeVarInt@BinaryStream@@QEAAXHPEBD0@Z
+    MCAPI void writeVarInt(int data, char const* docName = nullptr, char const* docDesc = nullptr);
 
-    // symbol: ?writeVarInt64@BinaryStream@@QEAAX_J@Z
-    MCAPI void writeVarInt64(int64);
+    // symbol: ?writeVarInt64@BinaryStream@@QEAAX_JPEBD1@Z
+    MCAPI void writeVarInt64(int64 data, char const* docName = nullptr, char const* docDesc = nullptr);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?write@BinaryStream@@AEAAXPEBX_K@Z
-    MCAPI void write(void const*, uint64);
+    MCAPI void write(void const* origin, uint64 num);
 
     // NOLINTEND
 };

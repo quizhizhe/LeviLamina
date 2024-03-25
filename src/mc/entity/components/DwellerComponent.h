@@ -32,16 +32,16 @@ public:
     MCAPI DwellerComponent(class DwellerComponent&&);
 
     // symbol: ?addAdditionalSaveData@DwellerComponent@@QEBAXAEAVCompoundTag@@AEBVActor@@@Z
-    MCAPI void addAdditionalSaveData(class CompoundTag&, class Actor const&) const;
+    MCAPI void addAdditionalSaveData(class CompoundTag& tag, class Actor const& owner) const;
 
     // symbol: ?checkandUpdateDwellingStatus@DwellerComponent@@QEAAXAEBVActor@@PEAVVillage@@@Z
-    MCAPI void checkandUpdateDwellingStatus(class Actor const&, class Village*);
+    MCAPI void checkandUpdateDwellingStatus(class Actor const& owner, class Village* myVillage);
 
     // symbol: ?clearPreferredProfession@DwellerComponent@@QEAAXXZ
     MCAPI void clearPreferredProfession();
 
     // symbol: ?fixupProfession@DwellerComponent@@QEAAXAEBVActor@@PEAVVillage@@@Z
-    MCAPI void fixupProfession(class Actor const&, class Village*);
+    MCAPI void fixupProfession(class Actor const& owner, class Village* village);
 
     // symbol: ?getCanFindPOI@DwellerComponent@@QEBA_NXZ
     MCAPI bool getCanFindPOI() const;
@@ -68,67 +68,71 @@ public:
     MCAPI int getUpdateIntervalVariant() const;
 
     // symbol: ?getVillage@DwellerComponent@@QEBA?BV?$weak_ptr@VVillage@@@std@@AEBVActor@@@Z
-    MCAPI std::weak_ptr<class Village> const getVillage(class Actor const&) const;
+    MCAPI std::weak_ptr<class Village> const getVillage(class Actor const& owner) const;
 
     // symbol: ?getVillageCenter@DwellerComponent@@QEBA?AVBlockPos@@AEBVActor@@@Z
-    MCAPI class BlockPos getVillageCenter(class Actor const&) const;
+    MCAPI class BlockPos getVillageCenter(class Actor const& owner) const;
 
     // symbol: ?hasDwelling@DwellerComponent@@QEBA_NXZ
     MCAPI bool hasDwelling() const;
 
     // symbol: ?hasPreferredProfession@DwellerComponent@@QEBA_NAEBVActor@@@Z
-    MCAPI bool hasPreferredProfession(class Actor const&) const;
+    MCAPI bool hasPreferredProfession(class Actor const& owner) const;
 
     // symbol: ?initFromDefinition@DwellerComponent@@QEAAXAEAVActor@@@Z
-    MCAPI void initFromDefinition(class Actor&);
+    MCAPI void initFromDefinition(class Actor& owner);
 
     // symbol: ?isWithinRestriction@DwellerComponent@@QEBA_NAEBVActor@@@Z
-    MCAPI bool isWithinRestriction(class Actor const&) const;
+    MCAPI bool isWithinRestriction(class Actor const& owner) const;
+
+    // symbol: ?needsToFixupJobSite@DwellerComponent@@QEBA_NAEBVActor@@@Z
+    MCAPI bool needsToFixupJobSite(class Actor const&) const;
 
     // symbol: ?needsToFixupProfession@DwellerComponent@@QEBA_NAEBVActor@@@Z
-    MCAPI bool needsToFixupProfession(class Actor const&) const;
+    MCAPI bool needsToFixupProfession(class Actor const& owner) const;
 
     // symbol: ?needsToFixupVillageRole@DwellerComponent@@QEBA_NAEBVActor@@PEAVVillage@@@Z
-    MCAPI bool needsToFixupVillageRole(class Actor const&, class Village*) const;
+    MCAPI bool needsToFixupVillageRole(class Actor const& owner, class Village* myVillage) const;
 
     // symbol: ?onDeath@DwellerComponent@@QEAAXAEAVActor@@AEBVActorDamageSource@@@Z
-    MCAPI void onDeath(class Actor&, class ActorDamageSource const&);
+    MCAPI void onDeath(class Actor& owner, class ActorDamageSource const& source);
 
     // symbol: ?onDimensionChange@DwellerComponent@@QEAAXAEAVActor@@@Z
-    MCAPI void onDimensionChange(class Actor&);
+    MCAPI void onDimensionChange(class Actor& owner);
 
     // symbol: ?onRemove@DwellerComponent@@QEAAXAEAVActor@@@Z
-    MCAPI void onRemove(class Actor&);
+    MCAPI void onRemove(class Actor& owner);
 
     // symbol: ??4DwellerComponent@@QEAAAEAV0@$$QEAV0@@Z
     MCAPI class DwellerComponent& operator=(class DwellerComponent&&);
 
     // symbol: ?readAdditionalSaveData@DwellerComponent@@QEAAXAEAVActor@@AEBVCompoundTag@@AEAVDataLoadHelper@@@Z
-    MCAPI void readAdditionalSaveData(class Actor&, class CompoundTag const&, class DataLoadHelper&);
+    MCAPI void
+    readAdditionalSaveData(class Actor& owner, class CompoundTag const& tag, class DataLoadHelper& dataLoadHelper);
 
     // symbol: ?setDwellingUniqueID@DwellerComponent@@QEAAXAEAVActor@@VUUID@mce@@@Z
-    MCAPI void setDwellingUniqueID(class Actor&, class mce::UUID);
+    MCAPI void setDwellingUniqueID(class Actor& owner, class mce::UUID id);
 
     // symbol: ?setDwellingUpdateInterval@DwellerComponent@@QEAAX_K@Z
-    MCAPI void setDwellingUpdateInterval(uint64);
+    MCAPI void setDwellingUpdateInterval(uint64 updateInterval);
 
     // symbol: ?setFixUpRole@DwellerComponent@@QEAAX_N@Z
-    MCAPI void setFixUpRole(bool);
+    MCAPI void setFixUpRole(bool fixUpRole);
 
     // symbol: ?setLastHurtByMob@DwellerComponent@@QEAAXAEAVActor@@PEAVMob@@@Z
-    MCAPI void setLastHurtByMob(class Actor&, class Mob*);
+    MCAPI void setLastHurtByMob(class Actor& owner, class Mob* mob);
 
     // symbol: ?trySetPreferredProfession@DwellerComponent@@QEAA_NAEBVActor@@AEBVHashedString@@@Z
-    MCAPI bool trySetPreferredProfession(class Actor const&, class HashedString const&);
+    MCAPI bool trySetPreferredProfession(class Actor const& owner, class HashedString const& poi);
 
     // symbol: ?tryToFixupRole@DwellerComponent@@QEAA_NAEBVActor@@PEAVVillage@@@Z
-    MCAPI bool tryToFixupRole(class Actor const&, class Village*);
+    MCAPI bool tryToFixupRole(class Actor const& owner, class Village* village);
 
     // symbol: ?tryToMigrate@DwellerComponent@@QEAA_NAEAVActor@@PEAVVillage@@1@Z
-    MCAPI bool tryToMigrate(class Actor&, class Village*, class Village*);
+    MCAPI bool tryToMigrate(class Actor& owner, class Village* oldVillage, class Village* newVillage);
 
     // symbol: ?wantsToMigrate@DwellerComponent@@QEBA_NAEBVActor@@PEAVVillage@@@Z
-    MCAPI bool wantsToMigrate(class Actor const&, class Village*) const;
+    MCAPI bool wantsToMigrate(class Actor const& owner, class Village* myVillage) const;
 
     // symbol: ??1DwellerComponent@@QEAA@XZ
     MCAPI ~DwellerComponent();
@@ -138,7 +142,7 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol: ?_isLockedInToProfession@DwellerComponent@@AEBA_NAEBVActor@@@Z
-    MCAPI bool _isLockedInToProfession(class Actor const&) const;
+    MCAPI bool _isLockedInToProfession(class Actor const& owner) const;
 
     // NOLINTEND
 
@@ -157,9 +161,9 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $DWELLING_ROLES() { return DWELLING_ROLES; }
+    static auto& $DWELLING_ROLES() { return DWELLING_ROLES; }
 
-    auto& $DWELLING_TYPES() { return DWELLING_TYPES; }
+    static auto& $DWELLING_TYPES() { return DWELLING_TYPES; }
 
     // NOLINTEND
 };

@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1DragonScanningGoal@@UEAA@XZ
+    virtual ~DragonScanningGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@DragonScanningGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -35,10 +35,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@DragonScanningGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0DragonScanningGoal@@QEAA@AEAVEnderDragon@@@Z
-    MCAPI explicit DragonScanningGoal(class EnderDragon&);
+    MCAPI explicit DragonScanningGoal(class EnderDragon& mob);
 
     // NOLINTEND
 
@@ -58,11 +58,11 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $SITTING_ATTACK_VIEW_RANGE() { return SITTING_ATTACK_VIEW_RANGE; }
+    static auto& $SITTING_ATTACK_VIEW_RANGE() { return SITTING_ATTACK_VIEW_RANGE; }
 
-    auto& $SITTING_CHARGE_VIEW_RANGE() { return SITTING_CHARGE_VIEW_RANGE; }
+    static auto& $SITTING_CHARGE_VIEW_RANGE() { return SITTING_CHARGE_VIEW_RANGE; }
 
-    auto& $SITTING_SCANNING_IDLE_TICKS() { return SITTING_SCANNING_IDLE_TICKS; }
+    static auto& $SITTING_SCANNING_IDLE_TICKS() { return SITTING_SCANNING_IDLE_TICKS; }
 
     // NOLINTEND
 };

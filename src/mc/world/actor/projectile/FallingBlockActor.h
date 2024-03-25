@@ -3,13 +3,14 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
+#include "mc/deps/puv/EquipmentSlot.h"
 #include "mc/entity/utilities/ActorDamageCause.h"
 #include "mc/entity/utilities/ActorFlags.h"
+#include "mc/entity/utilities/ActorInitializationMethod.h"
 #include "mc/entity/utilities/ActorType.h"
 #include "mc/enums/ArmorMaterialType.h"
 #include "mc/enums/ArmorSlot.h"
 #include "mc/enums/ArmorTextureType.h"
-#include "mc/enums/EquipmentSlot.h"
 #include "mc/enums/HandSlot.h"
 #include "mc/enums/InputMode.h"
 #include "mc/enums/MaterialType.h"
@@ -18,9 +19,13 @@
 #include "mc/events/LevelSoundEvent.h"
 #include "mc/server/commands/CommandPermissionLevel.h"
 #include "mc/world/AutomaticID.h"
-#include "mc/world/actor/Actor.h"
 #include "mc/world/actor/projectile/PredictableProjectile.h"
 #include "mc/world/item/components/ItemUseMethod.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace mce { class Color; }
+// clang-format on
 
 class FallingBlockActor : public ::PredictableProjectile {
 public:
@@ -32,89 +37,48 @@ public:
 public:
     // NOLINTBEGIN
     // vIndex: 4, symbol:
-    // ?reloadHardcoded@FallingBlockActor@@UEAAXW4InitializationMethod@Actor@@AEBVVariantParameterList@@@Z
-    virtual void reloadHardcoded(::Actor::InitializationMethod, class VariantParameterList const&);
+    // ?reloadHardcoded@FallingBlockActor@@UEAAXW4ActorInitializationMethod@@AEBVVariantParameterList@@@Z
+    virtual void reloadHardcoded(::ActorInitializationMethod method, class VariantParameterList const& params);
 
-    // vIndex: 10, symbol: __unk_vfn_10
-    virtual void __unk_vfn_10();
-
-    // vIndex: 23, symbol: __unk_vfn_23
-    virtual void __unk_vfn_23();
+    // vIndex: 10, symbol: __gen_??1FallingBlockActor@@UEAA@XZ
+    virtual ~FallingBlockActor() = default;
 
     // vIndex: 26, symbol: ?teleportTo@FallingBlockActor@@UEAAXAEBVVec3@@_NHH1@Z
-    virtual void teleportTo(class Vec3 const&, bool, int, int, bool);
+    virtual void teleportTo(class Vec3 const& pos, bool shouldStopRiding, int cause, int sourceEntityType, bool);
 
     // vIndex: 29, symbol: ?normalTick@FallingBlockActor@@UEAAXXZ
     virtual void normalTick();
 
-    // vIndex: 39, symbol: __unk_vfn_39
-    virtual void __unk_vfn_39();
-
-    // vIndex: 41, symbol: __unk_vfn_41
-    virtual void __unk_vfn_41();
-
-    // vIndex: 42, symbol: ?getShadowRadius@FallingBlockActor@@UEBAMXZ
+    // vIndex: 41, symbol: ?getShadowRadius@FallingBlockActor@@UEBAMXZ
     virtual float getShadowRadius() const;
 
-    // vIndex: 44, symbol: __unk_vfn_44
-    virtual void __unk_vfn_44();
-
-    // vIndex: 47, symbol: __unk_vfn_47
-    virtual void __unk_vfn_47();
-
-    // vIndex: 51, symbol: ?isPickable@FallingBlockActor@@UEAA_NXZ
+    // vIndex: 48, symbol: ?isPickable@FallingBlockActor@@UEAA_NXZ
     virtual bool isPickable();
 
-    // vIndex: 52, symbol: __unk_vfn_52
-    virtual void __unk_vfn_52();
-
-    // vIndex: 61, symbol: __unk_vfn_61
-    virtual void __unk_vfn_61();
-
-    // vIndex: 62, symbol: __unk_vfn_62
-    virtual void __unk_vfn_62();
-
-    // vIndex: 63, symbol: __unk_vfn_63
-    virtual void __unk_vfn_63();
-
-    // vIndex: 108, symbol: ?canChangeDimensionsUsingPortal@FallingBlockActor@@UEBA_NXZ
+    // vIndex: 103, symbol: ?canChangeDimensionsUsingPortal@FallingBlockActor@@UEBA_NXZ
     virtual bool canChangeDimensionsUsingPortal() const;
 
-    // vIndex: 109, symbol: __unk_vfn_109
-    virtual void __unk_vfn_109();
-
-    // vIndex: 113, symbol: ?causeFallDamageToActor@FallingBlockActor@@UEAAMMMVActorDamageSource@@@Z
+    // vIndex: 108, symbol: ?causeFallDamageToActor@FallingBlockActor@@UEAAMMMVActorDamageSource@@@Z
     virtual float causeFallDamageToActor(float, float, class ActorDamageSource);
 
-    // vIndex: 114, symbol: ?onSynchedDataUpdate@FallingBlockActor@@UEAAXH@Z
-    virtual void onSynchedDataUpdate(int);
+    // vIndex: 109, symbol: ?onSynchedDataUpdate@FallingBlockActor@@UEAAXH@Z
+    virtual void onSynchedDataUpdate(int dataId);
 
-    // vIndex: 147, symbol: __unk_vfn_147
-    virtual void __unk_vfn_147();
-
-    // vIndex: 148, symbol: __unk_vfn_148
-    virtual void __unk_vfn_148();
-
-    // vIndex: 165, symbol: __unk_vfn_165
-    virtual void __unk_vfn_165();
-
-    // vIndex: 166, symbol: ?_hurt@FallingBlockActor@@MEAA_NAEBVActorDamageSource@@M_N1@Z
+    // vIndex: 158, symbol: ?_hurt@FallingBlockActor@@MEAA_NAEBVActorDamageSource@@M_N1@Z
     virtual bool _hurt(class ActorDamageSource const&, float, bool, bool);
 
-    // vIndex: 167, symbol: ?readAdditionalSaveData@FallingBlockActor@@MEAAXAEBVCompoundTag@@AEAVDataLoadHelper@@@Z
-    virtual void readAdditionalSaveData(class CompoundTag const&, class DataLoadHelper&);
+    // vIndex: 159, symbol: ?readAdditionalSaveData@FallingBlockActor@@MEAAXAEBVCompoundTag@@AEAVDataLoadHelper@@@Z
+    virtual void readAdditionalSaveData(class CompoundTag const& tag, class DataLoadHelper& dataLoadHelper);
 
-    // vIndex: 168, symbol: ?addAdditionalSaveData@FallingBlockActor@@MEBAXAEAVCompoundTag@@@Z
-    virtual void addAdditionalSaveData(class CompoundTag&) const;
-
-    // vIndex: 170, symbol: __unk_vfn_170
-    virtual void __unk_vfn_170();
-
-    // symbol: ?getDeletionDelayTimeSeconds@FallingBlockActor@@UEBAMXZ
-    MCVAPI float getDeletionDelayTimeSeconds() const;
+    // vIndex: 160, symbol: ?addAdditionalSaveData@FallingBlockActor@@MEBAXAEAVCompoundTag@@@Z
+    virtual void addAdditionalSaveData(class CompoundTag& tag) const;
 
     // symbol: ??0FallingBlockActor@@QEAA@PEAVActorDefinitionGroup@@AEBUActorDefinitionIdentifier@@AEAVEntityContext@@@Z
-    MCAPI FallingBlockActor(class ActorDefinitionGroup*, struct ActorDefinitionIdentifier const&, class EntityContext&);
+    MCAPI FallingBlockActor(
+        class ActorDefinitionGroup*             definitions,
+        struct ActorDefinitionIdentifier const& definitionName,
+        class EntityContext&                    entityContext
+    );
 
     // symbol: ?breakBlock@FallingBlockActor@@QEAAXXZ
     MCAPI void breakBlock();
@@ -126,10 +90,10 @@ public:
     MCAPI class Block const& getFallingBlock() const;
 
     // symbol: ?setFallDamageAmount@FallingBlockActor@@QEAAXM@Z
-    MCAPI void setFallDamageAmount(float);
+    MCAPI void setFallDamageAmount(float amount);
 
     // symbol: ?setFallingBlock@FallingBlockActor@@QEAAXAEBVBlock@@_N@Z
-    MCAPI void setFallingBlock(class Block const&, bool);
+    MCAPI void setFallingBlock(class Block const& block, bool creative);
 
     // NOLINTEND
 

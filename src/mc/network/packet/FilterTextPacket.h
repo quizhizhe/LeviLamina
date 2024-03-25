@@ -18,8 +18,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1FilterTextPacket@@UEAA@XZ
+    virtual ~FilterTextPacket();
 
     // vIndex: 1, symbol: ?getId@FilterTextPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -29,20 +29,17 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@FilterTextPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@FilterTextPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1FilterTextPacket@@UEAA@XZ
-    MCVAPI ~FilterTextPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0FilterTextPacket@@QEAA@XZ
     MCAPI FilterTextPacket();
 
     // symbol: ??0FilterTextPacket@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z
-    MCAPI FilterTextPacket(std::string const&, bool);
+    MCAPI FilterTextPacket(std::string const& text, bool);
 
     // NOLINTEND
 };

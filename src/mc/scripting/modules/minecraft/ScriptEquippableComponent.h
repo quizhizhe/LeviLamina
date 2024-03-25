@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/enums/EquipmentSlot.h"
+#include "mc/deps/puv/EquipmentSlot.h"
 #include "mc/external/scripting/ClassBindingBuilder.h"
 #include "mc/external/scripting/Result.h"
 #include "mc/external/scripting/StrongTypedObjectHandle.h"
@@ -12,6 +12,7 @@
 // auto generated forward declare list
 // clang-format off
 namespace ScriptModuleMinecraft { class ScriptActorComponent; }
+namespace ScriptModuleMinecraft { class ScriptComponentTypeEnumBuilder; }
 namespace ScriptModuleMinecraft { class ScriptContainerSlot; }
 namespace ScriptModuleMinecraft { class ScriptItemStack; }
 // clang-format on
@@ -27,32 +28,30 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // symbol: ??1ScriptEquippableComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptEquippableComponent();
+    // vIndex: 0, symbol: __gen_??1ScriptEquippableComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptEquippableComponent() = default;
 
     // symbol:
-    // ?getEquipment@ScriptEquippableComponent@ScriptModuleMinecraft@@QEAA?AV?$Result@V?$optional@V?$StrongTypedObjectHandle@VScriptItemStack@ScriptModuleMinecraft@@@Scripting@@@std@@$$V@Scripting@@W4EquipmentSlot@@@Z
+    // ?getEquipment@ScriptEquippableComponent@ScriptModuleMinecraft@@QEAA?AV?$Result@V?$optional@V?$StrongTypedObjectHandle@VScriptItemStack@ScriptModuleMinecraft@@@Scripting@@@std@@$$V@Scripting@@W4EquipmentSlot@Legacy@Puv@@@Z
     MCAPI class Scripting::Result<
         std::optional<class Scripting::StrongTypedObjectHandle<class ScriptModuleMinecraft::ScriptItemStack>>>
-        getEquipment(::EquipmentSlot);
+        getEquipment(::Puv::Legacy::EquipmentSlot);
 
     // symbol:
-    // ?getEquipmentSlot@ScriptEquippableComponent@ScriptModuleMinecraft@@QEAA?AV?$Result@V?$StrongTypedObjectHandle@VScriptContainerSlot@ScriptModuleMinecraft@@@Scripting@@$$V@Scripting@@W4EquipmentSlot@@@Z
+    // ?getEquipmentSlot@ScriptEquippableComponent@ScriptModuleMinecraft@@QEAA?AV?$Result@V?$StrongTypedObjectHandle@VScriptContainerSlot@ScriptModuleMinecraft@@@Scripting@@$$V@Scripting@@W4EquipmentSlot@Legacy@Puv@@@Z
     MCAPI class Scripting::Result<
         class Scripting::StrongTypedObjectHandle<class ScriptModuleMinecraft::ScriptContainerSlot>>
-        getEquipmentSlot(::EquipmentSlot);
+        getEquipmentSlot(::Puv::Legacy::EquipmentSlot);
 
     // symbol:
-    // ?setEquipment@ScriptEquippableComponent@ScriptModuleMinecraft@@QEAA?AV?$Result@_N$$V@Scripting@@W4EquipmentSlot@@AEBV?$optional@VScriptItemStack@ScriptModuleMinecraft@@@std@@@Z
+    // ?setEquipment@ScriptEquippableComponent@ScriptModuleMinecraft@@QEAA?AV?$Result@_N$$V@Scripting@@W4EquipmentSlot@Legacy@Puv@@AEBV?$optional@VScriptItemStack@ScriptModuleMinecraft@@@std@@@Z
     MCAPI class Scripting::Result<bool>
-    setEquipment(::EquipmentSlot, std::optional<class ScriptModuleMinecraft::ScriptItemStack> const&);
+    setEquipment(::Puv::Legacy::EquipmentSlot, std::optional<class ScriptModuleMinecraft::ScriptItemStack> const&);
 
     // symbol:
-    // ?bind@ScriptEquippableComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptEquippableComponent@ScriptModuleMinecraft@@@Scripting@@XZ
-    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptEquippableComponent> bind();
+    // ?bind@ScriptEquippableComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptEquippableComponent@ScriptModuleMinecraft@@@Scripting@@AEAVScriptComponentTypeEnumBuilder@2@@Z
+    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptEquippableComponent>
+    bind(class ScriptModuleMinecraft::ScriptComponentTypeEnumBuilder&);
 
     // symbol: ?ComponentId@ScriptEquippableComponent@ScriptModuleMinecraft@@2PEBDEB
     MCAPI static char const* ComponentId;

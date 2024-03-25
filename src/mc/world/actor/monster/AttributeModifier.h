@@ -22,14 +22,11 @@ public:
     bool                         mSerialize;
 
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1AttributeModifier@@UEAA@XZ
+    virtual ~AttributeModifier();
 
     // vIndex: 1, symbol: ?isInstantaneous@AttributeModifier@@UEBA_NXZ
     virtual bool isInstantaneous() const;
-
-    // symbol: ??1AttributeModifier@@UEAA@XZ
-    MCVAPI ~AttributeModifier();
 
     // symbol: ??0AttributeModifier@@QEAA@XZ
     MCAPI AttributeModifier();
@@ -40,17 +37,24 @@ public:
     // symbol:
     // ??0AttributeModifier@@QEAA@VUUID@mce@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@MW4AttributeModifierOperation@@W4AttributeOperands@@_N@Z
     MCAPI AttributeModifier(
-        class mce::UUID,
-        std::string const&,
-        float,
-        ::AttributeModifierOperation,
-        ::AttributeOperands,
-        bool
+        class mce::UUID              id,
+        std::string const&           name,
+        float                        amount,
+        ::AttributeModifierOperation operation,
+        ::AttributeOperands          operand,
+        bool                         serializable
     );
 
     // symbol:
     // ??0AttributeModifier@@QEAA@VUUID@mce@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@MHH_N@Z
-    MCAPI AttributeModifier(class mce::UUID, std::string const&, float, int, int, bool);
+    MCAPI AttributeModifier(
+        class mce::UUID    id,
+        std::string const& name,
+        float              amount,
+        int                operation,
+        int                operand,
+        bool               serializable
+    );
 
     // symbol: ?getAmount@AttributeModifier@@QEBAMXZ
     MCAPI float getAmount() const;
@@ -71,10 +75,10 @@ public:
     MCAPI bool isSerializable() const;
 
     // symbol: ??4AttributeModifier@@QEAAAEAV0@AEBV0@@Z
-    MCAPI class AttributeModifier& operator=(class AttributeModifier const&);
+    MCAPI class AttributeModifier& operator=(class AttributeModifier const& rhs);
 
     // symbol: ??8AttributeModifier@@QEBA_NAEBV0@@Z
-    MCAPI bool operator==(class AttributeModifier const&) const;
+    MCAPI bool operator==(class AttributeModifier const& rhs) const;
 
     // NOLINTEND
 
@@ -88,7 +92,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mInvalidUUID() { return mInvalidUUID; }
+    static auto& $mInvalidUUID() { return mInvalidUUID; }
 
     // NOLINTEND
 };

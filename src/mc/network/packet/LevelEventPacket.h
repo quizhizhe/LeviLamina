@@ -21,8 +21,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1LevelEventPacket@@UEAA@XZ
+    virtual ~LevelEventPacket();
 
     // vIndex: 1, symbol: ?getId@LevelEventPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -32,23 +32,20 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@LevelEventPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
     // ?_read@LevelEventPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1LevelEventPacket@@UEAA@XZ
-    MCVAPI ~LevelEventPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0LevelEventPacket@@QEAA@XZ
     MCAPI LevelEventPacket();
 
     // symbol: ??0LevelEventPacket@@QEAA@W4LevelEvent@@AEBVVec3@@H@Z
-    MCAPI LevelEventPacket(::LevelEvent, class Vec3 const&, int);
+    MCAPI LevelEventPacket(::LevelEvent eventId, class Vec3 const& pos, int data);
 
     // symbol: ??0LevelEventPacket@@QEAA@W4LevelEvent@@MMMH@Z
-    MCAPI LevelEventPacket(::LevelEvent, float, float, float, int);
+    MCAPI LevelEventPacket(::LevelEvent eventId, float x, float y, float z, int data);
 
     // NOLINTEND
 };

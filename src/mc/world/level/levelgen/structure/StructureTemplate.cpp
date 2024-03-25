@@ -2,12 +2,11 @@
 
 #include "mc/server/ServerLevel.h"
 #include "mc/world/level/BlockPalette.h"
+#include "mc/world/level/BlockSource.h"
 #include "mc/world/level/levelgen/structure/StructureManager.h"
 #include "mc/world/level/levelgen/structure/StructureSettings.h"
 
-#include "ll/api/service/GlobalService.h"
-
-using ll::Global;
+#include "ll/api/service/Bedrock.h"
 
 void StructureTemplate::placeInWorld(
     BlockSource&    blockSource,
@@ -17,20 +16,23 @@ void StructureTemplate::placeInWorld(
     bool            ignoreBlocks,
     bool            ignoreEntities
 ) const {
-    if (!Global<Level>) { return; }
-    auto setting = StructureSettings(getSize(), ignoreBlocks, ignoreEntities);
+    auto setting    = StructureSettings(getSize(), ignoreBlocks, ignoreEntities);
     setting.mMirror = mirror;
     setting.setRotation(rotation);
-    placeInWorld(blockSource, Global<Level>->getBlockPalette(), minCorner, setting);
+    placeInWorld(blockSource, blockSource.getLevel().getBlockPalette(), minCorner, setting);
 }
 
 
 std::unique_ptr<StructureTemplate> StructureTemplate::create(const std::string& name, CompoundTag const& tag) {
-    if (!Global<StructureManager>) { return nullptr; }
-    auto& unknownBlockRegistry = Global<StructureManager>->mUnknownBlockRegistry;
+    if (!ll::service::getLevel()) {
+        return nullptr;
+    }
+    auto& unknownBlockRegistry = ll::service::getLevel()->getStructureManager()->mUnknownBlockRegistry;
     auto  res                  = std::make_unique<StructureTemplate>(name, unknownBlockRegistry);
     bool  success{res->load(tag)};
-    if (!success) { return nullptr; }
+    if (!success) {
+        return nullptr;
+    }
     return res;
 }
 
@@ -41,8 +43,7 @@ std::unique_ptr<StructureTemplate> StructureTemplate::create(
     bool               ignoreBlocks,
     bool               ignoreEntities
 ) {
-    if (!Global<StructureManager>) { return nullptr; }
-    auto& unknownBlockRegistry = Global<StructureManager>->mUnknownBlockRegistry;
+    auto& unknownBlockRegistry = blockSource.getLevel().getStructureManager()->mUnknownBlockRegistry;
     auto  res                  = std::make_unique<StructureTemplate>(name, unknownBlockRegistry);
     auto  setting              = StructureSettings(boundingBox.getSideLength(), ignoreBlocks, ignoreEntities);
     res->fillFromWorld(blockSource, boundingBox.min, setting);

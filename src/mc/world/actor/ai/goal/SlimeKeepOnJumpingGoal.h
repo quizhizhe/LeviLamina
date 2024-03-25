@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SlimeKeepOnJumpingGoal@@UEAA@XZ
+    virtual ~SlimeKeepOnJumpingGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@SlimeKeepOnJumpingGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -26,10 +26,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@SlimeKeepOnJumpingGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0SlimeKeepOnJumpingGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit SlimeKeepOnJumpingGoal(class Mob&);
+    MCAPI explicit SlimeKeepOnJumpingGoal(class Mob& mob);
 
     // NOLINTEND
 };

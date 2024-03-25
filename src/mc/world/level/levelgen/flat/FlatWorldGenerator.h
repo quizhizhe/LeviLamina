@@ -1,6 +1,7 @@
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
+#include "mc/world/level/biome/source/FixedBiomeSource.h"
 #include "mc/world/level/block/BlockVolume.h"
 
 // auto generated inclusion list
@@ -13,15 +14,12 @@
 namespace Json { class Value; }
 // clang-format on
 
-class FixedBiomeSource;
-class Biome;
-
 class FlatWorldGenerator : public ::WorldGenerator {
 public:
-    std::vector<Block const*>         mPrototypeBlocks; // this+0x88
-    BlockVolume                       mPrototype;       // this+0xA0
-    const Biome*                      mBiome;           // this+0xC8
-    std::unique_ptr<FixedBiomeSource> mBiomeSource;     // this+0xD0
+    std::vector<Block const*>         mPrototypeBlocks; // this+0x190
+    BlockVolume                       mPrototype;       // this+0x1A8
+    Biome const*                      mBiome;           // this+0x1D0
+    std::unique_ptr<FixedBiomeSource> mBiomeSource;     // this+0x1D8
 
     // prevent constructor by default
     FlatWorldGenerator& operator=(FlatWorldGenerator const&);
@@ -69,27 +67,28 @@ public:
 
     // vIndex: 35, symbol:
     // ?findNearestStructureFeature@FlatWorldGenerator@@UEAA_NW4StructureFeatureType@@AEBVBlockPos@@AEAV3@_N@Z
-    virtual bool findNearestStructureFeature(::StructureFeatureType, class BlockPos const&, class BlockPos&, bool);
+    virtual bool
+    findNearestStructureFeature(::StructureFeatureType, class BlockPos const&, class BlockPos&, bool, std::optional<HashedString>);
 
     // vIndex: 36, symbol: ?garbageCollectBlueprints@FlatWorldGenerator@@UEAAXV?$buffer_span@VChunkPos@@@@@Z
     virtual void garbageCollectBlueprints(class buffer_span<class ChunkPos>);
 
     // ChunkSource reload function
     // vIndex: 9, symbol: ?postProcess@FlatWorldGenerator@@UEAA_NAEAVChunkViewSource@@@Z
-    virtual bool postProcess(class ChunkViewSource&);
+    virtual bool postProcess(class ChunkViewSource& neighborhood);
 
     // vIndex: 11, symbol: ?loadChunk@FlatWorldGenerator@@UEAAXAEAVLevelChunk@@_N@Z
-    virtual void loadChunk(class LevelChunk&, bool);
+    virtual void loadChunk(class LevelChunk& levelchunk, bool forceImmediateReplacementDataLoad);
 
     // symbol: ??0FlatWorldGenerator@@QEAA@AEAVDimension@@IAEBVValue@Json@@@Z
-    MCAPI FlatWorldGenerator(class Dimension&, uint, class Json::Value const&);
+    MCAPI FlatWorldGenerator(class Dimension& dimension, uint, class Json::Value const& generationOptionsJSON);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_generatePrototypeBlockValues@FlatWorldGenerator@@AEAAXAEBVFlatWorldGeneratorOptions@@F@Z
-    MCAPI void _generatePrototypeBlockValues(class FlatWorldGeneratorOptions const&, short);
+    MCAPI void _generatePrototypeBlockValues(class FlatWorldGeneratorOptions const& layersDesc, short);
 
     // NOLINTEND
 };

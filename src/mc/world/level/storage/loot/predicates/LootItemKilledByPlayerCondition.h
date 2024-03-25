@@ -14,11 +14,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1LootItemKilledByPlayerCondition@@UEAA@XZ
+    virtual ~LootItemKilledByPlayerCondition() = default;
 
     // vIndex: 1, symbol: ?applies@LootItemKilledByPlayerCondition@@UEAA_NAEAVRandom@@AEAVLootTableContext@@@Z
-    virtual bool applies(class Random&, class LootTableContext&);
+    virtual bool applies(class Random& random, class LootTableContext& context);
 
     // NOLINTEND
 };

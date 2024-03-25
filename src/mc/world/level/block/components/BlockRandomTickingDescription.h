@@ -21,18 +21,15 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1BlockRandomTickingDescription@@UEAA@XZ
+    virtual ~BlockRandomTickingDescription() = default;
 
     // vIndex: 1, symbol:
     // ?getName@BlockRandomTickingDescription@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
     virtual std::string const& getName() const;
 
-    // vIndex: 2, symbol: ?initializeComponent@BlockRandomTickingDescription@@UEBAXAEAVEntityContext@@@Z
-    virtual void initializeComponent(class EntityContext&) const;
-
-    // vIndex: 5, symbol: __unk_vfn_5
-    virtual void __unk_vfn_5();
+    // vIndex: 3, symbol: ?initializeComponent@BlockRandomTickingDescription@@UEBAXAEAVBlockComponentStorage@@@Z
+    virtual void initializeComponent(class BlockComponentStorage&) const;
 
     // symbol: ?bindType@BlockRandomTickingDescription@@SAXAEAUReflectionCtx@cereal@@@Z
     MCAPI static void bindType(struct cereal::ReflectionCtx&);

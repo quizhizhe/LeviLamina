@@ -11,23 +11,20 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1BaseMobSpawner@@UEAA@XZ
+    virtual ~BaseMobSpawner();
 
     // vIndex: 1, symbol: ?tick@BaseMobSpawner@@UEAAXAEAVBlockSource@@@Z
-    virtual void tick(class BlockSource&);
+    virtual void tick(class BlockSource& source);
 
     // vIndex: 2, symbol: ?load@BaseMobSpawner@@UEAAXAEBVCompoundTag@@@Z
-    virtual void load(class CompoundTag const&);
+    virtual void load(class CompoundTag const& data);
 
     // vIndex: 3, symbol: ?save@BaseMobSpawner@@UEAAXAEAVCompoundTag@@@Z
-    virtual void save(class CompoundTag&);
+    virtual void save(class CompoundTag& tag);
 
     // vIndex: 4, symbol: ?getPos@DefaultMobSpawner@@UEAAAEBVBlockPos@@XZ
     virtual class BlockPos const& getPos() = 0;
-
-    // symbol: ??1BaseMobSpawner@@UEAA@XZ
-    MCVAPI ~BaseMobSpawner();
 
     // symbol: ??0BaseMobSpawner@@QEAA@UActorDefinitionIdentifier@@@Z
     MCAPI explicit BaseMobSpawner(struct ActorDefinitionIdentifier);
@@ -40,14 +37,14 @@ public:
 
     // symbol:
     // ?setNextSpawnData@BaseMobSpawner@@QEAAXV?$unique_ptr@VSpawnData@@U?$default_delete@VSpawnData@@@std@@@std@@@Z
-    MCAPI void setNextSpawnData(std::unique_ptr<class SpawnData>);
+    MCAPI void setNextSpawnData(std::unique_ptr<class SpawnData> nextSpawnData);
 
     // NOLINTEND
 
     // protected:
     // NOLINTBEGIN
     // symbol: ?_delay@BaseMobSpawner@@IEAAXAEAVBlockSource@@@Z
-    MCAPI void _delay(class BlockSource&);
+    MCAPI void _delay(class BlockSource& source);
 
     // NOLINTEND
 };

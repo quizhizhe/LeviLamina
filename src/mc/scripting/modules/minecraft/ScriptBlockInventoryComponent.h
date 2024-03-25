@@ -12,6 +12,7 @@
 // clang-format off
 namespace ScriptModuleMinecraft { class BaseScriptBlockComponent; }
 namespace ScriptModuleMinecraft { class ScriptBlockInventoryComponentContainer; }
+namespace ScriptModuleMinecraft { class ScriptComponentTypeEnumBuilder; }
 namespace ScriptModuleMinecraft { class ScriptContainerWrapper; }
 // clang-format on
 
@@ -25,11 +26,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // symbol: ??1ScriptBlockInventoryComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptBlockInventoryComponent();
+    // vIndex: 0, symbol: __gen_??1ScriptBlockInventoryComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptBlockInventoryComponent() = default;
 
     // symbol: ??0ScriptBlockInventoryComponent@ScriptModuleMinecraft@@QEAA@AEBV01@@Z
     MCAPI ScriptBlockInventoryComponent(class ScriptModuleMinecraft::ScriptBlockInventoryComponent const&);
@@ -46,14 +44,10 @@ public:
         class Scripting::StrongTypedObjectHandle<class ScriptModuleMinecraft::ScriptBlockInventoryComponentContainer>>>
     getOrCreateContainerV010();
 
-    // symbol: ??4ScriptBlockInventoryComponent@ScriptModuleMinecraft@@QEAAAEAV01@$$QEAV01@@Z
-    MCAPI class ScriptModuleMinecraft::ScriptBlockInventoryComponent&
-    operator=(class ScriptModuleMinecraft::ScriptBlockInventoryComponent&&);
-
     // symbol:
-    // ?bind@ScriptBlockInventoryComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptBlockInventoryComponent@ScriptModuleMinecraft@@@Scripting@@XZ
+    // ?bind@ScriptBlockInventoryComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptBlockInventoryComponent@ScriptModuleMinecraft@@@Scripting@@AEAVScriptComponentTypeEnumBuilder@2@@Z
     MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptBlockInventoryComponent>
-    bind();
+    bind(class ScriptModuleMinecraft::ScriptComponentTypeEnumBuilder&);
 
     // symbol: ?ComponentId@ScriptBlockInventoryComponent@ScriptModuleMinecraft@@2PEBDEB
     MCAPI static char const* ComponentId;

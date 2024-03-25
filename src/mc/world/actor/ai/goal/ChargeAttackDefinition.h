@@ -19,19 +19,22 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ChargeAttackDefinition@@UEAA@XZ
+    virtual ~ChargeAttackDefinition() = default;
 
     // symbol: ??0ChargeAttackDefinition@@QEAA@XZ
     MCAPI ChargeAttackDefinition();
 
     // symbol: ?initialize@ChargeAttackDefinition@@QEBAXAEAVEntityContext@@AEAVChargeAttackGoal@@@Z
-    MCAPI void initialize(class EntityContext&, class ChargeAttackGoal&) const;
+    MCAPI void initialize(class EntityContext& entity, class ChargeAttackGoal& goal) const;
 
     // symbol:
     // ?buildSchema@ChargeAttackDefinition@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VChargeAttackDefinition@@@JsonUtil@@@3@@Z
-    MCAPI static void
-    buildSchema(std::string const&, std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class ChargeAttackDefinition>>&);
+    MCAPI static void buildSchema(
+        std::string const& name,
+        std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class ChargeAttackDefinition>>&
+            root
+    );
 
     // NOLINTEND
 };

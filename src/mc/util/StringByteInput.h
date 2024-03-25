@@ -10,7 +10,9 @@ public:
     size_t           mIdx;
     std::string_view mBuffer;
 
-    constexpr StringByteInput(std::string_view strv, size_t offset = 0) noexcept : mIdx(offset), mBuffer(strv) {}
+    [[nodiscard]] constexpr StringByteInput(std::string_view sv, size_t offset = 0) noexcept
+    : mIdx(offset),
+      mBuffer(sv) {}
 
 public:
     // NOLINTBEGIN
@@ -18,7 +20,7 @@ public:
     virtual ~StringByteInput();
 
     // vIndex: 9, symbol: ?readBytes@StringByteInput@@UEAA_NPEAX_K@Z
-    virtual bool readBytes(void*, uint64);
+    virtual bool readBytes(void* data, uint64 bytes);
 
     // vIndex: 10, symbol: ?numBytesLeft@StringByteInput@@UEBA_KXZ
     virtual uint64 numBytesLeft() const;

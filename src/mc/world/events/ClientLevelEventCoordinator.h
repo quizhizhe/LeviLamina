@@ -11,4 +11,11 @@ public:
     ClientLevelEventCoordinator& operator=(ClientLevelEventCoordinator const&);
     ClientLevelEventCoordinator(ClientLevelEventCoordinator const&);
     ClientLevelEventCoordinator();
+
+public:
+    // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1ClientLevelEventCoordinator@@UEAA@XZ
+    virtual ~ClientLevelEventCoordinator() = default;
+
+    // NOLINTEND
 };

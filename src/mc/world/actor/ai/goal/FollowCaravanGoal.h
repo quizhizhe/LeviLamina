@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1FollowCaravanGoal@@UEAA@XZ
+    virtual ~FollowCaravanGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@FollowCaravanGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -35,21 +35,26 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@FollowCaravanGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol:
     // ??0FollowCaravanGoal@@QEAA@AEAVMob@@MHAEBV?$vector@UMobDescriptor@@V?$allocator@UMobDescriptor@@@std@@@std@@@Z
-    MCAPI FollowCaravanGoal(class Mob&, float, int, std::vector<struct MobDescriptor> const&);
+    MCAPI FollowCaravanGoal(
+        class Mob&                               mob,
+        float                                    speed,
+        int                                      caravanLimit,
+        std::vector<struct MobDescriptor> const& targetTypes
+    );
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?checkCaravanType@FollowCaravanGoal@@AEAA_NPEAVMob@@@Z
-    MCAPI bool checkCaravanType(class Mob*);
+    MCAPI bool checkCaravanType(class Mob* currentMob);
 
     // symbol: ?firstIsLeashed@FollowCaravanGoal@@AEAA_NPEAVMob@@H@Z
-    MCAPI bool firstIsLeashed(class Mob*, int);
+    MCAPI bool firstIsLeashed(class Mob* currentMob, int counter);
 
     // NOLINTEND
 };

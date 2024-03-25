@@ -18,23 +18,20 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1MobEffectSubcomponent@@UEAA@XZ
+    virtual ~MobEffectSubcomponent();
 
     // vIndex: 1, symbol: ?readfromJSON@MobEffectSubcomponent@@UEAAXAEAVValue@Json@@AEBVSemVersion@@@Z
-    virtual void readfromJSON(class Json::Value&, class SemVersion const&);
+    virtual void readfromJSON(class Json::Value& component, class SemVersion const& engineVersion);
 
     // vIndex: 2, symbol: ?writetoJSON@MobEffectSubcomponent@@UEBAXAEAVValue@Json@@@Z
-    virtual void writetoJSON(class Json::Value&) const;
+    virtual void writetoJSON(class Json::Value& component) const;
 
     // vIndex: 3, symbol: ?doOnHitEffect@MobEffectSubcomponent@@UEAAXAEAVActor@@AEAVProjectileComponent@@@Z
-    virtual void doOnHitEffect(class Actor&, class ProjectileComponent&);
+    virtual void doOnHitEffect(class Actor& owner, class ProjectileComponent& component);
 
     // vIndex: 4, symbol: ?getName@MobEffectSubcomponent@@UEAAPEBDXZ
     virtual char const* getName();
-
-    // symbol: ??1MobEffectSubcomponent@@UEAA@XZ
-    MCVAPI ~MobEffectSubcomponent();
 
     // symbol: ??0MobEffectSubcomponent@@QEAA@XZ
     MCAPI MobEffectSubcomponent();
@@ -44,7 +41,7 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol: ?_addEffectFromJSON@MobEffectSubcomponent@@AEAAXAEAVValue@Json@@@Z
-    MCAPI void _addEffectFromJSON(class Json::Value&);
+    MCAPI void _addEffectFromJSON(class Json::Value& component);
 
     // NOLINTEND
 };

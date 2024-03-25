@@ -39,22 +39,22 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ??0EndDragonFight@@QEAA@AEAVBlockSource@@@Z
-    MCAPI explicit EndDragonFight(class BlockSource&);
+    MCAPI explicit EndDragonFight(class BlockSource& level);
 
     // symbol: ?loadData@EndDragonFight@@QEAAXAEBVCompoundTag@@@Z
-    MCAPI void loadData(class CompoundTag const&);
+    MCAPI void loadData(class CompoundTag const& tag);
 
     // symbol: ?onCrystalDestroyed@EndDragonFight@@QEAAXAEBVEnderCrystal@@AEBVActorDamageSource@@@Z
-    MCAPI void onCrystalDestroyed(class EnderCrystal const&, class ActorDamageSource const&);
+    MCAPI void onCrystalDestroyed(class EnderCrystal const& crystal, class ActorDamageSource const& source);
 
     // symbol: ?resetSpikeCrystals@EndDragonFight@@QEAAXXZ
     MCAPI void resetSpikeCrystals();
 
     // symbol: ?saveData@EndDragonFight@@QEAAXAEAVCompoundTag@@@Z
-    MCAPI void saveData(class CompoundTag&);
+    MCAPI void saveData(class CompoundTag& tag);
 
     // symbol: ?spawnNewGatewayChunks@EndDragonFight@@QEAAXAEBVBlockPos@@_N1@Z
-    MCAPI void spawnNewGatewayChunks(class BlockPos const&, bool, bool);
+    MCAPI void spawnNewGatewayChunks(class BlockPos const& pos, bool placeEntryBlocks, bool placeExitBlocks);
 
     // symbol: ?tick@EndDragonFight@@QEAAXXZ
     MCAPI void tick();
@@ -67,7 +67,7 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol: ?_canSpawnNewGateway@EndDragonFight@@AEBA_NPEAVChunkViewSource@@AEBVBlockPos@@@Z
-    MCAPI bool _canSpawnNewGateway(class ChunkViewSource*, class BlockPos const&) const;
+    MCAPI bool _canSpawnNewGateway(class ChunkViewSource* source, class BlockPos const& pos) const;
 
     // symbol: ?_createNewDragon@EndDragonFight@@AEAAXXZ
     MCAPI void _createNewDragon();
@@ -79,42 +79,42 @@ public:
     MCAPI void _initializeDragon(class EnderDragon&);
 
     // symbol: ?_makeEndIslandFeature@EndDragonFight@@AEAAXAEAVBlockSource@@VBlockPos@@@Z
-    MCAPI void _makeEndIslandFeature(class BlockSource&, class BlockPos);
+    MCAPI void _makeEndIslandFeature(class BlockSource& region, class BlockPos position);
 
     // symbol: ?_placeAndLinkNewGatewayPair@EndDragonFight@@AEAAXXZ
     MCAPI void _placeAndLinkNewGatewayPair();
 
     // symbol: ?_setEndGatewayBlockActorExitPosition@EndDragonFight@@AEAA_NAEAVBlockSource@@0AEBVBlockPos@@1_N@Z
     MCAPI bool _setEndGatewayBlockActorExitPosition(
-        class BlockSource&,
-        class BlockSource&,
-        class BlockPos const&,
-        class BlockPos const&,
-        bool
+        class BlockSource&    entrySource,
+        class BlockSource&    exitSource,
+        class BlockPos const& endGatewayActorPos,
+        class BlockPos const& destinationPos,
+        bool                  lookForGateway
     );
 
     // symbol: ?_setEndGatewayExitPositions@EndDragonFight@@AEAAXXZ
     MCAPI void _setEndGatewayExitPositions();
 
     // symbol: ?_setRespawnStage@EndDragonFight@@AEAAXW4RespawnAnimation@@@Z
-    MCAPI void _setRespawnStage(::RespawnAnimation);
+    MCAPI void _setRespawnStage(::RespawnAnimation stage);
 
     // symbol: ?_spawnExitPortal@EndDragonFight@@AEAAX_N@Z
-    MCAPI void _spawnExitPortal(bool);
+    MCAPI void _spawnExitPortal(bool activated);
 
     // symbol:
     // ?_spawnNewGatewayChunksTask@EndDragonFight@@AEAAXAEAV?$tuple@W4GatewayTask@EndDragonFight@@UGateWayGenerator@2@U32@@std@@@Z
     MCAPI void _spawnNewGatewayChunksTask(std::tuple<
                                           ::EndDragonFight::GatewayTask,
                                           struct EndDragonFight::GateWayGenerator,
-                                          struct EndDragonFight::GateWayGenerator>&);
+                                          struct EndDragonFight::GateWayGenerator>& task);
 
     // symbol: ?_spawnNewGatewayPair@EndDragonFight@@AEAAXXZ
     MCAPI void _spawnNewGatewayPair();
 
     // symbol:
     // ?_tickRespawnAnimation@EndDragonFight@@AEAAXAEBV?$vector@UActorUniqueID@@V?$allocator@UActorUniqueID@@@std@@@std@@H@Z
-    MCAPI void _tickRespawnAnimation(std::vector<struct ActorUniqueID> const&, int);
+    MCAPI void _tickRespawnAnimation(std::vector<struct ActorUniqueID> const&, int time);
 
     // symbol: ?_updateCrystalCount@EndDragonFight@@AEAAXXZ
     MCAPI void _updateCrystalCount();
@@ -124,7 +124,7 @@ public:
     MCAPI void _verifyExitPositionsTask(std::tuple<
                                         ::EndDragonFight::GatewayTask,
                                         struct EndDragonFight::GateWayGenerator,
-                                        struct EndDragonFight::GateWayGenerator>&);
+                                        struct EndDragonFight::GateWayGenerator>& task);
 
     // NOLINTEND
 
@@ -162,23 +162,23 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $ARENA_SIZE_CHUNKS() { return ARENA_SIZE_CHUNKS; }
+    static auto& $ARENA_SIZE_CHUNKS() { return ARENA_SIZE_CHUNKS; }
 
-    auto& $DEFAULT_PORTAL_LOCATION() { return DEFAULT_PORTAL_LOCATION; }
+    static auto& $DEFAULT_PORTAL_LOCATION() { return DEFAULT_PORTAL_LOCATION; }
 
-    auto& $GATEWAY_CHUNK_RADIUS() { return GATEWAY_CHUNK_RADIUS; }
+    static auto& $GATEWAY_CHUNK_RADIUS() { return GATEWAY_CHUNK_RADIUS; }
 
-    auto& $GATEWAY_COUNT() { return GATEWAY_COUNT; }
+    static auto& $GATEWAY_COUNT() { return GATEWAY_COUNT; }
 
-    auto& $GATEWAY_DISTANCE() { return GATEWAY_DISTANCE; }
+    static auto& $GATEWAY_DISTANCE() { return GATEWAY_DISTANCE; }
 
-    auto& $GATEWAY_HEIGHT() { return GATEWAY_HEIGHT; }
+    static auto& $GATEWAY_HEIGHT() { return GATEWAY_HEIGHT; }
 
-    auto& $TIME_BETWEEN_CRYSTAL_SCANS() { return TIME_BETWEEN_CRYSTAL_SCANS; }
+    static auto& $TIME_BETWEEN_CRYSTAL_SCANS() { return TIME_BETWEEN_CRYSTAL_SCANS; }
 
-    auto& $TIME_BETWEEN_PLAYER_SCANS() { return TIME_BETWEEN_PLAYER_SCANS; }
+    static auto& $TIME_BETWEEN_PLAYER_SCANS() { return TIME_BETWEEN_PLAYER_SCANS; }
 
-    auto& $TIME_BETWEEN_PORTAL_SCANS() { return TIME_BETWEEN_PORTAL_SCANS; }
+    static auto& $TIME_BETWEEN_PORTAL_SCANS() { return TIME_BETWEEN_PORTAL_SCANS; }
 
     // NOLINTEND
 };

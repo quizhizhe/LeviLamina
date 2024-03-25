@@ -2,7 +2,10 @@
 
 #include "mc/_HeaderOutputPredefine.h"
 
-class StopCommand {
+// auto generated inclusion list
+#include "mc/world/level/Command.h"
+
+class StopCommand : public ::Command {
 public:
     // prevent constructor by default
     StopCommand& operator=(StopCommand const&);
@@ -11,17 +14,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // vIndex: 1, symbol: __unk_vfn_1
-    virtual void __unk_vfn_1();
+    // vIndex: 0, symbol: __gen_??1StopCommand@@UEAA@XZ
+    virtual ~StopCommand() = default;
 
     // vIndex: 2, symbol: ?execute@StopCommand@@UEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
     virtual void execute(class CommandOrigin const&, class CommandOutput&) const;
 
     // symbol: ?setup@StopCommand@@SAXAEAVCommandRegistry@@AEAVDedicatedServer@@@Z
-    MCAPI static void setup(class CommandRegistry&, class DedicatedServer&);
+    MCAPI static void setup(class CommandRegistry& registry, class DedicatedServer& server);
 
     // NOLINTEND
 
@@ -35,7 +35,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mServer() { return mServer; }
+    static auto& $mServer() { return mServer; }
 
     // NOLINTEND
 };

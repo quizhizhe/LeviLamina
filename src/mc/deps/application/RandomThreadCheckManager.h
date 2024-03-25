@@ -4,6 +4,7 @@
 
 // auto generated inclusion list
 #include "mc/common/AppPlatformListener.h"
+#include "mc/enums/OperationMode.h"
 
 class RandomThreadCheckManager : public ::AppPlatformListener {
 public:
@@ -14,23 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // vIndex: 1, symbol: __unk_vfn_1
-    virtual void __unk_vfn_1();
-
-    // vIndex: 2, symbol: __unk_vfn_2
-    virtual void __unk_vfn_2();
-
-    // vIndex: 3, symbol: __unk_vfn_3
-    virtual void __unk_vfn_3();
-
-    // vIndex: 4, symbol: __unk_vfn_4
-    virtual void __unk_vfn_4();
-
-    // vIndex: 5, symbol: __unk_vfn_5
-    virtual void __unk_vfn_5();
+    // vIndex: 0, symbol: __gen_??1RandomThreadCheckManager@@UEAA@XZ
+    virtual ~RandomThreadCheckManager() = default;
 
     // vIndex: 6, symbol: ?onAppResumed@RandomThreadCheckManager@@UEAAXXZ
     virtual void onAppResumed();
@@ -51,9 +37,9 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mInstance() { return mInstance; }
+    static auto& $mInstance() { return mInstance; }
 
-    auto& $mMutex() { return mMutex; }
+    static auto& $mMutex() { return mMutex; }
 
     // NOLINTEND
 };

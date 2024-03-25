@@ -14,12 +14,12 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1RuinedPortalStart@@UEAA@XZ
+    virtual ~RuinedPortalStart() = default;
 
     // symbol: ??0RuinedPortalStart@@QEAA@AEAVBiomeRegistry@@AEBVBiomeSource@@HHAEBVIPreliminarySurfaceProvider@@@Z
     MCAPI
-    RuinedPortalStart(class BiomeRegistry&, class BiomeSource const&, int, int, class IPreliminarySurfaceProvider const&);
+    RuinedPortalStart(class BiomeRegistry& registry, class BiomeSource const& source, int chunkX, int chunkZ, class IPreliminarySurfaceProvider const&);
 
     // NOLINTEND
 };

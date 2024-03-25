@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1RollGoal@@UEAA@XZ
+    virtual ~RollGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@RollGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -38,17 +38,17 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@RollGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0RollGoal@@QEAA@AEAVMob@@M@Z
-    MCAPI RollGoal(class Mob&, float);
+    MCAPI RollGoal(class Mob& mob, float probability);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_handleRoll@RollGoal@@AEBAXHAEAVVec3@@AEAM1@Z
-    MCAPI void _handleRoll(int, class Vec3&, float&, float&) const;
+    MCAPI void _handleRoll(int rollCounter, class Vec3& positionDelta, float& rollX, float& rollZ) const;
 
     // NOLINTEND
 };

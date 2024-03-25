@@ -10,17 +10,15 @@ public:
     // prevent constructor by default
     AgentBodyControl& operator=(AgentBodyControl const&);
     AgentBodyControl(AgentBodyControl const&);
+    AgentBodyControl();
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1AgentBodyControl@@UEAA@XZ
+    virtual ~AgentBodyControl() = default;
 
     // vIndex: 1, symbol: ?clientTick@AgentBodyControl@@UEAAXAEAVMob@@@Z
-    virtual void clientTick(class Mob&);
-
-    // symbol: ??0AgentBodyControl@@QEAA@XZ
-    MCAPI AgentBodyControl();
+    virtual void clientTick(class Mob& mob);
 
     // NOLINTEND
 };

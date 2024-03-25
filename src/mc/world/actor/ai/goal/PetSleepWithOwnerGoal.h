@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1PetSleepWithOwnerGoal@@UEAA@XZ
+    virtual ~PetSleepWithOwnerGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@PetSleepWithOwnerGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -35,14 +35,15 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@PetSleepWithOwnerGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0PetSleepWithOwnerGoal@@QEAA@AEAVMob@@MHHM@Z
-    MCAPI PetSleepWithOwnerGoal(class Mob&, float, int, int, float);
+    MCAPI
+    PetSleepWithOwnerGoal(class Mob& mob, float speedModifier, int searchRange, int searchHeight, float goalRadius);
 
     // symbol:
     // ?setState@PetSleepWithOwnerGoal@@QEAAXV?$unique_ptr@VPetSleepWithOwnerState@@U?$default_delete@VPetSleepWithOwnerState@@@std@@@std@@@Z
-    MCAPI void setState(std::unique_ptr<class PetSleepWithOwnerState>);
+    MCAPI void setState(std::unique_ptr<class PetSleepWithOwnerState> state);
 
     // NOLINTEND
 };

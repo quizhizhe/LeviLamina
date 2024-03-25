@@ -20,16 +20,15 @@ public:
     MCAPI static struct TickingSystemWithInfo createFramewiseActionOrStopSystem();
 
     // symbol:
-    // ?tickFramewiseActionOrStopSystem@FramewiseActionOrStopSystem@@SAXV?$ViewT@VStrictEntityContext@@VEntityRegistryBase@@U?$Include@V?$FlagComponent@UActorMovementTickNeededFlag@@@@V?$FlagComponent@ULocalPlayerComponentFlag@@@@UPlayerInputRequestComponent@@@@$$CBULocalMoveVelocityComponent@@UActionOrStopComponent@@@@@Z
+    // ?tickFramewiseActionOrStopSystem@FramewiseActionOrStopSystem@@SAXV?$ViewT@VStrictEntityContext@@U?$Include@V?$FlagComponent@UActorMovementTickNeededFlag@@@@V?$FlagComponent@ULocalPlayerComponentFlag@@@@UPlayerInputRequestComponent@@@@$$CBULocalMoveVelocityComponent@@UActionOrStopComponent@@@@@Z
     MCAPI static void tickFramewiseActionOrStopSystem(class ViewT<
                                                       class StrictEntityContext,
-                                                      class EntityRegistryBase,
                                                       struct Include<
                                                           class FlagComponent<struct ActorMovementTickNeededFlag>,
                                                           class FlagComponent<struct LocalPlayerComponentFlag>,
                                                           struct PlayerInputRequestComponent>,
                                                       struct LocalMoveVelocityComponent const,
-                                                      struct ActionOrStopComponent>);
+                                                      struct ActionOrStopComponent> view);
 
     // NOLINTEND
 

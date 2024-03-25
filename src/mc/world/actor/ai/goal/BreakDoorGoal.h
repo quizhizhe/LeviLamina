@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1BreakDoorGoal@@UEAA@XZ
+    virtual ~BreakDoorGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@BreakDoorGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -35,10 +35,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@BreakDoorGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0BreakDoorGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit BreakDoorGoal(class Mob&);
+    MCAPI explicit BreakDoorGoal(class Mob& mob);
 
     // NOLINTEND
 };

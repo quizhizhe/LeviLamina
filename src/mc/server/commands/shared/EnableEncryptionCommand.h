@@ -14,14 +14,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1EnableEncryptionCommand@@UEAA@XZ
+    virtual ~EnableEncryptionCommand() = default;
 
     // vIndex: 2, symbol: ?execute@EnableEncryptionCommand@@UEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    virtual void execute(class CommandOrigin const&, class CommandOutput&) const;
+    virtual void execute(class CommandOrigin const& origin, class CommandOutput& output) const;
 
     // symbol: ?setup@EnableEncryptionCommand@@SAXAEAVCommandRegistry@@AEAVIMinecraftApp@@@Z
-    MCAPI static void setup(class CommandRegistry&, class IMinecraftApp&);
+    MCAPI static void setup(class CommandRegistry& registry, class IMinecraftApp& app);
 
     // NOLINTEND
 
@@ -35,7 +35,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mApp() { return mApp; }
+    static auto& $mApp() { return mApp; }
 
     // NOLINTEND
 };

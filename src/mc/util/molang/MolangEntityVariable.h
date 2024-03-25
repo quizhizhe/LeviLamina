@@ -1,18 +1,17 @@
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
+#include "mc/deps/core/string/HashedString.h"
+#include "mc/util/molang/MolangVariableIndex.h"
 
-struct MolangEntityVariable {
+struct MolangEntityVariable : HashedString {
 public:
-    // prevent constructor by default
-    MolangEntityVariable& operator=(MolangEntityVariable const&);
-    MolangEntityVariable(MolangEntityVariable const&);
-    MolangEntityVariable();
+    MolangVariableIndex mMolangVariableIndex;
 
 public:
     // NOLINTBEGIN
     // symbol: ??0MolangEntityVariable@@QEAA@AEBVHashedString@@@Z
-    MCAPI explicit MolangEntityVariable(class HashedString const&);
+    MCAPI explicit MolangEntityVariable(class HashedString const& value);
 
     // symbol: ??1MolangEntityVariable@@QEAA@XZ
     MCAPI ~MolangEntityVariable();

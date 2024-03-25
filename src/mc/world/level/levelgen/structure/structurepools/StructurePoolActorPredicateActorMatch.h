@@ -14,16 +14,16 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1StructurePoolActorPredicateActorMatch@@UEAA@XZ
+    virtual ~StructurePoolActorPredicateActorMatch() = default;
 
     // vIndex: 1, symbol:
     // ?test@StructurePoolActorPredicateActorMatch@@UEBA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual bool test(std::string const&) const;
+    virtual bool test(std::string const& actor) const;
 
     // symbol:
     // ??0StructurePoolActorPredicateActorMatch@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI explicit StructurePoolActorPredicateActorMatch(std::string);
+    MCAPI explicit StructurePoolActorPredicateActorMatch(std::string actor);
 
     // NOLINTEND
 };

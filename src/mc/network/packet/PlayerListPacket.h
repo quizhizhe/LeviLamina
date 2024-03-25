@@ -16,8 +16,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1PlayerListPacket@@UEAA@XZ
+    virtual ~PlayerListPacket();
 
     // vIndex: 1, symbol: ?getId@PlayerListPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -27,24 +27,21 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@PlayerListPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 4, symbol:
     // ?read@PlayerListPacket@@UEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> read(class ReadOnlyBinaryStream&);
+    virtual class Bedrock::Result<void> read(class ReadOnlyBinaryStream& stream);
 
     // vIndex: 7, symbol:
     // ?_read@PlayerListPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1PlayerListPacket@@UEAA@XZ
-    MCVAPI ~PlayerListPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0PlayerListPacket@@QEAA@XZ
     MCAPI PlayerListPacket();
 
     // symbol: ?emplace@PlayerListPacket@@QEAAX$$QEAVPlayerListEntry@@@Z
-    MCAPI void emplace(class PlayerListEntry&&);
+    MCAPI void emplace(class PlayerListEntry&& entry);
 
     // NOLINTEND
 };

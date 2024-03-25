@@ -30,13 +30,17 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1TakeFlowerDefinition@TakeFlowerGoal@@UEAA@XZ
+        virtual ~TakeFlowerDefinition() = default;
 
         // symbol:
         // ?buildSchema@TakeFlowerDefinition@TakeFlowerGoal@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VTakeFlowerDefinition@TakeFlowerGoal@@@JsonUtil@@@4@@Z
-        MCAPI static void
-        buildSchema(std::string const&, std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class TakeFlowerGoal::TakeFlowerDefinition>>&);
+        MCAPI static void buildSchema(
+            std::string const&                                name,
+            std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<
+                class JsonUtil::EmptyClass,
+                class TakeFlowerGoal::TakeFlowerDefinition>>& root
+        );
 
         // NOLINTEND
     };
@@ -49,8 +53,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1TakeFlowerGoal@@UEAA@XZ
+    virtual ~TakeFlowerGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@TakeFlowerGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -69,10 +73,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@TakeFlowerGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0TakeFlowerGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit TakeFlowerGoal(class Mob&);
+    MCAPI explicit TakeFlowerGoal(class Mob& mob);
 
     // NOLINTEND
 };

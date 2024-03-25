@@ -10,6 +10,13 @@ public:
     CrashTelemetryProcessor& operator=(CrashTelemetryProcessor const&);
     CrashTelemetryProcessor(CrashTelemetryProcessor const&);
     CrashTelemetryProcessor();
+
+public:
+    // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1CrashTelemetryProcessor@Bedrock@@UEAA@XZ
+    virtual ~CrashTelemetryProcessor() = default;
+
+    // NOLINTEND
 };
 
 }; // namespace Bedrock

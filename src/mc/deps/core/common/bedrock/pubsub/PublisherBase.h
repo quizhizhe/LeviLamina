@@ -23,6 +23,9 @@ public:
 
 public:
     // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1PublisherBase@Detail@PubSub@Bedrock@@UEAA@XZ
+    virtual ~PublisherBase() = default;
+
     // symbol: ?empty@PublisherBase@Detail@PubSub@Bedrock@@QEBA_NXZ
     MCAPI bool empty() const;
 
@@ -35,8 +38,11 @@ public:
 
     // symbol:
     // ?_insertConnection@PublisherBase@Detail@PubSub@Bedrock@@IEAAXAEBV?$shared_ptr@VSubscriptionBodyBase@Detail@PubSub@Bedrock@@@std@@W4ConnectPosition@34@V?$optional@H@6@@Z
-    MCAPI void
-    _insertConnection(std::shared_ptr<class Bedrock::PubSub::Detail::SubscriptionBodyBase> const&, ::Bedrock::PubSub::ConnectPosition, std::optional<int>);
+    MCAPI void _insertConnection(
+        std::shared_ptr<class Bedrock::PubSub::Detail::SubscriptionBodyBase> const& body,
+        ::Bedrock::PubSub::ConnectPosition                                          at,
+        std::optional<int>                                                          group
+    );
 
     // NOLINTEND
 };

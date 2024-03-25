@@ -42,10 +42,6 @@ public:
     // ?getTypeId@ScriptMobEffectInstance@ScriptModuleMinecraft@@QEBA?AV?$Result@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$$V@Scripting@@XZ
     MCAPI class Scripting::Result<std::string> getTypeId() const;
 
-    // symbol: ??4ScriptMobEffectInstance@ScriptModuleMinecraft@@QEAAAEAV01@$$QEAV01@@Z
-    MCAPI class ScriptModuleMinecraft::ScriptMobEffectInstance&
-    operator=(class ScriptModuleMinecraft::ScriptMobEffectInstance&&);
-
     // symbol:
     // ?bind@ScriptMobEffectInstance@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptMobEffectInstance@ScriptModuleMinecraft@@@Scripting@@XZ
     MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptMobEffectInstance> bind();
@@ -53,7 +49,7 @@ public:
     // symbol:
     // ?getHandle@ScriptMobEffectInstance@ScriptModuleMinecraft@@SA?AV?$StrongTypedObjectHandle@VScriptMobEffectInstance@ScriptModuleMinecraft@@@Scripting@@AEBVActor@@IAEBVWeakLifetimeScope@4@@Z
     MCAPI static class Scripting::StrongTypedObjectHandle<class ScriptModuleMinecraft::ScriptMobEffectInstance>
-    getHandle(class Actor const&, uint, class Scripting::WeakLifetimeScope const&);
+    getHandle(class Actor const& actor, uint, class Scripting::WeakLifetimeScope const& scope);
 
     // NOLINTEND
 };

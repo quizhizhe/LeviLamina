@@ -21,15 +21,18 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1BlockCreativeGroupDescription@@UEAA@XZ
+    virtual ~BlockCreativeGroupDescription() = default;
 
     // vIndex: 1, symbol:
     // ?getName@BlockCreativeGroupDescription@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
     virtual std::string const& getName() const;
 
-    // vIndex: 5, symbol: __unk_vfn_5
-    virtual void __unk_vfn_5();
+    // symbol: ?bindType@BlockCreativeGroupDescription@@SAXAEAUReflectionCtx@cereal@@@Z
+    MCAPI static void bindType(struct cereal::ReflectionCtx&);
+
+    // symbol: ?registerVersionUpgrades@BlockCreativeGroupDescription@@SAXAEAVCerealSchemaUpgradeSet@@@Z
+    MCAPI static void registerVersionUpgrades(class CerealSchemaUpgradeSet&);
 
     // symbol: ?NameID@BlockCreativeGroupDescription@@2V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@B
     MCAPI static std::string const NameID;

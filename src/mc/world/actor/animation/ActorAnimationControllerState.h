@@ -16,22 +16,31 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ?addAnimation@ActorAnimationControllerState@@QEAAXAEBVHashedString@@@Z
-    MCAPI void addAnimation(class HashedString const&);
+    MCAPI void addAnimation(class HashedString const& name);
 
     // symbol: ?addAnimation@ActorAnimationControllerState@@QEAAXAEBVHashedString@@AEBVExpressionNode@@@Z
-    MCAPI void addAnimation(class HashedString const&, class ExpressionNode const&);
+    MCAPI void addAnimation(class HashedString const& name, class ExpressionNode const& blendWeightExpression);
 
     // symbol: ?addBlendTransitionKeyFrame@ActorAnimationControllerState@@QEAAXMM@Z
-    MCAPI void addBlendTransitionKeyFrame(float, float);
+    MCAPI void addBlendTransitionKeyFrame(float time, float blendValue);
 
     // symbol:
     // ?addEntryActorEvent@ActorAnimationControllerState@@QEAAAEAVActorAnimationEvent@@MAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@W4CurrentCmdVersion@@W4MolangVersion@@@Z
-    MCAPI class ActorAnimationEvent&
-    addEntryActorEvent(float, std::string const&, ::CurrentCmdVersion, ::MolangVersion);
+    MCAPI class ActorAnimationEvent& addEntryActorEvent(
+        float               time,
+        std::string const&  event,
+        ::CurrentCmdVersion commandVersion,
+        ::MolangVersion     molangVersion
+    );
 
     // symbol:
     // ?addExitActorEvent@ActorAnimationControllerState@@QEAAAEAVActorAnimationEvent@@MAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@W4CurrentCmdVersion@@W4MolangVersion@@@Z
-    MCAPI class ActorAnimationEvent& addExitActorEvent(float, std::string const&, ::CurrentCmdVersion, ::MolangVersion);
+    MCAPI class ActorAnimationEvent& addExitActorEvent(
+        float               time,
+        std::string const&  event,
+        ::CurrentCmdVersion commandVersion,
+        ::MolangVersion     molangVersion
+    );
 
     // symbol: ?addParticleEffect@ActorAnimationControllerState@@QEAAAEAVActorParticleEffect@@XZ
     MCAPI class ActorParticleEffect& addParticleEffect();
@@ -41,17 +50,19 @@ public:
 
     // symbol:
     // ?addTransition@ActorAnimationControllerState@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0W4MolangVersion@@_N@Z
-    MCAPI void addTransition(std::string const&, std::string const&, ::MolangVersion, bool);
+    MCAPI void addTransition(
+        std::string const& stateName,
+        std::string const& expression,
+        ::MolangVersion    molangVersion,
+        bool               createEvenIfAlreadyExists
+    );
 
     // symbol:
     // ?addVariable@ActorAnimationControllerState@@QEAAAEAVStateAnimationVariable@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI class StateAnimationVariable& addVariable(std::string const&);
+    MCAPI class StateAnimationVariable& addVariable(std::string const& variableName);
 
     // symbol: ?setBlendTransitionTime@ActorAnimationControllerState@@QEAAXM@Z
-    MCAPI void setBlendTransitionTime(float);
-
-    // symbol: ?setVariables@ActorAnimationControllerState@@QEBAXAEAVRenderParams@@@Z
-    MCAPI void setVariables(class RenderParams&) const;
+    MCAPI void setBlendTransitionTime(float time);
 
     // NOLINTEND
 };

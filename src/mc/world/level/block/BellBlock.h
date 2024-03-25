@@ -27,177 +27,73 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1BellBlock@@UEAA@XZ
+    virtual ~BellBlock() = default;
 
-    // vIndex: 12, symbol: ?getVisualShape@BellBlock@@UEBAAEBVAABB@@AEBVBlock@@AEAV2@@Z
+    // vIndex: 11, symbol: ?getVisualShape@BellBlock@@UEBAAEBVAABB@@AEBVBlock@@AEAV2@@Z
     virtual class AABB const& getVisualShape(class Block const&, class AABB&) const;
 
-    // vIndex: 18, symbol: ?onProjectileHit@BellBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@AEBVActor@@@Z
-    virtual void onProjectileHit(class BlockSource&, class BlockPos const&, class Actor const&) const;
+    // vIndex: 17, symbol: ?onProjectileHit@BellBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@AEBVActor@@@Z
+    virtual void
+    onProjectileHit(class BlockSource& region, class BlockPos const& pos, class Actor const& projectile) const;
 
-    // vIndex: 22, symbol: __unk_vfn_22
-    virtual void __unk_vfn_22();
+    // vIndex: 25, symbol: ?canConnect@BellBlock@@UEBA_NAEBVBlock@@E0@Z
+    virtual bool canConnect(class Block const& otherBlock, uchar toOther, class Block const& thisBlock) const;
 
-    // vIndex: 28, symbol: ?canConnect@BellBlock@@UEBA_NAEBVBlock@@E0@Z
-    virtual bool canConnect(class Block const&, uchar, class Block const&) const;
-
-    // vIndex: 31, symbol: __unk_vfn_31
-    virtual void __unk_vfn_31();
-
-    // vIndex: 32, symbol: __unk_vfn_32
-    virtual void __unk_vfn_32();
-
-    // vIndex: 34, symbol: __unk_vfn_34
-    virtual void __unk_vfn_34();
-
-    // vIndex: 35, symbol: __unk_vfn_35
-    virtual void __unk_vfn_35();
-
-    // vIndex: 36, symbol: __unk_vfn_36
-    virtual void __unk_vfn_36();
-
-    // vIndex: 38, symbol: __unk_vfn_38
-    virtual void __unk_vfn_38();
-
-    // vIndex: 39, symbol: __unk_vfn_39
-    virtual void __unk_vfn_39();
-
-    // vIndex: 40, symbol: __unk_vfn_40
-    virtual void __unk_vfn_40();
-
-    // vIndex: 41, symbol: __unk_vfn_41
-    virtual void __unk_vfn_41();
-
-    // vIndex: 42, symbol: __unk_vfn_42
-    virtual void __unk_vfn_42();
-
-    // vIndex: 43, symbol: __unk_vfn_43
-    virtual void __unk_vfn_43();
-
-    // vIndex: 44, symbol: __unk_vfn_44
-    virtual void __unk_vfn_44();
-
-    // vIndex: 46, symbol: __unk_vfn_46
-    virtual void __unk_vfn_46();
-
-    // vIndex: 47, symbol: __unk_vfn_47
-    virtual void __unk_vfn_47();
-
-    // vIndex: 48, symbol: __unk_vfn_48
-    virtual void __unk_vfn_48();
-
-    // vIndex: 49, symbol: __unk_vfn_49
-    virtual void __unk_vfn_49();
-
-    // vIndex: 50, symbol: __unk_vfn_50
-    virtual void __unk_vfn_50();
-
-    // vIndex: 51, symbol: __unk_vfn_51
-    virtual void __unk_vfn_51();
-
-    // vIndex: 55, symbol: __unk_vfn_55
-    virtual void __unk_vfn_55();
-
-    // vIndex: 61, symbol: __unk_vfn_61
-    virtual void __unk_vfn_61();
-
-    // vIndex: 62, symbol: __unk_vfn_62
-    virtual void __unk_vfn_62();
-
-    // vIndex: 63, symbol: ?canContainLiquid@BellBlock@@UEBA_NXZ
+    // vIndex: 56, symbol: ?canContainLiquid@BellBlock@@UEBA_NXZ
     virtual bool canContainLiquid() const;
 
-    // vIndex: 65, symbol: ?shouldConnectToRedstone@BellBlock@@UEBA_NAEAVBlockSource@@AEBVBlockPos@@W4Type@Direction@@@Z
+    // vIndex: 58, symbol: ?shouldConnectToRedstone@BellBlock@@UEBA_NAEAVBlockSource@@AEBVBlockPos@@W4Type@Direction@@@Z
     virtual bool shouldConnectToRedstone(class BlockSource&, class BlockPos const&, ::Direction::Type) const;
 
-    // vIndex: 76, symbol: __unk_vfn_76
-    virtual void __unk_vfn_76();
+    // vIndex: 68, symbol: ?movedByPiston@BellBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@@Z
+    virtual void movedByPiston(class BlockSource& region, class BlockPos const& pos) const;
 
-    // vIndex: 77, symbol: ?movedByPiston@BellBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@@Z
-    virtual void movedByPiston(class BlockSource&, class BlockPos const&) const;
+    // vIndex: 71, symbol: ?setupRedstoneComponent@BellBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@@Z
+    virtual void setupRedstoneComponent(class BlockSource& region, class BlockPos const& pos) const;
 
-    // vIndex: 80, symbol: ?setupRedstoneComponent@BellBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@@Z
-    virtual void setupRedstoneComponent(class BlockSource&, class BlockPos const&) const;
+    // vIndex: 92, symbol: ?neighborChanged@BellBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@1@Z
+    virtual void
+    neighborChanged(class BlockSource& region, class BlockPos const& pos, class BlockPos const& neighborPos) const;
 
-    // vIndex: 83, symbol: __unk_vfn_83
-    virtual void __unk_vfn_83();
+    // vIndex: 98, symbol: ?getPlacementBlock@BellBlock@@UEBAAEBVBlock@@AEBVActor@@AEBVBlockPos@@EAEBVVec3@@H@Z
+    virtual class Block const& getPlacementBlock(
+        class Actor const&    by,
+        class BlockPos const& pos,
+        uchar                 face,
+        class Vec3 const&     clickPos,
+        int                   itemValue
+    ) const;
 
-    // vIndex: 100, symbol: ?neighborChanged@BellBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@1@Z
-    virtual void neighborChanged(class BlockSource&, class BlockPos const&, class BlockPos const&) const;
+    // vIndex: 147, symbol: ?onPlace@BellBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@@Z
+    virtual void onPlace(class BlockSource& region, class BlockPos const& pos) const;
 
-    // vIndex: 106, symbol: __unk_vfn_106
-    virtual void __unk_vfn_106();
+    // vIndex: 150, symbol: ?tick@BellBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@AEAVRandom@@@Z
+    virtual void tick(class BlockSource& region, class BlockPos const& pos, class Random& random) const;
 
-    // vIndex: 107, symbol: ?getPlacementBlock@BellBlock@@UEBAAEBVBlock@@AEBVActor@@AEBVBlockPos@@EAEBVVec3@@H@Z
-    virtual class Block const&
-    getPlacementBlock(class Actor const&, class BlockPos const&, uchar, class Vec3 const&, int) const;
+    // vIndex: 152, symbol: ?isInteractiveBlock@BellBlock@@UEBA_NXZ
+    virtual bool isInteractiveBlock() const;
 
-    // vIndex: 122, symbol: __unk_vfn_122
-    virtual void __unk_vfn_122();
+    // vIndex: 154, symbol: ?use@BellBlock@@UEBA_NAEAVPlayer@@AEBVBlockPos@@E@Z
+    virtual bool use(class Player& player, class BlockPos const& pos, uchar face) const;
 
-    // vIndex: 123, symbol: __unk_vfn_123
-    virtual void __unk_vfn_123();
+    // vIndex: 156, symbol: ?canSurvive@BellBlock@@UEBA_NAEAVBlockSource@@AEBVBlockPos@@@Z
+    virtual bool canSurvive(class BlockSource& region, class BlockPos const& pos) const;
 
-    // vIndex: 124, symbol: __unk_vfn_124
-    virtual void __unk_vfn_124();
-
-    // vIndex: 127, symbol: __unk_vfn_127
-    virtual void __unk_vfn_127();
-
-    // vIndex: 130, symbol: __unk_vfn_130
-    virtual void __unk_vfn_130();
-
-    // vIndex: 153, symbol: __unk_vfn_153
-    virtual void __unk_vfn_153();
-
-    // vIndex: 162, symbol: __unk_vfn_162
-    virtual void __unk_vfn_162();
-
-    // vIndex: 163, symbol: __unk_vfn_163
-    virtual void __unk_vfn_163();
-
-    // vIndex: 164, symbol: __unk_vfn_164
-    virtual void __unk_vfn_164();
-
-    // vIndex: 165, symbol: ?onPlace@BellBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@@Z
-    virtual void onPlace(class BlockSource&, class BlockPos const&) const;
-
-    // vIndex: 167, symbol: __unk_vfn_167
-    virtual void __unk_vfn_167();
-
-    // vIndex: 168, symbol: ?tick@BellBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@AEAVRandom@@@Z
-    virtual void tick(class BlockSource&, class BlockPos const&, class Random&) const;
-
-    // vIndex: 171, symbol: __unk_vfn_171
-    virtual void __unk_vfn_171();
-
-    // vIndex: 173, symbol: ?use@BellBlock@@UEBA_NAEAVPlayer@@AEBVBlockPos@@E@Z
-    virtual bool use(class Player&, class BlockPos const&, uchar) const;
-
-    // vIndex: 174, symbol: __unk_vfn_174
-    virtual void __unk_vfn_174();
-
-    // vIndex: 175, symbol: ?canSurvive@BellBlock@@UEBA_NAEAVBlockSource@@AEBVBlockPos@@@Z
-    virtual bool canSurvive(class BlockSource&, class BlockPos const&) const;
-
-    // vIndex: 183, symbol: __unk_vfn_183
-    virtual void __unk_vfn_183();
-
-    // vIndex: 187, symbol: ?getSilkTouchItemInstance@BellBlock@@UEBA?AVItemInstance@@AEBVBlock@@@Z
+    // vIndex: 165, symbol: ?getSilkTouchItemInstance@BellBlock@@UEBA?AVItemInstance@@AEBVBlock@@@Z
     virtual class ItemInstance getSilkTouchItemInstance(class Block const&) const;
 
-    // vIndex: 188, symbol: ?entityInside@BellBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@AEAVActor@@@Z
-    virtual void entityInside(class BlockSource&, class BlockPos const&, class Actor&) const;
+    // vIndex: 166, symbol: ?_onHitByActivatingAttack@BellBlock@@EEBAXAEAVBlockSource@@AEBVBlockPos@@@Z
+    virtual void _onHitByActivatingAttack(class BlockSource&, class BlockPos const&) const;
 
-    // symbol: ?isInteractiveBlock@BellBlock@@UEBA_NXZ
-    MCVAPI bool isInteractiveBlock() const;
+    // vIndex: 167, symbol: ?entityInside@BellBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@AEAVActor@@@Z
+    virtual void entityInside(class BlockSource& region, class BlockPos const& pos, class Actor& actor) const;
 
     // symbol: ??0BellBlock@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z
-    MCAPI BellBlock(std::string const&, int);
+    MCAPI BellBlock(std::string const& nameId, int id);
 
     // symbol: ?hasValidAttachment@BellBlock@@QEBA_NAEBVBlock@@AEAVBlockSource@@AEBVBlockPos@@@Z
-    MCAPI bool hasValidAttachment(class Block const&, class BlockSource&, class BlockPos const&) const;
+    MCAPI bool hasValidAttachment(class Block const& block, class BlockSource& region, class BlockPos const& pos) const;
 
     // NOLINTEND
 
@@ -205,16 +101,21 @@ public:
     // NOLINTBEGIN
     // symbol: ?_determineAttachment@BellBlock@@AEBAAEBVBlock@@AEBVActor@@AEAVBlockSource@@AEBVBlockPos@@E@Z
     MCAPI class Block const&
-    _determineAttachment(class Actor const&, class BlockSource&, class BlockPos const&, uchar) const;
+    _determineAttachment(class Actor const& by, class BlockSource& region, class BlockPos const& pos, uchar face) const;
 
     // symbol: ?_getItemId@BellBlock@@AEBAFAEBVBlockSource@@V?$basic_string_view@DU?$char_traits@D@std@@@std@@@Z
-    MCAPI short _getItemId(class BlockSource const&, std::string_view) const;
+    MCAPI short _getItemId(class BlockSource const& region, std::string_view itemName) const;
 
     // symbol: ?_sendBellUsedEventToClient@BellBlock@@AEBAXAEBVBlockSource@@AEBVActor@@@Z
-    MCAPI void _sendBellUsedEventToClient(class BlockSource const&, class Actor const&) const;
+    MCAPI void _sendBellUsedEventToClient(class BlockSource const& region, class Actor const& sourceActor) const;
 
     // symbol: ?_tryAttachToNeighbors@BellBlock@@AEBAXAEAVBlockSource@@AEBVBlockPos@@1H@Z
-    MCAPI void _tryAttachToNeighbors(class BlockSource&, class BlockPos const&, class BlockPos const&, int) const;
+    MCAPI void _tryAttachToNeighbors(
+        class BlockSource&    region,
+        class BlockPos const& pos,
+        class BlockPos const& neighborPos,
+        int                   updateFlags
+    ) const;
 
     // NOLINTEND
 };

@@ -2,10 +2,7 @@
 
 #include "mc/_HeaderOutputPredefine.h"
 
-// auto generated inclusion list
-#include "mc/world/level/block/components/BlockAABBComponentData.h"
-
-struct BlockCollisionBoxComponent : public ::BlockAABBComponentData {
+struct BlockCollisionBoxComponent {
 public:
     // prevent constructor by default
     BlockCollisionBoxComponent& operator=(BlockCollisionBoxComponent const&);
@@ -14,8 +11,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ?usesNewComponentStorage@BlockCollisionBoxComponent@@SA_NXZ
-    MCAPI static bool usesNewComponentStorage();
+    // vIndex: 0, symbol: __gen_??1BlockCollisionBoxComponent@@UEAA@XZ
+    virtual ~BlockCollisionBoxComponent() = default;
 
     // NOLINTEND
 };

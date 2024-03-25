@@ -13,6 +13,7 @@
 
 // auto generated forward declare list
 // clang-format off
+namespace Bedrock::Http { class BinaryRequestBody; }
 namespace Bedrock::Http { class DispatcherProcess; }
 namespace Bedrock::Http { class HeaderCollection; }
 namespace Bedrock::Http { class HttpInterface; }

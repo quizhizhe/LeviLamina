@@ -1,22 +1,23 @@
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
+#include "mc/entity/EntityIdTraits.h"
 
-class EntityId : public entt::entt_traits<entt::id_type> {
+template <>
+class entt::entt_traits<EntityId> : public entt::basic_entt_traits<EntityIdTraits> {
 public:
-    entity_type mRawId;
+    static constexpr entity_type page_size = 2048;
+};
 
-    constexpr EntityId(EntityId&&) = default;
-
-    constexpr EntityId(EntityId const&) = default;
-
-    constexpr EntityId& operator=(EntityId const&) = default;
-
-    template <std::integral T>
-    constexpr EntityId(T rawId) : mRawId(static_cast<entity_type>(rawId)) {}
+class EntityId : public entt::entt_traits<EntityId> {
+public:
+    entity_type mRawId{};
 
     template <std::integral T>
-    constexpr operator T() const {
-        return mRawId;
-    }
+        requires(!std::is_same_v<std::remove_cvref_t<T>, bool>)
+    [[nodiscard]] constexpr EntityId(T rawId) : mRawId(static_cast<entity_type>(rawId)) {} // NOLINT
+
+    [[nodiscard]] constexpr bool isNull() const { return *this == entt::null; }
+
+    [[nodiscard]] constexpr operator entity_type() const { return mRawId; }
 };

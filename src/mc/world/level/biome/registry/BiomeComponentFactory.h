@@ -15,12 +15,13 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol:
-    // ?processDataComponents@BiomeComponentFactory@@QEBAXAEAVBiome@@AEAVIWorldRegistriesProvider@@AEAVCompoundTag@@@Z
-    MCAPI void processDataComponents(class Biome&, class IWorldRegistriesProvider&, class CompoundTag&) const;
-
     // symbol: ?registrationFinished@BiomeComponentFactory@@QEAAXXZ
     MCAPI void registrationFinished();
+
+    // symbol:
+    // ?writeComponentsToTag@BiomeComponentFactory@@QEBAXAEBVBiome@@AEBVIWorldRegistriesProvider@@AEAVCompoundTag@@@Z
+    MCAPI void
+    writeComponentsToTag(class Biome const&, class IWorldRegistriesProvider const&, class CompoundTag&) const;
 
     // NOLINTEND
 };

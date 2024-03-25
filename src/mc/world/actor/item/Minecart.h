@@ -3,13 +3,14 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
+#include "mc/deps/puv/EquipmentSlot.h"
 #include "mc/entity/utilities/ActorDamageCause.h"
 #include "mc/entity/utilities/ActorFlags.h"
+#include "mc/entity/utilities/ActorInitializationMethod.h"
 #include "mc/entity/utilities/ActorType.h"
 #include "mc/enums/ArmorMaterialType.h"
 #include "mc/enums/ArmorSlot.h"
 #include "mc/enums/ArmorTextureType.h"
-#include "mc/enums/EquipmentSlot.h"
 #include "mc/enums/HandSlot.h"
 #include "mc/enums/InputMode.h"
 #include "mc/enums/MaterialType.h"
@@ -22,6 +23,11 @@
 #include "mc/world/actor/Actor.h"
 #include "mc/world/item/components/ItemUseMethod.h"
 
+// auto generated forward declare list
+// clang-format off
+namespace mce { class Color; }
+// clang-format on
+
 class Minecart : public ::Actor {
 public:
     // prevent constructor by default
@@ -31,126 +37,70 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 4, symbol: ?reloadHardcoded@Minecart@@UEAAXW4InitializationMethod@Actor@@AEBVVariantParameterList@@@Z
-    virtual void reloadHardcoded(::Actor::InitializationMethod, class VariantParameterList const&);
+    // vIndex: 4, symbol: ?reloadHardcoded@Minecart@@UEAAXW4ActorInitializationMethod@@AEBVVariantParameterList@@@Z
+    virtual void reloadHardcoded(::ActorInitializationMethod method, class VariantParameterList const& params);
 
     // vIndex: 5, symbol:
-    // ?reloadHardcodedClient@Minecart@@UEAAXW4InitializationMethod@Actor@@AEBVVariantParameterList@@@Z
-    virtual void reloadHardcodedClient(::Actor::InitializationMethod, class VariantParameterList const&);
+    // ?reloadHardcodedClient@Minecart@@UEAAXW4ActorInitializationMethod@@AEBVVariantParameterList@@@Z
+    virtual void reloadHardcodedClient(::ActorInitializationMethod method, class VariantParameterList const& params);
 
-    // vIndex: 10, symbol: __unk_vfn_10
-    virtual void __unk_vfn_10();
+    // vIndex: 10, symbol: ??1Minecart@@UEAA@XZ
+    virtual ~Minecart();
 
     // vIndex: 18, symbol: ?getInterpolatedBodyYaw@Minecart@@UEBAMM@Z
-    virtual float getInterpolatedBodyYaw(float) const;
+    virtual float getInterpolatedBodyYaw(float a) const;
 
-    // vIndex: 23, symbol: __unk_vfn_23
-    virtual void __unk_vfn_23();
-
-    // vIndex: 39, symbol: __unk_vfn_39
-    virtual void __unk_vfn_39();
-
-    // vIndex: 41, symbol: __unk_vfn_41
-    virtual void __unk_vfn_41();
-
-    // vIndex: 42, symbol: ?getShadowRadius@Minecart@@UEBAMXZ
+    // vIndex: 41, symbol: ?getShadowRadius@Minecart@@UEBAMXZ
     virtual float getShadowRadius() const;
 
-    // vIndex: 44, symbol: __unk_vfn_44
-    virtual void __unk_vfn_44();
-
-    // vIndex: 47, symbol: __unk_vfn_47
-    virtual void __unk_vfn_47();
-
-    // vIndex: 51, symbol: ?isPickable@Minecart@@UEAA_NXZ
+    // vIndex: 48, symbol: ?isPickable@Minecart@@UEAA_NXZ
     virtual bool isPickable();
 
-    // vIndex: 52, symbol: __unk_vfn_52
-    virtual void __unk_vfn_52();
+    // vIndex: 75, symbol: ?isInvulnerableTo@Minecart@@UEBA_NAEBVActorDamageSource@@@Z
+    virtual bool isInvulnerableTo(class ActorDamageSource const& source) const;
 
-    // vIndex: 61, symbol: __unk_vfn_61
-    virtual void __unk_vfn_61();
-
-    // vIndex: 62, symbol: __unk_vfn_62
-    virtual void __unk_vfn_62();
-
-    // vIndex: 63, symbol: __unk_vfn_63
-    virtual void __unk_vfn_63();
-
-    // vIndex: 79, symbol: ?isInvulnerableTo@Minecart@@UEBA_NAEBVActorDamageSource@@@Z
-    virtual bool isInvulnerableTo(class ActorDamageSource const&) const;
-
-    // vIndex: 109, symbol: __unk_vfn_109
-    virtual void __unk_vfn_109();
-
-    // vIndex: 111, symbol: ?getControllingPlayer@Minecart@@UEBA?AUActorUniqueID@@XZ
+    // vIndex: 106, symbol: ?getControllingPlayer@Minecart@@UEBA?AUActorUniqueID@@XZ
     virtual struct ActorUniqueID getControllingPlayer() const;
 
-    // vIndex: 147, symbol: __unk_vfn_147
-    virtual void __unk_vfn_147();
-
-    // vIndex: 148, symbol: __unk_vfn_148
-    virtual void __unk_vfn_148();
-
-    // vIndex: 149, symbol: ?kill@Minecart@@MEAAXXZ
+    // vIndex: 142, symbol: ?kill@Minecart@@MEAAXXZ
     virtual void kill();
 
-    // vIndex: 165, symbol: __unk_vfn_165
-    virtual void __unk_vfn_165();
+    // vIndex: 158, symbol: ?_hurt@Minecart@@MEAA_NAEBVActorDamageSource@@M_N1@Z
+    virtual bool _hurt(class ActorDamageSource const& source, float damage, bool knock, bool ignite);
 
-    // vIndex: 166, symbol: ?_hurt@Minecart@@MEAA_NAEBVActorDamageSource@@M_N1@Z
-    virtual bool _hurt(class ActorDamageSource const&, float, bool, bool);
+    // vIndex: 159, symbol: ?readAdditionalSaveData@Minecart@@MEAAXAEBVCompoundTag@@AEAVDataLoadHelper@@@Z
+    virtual void readAdditionalSaveData(class CompoundTag const& tag, class DataLoadHelper& dataLoadHelper);
 
-    // vIndex: 167, symbol: ?readAdditionalSaveData@Minecart@@MEAAXAEBVCompoundTag@@AEAVDataLoadHelper@@@Z
-    virtual void readAdditionalSaveData(class CompoundTag const&, class DataLoadHelper&);
+    // vIndex: 160, symbol: ?addAdditionalSaveData@Minecart@@MEBAXAEAVCompoundTag@@@Z
+    virtual void addAdditionalSaveData(class CompoundTag& tag) const;
 
-    // vIndex: 168, symbol: ?addAdditionalSaveData@Minecart@@MEBAXAEAVCompoundTag@@@Z
-    virtual void addAdditionalSaveData(class CompoundTag&) const;
+    // vIndex: 163, symbol: ?destroy@Minecart@@UEAAXAEBVActorDamageSource@@_N@Z
+    virtual void destroy(class ActorDamageSource const& source, bool dropMinecartComponents);
 
-    // vIndex: 170, symbol: __unk_vfn_170
-    virtual void __unk_vfn_170();
-
-    // vIndex: 171, symbol: ?_onSizeUpdated@Minecart@@EEAAXXZ
-    virtual void _onSizeUpdated();
-
-    // vIndex: 172, symbol: __unk_vfn_172
-    virtual void __unk_vfn_172();
-
-    // vIndex: 173, symbol: ?destroy@Minecart@@UEAAXAEBVActorDamageSource@@_N@Z
-    virtual void destroy(class ActorDamageSource const&, bool);
-
-    // vIndex: 174, symbol: ?getType@MinecartRideable@@UEAA?AW4MinecartType@@XZ
+    // vIndex: 164, symbol: ?getType@MinecartChest@@UEAA?AW4MinecartType@@XZ
     virtual ::MinecartType getType() = 0;
 
-    // vIndex: 175, symbol: ?getDefaultDisplayBlock@Minecart@@UEBAPEBVBlock@@XZ
+    // vIndex: 165, symbol: ?getDefaultDisplayBlock@Minecart@@UEBAPEBVBlock@@XZ
     virtual class Block const* getDefaultDisplayBlock() const;
 
-    // vIndex: 176, symbol: __unk_vfn_176
-    virtual void __unk_vfn_176();
-
-    // vIndex: 177, symbol: ?getDefaultDisplayOffset@Minecart@@UEBAHXZ
+    // vIndex: 166, symbol: ?getDefaultDisplayOffset@Minecart@@UEBAHXZ
     virtual int getDefaultDisplayOffset() const;
 
-    // vIndex: 178, symbol: ?applyNaturalSlowdown@Minecart@@MEAAXAEAVBlockSource@@@Z
-    virtual void applyNaturalSlowdown(class BlockSource&);
+    // vIndex: 167, symbol: ?applyNaturalSlowdown@Minecart@@MEAAXAEAVBlockSource@@@Z
+    virtual void applyNaturalSlowdown(class BlockSource& region);
 
-    // vIndex: 179, symbol: ?_lazyInitDisplayBlock@Minecart@@EEAAXXZ
+    // vIndex: 168, symbol: ?_lazyInitDisplayBlock@Minecart@@EEAAXXZ
     virtual void _lazyInitDisplayBlock();
 
-    // symbol: ?canMakeStepSound@Minecart@@EEBA_NXZ
-    MCVAPI bool canMakeStepSound() const;
-
-    // symbol: ?getDefaultDisplayData@Minecart@@UEBAHXZ
-    MCVAPI int getDefaultDisplayData() const;
-
-    // symbol: ??1Minecart@@UEAA@XZ
-    MCVAPI ~Minecart();
-
     // symbol: ??0Minecart@@QEAA@PEAVActorDefinitionGroup@@AEBUActorDefinitionIdentifier@@AEAVEntityContext@@@Z
-    MCAPI Minecart(class ActorDefinitionGroup*, struct ActorDefinitionIdentifier const&, class EntityContext&);
+    MCAPI Minecart(
+        class ActorDefinitionGroup*             definitions,
+        struct ActorDefinitionIdentifier const& definitionName,
+        class EntityContext&                    entityContext
+    );
 
     // symbol: ?dropMinecartWithContentsAndRemove@Minecart@@QEAAXV?$basic_string_view@DU?$char_traits@D@std@@@std@@_N@Z
-    MCAPI void dropMinecartWithContentsAndRemove(std::string_view, bool);
+    MCAPI void dropMinecartWithContentsAndRemove(std::string_view, bool dropMinecartComponents);
 
     // symbol: ?postNormalTick@Minecart@@QEAAXAEBVBlockPos@@@Z
     MCAPI void postNormalTick(class BlockPos const&);
@@ -158,8 +108,14 @@ public:
     // symbol: ?preNormalTick@Minecart@@QEAA?AVBlockPos@@XZ
     MCAPI class BlockPos preNormalTick();
 
+    // symbol: ?setCustomDisplay@Minecart@@QEAAX_N@Z
+    MCAPI void setCustomDisplay(bool displayValue);
+
     // symbol: ?setDisplayBlock@Minecart@@QEAAXAEBVBlock@@@Z
-    MCAPI void setDisplayBlock(class Block const&);
+    MCAPI void setDisplayBlock(class Block const& block);
+
+    // symbol: ?getHeightOffset@Minecart@@SAMAEBUAABBShapeComponent@@@Z
+    MCAPI static float getHeightOffset(struct AABBShapeComponent const&);
 
     // NOLINTEND
 

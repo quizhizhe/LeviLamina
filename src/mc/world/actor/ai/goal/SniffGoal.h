@@ -30,19 +30,22 @@ public:
 
     public:
         // NOLINTBEGIN
-        // vIndex: 0, symbol: __unk_vfn_0
-        virtual void __unk_vfn_0();
+        // vIndex: 0, symbol: __gen_??1Definition@SniffGoal@@UEAA@XZ
+        virtual ~Definition() = default;
 
         // symbol: ??0Definition@SniffGoal@@QEAA@XZ
         MCAPI Definition();
 
         // symbol: ?initialize@Definition@SniffGoal@@QEBAXAEAVEntityContext@@AEAV2@@Z
-        MCAPI void initialize(class EntityContext&, class SniffGoal&) const;
+        MCAPI void initialize(class EntityContext& entity, class SniffGoal& goal) const;
 
         // symbol:
         // ?buildSchema@Definition@SniffGoal@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VDefinition@SniffGoal@@@JsonUtil@@@4@@Z
-        MCAPI static void
-        buildSchema(std::string const&, std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class SniffGoal::Definition>>&);
+        MCAPI static void buildSchema(
+            std::string const& name,
+            std::shared_ptr<
+                class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class SniffGoal::Definition>>& root
+        );
 
         // NOLINTEND
     };
@@ -55,8 +58,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SniffGoal@@UEAA@XZ
+    virtual ~SniffGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@SniffGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -75,10 +78,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@SniffGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0SniffGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit SniffGoal(class Mob&);
+    MCAPI explicit SniffGoal(class Mob& mob);
 
     // NOLINTEND
 

@@ -8,11 +8,4 @@ public:
     TextFilteringProcessor& operator=(TextFilteringProcessor const&);
     TextFilteringProcessor(TextFilteringProcessor const&);
     TextFilteringProcessor();
-
-public:
-    // NOLINTBEGIN
-    // symbol: ??1TextFilteringProcessor@@UEAA@XZ
-    MCVAPI ~TextFilteringProcessor();
-
-    // NOLINTEND
 };

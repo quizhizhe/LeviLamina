@@ -3,7 +3,10 @@
 #include "mc/_HeaderOutputPredefine.h"
 #include "mc/server/commands/CommandFlag.h"
 #include "mc/server/commands/CommandPermissionLevel.h"
-#include "mc/server/commands/CommandRegistry.h"
+
+class CommandRegistry;
+class CommandOrigin;
+class CommandOutput;
 
 class Command {
 public:
@@ -11,11 +14,12 @@ public:
     Command& operator=(Command const&);
     Command(Command const&);
 
-    int                          mVersion;         // this+0x8
-    class CommandRegistry const* mRegistry;        // this+0x10
-    int                          mCommandSymbol;   // this+0x18
-    ::CommandPermissionLevel     mPermissionLevel; // this+0x1C
-    struct CommandFlag           mFlags;           // this+0x1E
+    int                      mVersion;         // this+0x8
+    CommandRegistry const*   mRegistry;        // this+0x10
+    int                      mCommandSymbol;   // this+0x18
+    ::CommandPermissionLevel mPermissionLevel; // this+0x1C
+    CommandFlag              mFlags;           // this+0x1E
+
 public:
     // NOLINTBEGIN
     // vIndex: 0, symbol: ??1Command@@UEAA@XZ
@@ -24,8 +28,8 @@ public:
     // vIndex: 1, symbol: ?collectOptionalArguments@Command@@MEAA_NXZ
     virtual bool collectOptionalArguments();
 
-    // vIndex: 2, symbol: ?execute@TakePictureCommand@@UEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    virtual void execute(class CommandOrigin const&, class CommandOutput&) const = 0;
+    // vIndex: 2, symbol: ?execute@AbilityCommand@@UEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
+    virtual void execute(class CommandOrigin const& origin, class CommandOutput& output) const = 0;
 
     // symbol: ??0Command@@QEAA@XZ
     MCAPI Command();
@@ -33,23 +37,20 @@ public:
     // symbol: ?getCommandName@Command@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
     MCAPI std::string getCommandName() const;
 
-    // symbol: ?getVersion@Command@@QEBAHXZ
-    MCAPI int getVersion() const;
-
     // symbol: ?hasFlag@Command@@QEBA_NUCommandFlag@@@Z
-    MCAPI bool hasFlag(struct CommandFlag) const;
+    MCAPI bool hasFlag(struct CommandFlag flag) const;
 
     // symbol: ?run@Command@@QEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    MCAPI void run(class CommandOrigin const&, class CommandOutput&) const;
+    MCAPI void run(class CommandOrigin const& origin, class CommandOutput& output) const;
 
     // symbol: ?shouldUseCommandOriginRotation@Command@@SA_NAEBVCommandOrigin@@H@Z
-    MCAPI static bool shouldUseCommandOriginRotation(class CommandOrigin const&, int);
+    MCAPI static bool shouldUseCommandOriginRotation(class CommandOrigin const& origin, int version);
 
     // symbol: ?validRange@Command@@SA_NMMMAEAVCommandOutput@@@Z
-    MCAPI static bool validRange(float, float, float, class CommandOutput&);
+    MCAPI static bool validRange(float input, float low, float high, class CommandOutput& output);
 
     // symbol: ?validRange@Command@@SA_NHHHAEAVCommandOutput@@@Z
-    MCAPI static bool validRange(int, int, int, class CommandOutput&);
+    MCAPI static bool validRange(int input, int low, int high, class CommandOutput& output);
 
     // symbol: ?WILDCARD_TOKEN@Command@@2V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@B
     MCAPI static std::string const WILDCARD_TOKEN;
@@ -62,22 +63,22 @@ public:
     MCAPI class CommandRegistry const& getRegistry() const;
 
     // symbol: ?sendTelemetry@Command@@IEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    MCAPI void sendTelemetry(class CommandOrigin const&, class CommandOutput&) const;
+    MCAPI void sendTelemetry(class CommandOrigin const& origin, class CommandOutput& output) const;
 
     // symbol: ?shouldSendTelemetry@Command@@IEBA_NAEBVCommandOrigin@@@Z
-    MCAPI bool shouldSendTelemetry(class CommandOrigin const&) const;
+    MCAPI bool shouldSendTelemetry(class CommandOrigin const& origin) const;
 
     // symbol: ?getPlayerFromOrigin@Command@@KAPEAVPlayer@@AEBVCommandOrigin@@@Z
-    MCAPI static class Player* getPlayerFromOrigin(class CommandOrigin const&);
+    MCAPI static class Player* getPlayerFromOrigin(class CommandOrigin const& origin);
 
     // symbol: ?isTemplateLockedAction@Command@@KA_NAEBVCommandOrigin@@@Z
-    MCAPI static bool isTemplateLockedAction(class CommandOrigin const&);
+    MCAPI static bool isTemplateLockedAction(class CommandOrigin const& origin);
 
     // symbol: ?isWildcard@Command@@KA_NAEBVCommandSelectorBase@@@Z
-    MCAPI static bool isWildcard(class CommandSelectorBase const&);
+    MCAPI static bool isWildcard(class CommandSelectorBase const& selector);
 
     // symbol: ?validData@Command@@KA_NHAEAGAEAVCommandOutput@@@Z
-    MCAPI static bool validData(int, ushort&, class CommandOutput&);
+    MCAPI static bool validData(int input, ushort& data, class CommandOutput& output);
 
     // NOLINTEND
 };

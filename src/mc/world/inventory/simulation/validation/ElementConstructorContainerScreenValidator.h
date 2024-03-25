@@ -11,14 +11,12 @@ public:
     // prevent constructor by default
     ElementConstructorContainerScreenValidator& operator=(ElementConstructorContainerScreenValidator const&);
     ElementConstructorContainerScreenValidator(ElementConstructorContainerScreenValidator const&);
+    ElementConstructorContainerScreenValidator();
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // symbol: ??0ElementConstructorContainerScreenValidator@@QEAA@XZ
-    MCAPI ElementConstructorContainerScreenValidator();
+    // vIndex: 0, symbol: __gen_??1ElementConstructorContainerScreenValidator@@UEAA@XZ
+    virtual ~ElementConstructorContainerScreenValidator() = default;
 
     // NOLINTEND
 };

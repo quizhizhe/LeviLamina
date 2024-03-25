@@ -24,8 +24,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1GameDirectorEntityServerCommandOrigin@@UEAA@XZ
+    virtual ~GameDirectorEntityServerCommandOrigin() = default;
 
     // vIndex: 9, symbol: ?getPermissionsLevel@GameDirectorEntityServerCommandOrigin@@UEBA?AW4CommandPermissionLevel@@XZ
     virtual ::CommandPermissionLevel getPermissionsLevel() const;
@@ -44,7 +44,12 @@ public:
     virtual ::CommandOriginType getOriginType() const;
 
     // symbol: ??0GameDirectorEntityServerCommandOrigin@@QEAA@AEAVActor@@@Z
-    MCAPI explicit GameDirectorEntityServerCommandOrigin(class Actor&);
+    MCAPI explicit GameDirectorEntityServerCommandOrigin(class Actor& origin);
+
+    // symbol:
+    // ?load@GameDirectorEntityServerCommandOrigin@@SA?AV?$unique_ptr@VGameDirectorEntityServerCommandOrigin@@U?$default_delete@VGameDirectorEntityServerCommandOrigin@@@std@@@std@@AEBVCompoundTag@@AEAVLevel@@@Z
+    MCAPI static std::unique_ptr<class GameDirectorEntityServerCommandOrigin>
+    load(class CompoundTag const& tag, class Level& level);
 
     // NOLINTEND
 };

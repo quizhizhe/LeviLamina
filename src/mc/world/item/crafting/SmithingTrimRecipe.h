@@ -19,15 +19,12 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SmithingTrimRecipe@@UEAA@XZ
+    virtual ~SmithingTrimRecipe() = default;
 
     // vIndex: 1, symbol:
     // ?assemble@SmithingTrimRecipe@@UEBAAEBV?$vector@VItemInstance@@V?$allocator@VItemInstance@@@std@@@std@@AEAVCraftingContainer@@AEAVCraftingContext@@@Z
     virtual std::vector<class ItemInstance> const& assemble(class CraftingContainer&, class CraftingContext&) const;
-
-    // vIndex: 5, symbol: __unk_vfn_5
-    virtual void __unk_vfn_5();
 
     // vIndex: 6, symbol: ?matches@SmithingTrimRecipe@@UEBA_NAEBVCraftingContainer@@AEBVCraftingContext@@@Z
     virtual bool matches(class CraftingContainer const&, class CraftingContext const&) const;
@@ -37,8 +34,13 @@ public:
 
     // symbol:
     // ??0SmithingTrimRecipe@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVRecipeIngredient@@11AEBVHashedString@@@Z
-    MCAPI
-    SmithingTrimRecipe(std::string const&, class RecipeIngredient const&, class RecipeIngredient const&, class RecipeIngredient const&, class HashedString const&);
+    MCAPI SmithingTrimRecipe(
+        std::string const& recipeId,
+        class RecipeIngredient const&,
+        class RecipeIngredient const&,
+        class RecipeIngredient const&,
+        class HashedString const& tag
+    );
 
     // symbol: ?getAdditionIngredient@SmithingTrimRecipe@@QEBAAEBVRecipeIngredient@@XZ
     MCAPI class RecipeIngredient const& getAdditionIngredient() const;

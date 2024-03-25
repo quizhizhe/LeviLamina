@@ -19,11 +19,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // symbol: ?_serializeValue@SimpleHashStringFilterTest@@MEBA?AVValue@Json@@XZ
-    MCVAPI class Json::Value _serializeValue() const;
-
-    // symbol: ?setup@SimpleHashStringFilterTest@@UEAA_NAEBUDefinition@FilterTest@@AEBUFilterInputs@@@Z
-    MCVAPI bool setup(struct FilterTest::Definition const&, struct FilterInputs const&);
+    // vIndex: 0, symbol: __gen_??1SimpleHashStringFilterTest@@UEAA@XZ
+    virtual ~SimpleHashStringFilterTest() = default;
 
     // NOLINTEND
 };

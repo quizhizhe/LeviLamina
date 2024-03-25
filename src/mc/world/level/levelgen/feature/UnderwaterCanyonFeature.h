@@ -19,23 +19,35 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1UnderwaterCanyonFeature@@UEAA@XZ
+    virtual ~UnderwaterCanyonFeature() = default;
 
     // vIndex: 1, symbol:
     // ?carve@UnderwaterCanyonFeature@@MEBA_NAEAVBlockVolume@@AEBVBiomeSource@@AEAVRandom@@AEBVChunkPos@@AEBVVec3@@4HHHHHHMMV?$span@$$CBM$0?0@gsl@@AEBUWorldGenContext@@@Z
-    virtual bool
-    carve(class BlockVolume&, class BiomeSource const&, class Random&, class ChunkPos const&, class Vec3 const&, class Vec3 const&, int, int, int, int, int, int, float, float, gsl::span<float const>, struct WorldGenContext const&)
-        const;
-
-    // symbol: ??1UnderwaterCanyonFeature@@UEAA@XZ
-    MCVAPI ~UnderwaterCanyonFeature();
+    virtual bool carve(
+        class BlockVolume&            blocks,
+        class BiomeSource const&      localBiomeSource,
+        class Random&                 random,
+        class ChunkPos const&         pos,
+        class Vec3 const&             startPos,
+        class Vec3 const&             originalStartPos,
+        int                           x0,
+        int                           x1,
+        int                           y0,
+        int                           y1,
+        int                           z0,
+        int                           z1,
+        float                         rad,
+        float                         yRad,
+        gsl::span<float const>        rs,
+        struct WorldGenContext const& context
+    ) const;
 
     // symbol: ??0UnderwaterCanyonFeature@@QEAA@F@Z
-    MCAPI explicit UnderwaterCanyonFeature(short);
+    MCAPI explicit UnderwaterCanyonFeature(short seaLevel);
 
     // symbol: ?isDiggable@UnderwaterCanyonFeature@@SA_NAEBVBlock@@@Z
-    MCAPI static bool isDiggable(class Block const&);
+    MCAPI static bool isDiggable(class Block const& block);
 
     // NOLINTEND
 };

@@ -25,8 +25,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1BlockCommandOrigin@@UEAA@XZ
+    virtual ~BlockCommandOrigin();
 
     // vIndex: 1, symbol:
     // ?getRequestId@BlockCommandOrigin@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
@@ -77,20 +77,26 @@ public:
     virtual bool isValid() const;
 
     // vIndex: 32, symbol: ?_getBaseCommandBlock@BlockCommandOrigin@@MEBAPEAVBaseCommandBlock@@AEAVBlockSource@@@Z
-    virtual class BaseCommandBlock* _getBaseCommandBlock(class BlockSource&) const;
+    virtual class BaseCommandBlock* _getBaseCommandBlock(class BlockSource& region) const;
 
     // vIndex: 33, symbol: ?_getBlockEntity@BlockCommandOrigin@@MEBAPEAVCommandBlockActor@@AEAVBlockSource@@@Z
-    virtual class CommandBlockActor* _getBlockEntity(class BlockSource&) const;
-
-    // symbol: ??1BlockCommandOrigin@@UEAA@XZ
-    MCVAPI ~BlockCommandOrigin();
+    virtual class CommandBlockActor* _getBlockEntity(class BlockSource& region) const;
 
     // symbol: ??0BlockCommandOrigin@@QEAA@AEAVBlockSource@@AEBVBlockPos@@@Z
-    MCAPI BlockCommandOrigin(class BlockSource&, class BlockPos const&);
+    MCAPI BlockCommandOrigin(class BlockSource& region, class BlockPos const& pos);
 
     // symbol:
     // ??0BlockCommandOrigin@@QEAA@AEAVLevel@@V?$AutomaticID@VDimension@@H@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVBlockPos@@@Z
-    MCAPI BlockCommandOrigin(class Level&, DimensionType, std::string const&, class BlockPos const&);
+    MCAPI BlockCommandOrigin(
+        class Level&          level,
+        DimensionType         dimensionType,
+        std::string const&    name,
+        class BlockPos const& pos
+    );
+
+    // symbol:
+    // ?load@BlockCommandOrigin@@SA?AV?$unique_ptr@VBlockCommandOrigin@@U?$default_delete@VBlockCommandOrigin@@@std@@@std@@AEBVCompoundTag@@AEAVLevel@@@Z
+    MCAPI static std::unique_ptr<class BlockCommandOrigin> load(class CompoundTag const& tag, class Level& level);
 
     // NOLINTEND
 

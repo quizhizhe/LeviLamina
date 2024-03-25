@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1OpenDoorGoal@@UEAA@XZ
+    virtual ~OpenDoorGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@OpenDoorGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -35,10 +35,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@OpenDoorGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0OpenDoorGoal@@QEAA@AEAVMob@@_N@Z
-    MCAPI OpenDoorGoal(class Mob&, bool);
+    MCAPI OpenDoorGoal(class Mob& mob, bool closeDoorAfter);
 
     // NOLINTEND
 };

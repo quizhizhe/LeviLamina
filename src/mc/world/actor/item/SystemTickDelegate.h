@@ -25,18 +25,15 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1SystemTickDelegate@FallingBlockSystemOnLand@@UEAA@XZ
+    virtual ~SystemTickDelegate();
 
     // vIndex: 1, symbol:
     // ?onLand@SystemTickDelegate@FallingBlockSystemOnLand@@UEAAXAEBVFallingBlock@@AEAVIBlockSource@@AEBVBlockPos@@@Z
-    virtual void onLand(class FallingBlock const&, class IBlockSource&, class BlockPos const&);
+    virtual void onLand(class FallingBlock const& block, class IBlockSource& region, class BlockPos const& pos);
 
     // vIndex: 2, symbol: ?breakBlock@SystemTickDelegate@FallingBlockSystemOnLand@@UEAAXAEAVFallingBlockActor@@@Z
     virtual void breakBlock(class FallingBlockActor&);
-
-    // symbol: ??1SystemTickDelegate@FallingBlockSystemOnLand@@UEAA@XZ
-    MCVAPI ~SystemTickDelegate();
 
     // NOLINTEND
 };

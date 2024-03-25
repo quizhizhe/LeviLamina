@@ -3,6 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
+#include "mc/deps/core/common/bedrock/NonOwnerPointer.h"
 #include "mc/world/level/block/actor/BlockActor.h"
 
 class JigsawBlockActor : public ::BlockActor {
@@ -14,41 +15,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1JigsawBlockActor@@UEAA@XZ
+    virtual ~JigsawBlockActor() = default;
 
     // vIndex: 1, symbol: ?load@JigsawBlockActor@@UEAAXAEAVLevel@@AEBVCompoundTag@@AEAVDataLoadHelper@@@Z
-    virtual void load(class Level&, class CompoundTag const&, class DataLoadHelper&);
+    virtual void load(class Level& level, class CompoundTag const& tag, class DataLoadHelper& dataLoadHelper);
 
     // vIndex: 2, symbol: ?save@JigsawBlockActor@@UEBA_NAEAVCompoundTag@@@Z
-    virtual bool save(class CompoundTag&) const;
-
-    // vIndex: 12, symbol: __unk_vfn_12
-    virtual void __unk_vfn_12();
-
-    // vIndex: 18, symbol: __unk_vfn_18
-    virtual void __unk_vfn_18();
-
-    // vIndex: 30, symbol: __unk_vfn_30
-    virtual void __unk_vfn_30();
-
-    // vIndex: 31, symbol: __unk_vfn_31
-    virtual void __unk_vfn_31();
-
-    // vIndex: 32, symbol: __unk_vfn_32
-    virtual void __unk_vfn_32();
-
-    // vIndex: 33, symbol: __unk_vfn_33
-    virtual void __unk_vfn_33();
-
-    // vIndex: 34, symbol: __unk_vfn_34
-    virtual void __unk_vfn_34();
-
-    // vIndex: 35, symbol: __unk_vfn_35
-    virtual void __unk_vfn_35();
-
-    // vIndex: 36, symbol: __unk_vfn_36
-    virtual void __unk_vfn_36();
+    virtual bool save(class CompoundTag& tag) const;
 
     // vIndex: 37, symbol:
     // ?getUgcStrings@JigsawBlockActor@@UEBA?AV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@AEBVCompoundTag@@@Z
@@ -58,18 +32,15 @@ public:
     // ?setUgcStrings@JigsawBlockActor@@UEBAXAEAVCompoundTag@@AEBV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@Z
     virtual void setUgcStrings(class CompoundTag&, std::vector<std::string> const&) const;
 
-    // vIndex: 39, symbol: __unk_vfn_39
-    virtual void __unk_vfn_39();
-
     // vIndex: 40, symbol:
     // ?_getUpdatePacket@JigsawBlockActor@@MEAA?AV?$unique_ptr@VBlockActorDataPacket@@U?$default_delete@VBlockActorDataPacket@@@std@@@std@@AEAVBlockSource@@@Z
-    virtual std::unique_ptr<class BlockActorDataPacket> _getUpdatePacket(class BlockSource&);
+    virtual std::unique_ptr<class BlockActorDataPacket> _getUpdatePacket(class BlockSource& region);
 
     // vIndex: 41, symbol: ?_onUpdatePacket@JigsawBlockActor@@MEAAXAEBVCompoundTag@@AEAVBlockSource@@@Z
-    virtual void _onUpdatePacket(class CompoundTag const&, class BlockSource&);
+    virtual void _onUpdatePacket(class CompoundTag const& data, class BlockSource& region);
 
     // symbol: ??0JigsawBlockActor@@QEAA@AEBVBlockPos@@@Z
-    MCAPI explicit JigsawBlockActor(class BlockPos const&);
+    MCAPI explicit JigsawBlockActor(class BlockPos const& pos);
 
     // NOLINTEND
 };

@@ -1,20 +1,21 @@
 #include "ll/api/Logger.h"
-#include "ll/api/utils/Base64.h"
+#include "ll/api/utils/Base64Utils.h"
 #include "ll/api/utils/StringUtils.h"
 #include "mc/common/ColorFormat.h"
 #include "mc/deps/core/mce/Color.h"
 #include "mc/nbt/CompoundTag.h"
+
 #include "nlohmann/json.hpp"
 
-extern bool isTrivialNbtStringChar(char c);
+namespace ll::nbt::detail {
+bool isTrivialNbtStringChar(char c);
+}
 
 namespace {
 
-using namespace ll::utils::string_utils;
-
 namespace cf = ColorFormat;
 
-static constexpr auto base64Id = std::string{" /*BASE64*/"};
+const std::string base64Id = " /*BASE64*/";
 
 template <std::integral T>
 std::string getString(T value) {
@@ -23,13 +24,16 @@ std::string getString(T value) {
 
 template <std::floating_point T>
 std::string getString(T value) {
-    if (std::round(value) == value) { return fmt::format("{:.1f}", value); }
+    if (std::round(value) == value) {
+        return fmt::format("{:.1f}", value);
+    }
     return fmt::format("{}", value);
 }
 
 bool isMinimize(SnbtFormat format) {
     return !(
-        static_cast<bool>(format & SnbtFormat::CompoundNewLine) || static_cast<bool>(format & SnbtFormat::ListNewLine)
+        static_cast<bool>(format & SnbtFormat::CompoundLineFeed)
+        || static_cast<bool>(format & SnbtFormat::ArrayLineFeed)
     );
 }
 
@@ -40,41 +44,58 @@ std::string toDumpString(std::string const& str, fmt::color defaultc, std::strin
     std::string res;
 
     bool base64 = false;
-
-    bool isTrivial = true;
-    if (!static_cast<bool>(format & SnbtFormat::Jsonify)) {
-        for (auto c : str) {
-            if (!isTrivialNbtStringChar(c)) {
+    if (str.empty()) {
+        res = "\"\"";
+    } else {
+        bool isTrivial = true;
+        if (!static_cast<bool>(format & SnbtFormat::ForceQuote)) {
+            if (str[0] == '-' || isdigit(str[0])) {
                 isTrivial = false;
-                break;
+            } else {
+                for (auto c : str) {
+                    if (!ll::nbt::detail::isTrivialNbtStringChar(c)) {
+                        isTrivial = false;
+                        break;
+                    }
+                }
             }
+        } else {
+            isTrivial = false;
         }
-    } else {
-        isTrivial = false;
-    }
-    if (isTrivial) {
-        res = str;
-    } else {
-        try {
-            res = nlohmann::json{str}
-                      .dump(-1, ' ', (bool)(format & SnbtFormat::ForceAscii), nlohmann::json::error_handler_t::strict);
-            res = res.substr(1, res.size() - 2);
-        } catch (...) {
-            base64 = true;
-            res    = "\"" + ll::utils::base64::encode(str) + "\"";
+        if (isTrivial) {
+            res = str;
+        } else {
+            try {
+                res = nlohmann::json{str}.dump(
+                    -1,
+                    ' ',
+                    (bool)(format & SnbtFormat::ForceAscii),
+                    nlohmann::json::error_handler_t::strict
+                );
+                res = res.substr(1, res.size() - 2);
+            } catch (...) {
+                base64 = true;
+                res    = "\"" + ll::base64_utils::encode(str) + "\"";
+            }
         }
     }
 
     if ((int)format & (int)SnbtFormat::Colored) {
         if ((int)format & (int)SnbtFormat::Console) {
-            res = applyTextStyle(fmt::fg(defaultc), res);
-            if (base64) { res += applyTextStyle(fmt::fg(fmt::color::olive_drab), base64Id); }
+            res = ll::string_utils::applyTextStyle(fmt::fg(defaultc), res);
+            if (base64) {
+                res += ll::string_utils::applyTextStyle(fmt::fg(fmt::color::olive_drab), base64Id);
+            }
         } else {
             res = WrapColorCode(res, defaultmc);
-            if (base64) { res += WrapColorCode(base64Id, cf::MATERIAL_EMERALD); }
+            if (base64) {
+                res += WrapColorCode(base64Id, cf::MATERIAL_EMERALD);
+            }
         }
     } else {
-        if (base64) { res += base64Id; }
+        if (base64) {
+            res += base64Id;
+        }
     }
     return res;
 }
@@ -82,7 +103,7 @@ std::string toDumpString(std::string const& str, fmt::color defaultc, std::strin
 std::string toDumpNumber(std::string str, SnbtFormat format) {
     if ((int)format & (int)SnbtFormat::Colored) {
         if ((int)format & (int)SnbtFormat::Console) {
-            str = applyTextStyle(fmt::fg(fmt::color::pale_green), str);
+            str = ll::string_utils::applyTextStyle(fmt::fg(fmt::color::pale_green), str);
         } else {
             str = WrapColorCode(str, cf::GREEN);
         }
@@ -91,12 +112,13 @@ std::string toDumpNumber(std::string str, SnbtFormat format) {
 }
 } // namespace
 
+namespace ll::nbt::detail {
 std::string TypedToSnbt(EndTag&, uchar, SnbtFormat format) {
     std::string res = "null";
 
     if ((int)format & (int)SnbtFormat::Colored) {
         if ((int)format & (int)SnbtFormat::Console) {
-            res = applyTextStyle(fmt::fg(fmt::color::dodger_blue), res);
+            res = ll::string_utils::applyTextStyle(fmt::fg(fmt::color::royal_blue), res);
         } else {
             res = WrapColorCode(res, cf::BLUE);
         }
@@ -105,13 +127,13 @@ std::string TypedToSnbt(EndTag&, uchar, SnbtFormat format) {
 }
 std::string TypedToSnbt(ByteTag& self, uchar, SnbtFormat format) {
     return toDumpNumber(
-        getString(self.data) + (static_cast<bool>(format & SnbtFormat::Jsonify) ? " /*b*/" : "b"),
+        getString(self.data) + (static_cast<bool>(format & SnbtFormat::CommentMarks) ? " /*b*/" : "b"),
         format
     );
 }
 std::string TypedToSnbt(ShortTag& self, uchar, SnbtFormat format) {
     return toDumpNumber(
-        getString(self.data) + (static_cast<bool>(format & SnbtFormat::Jsonify) ? " /*s*/" : "s"),
+        getString(self.data) + (static_cast<bool>(format & SnbtFormat::CommentMarks) ? " /*s*/" : "s"),
         format
     );
 }
@@ -119,13 +141,13 @@ std::string TypedToSnbt(IntTag& self, uchar, SnbtFormat format) { return toDumpN
 
 std::string TypedToSnbt(Int64Tag& self, uchar, SnbtFormat format) {
     return toDumpNumber(
-        getString(self.data) + (static_cast<bool>(format & SnbtFormat::Jsonify) ? " /*l*/" : "l"),
+        getString(self.data) + (static_cast<bool>(format & SnbtFormat::CommentMarks) ? " /*l*/" : "l"),
         format
     );
 }
 std::string TypedToSnbt(FloatTag& self, uchar, SnbtFormat format) {
     return toDumpNumber(
-        getString(self.data) + (static_cast<bool>(format & SnbtFormat::Jsonify) ? " /*f*/" : "f"),
+        getString(self.data) + (static_cast<bool>(format & SnbtFormat::CommentMarks) ? " /*f*/" : "f"),
         format
     );
 }
@@ -147,8 +169,8 @@ std::string TypedToSnbt(ListTag& self, uchar indent, SnbtFormat format) {
 
     if ((int)format & (int)SnbtFormat::Colored) {
         if ((int)format & (int)SnbtFormat::Console) {
-            lbracket = applyTextStyle(bracketColor, lbracket);
-            rbracket = applyTextStyle(bracketColor, rbracket);
+            lbracket = ll::string_utils::applyTextStyle(bracketColor, lbracket);
+            rbracket = ll::string_utils::applyTextStyle(bracketColor, rbracket);
         } else {
             lbracket = WrapColorCode(lbracket, cf::MATERIAL_DIAMOND);
             rbracket = WrapColorCode(rbracket, cf::MATERIAL_DIAMOND);
@@ -161,27 +183,35 @@ std::string TypedToSnbt(ListTag& self, uchar indent, SnbtFormat format) {
     std::string indentSpace(indent, ' ');
 
     bool isMinimized = isMinimize(format);
-    bool isNewLine   = (int)format & (int)SnbtFormat::ListNewLine;
+    bool isNewLine   = (int)format & (int)SnbtFormat::ArrayLineFeed;
 
-    if (isNewLine) { res += '\n'; }
+    if (isNewLine) {
+        res += '\n';
+    }
 
     for (auto& tag : self.mList) {
         i--;
-        if (isNewLine) { res += indentSpace; }
+        if (isNewLine) {
+            res += indentSpace;
+        }
 
         auto key = tag->toSnbt(format, indent);
 
         if (isNewLine) {
-            res += replaceAll(key, "\n", "\n" + indentSpace);
-        } else {
-            res += key;
+            ll::string_utils::replaceAll(key, "\n", "\n" + indentSpace);
         }
+        res += key;
+
 
         if (i > 0) {
             res += ',';
-            if (!isMinimized && !isNewLine) { res += ' '; }
+            if (!isMinimized && !isNewLine) {
+                res += ' ';
+            }
         }
-        if (isNewLine) { res += '\n'; }
+        if (isNewLine) {
+            res += '\n';
+        }
     }
 
     res += rbracket;
@@ -198,8 +228,8 @@ std::string TypedToSnbt(CompoundTag& self, uchar indent, SnbtFormat format) {
 
     if ((int)format & (int)SnbtFormat::Colored) {
         if ((int)format & (int)SnbtFormat::Console) {
-            lbracket = applyTextStyle(bracketColor, lbracket);
-            rbracket = applyTextStyle(bracketColor, rbracket);
+            lbracket = ll::string_utils::applyTextStyle(bracketColor, lbracket);
+            rbracket = ll::string_utils::applyTextStyle(bracketColor, rbracket);
         } else {
             lbracket = WrapColorCode(lbracket, cf::LIGHT_PURPLE);
             rbracket = WrapColorCode(rbracket, cf::LIGHT_PURPLE);
@@ -212,13 +242,17 @@ std::string TypedToSnbt(CompoundTag& self, uchar indent, SnbtFormat format) {
     std::string indentSpace(indent, ' ');
 
     bool isMinimized = isMinimize(format);
-    bool isNewLine   = (int)format & (int)SnbtFormat::CompoundNewLine;
+    bool isNewLine   = (int)format & (int)SnbtFormat::CompoundLineFeed;
 
-    if (isNewLine) { res += '\n'; }
+    if (isNewLine) {
+        res += '\n';
+    }
 
     for (auto& [k, v] : self.mTags) {
         i--;
-        if (isNewLine) { res += indentSpace; }
+        if (isNewLine) {
+            res += indentSpace;
+        }
 
         auto keyStr = toDumpString(k, fmt::color::sky_blue, cf::AQUA, format);
 
@@ -226,21 +260,26 @@ std::string TypedToSnbt(CompoundTag& self, uchar indent, SnbtFormat format) {
 
         res += ':';
 
-        if (!isMinimized) { res += ' '; }
+        if (!isMinimized) {
+            res += ' ';
+        }
 
-        auto key = v.get()->toSnbt(format, indent);
+        auto key = v.toSnbt(format, indent);
 
         if (isNewLine) {
-            res += replaceAll(key, "\n", "\n" + indentSpace);
-        } else {
-            res += key;
+            ll::string_utils::replaceAll(key, "\n", "\n" + indentSpace);
         }
+        res += key;
 
         if (i > 0) {
             res += ',';
-            if (!isMinimized && !isNewLine) { res += ' '; }
+            if (!isMinimized && !isNewLine) {
+                res += ' ';
+            }
         }
-        if (isNewLine) { res += '\n'; }
+        if (isNewLine) {
+            res += '\n';
+        }
     }
 
     res += rbracket;
@@ -254,12 +293,14 @@ std::string TypedToSnbt(ByteArrayTag& self, uchar indent, SnbtFormat format) {
     std::string res;
 
     std::string lbracket{"[B;"}, rbracket{"]"};
-    if (static_cast<bool>(format & SnbtFormat::Jsonify)) { lbracket = "[ /*B;*/"; }
+    if (static_cast<bool>(format & SnbtFormat::CommentMarks)) {
+        lbracket = "[ /*B;*/";
+    }
 
     if ((int)format & (int)SnbtFormat::Colored) {
         if ((int)format & (int)SnbtFormat::Console) {
-            lbracket = applyTextStyle(bracketColor, lbracket);
-            rbracket = applyTextStyle(bracketColor, rbracket);
+            lbracket = ll::string_utils::applyTextStyle(bracketColor, lbracket);
+            rbracket = ll::string_utils::applyTextStyle(bracketColor, rbracket);
         } else {
             lbracket = WrapColorCode(lbracket, cf::YELLOW);
             rbracket = WrapColorCode(rbracket, cf::YELLOW);
@@ -268,28 +309,38 @@ std::string TypedToSnbt(ByteArrayTag& self, uchar indent, SnbtFormat format) {
 
     res += lbracket;
 
-    size_t      i = self.view().size();
+    size_t      i = self.size();
     std::string indentSpace(indent, ' ');
 
     bool isMinimized = isMinimize(format);
-    bool isNewLine   = (int)format & (int)SnbtFormat::ListNewLine;
+    bool isNewLine   = (int)format & (int)SnbtFormat::ArrayLineFeed;
 
-    if (isNewLine) { res += '\n'; }
+    if (isNewLine) {
+        res += '\n';
+    }
 
     std::string back{"b"};
-    if (static_cast<bool>(format & SnbtFormat::Jsonify)) { back = " /*b*/"; }
+    if (static_cast<bool>(format & SnbtFormat::CommentMarks)) {
+        back = " /*b*/";
+    }
 
-    for (auto& tag : self.view()) {
+    for (auto& tag : self.data) {
         i--;
-        if (isNewLine) { res += indentSpace; }
+        if (isNewLine) {
+            res += indentSpace;
+        }
 
         res += toDumpNumber(getString(tag) + back, format);
 
         if (i > 0) {
             res += ',';
-            if (!isMinimized && !isNewLine) { res += ' '; }
+            if (!isMinimized && !isNewLine) {
+                res += ' ';
+            }
         }
-        if (isNewLine) { res += '\n'; }
+        if (isNewLine) {
+            res += '\n';
+        }
     }
 
     res += rbracket;
@@ -303,12 +354,14 @@ std::string TypedToSnbt(IntArrayTag& self, uchar indent, SnbtFormat format) {
     std::string res;
 
     std::string lbracket{"[I;"}, rbracket{"]"};
-    if (static_cast<bool>(format & SnbtFormat::Jsonify)) { lbracket = "[ /*I;*/"; }
+    if (static_cast<bool>(format & SnbtFormat::CommentMarks)) {
+        lbracket = "[ /*I;*/";
+    }
 
     if ((int)format & (int)SnbtFormat::Colored) {
         if ((int)format & (int)SnbtFormat::Console) {
-            lbracket = applyTextStyle(bracketColor, lbracket);
-            rbracket = applyTextStyle(bracketColor, rbracket);
+            lbracket = ll::string_utils::applyTextStyle(bracketColor, lbracket);
+            rbracket = ll::string_utils::applyTextStyle(bracketColor, rbracket);
         } else {
             lbracket = WrapColorCode(lbracket, cf::YELLOW);
             rbracket = WrapColorCode(rbracket, cf::YELLOW);
@@ -317,28 +370,37 @@ std::string TypedToSnbt(IntArrayTag& self, uchar indent, SnbtFormat format) {
 
     res += lbracket;
 
-    size_t      i = self.view().size();
+    size_t      i = self.size();
     std::string indentSpace(indent, ' ');
 
     bool isMinimized = isMinimize(format);
-    bool isNewLine   = (int)format & (int)SnbtFormat::ListNewLine;
+    bool isNewLine   = (int)format & (int)SnbtFormat::ArrayLineFeed;
 
-    if (isNewLine) { res += '\n'; }
+    if (isNewLine) {
+        res += '\n';
+    }
 
-    for (auto& tag : self.view()) {
+    for (auto& tag : self.data) {
         i--;
-        if (isNewLine) { res += indentSpace; }
+        if (isNewLine) {
+            res += indentSpace;
+        }
 
         res += toDumpNumber(getString(tag), format);
 
         if (i > 0) {
             res += ',';
-            if (!isMinimized && !isNewLine) { res += ' '; }
+            if (!isMinimized && !isNewLine) {
+                res += ' ';
+            }
         }
-        if (isNewLine) { res += '\n'; }
+        if (isNewLine) {
+            res += '\n';
+        }
     }
 
     res += rbracket;
 
     return res;
 }
+} // namespace ll::nbt::detail

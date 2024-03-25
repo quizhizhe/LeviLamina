@@ -17,11 +17,14 @@ public:
     // vIndex: 0, symbol: ?containerContentChanged@LegacyActorArmorChangedListener@@UEAAXH@Z
     virtual void containerContentChanged(int);
 
+    // vIndex: 1, symbol: __gen_??1LegacyActorArmorChangedListener@@UEAA@XZ
+    virtual ~LegacyActorArmorChangedListener() = default;
+
     // symbol: ?containerContentChanged@LegacyActorArmorChangedListener@@QEAAXAEAVActor@@@Z
-    MCAPI void containerContentChanged(class Actor&);
+    MCAPI void containerContentChanged(class Actor& actor);
 
     // symbol: ?initializeEntity@LegacyActorArmorChangedListener@@SAXAEAVEntityContext@@@Z
-    MCAPI static void initializeEntity(class EntityContext&);
+    MCAPI static void initializeEntity(class EntityContext& entity);
 
     // NOLINTEND
 };

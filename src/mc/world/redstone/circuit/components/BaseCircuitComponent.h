@@ -28,8 +28,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1BaseCircuitComponent@@UEAA@XZ
+    virtual ~BaseCircuitComponent();
 
     // vIndex: 1, symbol: ?getStrength@BaseCircuitComponent@@UEBAHXZ
     virtual int getStrength() const;
@@ -38,10 +38,10 @@ public:
     virtual int getDirection() const;
 
     // vIndex: 3, symbol: ?setStrength@BaseCircuitComponent@@UEAAXH@Z
-    virtual void setStrength(int);
+    virtual void setStrength(int strength);
 
     // vIndex: 4, symbol: ?setDirection@BaseCircuitComponent@@UEAAXE@Z
-    virtual void setDirection(uchar);
+    virtual void setDirection(uchar direction);
 
     // vIndex: 5, symbol: ?setConsumePowerAnyDirection@BaseCircuitComponent@@UEAAX_N@Z
     virtual void setConsumePowerAnyDirection(bool);
@@ -56,48 +56,54 @@ public:
     virtual bool canStopPower() const;
 
     // vIndex: 9, symbol: ?setStopPower@BaseCircuitComponent@@UEAAX_N@Z
-    virtual void setStopPower(bool);
+    virtual void setStopPower(bool bPower);
 
     // vIndex: 10, symbol: ?removeSource@BaseCircuitComponent@@UEAAXAEBVBlockPos@@PEBV1@@Z
-    virtual void removeSource(class BlockPos const&, class BaseCircuitComponent const*);
+    virtual void removeSource(class BlockPos const& posSource, class BaseCircuitComponent const* pComponent);
 
     // vIndex: 11, symbol:
     // ?addSource@BaseCircuitComponent@@UEAA_NAEAVCircuitSceneGraph@@AEBVCircuitTrackingInfo@@AEAHAEA_N@Z
-    virtual bool addSource(class CircuitSceneGraph&, class CircuitTrackingInfo const&, int&, bool&);
+    virtual bool addSource(
+        class CircuitSceneGraph&         graph,
+        class CircuitTrackingInfo const& info,
+        int&                             dampening,
+        bool&                            bDirectlyPowered
+    );
 
     // vIndex: 12, symbol:
     // ?allowConnection@BaseCircuitComponent@@UEAA_NAEAVCircuitSceneGraph@@AEBVCircuitTrackingInfo@@AEA_N@Z
-    virtual bool allowConnection(class CircuitSceneGraph&, class CircuitTrackingInfo const&, bool&);
+    virtual bool
+    allowConnection(class CircuitSceneGraph& graph, class CircuitTrackingInfo const& info, bool& bDirectlyPowered);
 
     // vIndex: 13, symbol: ?checkLock@BaseCircuitComponent@@UEAAXAEAVCircuitSystem@@AEBVBlockPos@@@Z
-    virtual void checkLock(class CircuitSystem&, class BlockPos const&);
+    virtual void checkLock(class CircuitSystem& system, class BlockPos const& pos);
 
     // vIndex: 14, symbol: ?evaluate@BaseCircuitComponent@@UEAA_NAEAVCircuitSystem@@AEBVBlockPos@@@Z
-    virtual bool evaluate(class CircuitSystem&, class BlockPos const&);
+    virtual bool evaluate(class CircuitSystem& system, class BlockPos const& pos);
 
     // vIndex: 15, symbol: ?cacheValues@BaseCircuitComponent@@UEAAXAEAVCircuitSystem@@AEBVBlockPos@@@Z
-    virtual void cacheValues(class CircuitSystem&, class BlockPos const&);
+    virtual void cacheValues(class CircuitSystem& system, class BlockPos const& pos);
 
     // vIndex: 16, symbol: ?updateDependencies@BaseCircuitComponent@@UEAAXAEAVCircuitSceneGraph@@AEBVBlockPos@@@Z
-    virtual void updateDependencies(class CircuitSceneGraph&, class BlockPos const&);
+    virtual void updateDependencies(class CircuitSceneGraph& system, class BlockPos const& pos);
 
-    // vIndex: 17, symbol: __unk_vfn_17
-    virtual void __unk_vfn_17();
+    // vIndex: 17, symbol: ?allowIndirect@BaseCircuitComponent@@UEBA_NXZ
+    virtual bool allowIndirect() const;
 
     // vIndex: 18, symbol: ?isHalfPulse@BaseCircuitComponent@@UEBA_NXZ
     virtual bool isHalfPulse() const;
 
     // vIndex: 19, symbol: ?hasSource@BaseCircuitComponent@@UEBA_NAEBV1@@Z
-    virtual bool hasSource(class BaseCircuitComponent const&) const;
+    virtual bool hasSource(class BaseCircuitComponent const& source) const;
 
-    // vIndex: 20, symbol: __unk_vfn_20
-    virtual void __unk_vfn_20();
+    // vIndex: 20, symbol: ?hasChildrenSource@BaseCircuitComponent@@UEBA_NXZ
+    virtual bool hasChildrenSource() const;
 
     // vIndex: 21, symbol: ?isSecondaryPowered@BaseCircuitComponent@@UEBA_NXZ
     virtual bool isSecondaryPowered() const;
 
     // vIndex: 22, symbol: ?removeFromAnySourceList@BaseCircuitComponent@@MEAAXPEBV1@@Z
-    virtual void removeFromAnySourceList(class BaseCircuitComponent const*);
+    virtual void removeFromAnySourceList(class BaseCircuitComponent const* component);
 
     // vIndex: 23, symbol: ?getCircuitComponentType@BaseCircuitComponent@@UEBA?AW4CircuitComponentType@@XZ
     virtual ::CircuitComponentType getCircuitComponentType() const;
@@ -105,30 +111,22 @@ public:
     // vIndex: 24, symbol: ?getCircuitComponentGroupType@BaseCircuitComponent@@UEBA?AW4CircuitComponentType@@XZ
     virtual ::CircuitComponentType getCircuitComponentGroupType() const;
 
-    // symbol: ?allowIndirect@BaseCircuitComponent@@UEBA_NXZ
-    MCVAPI bool allowIndirect() const;
-
-    // symbol: ?hasChildrenSource@BaseCircuitComponent@@UEBA_NXZ
-    MCVAPI bool hasChildrenSource() const;
-
-    // symbol: ??1BaseCircuitComponent@@UEAA@XZ
-    MCVAPI ~BaseCircuitComponent();
-
     // symbol: ??0BaseCircuitComponent@@QEAA@XZ
     MCAPI BaseCircuitComponent();
 
     // symbol: ?addSourceItem@BaseCircuitComponent@@QEAAXAEBVItem@CircuitComponentList@@@Z
-    MCAPI void addSourceItem(class CircuitComponentList::Item const&);
+    MCAPI void addSourceItem(class CircuitComponentList::Item const& item);
 
-    // symbol: ?hasDirectPower@BaseCircuitComponent@@QEAA_NXZ
-    MCAPI bool hasDirectPower();
+    // symbol: ?isRemoved@BaseCircuitComponent@@QEBA_NXZ
+    MCAPI bool isRemoved() const;
 
     // NOLINTEND
 
     // protected:
     // NOLINTBEGIN
     // symbol: ?trackPowerSource@BaseCircuitComponent@@IEAA_NAEBVCircuitTrackingInfo@@H_NH1@Z
-    MCAPI bool trackPowerSource(class CircuitTrackingInfo const&, int, bool, int, bool);
+    MCAPI bool
+    trackPowerSource(class CircuitTrackingInfo const& info, int dampening, bool directlyPowered, int data, bool);
 
     // NOLINTEND
 };

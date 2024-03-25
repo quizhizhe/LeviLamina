@@ -9,7 +9,9 @@
 
 // auto generated forward declare list
 // clang-format off
+namespace ScriptModuleMinecraft { class ScriptComponentTypeEnumBuilder; }
 namespace ScriptModuleMinecraft { class ScriptItemComponent; }
+namespace Scripting { struct NumberRange; }
 struct FloatRange;
 // clang-format on
 
@@ -18,15 +20,13 @@ namespace ScriptModuleMinecraft {
 class ScriptItemDurabilityComponent : public ::ScriptModuleMinecraft::ScriptItemComponent {
 public:
     // prevent constructor by default
+    ScriptItemDurabilityComponent& operator=(ScriptItemDurabilityComponent const&);
     ScriptItemDurabilityComponent();
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // symbol: ??1ScriptItemDurabilityComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptItemDurabilityComponent();
+    // vIndex: 0, symbol: __gen_??1ScriptItemDurabilityComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptItemDurabilityComponent() = default;
 
     // symbol: ??0ScriptItemDurabilityComponent@ScriptModuleMinecraft@@QEAA@AEBV01@@Z
     MCAPI ScriptItemDurabilityComponent(class ScriptModuleMinecraft::ScriptItemDurabilityComponent const&);
@@ -35,27 +35,27 @@ public:
     MCAPI class Scripting::Result<int> getCurrentDamage();
 
     // symbol: ?getDamageChance@ScriptItemDurabilityComponent@ScriptModuleMinecraft@@QEAA?AV?$Result@H$$V@Scripting@@H@Z
-    MCAPI class Scripting::Result<int> getDamageChance(int);
+    MCAPI class Scripting::Result<int> getDamageChance(int unbreaking);
 
     // symbol:
-    // ?getDamageRange@ScriptItemDurabilityComponent@ScriptModuleMinecraft@@QEAA?AV?$Result@UFloatRange@@$$V@Scripting@@XZ
-    MCAPI class Scripting::Result<struct FloatRange> getDamageRange();
+    // ?getDamageChanceRange@ScriptItemDurabilityComponent@ScriptModuleMinecraft@@QEAA?AV?$Result@UNumberRange@Scripting@@$$V@Scripting@@XZ
+    MCAPI class Scripting::Result<struct Scripting::NumberRange> getDamageChanceRange();
+
+    // symbol:
+    // ?getDamageRange_V010@ScriptItemDurabilityComponent@ScriptModuleMinecraft@@QEAA?AV?$Result@UFloatRange@@$$V@Scripting@@XZ
+    MCAPI class Scripting::Result<struct FloatRange> getDamageRange_V010();
 
     // symbol: ?getMaxDurability@ScriptItemDurabilityComponent@ScriptModuleMinecraft@@QEAA?AV?$Result@H$$V@Scripting@@XZ
     MCAPI class Scripting::Result<int> getMaxDurability();
 
-    // symbol: ??4ScriptItemDurabilityComponent@ScriptModuleMinecraft@@QEAAAEAV01@AEBV01@@Z
-    MCAPI class ScriptModuleMinecraft::ScriptItemDurabilityComponent&
-    operator=(class ScriptModuleMinecraft::ScriptItemDurabilityComponent const&);
-
     // symbol:
     // ?setCurrentDamage@ScriptItemDurabilityComponent@ScriptModuleMinecraft@@QEAA?AV?$Result@X$$V@Scripting@@H@Z
-    MCAPI class Scripting::Result<void> setCurrentDamage(int);
+    MCAPI class Scripting::Result<void> setCurrentDamage(int damage);
 
     // symbol:
-    // ?bind@ScriptItemDurabilityComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptItemDurabilityComponent@ScriptModuleMinecraft@@@Scripting@@XZ
+    // ?bind@ScriptItemDurabilityComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptItemDurabilityComponent@ScriptModuleMinecraft@@@Scripting@@AEAVScriptComponentTypeEnumBuilder@2@@Z
     MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptItemDurabilityComponent>
-    bind();
+    bind(class ScriptModuleMinecraft::ScriptComponentTypeEnumBuilder&);
 
     // NOLINTEND
 };

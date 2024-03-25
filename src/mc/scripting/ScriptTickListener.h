@@ -15,10 +15,13 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ?onLevelRemovedPlayer@ScriptTickListener@@UEAA?AW4EventResult@@AEAVLevel@@AEAVPlayer@@@Z
-    MCVAPI ::EventResult onLevelRemovedPlayer(class Level&, class Player&);
+    MCVAPI ::EventResult onLevelRemovedPlayer(class Level&, class Player& player);
 
     // symbol: ?onLevelTickEnd@ScriptTickListener@@UEAAXXZ
     MCVAPI void onLevelTickEnd();
+
+    // symbol: ?onRunAsyncJobs@ScriptTickListener@@UEAAXXZ
+    MCVAPI void onRunAsyncJobs();
 
     // NOLINTEND
 };

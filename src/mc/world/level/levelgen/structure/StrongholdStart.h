@@ -14,21 +14,21 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1StrongholdStart@@UEAA@XZ
+    virtual ~StrongholdStart() = default;
 
     // vIndex: 2, symbol: ?isValid@StrongholdStart@@UEBA_NXZ
     virtual bool isValid() const;
 
     // symbol: ??0StrongholdStart@@QEAA@AEAVDimension@@AEAVRandom@@HH@Z
-    MCAPI StrongholdStart(class Dimension&, class Random&, int, int);
+    MCAPI StrongholdStart(class Dimension& dimension, class Random& random, int chunkX, int chunkZ);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_initializePieceSet@StrongholdStart@@AEAAXAEAVRandom@@@Z
-    MCAPI void _initializePieceSet(class Random&);
+    MCAPI void _initializePieceSet(class Random& random);
 
     // NOLINTEND
 };

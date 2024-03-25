@@ -2,12 +2,15 @@
 
 #include "mc/_HeaderOutputPredefine.h"
 
+// auto generated inclusion list
+#include "mc/server/commands/ServerCommand.h"
+
 // auto generated forward declare list
 // clang-format off
 namespace Bedrock::Threading { class Mutex; }
 // clang-format on
 
-class SaveCommand {
+class SaveCommand : public ::ServerCommand {
 public:
     // SaveCommand inner types define
     enum class State {};
@@ -20,30 +23,27 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // vIndex: 1, symbol: __unk_vfn_1
-    virtual void __unk_vfn_1();
+    // vIndex: 0, symbol: __gen_??1SaveCommand@@UEAA@XZ
+    virtual ~SaveCommand() = default;
 
     // vIndex: 2, symbol: ?execute@SaveCommand@@UEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    virtual void execute(class CommandOrigin const&, class CommandOutput&) const;
+    virtual void execute(class CommandOrigin const&, class CommandOutput& output) const;
 
     // symbol: ?setup@SaveCommand@@SAXAEAVCommandRegistry@@@Z
-    MCAPI static void setup(class CommandRegistry&);
+    MCAPI static void setup(class CommandRegistry& registry);
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?saveHold@SaveCommand@@CAXAEAVCommandOutput@@@Z
-    MCAPI static void saveHold(class CommandOutput&);
+    MCAPI static void saveHold(class CommandOutput& output);
 
     // symbol: ?saveResume@SaveCommand@@CAXAEAVCommandOutput@@@Z
-    MCAPI static void saveResume(class CommandOutput&);
+    MCAPI static void saveResume(class CommandOutput& output);
 
     // symbol: ?saveState@SaveCommand@@CAXAEAVCommandOutput@@@Z
-    MCAPI static void saveState(class CommandOutput&);
+    MCAPI static void saveState(class CommandOutput& output);
 
     // NOLINTEND
 
@@ -64,11 +64,11 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mSaveAllFileList() { return mSaveAllFileList; }
+    static auto& $mSaveAllFileList() { return mSaveAllFileList; }
 
-    auto& $mSaveAllMutex() { return mSaveAllMutex; }
+    static auto& $mSaveAllMutex() { return mSaveAllMutex; }
 
-    auto& $mState() { return mState; }
+    static auto& $mState() { return mState; }
 
     // NOLINTEND
 };

@@ -19,19 +19,22 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1DragonChargePlayerDefinition@@UEAA@XZ
+    virtual ~DragonChargePlayerDefinition() = default;
 
     // symbol: ??0DragonChargePlayerDefinition@@QEAA@XZ
     MCAPI DragonChargePlayerDefinition();
 
     // symbol: ?initialize@DragonChargePlayerDefinition@@QEBAXAEAVEntityContext@@AEAVDragonChargePlayerGoal@@@Z
-    MCAPI void initialize(class EntityContext&, class DragonChargePlayerGoal&) const;
+    MCAPI void initialize(class EntityContext& entity, class DragonChargePlayerGoal& goal) const;
 
     // symbol:
     // ?buildSchema@DragonChargePlayerDefinition@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VDragonChargePlayerDefinition@@@JsonUtil@@@3@@Z
-    MCAPI static void
-    buildSchema(std::string const&, std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class DragonChargePlayerDefinition>>&);
+    MCAPI static void buildSchema(
+        std::string const& name,
+        std::shared_ptr<
+            class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class DragonChargePlayerDefinition>>& root
+    );
 
     // NOLINTEND
 };

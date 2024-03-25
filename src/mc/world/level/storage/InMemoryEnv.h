@@ -5,6 +5,11 @@
 // auto generated inclusion list
 #include "mc/world/level/storage/FlushableEnv.h"
 
+// auto generated forward declare list
+// clang-format off
+namespace Core { class Path; }
+// clang-format on
+
 class InMemoryEnv : public ::FlushableEnv {
 public:
     // prevent constructor by default
@@ -14,32 +19,32 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1InMemoryEnv@@UEAA@XZ
+    virtual ~InMemoryEnv() = default;
 
     // vIndex: 1, symbol:
     // ?NewSequentialFile@InMemoryEnv@@UEAA?AVStatus@leveldb@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PEAPEAVSequentialFile@3@@Z
-    virtual leveldb::Status NewSequentialFile(std::string const&, leveldb::SequentialFile**);
+    virtual leveldb::Status NewSequentialFile(std::string const& f, leveldb::SequentialFile** r);
 
     // vIndex: 2, symbol:
     // ?NewRandomAccessFile@InMemoryEnv@@UEAA?AVStatus@leveldb@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PEAPEAVRandomAccessFile@3@@Z
-    virtual leveldb::Status NewRandomAccessFile(std::string const&, leveldb::RandomAccessFile**);
+    virtual leveldb::Status NewRandomAccessFile(std::string const& f, leveldb::RandomAccessFile** r);
 
     // vIndex: 3, symbol:
     // ?NewWritableFile@InMemoryEnv@@UEAA?AVStatus@leveldb@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PEAPEAVWritableFile@3@@Z
-    virtual leveldb::Status NewWritableFile(std::string const&, leveldb::WritableFile**);
+    virtual leveldb::Status NewWritableFile(std::string const& f, leveldb::WritableFile** r);
 
     // vIndex: 4, symbol:
     // ?NewAppendableFile@InMemoryEnv@@UEAA?AVStatus@leveldb@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PEAPEAVWritableFile@3@@Z
-    virtual leveldb::Status NewAppendableFile(std::string const&, leveldb::WritableFile**);
+    virtual leveldb::Status NewAppendableFile(std::string const& f, leveldb::WritableFile** r);
 
     // vIndex: 5, symbol:
     // ?FileExists@InMemoryEnv@@UEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual bool FileExists(std::string const&);
+    virtual bool FileExists(std::string const& f);
 
     // vIndex: 6, symbol:
     // ?GetChildren@InMemoryEnv@@UEAA?AVStatus@leveldb@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@5@@Z
-    virtual leveldb::Status GetChildren(std::string const&, std::vector<std::string>*);
+    virtual leveldb::Status GetChildren(std::string const& dir, std::vector<std::string>* r);
 
     // vIndex: 7, symbol:
     // ?DeleteFileA@InMemoryEnv@@UEAA?AVStatus@leveldb@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
@@ -47,10 +52,13 @@ public:
 
     // vIndex: 11, symbol:
     // ?RenameFile@InMemoryEnv@@UEAA?AVStatus@leveldb@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z
-    virtual leveldb::Status RenameFile(std::string const&, std::string const&);
+    virtual leveldb::Status RenameFile(std::string const& from, std::string const& to);
 
     // vIndex: 20, symbol: ?flushToPermanentStorage@InMemoryEnv@@UEAAXXZ
     virtual void flushToPermanentStorage();
+
+    // symbol: ??0InMemoryEnv@@QEAA@PEAVEnv@leveldb@@AEBVPath@Core@@@Z
+    MCAPI InMemoryEnv(leveldb::Env* env, class Core::Path const& rootDbPath);
 
     // NOLINTEND
 

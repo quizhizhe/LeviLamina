@@ -50,19 +50,19 @@ public:
         MCAPI Neighbors();
 
         // symbol: ??0Neighbors@LevelChunk@@QEAA@AEAVStringByteInput@@@Z
-        MCAPI explicit Neighbors(class StringByteInput&);
+        MCAPI explicit Neighbors(class StringByteInput& stream);
 
         // symbol: ?hasNeighbor@Neighbors@LevelChunk@@QEBA_NW4LevelChunkNeighbor@@@Z
-        MCAPI bool hasNeighbor(::LevelChunkNeighbor) const;
+        MCAPI bool hasNeighbor(::LevelChunkNeighbor neighbor) const;
 
         // symbol: ?isSurrounded@Neighbors@LevelChunk@@QEBA_NXZ
         MCAPI bool isSurrounded() const;
 
         // symbol: ?serialize@Neighbors@LevelChunk@@QEBAXAEAVStringByteOutput@@@Z
-        MCAPI void serialize(class StringByteOutput&) const;
+        MCAPI void serialize(class StringByteOutput& stream) const;
 
         // symbol: ?setNeighbor@Neighbors@LevelChunk@@QEAAXW4LevelChunkNeighbor@@_N@Z
-        MCAPI void setNeighbor(::LevelChunkNeighbor, bool);
+        MCAPI void setNeighbor(::LevelChunkNeighbor neighbor, bool value);
 
         // symbol: ?sOffsetMap@Neighbors@LevelChunk@@2V?$array@U?$pair@W4LevelChunkNeighbor@@VChunkPos@@@std@@$07@std@@B
         MCAPI static std::array<std::pair<::LevelChunkNeighbor, class ChunkPos>, 8> const sOffsetMap;
@@ -79,10 +79,16 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ??0LevelChunk@@QEAA@AEAVDimension@@AEBVChunkPos@@_NW4SubChunkInitMode@@2@Z
-    MCAPI LevelChunk(class Dimension&, class ChunkPos const&, bool, ::SubChunkInitMode, bool);
+    MCAPI LevelChunk(
+        class Dimension&      dimension,
+        class ChunkPos const& cp,
+        bool                  readOnly,
+        ::SubChunkInitMode    initBlocks,
+        bool
+    );
 
     // symbol: ?_changeTerrainDataState@LevelChunk@@QEAAXW4ChunkTerrainDataState@@0@Z
-    MCAPI void _changeTerrainDataState(::ChunkTerrainDataState, ::ChunkTerrainDataState);
+    MCAPI void _changeTerrainDataState(::ChunkTerrainDataState from, ::ChunkTerrainDataState to);
 
     // symbol: ?_getTerrainDataState@LevelChunk@@QEBA?AW4ChunkTerrainDataState@@XZ
     MCAPI ::ChunkTerrainDataState _getTerrainDataState() const;
@@ -94,19 +100,19 @@ public:
     MCAPI void _onTickingQueueChanged();
 
     // symbol: ?_setGenerator@LevelChunk@@QEAAXPEAVChunkSource@@@Z
-    MCAPI void _setGenerator(class ChunkSource*);
+    MCAPI void _setGenerator(class ChunkSource* generator);
 
     // symbol: ?_setOnChunkLoadedCalled@LevelChunk@@QEAA_NXZ
     MCAPI bool _setOnChunkLoadedCalled();
 
     // symbol: ?actorDataNeedsSaving@LevelChunk@@QEBA_NHH@Z
-    MCAPI bool actorDataNeedsSaving(int, int) const;
+    MCAPI bool actorDataNeedsSaving(int wait, int maxWait) const;
 
     // symbol: ?addEntity@LevelChunk@@QEAAXVWeakEntityRef@@@Z
-    MCAPI void addEntity(class WeakEntityRef);
+    MCAPI void addEntity(class WeakEntityRef entityRef);
 
     // symbol: ?addHardcodedSpawningArea@LevelChunk@@QEAAXAEBVBoundingBox@@W4HardcodedSpawnAreaType@@@Z
-    MCAPI void addHardcodedSpawningArea(class BoundingBox const&, ::HardcodedSpawnAreaType);
+    MCAPI void addHardcodedSpawningArea(class BoundingBox const& spawnerAABB, ::HardcodedSpawnAreaType type);
 
     // symbol:
     // ?addSubChunkBlockEntitiesToLevelChunk@LevelChunk@@QEAAXAEAV?$unordered_map@VChunkBlockPos@@V?$shared_ptr@VBlockActor@@@std@@U?$hash@VChunkBlockPos@@@3@U?$equal_to@VChunkBlockPos@@@3@V?$allocator@U?$pair@$$CBVChunkBlockPos@@V?$shared_ptr@VBlockActor@@@std@@@std@@@3@@std@@@Z
@@ -114,10 +120,10 @@ public:
     addSubChunkBlockEntitiesToLevelChunk(std::unordered_map<class ChunkBlockPos, std::shared_ptr<class BlockActor>>&);
 
     // symbol: ?applySeasonsPostProcess@LevelChunk@@QEAA_NAEAVBlockSource@@@Z
-    MCAPI bool applySeasonsPostProcess(class BlockSource&);
+    MCAPI bool applySeasonsPostProcess(class BlockSource& region);
 
     // symbol: ?changeState@LevelChunk@@QEAAXW4ChunkState@@0@Z
-    MCAPI void changeState(::ChunkState, ::ChunkState);
+    MCAPI void changeState(::ChunkState from, ::ChunkState to);
 
     // symbol: ?checkSeasonsPostProcessDirty@LevelChunk@@QEAA_NXZ
     MCAPI bool checkSeasonsPostProcessDirty();
@@ -129,50 +135,50 @@ public:
     MCAPI void clearDirtyTickCounters();
 
     // symbol: ?clientSubChunkRequestGenerateLightingForSubChunk@LevelChunk@@QEAAXAEAVChunkViewSource@@F@Z
-    MCAPI void clientSubChunkRequestGenerateLightingForSubChunk(class ChunkViewSource&, short);
+    MCAPI void clientSubChunkRequestGenerateLightingForSubChunk(class ChunkViewSource& neighborhood, short);
 
     // symbol: ?deserializeBiomes@LevelChunk@@QEAAXAEAVIDataInput@@_N@Z
     MCAPI void deserializeBiomes(class IDataInput&, bool);
 
     // symbol: ?deserializeBlockEntities@LevelChunk@@QEAAXAEAVIDataInput@@@Z
-    MCAPI void deserializeBlockEntities(class IDataInput&);
+    MCAPI void deserializeBlockEntities(class IDataInput& stream);
 
     // symbol: ?deserializeFinalization@LevelChunk@@QEAAXAEAVIDataInput@@@Z
-    MCAPI void deserializeFinalization(class IDataInput&);
+    MCAPI void deserializeFinalization(class IDataInput& stream);
 
     // symbol: ?deserializeHardcodedSpawners@LevelChunk@@QEAAXAEAVIDataInput@@@Z
-    MCAPI void deserializeHardcodedSpawners(class IDataInput&);
+    MCAPI void deserializeHardcodedSpawners(class IDataInput& stream);
 
     // symbol: ?deserializeKey@LevelChunk@@QEAA_NV?$basic_string_view@DU?$char_traits@D@std@@@std@@0@Z
-    MCAPI bool deserializeKey(std::string_view, std::string_view);
+    MCAPI bool deserializeKey(std::string_view key, std::string_view value);
 
     // symbol: ?deserializeLoadedVersion@LevelChunk@@QEAAXAEAVIDataInput@@@Z
-    MCAPI void deserializeLoadedVersion(class IDataInput&);
+    MCAPI void deserializeLoadedVersion(class IDataInput& stream);
 
     // symbol: ?deserializeMetaDataHash@LevelChunk@@QEAAXAEAVIDataInput@@@Z
-    MCAPI void deserializeMetaDataHash(class IDataInput&);
+    MCAPI void deserializeMetaDataHash(class IDataInput& stream);
 
     // symbol:
     // ?deserializeSubChunk@LevelChunk@@QEAAXEAEAVIDataInput@@V?$optional@C@std@@V?$optional@PEAUDeserializationChanges@@@4@@Z
     MCAPI void
-    deserializeSubChunk(uchar, class IDataInput&, std::optional<schar>, std::optional<struct DeserializationChanges*>);
+    deserializeSubChunk(uchar idx, class IDataInput& stream, std::optional<schar>, std::optional<struct DeserializationChanges*>);
 
     // symbol:
     // ?deserializeSubChunkBlockEntities@LevelChunk@@QEAAXAEAVIDataInput@@AEAV?$unordered_map@VChunkBlockPos@@V?$shared_ptr@VBlockActor@@@std@@U?$hash@VChunkBlockPos@@@3@U?$equal_to@VChunkBlockPos@@@3@V?$allocator@U?$pair@$$CBVChunkBlockPos@@V?$shared_ptr@VBlockActor@@@std@@@std@@@3@@std@@@Z
     MCAPI void
-    deserializeSubChunkBlockEntities(class IDataInput&, std::unordered_map<class ChunkBlockPos, std::shared_ptr<class BlockActor>>&);
+    deserializeSubChunkBlockEntities(class IDataInput& stream, std::unordered_map<class ChunkBlockPos, std::shared_ptr<class BlockActor>>&);
 
     // symbol: ?enableBlockEntityAccessForThisThread@LevelChunk@@QEBA?AVLevelChunkBlockActorAccessToken@@XZ
     MCAPI class LevelChunkBlockActorAccessToken enableBlockEntityAccessForThisThread() const;
 
     // symbol: ?fetchBiomes@LevelChunk@@QEBAXAEAV?$vector@PEBVBiome@@V?$allocator@PEBVBiome@@@std@@@std@@@Z
-    MCAPI void fetchBiomes(std::vector<class Biome const*>&) const;
+    MCAPI void fetchBiomes(std::vector<class Biome const*>& biomes) const;
 
     // symbol: ?fetchBlocks@LevelChunk@@QEBAXAEBVBlockPos@@AEAVBlockVolume@@@Z
-    MCAPI void fetchBlocks(class BlockPos const&, class BlockVolume&) const;
+    MCAPI void fetchBlocks(class BlockPos const& volumeOrigin, class BlockVolume& volume) const;
 
     // symbol: ?fillBiomes@LevelChunk@@QEAAXAEBUBiomeChunkData@@@Z
-    MCAPI void fillBiomes(struct BiomeChunkData const&);
+    MCAPI void fillBiomes(struct BiomeChunkData const& biomeChunkData);
 
     // symbol: ?finalizeDeserialization@LevelChunk@@QEAAXXZ
     MCAPI void finalizeDeserialization();
@@ -186,42 +192,48 @@ public:
     finalizeSubChunkDeserialization(std::unordered_map<class ChunkBlockPos, std::shared_ptr<class BlockActor>>&, class buffer_span_mut<struct SubChunk>);
 
     // symbol: ?findExposedLightningRod@LevelChunk@@QEAA?AV?$optional@VBlockPos@@@std@@AEBVBlockPos@@AEAVBlockSource@@@Z
-    MCAPI std::optional<class BlockPos> findExposedLightningRod(class BlockPos const&, class BlockSource&);
+    MCAPI std::optional<class BlockPos> findExposedLightningRod(class BlockPos const& pos, class BlockSource& region);
 
     // symbol: ?findLightningTarget@LevelChunk@@QEAA?AVVec3@@AEBVBlockPos@@AEAVBlockSource@@@Z
-    MCAPI class Vec3 findLightningTarget(class BlockPos const&, class BlockSource&);
+    MCAPI class Vec3 findLightningTarget(class BlockPos const& pos, class BlockSource& region);
 
     // symbol: ?generateOriginalLighting@LevelChunk@@QEAA_NAEAVChunkViewSource@@_N@Z
-    MCAPI bool generateOriginalLighting(class ChunkViewSource&, bool);
+    MCAPI bool generateOriginalLighting(class ChunkViewSource& neighborhood, bool enforceBorderCheck);
 
     // symbol: ?getAboveTopSolidBlock@LevelChunk@@QEAA?AVChunkLocalHeight@@AEBVChunkBlockPos@@_N11@Z
-    MCAPI class ChunkLocalHeight getAboveTopSolidBlock(class ChunkBlockPos const&, bool, bool, bool);
+    MCAPI class ChunkLocalHeight getAboveTopSolidBlock(
+        class ChunkBlockPos const& start,
+        bool                       dimensionShowsSky,
+        bool                       includeWater,
+        bool                       includeLeaves
+    );
 
     // symbol:
     // ?getActors@LevelChunk@@QEBAXAEBUActorDefinitionIdentifier@@AEBVAABB@@AEAV?$vector@PEAVActor@@V?$allocator@PEAVActor@@@std@@@std@@@Z
-    MCAPI void getActors(struct ActorDefinitionIdentifier const&, class AABB const&, std::vector<class Actor*>&) const;
+    MCAPI void
+    getActors(struct ActorDefinitionIdentifier const&, class AABB const& bb, std::vector<class Actor*>& actors) const;
 
     // symbol: ?getBiome@LevelChunk@@QEBAAEAVBiome@@AEBVChunkBlockPos@@@Z
-    MCAPI class Biome& getBiome(class ChunkBlockPos const&) const;
+    MCAPI class Biome& getBiome(class ChunkBlockPos const& pos) const;
 
     // symbol: ?getBlock@LevelChunk@@QEBAAEBVBlock@@AEBVChunkBlockPos@@@Z
-    MCAPI class Block const& getBlock(class ChunkBlockPos const&) const;
+    MCAPI class Block const& getBlock(class ChunkBlockPos const& pos) const;
 
     // symbol:
     // ?getBlockEntities@LevelChunk@@QEBAAEBV?$unordered_map@VChunkBlockPos@@V?$shared_ptr@VBlockActor@@@std@@U?$hash@VChunkBlockPos@@@3@U?$equal_to@VChunkBlockPos@@@3@V?$allocator@U?$pair@$$CBVChunkBlockPos@@V?$shared_ptr@VBlockActor@@@std@@@std@@@3@@std@@XZ
     MCAPI std::unordered_map<class ChunkBlockPos, std::shared_ptr<class BlockActor>> const& getBlockEntities() const;
 
     // symbol: ?getBlockEntity@LevelChunk@@QEAAPEAVBlockActor@@AEBVChunkBlockPos@@@Z
-    MCAPI class BlockActor* getBlockEntity(class ChunkBlockPos const&);
+    MCAPI class BlockActor* getBlockEntity(class ChunkBlockPos const& localPos);
 
     // symbol: ?getBorder@LevelChunk@@QEBA_NAEBVChunkBlockPos@@@Z
-    MCAPI bool getBorder(class ChunkBlockPos const&) const;
+    MCAPI bool getBorder(class ChunkBlockPos const& pos) const;
 
     // symbol: ?getBrightness@LevelChunk@@QEBA?AUBrightnessPair@@AEBVChunkBlockPos@@@Z
-    MCAPI struct BrightnessPair getBrightness(class ChunkBlockPos const&) const;
+    MCAPI struct BrightnessPair getBrightness(class ChunkBlockPos const& pos) const;
 
     // symbol: ?getCachedTemperatureNoise@LevelChunk@@QEAACAEBVChunkBlockPos@@@Z
-    MCAPI schar getCachedTemperatureNoise(class ChunkBlockPos const&);
+    MCAPI schar getCachedTemperatureNoise(class ChunkBlockPos const& pos);
 
     // symbol:
     // ?getChunkEntities@LevelChunk@@QEAAAEAV?$vector@VWeakEntityRef@@V?$allocator@VWeakEntityRef@@@std@@@std@@XZ
@@ -232,19 +244,23 @@ public:
 
     // symbol:
     // ?getEntities@LevelChunk@@QEBAXV?$span@V?$not_null@PEBVActor@@@gsl@@$0?0@gsl@@AEBVAABB@@AEAV?$vector@PEAVActor@@V?$allocator@PEAVActor@@@std@@@std@@_N@Z
-    MCAPI void
-    getEntities(gsl::span<gsl::not_null<class Actor const*>>, class AABB const&, std::vector<class Actor*>&, bool)
-        const;
+    MCAPI void getEntities(
+        gsl::span<gsl::not_null<class Actor const*>> ignoredEntities,
+        class AABB const&                            bb,
+        std::vector<class Actor*>&                   entities,
+        bool
+    ) const;
 
     // symbol:
     // ?getEntities@LevelChunk@@QEBAXW4ActorType@@AEBVAABB@@AEAV?$vector@PEAVActor@@V?$allocator@PEAVActor@@@std@@@std@@_N@Z
-    MCAPI void getEntities(::ActorType, class AABB const&, std::vector<class Actor*>&, bool) const;
+    MCAPI void
+    getEntities(::ActorType type, class AABB const& bb, std::vector<class Actor*>& es, bool ignoreTargetType) const;
 
     // symbol: ?getEntity@LevelChunk@@QEBAPEAVActor@@AEBUActorUniqueID@@@Z
-    MCAPI class Actor* getEntity(struct ActorUniqueID const&) const;
+    MCAPI class Actor* getEntity(struct ActorUniqueID const& actorId) const;
 
     // symbol: ?getExtraBlock@LevelChunk@@QEBAAEBVBlock@@AEBVChunkBlockPos@@@Z
-    MCAPI class Block const& getExtraBlock(class ChunkBlockPos const&) const;
+    MCAPI class Block const& getExtraBlock(class ChunkBlockPos const& localPos) const;
 
     // symbol: ?getFinalized@LevelChunk@@QEBA?AW4Finalization@1@XZ
     MCAPI ::LevelChunk::Finalization getFinalized() const;
@@ -256,19 +272,19 @@ public:
     MCAPI class ChunkSource* getGenerator() const;
 
     // symbol: ?getGrassColor@LevelChunk@@QEAAHAEBVChunkBlockPos@@@Z
-    MCAPI int getGrassColor(class ChunkBlockPos const&);
+    MCAPI int getGrassColor(class ChunkBlockPos const& pos);
 
     // symbol: ?getHeightRange@LevelChunk@@QEBAAEBVDimensionHeightRange@@XZ
     MCAPI class DimensionHeightRange const& getHeightRange() const;
 
     // symbol: ?getHeightmap@LevelChunk@@QEBAFAEBVChunkBlockPos@@@Z
-    MCAPI short getHeightmap(class ChunkBlockPos const&) const;
+    MCAPI short getHeightmap(class ChunkBlockPos const& pos) const;
 
     // symbol: ?getHighestNonAirSubChunkIndex@LevelChunk@@QEBAFXZ
     MCAPI short getHighestNonAirSubChunkIndex() const;
 
     // symbol: ?getInterpolant@LevelChunk@@QEBAM_K0@Z
-    MCAPI float getInterpolant(uint64, uint64) const;
+    MCAPI float getInterpolant(uint64 x, uint64 y) const;
 
     // symbol: ?getLastTick@LevelChunk@@QEBAAEBUTick@@XZ
     MCAPI struct Tick const& getLastTick() const;
@@ -310,7 +326,7 @@ public:
     MCAPI class ChunkPos const& getPosition() const;
 
     // symbol: ?getPreWorldGenHeightmap@LevelChunk@@QEBA?AVChunkLocalHeight@@AEBVChunkBlockPos@@@Z
-    MCAPI class ChunkLocalHeight getPreWorldGenHeightmap(class ChunkBlockPos const&) const;
+    MCAPI class ChunkLocalHeight getPreWorldGenHeightmap(class ChunkBlockPos const& pos) const;
 
     // symbol: ?getPreWorldGenHeightmap@LevelChunk@@QEBA?AVHeightmapWrapper@@XZ
     MCAPI class HeightmapWrapper getPreWorldGenHeightmap() const;
@@ -323,7 +339,7 @@ public:
     MCAPI class BlockTickingQueue& getRandomTickQueue();
 
     // symbol: ?getRawBrightness@LevelChunk@@QEBA?AUBrightness@@AEBVChunkBlockPos@@U2@@Z
-    MCAPI struct Brightness getRawBrightness(class ChunkBlockPos const&, struct Brightness) const;
+    MCAPI struct Brightness getRawBrightness(class ChunkBlockPos const& pos, struct Brightness skyDampen) const;
 
     // symbol:
     // ?getSpawningAreas@LevelChunk@@QEBAAEBV?$vector@UHardcodedSpawningArea@LevelChunk@@V?$allocator@UHardcodedSpawningArea@LevelChunk@@@std@@@std@@XZ
@@ -339,7 +355,7 @@ public:
     MCAPI struct SubChunk const* getSubChunk(short) const;
 
     // symbol: ?getSurfaceBiome@LevelChunk@@QEBAAEBVBiome@@VChunkBlockPos@@@Z
-    MCAPI class Biome const& getSurfaceBiome(class ChunkBlockPos) const;
+    MCAPI class Biome const& getSurfaceBiome(class ChunkBlockPos pos) const;
 
     // symbol: ?getTickQueue@LevelChunk@@QEAAAEAVBlockTickingQueue@@XZ
     MCAPI class BlockTickingQueue& getTickQueue();
@@ -348,7 +364,7 @@ public:
     MCAPI class BlockTickingQueue const& getTickQueue() const;
 
     // symbol: ?getTopRainBlockPos@LevelChunk@@QEAA?BVBlockPos@@AEBVChunkBlockPos@@@Z
-    MCAPI class BlockPos const getTopRainBlockPos(class ChunkBlockPos const&);
+    MCAPI class BlockPos const getTopRainBlockPos(class ChunkBlockPos const& pos);
 
     // symbol: ?getTotalAllocatedHeight@LevelChunk@@QEBA?AVChunkLocalHeight@@XZ
     MCAPI class ChunkLocalHeight getTotalAllocatedHeight() const;
@@ -366,13 +382,13 @@ public:
     MCAPI bool hasEntitiesToSerialize() const;
 
     // symbol: ?hasEntity@LevelChunk@@QEAA_NVWeakEntityRef@@@Z
-    MCAPI bool hasEntity(class WeakEntityRef);
+    MCAPI bool hasEntity(class WeakEntityRef entityRef);
 
     // symbol: ?isAnyBlockEntityDirty@LevelChunk@@QEAA_NXZ
     MCAPI bool isAnyBlockEntityDirty();
 
     // symbol: ?isBlockInChunk@LevelChunk@@QEBA_NAEBVBlockPos@@@Z
-    MCAPI bool isBlockInChunk(class BlockPos const&) const;
+    MCAPI bool isBlockInChunk(class BlockPos const& block) const;
 
     // symbol: ?isClientGeneratedChunk@LevelChunk@@QEBA_NXZ
     MCAPI bool isClientGeneratedChunk() const;
@@ -390,13 +406,13 @@ public:
     MCAPI bool isReadOnly() const;
 
     // symbol: ?isSkyLit@LevelChunk@@QEBA_NAEBVChunkBlockPos@@@Z
-    MCAPI bool isSkyLit(class ChunkBlockPos const&) const;
+    MCAPI bool isSkyLit(class ChunkBlockPos const& pos) const;
 
     // symbol: ?legacyDeserializeBlockExtraData@LevelChunk@@QEAAXAEAVIDataInput@@@Z
-    MCAPI void legacyDeserializeBlockExtraData(class IDataInput&);
+    MCAPI void legacyDeserializeBlockExtraData(class IDataInput& stream);
 
     // symbol: ?legacyDeserializeTerrain@LevelChunk@@QEAAXAEAVIDataInput@@@Z
-    MCAPI void legacyDeserializeTerrain(class IDataInput&);
+    MCAPI void legacyDeserializeTerrain(class IDataInput& stream);
 
     // symbol: ?levelChunkHad3dBiomeTagOnLastDeserialize@LevelChunk@@QEBA_NXZ
     MCAPI bool levelChunkHad3dBiomeTagOnLastDeserialize() const;
@@ -417,7 +433,7 @@ public:
     MCAPI bool needsWallFix() const;
 
     // symbol: ?nonActorDataNeedsSaving@LevelChunk@@QEBA_NHH@Z
-    MCAPI bool nonActorDataNeedsSaving(int, int) const;
+    MCAPI bool nonActorDataNeedsSaving(int wait, int maxWait) const;
 
     // symbol: ?onBlockEntityChanged@LevelChunk@@QEAAXXZ
     MCAPI void onBlockEntityChanged();
@@ -426,119 +442,134 @@ public:
     MCAPI void onDiscarded();
 
     // symbol: ??4LevelChunk@@QEAAAEAV0@$$QEAV0@@Z
-    MCAPI class LevelChunk& operator=(class LevelChunk&&);
+    MCAPI class LevelChunk& operator=(class LevelChunk&& otherChunk);
 
     // symbol:
     // ?placeCallbacks@LevelChunk@@QEAAXAEBVChunkBlockPos@@AEBVBlock@@1PEAVBlockSource@@V?$shared_ptr@VBlockActor@@@std@@@Z
-    MCAPI void
-    placeCallbacks(class ChunkBlockPos const&, class Block const&, class Block const&, class BlockSource*, std::shared_ptr<class BlockActor>);
+    MCAPI void placeCallbacks(
+        class ChunkBlockPos const&        pos,
+        class Block const&                old,
+        class Block const&                current,
+        class BlockSource*                currentSource,
+        std::shared_ptr<class BlockActor> blockEntity
+    );
 
     // symbol: ?populateHeightMapDataForSubChunkPacket@LevelChunk@@QEBAXFAEAUSubChunkPacketData@SubChunkPacket@@@Z
     MCAPI void populateHeightMapDataForSubChunkPacket(short, struct SubChunkPacket::SubChunkPacketData&) const;
 
     // symbol: ?recomputeHeightMap@LevelChunk@@QEAAX_N@Z
-    MCAPI void recomputeHeightMap(bool);
+    MCAPI void recomputeHeightMap(bool resetLighting);
 
     // symbol: ?removeBlockEntity@LevelChunk@@QEAA?AV?$shared_ptr@VBlockActor@@@std@@AEBVBlockPos@@@Z
-    MCAPI std::shared_ptr<class BlockActor> removeBlockEntity(class BlockPos const&);
+    MCAPI std::shared_ptr<class BlockActor> removeBlockEntity(class BlockPos const& blockPos);
 
     // symbol: ?removeEntityFromChunk@LevelChunk@@QEAA_NVWeakEntityRef@@@Z
-    MCAPI bool removeEntityFromChunk(class WeakEntityRef);
+    MCAPI bool removeEntityFromChunk(class WeakEntityRef entityRef);
 
     // symbol: ?removeEntityFromWorld@LevelChunk@@QEAA_NVWeakEntityRef@@@Z
-    MCAPI bool removeEntityFromWorld(class WeakEntityRef);
+    MCAPI bool removeEntityFromWorld(class WeakEntityRef entityRef);
 
     // symbol: ?removeHardcodedSpawningArea@LevelChunk@@QEAAXW4HardcodedSpawnAreaType@@@Z
-    MCAPI void removeHardcodedSpawningArea(::HardcodedSpawnAreaType);
+    MCAPI void removeHardcodedSpawningArea(::HardcodedSpawnAreaType type);
 
     // symbol:
     // ?runtimeRelightSubchunk@LevelChunk@@QEAAXAEAVBlockSource@@_KAEBV?$vector@USubChunkLightUpdate@@V?$allocator@USubChunkLightUpdate@@@std@@@std@@AEAV?$vector@VBlockPos@@V?$allocator@VBlockPos@@@std@@@4@@Z
-    MCAPI void
-    runtimeRelightSubchunk(class BlockSource&, uint64, std::vector<struct SubChunkLightUpdate> const&, std::vector<class BlockPos>&);
+    MCAPI void runtimeRelightSubchunk(
+        class BlockSource&                             region,
+        uint64                                         subChunkIdx,
+        std::vector<struct SubChunkLightUpdate> const& alteredBlockList,
+        std::vector<class BlockPos>&                   brightnessChangedList
+    );
 
     // symbol: ?serialize2DMaps@LevelChunk@@QEBAXAEAVIDataOutput@@@Z
-    MCAPI void serialize2DMaps(class IDataOutput&) const;
+    MCAPI void serialize2DMaps(class IDataOutput& stream) const;
 
     // symbol: ?serialize3DMaps@LevelChunk@@QEBAXAEAVIDataOutput@@@Z
-    MCAPI void serialize3DMaps(class IDataOutput&) const;
+    MCAPI void serialize3DMaps(class IDataOutput& stream) const;
 
     // symbol: ?serializeBiomeStates@LevelChunk@@QEBAXAEAVIDataOutput@@@Z
-    MCAPI void serializeBiomeStates(class IDataOutput&) const;
+    MCAPI void serializeBiomeStates(class IDataOutput& stream) const;
 
     // symbol: ?serializeBiomes@LevelChunk@@QEBAXAEAVIDataOutput@@@Z
-    MCAPI void serializeBiomes(class IDataOutput&) const;
+    MCAPI void serializeBiomes(class IDataOutput& stream) const;
 
     // symbol: ?serializeBlockEntities@LevelChunk@@QEBAXAEAVIDataOutput@@@Z
-    MCAPI void serializeBlockEntities(class IDataOutput&) const;
+    MCAPI void serializeBlockEntities(class IDataOutput& stream) const;
 
     // symbol: ?serializeBlockEntitiesForSubChunk@LevelChunk@@QEBAXAEAVIDataOutput@@AEBVSubChunkPos@@@Z
-    MCAPI void serializeBlockEntitiesForSubChunk(class IDataOutput&, class SubChunkPos const&) const;
+    MCAPI void serializeBlockEntitiesForSubChunk(class IDataOutput& stream, class SubChunkPos const& subChunkPos) const;
 
     // symbol: ?serializeBorderBlocks@LevelChunk@@QEBA_NAEAVIDataOutput@@@Z
-    MCAPI bool serializeBorderBlocks(class IDataOutput&) const;
+    MCAPI bool serializeBorderBlocks(class IDataOutput& stream) const;
 
     // symbol:
     // ?serializeEntities@LevelChunk@@QEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_NV?$function@$$A6AXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z@3@22@Z
     MCAPI void
-    serializeEntities(std::string&, bool, std::function<void(std::string const&)>, std::function<void(std::string const&)>, std::function<void(std::string const&)>)
+    serializeEntities(std::string& buffer, bool, std::function<void(std::string const&)>, std::function<void(std::string const&)>, std::function<void(std::string const&)>)
         const;
 
     // symbol:
     // ?serializeEntityRemovals@LevelChunk@@QEAAXV?$function@$$A6AXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z@std@@@Z
-    MCAPI void serializeEntityRemovals(std::function<void(std::string const&)>);
+    MCAPI void serializeEntityRemovals(std::function<void(std::string const&)> callback);
 
     // symbol: ?serializeFinalization@LevelChunk@@QEBAXAEAVIDataOutput@@@Z
-    MCAPI void serializeFinalization(class IDataOutput&) const;
+    MCAPI void serializeFinalization(class IDataOutput& stream) const;
 
     // symbol: ?serializeHardcodedSpawners@LevelChunk@@QEBA_NAEAVIDataOutput@@@Z
-    MCAPI bool serializeHardcodedSpawners(class IDataOutput&) const;
+    MCAPI bool serializeHardcodedSpawners(class IDataOutput& stream) const;
 
     // symbol: ?serializeMetaDataHash@LevelChunk@@QEBAXAEAVIDataOutput@@@Z
-    MCAPI void serializeMetaDataHash(class IDataOutput&) const;
+    MCAPI void serializeMetaDataHash(class IDataOutput& stream) const;
 
     // symbol: ?serializeRandomTicks@LevelChunk@@QEBAXAEAVIDataOutput@@@Z
-    MCAPI void serializeRandomTicks(class IDataOutput&) const;
+    MCAPI void serializeRandomTicks(class IDataOutput& stream) const;
 
     // symbol: ?serializeTicks@LevelChunk@@QEBAXAEAVIDataOutput@@@Z
-    MCAPI void serializeTicks(class IDataOutput&) const;
+    MCAPI void serializeTicks(class IDataOutput& stream) const;
 
     // symbol: ?setAllLegacyBlockIDAndData@LevelChunk@@QEAAXV?$buffer_span@UBlockID@@@@V?$buffer_span@UNibblePair@@@@@Z
-    MCAPI void setAllLegacyBlockIDAndData(class buffer_span<struct BlockID>, class buffer_span<struct NibblePair>);
+    MCAPI void
+    setAllLegacyBlockIDAndData(class buffer_span<struct BlockID> ids, class buffer_span<struct NibblePair> data);
 
     // symbol: ?setBiome2d@LevelChunk@@QEAAXAEBVBiome@@AEBVChunkBlockPos@@@Z
-    MCAPI void setBiome2d(class Biome const&, class ChunkBlockPos const&);
+    MCAPI void setBiome2d(class Biome const& biome, class ChunkBlockPos const& pos);
 
     // symbol: ?setBiomeFromVolume@LevelChunk@@QEAAXAEBV?$VolumeOf@PEBVBiome@@@ClientBlockPipeline@@I@Z
-    MCAPI void setBiomeFromVolume(class ClientBlockPipeline::VolumeOf<class Biome const*> const&, uint);
+    MCAPI void setBiomeFromVolume(class ClientBlockPipeline::VolumeOf<class Biome const*> const& volume, uint yOffset);
 
     // symbol:
     // ?setBlock@LevelChunk@@QEAAAEBVBlock@@AEBVChunkBlockPos@@AEBV2@PEAVBlockSource@@V?$shared_ptr@VBlockActor@@@std@@@Z
-    MCAPI class Block const&
-    setBlock(class ChunkBlockPos const&, class Block const&, class BlockSource*, std::shared_ptr<class BlockActor>);
+    MCAPI class Block const& setBlock(
+        class ChunkBlockPos const&        pos,
+        class Block const&                block,
+        class BlockSource*                issuingSource,
+        std::shared_ptr<class BlockActor> blockEntity
+    );
 
     // symbol: ?setBlockSimple@LevelChunk@@QEAAXAEBVChunkBlockPos@@AEBVBlock@@@Z
-    MCAPI void setBlockSimple(class ChunkBlockPos const&, class Block const&);
+    MCAPI void setBlockSimple(class ChunkBlockPos const& pos, class Block const& block);
 
     // symbol: ?setBlockVolume@LevelChunk@@QEAAXAEBVBlockVolume@@I@Z
-    MCAPI void setBlockVolume(class BlockVolume const&, uint);
+    MCAPI void setBlockVolume(class BlockVolume const& box, uint yOffset);
 
     // symbol: ?setBorder@LevelChunk@@QEAAXAEBVChunkBlockPos@@_N@Z
-    MCAPI void setBorder(class ChunkBlockPos const&, bool);
+    MCAPI void setBorder(class ChunkBlockPos const& pos, bool val);
 
     // symbol: ?setCachedTemperatureNoise@LevelChunk@@QEAAXAEBVChunkBlockPos@@C@Z
-    MCAPI void setCachedTemperatureNoise(class ChunkBlockPos const&, schar);
+    MCAPI void setCachedTemperatureNoise(class ChunkBlockPos const& pos, schar noiseVal);
 
     // symbol: ?setChunkInterpolants@LevelChunk@@QEAAXAEBVNeighbors@1@@Z
     MCAPI void setChunkInterpolants(class LevelChunk::Neighbors const&);
 
     // symbol: ?setExtraBlock@LevelChunk@@QEAAAEBVBlock@@AEBVChunkBlockPos@@AEBV2@PEAVBlockSource@@@Z
-    MCAPI class Block const& setExtraBlock(class ChunkBlockPos const&, class Block const&, class BlockSource*);
+    MCAPI class Block const&
+    setExtraBlock(class ChunkBlockPos const& localPos, class Block const& block, class BlockSource* issuingSource);
 
     // symbol: ?setExtraBlockSimple@LevelChunk@@QEAAXAEBVChunkBlockPos@@AEBVBlock@@@Z
-    MCAPI void setExtraBlockSimple(class ChunkBlockPos const&, class Block const&);
+    MCAPI void setExtraBlockSimple(class ChunkBlockPos const& pos, class Block const& block);
 
     // symbol: ?setFinalized@LevelChunk@@QEAAXW4Finalization@1@@Z
-    MCAPI void setFinalized(::LevelChunk::Finalization);
+    MCAPI void setFinalized(::LevelChunk::Finalization state);
 
     // symbol: ?setHadSerializedEntities@LevelChunk@@QEAAXXZ
     MCAPI void setHadSerializedEntities();
@@ -547,11 +578,11 @@ public:
     MCAPI void setMetaData(std::shared_ptr<class LevelChunkMetaData>);
 
     // symbol: ?setPendingEntities@LevelChunk@@QEAAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI void setPendingEntities(std::string);
+    MCAPI void setPendingEntities(std::string entitiesData);
 
     // symbol:
     // ?setPreWorldGenHeightMap@LevelChunk@@QEAAXV?$unique_ptr@V?$vector@FV?$allocator@F@std@@@std@@U?$default_delete@V?$vector@FV?$allocator@F@std@@@std@@@2@@std@@@Z
-    MCAPI void setPreWorldGenHeightMap(std::unique_ptr<std::vector<short>>);
+    MCAPI void setPreWorldGenHeightMap(std::unique_ptr<std::vector<short>> heightmap);
 
     // symbol: ?setSaved@LevelChunk@@QEAAXXZ
     MCAPI void setSaved();
@@ -560,7 +591,7 @@ public:
     MCAPI void setUnsaved();
 
     // symbol: ?setupRedstoneCircuit@LevelChunk@@QEAAXAEAVBlockSource@@@Z
-    MCAPI void setupRedstoneCircuit(class BlockSource&);
+    MCAPI void setupRedstoneCircuit(class BlockSource& resource);
 
     // symbol: ?shouldSaveIfNeverSaved@LevelChunk@@QEBA_NXZ
     MCAPI bool shouldSaveIfNeverSaved() const;
@@ -569,22 +600,22 @@ public:
     MCAPI bool shouldSaveNonActorDataIfDirty() const;
 
     // symbol: ?subChunkIsSafeReference@LevelChunk@@QEBA_NAEBVBlockPos@@@Z
-    MCAPI bool subChunkIsSafeReference(class BlockPos const&) const;
+    MCAPI bool subChunkIsSafeReference(class BlockPos const& blockPos) const;
 
     // symbol: ?tick@LevelChunk@@QEAAXAEAVBlockSource@@AEBUTick@@@Z
-    MCAPI void tick(class BlockSource&, struct Tick const&);
+    MCAPI void tick(class BlockSource& tickRegion, struct Tick const& tick);
 
     // symbol: ?tickBlockEntities@LevelChunk@@QEAAXAEAVBlockSource@@@Z
-    MCAPI void tickBlockEntities(class BlockSource&);
+    MCAPI void tickBlockEntities(class BlockSource& tickRegion);
 
     // symbol: ?tickBlocks@LevelChunk@@QEAAXAEAVBlockSource@@@Z
-    MCAPI void tickBlocks(class BlockSource&);
+    MCAPI void tickBlocks(class BlockSource& region);
 
     // symbol: ?toWorldPos@LevelChunk@@QEBA?AVBlockPos@@AEBVChunkBlockPos@@@Z
     MCAPI class BlockPos toWorldPos(class ChunkBlockPos const&) const;
 
     // symbol: ?trySpawnSkeletonTrap@LevelChunk@@QEAAXAEAVBlockSource@@AEBVBlockPos@@@Z
-    MCAPI void trySpawnSkeletonTrap(class BlockSource&, class BlockPos const&);
+    MCAPI void trySpawnSkeletonTrap(class BlockSource& region, class BlockPos const& pos);
 
     // symbol: ?updateLoadedMetaDataHash@LevelChunk@@QEAAXXZ
     MCAPI void updateLoadedMetaDataHash();
@@ -593,7 +624,7 @@ public:
     MCAPI void validateAndFixBiomeStates();
 
     // symbol: ?wasTickedThisTick@LevelChunk@@QEBA_NAEBUTick@@@Z
-    MCAPI bool wasTickedThisTick(struct Tick const&) const;
+    MCAPI bool wasTickedThisTick(struct Tick const& tick) const;
 
     // symbol: ??1LevelChunk@@QEAA@XZ
     MCAPI ~LevelChunk();
@@ -604,7 +635,7 @@ public:
     // symbol:
     // ?deserialize2DData@LevelChunk@@SA?AV?$tuple@V?$array@VChunkLocalHeight@@$0BAA@@std@@V?$array@UBiomeChunkData@@$0BAA@@2@@std@@AEAVIDataInput@@@Z
     MCAPI static std::tuple<std::array<class ChunkLocalHeight, 256>, std::array<struct BiomeChunkData, 256>>
-    deserialize2DData(class IDataInput&);
+    deserialize2DData(class IDataInput& stream);
 
     // symbol:
     // ?deserialize3DBiomes@LevelChunk@@SA?AU?$pair@GV?$vector@V?$unique_ptr@V?$SubChunkStorage@VBiome@@@@U?$default_delete@V?$SubChunkStorage@VBiome@@@@@std@@@std@@V?$allocator@V?$unique_ptr@V?$SubChunkStorage@VBiome@@@@U?$default_delete@V?$SubChunkStorage@VBiome@@@@@std@@@std@@@2@@std@@@std@@AEAVIDataInput@@AEBVBiomeRegistry@@GPEAVBiome@@_N@Z
@@ -617,24 +648,24 @@ public:
         std::array<class ChunkLocalHeight, 256>,
         ushort,
         std::vector<std::unique_ptr<class SubChunkStorage<class Biome>>>>
-    deserialize3DData(class IDataInput&, class BiomeRegistry const&, ushort, class Biome*);
+    deserialize3DData(class IDataInput& stream, class BiomeRegistry const& biomeRegistry, ushort, class Biome*);
 
     // symbol:
     // ?deserializeSubChunk@LevelChunk@@SAXAEAVIDataInput@@AEBVChunkPos@@V?$optional@C@std@@AEAUSubChunk@@AEAVBlockPalette@@V?$optional@PEAUDeserializationChanges@@@5@@Z
     MCAPI static void
-    deserializeSubChunk(class IDataInput&, class ChunkPos const&, std::optional<schar>, struct SubChunk&, class BlockPalette&, std::optional<struct DeserializationChanges*>);
+    deserializeSubChunk(class IDataInput& stream, class ChunkPos const&, std::optional<schar>, struct SubChunk&, class BlockPalette& blockPalette, std::optional<struct DeserializationChanges*>);
 
     // symbol: ?flushGarbageCollector@LevelChunk@@SAXXZ
     MCAPI static void flushGarbageCollector();
 
     // symbol:
     // ?getTagAndSubIndexFromKey@LevelChunk@@SA?AU?$pair@W4LevelChunkTag@@F@std@@V?$basic_string_view@DU?$char_traits@D@std@@@3@@Z
-    MCAPI static std::pair<::LevelChunkTag, short> getTagAndSubIndexFromKey(std::string_view);
+    MCAPI static std::pair<::LevelChunkTag, short> getTagAndSubIndexFromKey(std::string_view key);
 
     // symbol:
     // ?serializeEntities@LevelChunk@@SAXAEBV?$vector@VWeakEntityRef@@V?$allocator@VWeakEntityRef@@@std@@@std@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@3@AEAV43@_NV?$function@$$A6AXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z@3@44@Z
     MCAPI static void
-    serializeEntities(std::vector<class WeakEntityRef> const&, std::string const&, std::string&, bool, std::function<void(std::string const&)>, std::function<void(std::string const&)>, std::function<void(std::string const&)>);
+    serializeEntities(std::vector<class WeakEntityRef> const& entities, std::string const&, std::string& buffer, bool, std::function<void(std::string const&)>, std::function<void(std::string const&)>, std::function<void(std::string const&)>);
 
     // NOLINTEND
 
@@ -642,17 +673,22 @@ public:
     // NOLINTBEGIN
     // symbol:
     // ?_createBlockEntity@LevelChunk@@IEAA?AV?$shared_ptr@VBlockActor@@@std@@AEBVBlockPos@@PEAVBlockSource@@AEBVBlock@@2@Z
-    MCAPI std::shared_ptr<class BlockActor>
-          _createBlockEntity(class BlockPos const&, class BlockSource*, class Block const&, class Block const&);
+    MCAPI std::shared_ptr<class BlockActor> _createBlockEntity(
+        class BlockPos const& block,
+        class BlockSource*    currentSource,
+        class Block const&    current,
+        class Block const&    old
+    );
 
     // symbol:
     // ?_deserializeBlockEntities@LevelChunk@@IEAAXAEAVIDataInput@@AEAV?$unordered_map@VChunkBlockPos@@V?$shared_ptr@VBlockActor@@@std@@U?$hash@VChunkBlockPos@@@3@U?$equal_to@VChunkBlockPos@@@3@V?$allocator@U?$pair@$$CBVChunkBlockPos@@V?$shared_ptr@VBlockActor@@@std@@@std@@@3@@std@@@Z
     MCAPI void
-    _deserializeBlockEntities(class IDataInput&, std::unordered_map<class ChunkBlockPos, std::shared_ptr<class BlockActor>>&);
+    _deserializeBlockEntities(class IDataInput& stream, std::unordered_map<class ChunkBlockPos, std::shared_ptr<class BlockActor>>&);
 
     // symbol:
     // ?_deserializeEntity@LevelChunk@@IEAAXAEAVBlockSource@@AEAVIDataInput@@AEAV?$vector@UActorLink@@V?$allocator@UActorLink@@@std@@@std@@@Z
-    MCAPI void _deserializeEntity(class BlockSource&, class IDataInput&, std::vector<struct ActorLink>&);
+    MCAPI void
+    _deserializeEntity(class BlockSource& source, class IDataInput& stream, std::vector<struct ActorLink>& links);
 
     // symbol:
     // ?_fixupCorruptedBlockActors@LevelChunk@@IEAAXAEAV?$unordered_map@VChunkBlockPos@@V?$shared_ptr@VBlockActor@@@std@@U?$hash@VChunkBlockPos@@@3@U?$equal_to@VChunkBlockPos@@@3@V?$allocator@U?$pair@$$CBVChunkBlockPos@@V?$shared_ptr@VBlockActor@@@std@@@std@@@3@@std@@V?$buffer_span_mut@USubChunk@@@@@Z
@@ -660,23 +696,32 @@ public:
     _fixupCorruptedBlockActors(std::unordered_map<class ChunkBlockPos, std::shared_ptr<class BlockActor>>&, class buffer_span_mut<struct SubChunk>);
 
     // symbol: ?_generateOriginalLighting@LevelChunk@@IEAAXAEAVChunkViewSource@@_N@Z
-    MCAPI void _generateOriginalLighting(class ChunkViewSource&, bool);
+    MCAPI void _generateOriginalLighting(class ChunkViewSource& neighborhood, bool enforceBorderCheck);
 
     // symbol: ?_generateOriginalLightingSubChunk@LevelChunk@@IEAAXAEAVBlockSource@@_K_N@Z
-    MCAPI void _generateOriginalLightingSubChunk(class BlockSource&, uint64, bool);
+    MCAPI void _generateOriginalLightingSubChunk(class BlockSource& source, uint64 subchunkIdx, bool);
 
     // symbol: ?_lightingCallbacks@LevelChunk@@IEAAXAEBVChunkBlockPos@@AEBVBlock@@1PEAVBlockSource@@@Z
-    MCAPI void
-    _lightingCallbacks(class ChunkBlockPos const&, class Block const&, class Block const&, class BlockSource*);
+    MCAPI void _lightingCallbacks(
+        class ChunkBlockPos const& pos,
+        class Block const&         old,
+        class Block const&         current,
+        class BlockSource*         currentSource
+    );
 
     // symbol: ?_placeBlockEntity@LevelChunk@@IEAAXV?$shared_ptr@VBlockActor@@@std@@@Z
-    MCAPI void _placeBlockEntity(std::shared_ptr<class BlockActor>);
+    MCAPI void _placeBlockEntity(std::shared_ptr<class BlockActor> te);
 
     // symbol: ?_recalcHeight@LevelChunk@@IEAA_NAEBVChunkBlockPos@@PEAVBlockSource@@@Z
-    MCAPI bool _recalcHeight(class ChunkBlockPos const&, class BlockSource*);
+    MCAPI bool _recalcHeight(class ChunkBlockPos const& start, class BlockSource* source);
 
     // symbol: ?_removeCallbacks@LevelChunk@@IEAAXAEBVChunkBlockPos@@AEBVBlock@@1PEAVBlockSource@@@Z
-    MCAPI void _removeCallbacks(class ChunkBlockPos const&, class Block const&, class Block const&, class BlockSource*);
+    MCAPI void _removeCallbacks(
+        class ChunkBlockPos const& pos,
+        class Block const&         oldBlock,
+        class Block const&         current,
+        class BlockSource*         currentSource
+    );
 
     // symbol: ?_setAllBiomesFrom2D@LevelChunk@@IEAAXAEAV?$array@UBiomeChunkData@@$0BAA@@std@@@Z
     MCAPI void _setAllBiomesFrom2D(std::array<struct BiomeChunkData, 256>&);
@@ -686,13 +731,13 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol: ?_addEntityToVolumes@LevelChunk@@AEAAXV?$not_null@PEAVActor@@@gsl@@@Z
-    MCAPI void _addEntityToVolumes(gsl::not_null<class Actor*>);
+    MCAPI void _addEntityToVolumes(gsl::not_null<class Actor*> actor);
 
     // symbol: ?_deserializeCCsubChunks@LevelChunk@@AEAAXFAEAVStringByteInput@@@Z
-    MCAPI void _deserializeCCsubChunks(short, class StringByteInput&);
+    MCAPI void _deserializeCCsubChunks(short index, class StringByteInput& stream);
 
     // symbol: ?_deserializeSubChunk@LevelChunk@@AEAA_NFAEAVStringByteInput@@@Z
-    MCAPI bool _deserializeSubChunk(short, class StringByteInput&);
+    MCAPI bool _deserializeSubChunk(short index, class StringByteInput& stream);
 
     // symbol: ?_disableBlockEntityAccessForThisThread@LevelChunk@@AEBAXXZ
     MCAPI void _disableBlockEntityAccessForThisThread() const;
@@ -701,22 +746,25 @@ public:
     MCAPI void _enableBlockEntityAccessForThisThread() const;
 
     // symbol: ?_fixupCommandBlocksOnTickingQueue@LevelChunk@@AEAAXAEAVBlockSource@@@Z
-    MCAPI void _fixupCommandBlocksOnTickingQueue(class BlockSource&);
+    MCAPI void _fixupCommandBlocksOnTickingQueue(class BlockSource& tickRegion);
 
     // symbol: ?_makeUniformBiomes@LevelChunk@@AEAAXAEBVBiome@@@Z
-    MCAPI void _makeUniformBiomes(class Biome const&);
+    MCAPI void _makeUniformBiomes(class Biome const& biome);
 
     // symbol:
     // ?_replaceBiomeStorage@LevelChunk@@AEAAXGV?$unique_ptr@V?$SubChunkStorage@VBiome@@@@U?$default_delete@V?$SubChunkStorage@VBiome@@@@@std@@@std@@AEBV?$UniqueLock@Vshared_mutex@std@@@Threading@Bedrock@@@Z
-    MCAPI void
-    _replaceBiomeStorage(ushort, std::unique_ptr<class SubChunkStorage<class Biome>>, class Bedrock::Threading::UniqueLock<std::shared_mutex> const&);
+    MCAPI void _replaceBiomeStorage(
+        ushort,
+        std::unique_ptr<class SubChunkStorage<class Biome>>            newStorage,
+        class Bedrock::Threading::UniqueLock<std::shared_mutex> const& lock
+    );
 
     // symbol: ?_setBiome@LevelChunk@@AEAAXAEBVBiome@@AEBVChunkBlockPos@@_N@Z
-    MCAPI void _setBiome(class Biome const&, class ChunkBlockPos const&, bool);
+    MCAPI void _setBiome(class Biome const& biome, class ChunkBlockPos const& pos, bool);
 
     // symbol: ?_setBiome@LevelChunk@@AEAAXAEBVBiome@@GGAEBV?$UniqueLock@Vshared_mutex@std@@@Threading@Bedrock@@@Z
     MCAPI void
-    _setBiome(class Biome const&, ushort, ushort, class Bedrock::Threading::UniqueLock<std::shared_mutex> const&);
+    _setBiome(class Biome const& biome, ushort, ushort, class Bedrock::Threading::UniqueLock<std::shared_mutex> const&);
 
     // symbol: ?_tickSnowAndIce@LevelChunk@@AEAAXAEAVBlockSource@@AEAVRandom@@HHAEAVWeather@@@Z
     MCAPI void _tickSnowAndIce(class BlockSource&, class Random&, int, int, class Weather&);
@@ -733,7 +781,7 @@ protected:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $UPDATE_MAP_BIT_SHIFT() { return UPDATE_MAP_BIT_SHIFT; }
+    static auto& $UPDATE_MAP_BIT_SHIFT() { return UPDATE_MAP_BIT_SHIFT; }
 
     // NOLINTEND
 };

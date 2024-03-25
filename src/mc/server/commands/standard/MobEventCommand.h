@@ -23,7 +23,7 @@ public:
     public:
         // NOLINTBEGIN
         // symbol: ??0InitProxy@MobEventCommand@@QEAA@AEAVServerLevel@@@Z
-        MCAPI explicit InitProxy(class ServerLevel&);
+        MCAPI explicit InitProxy(class ServerLevel& level);
 
         // NOLINTEND
     };
@@ -36,14 +36,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1MobEventCommand@@UEAA@XZ
+    virtual ~MobEventCommand() = default;
 
     // vIndex: 2, symbol: ?execute@MobEventCommand@@UEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    virtual void execute(class CommandOrigin const&, class CommandOutput&) const;
+    virtual void execute(class CommandOrigin const& origin, class CommandOutput& output) const;
 
     // symbol: ?setup@MobEventCommand@@SAXAEAVCommandRegistry@@$$QEAUInitProxy@1@@Z
-    MCAPI static void setup(class CommandRegistry&, struct MobEventCommand::InitProxy&&);
+    MCAPI static void setup(class CommandRegistry& registry, struct MobEventCommand::InitProxy&& dependencies);
 
     // NOLINTEND
 };

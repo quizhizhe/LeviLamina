@@ -11,22 +11,20 @@ public:
     ItemStackRequestActionCraftResults_DEPRECATEDASKTYLAING&
     operator=(ItemStackRequestActionCraftResults_DEPRECATEDASKTYLAING const&);
     ItemStackRequestActionCraftResults_DEPRECATEDASKTYLAING(ItemStackRequestActionCraftResults_DEPRECATEDASKTYLAING const&);
+    ItemStackRequestActionCraftResults_DEPRECATEDASKTYLAING();
 
 public:
     // NOLINTBEGIN
     // symbol:
     // ?_read@ItemStackRequestActionCraftResults_DEPRECATEDASKTYLAING@@MEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    MCVAPI class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
+    MCVAPI class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ?_write@ItemStackRequestActionCraftResults_DEPRECATEDASKTYLAING@@MEBAXAEAVBinaryStream@@@Z
-    MCVAPI void _write(class BinaryStream&) const;
+    MCVAPI void _write(class BinaryStream& stream) const;
 
     // symbol:
     // ?postLoadItems_DEPRECATEDASKTYLAING@ItemStackRequestActionCraftResults_DEPRECATEDASKTYLAING@@UEAAXAEAVBlockPalette@@_N@Z
-    MCVAPI void postLoadItems_DEPRECATEDASKTYLAING(class BlockPalette&, bool);
-
-    // symbol: ??0ItemStackRequestActionCraftResults_DEPRECATEDASKTYLAING@@QEAA@XZ
-    MCAPI ItemStackRequestActionCraftResults_DEPRECATEDASKTYLAING();
+    MCVAPI void postLoadItems_DEPRECATEDASKTYLAING(class BlockPalette& blockPalette, bool isClientSide);
 
     // NOLINTEND
 };

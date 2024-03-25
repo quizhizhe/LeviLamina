@@ -9,6 +9,7 @@
 // auto generated forward declare list
 // clang-format off
 class WeakEntityRef;
+namespace ScriptModuleMinecraft { class ScriptComponentTypeEnumBuilder; }
 namespace Scripting { class WeakLifetimeScope; }
 // clang-format on
 
@@ -23,19 +24,20 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ScriptTameableComponent@ScriptModuleMinecraft@@UEAA@XZ
+    virtual ~ScriptTameableComponent() = default;
 
-    // vIndex: 1, symbol: ?_isValid@ScriptItemComponent@ScriptModuleMinecraft@@MEBA_NXZ
+    // vIndex: 1, symbol:
+    // ?_isValid@?$ECSScriptActorComponent@VTameableComponent@@VTameableDefinition@@@ScriptModuleMinecraft@@MEBA_NXZ
     virtual bool _isValid() const;
-
-    // symbol: ??1ScriptTameableComponent@ScriptModuleMinecraft@@UEAA@XZ
-    MCVAPI ~ScriptTameableComponent();
 
     // symbol:
     // ??0ScriptTameableComponent@ScriptModuleMinecraft@@QEAA@AEBVWeakEntityRef@@AEBVWeakLifetimeScope@Scripting@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI
-    ScriptTameableComponent(class WeakEntityRef const&, class Scripting::WeakLifetimeScope const&, std::string const&);
+    MCAPI ScriptTameableComponent(
+        class WeakEntityRef const&                entity,
+        class Scripting::WeakLifetimeScope const& scope,
+        std::string const&                        id
+    );
 
     // symbol: ?getProbability@ScriptTameableComponent@ScriptModuleMinecraft@@QEBA?AV?$Result@M$$V@Scripting@@XZ
     MCAPI class Scripting::Result<float> getProbability() const;
@@ -48,8 +50,9 @@ public:
     MCAPI class Scripting::Result<bool> tame() const;
 
     // symbol:
-    // ?bind@ScriptTameableComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptTameableComponent@ScriptModuleMinecraft@@@Scripting@@XZ
-    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptTameableComponent> bind();
+    // ?bind@ScriptTameableComponent@ScriptModuleMinecraft@@SA?AV?$ClassBindingBuilder@VScriptTameableComponent@ScriptModuleMinecraft@@@Scripting@@AEAVScriptComponentTypeEnumBuilder@2@@Z
+    MCAPI static class Scripting::ClassBindingBuilder<class ScriptModuleMinecraft::ScriptTameableComponent>
+    bind(class ScriptModuleMinecraft::ScriptComponentTypeEnumBuilder&);
 
     // symbol: ?ComponentId@ScriptTameableComponent@ScriptModuleMinecraft@@2PEBDEB
     MCAPI static char const* ComponentId;

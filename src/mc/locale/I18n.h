@@ -22,18 +22,20 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ?addI18nObserver@I18n@@SAXAEAVI18nObserver@@@Z
-    MCAPI static void addI18nObserver(class I18nObserver&);
+    MCAPI static void addI18nObserver(class I18nObserver& observer);
 
     // symbol:
     // ?appendLanguageStringsFromPack@I18n@@SAXAEBVPackManifest@@AEBV?$multimap@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$pair@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@@2@U?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$pair@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@@2@@std@@@2@@std@@@Z
-    MCAPI static void
-    appendLanguageStringsFromPack(class PackManifest const&, std::multimap<std::string, std::pair<std::string, std::string>> const&);
+    MCAPI static void appendLanguageStringsFromPack(
+        class PackManifest const&                                              manifest,
+        std::multimap<std::string, std::pair<std::string, std::string>> const& localizationMapping
+    );
 
     // symbol: ?chooseLanguage@I18n@@SAXAEBVLocalization@@@Z
-    MCAPI static void chooseLanguage(class Localization const&);
+    MCAPI static void chooseLanguage(class Localization const& chosen);
 
     // symbol: ?chooseLanguage@I18n@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI static void chooseLanguage(std::string const&);
+    MCAPI static void chooseLanguage(std::string const& code);
 
     // symbol:
     // ?findAvailableLanguageNames@I18n@@SA?AV?$unordered_map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@U?$hash@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@U?$equal_to@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@@std@@@2@@std@@AEAVResourcePackManager@@@Z
@@ -44,7 +46,7 @@ public:
     MCAPI static std::vector<std::string> findAvailableLanguages(class ResourcePackManager&);
 
     // symbol: ?get@I18n@@SA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV23@PEBVLocalization@@@Z
-    MCAPI static std::string get(std::string const&, class Localization const*);
+    MCAPI static std::string get(std::string const& langString, class Localization const* locale);
 
     // symbol:
     // ?get@I18n@@SA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV23@AEBV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@3@PEBVLocalization@@@Z
@@ -61,30 +63,34 @@ public:
     MCAPI static std::vector<std::string> getLanguageCodesFromPack(class PackAccessStrategy const&);
 
     // symbol: ?getLocaleCodeFor@I18n@@SAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV23@@Z
-    MCAPI static std::string const& getLocaleCodeFor(std::string const&);
+    MCAPI static std::string const& getLocaleCodeFor(std::string const& code);
 
     // symbol:
     // ?getLocaleFor@I18n@@SAAEBVLocalization@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI static class Localization const& getLocaleFor(std::string const&);
+    MCAPI static class Localization const& getLocaleFor(std::string const& code);
 
     // symbol:
     // ?getPackKeywordValue@I18n@@SA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVPackManifest@@AEBV23@@Z
-    MCAPI static std::string getPackKeywordValue(class PackManifest const&, std::string const&);
+    MCAPI static std::string getPackKeywordValue(class PackManifest const& manifest, std::string const& key);
 
     // symbol:
     // ?getPackKeywordValueForTelemetry@I18n@@SA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVPackManifest@@AEBV23@@Z
-    MCAPI static std::string getPackKeywordValueForTelemetry(class PackManifest const&, std::string const&);
+    MCAPI static std::string
+    getPackKeywordValueForTelemetry(class PackManifest const& manifest, std::string const& key);
 
     // symbol: ?isPackKeyword@I18n@@SA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI static bool isPackKeyword(std::string const&);
+    MCAPI static bool isPackKeyword(std::string const& key);
 
     // symbol: ?loadAllLanguages@I18n@@SAXAEAVResourcePackManager@@@Z
-    MCAPI static void loadAllLanguages(class ResourcePackManager&);
+    MCAPI static void loadAllLanguages(class ResourcePackManager& resourcePackManager);
 
     // symbol:
     // ?loadLanguageKeywordsFromPack@I18n@@SAXAEBVPackManifest@@AEBVPackAccessStrategy@@AEBV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@Z
-    MCAPI static void
-    loadLanguageKeywordsFromPack(class PackManifest const&, class PackAccessStrategy const&, std::vector<std::string> const&);
+    MCAPI static void loadLanguageKeywordsFromPack(
+        class PackManifest const&       manifest,
+        class PackAccessStrategy const& accessStrategy,
+        std::vector<std::string> const& languageCodes
+    );
 
     // symbol: ?NeutralLangCode@I18n@@2QBDB
     MCAPI static char const NeutralLangCode[];
@@ -95,16 +101,18 @@ public:
     // NOLINTBEGIN
     // symbol:
     // ?_findAvailableLanguageNames@I18n@@CAXAEBVValue@Json@@AEAV?$unordered_map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@U?$hash@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@U?$equal_to@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@@std@@@2@@std@@@Z
-    MCAPI static void
-    _findAvailableLanguageNames(class Json::Value const&, std::unordered_map<std::string, std::string>&);
+    MCAPI static void _findAvailableLanguageNames(
+        class Json::Value const&                      root,
+        std::unordered_map<std::string, std::string>& destination
+    );
 
     // symbol:
     // ?_findAvailableLanguages@I18n@@CAXAEBVValue@Json@@AEAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@Z
-    MCAPI static void _findAvailableLanguages(class Json::Value const&, std::vector<std::string>&);
+    MCAPI static void _findAvailableLanguages(class Json::Value const& root, std::vector<std::string>& destination);
 
     // symbol:
     // ?_findLocaleFor@I18n@@CAPEAVLocalization@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI static class Localization* _findLocaleFor(std::string const&);
+    MCAPI static class Localization* _findLocaleFor(std::string const& code);
 
     // symbol:
     // ?_generatePackKeyPrefix@I18n@@CA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVPackManifest@@@Z
@@ -112,11 +120,12 @@ public:
 
     // symbol:
     // ?_getAdditionalTranslationsBackupLocale@I18n@@CAPEAVLocalization@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z
-    MCAPI static class Localization* _getAdditionalTranslationsBackupLocale(std::string const&, bool);
+    MCAPI static class Localization*
+    _getAdditionalTranslationsBackupLocale(std::string const& langCode, bool createIfDoesNotExist);
 
     // symbol:
     // ?_getPackKeywordLocale@I18n@@CAAEAVLocalization@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI static class Localization& _getPackKeywordLocale(std::string const&);
+    MCAPI static class Localization& _getPackKeywordLocale(std::string const& langCode);
 
     // NOLINTEND
 
@@ -176,33 +185,33 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mAdditionalTranslationsBackup() { return mAdditionalTranslationsBackup; }
+    static auto& $mAdditionalTranslationsBackup() { return mAdditionalTranslationsBackup; }
 
-    auto& $mAdditionalTranslationsBackupMutex() { return mAdditionalTranslationsBackupMutex; }
+    static auto& $mAdditionalTranslationsBackupMutex() { return mAdditionalTranslationsBackupMutex; }
 
-    auto& $mCurrentLanguage() { return mCurrentLanguage; }
+    static auto& $mCurrentLanguage() { return mCurrentLanguage; }
 
-    auto& $mCurrentPackMetaLanguage() { return mCurrentPackMetaLanguage; }
+    static auto& $mCurrentPackMetaLanguage() { return mCurrentPackMetaLanguage; }
 
-    auto& $mEmptyLanguage() { return mEmptyLanguage; }
+    static auto& $mEmptyLanguage() { return mEmptyLanguage; }
 
-    auto& $mFormatDictionary() { return mFormatDictionary; }
+    static auto& $mFormatDictionary() { return mFormatDictionary; }
 
-    auto& $mLanguageCodes() { return mLanguageCodes; }
+    static auto& $mLanguageCodes() { return mLanguageCodes; }
 
-    auto& $mLanguageNames() { return mLanguageNames; }
+    static auto& $mLanguageNames() { return mLanguageNames; }
 
-    auto& $mLanguageSupportsHypenSplitting() { return mLanguageSupportsHypenSplitting; }
+    static auto& $mLanguageSupportsHypenSplitting() { return mLanguageSupportsHypenSplitting; }
 
-    auto& $mLanguages() { return mLanguages; }
+    static auto& $mLanguages() { return mLanguages; }
 
-    auto& $mPackKeywordLanguages() { return mPackKeywordLanguages; }
+    static auto& $mPackKeywordLanguages() { return mPackKeywordLanguages; }
 
-    auto& $mPackReservedKeys() { return mPackReservedKeys; }
+    static auto& $mPackReservedKeys() { return mPackReservedKeys; }
 
-    auto& $mResourcePackManager() { return mResourcePackManager; }
+    static auto& $mResourcePackManager() { return mResourcePackManager; }
 
-    auto& $mSubject() { return mSubject; }
+    static auto& $mSubject() { return mSubject; }
 
     // NOLINTEND
 };

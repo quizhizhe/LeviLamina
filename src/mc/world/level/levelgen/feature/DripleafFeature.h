@@ -14,18 +14,18 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1DripleafFeature@@UEAA@XZ
+    virtual ~DripleafFeature() = default;
 
     // vIndex: 3, symbol: ?place@DripleafFeature@@UEBA_NAEAVBlockSource@@AEBVBlockPos@@AEAVRandom@@@Z
-    virtual bool place(class BlockSource&, class BlockPos const&, class Random&) const;
+    virtual bool place(class BlockSource& region, class BlockPos const& pos, class Random& random) const;
 
     // NOLINTEND
 
     // private:
     // NOLINTBEGIN
     // symbol: ?_placeBigDripleaf@DripleafFeature@@CA_NAEAVBlockSource@@AEBVBlockPos@@AEAVRandom@@@Z
-    MCAPI static bool _placeBigDripleaf(class BlockSource&, class BlockPos const&, class Random&);
+    MCAPI static bool _placeBigDripleaf(class BlockSource& region, class BlockPos const& pos, class Random& random);
 
     // NOLINTEND
 };

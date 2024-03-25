@@ -11,8 +11,11 @@ public:
 
 public:
     // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1NetworkPacketEventCoordinator@@UEAA@XZ
+    virtual ~NetworkPacketEventCoordinator() = default;
+
     // symbol: ?sendPacketReceivedFrom@NetworkPacketEventCoordinator@@QEAAXAEBVPacketHeader@@AEBVPacket@@@Z
-    MCAPI void sendPacketReceivedFrom(class PacketHeader const&, class Packet const&);
+    MCAPI void sendPacketReceivedFrom(class PacketHeader const& header, class Packet const& packet);
 
     // NOLINTEND
 };

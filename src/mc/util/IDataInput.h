@@ -5,7 +5,7 @@
 class IDataInput {
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
+    // vIndex: 0, symbol: __gen_??1IDataInput@@UEAA@XZ
     virtual ~IDataInput() = default;
 
     // vIndex: 1, symbol:
@@ -34,8 +34,8 @@ public:
     // vIndex: 8, symbol: ?readLongLong@BigEndianStringByteInput@@UEAA_JXZ
     virtual int64 readLongLong() = 0;
 
-    // vIndex: 9, symbol: ?readBytes@StringByteInput@@UEAA_NPEAX_K@Z
-    virtual bool readBytes(void*, uint64) = 0;
+    // vIndex: 9, symbol: ?readBytes@BigEndianStringByteInput@@UEAA_NPEAX_K@Z
+    virtual bool readBytes(void* data, uint64 bytes) = 0;
 
     // vIndex: 10, symbol: ?numBytesLeft@StringByteInput@@UEBA_KXZ
     virtual uint64 numBytesLeft() const = 0;

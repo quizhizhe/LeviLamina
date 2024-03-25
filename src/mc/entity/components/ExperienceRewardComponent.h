@@ -12,23 +12,23 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ?addAdditionalSaveData@ExperienceRewardComponent@@QEBAXAEAVCompoundTag@@@Z
-    MCAPI void addAdditionalSaveData(class CompoundTag&) const;
+    MCAPI void addAdditionalSaveData(class CompoundTag& tag) const;
 
     // symbol: ?getIsExperienceDropEnabled@ExperienceRewardComponent@@QEBA_NXZ
     MCAPI bool getIsExperienceDropEnabled() const;
 
     // symbol: ?getOnBredExperience@ExperienceRewardComponent@@QEBAHAEAVActor@@@Z
-    MCAPI int getOnBredExperience(class Actor&) const;
+    MCAPI int getOnBredExperience(class Actor& owner) const;
 
     // symbol: ?getOnDeathExperience@ExperienceRewardComponent@@QEBAHAEAVActor@@@Z
-    MCAPI int getOnDeathExperience(class Actor&) const;
+    MCAPI int getOnDeathExperience(class Actor& owner) const;
 
     // symbol: ??4ExperienceRewardComponent@@QEAAAEAV0@$$QEAV0@@Z
     MCAPI class ExperienceRewardComponent& operator=(class ExperienceRewardComponent&&);
 
     // symbol:
     // ?readAdditionalSaveData@ExperienceRewardComponent@@QEAAXAEAVActor@@AEBVCompoundTag@@AEAVDataLoadHelper@@@Z
-    MCAPI void readAdditionalSaveData(class Actor&, class CompoundTag const&, class DataLoadHelper&);
+    MCAPI void readAdditionalSaveData(class Actor&, class CompoundTag const& tag, class DataLoadHelper&);
 
     // symbol: ?setIsExperienceDropEnabled@ExperienceRewardComponent@@QEAAX_N@Z
     MCAPI void setIsExperienceDropEnabled(bool);
@@ -46,7 +46,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mIsExperienceDropEnabledTag() { return mIsExperienceDropEnabledTag; }
+    static auto& $mIsExperienceDropEnabledTag() { return mIsExperienceDropEnabledTag; }
 
     // NOLINTEND
 };

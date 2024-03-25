@@ -10,8 +10,7 @@
 
 class CameraPresetsPacket : public ::Packet {
 public:
-    CameraPresets                          mData;
-    std::vector<CameraPresets::CameraList> mList;
+    CameraPresets mData;
 
     // prevent constructor by default
     CameraPresetsPacket& operator=(CameraPresetsPacket const&);
@@ -19,8 +18,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1CameraPresetsPacket@@UEAA@XZ
+    virtual ~CameraPresetsPacket();
 
     // vIndex: 1, symbol: ?getId@CameraPresetsPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -30,24 +29,18 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@CameraPresetsPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 4, symbol:
     // ?read@CameraPresetsPacket@@UEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> read(class ReadOnlyBinaryStream&);
+    virtual class Bedrock::Result<void> read(class ReadOnlyBinaryStream& stream);
 
     // vIndex: 7, symbol:
     // ?_read@CameraPresetsPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1CameraPresetsPacket@@UEAA@XZ
-    MCVAPI ~CameraPresetsPacket();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0CameraPresetsPacket@@QEAA@XZ
     MCAPI CameraPresetsPacket();
-
-    // symbol: ??0CameraPresetsPacket@@QEAA@AEBVCameraPresets@@@Z
-    MCAPI explicit CameraPresetsPacket(class CameraPresets const&);
 
     // NOLINTEND
 };

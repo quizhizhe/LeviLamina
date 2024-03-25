@@ -21,8 +21,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1BlockPlacementFilterDescription@@UEAA@XZ
+    virtual ~BlockPlacementFilterDescription() = default;
 
     // vIndex: 1, symbol:
     // ?getName@BlockPlacementFilterDescription@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
@@ -30,9 +30,6 @@ public:
 
     // vIndex: 3, symbol: ?initializeComponent@BlockPlacementFilterDescription@@UEBAXAEAVBlockComponentStorage@@@Z
     virtual void initializeComponent(class BlockComponentStorage&) const;
-
-    // vIndex: 5, symbol: __unk_vfn_5
-    virtual void __unk_vfn_5();
 
     // vIndex: 7, symbol: ?isNetworkComponent@BlockPlacementFilterDescription@@UEBA_NXZ
     virtual bool isNetworkComponent() const;

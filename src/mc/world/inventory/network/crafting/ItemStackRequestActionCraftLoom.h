@@ -11,31 +11,19 @@ public:
     // prevent constructor by default
     ItemStackRequestActionCraftLoom& operator=(ItemStackRequestActionCraftLoom const&);
     ItemStackRequestActionCraftLoom(ItemStackRequestActionCraftLoom const&);
+    ItemStackRequestActionCraftLoom();
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // vIndex: 1, symbol: ?getCraftAction@ItemStackRequestActionCraftBase@@UEBAPEBV1@XZ
-    virtual class ItemStackRequestActionCraftBase const* getCraftAction() const;
-
-    // vIndex: 2, symbol: ?getFilteredStringIndex@ItemStackRequestAction@@UEBAHXZ
-    virtual int getFilteredStringIndex() const;
-
-    // vIndex: 3, symbol:
-    // ?postLoadItems_DEPRECATEDASKTYLAING@ItemStackRequestActionCraftBase@@UEAAXAEAVBlockPalette@@_N@Z
-    virtual void postLoadItems_DEPRECATEDASKTYLAING(class BlockPalette&, bool);
+    // vIndex: 0, symbol: __gen_??1ItemStackRequestActionCraftLoom@@UEAA@XZ
+    virtual ~ItemStackRequestActionCraftLoom() = default;
 
     // vIndex: 4, symbol: ?_write@ItemStackRequestActionCraftLoom@@UEBAXAEAVBinaryStream@@@Z
-    virtual void _write(class BinaryStream&) const;
+    virtual void _write(class BinaryStream& stream) const;
 
     // vIndex: 5, symbol:
     // ?_read@ItemStackRequestActionCraftLoom@@UEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??0ItemStackRequestActionCraftLoom@@QEAA@XZ
-    MCAPI ItemStackRequestActionCraftLoom();
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // NOLINTEND
 };

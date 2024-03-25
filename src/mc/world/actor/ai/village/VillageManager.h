@@ -4,6 +4,7 @@
 
 // auto generated inclusion list
 #include "mc/deps/core/common/bedrock/IVillageManager.h"
+#include "mc/enums/POIType.h"
 
 // auto generated forward declare list
 // clang-format off
@@ -59,61 +60,71 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1VillageManager@@UEAA@XZ
+    virtual ~VillageManager() = default;
 
     // vIndex: 1, symbol: ?fetchClosestVillage@VillageManager@@UEBA?AV?$weak_ptr@VVillage@@@std@@AEBVBlockPos@@HI@Z
-    virtual std::weak_ptr<class Village> fetchClosestVillage(class BlockPos const&, int, uint) const;
+    virtual std::weak_ptr<class Village>
+    fetchClosestVillage(class BlockPos const& position, int, uint searchRadius) const;
 
     // vIndex: 2, symbol: ?getVillageByID@VillageManager@@UEBA?AV?$weak_ptr@VVillage@@@std@@AEBVUUID@mce@@@Z
-    virtual std::weak_ptr<class Village> getVillageByID(class mce::UUID const&) const;
+    virtual std::weak_ptr<class Village> getVillageByID(class mce::UUID const& villageID) const;
 
     // symbol: ??0VillageManager@@QEAA@AEAVDimension@@@Z
-    MCAPI explicit VillageManager(class Dimension&);
+    MCAPI explicit VillageManager(class Dimension& dimension);
+
+    // symbol: ?applyHeroOfTheVillageEffect@VillageManager@@QEAAXAEAVActor@@@Z
+    MCAPI void applyHeroOfTheVillageEffect(class Actor& actor);
 
     // symbol:
     // ?fetchClosestVillageMostSuitableForDweller@VillageManager@@QEBA?AV?$weak_ptr@VVillage@@@std@@AEBVBlockPos@@HI@Z
     MCAPI std::weak_ptr<class Village>
-          fetchClosestVillageMostSuitableForDweller(class BlockPos const&, int, uint) const;
+          fetchClosestVillageMostSuitableForDweller(class BlockPos const& position, int, uint searchRadius) const;
 
     // symbol: ?getClosestVillageWithRaid@VillageManager@@QEAA?AV?$weak_ptr@VVillage@@@std@@AEBVBlockPos@@@Z
-    MCAPI std::weak_ptr<class Village> getClosestVillageWithRaid(class BlockPos const&);
+    MCAPI std::weak_ptr<class Village> getClosestVillageWithRaid(class BlockPos const& pos);
 
     // symbol: ?getPOI@VillageManager@@QEBA?AV?$weak_ptr@VPOIInstance@@@std@@AEBVBlockPos@@@Z
-    MCAPI std::weak_ptr<class POIInstance> getPOI(class BlockPos const&) const;
+    MCAPI std::weak_ptr<class POIInstance> getPOI(class BlockPos const& position) const;
 
     // symbol: ?getPOIInitEventFromName@VillageManager@@QEBA?AVHashedString@@AEBV2@@Z
-    MCAPI class HashedString getPOIInitEventFromName(class HashedString const&) const;
+    MCAPI class HashedString getPOIInitEventFromName(class HashedString const& name) const;
+
+    // symbol: ?hasPOI@VillageManager@@QEBA_NAEBVBlockPos@@W4POIType@@@Z
+    MCAPI bool hasPOI(class BlockPos const& position, ::POIType type) const;
 
     // symbol: ?initializeWithLevelStorageManager@VillageManager@@QEAAXAEAVLevelStorageManager@@@Z
     MCAPI void initializeWithLevelStorageManager(class LevelStorageManager&);
 
     // symbol: ?insertPOI@VillageManager@@QEAAX$$QEAV?$shared_ptr@VPOIInstance@@@std@@@Z
-    MCAPI void insertPOI(std::shared_ptr<class POIInstance>&&);
+    MCAPI void insertPOI(std::shared_ptr<class POIInstance>&& poi);
+
+    // symbol: ?isRegisteredPOI@VillageManager@@QEBA_NAEBVBlock@@@Z
+    MCAPI bool isRegisteredPOI(class Block const& block) const;
 
     // symbol: ?isValidPOIType@VillageManager@@QEBA_NAEBVBlockPos@@AEBVBlock@@@Z
-    MCAPI bool isValidPOIType(class BlockPos const&, class Block const&) const;
+    MCAPI bool isValidPOIType(class BlockPos const& pos, class Block const& block) const;
 
     // symbol: ?isWanderingTraderManagedByScheduler@VillageManager@@QEAA_NAEBVActor@@@Z
-    MCAPI bool isWanderingTraderManagedByScheduler(class Actor const&);
+    MCAPI bool isWanderingTraderManagedByScheduler(class Actor const& actor);
 
     // symbol: ?loadAllVillages@VillageManager@@QEAAXXZ
     MCAPI void loadAllVillages();
 
     // symbol: ?removePOI@VillageManager@@QEAAXV?$weak_ptr@VPOIInstance@@@std@@@Z
-    MCAPI void removePOI(std::weak_ptr<class POIInstance>);
+    MCAPI void removePOI(std::weak_ptr<class POIInstance> poi);
 
     // symbol: ?submitFindPOIQuery@VillageManager@@QEAAXAEBUActorUniqueID@@@Z
-    MCAPI void submitFindPOIQuery(struct ActorUniqueID const&);
+    MCAPI void submitFindPOIQuery(struct ActorUniqueID const& actorID);
 
     // symbol: ?tick@VillageManager@@QEAAXAEBUTick@@@Z
-    MCAPI void tick(struct Tick const&);
+    MCAPI void tick(struct Tick const& tick);
 
     // symbol: ?tickVillages@VillageManager@@QEAAXAEBUTick@@AEBVVec3@@AEAVBlockSource@@@Z
-    MCAPI void tickVillages(struct Tick const&, class Vec3 const&, class BlockSource&);
+    MCAPI void tickVillages(struct Tick const& tick, class Vec3 const& position, class BlockSource& region);
 
     // symbol: ?tryCreatePOI@VillageManager@@QEAA?AV?$shared_ptr@VPOIInstance@@@std@@AEBVBlockPos@@AEBVBlock@@@Z
-    MCAPI std::shared_ptr<class POIInstance> tryCreatePOI(class BlockPos const&, class Block const&);
+    MCAPI std::shared_ptr<class POIInstance> tryCreatePOI(class BlockPos const& position, class Block const& block);
 
     // symbol: ?MAX_POI_TOLERANCE_DIST@VillageManager@@2HB
     MCAPI static int const MAX_POI_TOLERANCE_DIST;
@@ -123,16 +134,17 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol: ?_addPOIWithinRadius@VillageManager@@AEAAXAEBVBlockPos@@AEAVBlockSource@@@Z
-    MCAPI void _addPOIWithinRadius(class BlockPos const&, class BlockSource&);
+    MCAPI void _addPOIWithinRadius(class BlockPos const& pos, class BlockSource& region);
 
     // symbol: ?_assignPOIOnly@VillageManager@@AEAAX$$QEAV?$shared_ptr@VPOIInstance@@@std@@@Z
-    MCAPI void _assignPOIOnly(std::shared_ptr<class POIInstance>&&);
+    MCAPI void _assignPOIOnly(std::shared_ptr<class POIInstance>&& pi);
 
     // symbol: ?_calculateDistanceFromPositionToEdgeOfVillage@VillageManager@@AEBAMAEBVBlockPos@@AEBVVillage@@@Z
-    MCAPI float _calculateDistanceFromPositionToEdgeOfVillage(class BlockPos const&, class Village const&) const;
+    MCAPI float
+    _calculateDistanceFromPositionToEdgeOfVillage(class BlockPos const& position, class Village const& village) const;
 
     // symbol: ?_createOrGetVillage@VillageManager@@AEAA?AV?$shared_ptr@VVillage@@@std@@AEBVUUID@mce@@AEBVBlockPos@@@Z
-    MCAPI std::shared_ptr<class Village> _createOrGetVillage(class mce::UUID const&, class BlockPos const&);
+    MCAPI std::shared_ptr<class Village> _createOrGetVillage(class mce::UUID const& id, class BlockPos const&);
 
     // symbol:
     // ?_getVillageWithBedsAvailableMap@VillageManager@@AEBA?AV?$unordered_map@PEBVVillage@@W4BedAvailabilityState@VillageManager@@U?$hash@PEBVVillage@@@std@@U?$equal_to@PEBVVillage@@@5@V?$allocator@U?$pair@QEBVVillage@@W4BedAvailabilityState@VillageManager@@@std@@@5@@std@@XZ
@@ -142,18 +154,15 @@ public:
     // symbol: ?_loadPOIBlueprints@VillageManager@@AEAAXXZ
     MCAPI void _loadPOIBlueprints();
 
-    // symbol: ?_removeVillage@VillageManager@@AEAAXAEAVVillage@@@Z
-    MCAPI void _removeVillage(class Village&);
-
     // symbol: ?_saveAllVillages@VillageManager@@AEAAXAEAVLevelStorage@@@Z
     MCAPI void _saveAllVillages(class LevelStorage&);
 
     // symbol: ?_tryAssignPOIOrCreateVillage@VillageManager@@AEAAX$$QEAV?$shared_ptr@VPOIInstance@@@std@@@Z
-    MCAPI void _tryAssignPOIOrCreateVillage(std::shared_ptr<class POIInstance>&&);
+    MCAPI void _tryAssignPOIOrCreateVillage(std::shared_ptr<class POIInstance>&& pi);
 
     // symbol:
     // ?_unclusterDerelictPOIs@VillageManager@@AEAAXAEAV?$vector@V?$weak_ptr@VPOIInstance@@@std@@V?$allocator@V?$weak_ptr@VPOIInstance@@@std@@@2@@std@@@Z
-    MCAPI void _unclusterDerelictPOIs(std::vector<std::weak_ptr<class POIInstance>>&);
+    MCAPI void _unclusterDerelictPOIs(std::vector<std::weak_ptr<class POIInstance>>& pois);
 
     // NOLINTEND
 
@@ -173,11 +182,11 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $MAX_POI_QUERIES() { return MAX_POI_QUERIES; }
+    static auto& $MAX_POI_QUERIES() { return MAX_POI_QUERIES; }
 
-    auto& $MAX_QUERY_SCAN_ITERATIONS() { return MAX_QUERY_SCAN_ITERATIONS; }
+    static auto& $MAX_QUERY_SCAN_ITERATIONS() { return MAX_QUERY_SCAN_ITERATIONS; }
 
-    auto& $VILLAGE_HERO_EFFECT_DURATION() { return VILLAGE_HERO_EFFECT_DURATION; }
+    static auto& $VILLAGE_HERO_EFFECT_DURATION() { return VILLAGE_HERO_EFFECT_DURATION; }
 
     // NOLINTEND
 };

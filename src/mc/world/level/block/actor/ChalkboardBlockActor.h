@@ -3,6 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
+#include "mc/deps/core/common/bedrock/NonOwnerPointer.h"
 #include "mc/enums/ChalkboardSize.h"
 #include "mc/world/level/block/actor/BlockActor.h"
 
@@ -58,7 +59,7 @@ public:
     public:
         // NOLINTBEGIN
         // symbol: ?confirmedBroken@ChalkboardFinder@ChalkboardBlockActor@@QEBA_NAEAV2@AEAVBlockSource@@@Z
-        MCAPI bool confirmedBroken(class ChalkboardBlockActor&, class BlockSource&) const;
+        MCAPI bool confirmedBroken(class ChalkboardBlockActor& compare, class BlockSource& region) const;
 
         // NOLINTEND
     };
@@ -71,51 +72,24 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ChalkboardBlockActor@@UEAA@XZ
+    virtual ~ChalkboardBlockActor() = default;
 
     // vIndex: 1, symbol: ?load@ChalkboardBlockActor@@UEAAXAEAVLevel@@AEBVCompoundTag@@AEAVDataLoadHelper@@@Z
-    virtual void load(class Level&, class CompoundTag const&, class DataLoadHelper&);
+    virtual void load(class Level& level, class CompoundTag const& tag, class DataLoadHelper& dataLoadHelper);
 
     // vIndex: 2, symbol: ?save@ChalkboardBlockActor@@UEBA_NAEAVCompoundTag@@@Z
-    virtual bool save(class CompoundTag&) const;
+    virtual bool save(class CompoundTag& tag) const;
 
     // vIndex: 7, symbol: ?tick@ChalkboardBlockActor@@UEAAXAEAVBlockSource@@@Z
-    virtual void tick(class BlockSource&);
+    virtual void tick(class BlockSource& region);
 
     // vIndex: 8, symbol: ?onChanged@ChalkboardBlockActor@@UEAAXAEAVBlockSource@@@Z
-    virtual void onChanged(class BlockSource&);
-
-    // vIndex: 12, symbol: __unk_vfn_12
-    virtual void __unk_vfn_12();
-
-    // vIndex: 18, symbol: __unk_vfn_18
-    virtual void __unk_vfn_18();
+    virtual void onChanged(class BlockSource& region);
 
     // vIndex: 28, symbol:
     // ?getImmersiveReaderText@ChalkboardBlockActor@@UEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAVBlockSource@@@Z
     virtual std::string getImmersiveReaderText(class BlockSource&);
-
-    // vIndex: 30, symbol: __unk_vfn_30
-    virtual void __unk_vfn_30();
-
-    // vIndex: 31, symbol: __unk_vfn_31
-    virtual void __unk_vfn_31();
-
-    // vIndex: 32, symbol: __unk_vfn_32
-    virtual void __unk_vfn_32();
-
-    // vIndex: 33, symbol: __unk_vfn_33
-    virtual void __unk_vfn_33();
-
-    // vIndex: 34, symbol: __unk_vfn_34
-    virtual void __unk_vfn_34();
-
-    // vIndex: 35, symbol: __unk_vfn_35
-    virtual void __unk_vfn_35();
-
-    // vIndex: 36, symbol: __unk_vfn_36
-    virtual void __unk_vfn_36();
 
     // vIndex: 37, symbol:
     // ?getUgcStrings@ChalkboardBlockActor@@UEBA?AV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@AEBVCompoundTag@@@Z
@@ -123,20 +97,17 @@ public:
 
     // vIndex: 38, symbol:
     // ?setUgcStrings@ChalkboardBlockActor@@UEBAXAEAVCompoundTag@@AEBV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@Z
-    virtual void setUgcStrings(class CompoundTag&, std::vector<std::string> const&) const;
-
-    // vIndex: 39, symbol: __unk_vfn_39
-    virtual void __unk_vfn_39();
+    virtual void setUgcStrings(class CompoundTag& tag, std::vector<std::string> const& list) const;
 
     // vIndex: 40, symbol:
     // ?_getUpdatePacket@ChalkboardBlockActor@@MEAA?AV?$unique_ptr@VBlockActorDataPacket@@U?$default_delete@VBlockActorDataPacket@@@std@@@std@@AEAVBlockSource@@@Z
-    virtual std::unique_ptr<class BlockActorDataPacket> _getUpdatePacket(class BlockSource&);
+    virtual std::unique_ptr<class BlockActorDataPacket> _getUpdatePacket(class BlockSource& region);
 
     // vIndex: 41, symbol: ?_onUpdatePacket@ChalkboardBlockActor@@MEAAXAEBVCompoundTag@@AEAVBlockSource@@@Z
-    virtual void _onUpdatePacket(class CompoundTag const&, class BlockSource&);
+    virtual void _onUpdatePacket(class CompoundTag const& data, class BlockSource& region);
 
     // symbol: ??0ChalkboardBlockActor@@QEAA@AEBVBlockPos@@@Z
-    MCAPI explicit ChalkboardBlockActor(class BlockPos const&);
+    MCAPI explicit ChalkboardBlockActor(class BlockPos const& pos);
 
     // symbol: ?getChalkboardSize@ChalkboardBlockActor@@QEBA?BW4ChalkboardSize@@XZ
     MCAPI ::ChalkboardSize const getChalkboardSize() const;
@@ -145,7 +116,7 @@ public:
     MCAPI bool getLocked() const;
 
     // symbol: ?getRotation@ChalkboardBlockActor@@QEBAHAEAVBlockSource@@@Z
-    MCAPI int getRotation(class BlockSource&) const;
+    MCAPI int getRotation(class BlockSource& region) const;
 
     // symbol: ?getText@ChalkboardBlockActor@@QEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
     MCAPI std::string const& getText() const;
@@ -154,44 +125,45 @@ public:
     MCAPI int getTextCharCount() const;
 
     // symbol: ?setText@ChalkboardBlockActor@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI void setText(std::string const&);
+    MCAPI void setText(std::string const& text);
 
     // symbol: ?validate@ChalkboardBlockActor@@QEAAXAEAVBlockSource@@@Z
-    MCAPI void validate(class BlockSource&);
+    MCAPI void validate(class BlockSource& region);
 
     // symbol:
     // ?calculateAllBlocks@ChalkboardBlockActor@@SA?AV?$vector@VBlockPos@@V?$allocator@VBlockPos@@@std@@@std@@AEBVBlockPos@@W4ChalkboardSize@@H@Z
-    MCAPI static std::vector<class BlockPos> calculateAllBlocks(class BlockPos const&, ::ChalkboardSize, int);
+    MCAPI static std::vector<class BlockPos>
+    calculateAllBlocks(class BlockPos const& basePos, ::ChalkboardSize boardSize, int dir);
 
     // symbol:
     // ?canCreateChalkboard@ChalkboardBlockActor@@SA_NPEAVActor@@AEAVBlockSource@@AEBVBlockPos@@W4ChalkboardSize@@EHAEAV?$vector@VBlockPos@@V?$allocator@VBlockPos@@@std@@@std@@AEBVItemStack@@_N@Z
     MCAPI static bool canCreateChalkboard(
-        class Actor*,
-        class BlockSource&,
-        class BlockPos const&,
-        ::ChalkboardSize,
-        uchar,
-        int,
-        std::vector<class BlockPos>&,
-        class ItemStack const&,
+        class Actor*                 creator,
+        class BlockSource&           region,
+        class BlockPos const&        basePos,
+        ::ChalkboardSize             boardSize,
+        uchar                        face,
+        int                          dir,
+        std::vector<class BlockPos>& occupiedBlocks,
+        class ItemStack const&       instance,
         bool
     );
 
     // symbol: ?convertFromEntity@ChalkboardBlockActor@@SAPEAV1@AEAVBlockSource@@AEBVCompoundTag@@@Z
-    MCAPI static class ChalkboardBlockActor* convertFromEntity(class BlockSource&, class CompoundTag const&);
+    MCAPI static class ChalkboardBlockActor* convertFromEntity(class BlockSource& region, class CompoundTag const& tag);
 
     // symbol:
     // ?createChalkboard@ChalkboardBlockActor@@SAPEAV1@PEAVActor@@AEAVBlockSource@@AEBVBlockPos@@W4ChalkboardSize@@EH_NAEBVItemStack@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
     MCAPI static class ChalkboardBlockActor* createChalkboard(
-        class Actor*,
-        class BlockSource&,
-        class BlockPos const&,
-        ::ChalkboardSize,
-        uchar,
-        int,
-        bool,
-        class ItemStack const&,
-        std::string
+        class Actor*           creator,
+        class BlockSource&     region,
+        class BlockPos const&  basePos,
+        ::ChalkboardSize       boardSize,
+        uchar                  face,
+        int                    dir,
+        bool                   isOnGround,
+        class ItemStack const& instance,
+        std::string            text
     );
 
     // NOLINTEND
@@ -200,7 +172,7 @@ public:
     // NOLINTBEGIN
     // symbol: ?_findChalkboard@ChalkboardBlockActor@@CA?AUChalkboardFinder@1@AEAVBlockSource@@AEBVBlockPos@@@Z
     MCAPI static struct ChalkboardBlockActor::ChalkboardFinder
-    _findChalkboard(class BlockSource&, class BlockPos const&);
+    _findChalkboard(class BlockSource& region, class BlockPos const& pos);
 
     // NOLINTEND
 };

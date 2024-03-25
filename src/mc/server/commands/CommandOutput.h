@@ -1,8 +1,10 @@
 #pragma once
 
-#include "ll/api/i18n/I18nAPI.h"
+#include "ll/api/i18n/I18n.h"
 #include "mc/_HeaderOutputPredefine.h"
+#include "mc/server/commands/CommandOutputMessage.h"
 #include "mc/server/commands/CommandOutputParameter.h"
+#include "mc/server/commands/CommandPropertyBag.h"
 
 // auto generated inclusion list
 #include "mc/server/commands/CommandOutputMessageType.h"
@@ -10,48 +12,59 @@
 
 class CommandOutput {
 public:
-    CommandOutputType                         mType;
-    std::unique_ptr<class CommandPropertyBag> mBag;
-    std::vector<class CommandOutputMessage>   mMessages;
-    int                                       mSuccessCount;
-    bool                                      mHasPlayerText;
+    CommandOutputType                   mType;
+    std::unique_ptr<CommandPropertyBag> mBag;
+    std::vector<CommandOutputMessage>   mMessages;
+    int                                 mSuccessCount;
+    bool                                mHasPlayerText;
 
     // prevent constructor by default
     CommandOutput& operator=(CommandOutput const&);
     CommandOutput();
 
-    template <typename... Args>
-    inline void trSuccess(std::string const& format, Args&&... args) {
-        success(ll::i18n::tr(format, std::forward<Args>(args)...));
+    template <class First, class... Args>
+        requires(!std::is_same_v<std::remove_cvref_t<First>, std::vector<class CommandOutputParameter>>)
+    void success(fmt::format_string<First, Args...> fmt, First&& _args, Args&&... args) {
+        success(fmt::vformat(fmt.get(), fmt::make_format_args(_args, args...)));
     }
 
-    template <typename... Args>
-    inline void trError(std::string const& format, Args&&... args) {
-        error(ll::i18n::tr(format, std::forward<Args>(args)...));
+    template <class First, class... Args>
+        requires(!std::is_same_v<std::remove_cvref_t<First>, std::vector<class CommandOutputParameter>>)
+    void error(fmt::format_string<First, Args...> fmt, First&& _args, Args&&... args) {
+        error(fmt::vformat(fmt.get(), fmt::make_format_args(_args, args...)));
     }
+
+    void success(char const* str) { success(std::string{str}); }
+    void error(char const* str) { error(std::string{str}); }
+
+    void success(std::string_view str) { success(std::string{str}); }
+    void error(std::string_view str) { error(std::string{str}); }
 
 public:
     // NOLINTBEGIN
     // symbol: ??0CommandOutput@@QEAA@AEBV0@@Z
-    MCAPI CommandOutput(class CommandOutput const&);
+    MCAPI CommandOutput(class CommandOutput const& rhs);
 
     // symbol: ??0CommandOutput@@QEAA@W4CommandOutputType@@@Z
-    MCAPI explicit CommandOutput(::CommandOutputType);
+    MCAPI explicit CommandOutput(::CommandOutputType type);
 
     // symbol:
     // ?addToResultList@CommandOutput@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVActor@@@Z
-    MCAPI void addToResultList(std::string const&, class Actor const&);
+    MCAPI void addToResultList(std::string const& key, class Actor const& element);
 
     // symbol: ?addToResultList@CommandOutput@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z
-    MCAPI void addToResultList(std::string const&, std::string const&);
+    MCAPI void addToResultList(std::string const& key, std::string const& element);
+
+    // symbol: ?empty@CommandOutput@@QEBA_NXZ
+    MCAPI bool empty() const;
 
     // symbol:
     // ?error@CommandOutput@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@VCommandOutputParameter@@V?$allocator@VCommandOutputParameter@@@std@@@3@@Z
-    MCAPI void error(std::string const&, std::vector<class CommandOutputParameter> const& = {});
+    MCAPI void error(std::string const& msgId, std::vector<class CommandOutputParameter> const& params = {});
 
     // symbol:
     // ?forceOutput@CommandOutput@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@VCommandOutputParameter@@V?$allocator@VCommandOutputParameter@@@std@@@3@@Z
-    MCAPI void forceOutput(std::string const&, std::vector<class CommandOutputParameter> const&);
+    MCAPI void forceOutput(std::string const& msgId, std::vector<class CommandOutputParameter> const& params);
 
     // symbol: ?getData@CommandOutput@@QEBAAEBVCommandPropertyBag@@XZ
     MCAPI class CommandPropertyBag const& getData() const;
@@ -71,8 +84,12 @@ public:
 
     // symbol:
     // ?load@CommandOutput@@QEAAXW4CommandOutputType@@H$$QEAV?$vector@VCommandOutputMessage@@V?$allocator@VCommandOutputMessage@@@std@@@std@@$$QEAV?$unique_ptr@VCommandPropertyBag@@U?$default_delete@VCommandPropertyBag@@@std@@@4@@Z
-    MCAPI void
-    load(::CommandOutputType, int, std::vector<class CommandOutputMessage>&&, std::unique_ptr<class CommandPropertyBag>&&);
+    MCAPI void load(
+        ::CommandOutputType                         type,
+        int                                         successCount,
+        std::vector<class CommandOutputMessage>&&   messages,
+        std::unique_ptr<class CommandPropertyBag>&& data
+    );
 
     // symbol: ?setHasPlayerText@CommandOutput@@QEAAXXZ
     MCAPI void setHasPlayerText();
@@ -82,7 +99,7 @@ public:
 
     // symbol:
     // ?success@CommandOutput@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@VCommandOutputParameter@@V?$allocator@VCommandOutputParameter@@@std@@@3@@Z
-    MCAPI void success(std::string const&, std::vector<class CommandOutputParameter> const& = {});
+    MCAPI void success(std::string const& msgId, std::vector<class CommandOutputParameter> const& params = {});
 
     // symbol: ?wantsData@CommandOutput@@QEBA_NXZ
     MCAPI bool wantsData() const;
@@ -96,8 +113,11 @@ public:
     // NOLINTBEGIN
     // symbol:
     // ?addMessage@CommandOutput@@AEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@VCommandOutputParameter@@V?$allocator@VCommandOutputParameter@@@std@@@3@W4CommandOutputMessageType@@@Z
-    MCAPI void
-    addMessage(std::string const&, std::vector<class CommandOutputParameter> const&, ::CommandOutputMessageType);
+    MCAPI void addMessage(
+        std::string const&                               msgId,
+        std::vector<class CommandOutputParameter> const& params,
+        ::CommandOutputMessageType                       type
+    );
 
     // NOLINTEND
 };

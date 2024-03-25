@@ -13,11 +13,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1MeadowFlowerFeature@@UEAA@XZ
+    virtual ~MeadowFlowerFeature() = default;
 
     // vIndex: 3, symbol: ?place@MeadowFlowerFeature@@UEBA_NAEAVBlockSource@@AEBVBlockPos@@AEAVRandom@@@Z
-    virtual bool place(class BlockSource&, class BlockPos const&, class Random&) const;
+    virtual bool place(class BlockSource& region, class BlockPos const& pos, class Random& random) const;
 
     // symbol: ??0MeadowFlowerFeature@@QEAA@XZ
     MCAPI MeadowFlowerFeature();
@@ -27,7 +27,7 @@ public:
     // private:
     // NOLINTBEGIN
     // symbol: ?getRandomArrayIndex@MeadowFlowerFeature@@AEBAHAEBVBlockPos@@_KM@Z
-    MCAPI int getRandomArrayIndex(class BlockPos const&, uint64, float) const;
+    MCAPI int getRandomArrayIndex(class BlockPos const& pos, uint64 length, float scale) const;
 
     // NOLINTEND
 };

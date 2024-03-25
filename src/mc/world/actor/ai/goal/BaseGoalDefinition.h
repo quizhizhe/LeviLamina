@@ -11,8 +11,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1BaseGoalDefinition@@UEAA@XZ
+    virtual ~BaseGoalDefinition();
 
     // vIndex: 1, symbol: ?validateMobType@BaseGoalDefinition@@UEBA_NAEAVMob@@@Z
     virtual bool validateMobType(class Mob&) const;
@@ -20,11 +20,8 @@ public:
     // vIndex: 2, symbol: ?validate@BaseGoalDefinition@@UEBA_NAEAVMob@@@Z
     virtual bool validate(class Mob&) const;
 
-    // symbol: ??1BaseGoalDefinition@@UEAA@XZ
-    MCVAPI ~BaseGoalDefinition();
-
     // symbol: ?initialize@BaseGoalDefinition@@QEBAXAEAVEntityContext@@AEAVGoal@@@Z
-    MCAPI void initialize(class EntityContext&, class Goal&) const;
+    MCAPI void initialize(class EntityContext&, class Goal& goal) const;
 
     // NOLINTEND
 
@@ -39,7 +36,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mControlFlagMap() { return mControlFlagMap; }
+    static auto& $mControlFlagMap() { return mControlFlagMap; }
 
     // NOLINTEND
 };

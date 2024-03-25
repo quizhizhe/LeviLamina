@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1ShulkerPeekGoal@@UEAA@XZ
+    virtual ~ShulkerPeekGoal() = default;
 
     // vIndex: 1, symbol: ?canUse@ShulkerPeekGoal@@UEAA_NXZ
     virtual bool canUse();
@@ -35,10 +35,10 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@ShulkerPeekGoal@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // symbol: ??0ShulkerPeekGoal@@QEAA@AEAVMob@@@Z
-    MCAPI explicit ShulkerPeekGoal(class Mob&);
+    MCAPI explicit ShulkerPeekGoal(class Mob& Mob);
 
     // NOLINTEND
 };

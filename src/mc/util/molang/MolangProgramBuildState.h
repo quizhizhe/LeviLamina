@@ -18,7 +18,7 @@ public:
     MCAPI void emplaceInstruction(std::function<void(struct MolangEvalParams&)>);
 
     // symbol: ?emplaceInstruction@MolangProgramBuildState@@QEAAX_KV?$function@$$A6AXAEAUMolangEvalParams@@@Z@std@@@Z
-    MCAPI void emplaceInstruction(uint64, std::function<void(struct MolangEvalParams&)>);
+    MCAPI void emplaceInstruction(uint64 index, std::function<void(struct MolangEvalParams&)>);
 
     // symbol: ?insertJumpWithMaddAtIndex@MolangProgramBuildState@@QEAAX_K0MM@Z
     MCAPI void insertJumpWithMaddAtIndex(uint64, uint64, float, float);
@@ -26,11 +26,14 @@ public:
     // symbol: ?numInstructions@MolangProgramBuildState@@QEBA_KXZ
     MCAPI uint64 numInstructions() const;
 
+    // symbol: ?popForEachScope@MolangProgramBuildState@@QEAAX_K@Z
+    MCAPI void popForEachScope(uint64);
+
     // symbol: ?pushReturnValue@MolangProgramBuildState@@QEAAXXZ
     MCAPI void pushReturnValue();
 
     // symbol: ?setReturnValue@MolangProgramBuildState@@QEAAXM@Z
-    MCAPI void setReturnValue(float);
+    MCAPI void setReturnValue(float value);
 
     // symbol: ??1MolangProgramBuildState@@QEAA@XZ
     MCAPI ~MolangProgramBuildState();

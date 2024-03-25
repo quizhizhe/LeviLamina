@@ -11,8 +11,11 @@ public:
 
 public:
     // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1ItemStackNetManagerScreen@@UEAA@XZ
+    virtual ~ItemStackNetManagerScreen() = default;
+
     // symbol: ??0ItemStackNetManagerScreen@@QEAA@AEAVEntityRegistry@@@Z
-    MCAPI explicit ItemStackNetManagerScreen(class EntityRegistry&);
+    MCAPI explicit ItemStackNetManagerScreen(class EntityRegistry& registry);
 
     // symbol: ?getEntity@ItemStackNetManagerScreen@@QEAAAEAVEntityContext@@XZ
     MCAPI class EntityContext& getEntity();

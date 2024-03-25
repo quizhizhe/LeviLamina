@@ -15,8 +15,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1WitherTargetHighestDamage@@UEAA@XZ
+    virtual ~WitherTargetHighestDamage() = default;
 
     // vIndex: 1, symbol: ?canUse@WitherTargetHighestDamage@@UEAA_NXZ
     virtual bool canUse();
@@ -29,14 +29,20 @@ public:
 
     // vIndex: 7, symbol:
     // ?appendDebugInfo@WitherTargetHighestDamage@@UEBAXAEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    virtual void appendDebugInfo(std::string&) const;
+    virtual void appendDebugInfo(std::string& str) const;
 
     // vIndex: 10, symbol: ?_canAttack@WitherTargetHighestDamage@@EEAA_NPEAVMob@@PEAVActor@@_N2PEAPEBUMobDescriptor@@@Z
-    virtual bool _canAttack(class Mob*, class Actor*, bool, bool, struct MobDescriptor const**);
+    virtual bool _canAttack(
+        class Mob*                   testMob,
+        class Actor*                 target,
+        bool                         allowInvulnerable,
+        bool                         mustSee,
+        struct MobDescriptor const** outDescriptorMatch
+    );
 
     // symbol:
     // ??0WitherTargetHighestDamage@@QEAA@AEAVWitherBoss@@AEBV?$vector@UMobDescriptor@@V?$allocator@UMobDescriptor@@@std@@@std@@@Z
-    MCAPI WitherTargetHighestDamage(class WitherBoss&, std::vector<struct MobDescriptor> const&);
+    MCAPI WitherTargetHighestDamage(class WitherBoss& witherBoss, std::vector<struct MobDescriptor> const& targetTypes);
 
     // NOLINTEND
 

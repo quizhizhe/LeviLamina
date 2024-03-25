@@ -2,41 +2,48 @@
 
 #include <concepts>
 #include <format>
+#include <ostream>
 #include <string>
 
+#include "fmt/core.h"
 #include "fmt/format.h"
 
 #include "ll/api/base/Concepts.h"
 
-namespace std {
+namespace nonstd {
 
 template <ll::concepts::Stringable T>
-string to_string(T const& t) { // NOLINT
-    return t.toString();
+std::string to_string(T const& t) {
+    if constexpr (requires { t.toString(); }) {
+        return t.toString();
+    } else if constexpr (requires { t.to_string(); }) {
+        return t.to_string();
+    } else {
+        static_assert(ll::concepts::IsString<T>, "T must be a stringable type");
+    }
 }
 
-} // namespace std
+} // namespace nonstd
 
 template <ll::concepts::Stringable T>
 std::ostream& operator<<(std::ostream& os, T const& t) {
-    os << t.toString();
-    return os;
+    return os << nonstd::to_string(t);
 }
 
 // fmt support
 template <ll::concepts::Stringable T>
-struct fmt::formatter<T> : formatter<std::string> {
-    template <typename FormatContext>
+struct fmt::formatter<T> : fmt::formatter<std::string> {
+    template <class FormatContext>
     auto format(T const& t, FormatContext& ctx) {
-        return formatter<std::string>::format(t.toString(), ctx);
+        return formatter<std::string>::format(nonstd::to_string(t), ctx);
     }
 };
 
 // std::format support
 template <ll::concepts::Stringable T>
 struct std::formatter<T> : std::formatter<std::string> { // NOLINT
-    template <typename FormatContext>
+    template <class FormatContext>
     auto format(T const& t, FormatContext& ctx) {
-        return std::formatter<std::string>::format(t.toString(), ctx);
+        return std::formatter<std::string>::format(nonstd::to_string(t), ctx);
     }
 };

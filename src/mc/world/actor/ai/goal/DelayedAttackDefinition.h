@@ -19,19 +19,22 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1DelayedAttackDefinition@@UEAA@XZ
+    virtual ~DelayedAttackDefinition() = default;
 
     // symbol: ??0DelayedAttackDefinition@@QEAA@XZ
     MCAPI DelayedAttackDefinition();
 
     // symbol: ?initialize@DelayedAttackDefinition@@QEBAXAEAVEntityContext@@AEAVDelayedAttackGoal@@@Z
-    MCAPI void initialize(class EntityContext&, class DelayedAttackGoal&) const;
+    MCAPI void initialize(class EntityContext& entity, class DelayedAttackGoal& goal) const;
 
     // symbol:
     // ?buildSchema@DelayedAttackDefinition@@SAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@VDelayedAttackDefinition@@@JsonUtil@@@3@@Z
-    MCAPI static void
-    buildSchema(std::string const&, std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class DelayedAttackDefinition>>&);
+    MCAPI static void buildSchema(
+        std::string const& name,
+        std::shared_ptr<
+            class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, class DelayedAttackDefinition>>& root
+    );
 
     // NOLINTEND
 };

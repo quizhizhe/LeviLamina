@@ -14,8 +14,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1WalkState@@UEAA@XZ
+    virtual ~WalkState() = default;
 
     // vIndex: 1, symbol: ?tick@WalkState@@UEAAXXZ
     virtual void tick();

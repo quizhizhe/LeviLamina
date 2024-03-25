@@ -14,17 +14,14 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // vIndex: 1, symbol: ?collectOptionalArguments@Command@@MEAA_NXZ
-    virtual bool collectOptionalArguments();
+    // vIndex: 0, symbol: __gen_??1TransferServerCommand@@UEAA@XZ
+    virtual ~TransferServerCommand() = default;
 
     // vIndex: 2, symbol: ?execute@TransferServerCommand@@UEBAXAEBVCommandOrigin@@AEAVCommandOutput@@@Z
-    virtual void execute(class CommandOrigin const&, class CommandOutput&) const;
+    virtual void execute(class CommandOrigin const& origin, class CommandOutput& output) const;
 
     // symbol: ?setup@TransferServerCommand@@SAXAEAVCommandRegistry@@@Z
-    MCAPI static void setup(class CommandRegistry&);
+    MCAPI static void setup(class CommandRegistry& registry);
 
     // NOLINTEND
 

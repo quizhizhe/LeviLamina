@@ -4,6 +4,7 @@
 
 // auto generated inclusion list
 #include "mc/world/level/BlockSourceListener.h"
+#include "mc/world/level/block/utils/BlockChangedEventTarget.h"
 
 class BlockSourceHandle : public ::BlockSourceListener {
 public:
@@ -14,20 +15,11 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
-
-    // vIndex: 1, symbol: __unk_vfn_1
-    virtual void __unk_vfn_1();
+    // vIndex: 0, symbol: __gen_??1BlockSourceHandle@@UEAA@XZ
+    virtual ~BlockSourceHandle() = default;
 
     // vIndex: 2, symbol: ?onSourceDestroyed@BlockSourceHandle@@UEAAXAEAVBlockSource@@@Z
-    virtual void onSourceDestroyed(class BlockSource&);
-
-    // vIndex: 3, symbol: __unk_vfn_3
-    virtual void __unk_vfn_3();
-
-    // vIndex: 4, symbol: __unk_vfn_4
-    virtual void __unk_vfn_4();
+    virtual void onSourceDestroyed(class BlockSource& source);
 
     // NOLINTEND
 };

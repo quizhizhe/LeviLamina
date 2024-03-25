@@ -20,30 +20,33 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1BlockComponentDescription@@UEAA@XZ
+    virtual ~BlockComponentDescription();
 
     // vIndex: 1, symbol:
     // ?getName@BlockComponentDescription@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
     virtual std::string const& getName() const;
 
     // vIndex: 2, symbol: ?initializeComponent@BlockComponentDescription@@UEBAXAEAVEntityContext@@@Z
-    virtual void initializeComponent(class EntityContext&) const;
+    virtual void initializeComponent(class EntityContext& entity) const;
 
     // vIndex: 3, symbol: ?initializeComponent@BlockComponentDescription@@UEBAXAEAVBlockComponentStorage@@@Z
     virtual void initializeComponent(class BlockComponentStorage&) const;
 
-    // vIndex: 4, symbol: ?initializeComponentFromCode@BlockComponentDescription@@UEBAXAEAVBlockComponentStorage@@@Z
-    virtual void initializeComponentFromCode(class BlockComponentStorage&) const;
+    // vIndex: 4, symbol: ?initializeComponentFromCode@BlockComponentDescription@@UEBAXAEAVEntityContext@@@Z
+    virtual void initializeComponentFromCode(class EntityContext&) const;
 
-    // vIndex: 5, symbol: __unk_vfn_5
-    virtual void __unk_vfn_5();
+    // vIndex: 5, symbol: ?initializeComponentFromCode@BlockComponentDescription@@UEBAXAEAVBlockComponentStorage@@@Z
+    virtual void initializeComponentFromCode(class BlockComponentStorage&) const;
 
     // vIndex: 6, symbol:
     // ?buildSchema@BlockComponentDescription@@UEBAXAEAV?$shared_ptr@V?$JsonSchemaObjectNode@VEmptyClass@JsonUtil@@UBlockComponentGroupDescription@@@JsonUtil@@@std@@AEBVBlockComponentFactory@@@Z
-    virtual void
-    buildSchema(std::shared_ptr<class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, struct BlockComponentGroupDescription>>&, class BlockComponentFactory const&)
-        const;
+    virtual void buildSchema(
+        std::shared_ptr<
+            class JsonUtil::JsonSchemaObjectNode<class JsonUtil::EmptyClass, struct BlockComponentGroupDescription>>&
+                                           componentSchema,
+        class BlockComponentFactory const& factory
+    ) const;
 
     // vIndex: 7, symbol: ?isNetworkComponent@BlockComponentDescription@@UEBA_NXZ
     virtual bool isNetworkComponent() const;
@@ -58,18 +61,6 @@ public:
 
     // vIndex: 10, symbol: ?handleVersionBasedInitialization@BlockComponentDescription@@UEAAXAEBVSemVersion@@@Z
     virtual void handleVersionBasedInitialization(class SemVersion const&);
-
-    // symbol: ?initializeComponentFromCode@BlockComponentDescription@@UEBAXAEAVEntityContext@@@Z
-    MCVAPI void initializeComponentFromCode(class EntityContext&) const;
-
-    // symbol: ??1BlockComponentDescription@@UEAA@XZ
-    MCVAPI ~BlockComponentDescription();
-
-    // symbol: ?bindType@BlockComponentDescription@@SAXAEAUReflectionCtx@cereal@@@Z
-    MCAPI static void bindType(struct cereal::ReflectionCtx&);
-
-    // symbol: ?registerVersionUpgrades@BlockComponentDescription@@SAXAEAVCerealSchemaUpgradeSet@@@Z
-    MCAPI static void registerVersionUpgrades(class CerealSchemaUpgradeSet&);
 
     // NOLINTEND
 };

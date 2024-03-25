@@ -19,8 +19,8 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1ResourcePacksInfoPacket@@UEAA@XZ
+    virtual ~ResourcePacksInfoPacket();
 
     // vIndex: 1, symbol: ?getId@ResourcePacksInfoPacket@@UEBA?AW4MinecraftPacketIds@@XZ
     virtual ::MinecraftPacketIds getId() const;
@@ -30,14 +30,11 @@ public:
     virtual std::string getName() const;
 
     // vIndex: 3, symbol: ?write@ResourcePacksInfoPacket@@UEBAXAEAVBinaryStream@@@Z
-    virtual void write(class BinaryStream&) const;
+    virtual void write(class BinaryStream& stream) const;
 
     // vIndex: 7, symbol:
-    // ?_read@ResourcePacksInfoPacket@@EEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
-    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream&);
-
-    // symbol: ??1ResourcePacksInfoPacket@@UEAA@XZ
-    MCVAPI ~ResourcePacksInfoPacket();
+    // ?_read@ResourcePacksInfoPacket@@MEAA?AV?$Result@XVerror_code@std@@@Bedrock@@AEAVReadOnlyBinaryStream@@@Z
+    virtual class Bedrock::Result<void> _read(class ReadOnlyBinaryStream& stream);
 
     // symbol: ??0ResourcePacksInfoPacket@@QEAA@XZ
     MCAPI ResourcePacksInfoPacket();
@@ -45,7 +42,13 @@ public:
     // symbol:
     // ??0ResourcePacksInfoPacket@@QEAA@_NAEAV?$vector@UPackInfoData@@V?$allocator@UPackInfoData@@@std@@@std@@10$$QEAV?$vector@U?$pair@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@@std@@V?$allocator@U?$pair@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@@std@@@2@@2@@Z
     MCAPI
-    ResourcePacksInfoPacket(bool, std::vector<struct PackInfoData>&, std::vector<struct PackInfoData>&, bool, std::vector<std::pair<std::string, std::string>>&&);
+    ResourcePacksInfoPacket(
+        bool                                               resourcePackRequired,
+        std::vector<struct PackInfoData>&                  behaviorPacks,
+        std::vector<struct PackInfoData>&                  resourcePacks,
+        bool                                               forceServerPacksEnabled,
+        std::vector<std::pair<std::string, std::string>>&& cdnUrls
+    );
 
     // NOLINTEND
 };

@@ -7,6 +7,7 @@
 #include "mc/enums/Difficulty.h"
 #include "mc/enums/GameType.h"
 #include "mc/enums/LogLevel.h"
+#include "mc/enums/TransportLayer.h"
 #include "mc/resources/PacketCompressionAlgorithm.h"
 #include "mc/server/commands/CommandPermissionLevel.h"
 #include "mc/world/actor/player/PlayerPermissionLevel.h"
@@ -21,7 +22,7 @@ public:
 public:
     // NOLINTBEGIN
     // symbol: ??0PropertiesSettings@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI explicit PropertiesSettings(std::string const&);
+    MCAPI explicit PropertiesSettings(std::string const& filename);
 
     // symbol: ?adventureModeOverridesEnabled@PropertiesSettings@@QEBA_NXZ
     MCAPI bool adventureModeOverridesEnabled() const;
@@ -47,6 +48,18 @@ public:
     // symbol: ?forceGamemode@PropertiesSettings@@QEBA_NXZ
     MCAPI bool forceGamemode() const;
 
+    // symbol:
+    // ?getApplicationId@PropertiesSettings@@QEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+    MCAPI std::string const& getApplicationId() const;
+
+    // symbol:
+    // ?getApplicationSecret@PropertiesSettings@@QEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+    MCAPI std::string const& getApplicationSecret() const;
+
+    // symbol:
+    // ?getChangedValues@PropertiesSettings@@QEBA?AV?$unordered_map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@U?$hash@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@U?$equal_to@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@@std@@@2@@std@@XZ
+    MCAPI std::unordered_map<std::string, std::string> getChangedValues() const;
+
     // symbol: ?getChatRestrictionLevel@PropertiesSettings@@QEBA?AW4ChatRestrictionLevel@@XZ
     MCAPI ::ChatRestrictionLevel getChatRestrictionLevel() const;
 
@@ -67,7 +80,7 @@ public:
 
     // symbol:
     // ?getCustomProperty@PropertiesSettings@@QEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV23@@Z
-    MCAPI std::string const& getCustomProperty(std::string const&) const;
+    MCAPI std::string const& getCustomProperty(std::string const& propertyName) const;
 
     // symbol: ?getDefaultPlayerPermissionLevel@PropertiesSettings@@QEBA?BW4PlayerPermissionLevel@@XZ
     MCAPI ::PlayerPermissionLevel const getDefaultPlayerPermissionLevel() const;
@@ -146,6 +159,9 @@ public:
     // symbol: ?getServerWakeupFrequency@PropertiesSettings@@QEBAHXZ
     MCAPI int getServerWakeupFrequency() const;
 
+    // symbol: ?getTransportLayerType@PropertiesSettings@@QEBA?AW4TransportLayer@@XZ
+    MCAPI ::TransportLayer getTransportLayerType() const;
+
     // symbol: ?isClientSideGenEnabled@PropertiesSettings@@QEBA_NXZ
     MCAPI bool isClientSideGenEnabled() const;
 
@@ -163,6 +179,9 @@ public:
 
     // symbol: ?isPropertiesFileLoaded@PropertiesSettings@@QEBA?B_NXZ
     MCAPI bool const isPropertiesFileLoaded() const;
+
+    // symbol: ?isRakNetJoinFloodProtectionEnabled@PropertiesSettings@@QEBA_NXZ
+    MCAPI bool isRakNetJoinFloodProtectionEnabled() const;
 
     // symbol: ?isRealmsStoriesEnabled@PropertiesSettings@@QEBA_NXZ
     MCAPI bool isRealmsStoriesEnabled() const;
@@ -193,15 +212,15 @@ public:
 
     // symbol:
     // ?parseBoolValue@PropertiesSettings@@SA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI static bool parseBoolValue(std::string const&);
+    MCAPI static bool parseBoolValue(std::string const& value);
 
     // symbol:
     // ?parseGameMode@PropertiesSettings@@SA?AW4GameType@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI static ::GameType parseGameMode(std::string const&);
+    MCAPI static ::GameType parseGameMode(std::string const& value);
 
     // symbol:
     // ?parseInt32Value@PropertiesSettings@@SAHAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-    MCAPI static int parseInt32Value(std::string const&);
+    MCAPI static int parseInt32Value(std::string const& value);
 
     // NOLINTEND
 };

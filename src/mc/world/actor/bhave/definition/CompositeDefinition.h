@@ -17,15 +17,22 @@ public:
     CompositeDefinition(CompositeDefinition const&);
     CompositeDefinition();
 
+public:
+    // NOLINTBEGIN
+    // vIndex: 0, symbol: __gen_??1CompositeDefinition@@UEAA@XZ
+    virtual ~CompositeDefinition() = default;
+
+    // NOLINTEND
+
     // protected:
     // NOLINTBEGIN
     // symbol:
     // ?_compositeLoadChildrenBehaviors@CompositeDefinition@@KAXVValue@Json@@AEAV?$vector@V?$unique_ptr@VBehaviorDefinition@@U?$default_delete@VBehaviorDefinition@@@std@@@std@@V?$allocator@V?$unique_ptr@VBehaviorDefinition@@U?$default_delete@VBehaviorDefinition@@@std@@@std@@@2@@std@@AEBVBehaviorFactory@@VBehaviorTreeDefinitionPtr@@@Z
     MCAPI static void _compositeLoadChildrenBehaviors(
-        class Json::Value,
-        std::vector<std::unique_ptr<class BehaviorDefinition>>&,
-        class BehaviorFactory const&,
-        class BehaviorTreeDefinitionPtr
+        class Json::Value                                       value,
+        std::vector<std::unique_ptr<class BehaviorDefinition>>& childList,
+        class BehaviorFactory const&                            factory,
+        class BehaviorTreeDefinitionPtr                         ptr
     );
 
     // NOLINTEND

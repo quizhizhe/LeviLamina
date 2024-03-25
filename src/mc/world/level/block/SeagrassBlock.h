@@ -27,184 +27,68 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1SeagrassBlock@@UEAA@XZ
+    virtual ~SeagrassBlock() = default;
 
-    // vIndex: 6, symbol:
+    // vIndex: 5, symbol:
     // ?getCollisionShape@SeagrassBlock@@UEBA?AVAABB@@AEBVBlock@@AEBVIConstBlockSource@@AEBVBlockPos@@V?$optional_ref@$$CBVGetCollisionShapeInterface@@@@@Z
     virtual class AABB
     getCollisionShape(class Block const&, class IConstBlockSource const&, class BlockPos const&, class optional_ref<class GetCollisionShapeInterface const>)
         const;
 
-    // vIndex: 22, symbol: __unk_vfn_22
-    virtual void __unk_vfn_22();
+    // vIndex: 49, symbol: ?isValidAuxValue@SeagrassBlock@@UEBA_NH@Z
+    virtual bool isValidAuxValue(int value) const;
 
-    // vIndex: 31, symbol: __unk_vfn_31
-    virtual void __unk_vfn_31();
+    // vIndex: 55, symbol: ?waterSpreadCausesSpawn@SeagrassBlock@@UEBA_NXZ
+    virtual bool waterSpreadCausesSpawn() const;
 
-    // vIndex: 32, symbol: __unk_vfn_32
-    virtual void __unk_vfn_32();
-
-    // vIndex: 34, symbol: __unk_vfn_34
-    virtual void __unk_vfn_34();
-
-    // vIndex: 35, symbol: __unk_vfn_35
-    virtual void __unk_vfn_35();
-
-    // vIndex: 36, symbol: __unk_vfn_36
-    virtual void __unk_vfn_36();
-
-    // vIndex: 38, symbol: __unk_vfn_38
-    virtual void __unk_vfn_38();
-
-    // vIndex: 39, symbol: __unk_vfn_39
-    virtual void __unk_vfn_39();
-
-    // vIndex: 40, symbol: __unk_vfn_40
-    virtual void __unk_vfn_40();
-
-    // vIndex: 41, symbol: __unk_vfn_41
-    virtual void __unk_vfn_41();
-
-    // vIndex: 42, symbol: __unk_vfn_42
-    virtual void __unk_vfn_42();
-
-    // vIndex: 43, symbol: __unk_vfn_43
-    virtual void __unk_vfn_43();
-
-    // vIndex: 44, symbol: __unk_vfn_44
-    virtual void __unk_vfn_44();
-
-    // vIndex: 46, symbol: __unk_vfn_46
-    virtual void __unk_vfn_46();
-
-    // vIndex: 47, symbol: __unk_vfn_47
-    virtual void __unk_vfn_47();
-
-    // vIndex: 48, symbol: __unk_vfn_48
-    virtual void __unk_vfn_48();
-
-    // vIndex: 49, symbol: __unk_vfn_49
-    virtual void __unk_vfn_49();
-
-    // vIndex: 50, symbol: __unk_vfn_50
-    virtual void __unk_vfn_50();
-
-    // vIndex: 51, symbol: __unk_vfn_51
-    virtual void __unk_vfn_51();
-
-    // vIndex: 55, symbol: __unk_vfn_55
-    virtual void __unk_vfn_55();
-
-    // vIndex: 56, symbol: ?isValidAuxValue@SeagrassBlock@@UEBA_NH@Z
-    virtual bool isValidAuxValue(int) const;
-
-    // vIndex: 61, symbol: __unk_vfn_61
-    virtual void __unk_vfn_61();
-
-    // vIndex: 62, symbol: __unk_vfn_62
-    virtual void __unk_vfn_62();
-
-    // vIndex: 76, symbol: __unk_vfn_76
-    virtual void __unk_vfn_76();
-
-    // vIndex: 83, symbol: __unk_vfn_83
-    virtual void __unk_vfn_83();
-
-    // vIndex: 87, symbol:
+    // vIndex: 79, symbol:
     // ?onFertilized@SeagrassBlock@@UEBA_NAEAVBlockSource@@AEBVBlockPos@@PEAVActor@@W4FertilizerType@@@Z
-    virtual bool onFertilized(class BlockSource&, class BlockPos const&, class Actor*, ::FertilizerType) const;
-
-    // vIndex: 88, symbol: ?mayConsumeFertilizer@SeagrassBlock@@UEBA_NAEAVBlockSource@@@Z
-    virtual bool mayConsumeFertilizer(class BlockSource&) const;
-
-    // vIndex: 89, symbol: ?canBeFertilized@SeagrassBlock@@UEBA_NAEAVBlockSource@@AEBVBlockPos@@AEBVBlock@@@Z
-    virtual bool canBeFertilized(class BlockSource&, class BlockPos const&, class Block const&) const;
-
-    // vIndex: 93, symbol: ?mayPlace@SeagrassBlock@@UEBA_NAEAVBlockSource@@AEBVBlockPos@@@Z
-    virtual bool mayPlace(class BlockSource&, class BlockPos const&) const;
-
-    // vIndex: 100, symbol: ?neighborChanged@SeagrassBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@1@Z
-    virtual void neighborChanged(class BlockSource&, class BlockPos const&, class BlockPos const&) const;
-
-    // vIndex: 103, symbol:
-    // ?spawnResources@SeagrassBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@AEBVBlock@@AEAVRandomize@@AEBUResourceDropsContext@@@Z
-    virtual void
-    spawnResources(class BlockSource&, class BlockPos const&, class Block const&, class Randomize&, struct ResourceDropsContext const&)
+    virtual bool
+    onFertilized(class BlockSource& region, class BlockPos const& pos, class Actor* entity, ::FertilizerType fType)
         const;
 
-    // vIndex: 106, symbol: __unk_vfn_106
-    virtual void __unk_vfn_106();
+    // vIndex: 80, symbol: ?mayConsumeFertilizer@SeagrassBlock@@UEBA_NAEAVBlockSource@@@Z
+    virtual bool mayConsumeFertilizer(class BlockSource& region) const;
 
-    // vIndex: 122, symbol: __unk_vfn_122
-    virtual void __unk_vfn_122();
+    // vIndex: 81, symbol: ?canBeFertilized@SeagrassBlock@@UEBA_NAEAVBlockSource@@AEBVBlockPos@@AEBVBlock@@@Z
+    virtual bool
+    canBeFertilized(class BlockSource& region, class BlockPos const& pos, class Block const& aboveBlock) const;
 
-    // vIndex: 123, symbol: __unk_vfn_123
-    virtual void __unk_vfn_123();
+    // vIndex: 85, symbol: ?mayPlace@SeagrassBlock@@UEBA_NAEAVBlockSource@@AEBVBlockPos@@@Z
+    virtual bool mayPlace(class BlockSource& region, class BlockPos const& pos) const;
 
-    // vIndex: 124, symbol: __unk_vfn_124
-    virtual void __unk_vfn_124();
+    // vIndex: 92, symbol: ?neighborChanged@SeagrassBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@1@Z
+    virtual void
+    neighborChanged(class BlockSource& region, class BlockPos const& pos, class BlockPos const& neighborPos) const;
 
-    // vIndex: 127, symbol: __unk_vfn_127
-    virtual void __unk_vfn_127();
-
-    // vIndex: 130, symbol: __unk_vfn_130
-    virtual void __unk_vfn_130();
-
-    // vIndex: 132, symbol:
+    // vIndex: 119, symbol:
     // ?buildDescriptionId@SeagrassBlock@@UEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVBlock@@@Z
     virtual std::string buildDescriptionId(class Block const&) const;
 
-    // vIndex: 134, symbol: ?getColor@SeagrassBlock@@UEBAHAEBVBlock@@@Z
-    virtual int getColor(class Block const&) const;
+    // vIndex: 121, symbol: ?getColor@SeagrassBlock@@UEBAHAEBVBlock@@@Z
+    virtual int getColor(class Block const& block) const;
 
-    // vIndex: 135, symbol: ?getColor@SeagrassBlock@@UEBAHAEAVBlockSource@@AEBVBlockPos@@AEBVBlock@@@Z
-    virtual int getColor(class BlockSource&, class BlockPos const&, class Block const&) const;
+    // vIndex: 122, symbol: ?getColor@SeagrassBlock@@UEBAHAEAVBlockSource@@AEBVBlockPos@@AEBVBlock@@@Z
+    virtual int getColor(class BlockSource& region, class BlockPos const& pos, class Block const& block) const;
 
-    // vIndex: 153, symbol: __unk_vfn_153
-    virtual void __unk_vfn_153();
+    // vIndex: 138, symbol: ?canBeSilkTouched@SeagrassBlock@@MEBA_NXZ
+    virtual bool canBeSilkTouched() const;
 
-    // vIndex: 162, symbol: __unk_vfn_162
-    virtual void __unk_vfn_162();
+    // vIndex: 147, symbol: ?onPlace@SeagrassBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@@Z
+    virtual void onPlace(class BlockSource& region, class BlockPos const& pos) const;
 
-    // vIndex: 163, symbol: __unk_vfn_163
-    virtual void __unk_vfn_163();
+    // vIndex: 150, symbol: ?tick@SeagrassBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@AEAVRandom@@@Z
+    virtual void tick(class BlockSource& region, class BlockPos const& pos, class Random& random) const;
 
-    // vIndex: 164, symbol: __unk_vfn_164
-    virtual void __unk_vfn_164();
-
-    // vIndex: 165, symbol: ?onPlace@SeagrassBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@@Z
-    virtual void onPlace(class BlockSource&, class BlockPos const&) const;
-
-    // vIndex: 167, symbol: __unk_vfn_167
-    virtual void __unk_vfn_167();
-
-    // vIndex: 168, symbol: ?tick@SeagrassBlock@@UEBAXAEAVBlockSource@@AEBVBlockPos@@AEAVRandom@@@Z
-    virtual void tick(class BlockSource&, class BlockPos const&, class Random&) const;
-
-    // vIndex: 171, symbol: __unk_vfn_171
-    virtual void __unk_vfn_171();
-
-    // vIndex: 174, symbol: __unk_vfn_174
-    virtual void __unk_vfn_174();
-
-    // vIndex: 175, symbol: ?canSurvive@SeagrassBlock@@UEBA_NAEAVBlockSource@@AEBVBlockPos@@@Z
-    virtual bool canSurvive(class BlockSource&, class BlockPos const&) const;
-
-    // vIndex: 183, symbol: __unk_vfn_183
-    virtual void __unk_vfn_183();
-
-    // symbol: ?canBeSilkTouched@SeagrassBlock@@MEBA_NXZ
-    MCVAPI bool canBeSilkTouched() const;
-
-    // symbol: ?waterSpreadCausesSpawn@SeagrassBlock@@UEBA_NXZ
-    MCVAPI bool waterSpreadCausesSpawn() const;
+    // vIndex: 156, symbol: ?canSurvive@SeagrassBlock@@UEBA_NAEAVBlockSource@@AEBVBlockPos@@@Z
+    virtual bool canSurvive(class BlockSource& region, class BlockPos const& pos) const;
 
     // symbol: ??0SeagrassBlock@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z
-    MCAPI SeagrassBlock(std::string const&, int);
+    MCAPI SeagrassBlock(std::string const& nameId, int id);
 
     // symbol: ?trySpawnSeaGrass@SeagrassBlock@@SA_NAEAVBlockSource@@AEBVBlockPos@@@Z
-    MCAPI static bool trySpawnSeaGrass(class BlockSource&, class BlockPos const&);
+    MCAPI static bool trySpawnSeaGrass(class BlockSource& region, class BlockPos const& pos);
 
     // NOLINTEND
 };

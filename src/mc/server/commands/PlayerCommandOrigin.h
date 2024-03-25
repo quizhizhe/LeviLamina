@@ -1,6 +1,7 @@
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
+#include "mc/world/ActorUniqueID.h"
 
 // auto generated inclusion list
 #include "mc/enums/AbilitiesIndex.h"
@@ -15,17 +16,17 @@ namespace Json { class Value; }
 namespace mce { class UUID; }
 // clang-format on
 
+class Level;
+
 class PlayerCommandOrigin : public ::CommandOrigin {
 public:
-    // prevent constructor by default
-    PlayerCommandOrigin& operator=(PlayerCommandOrigin const&);
-    PlayerCommandOrigin(PlayerCommandOrigin const&);
-    PlayerCommandOrigin();
+    ActorUniqueID mPlayerId;
+    Level*        mLevel;
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: __gen_??1PlayerCommandOrigin@@UEAA@XZ
+    virtual ~PlayerCommandOrigin() = default;
 
     // vIndex: 1, symbol:
     // ?getRequestId@PlayerCommandOrigin@@UEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
@@ -67,7 +68,7 @@ public:
     virtual std::optional<class Vec3> getCursorHitPos() const;
 
     // vIndex: 15, symbol: ?canUseAbility@PlayerCommandOrigin@@UEBA_NW4AbilitiesIndex@@@Z
-    virtual bool canUseAbility(::AbilitiesIndex) const;
+    virtual bool canUseAbility(::AbilitiesIndex abilityIndex) const;
 
     // vIndex: 18, symbol: ?isSelectorExpansionAllowed@PlayerCommandOrigin@@UEBA_NXZ
     virtual bool isSelectorExpansionAllowed() const;
@@ -91,7 +92,11 @@ public:
     virtual bool isValid() const;
 
     // symbol: ??0PlayerCommandOrigin@@QEAA@AEAVPlayer@@@Z
-    MCAPI explicit PlayerCommandOrigin(class Player&);
+    MCAPI explicit PlayerCommandOrigin(class Player& origin);
+
+    // symbol:
+    // ?load@PlayerCommandOrigin@@SA?AV?$unique_ptr@VPlayerCommandOrigin@@U?$default_delete@VPlayerCommandOrigin@@@std@@@std@@AEBVCompoundTag@@AEAVLevel@@@Z
+    MCAPI static std::unique_ptr<class PlayerCommandOrigin> load(class CompoundTag const& tag, class Level& level);
 
     // NOLINTEND
 };

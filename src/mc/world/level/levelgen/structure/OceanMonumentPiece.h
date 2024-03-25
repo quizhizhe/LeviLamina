@@ -15,42 +15,52 @@ public:
 
 public:
     // NOLINTBEGIN
-    // vIndex: 0, symbol: __unk_vfn_0
-    virtual void __unk_vfn_0();
+    // vIndex: 0, symbol: ??1OceanMonumentPiece@@UEAA@XZ
+    virtual ~OceanMonumentPiece();
 
     // vIndex: 5, symbol: ?postProcessMobsAt@OceanMonumentPiece@@UEAAXAEAVBlockSource@@AEAVRandom@@AEBVBoundingBox@@@Z
-    virtual void postProcessMobsAt(class BlockSource&, class Random&, class BoundingBox const&);
+    virtual void postProcessMobsAt(class BlockSource& region, class Random& random, class BoundingBox const& chunkBB);
 
     // vIndex: 7, symbol: ?getWorldX@OceanMonumentPiece@@UEAAHHH@Z
-    virtual int getWorldX(int, int);
+    virtual int getWorldX(int x, int z);
 
     // vIndex: 8, symbol: ?getWorldZ@OceanMonumentPiece@@UEAAHHH@Z
-    virtual int getWorldZ(int, int);
+    virtual int getWorldZ(int x, int z);
 
     // vIndex: 12, symbol: ?addHardcodedSpawnAreas@OceanMonumentPiece@@UEBAXAEAVLevelChunk@@@Z
-    virtual void addHardcodedSpawnAreas(class LevelChunk&) const;
-
-    // symbol: ??1OceanMonumentPiece@@UEAA@XZ
-    MCVAPI ~OceanMonumentPiece();
+    virtual void addHardcodedSpawnAreas(class LevelChunk& chunk) const;
 
     // symbol: ??0OceanMonumentPiece@@QEAA@AEAHAEAVBoundingBox@@@Z
-    MCAPI OceanMonumentPiece(int&, class BoundingBox&);
+    MCAPI OceanMonumentPiece(int& orientation, class BoundingBox& boundingBox);
 
     // NOLINTEND
 
     // protected:
     // NOLINTBEGIN
     // symbol: ??0OceanMonumentPiece@@IEAA@HAEAHV?$shared_ptr@VRoomDefinition@@@std@@HHH@Z
-    MCAPI OceanMonumentPiece(int, int&, std::shared_ptr<class RoomDefinition>, int, int, int);
+    MCAPI OceanMonumentPiece(
+        int                                   genDepth,
+        int&                                  orientation,
+        std::shared_ptr<class RoomDefinition> roomDefinition,
+        int                                   roomWidth,
+        int                                   roomHeight,
+        int                                   roomDepth
+    );
 
     // symbol: ?chunkIntersects@OceanMonumentPiece@@IEAA_NAEBVBoundingBox@@HHHH@Z
-    MCAPI bool chunkIntersects(class BoundingBox const&, int, int, int, int);
+    MCAPI bool chunkIntersects(class BoundingBox const& chunkBB, int x0, int z0, int x1, int z1);
 
     // symbol: ?generateDefaultFloor@OceanMonumentPiece@@IEAAXAEAVBlockSource@@AEBVBoundingBox@@HH_N@Z
-    MCAPI void generateDefaultFloor(class BlockSource&, class BoundingBox const&, int, int, bool);
+    MCAPI void generateDefaultFloor(
+        class BlockSource&       region,
+        class BoundingBox const& chunkBB,
+        int                      xOff,
+        int                      zOff,
+        bool                     downOpening
+    );
 
     // symbol: ?spawnElder@OceanMonumentPiece@@IEAAXAEAVBlockSource@@AEBVBoundingBox@@HHH@Z
-    MCAPI void spawnElder(class BlockSource&, class BoundingBox const&, int, int, int);
+    MCAPI void spawnElder(class BlockSource& region, class BoundingBox const& chunkBB, int x, int y, int z);
 
     // NOLINTEND
 
@@ -82,19 +92,19 @@ protected:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $mGridroomLeftWingConnectIndex() { return mGridroomLeftWingConnectIndex; }
+    static auto& $mGridroomLeftWingConnectIndex() { return mGridroomLeftWingConnectIndex; }
 
-    auto& $mGridroomRightWingConnectIndex() { return mGridroomRightWingConnectIndex; }
+    static auto& $mGridroomRightWingConnectIndex() { return mGridroomRightWingConnectIndex; }
 
-    auto& $mGridroomSourceIndex() { return mGridroomSourceIndex; }
+    static auto& $mGridroomSourceIndex() { return mGridroomSourceIndex; }
 
-    auto& $mGridroomTopConnectIndex() { return mGridroomTopConnectIndex; }
+    static auto& $mGridroomTopConnectIndex() { return mGridroomTopConnectIndex; }
 
-    auto& $mLeftWingIndex() { return mLeftWingIndex; }
+    static auto& $mLeftWingIndex() { return mLeftWingIndex; }
 
-    auto& $mPenthouseIndex() { return mPenthouseIndex; }
+    static auto& $mPenthouseIndex() { return mPenthouseIndex; }
 
-    auto& $mRightWingIndex() { return mRightWingIndex; }
+    static auto& $mRightWingIndex() { return mRightWingIndex; }
 
     // NOLINTEND
 };

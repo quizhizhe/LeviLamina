@@ -1,6 +1,7 @@
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
+#include "mc/scripting/ScriptPackConfiguration.h"
 
 // auto generated inclusion list
 #include "mc/deps/core/PathBuffer.h"
@@ -13,14 +14,18 @@ namespace Bedrock { class EnableNonOwnerReferences; }
 
 class ScriptPackConfigurationManager : public ::Bedrock::EnableNonOwnerReferences {
 public:
+    std::unordered_map<std::string, ScriptPackConfiguration> mPackConfigurations;
+    ScriptPackConfiguration                                  mDefaultPackConfiguration;
+
+public:
     // prevent constructor by default
     ScriptPackConfigurationManager& operator=(ScriptPackConfigurationManager const&);
     ScriptPackConfigurationManager();
 
 public:
     // NOLINTBEGIN
-    // symbol: ??1ScriptPackConfigurationManager@@UEAA@XZ
-    MCVAPI ~ScriptPackConfigurationManager();
+    // vIndex: 0, symbol: ??1ScriptPackConfigurationManager@@UEAA@XZ
+    virtual ~ScriptPackConfigurationManager();
 
     // symbol: ??0ScriptPackConfigurationManager@@QEAA@$$QEAV0@@Z
     MCAPI ScriptPackConfigurationManager(class ScriptPackConfigurationManager&&);
@@ -56,7 +61,7 @@ private:
     // member accessor
 public:
     // NOLINTBEGIN
-    auto& $sDefaultConfigurationName() { return sDefaultConfigurationName; }
+    static auto& $sDefaultConfigurationName() { return sDefaultConfigurationName; }
 
     // NOLINTEND
 };
