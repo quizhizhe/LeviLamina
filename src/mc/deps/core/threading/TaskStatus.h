@@ -27,6 +27,8 @@ public:
 public:
     // member functions
     // NOLINTBEGIN
+    TaskStatus(::TaskStatus::Value value) : mValue(value) {}
+
     MCNAPI TaskStatus();
 
     MCNAPI bool isComplete() const;

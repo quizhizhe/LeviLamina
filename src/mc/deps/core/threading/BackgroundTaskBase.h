@@ -3,12 +3,13 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
+#include "mc/deps/core/memory/MemoryCategory.h"
+#include "mc/deps/core/threading/IBackgroundTaskOwner.h"
 #include "mc/deps/core/threading/TaskRunResult.h"
 #include "mc/resources/TaskGroupState.h"
 
 // auto generated forward declare list
 // clang-format off
-class IBackgroundTaskOwner;
 class ITaskExecutionContext;
 struct TaskStartInfo;
 // clang-format on
@@ -27,7 +28,7 @@ public:
     public:
         // member variables
         // NOLINTBEGIN
-        ::ll::UntypedStorage<8, 8> mUnk209247;
+        ::BackgroundTaskBase* mPrev;
         // NOLINTEND
 
     public:
@@ -73,16 +74,16 @@ public:
 public:
     // member variables
     // NOLINTBEGIN
-    ::ll::UntypedStorage<1, 1>  mUnk2ebc0e;
-    ::ll::UntypedStorage<8, 8>  mUnk7e9993;
-    ::ll::UntypedStorage<8, 8>  mUnk2e5c7a;
-    ::ll::UntypedStorage<8, 16> mUnk2bac6e;
-    ::ll::UntypedStorage<4, 4>  mUnkb3642a;
-    ::ll::UntypedStorage<4, 4>  mUnk96ebbd;
-    ::ll::UntypedStorage<4, 4>  mUnkcad031;
-    ::ll::UntypedStorage<8, 8>  mUnk8b825b;
-    ::ll::UntypedStorage<8, 32> mUnk855f70;
-    ::ll::UntypedStorage<1, 1>  mUnk3605cd;
+    const bool                               mIsAsync;
+    ::IBackgroundTaskOwner*                  mGroup;
+    ::BackgroundTaskBase*                    mPrevTask;
+    ::std::shared_ptr<::BackgroundTaskBase>  mNextTask;
+    int                                      mPriority;
+    ::std::thread::id                        mAffinity;
+    const int                                mBackDownPriorityAmount;
+    ::std::chrono::steady_clock::time_point  mStartAfterTime;
+    ::std::string                            mTaskName;
+    ::Memory::MemoryCategory                 mMemoryCategory;
     // NOLINTEND
 
 public:
@@ -180,3 +181,4 @@ public:
     MCNAPI static void** $vftable();
     // NOLINTEND
 };
+

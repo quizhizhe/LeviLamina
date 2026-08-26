@@ -7,12 +7,12 @@
 namespace Bedrock::Threading {
 
 template <typename T>
-class IAsyncResult : public Bedrock::Threading::AsyncBase, public Bedrock::Threading::IAsyncGetResult<T> {
+class IAsyncResult : public Bedrock::Threading::IAsyncGetResult<T>, public Bedrock::Threading::AsyncBase {
 public:
     using Handle            = std::shared_ptr<Bedrock::Threading::IAsyncResult<T>>;
     using CompletionHandler = std::function<void(const Bedrock::Threading::IAsyncResult<T>&)>;
 
-    virtual T addOnComplete(Bedrock::Threading::IAsyncResult<T>::CompletionHandler) = 0;
+    virtual void addOnComplete(Bedrock::Threading::IAsyncResult<T>::CompletionHandler) = 0;
 };
 
 } // namespace Bedrock::Threading
