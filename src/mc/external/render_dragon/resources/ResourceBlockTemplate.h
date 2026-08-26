@@ -45,8 +45,8 @@ struct ResourceBlockTemplate {
     typename ResourceHandleTrackerValidator<T>::TrackerType                      mTrackingBlock;
     std::unique_ptr<T>                                                           mResource;
 
-    ResourceBlockTemplate();
-    ~ResourceBlockTemplate();
+    ResourceBlockTemplate() : mDebugInfoBlock(), mTrackingBlock(), mResource(std::make_unique<T>()) {}
+    ~ResourceBlockTemplate() = default;
 
     void reset();
     T*   get() const;
